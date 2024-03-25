@@ -1,12 +1,16 @@
 @font-face {
 
+    font-family: Huballi;
+    src: url(../font/Hubballi-Regular.ttf);
+}
+
+@font-face {
+
     font-family: RobotoSerif;
     src: url(../font/Roboto_Serif/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf);
 }
 
-html,
-body,
-#container {
+html, body, #container {
 
     width: 100%;
     height: 100%;
@@ -117,25 +121,31 @@ footer {
     }
 
     #btnchat img {
+
         width: 50px;
     }
 
     #main {
+
         display: block;
         margin-bottom: 60%;
     }
 
     footer {
+
         text-align: center;
         padding: 20px;
     }
 
     #logofooter {
+
         width: 60px;
         margin: 15px;
+        margin-left: 0;
     }
 
     #contFooter {
+
         width: 900px;
         height: 100px;
         display: inline-flex;
@@ -143,7 +153,14 @@ footer {
         justify-content: center;
         background-color: white;
         border-radius: 15px;
-        box-shadow: -4px -4px 5px #88CEDD, 4px 4px #6C6C6C;
+        box-shadow: -4px -4px 5px #88CEDD, 4px 4px #9B9B9B;
+    }
+
+    #contFooter p {
+
+        text-shadow: 1px 1px 0 #9B9B9B;
+        font-family: Huballi, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 120%;
     }
 
     #ftFont {
@@ -151,18 +168,27 @@ footer {
     }
 
     #pablo {
+
         background-color: white;
-        height: 1000px;
+        height: 500vh;
         width: 1000px;
+    }
+
+    #btnperfil img {
+
+        background-color: white;
+        border-radius: 50%;
+        padding: 10px;
+        width: 100px;
     }
 }
 
 @media screen and (min-width: 100px) and (max-width: 800px) {
+
     header {
         height: 100px;
         width: 400px;
         box-shadow: 0 4px 0 #9B9B9B;
         display: flex;
     }
-
 }
