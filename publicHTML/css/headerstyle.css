@@ -24,7 +24,7 @@ header {
     border-radius: 15px;
     margin: 10px;
     min-height: 100px;
-    max-height: 200px;
+    max-height: 150px;
 }
 
 nav ul {
@@ -69,8 +69,9 @@ footer {
 
         box-shadow: 0 4px 0 #9B9B9B;
         display: flex;
-        justify-content:left;
+        justify-content: left;
         align-items: center;
+        min-width: 98%;
     }
 
     nav {
@@ -79,7 +80,9 @@ footer {
         justify-content: right;
         width: 100%;
     }
+
     .contReservar {
+
         display: inline-flex;
     }
 
@@ -99,25 +102,24 @@ footer {
     }
 
     #btnreservar {
+
         background-color: white;
         color: #88CEDD;
         padding: 20px;
         border-radius: 20px;
-        margin-right: 20%;
+        margin-right: 0%;
         box-shadow: 4px 4px 0 #9B9B9B;
         padding-top: 20px;
         padding-bottom: 20px;
         text-decoration: none;
+        text-align: center;
     }
 
     #btnperfil {
-        margin-right: 3%;
-        margin-left: 1%;
-        justify-content: center;
-    }
 
-    #btnperfil img {
-        max-width: 60px;
+        width: 260px;
+        display: flex;
+        justify-content: center;
     }
 
     #btnchat {
@@ -191,6 +193,8 @@ footer {
         border-radius: 50%;
         padding: 10px;
         width: 100px;
+        max-width: 60px;
+        box-shadow: 2px 4px 0 #9B9B9B;
     }
 
     #btnopciones {
@@ -201,6 +205,7 @@ footer {
 @media screen and (min-width: 100px) and (max-width: 800px) {
 
     header #imglogo {
+
         width: 120px;
         margin: 20px;
     }
@@ -210,6 +215,7 @@ footer {
     }
 
     header {
+
         display: flex;
         justify-content: left;
         align-items: center;
@@ -217,6 +223,7 @@ footer {
 
 
     header .contReservar  {
+
         background-color: white;
         padding: 20px;
         border-radius: 20px;
@@ -224,52 +231,58 @@ footer {
         padding-top: 20px;
         padding-bottom: 20px;
         text-decoration: none;
-        margin-left:20%;
     }
 
     header .contReservar a {
+
         color: #88CEDD;
         text-decoration: none;
         text-shadow: 2px 1px 0 rgb(78, 78, 78);
         font-size: 15px;
     }
 
+    header #opcionescontainer {
+
+        width: 120px;
+    }
+
     header #btnopciones {
+
         background-color: white;
         width: 60px;
         height: 60px;
         display: flex;
-        margin-left: 10%;
-        margin-right: 5%;
         align-items: center;
         justify-content: center;
         border-radius: 20px;
+        padding-right: 1.6%;
+        padding-left: 1.6%;
+        box-shadow: 4px 4px 0 #9B9B9B;
     }
 
     header #btnopciones img { 
+
         width: 44px;
         height: 44px;
     }
 
-    
     #contFooter {
 
-        width: 900px;
-        height: 100px;
+        width: 400px;
+        height: 60px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         background-color: white;
         border-radius: 15px;
         box-shadow: -4px -4px 5px #88CEDD, 4px 4px #9B9B9B;
-
     }
 
     #contFooter p {
 
         text-shadow: 1px 1px 0 #9B9B9B;
         font-family: Huballi, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        font-size: 120%;
+        font-size: 50%;
 
     }
 
@@ -279,10 +292,41 @@ footer {
         margin: 15px;
         margin-left: 0;
     }
+
     #pablo {
 
         background-color: white;
         height: 200vh;
         width: 1000px;
+    }
+
+    #btnchat {
+
+        background-color: #88CEDD;
+        width: fit-content;
+        padding: 15px;
+        border-radius: 50%;
+        box-shadow: 2px 4px 0 #9B9B9B;
+        position: fixed;
+        right: 40px;
+        bottom: 40px;
+    }
+
+    #btnchat img {
+
+        width: 50px;
+    }
+
+    footer {
+
+        text-align: center;
+        padding: 20px;
+    }
+
+    nav {
+
+        display: flex;
+        justify-content: right;
+        width: 100%;
     }
 }
