@@ -10,7 +10,9 @@
     src: url(../font/Roboto_Serif/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf);
 }
 
-html, body, #container {
+html,
+body,
+#container {
 
     width: 100%;
     height: 100%;
@@ -32,7 +34,8 @@ nav ul {
     list-style: none;
 }
 
-nav ul li, #btnreservar {
+nav ul li,
+#btnreservar {
 
     font-family: RobotoSerif, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: 800;
@@ -49,15 +52,17 @@ footer {
     font-size: 35px;
 }
 
+/*/ PC /*/
+@media screen and (min-width: 801px) {
 
-@media screen and (min-width: 800px) {
-
-    nav ul li, #btnreservar {
+    nav ul li,
+    #btnreservar {
         display: inline-block;
         margin-right: 40px;
     }
 
-    nav ul li a, #btnreservar {
+    nav ul li a,
+    #btnreservar {
 
         color: white;
         text-shadow: 2px 1px 0 rgb(78, 78, 78);
@@ -202,7 +207,8 @@ footer {
     }
 }
 
-@media screen and (min-width: 100px) and (max-width: 800px) {
+/*/ Tablets /*/
+@media screen and (max-width: 800px) and (min-width: 401px) {
 
     header #imglogo {
 
@@ -210,7 +216,8 @@ footer {
         margin: 20px;
     }
 
-    header ul, #btnperfil {
+    header ul,
+    #btnperfil {
         display: none;
     }
 
@@ -222,7 +229,7 @@ footer {
     }
 
 
-    header .contReservar  {
+    header .contReservar {
 
         background-color: white;
         padding: 20px;
@@ -257,10 +264,12 @@ footer {
         border-radius: 20px;
         padding-right: 1.6%;
         padding-left: 1.6%;
+        margin-right: 20px;
+        margin-left: 20px;
         box-shadow: 4px 4px 0 #9B9B9B;
     }
 
-    header #btnopciones img { 
+    header #btnopciones img {
 
         width: 44px;
         height: 44px;
@@ -297,7 +306,7 @@ footer {
 
         background-color: white;
         height: 200vh;
-        width: 1000px;
+        width: 800px;
     }
 
     #btnchat {
@@ -313,7 +322,6 @@ footer {
     }
 
     #btnchat img {
-
         width: 50px;
     }
 
@@ -328,5 +336,263 @@ footer {
         display: flex;
         justify-content: right;
         width: 100%;
+    }
+
+
+
+
+    header #imglogo {
+
+        width: 120px;
+        margin: 20px;
+    }
+
+    header ul,
+    #btnperfil {
+        display: none;
+    }
+
+    header {
+
+        display: flex;
+        justify-content: left;
+        align-items: center;
+    }
+
+
+    header .contReservar {
+
+        background-color: white;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 4px 4px 0 #9B9B9B;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        text-decoration: none;
+    }
+
+    header .contReservar a {
+
+        color: #88CEDD;
+        text-decoration: none;
+        text-shadow: 2px 1px 0 rgb(78, 78, 78);
+        font-size: 15px;
+    }
+
+    header #opcionescontainer {
+
+        width: 120px;
+    }
+
+    header #btnopciones {
+
+        background-color: white;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        padding-right: 1.6%;
+        padding-left: 1.6%;
+        margin-right: 20px;
+        margin-left: 20px;
+        box-shadow: 4px 4px 0 #9B9B9B;
+    }
+
+    header #btnopciones img {
+
+        width: 44px;
+        height: 44px;
+    }
+
+    #contFooter {
+
+        width: 380px;
+        height: 60px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: -4px -4px 5px #88CEDD, 4px 4px #9B9B9B;
+    }
+
+    #contFooter p {
+
+        text-shadow: 1px 1px 0 #9B9B9B;
+        font-family: Huballi, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 50%;
+
+    }
+
+    #logofooter {
+
+        width: 20px;
+        margin: 15px;
+        margin-left: 0;
+    }
+
+    #pablo {
+
+        background-color: white;
+        height: 800px;
+        width: 400px;
+    }
+
+    #btnchat {
+
+        background-color: #88CEDD;
+        width: fit-content;
+        padding: 15px;
+        border-radius: 50%;
+        box-shadow: 2px 4px 0 #9B9B9B;
+        position: fixed;
+        right: 40px;
+        bottom: 40px;
+    }
+
+    #btnchat img {
+        width: 50px;
+    }
+
+    footer {
+
+        text-align: center;
+        padding: 10px;
+    }
+
+    nav {
+
+        display: flex;
+        justify-content: right;
+        width: 100%;
+    }
+
+}
+
+/*/ Smart Phones /*/
+@media screen and (max-width: 400px) {
+
+    header ul,
+    #btnperfil {
+        display: none;
+    }
+
+    header {
+
+        display: flex;
+        justify-content: left;
+        align-items: center;
+
+    }
+
+    header #imglogo {
+
+        width: 100px;
+        margin: 20px;
+    }
+
+
+    header .contReservar {
+
+        background-color: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 4px 4px 0 #9B9B9B;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    header .contReservar a {
+
+        color: #88CEDD;
+        text-decoration: none;
+        text-shadow: 2px 1px 0 rgb(78, 78, 78);
+        font-size: 13px;
+    }
+
+    header #opcionescontainer {
+
+        width: 120px;
+    }
+
+    header #btnopciones {
+
+        background-color: white;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        padding-right: 1.6%;
+        padding-left: 1.6%;
+        margin-right: 20px;
+        margin-left: 20px;
+        box-shadow: 4px 4px 0 #9B9B9B;
+    }
+
+    header #btnopciones img {
+        width: 30px;
+        height: 30px;
+    }
+
+    footer {
+
+        text-align: center;
+        padding: 10px;
+    }
+
+    #contFooter {
+
+        width: 320px;
+        height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: -4px -4px 5px #88CEDD, 4px 4px #9B9B9B;
+    }
+
+    #contFooter p {
+
+        text-shadow: 1px 1px 0 #9B9B9B;
+        font-family: Huballi, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 42%;
+
+    }
+
+    #logofooter {
+
+        width: 18px;
+        margin: 10px;
+        
+    }
+
+    #btnchat {
+
+        background-color: #88CEDD;
+        width: fit-content;
+        padding: 10px;
+        border-radius: 50%;
+        box-shadow: 2px 4px 0 #9B9B9B;
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+    }
+
+    #btnchat img {
+        width: 35px;
+    }
+
+    #pablo {
+
+        background-color: white;
+        height: 100vh;
+        width: 360px;
     }
 }
