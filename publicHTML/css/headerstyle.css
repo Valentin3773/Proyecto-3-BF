@@ -26,16 +26,37 @@ html, body, #container {
 
 header {
 
-    background-color: #88CEDD;
+    position: fixed;
+    background-color: rgba(136, 206, 221, 1);
     border-radius: 15px;
     margin: 10px;
     min-height: 100px;
     max-height: 150px;
     overflow: hidden;
+    transition-duration: 400ms;
+    top: 0;
+}
+
+header.comprimido {
+
+    max-height: 80px;
+    background-color: rgba(136, 206, 221, 0.6);
+}
+
+.comprimido #btnreservar {
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.comprimido #btnperfil img {
+
+    transform: scale(0.9);
 }
 
 #btnchat, #btnreservar {
-    transition-duration: 500ms;
+
+    transition-duration: 300ms;
 }
 
 header #titulogo h2 {
@@ -56,6 +77,12 @@ header #titulogo h1 {
 header #titulogo {
 
     font-family: Francois,  'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+header #titulogo h1 {
+
+    letter-spacing: 2px;
+    margin-bottom: 0;
 }
 
 header #titulogo h1 .s1 {
@@ -101,9 +128,25 @@ footer {
     font-weight: 400;
     font-size: 35px;
     animation: headerfade 2s ease forwards;
+    transition-duration: 300ms;
 }
 
+#contFooter {
 
+    transition-duration: 300ms;
+}
+
+main {
+
+    margin-top: 150px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+header #btnperfil img {
+
+    transition-duration: 300ms;
+}
 
 /*/ PCs con tremendo zoom /*/
 @media screen and (max-width: 1412px) and (min-width: 1001px) {
@@ -741,17 +784,33 @@ footer {
     }
 }
 
+/* Hovers */
+
 #btnreservar:hover {
+
     transform: scale(1.1);
 }
 
 #btnchat:hover {
+
     box-shadow: #0AF0AB 20px 20px 30px -10px , 2px 4px 0 #9B9B9B ;
+    transform: scale(1.05);
+}
+
+.extendido #btnperfil img:hover {
+
     transform: scale(1.1);
 }
 
+.comprimido #btnperfil img:hover {
 
+    transform: scale(1);
+}
 
+footer #contFooter:hover {
+
+    box-shadow: 4px 4px 5px #88CEDD, -4px -4px #9B9B9B;
+}
 
 /* Animaciones */
 
@@ -795,11 +854,12 @@ footer {
 @keyframes chatdown {
 
     from {
+
         margin-bottom: 80px;
     }
 
     to {
+
         margin: 0;
     }
-
 }
