@@ -31,7 +31,7 @@ header {
     border-radius: 15px;
     margin: 10px;
     min-height: 100px;
-    max-height: 150px;
+    max-height: 130px;
     overflow: hidden;
     transition-duration: 400ms;
     top: 0;
@@ -148,79 +148,6 @@ header #btnperfil img {
     transition-duration: 300ms;
 }
 
-/*/ PCs con tremendo zoom /*/
-@media screen and (max-width: 1412px) and (min-width: 1001px) {
-    
-    nav {
-
-        width: 60%;
-        justify-content: center;
-    }
-
-    nav ul {
-
-        width: 250px;
-        text-align: center;
-    }
-
-    nav ul li {
-
-        border-bottom: 2px solid white;
-    }
-
-
-    #btnperfil img {
-
-        width: 80px;
-    }
-
-    #btnperfil {
-
-        padding: 8px;
-    }
-}
-
-/* PCs con zoom extremo (para loco baja el zoom) */
-@media screen and (max-width: 1000px) and (min-width: 801px) {
-    
-    nav {
-
-        width: 60%;
-        justify-content: center;
-    }
-
-    nav ul {
-
-        width: 250px;
-        text-align: center;
-    }
-
-    nav ul li {
-
-        border-bottom: 2px solid white;
-    }
-
-    #btnperfil img {
-
-        width: 80px;
-    }
-
-    #btnperfil {
-
-        padding: 8px;
-    }
-
-    header #titulogo {
-
-        display: none;
-    }
-
-    .contReservar {
-
-        padding: 0;
-    }
-}
-
 /*/ PC /*/
 @media screen and (min-width: 801px) {
 
@@ -241,8 +168,8 @@ header #btnperfil img {
     header {
 
         box-shadow: 0 4px 0 #9B9B9B;
-        display: flex;
-        justify-content: left;
+        display: inline-flex;
+        justify-content:left;
         align-items: center;
         min-width: 98%;
         animation: headerfade 2s ease forwards;
@@ -286,17 +213,17 @@ header #btnperfil img {
         margin-right: 0px;
         width: fit-content;
         height: fit-content;
-        display: inline-block;
+        display: inline-flex;
     }
 
     #btnreservar {
 
         background-color: #4294FF;
         color: #ffffff;
-        padding: 20px;
         border-radius: 20px;
         margin-right: 0%;
         box-shadow: 4px 4px 0 #9B9B9B;
+        padding: 20px;
         padding-top: 20px;
         padding-bottom: 20px;
         text-decoration: none;
@@ -392,6 +319,142 @@ header #btnperfil img {
         color: #0AF0AB;
     }
 }
+
+/*/ PCs con tremendo zoom /*/
+@media screen and (max-width: 1412px) and (min-width: 1001px) {
+    
+    nav {
+
+        width: 60%;
+        justify-content: center;
+    }
+
+    header {
+
+        box-shadow: 0 4px 0 #9B9B9B;
+        display: inline-flex;
+        justify-content:left;
+        align-items: center;
+        min-width: 98%;
+        animation: headerfade 2s ease forwards;
+    }
+
+    header #titulogo {
+
+        width: 165px;
+        text-align: center;
+    }
+
+    header #titulogo h1 {
+        font-size: 15px;
+        width: 180px;
+    }
+    header #titulogo h2 {
+        font-size: 15px;
+        width: 180px;
+    }
+
+    header #imglogo {
+        width: 100px;
+        height: 50px;
+    }
+
+    header nav ul li {
+        font-size: 12px;
+
+    }
+
+    header #btnreservar {
+        width: 90px;
+        font-size: 20px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        margin-right: -5px;
+    }
+
+    header #btnperfil {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+
+    .comprimido #btnreservar {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    header .comprimido {
+        min-height: 60px;
+        max-height: 80px;
+    }
+
+
+
+
+    nav ul {
+
+        width: 250px;
+        text-align:center;
+
+    }
+
+    nav ul li {
+
+        border-bottom: 2px solid white;
+    }
+
+
+    #btnperfil img {
+
+        width: 80px;
+    }
+
+    #btnperfil {
+
+        padding: 8px;
+    }
+}
+
+/* PCs con zoom extremo (para loco baja el zoom) */
+@media screen and (max-width: 1000px) and (min-width: 801px) {
+    
+    nav {
+
+        width: 60%;
+        justify-content: center;
+    }
+
+    nav ul {
+
+        width: 250px;
+        text-align: center;
+    }
+
+    nav ul li {
+
+        border-bottom: 2px solid white;
+    }
+
+    #btnperfil img {
+
+        width: 80px;
+    }
+
+    #btnperfil {
+
+        padding: 8px;
+    }
+
+    header #titulogo {
+
+        display: none;
+    }
+
+    .contReservar {
+
+        padding: 0;
+    }
+}
+
 
 /*/ Tablets y Smart Phones anchos /*/
 @media screen and (max-width: 790px) and (min-width: 401px) {

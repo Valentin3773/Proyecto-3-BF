@@ -22,7 +22,7 @@ function checkHeaderPosition() {
 
     let header = document.querySelector('header');
 
-    if(window.scrollY > 0) {
+    if(window.scrollY > 1) {
 
         header.className = "comprimido";
     }
