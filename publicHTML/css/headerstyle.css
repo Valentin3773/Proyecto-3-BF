@@ -34,19 +34,24 @@ header {
     overflow: hidden;
 }
 
+#btnchat, #btnreservar {
+    transition-duration: 500ms;
+}
+
 header #titulogo h2 {
 
     margin-top: 0px;
     text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
 }
 
+/*
 header #titulogo h1 {
 
     text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
     1.5px 1.5px 0 white;
     margin-bottom: 0px;
     letter-spacing: 2px;
-}
+}*/
 
 header #titulogo {
 
@@ -55,17 +60,20 @@ header #titulogo {
 
 header #titulogo h1 .s1 {
 
-    color: #4BF4FF;
+    color: #F4F8F7;
+    text-shadow: 2px 2px 0 #0AF0AB;
 }
 
 header #titulogo h1 .s2 {
 
-    color: #38F9EC;
+    color: #F4F8F7;
+    text-shadow: 2px 2px 0 #4294FF;
 }
+    
 
 header #titulogo h1 .s3 {
-
-    color: #2AFDDD;
+    text-shadow: 2px 2px 0 #E84141;
+    color: #F4F8F7;
 }
 
 
@@ -93,6 +101,81 @@ footer {
     font-weight: 400;
     font-size: 35px;
     animation: headerfade 2s ease forwards;
+}
+
+
+
+/*/ PCs con tremendo zoom /*/
+@media screen and (max-width: 1412px) and (min-width: 1001px) {
+    
+    nav {
+
+        width: 60%;
+        justify-content: center;
+    }
+
+    nav ul {
+
+        width: 250px;
+        text-align: center;
+    }
+
+    nav ul li {
+
+        border-bottom: 2px solid white;
+    }
+
+
+    #btnperfil img {
+
+        width: 80px;
+    }
+
+    #btnperfil {
+
+        padding: 8px;
+    }
+}
+
+/* PCs con zoom extremo (para loco baja el zoom) */
+@media screen and (max-width: 1000px) and (min-width: 801px) {
+    
+    nav {
+
+        width: 60%;
+        justify-content: center;
+    }
+
+    nav ul {
+
+        width: 250px;
+        text-align: center;
+    }
+
+    nav ul li {
+
+        border-bottom: 2px solid white;
+    }
+
+    #btnperfil img {
+
+        width: 80px;
+    }
+
+    #btnperfil {
+
+        padding: 8px;
+    }
+
+    header #titulogo {
+
+        display: none;
+    }
+
+    .contReservar {
+
+        padding: 0;
+    }
 }
 
 /*/ PC /*/
@@ -165,8 +248,8 @@ footer {
 
     #btnreservar {
 
-        background-color: white;
-        color: #88CEDD;
+        background-color: #4294FF;
+        color: #ffffff;
         padding: 20px;
         border-radius: 20px;
         margin-right: 0%;
@@ -267,81 +350,8 @@ footer {
     }
 }
 
-/*/ PCs con tremendo zoom /*/
-@media screen and (max-width: 1412px) and (min-width: 1001px) {
-    
-    nav {
-
-        width: 60%;
-        justify-content: center;
-    }
-
-    nav ul {
-
-        width: 250px;
-        text-align: center;
-    }
-
-    nav ul li {
-
-        border-bottom: 2px solid white;
-    }
-
-
-    #btnperfil img {
-
-        width: 80px;
-    }
-
-    #btnperfil {
-
-        padding: 8px;
-    }
-}
-
-/* PCs con zoom extremo (para loco baja el zoom) */
-@media screen and (max-width: 1000px) and (min-width: 801px) {
-    
-    nav {
-
-        width: 60%;
-        justify-content: center;
-    }
-
-    nav ul {
-
-        width: 250px;
-        text-align: center;
-    }
-
-    nav ul li {
-
-        border-bottom: 2px solid white;
-    }
-
-    #btnperfil img {
-
-        width: 80px;
-    }
-
-    #btnperfil {
-
-        padding: 8px;
-    }
-
-    header #titulogo {
-
-        display: none;
-    }
-
-    .contReservar {
-
-        padding: 0;
-    }
-}
-
 /*/ Tablets y Smart Phones anchos /*/
-@media screen and (max-width: 800px) and (min-width: 401px) {
+@media screen and (max-width: 790px) and (min-width: 401px) {
 
     header #imglogo {
 
@@ -360,7 +370,6 @@ footer {
     }
 
     header {
-
         display: flex;
         justify-content: left;
         align-items: center;
@@ -370,10 +379,11 @@ footer {
 
     header .contReservar {
 
-        background-color: white;
+        background-color: #4294FF;
         padding: 20px;
         border-radius: 20px;
         box-shadow: 4px 4px 0 #9B9B9B;
+        margin-right: 20px;
         padding-top: 20px;
         padding-bottom: 20px;
         text-decoration: none;
@@ -381,7 +391,7 @@ footer {
 
     header .contReservar a {
 
-        color: #88CEDD;
+        color: white;
         text-decoration: none;
         text-shadow: 2px 1px 0 rgb(78, 78, 78);
         font-size: 15px;
@@ -400,7 +410,8 @@ footer {
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 20px;
+        border-radius: 10px;
+        padding: 2px;
         padding-right: 1.6%;
         padding-left: 1.6%;
         margin-right: 20px;
@@ -409,9 +420,8 @@ footer {
     }
 
     header #btnopciones img {
-
-        width: 44px;
-        height: 44px;
+        width: 40px;
+        height: 40px;
     }
 
     #contFooter {
@@ -454,19 +464,17 @@ footer {
         padding: 15px;
         border-radius: 50%;
         box-shadow: 2px 4px 0 #9B9B9B;
-        position: fixed;
+        position: sticky;
         right: 40px;
         bottom: 20px;
         animation: chatslide 2s ease forwards;
     }
 
     #btnchat img {
-
         width: 50px;
     }
 
     footer {
-
         text-align: center;
         padding: 20px;
     }
@@ -474,7 +482,7 @@ footer {
     nav {
 
         display: flex;
-        justify-content: right;
+        justify-content: center;
         width: 100%;
     }
 
@@ -496,24 +504,6 @@ footer {
         align-items: center;
     }
 
-    header .contReservar {
-
-        background-color: white;
-        padding: 20px;
-        border-radius: 20px;
-        box-shadow: 4px 4px 0 #9B9B9B;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        text-decoration: none;
-    }
-
-    header .contReservar a {
-
-        color: #88CEDD;
-        text-decoration: none;
-        text-shadow: 2px 1px 0 rgb(78, 78, 78);
-        font-size: 15px;
-    }
 
     header #opcionescontainer {
 
@@ -612,6 +602,7 @@ footer {
     }
 }
 
+
 /*/ Smart Phones /*/
 @media screen and (max-width: 400px) {
 
@@ -639,10 +630,10 @@ footer {
         margin: 20px;
     }
 
-
+    
     header .contReservar {
 
-        background-color: white;
+        background-color: #4294FF;
         padding: 25px;
         border-radius: 20px;
         box-shadow: 4px 4px 0 #9B9B9B;
@@ -654,7 +645,7 @@ footer {
 
     header .contReservar a {
 
-        color: #88CEDD;
+        color: white;
         text-decoration: none;
         text-shadow: 2px 1px 0 rgb(78, 78, 78);
         font-size: 13px;
@@ -750,6 +741,18 @@ footer {
     }
 }
 
+#btnreservar:hover {
+    transform: scale(1.1);
+}
+
+#btnchat:hover {
+    box-shadow: #0AF0AB 20px 20px 30px -10px , 2px 4px 0 #9B9B9B ;
+    transform: scale(1.1);
+}
+
+
+
+
 /* Animaciones */
 
 @keyframes headerfade {
@@ -774,4 +777,29 @@ footer {
 
         bottom: 20px;
     }
+    
+}
+
+@keyframes chatup {
+
+    from {
+        margin: 0;
+    }
+
+    to {
+        margin-bottom: 80px;
+    }
+
+}
+
+@keyframes chatdown {
+
+    from {
+        margin-bottom: 80px;
+    }
+
+    to {
+        margin: 0;
+    }
+
 }

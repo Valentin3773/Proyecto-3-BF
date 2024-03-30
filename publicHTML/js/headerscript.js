@@ -1,17 +1,17 @@
-window.addEventListener('scroll', checkChatIcon);
+window.addEventListener('scroll', checkButtonPosition);
 
-let bounding = document.querySelector('footer').getBoundingClientRect();
+let footer = document.querySelector('footer');
+let button = document.querySelector('#btnchat');
 
-function checkChatIcon() {
-    
-    if(bounding.top <= window.innerHeight) {
+function checkButtonPosition() {
+    let bounding = footer.getBoundingClientRect();
 
-        console.log("egjewige");
-        document.querySelector('#btnchat').style.bottom = '40px';
-    }
-    else {
+    if (bounding.top <= window.innerHeight) {
+        document.querySelector('#btnchat').style.animation = 'chatup 0.6s ease forwards';
+        console.log("Poroto")
+    } else {
+        document.querySelector('#btnchat').style.animation = 'chatdown 0.6s ease forwards';
 
-        console.log("pepepe");
-        document.querySelector('#btnchat').style.bottom = '20px';
     }
 }
+
