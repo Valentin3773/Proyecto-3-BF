@@ -10,9 +10,13 @@
     src: url(../font/Roboto_Serif/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf);
 }
 
-html,
-body,
-#container {
+@font-face {
+
+    font-family: Francois;
+    src: url(../font/JacquesFrancois-Regular.ttf);
+}
+
+html, body, #container {
 
     width: 100%;
     height: 100%;
@@ -27,15 +31,52 @@ header {
     margin: 10px;
     min-height: 100px;
     max-height: 150px;
+    overflow: hidden;
 }
+
+header #titulogo h2 {
+
+    margin-top: 0px;
+    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
+}
+
+header #titulogo h1 {
+
+    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1.5px 1.5px 0 white;
+    margin-bottom: 0px;
+    letter-spacing: 2px;
+}
+
+header #titulogo {
+
+    font-family: Francois,  'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+header #titulogo h1 .s1 {
+
+    color: #4BF4FF;
+}
+
+header #titulogo h1 .s2 {
+
+    color: #38F9EC;
+}
+
+header #titulogo h1 .s3 {
+
+    color: #2AFDDD;
+}
+
 
 nav ul {
 
     list-style: none;
+    padding: 0;
+    width: fit-content;
 }
 
-nav ul li,
-#btnreservar {
+nav ul li, #btnreservar {
 
     font-family: RobotoSerif, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: 800;
@@ -47,22 +88,23 @@ nav ul li a {
 }
 
 footer {
+
     font-family: RobotoSerif, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: 400;
     font-size: 35px;
+    animation: headerfade 2s ease forwards;
 }
 
 /*/ PC /*/
 @media screen and (min-width: 801px) {
 
-    nav ul li,
-    #btnreservar {
+    nav ul li, #btnreservar {
+        
         display: inline-block;
-        margin-right: 40px;
+        margin-right: 20px;
     }
 
-    nav ul li a,
-    #btnreservar {
+    nav ul li a, #btnreservar {
 
         color: white;
         text-shadow: 2px 1px 0 rgb(78, 78, 78);
@@ -77,6 +119,13 @@ footer {
         justify-content: left;
         align-items: center;
         min-width: 98%;
+        animation: headerfade 2s ease forwards;
+    }
+
+    header #titulogo {
+
+        width: 750px;
+        text-align: center;
     }
 
     nav {
@@ -93,14 +142,22 @@ footer {
 
     header #imglogo {
 
-        width: 200px;
+        width: 120px;
         padding: 15px;
         display: inline-block;
+        padding-right: 0px;
+    }
+
+    header #imgtitulo {
+
+        width: 400px;
     }
 
     header #logo {
 
-        margin: 20px;
+        margin: 15px;
+        margin-left: 5px;
+        margin-right: 0px;
         width: fit-content;
         height: fit-content;
         display: inline-block;
@@ -128,6 +185,7 @@ footer {
     }
 
     #btnchat {
+
         background-color: #88CEDD;
         width: fit-content;
         padding: 15px;
@@ -135,7 +193,8 @@ footer {
         box-shadow: 2px 4px 0 #9B9B9B;
         position: fixed;
         right: 40px;
-        bottom: 40px;
+        bottom: 20px;
+        animation: chatslide 2s ease forwards;
     }
 
     #btnchat img {
@@ -181,10 +240,6 @@ footer {
         font-size: 120%;
     }
 
-    #ftFont {
-        color: #0AF0AB;
-    }
-
     #pablo {
 
         background-color: white;
@@ -205,9 +260,87 @@ footer {
     #btnopciones {
         display: none;
     }
+
+    #ftFont {
+        
+        color: #0AF0AB;
+    }
 }
 
-/*/ Tablets /*/
+/*/ PCs con tremendo zoom /*/
+@media screen and (max-width: 1412px) and (min-width: 1001px) {
+    
+    nav {
+
+        width: 60%;
+        justify-content: center;
+    }
+
+    nav ul {
+
+        width: 250px;
+        text-align: center;
+    }
+
+    nav ul li {
+
+        border-bottom: 2px solid white;
+    }
+
+
+    #btnperfil img {
+
+        width: 80px;
+    }
+
+    #btnperfil {
+
+        padding: 8px;
+    }
+}
+
+/* PCs con zoom extremo (para loco baja el zoom) */
+@media screen and (max-width: 1000px) and (min-width: 801px) {
+    
+    nav {
+
+        width: 60%;
+        justify-content: center;
+    }
+
+    nav ul {
+
+        width: 250px;
+        text-align: center;
+    }
+
+    nav ul li {
+
+        border-bottom: 2px solid white;
+    }
+
+    #btnperfil img {
+
+        width: 80px;
+    }
+
+    #btnperfil {
+
+        padding: 8px;
+    }
+
+    header #titulogo {
+
+        display: none;
+    }
+
+    .contReservar {
+
+        padding: 0;
+    }
+}
+
+/*/ Tablets y Smart Phones anchos /*/
 @media screen and (max-width: 800px) and (min-width: 401px) {
 
     header #imglogo {
@@ -216,8 +349,13 @@ footer {
         margin: 20px;
     }
 
-    header ul,
-    #btnperfil {
+    header #titulogo {
+
+        display: none;
+    }
+
+    header ul, #btnperfil {
+
         display: none;
     }
 
@@ -226,6 +364,7 @@ footer {
         display: flex;
         justify-content: left;
         align-items: center;
+        animation: headerfade 2s ease forwards;
     }
 
 
@@ -292,7 +431,6 @@ footer {
         text-shadow: 1px 1px 0 #9B9B9B;
         font-family: Huballi, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         font-size: 50%;
-
     }
 
     #logofooter {
@@ -318,10 +456,12 @@ footer {
         box-shadow: 2px 4px 0 #9B9B9B;
         position: fixed;
         right: 40px;
-        bottom: 40px;
+        bottom: 20px;
+        animation: chatslide 2s ease forwards;
     }
 
     #btnchat img {
+
         width: 50px;
     }
 
@@ -338,17 +478,14 @@ footer {
         width: 100%;
     }
 
-
-
-
     header #imglogo {
 
         width: 120px;
         margin: 20px;
     }
 
-    header ul,
-    #btnperfil {
+    header ul, #btnperfil {
+
         display: none;
     }
 
@@ -358,7 +495,6 @@ footer {
         justify-content: left;
         align-items: center;
     }
-
 
     header .contReservar {
 
@@ -444,16 +580,17 @@ footer {
 
         background-color: #88CEDD;
         width: fit-content;
-        padding: 15px;
+        padding: 10px;
         border-radius: 50%;
         box-shadow: 2px 4px 0 #9B9B9B;
         position: fixed;
-        right: 40px;
-        bottom: 40px;
+        right: 20px;
+        bottom: 20px;
     }
 
     #btnchat img {
-        width: 50px;
+
+        width: 35px;
     }
 
     footer {
@@ -469,13 +606,17 @@ footer {
         width: 100%;
     }
 
+    #ftFont {
+        
+        color: #0AF0AB;
+    }
 }
 
 /*/ Smart Phones /*/
 @media screen and (max-width: 400px) {
 
-    header ul,
-    #btnperfil {
+    header ul, #btnperfil {
+
         display: none;
     }
 
@@ -484,7 +625,12 @@ footer {
         display: flex;
         justify-content: left;
         align-items: center;
+        animation: headerfade 2s ease forwards;
+    }
 
+    header #titulogo {
+
+        display: none;
     }
 
     header #imglogo {
@@ -536,6 +682,7 @@ footer {
     }
 
     header #btnopciones img {
+
         width: 30px;
         height: 30px;
     }
@@ -583,6 +730,7 @@ footer {
         position: fixed;
         right: 20px;
         bottom: 20px;
+        animation: chatslide 2s ease forwards;
     }
 
     #btnchat img {
@@ -594,5 +742,36 @@ footer {
         background-color: white;
         height: 100vh;
         width: 360px;
+    }
+
+    #ftFont {
+        
+        color: #0AF0AB;
+    }
+}
+
+/* Animaciones */
+
+@keyframes headerfade {
+    
+    from {
+
+        opacity: 0;
+    }
+    to {
+
+        opacity: 1;
+    }
+}
+
+@keyframes chatslide {
+    
+    from {
+
+        bottom: -50px;
+    }
+    to {
+
+        bottom: 20px;
     }
 }
