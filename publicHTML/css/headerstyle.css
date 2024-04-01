@@ -29,12 +29,14 @@ header {
     position: fixed;
     background-color: rgba(136, 206, 221, 1);
     border-radius: 15px;
-    margin: 10px;
+    margin: 0.5%;
     min-height: 100px;
     max-height: 130px;
     overflow: hidden;
     transition-duration: 400ms;
-    top: 0;
+    top: -0.1%; 
+    left: 50%;
+    transform: translateX(-50.5%);
 }
 
 header.comprimido {
@@ -170,9 +172,9 @@ header #btnperfil img {
 
         box-shadow: 0 4px 0 #9B9B9B;
         display: inline-flex;
-        justify-content:left;
+        justify-content: left;
         align-items: center;
-        min-width: 98%;
+        width: 99%;
         animation: headerfade 2s ease forwards;
     }
 
