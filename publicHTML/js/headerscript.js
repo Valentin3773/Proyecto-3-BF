@@ -1,5 +1,5 @@
-window.addEventListener('scroll', checkButtonPosition);
-window.addEventListener('scroll', checkHeaderPosition);
+$(window).on('scroll', checkButtonPosition);
+$(window).on('scroll', checkHeaderPosition);
 
 let footer = document.querySelector('footer');
 let button = document.querySelector('#btnchat');
@@ -10,11 +10,11 @@ function checkButtonPosition() {
 
     if (bounding.top <= window.innerHeight) {
         
-        document.querySelector('#btnchat').style.animation = 'chatup 0.6s ease forwards';
+        $('#btnchat').css({animation: 'chatup 0.6s ease forwards'});
     } 
     else {
         
-        document.querySelector('#btnchat').style.animation = 'chatdown 0.6s ease forwards';
+        $('#btnchat').css({animation: 'chatdown 0.6s ease forwards'});
     }
 }
 

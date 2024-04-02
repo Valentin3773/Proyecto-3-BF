@@ -37,6 +37,7 @@ header {
     top: -0.1%; 
     left: 50%;
     transform: translateX(-50.5%);
+    box-shadow: 0 4px 0 #9B9B9B;
 }
 
 header.comprimido {
@@ -170,7 +171,6 @@ header #btnperfil img {
 
     header {
 
-        box-shadow: 0 4px 0 #9B9B9B;
         display: inline-flex;
         justify-content: left;
         align-items: center;
@@ -497,6 +497,8 @@ header #btnperfil img {
     }
 
     header {
+
+        margin: 0.6%;
         display: flex;
         justify-content: left;
         align-items: center;
@@ -622,6 +624,9 @@ header #btnperfil img {
 
     header {
 
+        width: 96%;
+        transform: translateX(-52%);
+        margin: 2%;
         display: flex;
         justify-content: left;
         align-items: center;
@@ -730,6 +735,9 @@ header #btnperfil img {
 
     header {
 
+        width: 96%;
+        transform: translateX(-52%);
+        margin: 2%;
         display: flex;
         justify-content: left;
         align-items: center;
