@@ -9,10 +9,10 @@ function checkButtonPosition() {
 
     if (posFooter.top <= $(window).height()) {
         $('#btnchat').css({ 'animation': 'chatup 0.6s ease forwards' });
-        console.log("a")
+
     } else {
         $('#btnchat').css({ 'animation': 'chatdown 0.6s ease forwards' });
-        
+
     }
 
 }
