@@ -1,34 +1,30 @@
-$(window).on('scroll', checkButtonPosition);
+$(window).on('scroll ', checkButtonPosition);
 $(window).on('scroll', checkHeaderPosition);
 
 let footer = document.querySelector('footer');
 let button = document.querySelector('#btnchat');
 
 function checkButtonPosition() {
+    var posFooter = $('footer').get(0).getBoundingClientRect();
 
-    let bounding = footer.getBoundingClientRect();
-
-    if (bounding.top <= window.innerHeight) {
+    if (posFooter.top <= $(window).height()) {
+        $('#btnchat').css({ 'animation': 'chatup 0.6s ease forwards' });
+        console.log("a")
+    } else {
+        $('#btnchat').css({ 'animation': 'chatdown 0.6s ease forwards' });
         
-        $('#btnchat').css({animation: 'chatup 0.6s ease forwards'});
-    } 
-    else {
-        
-        $('#btnchat').css({animation: 'chatdown 0.6s ease forwards'});
     }
+
 }
 
+
 function checkHeaderPosition() {
+    var header = $('header');
 
-    let header = document.querySelector('header');
-
-    if(window.scrollY > 1) {
-
-        header.className = "comprimido";
-    }
-    else {
-
-        header.className = "extendido";
+    if ($(window).scrollTop() > 1) {
+        header.addClass('comprimido').removeClass('extendido');
+    } else {
+        header.addClass('extendido').removeClass('comprimido');
     }
 }
 
