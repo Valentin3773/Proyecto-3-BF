@@ -1,8 +1,8 @@
 $(window).on('scroll ', checkButtonPosition);
 $(window).on('scroll', checkHeaderPosition);
 
-let footer = document.querySelector('footer');
-let button = document.querySelector('#btnchat');
+let footer = $('footer');
+let button = $('#btnchat');
 
 function checkButtonPosition() {
     var posFooter = $('footer').get(0).getBoundingClientRect();
