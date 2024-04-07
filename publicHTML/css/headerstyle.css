@@ -153,7 +153,7 @@ header #btnperfil img {
 }
 
 /*/ PC /*/
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 1300px) {
 
     nav ul li, #btnreservar {
         
@@ -323,162 +323,8 @@ header #btnperfil img {
     }
 }
 
-/*/ PCs con tremendo zoom /*/
-@media screen and (max-width: 1412px) and (min-width: 1001px) {
-    
-    nav {
-
-        width: 60%;
-        justify-content: center;
-    }
-
-    header {
-
-        box-shadow: 0 4px 0 #9B9B9B;
-        display: inline-flex;
-        justify-content:left;
-        align-items: center;
-        min-width: 98%;
-        animation: headerfade 2s ease forwards;
-    }
-
-    header #titulogo {
-
-        width: 165px;
-        text-align: center;
-    }
-
-    header #titulogo h1 {
-        font-size: 15px;
-        width: 180px;
-    }
-    header #titulogo h2 {
-        font-size: 15px;
-        width: 180px;
-    }
-
-    header #imglogo {
-        width: 100px;
-        height: 50px;
-    }
-
-    header nav ul li {
-        font-size: 12px;
-
-    }
-
-    header #btnreservar {
-        width: 90px;
-        font-size: 20px;
-        padding-top: 12px;
-        padding-bottom: 12px;
-        margin-right: -5px;
-    }
-
-    header #btnperfil {
-        margin-left: -20px;
-        margin-right: -20px;
-    }
-
-    .comprimido #btnreservar {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-
-    header .comprimido {
-        min-height: 60px;
-        max-height: 80px;
-    }
-
-
-    #pablo {
-        min-width: 100%;
-    }
-
-    nav ul {
-
-        width: 250px;
-        text-align:center;
-
-    }
-
-    nav ul li {
-
-        border-bottom: 2px solid white;
-    }
-
-
-    #btnperfil img {
-
-        width: 80px;
-    }
-
-    #btnperfil {
-
-        padding: 8px;
-    }
-
-    footer #contFooter p {
-        padding: 5px;
-        font-size: 30px;
-    }
-
-    footer #contFooter {
-        height: 60px;
-        width: fit-content;
-        padding-right: 5px;
-        padding-left: 5px;
-    }
-}
-
-/* PCs con zoom extremo (para loco baja el zoom) */
-@media screen and (max-width: 1000px) and (min-width: 801px) {
-    
-    nav {
-
-        width: 60%;
-        justify-content: center;
-    }
-
-    nav ul {
-
-        width: 250px;
-        text-align: center;
-    }
-
-    nav ul li {
-
-        border-bottom: 2px solid white;
-    }
-
-    #btnperfil img {
-
-        width: 80px;
-    }
-
-    #btnperfil {
-
-        padding: 8px;
-    }
-
-    header #titulogo {
-
-        display: none;
-    }
-
-    .contReservar {
-
-        padding: 0;
-    }
-
-    #pablo {
-        min-width: 100%;
-    }
-}
-
-
 /*/ Tablets y Smart Phones anchos /*/
-@media screen and (max-width: 790px) and (min-width: 401px) {
+@media screen and (max-width: 1299px) and (min-width: 401px) {
 
     header #imglogo {
 
@@ -498,7 +344,6 @@ header #btnperfil img {
 
     header {
 
-        margin: 0.6%;
         display: flex;
         justify-content: left;
         align-items: center;
@@ -513,10 +358,11 @@ header #btnperfil img {
         padding: 20px;
         border-radius: 20px;
         box-shadow: 4px 4px 0 #9B9B9B;
-        margin-right: 20px;
-        padding-top: 20px;
-        padding-bottom: 20px;
+        margin-right: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
         text-decoration: none;
+        text-align: center;
     }
 
     header .contReservar a {
@@ -524,7 +370,7 @@ header #btnperfil img {
         color: white;
         text-decoration: none;
         text-shadow: 2px 1px 0 rgb(78, 78, 78);
-        font-size: 15px;
+        font-size: 120%;
     }
 
     header #opcionescontainer {
@@ -550,6 +396,7 @@ header #btnperfil img {
     }
 
     header #btnopciones img {
+
         width: 40px;
         height: 40px;
     }
@@ -733,13 +580,18 @@ header #btnperfil img {
         display: none;
     }
 
+    nav {
+
+        width: 10%;
+    }
+
     header {
 
         width: 96%;
         transform: translateX(-52%);
-        margin: 2%;
+        margin: 1.6%;
         display: flex;
-        justify-content: left;
+        justify-content: right;
         align-items: center;
         animation: headerfade 2s ease forwards;
     }
@@ -762,9 +614,10 @@ header #btnperfil img {
         padding: 15px;
         border-radius: 20px;
         box-shadow: 4px 4px 0 #9B9B9B;
-        padding-top: 12px;
-        padding-bottom: 12px;
+        padding-top: 8px;
+        padding-bottom: 8px;
         text-align: center;
+        max-width: 95px;
         text-decoration: none;
     }
 
@@ -773,7 +626,7 @@ header #btnperfil img {
         color: white;
         text-decoration: none;
         text-shadow: 2px 1px 0 rgb(78, 78, 78);
-        font-size: 13px;
+        font-size: 120%;
     }
 
     header #opcionescontainer {
@@ -792,7 +645,7 @@ header #btnperfil img {
         border-radius: 10px;
         padding-right: 1.6%;
         padding-left: 1.6%;
-        margin-right: 20px;
+        margin-right: 0px;
         margin-left: 20px;
         box-shadow: 4px 4px 0 #9B9B9B;
     }
@@ -863,6 +716,17 @@ header #btnperfil img {
     #ftFont {
         
         color: #0AF0AB;
+    }
+}
+
+@media screen and (max-width: 1299px) and (min-width: 900px) {
+    
+    header {
+
+        margin: 1%;
+        margin-top: 0.5%;
+        width: 99%;
+        transform: translateX(-51%);
     }
 }
 
