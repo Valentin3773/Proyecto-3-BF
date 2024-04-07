@@ -1,0 +1,105 @@
+@font-face {
+
+    font-family: RobotoSerif;
+    src: url(recursos/font/Roboto_Serif/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+
+header {
+    background-color: rgba(136, 206, 221, 1);
+    box-shadow: 0 4px 0 #9B9B9B;
+    width: 98%;
+}
+
+footer {
+    width: 100%;
+}
+
+footer #contFooter {
+    box-shadow: -4px -4px 5px #88CEDD, 4px 4px #9B9B9B;
+}
+
+#ftFont {
+    color: #0AF0AB;
+}
+
+main,
+header,
+footer {
+    display: inline-block;
+}
+
+main {
+    margin-top: 8%;
+}
+
+header #titulogo{
+
+    font-family: Francois, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+header #titulogo h1 {
+
+    letter-spacing: 2px;
+    margin-bottom: 0;
+}
+
+header #titulogo h1 .s1 {
+
+    color: #F4F8F7;
+    text-shadow: 2px 2px 0 #0AF0AB;
+}
+
+header #titulogo h1 .s2 {
+
+    color: #F4F8F7;
+    text-shadow: 2px 2px 0 #4294FF;
+}
+
+
+header #titulogo h1 .s3 {
+    text-shadow: 2px 2px 0 #E84141;
+    color: #F4F8F7;
+}
+
+header #titulogo h2 {
+
+    margin-top: 0px;
+    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
+}
+
+#imglogo {
+    width: 120px;
+    height: 60px;
+}
+
+#logofooter {
+    width: 60px;
+    height: 30px;
+}
+
+#logoperfil {
+    width: 60px;
+    background-color: white;
+    border-radius: 30px;
+}
+
+#btnreservar,
+#indices,
+#titulogo h1,
+h2 {
+
+    font-family: RobotoSerif, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 600;
+}
+
+#pablo {
+    width: 100%;
+    height: 1800px;
+}
