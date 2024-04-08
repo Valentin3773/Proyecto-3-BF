@@ -80,6 +80,7 @@ header #titulogo h1 {
 header #titulogo {
 
     font-family: Francois,  'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 10px;
 }
 
 header #titulogo h1 {
@@ -573,7 +574,7 @@ header #btnperfil img {
 
 
 /*/ Smart Phones /*/
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 400px ) and (min-width: 301px) {
 
     header ul, #btnperfil {
 
@@ -605,6 +606,7 @@ header #btnperfil img {
 
         width: 80px;
         margin: 20px;
+        margin-right: 0;
     }
 
     
@@ -619,6 +621,7 @@ header #btnperfil img {
         text-align: center;
         max-width: 95px;
         text-decoration: none;
+        box-sizing: unset;
     }
 
     header .contReservar a {
@@ -631,7 +634,8 @@ header #btnperfil img {
 
     header #opcionescontainer {
 
-        width: 120px;
+        width: fit-content;
+        
     }
 
     header #btnopciones {
@@ -645,7 +649,7 @@ header #btnperfil img {
         border-radius: 10px;
         padding-right: 1.6%;
         padding-left: 1.6%;
-        margin-right: 0px;
+        margin-right: 20px;
         margin-left: 20px;
         box-shadow: 4px 4px 0 #9B9B9B;
     }
@@ -729,6 +733,161 @@ header #btnperfil img {
         transform: translateX(-51%);
     }
 }
+
+@media screen and (max-width: 300px) {
+    header ul, #btnperfil {
+
+        display: none;
+    }
+
+    nav {
+
+        width: 10%;
+    }
+
+    header {
+        width: 98%;
+        transform: translateX(-50%);
+        margin: 1.6%;
+        margin-left: 0;
+        display: flex;
+        align-items: center;
+        animation: headerfade 2s ease forwards;
+        min-height: 80px;
+    }
+
+    header #titulogo {
+
+        display: none;
+    }
+
+    header #imglogo {
+        margin: 10px;
+        width: 60px;
+        margin-right: 10px;
+    }
+
+    
+    header .contReservar {
+
+        background-color: #4294FF;
+        padding: 15px;
+        border-radius: 20px;
+        box-shadow: 4px 4px 0 #9B9B9B;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        text-align: center;
+        max-width: 60px;
+        text-decoration: none;
+        box-sizing: unset;
+    }
+
+    header .contReservar a {
+
+        color: white;
+        text-decoration: none;
+        text-shadow: 2px 1px 0 rgb(78, 78, 78);
+        font-size: 80%;
+    }
+
+    header #opcionescontainer {
+
+        width: fit-content;
+        
+    }
+
+    header #btnopciones {
+
+        background-color: white;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        padding-right: 1.6%;
+        padding-left: 1.6%;
+        margin-right: 20px;
+        margin-left: 20px;
+        box-shadow: 4px 4px 0 #9B9B9B;
+    }
+
+    header #btnopciones img {
+
+        width: 30px;
+        height: 30px;
+    }
+
+    main {
+        margin-top: 100px;
+    }
+
+    footer {
+
+        text-align: center;
+       
+    }
+
+    #contFooter {
+
+
+        margin: 10px;
+        width: 260px;
+        height: 50px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: -4px -4px 5px #88CEDD, 4px 4px #9B9B9B;
+    }
+
+    #contFooter p {
+
+        text-shadow: 1px 1px 0 #9B9B9B;
+        font-family: Huballi, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 50%;
+
+    }
+
+    #logofooter {
+
+        width: 28px;
+        margin: 20px;
+        margin-right: 0;
+        margin-left: 10px;
+        
+    }
+
+    #btnchat {
+
+        background-color: #88CEDD;
+        width: fit-content;
+        padding: 10px;
+        border-radius: 50%;
+        box-shadow: 2px 4px 0 #9B9B9B;
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        animation: chatslide 2s ease forwards;
+    }
+
+    #btnchat img {
+        width: 35px;
+    }
+
+    #pablo {
+
+        background-color: white;
+        height: 100vh;
+        min-width: 100%;
+    }
+
+    #ftFont {
+        
+        color: #0AF0AB;
+    }
+ }
 
 /* Hovers */
 
