@@ -1,26 +1,28 @@
-$(window).on('scroll ', checkButtonPosition);
+$(window).on('scroll', checkButtonPosition);
 $(window).on('scroll', checkHeaderPosition);
 
-let footer = $('footer');
-let button = $('#btnchat');
+$('#eujames')[0].volume = 0;
 
 function checkButtonPosition() {
-    
+
     var posFooter = $('footer').get(0).getBoundingClientRect();
 
-    if (posFooter.top <= $(window).height()) {
-        
-        $('#btnchat').css({ 'animation': 'chatup 0.6s ease forwards' });
-    } 
-    else {
+    if(window.innerWidth < 600) {
 
-        $('#btnchat').css({ 'animation': 'chatdown 0.6s ease forwards' });
+        if (posFooter.top <= $(window).height()) {
+            
+            $('#btnchat').css({ 'animation': 'chatup 0.6s ease forwards' });
+        } 
+        else {
+
+            $('#btnchat').css({ 'animation': 'chatdown 0.6s ease forwards' });
+        }
     }
 
 }
 function checkHeaderPosition() {
 
-    var header = $('header');
+    let header = $('header');
 
     if ($(window).scrollTop() > 1) {
 
