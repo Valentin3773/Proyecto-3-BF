@@ -9,6 +9,7 @@ $(() => {
     $('#servicios').on('click', cargarVistaServicios);
 
     $('#contacto').on('click', cargarVistaContacto);
+
 });
 
 function cargarVistaInicio() {
@@ -19,9 +20,9 @@ function cargarVistaInicio() {
         console.log("Cargando vista de 'Inicio'");
     });
 
-    $('#inicio').css({'text-decoration': 'underline'});
-    $('#servicios').css({'text-decoration': 'none'});
-    $('#contacto').css({'text-decoration': 'none'});
+    $('#inicio').css({ 'text-decoration': 'underline' });
+    $('#servicios').css({ 'text-decoration': 'none' });
+    $('#contacto').css({ 'text-decoration': 'none' });
 }
 
 function cargarVistaServicios() {
@@ -32,9 +33,9 @@ function cargarVistaServicios() {
         console.log("Cargando vista de 'Servicios'");
     });
 
-    $('#servicios').css({'text-decoration': 'underline'});
-    $('#inicio').css({'text-decoration': 'none'});
-    $('#contacto').css({'text-decoration': 'none'});
+    $('#servicios').css({ 'text-decoration': 'underline' });
+    $('#inicio').css({ 'text-decoration': 'none' });
+    $('#contacto').css({ 'text-decoration': 'none' });
 }
 
 function cargarVistaContacto() {
@@ -45,7 +46,28 @@ function cargarVistaContacto() {
         console.log("Cargando vista de 'Contacto'");
     });
 
-    $('#contacto').css({'text-decoration': 'underline'});
-    $('#inicio').css({'text-decoration': 'none'});
-    $('#servicios').css({'text-decoration': 'none'});
+    $('#contacto').css({ 'text-decoration': 'underline' });
+    $('#inicio').css({ 'text-decoration': 'none' });
+    $('#servicios').css({ 'text-decoration': 'none' });
 }
+$(document).ready(function () {
+    var imagenes = 3;
+
+    $('.slider-inner').css('transform', 'translateX(-100%)');
+
+    let index = 1;
+
+    setInterval(function () {
+        let porcentaje = index * -100;
+
+        $('.slider-inner').css('transform', 'translateX(' + porcentaje + '%)');
+        index++;
+
+        if (index >= imagenes) {
+            index = 0;
+        }
+
+    }, 4000);
+});
+
+
