@@ -2,6 +2,15 @@ $(() => {
 
     cargarVistaInicio();
 
+    addListeners();
+
+    let header = $('header');
+
+    header.
+});
+
+function addListeners() {
+
     $('#logo').on('click', cargarVistaInicio)
 
     $('#inicio').on('click', cargarVistaInicio);
@@ -9,8 +18,7 @@ $(() => {
     $('#servicios').on('click', cargarVistaServicios);
 
     $('#contacto').on('click', cargarVistaContacto);
-
-});
+}
 
 function cargarVistaInicio() {
 
@@ -23,6 +31,8 @@ function cargarVistaInicio() {
     $('#inicio').css({ 'text-decoration': 'underline' });
     $('#servicios').css({ 'text-decoration': 'none' });
     $('#contacto').css({ 'text-decoration': 'none' });
+
+    $('#seccionescss').attr('src', 'css/inicio.css');
 }
 
 function cargarVistaServicios() {
@@ -36,6 +46,8 @@ function cargarVistaServicios() {
     $('#servicios').css({ 'text-decoration': 'underline' });
     $('#inicio').css({ 'text-decoration': 'none' });
     $('#contacto').css({ 'text-decoration': 'none' });
+
+    $('#seccionescss').attr('src', 'css/servicios.css');
 }
 
 function cargarVistaContacto() {
@@ -49,25 +61,7 @@ function cargarVistaContacto() {
     $('#contacto').css({ 'text-decoration': 'underline' });
     $('#inicio').css({ 'text-decoration': 'none' });
     $('#servicios').css({ 'text-decoration': 'none' });
+
+    $('#seccionescss').attr('src', 'css/contacto.css');
 }
-$(document).ready(function () {
-    var imagenes = 3;
-
-    $('.slider-inner').css('transform', 'translateX(-100%)');
-
-    let index = 1;
-
-    setInterval(function () {
-        let porcentaje = index * -100;
-
-        $('.slider-inner').css('transform', 'translateX(' + porcentaje + '%)');
-        index++;
-
-        if (index >= imagenes) {
-            index = 0;
-        }
-
-    }, 4000);
-});
-
 

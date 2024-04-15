@@ -38,6 +38,8 @@ header {
     left: 50%;
     transform: translateX(-50.5%);
     box-shadow: 0 4px 0 #9B9B9B;
+
+    z-index: 5;
 }
 
 header.comprimido {

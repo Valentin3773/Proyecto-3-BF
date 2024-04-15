@@ -1,45 +1,58 @@
-<section class="">
+<section id="blkBienvenida" class="row gx-0">
 
-    <article class="">
+    <article class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 
-        <div id="blkBienvenida">
-
-            <span class= "fs-2"> 
-                Bienvenidos a la <span> Clínica Salud Bucal </span>, 
-                donde su salud bucal es nuestra prioridad. Nuestro equipo de odontólogos expertos y amable personal se dedican a 
-                proporcionar atención dental de la más alta calidad en un ambiente cálido y acogedor.
-            </span>
-
-            <img src="img/imagenesEmpresa/Ejemplo.png" alt="" id="Ejemplo1">
-
-        </div>
+        <p class="h-25 m-2 align-middle text">
+            Bienvenidos a la <span>Clínica Salud Bucal</span>,
+            donde su salud bucal es nuestra prioridad. Nuestro equipo de odontólogos expertos y amable personal se dedican a
+            proporcionar atención dental de la más alta calidad en un ambiente cálido y acogedor.
+        </p>
 
     </article>
+
+    <aside class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column justify-items-center align-items-center">
+
+        <img src="img/imagenesEmpresa/Ejemplo.png" alt="" id="Ejemplo1" class="w-100">
+
+    </aside>
+
+</section>
+
+<section id="carrusel" class="carousel slide" data-bs-ride="true">
+
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carrusel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carrusel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carrusel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+
+  <article class="carousel-inner">
+
+    <div class="carousel-item active">
+      <img src="img/imagenesEmpresa/Ejemplo2.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="img/imagenesEmpresa/Ejemplo3.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="img/imagenesEmpresa/Ejemplo4.jpg" class="d-block w-100" alt="...">
+    </div>
+
+  </article>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#carrusel" data-bs-slide="prev">
     
-    <aside>
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
 
-    </aside>
+  </button>
 
-</section>
+  <button class="carousel-control-next" type="button" data-bs-target="#carrusel" data-bs-slide="next">
 
-<section>
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
 
-    <article>
-        <div class="slider-container">
-            <div class= "slider">
-                <div class="slider-inner">
-                    <img src="img/imagenesEmpresa/Ejemplo2.jpg" alt="" id = "imagen">
-                    <img src="img/imagenesEmpresa/Ejemplo3.jpg" alt="" id = "imagen">
-                    <img src="img/imagenesEmpresa/Ejemplo4.jpg" alt="" id = "imagen">
-                </div>
-            </div>
-        </div>
-    </article>
-
-    <aside>
-
-
-    </aside>
+  </button>
 
 </section>
 
@@ -54,3 +67,4 @@
     </aside>
 
 </section>
+<br><br><br><br><br>
