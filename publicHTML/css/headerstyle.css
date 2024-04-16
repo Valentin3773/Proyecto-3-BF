@@ -31,13 +31,15 @@ header {
     border-radius: 15px;
     margin: 0.5%;
     min-height: 100px;
-    max-height: 130px;
+    max-height: 120px;
     overflow: hidden;
     transition-duration: 400ms;
     top: -0.1%; 
     left: 50%;
     transform: translateX(-50.5%);
     box-shadow: 0 4px 0 #9B9B9B;
+
+    z-index: 5;
 }
 
 header.comprimido {
@@ -146,7 +148,7 @@ footer {
 
 main {
 
-    margin-top: 150px;
+    margin-top: 135px;
     min-height: 100%;
 }
 
@@ -167,6 +169,32 @@ header #btnperfil img {
     position: fixed !important;
 }
 
+#navmobile.marboliviano {
+
+    transition-duration: 300ms;
+    display: none !important;
+}
+
+#navmobile {
+
+    transition-duration: 300ms;
+    display: none;
+}
+
+#navmobile.desplegado ul {
+
+    list-style: none;
+    width: 100%;
+    font-family: RobotoSerif, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 120%;
+    font-weight: 500;
+    text-shadow: 2px 1px 0 rgb(78, 78, 78);
+}
+#navmobile.desplegado ul li a {
+
+    text-decoration: none;
+}
+
 /*/ PC /*/
 @media screen and (min-width: 1100px) {
 
@@ -175,7 +203,7 @@ header #btnperfil img {
         display: inline-block;
         margin-right: 20px;
     }
-
+    
     nav ul li a, #btnreservar {
 
         color: white;
@@ -199,7 +227,7 @@ header #btnperfil img {
         text-align: center;
     }
 
-    nav {
+    header nav {
 
         display: flex;
         justify-content: right;
@@ -243,8 +271,8 @@ header #btnperfil img {
         margin-right: 0%;
         box-shadow: 4px 4px 0 #9B9B9B;
         padding: 20px;
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding-top: 15px;
+        padding-bottom: 15px;
         text-decoration: none;
         text-align: center;
     }
@@ -331,6 +359,7 @@ header #btnperfil img {
     }
 
     #btnopciones {
+        
         display: none;
     }
 
@@ -488,14 +517,6 @@ header #btnperfil img {
         padding: 20px;
     }
 
-    nav {
-
-        display: flex;
-        justify-content: center;
-        width: 100%;
-    }
-
-
     header ul, #btnperfil {
 
         display: none;
@@ -589,6 +610,46 @@ header #btnperfil img {
         width: 100%;
     }
 
+    .desplegado {
+
+        display: block !important;
+        position: fixed;
+        z-index: 3;
+        top: 130px;
+        right: 0.5%;
+        width: 50%;
+    }
+
+    .desplegado ul {
+
+        display: block;
+        background-color: #4294FF;
+        border-radius: 15px;
+        padding: 20px 0 20px 0;
+        width: 100%;
+        text-align: center;
+        border: 3px solid white;
+        box-shadow: 0 4px 0 #9B9B9B;
+    }
+
+    .desplegado ul hr {
+
+        border: none;
+        background-color: white;
+        height: 2px;
+        opacity: 1;
+    }
+
+    .desplegado ul li a {
+
+        color: white;
+    }
+
+    .desplegado svg, img {
+
+        width: 30px;
+    }
+
     #ftFont {
         
         color: #0AF0AB;
@@ -607,6 +668,45 @@ header #btnperfil img {
     nav {
 
         width: 10%;
+    }
+
+    #navmobile.desplegado {
+
+        position: fixed;
+        z-index: 3;
+        top: 115px;
+        right: 1%;
+        width: 80%;
+    }
+
+    #navmobile.desplegado ul {
+
+        display: block;
+        background-color: #4294FF;
+        border-radius: 15px;
+        padding: 20px 0 20px 0;
+        width: 100%;
+        text-align: center;
+        border: 3px solid white;
+        box-shadow: 0 4px 0 #9B9B9B;
+    }
+
+    #navmobile.desplegado ul hr {
+
+        border: none;
+        background-color: white;
+        height: 2px;
+        opacity: 1;
+    }
+
+    #navmobile.desplegado ul li a {
+
+        color: white;
+    }
+
+    #navmobile.desplegado svg, img {
+
+        width: 30px;
     }
 
     header {
@@ -734,6 +834,7 @@ header #btnperfil img {
     }
 
     #btnchat img {
+
         width: 35px;
     }
 
@@ -771,6 +872,45 @@ header #btnperfil img {
     nav {
 
         width: 10%;
+    }
+
+    #navmobile.desplegado {
+
+        position: fixed;
+        z-index: 3;
+        top: 110px;
+        right: 0.5%;
+        width: 100%;
+    }
+
+    #navmobile.desplegado ul {
+
+        display: block;
+        background-color: #4294FF;
+        border-radius: 15px;
+        padding: 20px 0 20px 0;
+        width: 100%;
+        text-align: center;
+        border: 3px solid white;
+        box-shadow: 0 4px 0 #9B9B9B;
+    }
+
+    #navmobile.desplegado ul hr {
+
+        border: none;
+        background-color: white;
+        height: 2px;
+        opacity: 1;
+    }
+
+    #navmobile.desplegado ul li a {
+
+        color: white;
+    }
+
+    #navmobile.desplegado svg, img {
+
+        width: 30px;
     }
 
     header {
@@ -931,6 +1071,16 @@ header #btnperfil img {
 
     box-shadow: 2px 4px 0 #9B9B9B, #0AF0AB 10px 10px 15px -5px;
     transform: scale(1.05);
+}
+
+.desplegado ul li a:hover {
+
+    color: #0AF0AB;
+}
+
+.desplegado ul li:hover {
+
+    color: red;
 }
 
 #btnopciones:hover {

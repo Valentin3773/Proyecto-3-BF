@@ -1,63 +1,26 @@
 main {
+
     width: 100%;
-    margin-left: 10px;
 }
 
-#blkBienvenida  {
+#blkBienvenida {
+
     background-color: #4294FF;
-    width: fit-content;
-    height: fit-content;
-    margin-right: 20px;
-    border-radius: 10px;
-    display: inline-block;
-    vertical-align:middle;
-    padding: 10px 0 10px 10px;
-    font-weight: 400;
     font-family: RobotoSerif, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-#blkBienvenida span span {
-    color: aqua;
-    display:inline;
+#blkBienvenida aside {
+
+    border-radius: 0;
 }
 
 #blkBienvenida span {
-    display: inline-block;
-    width: 60%;
+
+    color: aqua;
 }
 
-#blkBienvenida img {
-    display: inline-flex;
-    float: right;
-    width:30%;
-    margin: 10px;
-}
+#blkBienvenida p {
 
-.slider {
-    width: fit-content;
-    height: fit-content;
-    overflow: hidden;
-}
-
-.slider-inner {
-    transition: all ease-out 2s;
-    display: flex;
-    flex-flow: row nowrap;
-    width: 400px;
-    height: 300px;
-    
-}
-
-
-.slider-inner img {
-    width: 400px;
-    height: 300px;
-    border-radius: 10px;
-}
-
-.slider-container {
-    padding: 10px;
-    margin: 10px 0px;
-    margin-right: 20px;border-radius: 10px;
-    background-color: #4294FF;
-}
+    font-size: 150%;
+    color: white;
+}   
