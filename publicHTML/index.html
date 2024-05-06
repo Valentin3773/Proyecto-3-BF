@@ -10,10 +10,6 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
-    <!-- Scripts -->
-    <script src="js/headerscript.js" defer></script>
-    <script src="js/lobby.js" defer></script>
-
     <!-- JQuery -->
     <script src="js/jquery-3.7.1.min.js"></script>
 
@@ -21,71 +17,99 @@
     <link rel="stylesheet" href="css/bootstrap-5.2.3-dist/css/bootstrap.min.css">
     <script src="css/bootstrap-5.2.3-dist/js/bootstrap.min.js" defer></script>
     
+    <!-- Slick -->
+    <link rel="stylesheet" href="css/slick/slick.css">
+    <script src="css/slick/slick.min.js" defer></script>
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="css/headerstyle.css">
     <link id="seccionescss" rel="stylesheet" href="css/inicio.css">
     <title>Clínica Salud Bucal</title>
 
+    <!-- Scripts -->
+    <script src="js/preloader.js"></script>
+    <script src="js/headerscript.js" defer></script>
+    <script src="js/servicios.js" defer></script>
+    <script src="js/lobby.js" defer></script>
+
 </head>
 
 <body>
 
-    <div id="container">
+    <div id="preloader" class="d-flex justify-content-center align-items-center">
+        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+
+    <div id="container" class="hidden">
 
         <header class="extendido">
-
-            <a href="#" id="logo" title="Ir al inicio">
-
-                <img src="img/logaso.png" alt="Logo" id="imglogo">
-
-            </a>
             
-            <div id="titulogo">
+            <div class="left">
+                <a href="#" id="logo" title="Ir al inicio">
 
-                <h1 class="fs-2"><span class="s1">Clínica</span> <span class="s2">Salud</span> <span class="s3">Bucal</span></h1>
-                <h2 class="fs-5 mb-0">Implantes, Cirugía & Ortodoncia</h2>
-
-            </div>
-
-            <nav>
-
-                <ul class="mb-0">
-
-                    <li>
-                        <a href="#" id="inicio" title="Inicio">Inicio</a>
-                    </li>
-
-                    <li>
-                        <a href="#" id="servicios" title="Servicios">Servicios</a>
-                    </li>
-
-                    <li>
-                        <a href="#" id="contacto" title="Contacto">Contacto</a>
-                    </li>
-
-                </ul>
-
-            </nav>
-
-            <div class="contReservar lh-1">
-
-                <a href="" id="btnreservar" title="Reservar una consulta">Reservar Consulta</a>
-
-            </div>
-
-            <a href="" title="Mi perfil" id="btnperfil">
-
-                <img src="img/iconoperfil.png" alt="Mi Perfil">
-
-            </a>
-            <div id="opcionescontainer">
-
-                <a href="javascript:void(0)" id="btnopciones" title="Desplegar menú">
-
-                    <img src="img/opciones.png" alt="Imágen menú">
+                    <img src="img/logaso.png" alt="Logo" id="imglogo">
 
                 </a>
+                
+                <div id="titulogo">
 
+                    <h1 class="fs-2"><span class="s1">Clínica</span> <span class="s2">Salud</span> <span class="s3">Bucal</span></h1>
+                    <h2 class="fs-5 mb-0">Implantes, Cirugía & Ortodoncia</h2>
+
+                </div>
+            </div>
+
+            <div class="right">
+
+                <nav>
+
+                    <ul class="mb-0">
+
+                        <li>
+                            <a href="#" id="inicio" title="Inicio">Inicio</a>
+                        </li>
+
+                        <li>
+                            <a href="#" id="servicios" title="Servicios">Servicios</a>
+                        </li>
+
+                        <li>
+                            <a href="#" id="contacto" title="Contacto">Contacto</a>
+                        </li>
+
+                    </ul>
+
+                </nav>
+
+                <div class="contReservar lh-1">
+
+                    <a href="" id="btnreservar" title="Reservar una consulta">Reservar Consulta</a>
+
+                </div>
+
+                <a href="" title="Mi perfil" id="btnperfil">
+
+                    <img src="img/iconoperfil.png" alt="Mi Perfil">
+
+                </a>
+                <div id="opcionescontainer">
+
+                    <a href="javascript:void(0)" id="btnopciones" title="Desplegar menú">
+
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+
+                            <path stroke="black" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"/>
+
+                        </svg>
+
+                    </a>
+
+                </div>
+                
             </div>
      
         </header>
@@ -122,19 +146,21 @@
 
         </div>
 
-        <main></main>
+        <div id="hrelleno"></div>
+
+        <main class=""></main>
 
         <div id="btnchat" title="Envíanos un mensaje">
 
-            <img src="img/iconochat.png" alt="Ícono de chat">
+            <img src="img/iconosvg/icons8-whatsapp.svg" alt="Ícono de chat">
 
         </div>
 
-        <footer>
+        <footer data-aos="fade-in">
 
             <div id="contFooter">
 
-                <img src="img/Logaso.png" alt="logofooter" id="logofooter" title="Clínica Salud Bucal">
+                <img src="img/logaso.png" alt="logofooter" id="logofooter" title="Clínica Salud Bucal">
                 <p class="mb-0"> &copy;2024 <span id="ftFont"> Clínica Salud Bucal </span> | Developed by PA </p>
 
             </div>

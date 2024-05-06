@@ -1,9 +1,12 @@
 $(() => {
 
+    AOS.init();
+
     cargarVistaInicio();
 
     addListeners();
 });
+
 
 function addListeners() {
 
@@ -28,7 +31,7 @@ function cargarVistaInicio() {
     $('#servicios, #serviciosm').css({ 'text-decoration': 'none' });
     $('#contacto, #contactom').css({ 'text-decoration': 'none' });
 
-    $('#seccionescss').attr('src', 'css/inicio.css');
+    $('#seccionescss').attr('href', 'css/inicio.css');
 }
 
 function cargarVistaServicios() {
@@ -37,13 +40,15 @@ function cargarVistaServicios() {
 
         $('main').html(data);
         console.log("Cargando vista de 'Servicios'");
+
+        iniciarServicios();
     });
 
     $('#servicios, #serviciosm').css({ 'text-decoration': 'underline' });
     $('#inicio, #iniciom').css({ 'text-decoration': 'none' });
     $('#contacto, #contactom').css({ 'text-decoration': 'none' });
 
-    $('#seccionescss').attr('src', 'css/servicios.css');
+    $('#seccionescss').attr('href', 'css/servicios.css');
 }
 
 function cargarVistaContacto() {
@@ -58,6 +63,9 @@ function cargarVistaContacto() {
     $('#inicio, #iniciom').css({ 'text-decoration': 'none' });
     $('#servicios, #serviciosm').css({ 'text-decoration': 'none' });
 
-    $('#seccionescss').attr('src', 'css/contacto.css');
+    $('#seccionescss').attr('href', 'css/contacto.css');
 }
+
+
+
 

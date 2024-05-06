@@ -16,12 +16,118 @@
     src: url(../font/JacquesFrancois-Regular.ttf);
 }
 
-html, body, #container {
+
+html, body {
 
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+body { background-color: white; } 
+
+.hidden { display: none; }
+
+.lds-spinner,
+.lds-spinner div,
+.lds-spinner div:after {
+  box-sizing: border-box;
+}
+.lds-spinner {
+  color: currentColor;
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-spinner div {
+  transform-origin: 40px 40px;
+  animation: lds-spinner 1.2s linear infinite;
+}
+.lds-spinner div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 3.2px;
+  left: 36.8px;
+  width: 6.4px;
+  height: 17.6px;
+  border-radius: 20%;
+  background: currentColor;
+}
+.lds-spinner div:nth-child(1) {
+  transform: rotate(0deg);
+  animation-delay: -1.1s;
+}
+.lds-spinner div:nth-child(2) {
+  transform: rotate(30deg);
+  animation-delay: -1s;
+}
+.lds-spinner div:nth-child(3) {
+  transform: rotate(60deg);
+  animation-delay: -0.9s;
+}
+.lds-spinner div:nth-child(4) {
+  transform: rotate(90deg);
+  animation-delay: -0.8s;
+}
+.lds-spinner div:nth-child(5) {
+  transform: rotate(120deg);
+  animation-delay: -0.7s;
+}
+.lds-spinner div:nth-child(6) {
+  transform: rotate(150deg);
+  animation-delay: -0.6s;
+}
+.lds-spinner div:nth-child(7) {
+  transform: rotate(180deg);
+  animation-delay: -0.5s;
+}
+.lds-spinner div:nth-child(8) {
+  transform: rotate(210deg);
+  animation-delay: -0.4s;
+}
+.lds-spinner div:nth-child(9) {
+  transform: rotate(240deg);
+  animation-delay: -0.3s;
+}
+.lds-spinner div:nth-child(10) {
+  transform: rotate(270deg);
+  animation-delay: -0.2s;
+}
+.lds-spinner div:nth-child(11) {
+  transform: rotate(300deg);
+  animation-delay: -0.1s;
+}
+.lds-spinner div:nth-child(12) {
+  transform: rotate(330deg);
+  animation-delay: 0s;
+}
+@keyframes lds-spinner {
+
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+#preloader {
+
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 15;
+}
+
+#container {
+
+    width: 100%;
+    position: absolute;
+    background-color: rgb(217, 253, 239);
+    overflow: hidden;
 }
 
 header {
@@ -38,6 +144,8 @@ header {
     left: 50%;
     transform: translateX(-50.5%);
     box-shadow: 0 4px 0 #9B9B9B;
+    display: flex;
+    justify-content: space-between;
 
     z-index: 5;
 }
@@ -45,7 +153,8 @@ header {
 header.comprimido {
 
     max-height: 80px;
-    background-color: #88CEDD;
+    background-color: rgb(136, 206, 221, 0.5);
+    box-shadow: 0 4px 0 rgb(155, 155, 155, 0.5);
 }
 
 .comprimido #btnreservar {
@@ -62,6 +171,25 @@ header.comprimido {
 #btnchat, #btnreservar {
 
     transition-duration: 300ms;
+    cursor: pointer;
+}
+
+#hrelleno {
+
+    width: 100%;
+    height: 145px;
+}
+
+.left, .right {
+
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.left {
+
+    width: 70%;
 }
 
 header #titulogo h2 {
@@ -75,9 +203,6 @@ header #titulogo {
 
     font-family: Francois,  'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 header #titulogo h1 {
@@ -93,6 +218,7 @@ header #titulogo h2 {
 
     line-height: 1.5;
     font-weight: 900;
+    width: 100%;
 }
 
 header #titulogo h1 .s1 {
@@ -148,7 +274,6 @@ footer {
 
 main {
 
-    margin-top: 135px;
     min-height: 100%;
 }
 
@@ -214,8 +339,6 @@ header #btnperfil img {
 
     header {
 
-        display: inline-flex;
-        justify-content: left;
         align-items: center;
         width: 99%;
         animation: headerfade 2s ease forwards;
@@ -223,7 +346,6 @@ header #btnperfil img {
 
     header #titulogo {
 
-        width: 750px;
         text-align: center;
     }
 
@@ -256,7 +378,7 @@ header #btnperfil img {
 
         margin: 15px;
         margin-left: 5px;
-        margin-right: -10px;
+        margin-right: 10px;
         width: fit-content;
         height: fit-content;
         display: flex;
@@ -279,7 +401,7 @@ header #btnperfil img {
 
     #btnperfil {
 
-        width: 260px;
+        width: 200px;
         display: flex;
         justify-content: center;
     }
@@ -288,7 +410,7 @@ header #btnperfil img {
 
         background-color: #88CEDD;
         width: fit-content;
-        padding: 15px;
+        padding: 10px;
         border-radius: 50%;
         box-shadow: 2px 4px 0 #9B9B9B;
         position: fixed;
@@ -300,7 +422,6 @@ header #btnperfil img {
     #btnchat img {
 
         width: 44px;
-        height: 38px;
     }
 
     #main {
@@ -395,8 +516,6 @@ header #btnperfil img {
 
     header {
 
-        display: flex;
-        justify-content: left;
         align-items: center;
         animation: headerfade 2s ease forwards;
         min-width: 96%;
@@ -527,8 +646,6 @@ header #btnperfil img {
         width: 96%;
         transform: translateX(-52%);
         margin: 2%;
-        display: flex;
-        justify-content: left;
         align-items: center;
     }
 
@@ -670,8 +787,9 @@ header #btnperfil img {
         width: 10%;
     }
 
-    #navmobile.desplegado {
+    .desplegado {
 
+        display: block !important;
         position: fixed;
         z-index: 3;
         top: 115px;
@@ -714,8 +832,6 @@ header #btnperfil img {
         width: 96%;
         transform: translateX(-52%);
         margin: 1.6%;
-        display: flex;
-        justify-content: right;
         align-items: center;
         animation: headerfade 2s ease forwards;
     }
@@ -876,6 +992,7 @@ header #btnperfil img {
 
     #navmobile.desplegado {
 
+        display: block !important;
         position: fixed;
         z-index: 3;
         top: 110px;
