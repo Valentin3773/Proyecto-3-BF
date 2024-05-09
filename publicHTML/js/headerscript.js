@@ -42,7 +42,7 @@ function checkHeaderPosition() {
     else {
 
         header.addClass('extendido').removeClass('comprimido');
-        mnav.css({'top': '130px'});
+        mnav.css({'top': '120px'});
     }
 }
 

@@ -22,7 +22,7 @@
     display: flex;
     justify-content: center;
     align-items: end;
-    color: #0AF0AB;
+    color: #00d335;
 }
 
 .card h1 {
@@ -123,13 +123,13 @@
 
 .sectitulo {
 
-    color: #CEF6FF;
+    color: #78b3ff;
     font-weight: 900;
-    text-shadow: 0 2px 4px #818181, 0 -1px 3px #818181;  
+    text-shadow: 0 5px 4px #818181, 0 -2px 3px #818181, 0 3px 0 #ffa600;  
     font-size: 300%;
 }
 
-.slick-arrow:hover {
+.slick-arrow:hover {    
 
     background-color: gainsboro;
     opacity: 1;
