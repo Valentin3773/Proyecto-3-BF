@@ -85,7 +85,7 @@ body { background-color: white; }
   animation-delay: -0.5s;
 }
 .lds-spinner div:nth-child(8) {
-  transform: rotate(210deg);
+  transform: rotate(210deg);    
   animation-delay: -0.4s;
 }
 .lds-spinner div:nth-child(9) {
@@ -321,19 +321,19 @@ header #btnperfil img {
 }
 
 /*/ PC /*/
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 900px) {
 
     nav ul li, #btnreservar {
         
         display: inline-block;
-        margin-right: 20px;
+        margin-right: 16px;
     }
     
     nav ul li a, #btnreservar {
 
         color: white;
         text-shadow: 2px 1px 0 rgb(78, 78, 78);
-        font-size: 160%;
+        font-size: 125%;
         display: inline;
     }
 
@@ -363,7 +363,7 @@ header #btnperfil img {
 
     header #imglogo {
 
-        width: 120px;
+        width: 90px;
         padding: 15px;
         display: inline-block;
         padding-right: 0px;
@@ -392,16 +392,14 @@ header #btnperfil img {
         border-radius: 15px;
         margin-right: 0%;
         box-shadow: 4px 4px 0 #9B9B9B;
-        padding: 20px;
-        padding-top: 15px;
-        padding-bottom: 15px;
+        padding: 15px 4px 15px 4px;
         text-decoration: none;
         text-align: center;
     }
 
     #btnperfil {
 
-        width: 200px;
+        width: 160px;
         display: flex;
         justify-content: center;
     }
@@ -421,7 +419,7 @@ header #btnperfil img {
 
     #btnchat img {
 
-        width: 44px;
+        width: 35px;
     }
 
     #main {
@@ -474,7 +472,7 @@ header #btnperfil img {
         background-color: white;
         border-radius: 50%;
         padding: 10px;
-        width: 100px;
+        width: 50px;
         max-width: 60px;
         box-shadow: 2px 4px 0 #9B9B9B;
     }
@@ -496,11 +494,11 @@ header #btnperfil img {
 }
 
 /*/ Tablets y Smart Phones anchos /*/
-@media screen and (max-width: 1099px) and (min-width: 401px) {
+@media screen and (max-width: 899px) and (min-width: 401px) {
 
     header #imglogo {
 
-        width: 100px;
+        width: 90px;
         margin: 20px;
     }
 
@@ -843,7 +841,7 @@ header #btnperfil img {
 
     header #imglogo {
 
-        width: 80px;
+        width: 70px;
         margin: 20px;
         margin-right: 0;
     }
@@ -1055,7 +1053,7 @@ header #btnperfil img {
     header #imglogo {
 
         margin: 10px;
-        width: 60px;
+        width: 50px;
         margin-right: 10px;
     }
 

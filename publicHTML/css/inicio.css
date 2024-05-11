@@ -4,7 +4,7 @@ main {
 }
 
 #blkBienvenida {
-
+    
     background-color: #7CB9E8;
     font-family: RobotoSerif, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -15,7 +15,7 @@ main {
 }
 
 #blkBienvenida span {
-
+    
     color: aqua;
     text-shadow: 2px 2px 1px #9B9B9B, 0 0 5px rgb(255, 183, 0);
 }

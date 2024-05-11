@@ -2,11 +2,10 @@ $(() => {
 
     AOS.init();
 
-    cargarVistaInicio();
-
     addListeners();
-});
 
+    cargarVistaInicio();
+});
 
 function addListeners() {
 
@@ -25,6 +24,8 @@ function cargarVistaInicio() {
 
         $('main').html(data);
         console.log("Cargando vista de 'Inicio'");
+
+        // history.pushState({}, '', 'inicio');
     });
 
     $('#inicio, #iniciom').css({ 'text-decoration': 'underline' });
@@ -42,6 +43,8 @@ function cargarVistaServicios() {
         console.log("Cargando vista de 'Servicios'");
 
         iniciarServicios();
+
+        // history.pushState({}, '', 'servicios');
     });
 
     $('#servicios, #serviciosm').css({ 'text-decoration': 'underline' });
@@ -57,6 +60,8 @@ function cargarVistaContacto() {
 
         $('main').html(data);
         console.log("Cargando vista de 'Contacto'");
+
+        // history.pushState({}, '', 'contacto');
     });
 
     $('#contacto, #contactom').css({ 'text-decoration': 'underline' });
@@ -65,7 +70,3 @@ function cargarVistaContacto() {
 
     $('#seccionescss').attr('href', 'css/contacto.css');
 }
-
-
-
-
