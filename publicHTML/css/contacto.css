@@ -56,6 +56,12 @@ iframe {
     border-radius: 20px;
 }
 
+section {
+
+    border: 3px solid white;
+    box-shadow: 0 0 4px #9B9B9B, 0 0 10px #00B2FF;
+}
+
 #circulito {
 
     border-radius: 60px;
@@ -101,6 +107,11 @@ iframe {
     transition-duration: 200ms;
 }
 
+#contenedor_fondo_redes img {
+
+    transition-duration: 500ms;
+}
+
 input, textarea {
 
     width: 100%;
@@ -140,6 +151,7 @@ textarea {
 form {
 
     background-color: #7cdbe8;
+    border: 3px solid white;
     border-radius: 10px;
     height: 100%;
     box-shadow: 1.5px 3px 0 #9B9B9B;
@@ -148,6 +160,11 @@ form {
 #contenedor_fondo_redes:hover {
 
     scale: 0.92;
+}
+
+#contenedor_fondo_redes:hover img {
+
+    rotate: 360deg;
 }
 
 @media screen and (max-width: 800px) {

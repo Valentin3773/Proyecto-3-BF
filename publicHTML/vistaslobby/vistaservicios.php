@@ -4,10 +4,9 @@
 
 </div>
 
-<section id="navservicios" class="row mt-2 gx-0">
+<section id="navservicios" class="mt-2 gx-0">
 
-    <div class="col-xl-1 col-lg-1"></div>
-    <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12" id="contenedorexterno">
+    <div class="col-12" id="contenedorexterno">
         
         <div class="slidercontainer">
 
@@ -15,7 +14,7 @@
 
                 <div class="card btnortodoncia">
 
-                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top">
+                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top img-thumbnail">
 
                     <div class="card-body">
 
@@ -26,7 +25,7 @@
                 </div>
                 <div class="card btnodontopediatria">
 
-                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top">
+                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top img-thumbnail">
 
                     <div class="card-body">
 
@@ -37,7 +36,7 @@
                 </div>
                 <div class="card btnprotesis">
 
-                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top">
+                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top img-thumbnail">
 
                     <div class="card-body">
 
@@ -48,7 +47,7 @@
                 </div>
                 <div class="card btnoperatoria">
 
-                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top">
+                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top img-thumbnail">
 
                     <div class="card-body">
 
@@ -59,7 +58,7 @@
                 </div>
                 <div class="card btnortopedia">
 
-                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top">
+                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top img-thumbnail">
 
                     <div class="card-body">
 
@@ -70,7 +69,7 @@
                 </div>
                 <div class="card btncirugia">
 
-                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top">
+                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top img-thumbnail">
 
                     <div class="card-body">
 
@@ -81,7 +80,7 @@
                 </div>
                 <div class="card btnimplantes">
 
-                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top">
+                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top img-thumbnail">
 
                     <div class="card-body">
 
@@ -96,7 +95,6 @@
         </div>
 
     </div>
-    <div class="col-xl-1 col-lg-1"></div>
 
 </section>
 
