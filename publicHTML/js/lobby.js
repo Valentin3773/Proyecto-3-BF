@@ -20,7 +20,7 @@ function addListeners() {
 
 function cargarVistaInicio() {
 
-    $.get("http://127.0.0.1:5500/publicHTML/vistainicio.php", data => {
+    $.get("vistaslobby/vistainicio.php", data => {
 
         $('main').html(data);
         console.log("Cargando vista de 'Inicio'");
@@ -37,7 +37,7 @@ function cargarVistaInicio() {
 
 function cargarVistaServicios() {
 
-    $.get("http://127.0.0.1:5500/publicHTML/vistaservicios.php", data => {
+    $.get("vistaslobby/vistaservicios.php", data => {
 
         $('main').html(data);
         console.log("Cargando vista de 'Servicios'");
@@ -56,7 +56,7 @@ function cargarVistaServicios() {
 
 function cargarVistaContacto() {
 
-    $.get("http://127.0.0.1:5500/publicHTML/vistacontacto.php", data => {
+    $.get("vistaslobby/vistacontacto.php", data => {
 
         $('main').html(data);
         console.log("Cargando vista de 'Contacto'");

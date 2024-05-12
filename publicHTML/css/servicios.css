@@ -124,6 +124,7 @@
 .sectitulo {
 
     color: #78b3ff;
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 900;
     text-shadow: 0 5px 4px #818181, 0 -2px 3px #818181, 0 3px 0 #ffa600;  
     font-size: 300%;
