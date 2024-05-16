@@ -112,7 +112,7 @@ section {
     transition-duration: 500ms;
 }
 
-input, textarea {
+input, textarea, button[type='submit'] {
 
     width: 100%;
     border: none;
@@ -132,15 +132,34 @@ label {
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-input[type='submit'] {
+#enviarmail {
 
     background-color: #00B2FF;
     color: white;
     letter-spacing: 0.5px;
     border-radius: 10px;
     font-size: 130%;
-    width: 20%;
+    width: 50%;
     font-weight: 700;
+    position: relative;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: .3s ease all;
+}
+
+#enviarmail > div {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 2;
+    left: -20px;
+    transition: .3s ease-in-out all;
+    opacity: 0;
 }
 
 textarea {
@@ -165,6 +184,30 @@ form {
 #contenedor_fondo_redes:hover img {
 
     rotate: 360deg;
+}
+
+#enviarmail span {
+
+    transition: .4s ease-in-out all;
+    position: absolute;
+    left: 35%;
+    width: 20%;
+}
+
+#enviarmail:hover > div {
+
+    left: calc(100% - 40px);
+    opacity: 1;
+}
+
+#enviarmail:hover span {
+
+    left: 20px;
+}
+
+#enviarmail:hover {
+
+    background-color: #00d335;
 }
 
 @media screen and (max-width: 800px) {

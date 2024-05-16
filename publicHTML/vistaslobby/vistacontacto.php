@@ -63,7 +63,7 @@
             <div id="contenedor_fondo_redes">
 
                 <a href="https://www.instagram.com/saluddentalclinica/?hl=es" target="_blank">
-                    <img src="img/iconosvg/instagram.svg" alt="">
+                    <img src="img/iconosvg/instagram.svg" alt="Instragram">
                 </a>
                 
             </div>
@@ -71,7 +71,15 @@
             <div id="contenedor_fondo_redes">
 
                 <a href="" target="_blank">
-                    <img src="img/iconosvg/facebook.svg" alt="">
+                    <img src="img/iconosvg/facebook.svg" alt="Facebook">
+                </a>
+                
+            </div>
+
+            <div id="contenedor_fondo_redes">
+
+                <a href="" target="_blank">
+                    <img src="img/iconosvg/whatsapp.svg" alt="WhatsApp">
                 </a>
                 
             </div>
@@ -126,7 +134,15 @@
 
             <div class="submitcontainer d-flex justify-content-end">
 
-                <input type="submit" value="Enviar">
+                <button type="submit" id="enviarmail">
+                    
+                    <span>Enviar</span> 
+                    
+                    <div>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+
+                </button>
 
             </div>
 
