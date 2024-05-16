@@ -15,42 +15,44 @@ function iniciarServicios() {
         responsive: [
 
             {
-                breakpoint: 3000,
+                breakpoint: 2400,
                 settings: {
 
                     slidesToShow: 6
                 }
             },
             {
-                breakpoint: 2800,
+                breakpoint: 2000,
                 settings: {
 
                     slidesToShow: 5
                 }
             },
             {
-                breakpoint: 2400,
+                breakpoint: 1600,
                 settings: {
 
                     slidesToShow: 4
                 }
             },
             {
-                breakpoint: 2000,
+                breakpoint: 1300,
                 settings: {
 
-                    slidesToShow: 3
+                    slidesToShow: 3,
+                    arrows: false
                 }
             },
             {
-                breakpoint: 1600,
+                breakpoint: 800,
                 settings: {
 
-                    slidesToShow: 2
+                    slidesToShow: 2,
+                    arrows: false
                 }
             },
             {
-                breakpoint: 1200,
+                breakpoint: 400,
                 settings: {
 
                     slidesToShow: 1,

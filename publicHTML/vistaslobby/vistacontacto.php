@@ -1,6 +1,6 @@
 <section class="container row mx-auto">
     <h1 class="col-12 text-center mt-3" id="titulo">Contactanos</h1>
-    <div class="infocontacto p-4 pt-3 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+    <div class="infocontacto p-xl-4 p-lg-4 p-0 pt-xl-3 pt-lg-3 pt-md-0 pt-sm-0 pt-0 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 
         <article>
 
@@ -86,7 +86,7 @@
 
     </div>
 
-    <aside class="p-2 pt-3 pb-4 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+    <aside class="p-xl-2 p-lg-2 p-0  pt-3 pb-4 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 
         <form action="" method="POST" id="formemail" class="p-2 d-flex flex-column justify-content-center">
             
