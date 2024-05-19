@@ -311,6 +311,11 @@ header #btnperfil img {
     display: none;
 }
 
+.contReservar {
+
+    z-index: 3;
+}
+
 #navmobile.desplegado ul {
 
     list-style: none;
@@ -411,7 +416,7 @@ header #btnperfil img {
 
     #btnchat {
 
-        background-color: #88CEDD;
+        background-color: #25D366;
         width: fit-content;
         padding: 10px;
         border-radius: 50%;
@@ -615,7 +620,7 @@ header #btnperfil img {
 
     #btnchat {
 
-        background-color: #88CEDD;
+        background-color: #25D366;
         width: fit-content;
         padding: 15px;
         border-radius: 50%;
@@ -700,7 +705,7 @@ header #btnperfil img {
 
     #btnchat {
 
-        background-color: #88CEDD;
+        background-color: #25D366;
         width: fit-content;
         padding: 10px;
         border-radius: 50%;
@@ -943,7 +948,7 @@ header #btnperfil img {
 
     #btnchat {
 
-        background-color: #88CEDD;
+        background-color: #25D366;
         width: fit-content;
         padding: 10px;
         border-radius: 50%;
@@ -1158,7 +1163,7 @@ header #btnperfil img {
 
     #btnchat {
 
-        background-color: #88CEDD;
+        background-color: #25D366;
         width: fit-content;
         padding: 10px;
         border-radius: 50%;

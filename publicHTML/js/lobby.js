@@ -18,6 +18,8 @@ function addListeners() {
 
 function cargarVistaInicio() {
 
+    window.scrollTo({top: 0, behavior: 'smooth'});
+
     $.get("vistaslobby/vistainicio.php", data => {
 
         $('main').html(data);
@@ -34,6 +36,8 @@ function cargarVistaInicio() {
 }
 
 function cargarVistaServicios() {
+
+    window.scrollTo({top: 0, behavior: 'smooth'});
 
     $.get("vistaslobby/vistaservicios.php", data => {
 
@@ -53,6 +57,8 @@ function cargarVistaServicios() {
 }
 
 function cargarVistaContacto() {
+
+    window.scrollTo({top: 0, behavior: 'smooth'});
 
     $.get("vistaslobby/vistacontacto.php", data => {
 

@@ -116,7 +116,7 @@
 
         <aside class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 d-flex justify-content-center align-items-center">
 
-            <img src="img/imagenesEmpresa/Ejemplo2.jpg" alt="aaaa" class="img-thumbnail">
+            <img src="img/imagenesEmpresa/Ejemplo.png" alt="aaaa" class="img-thumbnail">
 
         </aside>
         <div class="col-xl-1 col-lg-1"></div>
@@ -142,7 +142,7 @@
 
         <aside class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 d-flex justify-content-center align-items-center">
 
-            <img src="img/imagenesEmpresa/Ejemplo2.jpg" alt="aaaa" class="img-thumbnail">
+            <img src="img/imagenesEmpresa/Ejemplo3.jpg" alt="aaaa" class="img-thumbnail">
 
         </aside>
         <div class="col-xl-1 col-lg-1"></div>
@@ -194,7 +194,7 @@
 
         <aside class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 d-flex justify-content-center align-items-center">
 
-            <img src="img/imagenesEmpresa/Ejemplo2.jpg" alt="aaaa" class="img-thumbnail">
+            <img src="img/imagenesEmpresa/Ejemplo.png" alt="aaaa" class="img-thumbnail">
 
         </aside>
         <div class="col-xl-1 col-lg-1"></div>
@@ -220,7 +220,7 @@
 
         <aside class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 d-flex justify-content-center align-items-center">
 
-            <img src="img/imagenesEmpresa/Ejemplo2.jpg" alt="aaaa" class="img-thumbnail">
+            <img src="img/imagenesEmpresa/Ejemplo3.jpg" alt="aaaa" class="img-thumbnail">
 
         </aside>
         <div class="col-xl-1 col-lg-1"></div>
@@ -272,7 +272,7 @@
 
         <aside class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 d-flex justify-content-center align-items-center">
 
-            <img src="img/imagenesEmpresa/Ejemplo2.jpg" alt="aaaa" class="img-thumbnail">
+            <img src="img/imagenesEmpresa/Ejemplo.png" alt="aaaa" class="img-thumbnail">
 
         </aside>
         <div class="col-xl-1 col-lg-1"></div>
