@@ -12,6 +12,7 @@ main {
     color: white;
     box-shadow: 1.5px 3px 0 #9B9B9B;
     letter-spacing: 0.5px;
+    border: .5px solid rgba(0, 0, 0, 0.6);
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -24,6 +25,7 @@ main {
     padding: 0 20px 0 20px;
     width: 150px;
     justify-content: center;
+    border: .5px solid rgba(0, 0, 0, 0.3);
 }
 
 #titulo_input label {
@@ -89,11 +91,15 @@ section {
     border-radius: 10px;
     width: 100%;
     box-shadow: 1.5px 2px 2px #9B9B9B;
+    border: .5px solid rgba(0, 0, 0, 0.3);
+    transition-duration: 300ms;
+    text-align: center;
 }
 
 #contenedor_fondo p {
 
     color: white;
+    transition-duration: 300ms;
 }
 
 #contenedor_fondo_redes {
@@ -104,6 +110,7 @@ section {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 1.5px 2px 2px #9B9B9B;
+    border: .5px solid rgba(0, 0, 0, 0.3);
     transition-duration: 200ms;
 }
 
@@ -121,6 +128,7 @@ input, textarea, button[type='submit'] {
     box-shadow: 1.5px 3px 0 #9B9B9B;
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 110%;
+    border: .5px solid rgba(0, 0, 0, 0.6);
 }
 
 label {
@@ -130,6 +138,11 @@ label {
     letter-spacing: 0.5px;
     font-size: 110%;
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#subtitulo, label, .contenedor {
+
+    text-shadow: 0 1px 5px rgba(0, 0, 0, .5);
 }
 
 textarea {
@@ -144,6 +157,7 @@ form {
     border-radius: 10px;
     height: 100%;
     box-shadow: 1.5px 3px 0 #9B9B9B;
+    border: .5px solid rgba(0, 0, 0, 0.3);
 }
 
 #contenedor_fondo_redes:hover {
@@ -154,6 +168,23 @@ form {
 #contenedor_fondo_redes:hover img {
 
     rotate: 360deg;
+}
+
+#contenedor_fondo:hover p {
+
+    color: #0af034;
+}
+
+#contenedor_fondo:hover {
+
+    scale: 0.98;
+}
+
+#jejeje {
+
+    opacity: 0;
+    position: absolute;
+    transform: translateX(30000px);
 }
 
 @media screen and (max-width: 800px) {
@@ -185,7 +216,7 @@ form {
     padding-left: 0.9em;
     display: flex;
     align-items: center;
-    border: none;
+    border: .5px solid rgba(0, 0, 0, 0.6);
     border-radius: 10px;
     width: 20%;
     overflow: hidden;

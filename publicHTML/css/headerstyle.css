@@ -309,6 +309,7 @@ header #btnperfil img {
 
     transition-duration: 300ms;
     display: none;
+    z-index: 10;
 }
 
 .contReservar {
@@ -539,7 +540,7 @@ header #btnperfil img {
         transform: scale(1.1);
     }
 
-    header .contReservar {
+    .contReservar {
 
         background-color: #4294FF;
         padding: 20px;
@@ -552,7 +553,7 @@ header #btnperfil img {
         text-align: center;
     }
 
-    header .contReservar a {
+    .contReservar a {
 
         color: white;
         text-decoration: none;
@@ -859,7 +860,7 @@ header #btnperfil img {
         min-height: 50px;
     }
     
-    header .contReservar {
+    .contReservar {
 
         background-color: #4294FF;
         padding: 15px;
@@ -873,7 +874,7 @@ header #btnperfil img {
         box-sizing: unset;
     }
 
-    header .contReservar a {
+    .contReservar a {
 
         color: white;
         text-decoration: none;
@@ -1069,7 +1070,7 @@ header #btnperfil img {
         margin-right: 10px;
     }
 
-    header .contReservar {
+    .contReservar {
 
         background-color: #4294FF;
         padding: 15px;
@@ -1083,7 +1084,7 @@ header #btnperfil img {
         box-sizing: unset;
     }
 
-    header .contReservar a {
+    .contReservar a {
 
         color: white;
         text-decoration: none;
