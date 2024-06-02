@@ -39,7 +39,7 @@ main {
 
 #bienvenida {
 
-    height: 85vh;
+    min-height: 85vh;
     text-align: center;
     position: relative;
     margin-top: 5px;
@@ -87,9 +87,8 @@ main {
 
 #bienvenida #btnreservar {
 
-    font-size: 250%;
-    padding: 20px !important;
-    text-align: center !important;
+    font-size: 300%;
+    padding: 15px 20px;
 }
 
 #secdatos {
@@ -118,11 +117,31 @@ main {
     
     #bienvenida article h1 {
 
-        font-size: 3rem;
+        font-size: 3rem !important;
     }
-    
+
     #bienvenida #btnreservar {
 
-        font-size: 150%;
+        font-size: 250%;
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    #bienvenida article h1 {
+
+        font-size: 1.5rem !important;
+    }
+
+    #bienvenida #btnreservar {
+
+        font-size: 100%;
+        padding: 0;
+    }
+    
+    #bienvenida .contReservar {
+
+        border-radius: 10px;
     }
 }

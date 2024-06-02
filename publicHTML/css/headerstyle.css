@@ -326,9 +326,28 @@ header #btnperfil img {
     font-weight: 500;
     text-shadow: 2px 1px 0 rgb(78, 78, 78);
 }
+
 #navmobile.desplegado ul li a {
 
     text-decoration: none;
+}
+
+#btnup {
+
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(136, 206, 221, 1);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 4px 0 #9B9B9B;
+    color: white;
+    cursor: pointer;
+    font-size: 150%;
 }
 
 /*/ PC /*/

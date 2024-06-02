@@ -6,7 +6,10 @@ $(() => {
 
     $(window).on('scroll', checkButtonPosition);
     $(window).on('scroll', checkHeaderPosition);
+
     $('#btnopciones').on('click', desplegarMenu);
+
+    $('#btnup').on('click', gototop);
 
     $('#iniciom, #serviciosm, #contactom, #perfilm').on('click', () => desplegarMenu());
 });
@@ -62,3 +65,7 @@ function desplegarMenu() {
     }
 }
 
+function gototop() {
+
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
