@@ -7,7 +7,7 @@ $(() => {
 
 function addListeners() {
 
-    $('#logo').on('click', cargarVistaInicio)
+    $('#logo').on('click', cargarVistaInicio);
 
     $('#inicio, #iniciom').on('click', cargarVistaInicio);
 
