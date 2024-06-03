@@ -1,4 +1,5 @@
-html, body {
+body,
+html {
 
     height: 100%;
     margin: 0;
@@ -15,7 +16,9 @@ main {
     height: 100%;
 }
 
-.lds-spinner, .lds-spinner div, .lds-spinner div:after {
+.lds-spinner,
+.lds-spinner div,
+.lds-spinner div:after {
 
     box-sizing: border-box;
 }
@@ -173,7 +176,10 @@ main {
     border: .5px solid rgba(0, 0, 0, 0.2);
 }
 
-input, textarea, button[type='submit'], #btnregistrarsel {
+input,
+textarea,
+button[type='submit'],
+#btnregistrarsel {
 
     width: 100%;
     border: none;
@@ -195,7 +201,9 @@ label {
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-#subtitulo, label, .contenedor {
+#subtitulo,
+label,
+.contenedor {
 
     text-shadow: 0 1px 5px rgba(0, 0, 0, .5);
 }
@@ -214,7 +222,8 @@ form {
     background-color: gray;
 }
 
-#ingresar, #btnregistrarsel {
+#ingresar,
+#btnregistrarsel {
 
     color: white;
     background-color: #00B2FF;
@@ -251,6 +260,7 @@ h1 {
     background-image: url(../img/fondos/fondologin.png);
     background-size: cover;
     background-repeat: no-repeat;
+
 }
 
 #logincontent span {
@@ -273,3 +283,16 @@ h1 {
 
     width: 300px;
 }
+
+
+
+
+/*/ Tablets y Smart Phones anchos /*/
+@media screen and (max-width: 899px) and (min-width: 401px) {
+    #sideimg{background: none;}
+
+}
+
+
+/*/ Smart Phones /*/
+@media screen and (max-width: 400px) and (min-width: 301px) {}

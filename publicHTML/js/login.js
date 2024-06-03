@@ -25,4 +25,6 @@ function cargarVistaRegistro() {
         $('main').html(data);
         console.log("Cargando vista de 'Registro'");
     });
+
+    $('html,body').css("height", "unset");
 }
