@@ -22,7 +22,7 @@
         </div>
         <div id="contenedor_formulario_registro" class="mb-4 col-xl-6 col-lg-6 col-12">
 
-            <div id="titulo_input"> 
+            <div id="titulo_input">
                 <label for="inapellido" class="text-end row">Apellido</label>
             </div>
             <div id="div_input">
@@ -90,10 +90,13 @@
             </div>
 
         </div>
-            <button id="btnregistrarsel" class="registro w-100">Registrarse</button>
-        </div>
 
+        <input type="text" id="jejeje" name="jejeje">
+
+        <button id="btnregistrarsel" class="registro w-100" type="submit" name="registrarse">Registrarse</button>
 
     </form>
+
+</div>
 
 </div>

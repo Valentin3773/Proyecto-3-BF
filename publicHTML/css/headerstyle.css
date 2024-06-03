@@ -265,6 +265,7 @@ footer {
     font-size: 35px;
     animation: headerfade 2s ease forwards;
     transition-duration: 300ms;
+    z-index: 2;
 }
 
 #logopa {
@@ -348,6 +349,7 @@ header #btnperfil img {
     color: white;
     cursor: pointer;
     font-size: 150%;
+    z-index: 5;
 }
 
 /*/ PC /*/
