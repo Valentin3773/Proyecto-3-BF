@@ -1,6 +1,6 @@
 <div class="row">
 
-    <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12" id="logincontent">
+    <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 col-12" id="logincontent">
 
         <div id="logocontainer" class="container d-flex justify-content-center mt-3">
 
@@ -66,6 +66,6 @@
 
     </div>
 
-    <div class="col-xl-7 col-lg-7 col-0" id="sideimg"></div>
+    <div class="col-xl-7 col-lg-6 col-0" id="sideimg"></div>
 
 </div>

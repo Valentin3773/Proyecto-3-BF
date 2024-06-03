@@ -171,7 +171,6 @@ main {
     border-radius: 10px 10px 0 0;
     box-shadow: 1.5px 3px 0 #9B9B9B;
     padding: 0 20px 0 20px;
-    width: 150px;
     justify-content: center;
     border: .5px solid rgba(0, 0, 0, 0.2);
 }
@@ -284,15 +283,127 @@ h1 {
     width: 300px;
 }
 
+body {
 
+    height: 100% !important;
+    background-image: url(../img/fondos/fondologin.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    filter: contrast(1.5);
+}
 
 
 /*/ Tablets y Smart Phones anchos /*/
 @media screen and (max-width: 899px) and (min-width: 401px) {
-    #sideimg{background: none;}
 
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    #sideimg {
+        display: none;
+    }
+
+    #contenedor_formulario_registro {
+        margin-bottom: 35px !important;
+    }
+
+    #formulario {
+        margin-left: 0 !important;
+    }
+
+    #div_input {
+        width: 100%;
+    }
+
+    #titulo_input {
+        width: fit-content !important;
+    }
+
+    body {
+
+        background-image: url(../img/fondos/fondologin.png);
+        background-size: cover;
+        background-position: unset !important;
+        background-repeat: no-repeat;
+        filter: contrast(1.5);
+    }
 }
 
 
 /*/ Smart Phones /*/
-@media screen and (max-width: 400px) and (min-width: 301px) {}
+@media screen and (max-width: 400px) and (min-width: 301px) {
+
+    html,
+    body {
+        width: 100%;
+        height: 100% !important;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+
+    #contenedor_formulario_registro {
+        margin-bottom: 35px !important;
+    }
+
+    #sideimg {
+        display: none;
+    }
+
+    #formulario {
+        margin-left: 0 !important;
+    }
+
+    #div_input {
+        width: 100%;
+    }
+
+    #titulo_input {
+        width: fit-content !important;
+    }
+
+    input,
+    textarea {
+
+        width: 100%;
+        border: none;
+        padding: 10px;
+        border-radius: 0 10px 10px 10px;
+        box-shadow: 1.5px 3px 0 #9B9B9B, 0 4px 4px rgba(0, 0, 0, 0.25);
+        font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 100%;
+        border: .5px solid rgba(0, 0, 0, 0.4);
+    }
+
+    body {
+
+        background-image: url(../img/fondos/fondologin.png);
+        background-size: cover;
+        background-position: unset !important;
+        background-repeat: no-repeat;
+        filter: contrast(1.5);
+    }
+}
+
+@media screen and (max-width: 1299px) and (min-width: 900px) {
+
+    html,
+    body {
+        width: 100%;
+        height: 100% !important;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+
+
+}
