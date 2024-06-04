@@ -11,11 +11,9 @@
 
         // Verifica si el campo 'jejeje' está vacío
         if (empty(trim($_POST["jejeje"]))) {
-    
             sendMail();
         } 
         else {
-    
             echo "Fuera bot hijueputa!!!";
         }
     }
@@ -37,13 +35,13 @@
             if (isset($_POST['enviar'])) {
                 if (!empty($_POST['nombre']) && !empty($_POST['telefono']) && !empty($_POST['email']) && !empty($_POST['mensaje'])) {
                     
-                    //Destinatario
-                    $destino = "laprogramarmy@gmail.com";         
+                        //Destinatario
+                        $destino = "laprogramarmy@gmail.com";         
 
-                    $nombre = $_POST["nombre"];
-                    $telefono = $_POST["telefono"];
-                    $email = $_POST["email"];
-                    $mensajec = $_POST['mensaje'];
+                        $nombre = $_POST["nombre"];
+                        $telefono = $_POST["telefono"];
+                        $email = $_POST["email"];
+                        $mensajec = $_POST['mensaje'];
 
                         //avisa que mail va ser tratado como un HTML
                         $mail->isHTML(true);
@@ -100,7 +98,7 @@
                                       </div>
                                     </body>
                                 </html>
-                            ";
+                        ";
                                     
 
                                 
