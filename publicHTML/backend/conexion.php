@@ -1,7 +1,7 @@
 <?php
 
 $host = "localhost";
-$db = "c";
+$db = "clinica";
 $charset = 'utf8mb4';
 $user = "root";
 $pass = "";
