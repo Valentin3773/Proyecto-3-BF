@@ -20,7 +20,7 @@
                         <label for="inemail" class="text-end row">Email</label>
                     </div>
                     <div>
-                        <input type="text" name="email" id="inemail" title="Ingrese su correo electrónico" placeholder="Ingrese su correo electrónico">
+                        <input type="text" name="email" id="inemail" title="Ingrese su correo electrónico" placeholder="Ingrese su correo electrónico" required autofocus>
                     </div>
 
                 </div>
@@ -30,11 +30,11 @@
                         <label for="incontrasenia" class="text-end row">Contraseña</label>
                     </div>
                     <div>
-                        <input type="password" name="contrasenia" id="incontrasenia" title="Ingrese su contraseña" placeholder="Ingrese su contraseña">
+                        <input type="password" name="contrasenia" id="incontrasenia" title="Ingrese su contraseña" placeholder="Ingrese su contraseña" required>
                     </div>
 
                 </div>
-                <input type="text" id="jejeje" name="jejeje">
+                <input type="text" id="jejeje" name="jejeje" tabindex="-1">
 
                 <button type="submit" id="ingresar" name="ingresar">Ingresar</button>
 

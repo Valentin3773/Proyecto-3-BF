@@ -2,10 +2,8 @@
 
 include("conexion.php");
 
-// Verifica si el formulario ha sido enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrarse'])) {
 
-    // Verifica si el campo 'jejeje' está vacío
     if (empty(trim($_POST["jejeje"]))) {
 
         processRegisterForm($pdo);
@@ -18,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrarse'])) {
 
 function processRegisterForm($pdo) {
 
-    // Obtiene los datos del formulario
     $nombre = trim($_POST["nombre"]);
     $apellidos = trim($_POST["apellido"]);
     $documento = trim($_POST["documento"]);
@@ -28,33 +25,27 @@ function processRegisterForm($pdo) {
     $contrasenia = trim($_POST["contrasenia"]);
     $concontrasenia = trim($_POST["concontrasenia"]);
 
-    // Comprueba si las contraseñas coinciden
     if ($contrasenia == $concontrasenia) {
 
-        // Prepara la consulta SQL para verificar si el documento ya existe
-        $chekeo = "SELECT documento FROM paciente WHERE documento = :documento";
+        $chekeo = "SELECT documento FROM paciente WHERE documento = :documento OR email = :email";
         $stmt = $pdo->prepare($chekeo);
         $stmt->bindParam(':documento', $documento);
+        $stmt->bindParam(':email', $email);
 
-        // Ejecuta la consulta
         if ($stmt->execute()) {
 
-            // Verifica si se encontró algún registro
             if ($stmt->rowCount() > 0) {
 
                 echo "Usuario ya registrado";
             } 
             else {
 
-                // Prepara la consulta SQL para insertar el nuevo registro
                 $sql = "INSERT INTO paciente (documento, nombre, apellido, email, contrasenia, direccion, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $pdo->prepare($sql);
 
-                // Ejecuta la consulta de inserción
                 if ($stmt->execute([$documento, $nombre, $apellidos, $email, $contrasenia, $direccion, $telefono])) {
 
-                    //Esto redirige al URL especificado
-                    header("Location: https://youtu.be/mCdA4bJAGGk?si=T0061-A3bbfF476Z");
+                    header("Location: ../login.html");
                     exit();
                 } 
                 else {
@@ -72,7 +63,6 @@ function processRegisterForm($pdo) {
 
         echo "Ingrese correctamente las contraseñas";
     }
-    // Cierra la sentencia y la conexión
     unset($stmt);
     unset($pdo);
 }

@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+
+if(isset($_SESSION['paciente'])) {
+    
+    echo $_SESSION['paciente']['nombre'];
+}
+
+?>
+
 <!DOCTYPE html>
 
 <html lang="es">
@@ -28,9 +39,9 @@
 
         <!-- Scripts -->
         <script src="js/preloader.js"></script>
-        <script defer src="js/headerscript.js"></script>
-        <script defer src="js/servicios.js"></script>
-        <script defer src="js/lobby.js"></script>
+        <script defer src="js/lobby/headerscript.js"></script>
+        <script defer src="js/lobby/servicios.js"></script>
+        <script defer src="js/lobby/lobby.js"></script>
 
         <title>Clínica Salud Bucal ❤️</title>
 
@@ -93,7 +104,7 @@
 
                     </div>
 
-                    <a href="" title="Mi perfil" id="btnperfil">
+                    <a href="login.html" title="Mi perfil" id="btnperfil">
 
                         <img src="img/iconoperfil.png" alt="Mi Perfil">
 
@@ -153,7 +164,7 @@
             <main class=""></main>
 
             <div id="btnchat" title="Envíanos un mensaje">
-
+                
                 <img src="img/iconosvg/whatsapp.svg" alt="Ícono de chat">
 
             </div>

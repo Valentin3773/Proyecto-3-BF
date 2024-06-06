@@ -12,7 +12,7 @@ main {
     color: white;
     box-shadow: 1.5px 3px 0 #9B9B9B;
     letter-spacing: 0.5px;
-    border: .5px solid rgba(0, 0, 0, 0.6);
+    border: .5px solid rgba(0, 0, 0, 0.3);
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -128,7 +128,7 @@ input, textarea, button[type='submit'] {
     box-shadow: 1.5px 3px 0 #9B9B9B;
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 110%;
-    border: .5px solid rgba(0, 0, 0, 0.6);
+    border: .5px solid rgba(0, 0, 0, 0.3);
 }
 
 label {
@@ -142,7 +142,7 @@ label {
 
 #subtitulo, label, .contenedor {
 
-    text-shadow: 0 1px 5px rgba(0, 0, 0, .5);
+    text-shadow: 0 1px 5px rgba(0, 0, 0, .3);
 }
 
 textarea {
@@ -216,7 +216,7 @@ form {
     padding-left: 0.9em;
     display: flex;
     align-items: center;
-    border: .5px solid rgba(0, 0, 0, 0.6);
+    border: .5px solid rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     width: 20%;
     overflow: hidden;

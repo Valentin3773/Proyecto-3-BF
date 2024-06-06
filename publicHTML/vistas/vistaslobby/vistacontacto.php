@@ -94,7 +94,7 @@
 
     </div>
 
-    <aside class="p-xl-2 p-lg-2 p-0  pt-3 pb-4 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+    <aside class="p-xl-2 p-lg-2 p-0 pt-3 pb-4 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 
         <form action="backend/formcontactomanager.php" method="POST" id="formemail" class="p-2 d-flex flex-column justify-content-center">
             
@@ -107,32 +107,32 @@
             <div id="contenedor_formulario" class="mb-4">
                 <div id="titulo_input"><label for="innombre" class="text-end row">Nombre</label></div>
                 <div>
-                    <input type="text" name="nombre" id="innombre" title="Ingrese su nombre" placeholder="Ingrese su nombre">
+                    <input type="text" name="nombre" id="innombre" title="Ingrese su nombre" placeholder="Ingrese su nombre" required autofocus>
                 </div>
             </div>
 
             <div id="contenedor_formulario" class="mb-4">
                 <div id="titulo_input"><label for="inemail" class="text-end row">Email</label></div>
                 <div>
-                    <input type="email" name="email" id="inemail" title="Ingrese su email" placeholder="Ingrese su email">
+                    <input type="email" name="email" id="inemail" title="Ingrese su email" placeholder="Ingrese su email" required>
                 </div>
             </div>
         
             <div id="contenedor_formulario" class="mb-4">
                 <div id="titulo_input"><label for="intelefono" class="text-end row">Teléfono</label></div>
                 <div>
-                    <input type="tel" name="telefono" id="intelefono" title="Ingrese su número" placeholder="Ingrese su número">
+                    <input type="tel" name="telefono" id="intelefono" title="Ingrese su número" placeholder="Ingrese su número" required>
                 </div>
             </div>
             
             <div id="contenedor_formulario" class="mb-3">
                 <div id="titulo_input"><label for="mensaje" class="text-end row">Mensaje</label></div>
                 <div>
-                    <textarea name="mensaje" id="mensaje" title="Ingrese el mensaje" placeholder="Ingrese el mensaje"></textarea>
+                    <textarea name="mensaje" id="mensaje" title="Ingrese el mensaje" placeholder="Ingrese el mensaje" required></textarea>
                 </div>
             </div>
             
-            <input type="text" id="jejeje" name="jejeje">
+            <input type="text" id="jejeje" name="jejeje" tabindex="-1">
 
             <div class="submitcontainer">
                 <button type="submit" name="enviar" id="enviarmail">

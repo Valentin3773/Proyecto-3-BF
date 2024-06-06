@@ -2,13 +2,13 @@
 
 include("conexion.php");
 
-// Verifica si el formulario ha sido enviado
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ingresar'])) {
     
-    // Verifica si el campo 'jejeje' no está vacío
     if (empty(trim($_POST["jejeje"]))) {
 
-        processCheckUser($pdo);
+        loginCheckUser($pdo);
     } 
     else {
 
@@ -16,25 +16,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ingresar'])) {
     }
 }
 
-function processCheckUser($pdo) {
+function loginCheckUser($pdo) {
 
     $email = trim($_POST["email"]);
     $contrasenia = trim($_POST["contrasenia"]);
 
-    // Prepara la consulta SQL para verificar si el usuario existe
-    $chekeo = "SELECT email, contrasenia FROM paciente WHERE email = :email AND contrasenia = :contrasenia";
+    $chekeo = "SELECT * FROM paciente WHERE email = :email AND contrasenia = :contrasenia";
     $stmt = $pdo->prepare($chekeo);
 
-    // Prepara la variable stmt para ejecutar, con el agregado que el PDO trate el dato como String
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt->bindParam(':contrasenia', $contrasenia, PDO::PARAM_STR);
 
-    // Ejecuta la consulta
     if ($stmt->execute()) {
 
         if ($stmt->rowCount() > 0) {
 
-            echo "Usuario existente";
+            $_SESSION['paciente'] = array();
+
+            $tupla = $stmt->fetchAll()[0];
+
+            $_SESSION['paciente']['nombre'] = $tupla['nombre'];
+            $_SESSION['paciente']['apellido'] = $tupla['apellido'];
+            $_SESSION['paciente']['documento'] = $tupla['documento'];
+            $_SESSION['paciente']['telefono'] = $tupla['telefono'];
+            $_SESSION['paciente']['direccion'] = $tupla['direccion'];
+            $_SESSION['paciente']['email'] = $email;
+
             header("location:../index.html");
             exit();
         } 
@@ -47,7 +54,7 @@ function processCheckUser($pdo) {
 
         echo "Error al ejecutar la consulta";
     }
-    // Cierra la sentencia y la conexión
+
     unset($stmt);
     unset($pdo);
 }
