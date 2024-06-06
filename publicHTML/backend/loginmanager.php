@@ -42,7 +42,7 @@ function loginCheckUser($pdo) {
             $_SESSION['paciente']['direccion'] = $tupla['direccion'];
             $_SESSION['paciente']['email'] = $email;
 
-            header("location:../index.html");
+            header("location:../index.php?iniciado=1");
             exit();
         } 
         else {

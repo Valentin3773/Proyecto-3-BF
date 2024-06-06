@@ -104,7 +104,7 @@ if(isset($_SESSION['paciente'])) {
 
                     </div>
 
-                    <a href="login.html" title="Mi perfil" id="btnperfil">
+                    <a href="login.php" title="Mi perfil" id="btnperfil">
 
                         <img src="img/iconoperfil.png" alt="Mi Perfil">
 

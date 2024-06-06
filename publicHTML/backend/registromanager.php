@@ -45,7 +45,7 @@ function processRegisterForm($pdo) {
 
                 if ($stmt->execute([$documento, $nombre, $apellidos, $email, $contrasenia, $direccion, $telefono])) {
 
-                    header("Location: ../login.html");
+                    header("Location: ../login.php");
                     exit();
                 } 
                 else {
