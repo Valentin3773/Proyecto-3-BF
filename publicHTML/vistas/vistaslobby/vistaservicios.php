@@ -14,7 +14,7 @@
 
                 <div class="card btnortodoncia">
 
-                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top img-thumbnail">
+                    <img src="img/iconosvg/Ortodoncia.svg" alt="aaaaa" class="card-img-top img-thumbnail">
 
                     <div class="card-body">
 
@@ -25,7 +25,7 @@
                 </div>
                 <div class="card btnodontopediatria">
 
-                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top img-thumbnail">
+                    <img src="img/iconosvg/Odontopediatria.svg" alt="aaaaa" class="card-img-top img-thumbnail">
 
                     <div class="card-body">
 
@@ -36,7 +36,7 @@
                 </div>
                 <div class="card btnprotesis">
 
-                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top img-thumbnail">
+                    <img src="img/iconosvg/Protesis.svg" alt="aaaaa" class="card-img-top img-thumbnail">
 
                     <div class="card-body">
 
@@ -47,7 +47,7 @@
                 </div>
                 <div class="card btnoperatoria">
 
-                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top img-thumbnail">
+                    <img src="img/iconosvg/Operatoria.svg" alt="aaaaa" class="card-img-top img-thumbnail">
 
                     <div class="card-body">
 
@@ -58,7 +58,7 @@
                 </div>
                 <div class="card btnortopedia">
 
-                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top img-thumbnail">
+                    <img src="img/iconosvg/Estetica.svg" alt="aaaaa" class="card-img-top img-thumbnail">
 
                     <div class="card-body">
 
@@ -69,7 +69,7 @@
                 </div>
                 <div class="card btncirugia">
 
-                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top img-thumbnail">
+                    <img src="img/iconosvg/Cirugia.svg" alt="aaaaa" class="card-img-top img-thumbnail">
 
                     <div class="card-body">
 
@@ -80,7 +80,7 @@
                 </div>
                 <div class="card btnimplantes">
 
-                    <img src="img/iconosvg/OIG4.jfif" alt="aaaaa" class="card-img-top img-thumbnail">
+                    <img src="img/iconosvg/Implantes.svg" alt="aaaaa" class="card-img-top img-thumbnail">
 
                     <div class="card-body">
 

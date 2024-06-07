@@ -12,7 +12,7 @@
                 
                 </div>
                 <div id="contenedor_fondo">
-                    <p class="m-0">Gertrud-Kolmar-Str. 14</p>
+                    <p class="m-0">Uruguay 937</p>
                 </div>
 
             </div>
@@ -25,7 +25,7 @@
 
                 </div>
                 <div id="contenedor_fondo">
-                    <p class="m-0">099 132 465</p>
+                    <p class="m-0">+598 091 814 295</p>
                 </div>
 
             </div>
