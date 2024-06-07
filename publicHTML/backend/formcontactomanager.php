@@ -45,14 +45,13 @@ function sendMail()
                 $telefono = $_POST["telefono"];
                 $email = $_POST["email"];
                 $mensajec = $_POST['mensaje'];
-
                 $mail->isHTML(true);
 
                 // Asunto del correo
                 $asunto = "Nueva Solicitud de Contacto: $nombre";
 
                 //Aca va el cuerpo del mensaje
-                $mensaje = "
+               $mensaje = "
                             <!DOCTYPE html>
                                 <html>
                                     <head>
@@ -107,7 +106,7 @@ function sendMail()
                 $headers .= "Content-type: text/html; charset=utf-8\r\n";
 
                 // Enviar correo con PHPMailer
-                $mail->setFrom($email, $nombre);
+                $mail->setFrom($email, $nombre,$headers);
                 $mail->addAddress($destino);
                 $mail->Subject = $asunto;
                 $mail->Body    = $mensaje;
