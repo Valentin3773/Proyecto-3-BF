@@ -46,13 +46,21 @@ function loginCheckUser($pdo) {
             exit();
         } 
         else {
+                    
+            echo '<script type="text/javascript">';
+            echo 'alert("Error: Cheque los datos ingresados");';
+            echo 'window.location.href = "../login.php";';
+            echo '</script>';
 
-            echo "Usuario no existente";
         }
     } 
     else {
 
-        echo "Error al ejecutar la consulta";
+        echo '<script type="text/javascript">';
+        echo 'alert("Error: Al ejecutar la consulta");';
+        echo 'window.location.href = "../login.php";';
+        echo '</script>';
+        
     }
 
     unset($stmt);

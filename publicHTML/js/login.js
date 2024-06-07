@@ -12,11 +12,24 @@ function cargarVistaLogin() {
         $('main').html(data);
         console.log("Cargando vista de 'Login'");
 
+        $('#btnvolver').on('click', volverInicio);
         $('#btnregistrarsel').on('click', cargarVistaRegistro);
 
         $('#inemail').focus();
+
+
     });
+
+
 }
+
+function volverInicio() {
+
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.location.href = "index.php"; 
+    
+}
+
 
 function cargarVistaRegistro() {
 

@@ -36,7 +36,10 @@ function processRegisterForm($pdo) {
 
             if ($stmt->rowCount() > 0) {
 
-                echo "Usuario ya registrado";
+                echo '<script type="text/javascript">';
+                echo 'alert("Usuario ya registrado");';
+                echo 'window.location.href = "../login.php";';
+                echo '</script>';
             } 
             else {
 
