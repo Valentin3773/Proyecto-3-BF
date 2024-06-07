@@ -40,6 +40,7 @@ function cargarVistaRegistro() {
         $('main').html(data);
         console.log("Cargando vista de 'Registro'");
 
+        $('#btnvolver').on('click', volverInicio);
         $('#innombre').focus();
     });
 

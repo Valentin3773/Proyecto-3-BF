@@ -39,7 +39,7 @@ function sendMail()
             if (!empty($_POST['nombre']) && !empty($_POST['telefono']) && !empty($_POST['email']) && !empty($_POST['mensaje'])) {
 
                 //Destinatario
-                $destino = "themystymysty@gmail.com";
+                $destino = "laprogramarmy@gmail.com";
 
                 $nombre = $_POST["nombre"];
                 $telefono = $_POST["telefono"];
@@ -105,8 +105,6 @@ function sendMail()
                 // Cabeceras del correo
                 $headers = "MIME-Version: 1.0\r\n";
                 $headers .= "Content-type: text/html; charset=utf-8\r\n";
-                $headers .= "From: $nombre <$email>\r\n";
-                $headers .= "Return-path: $destino\r\n";
 
                 // Enviar correo con PHPMailer
                 $mail->setFrom($email, $nombre);
@@ -145,7 +143,7 @@ function sendMail()
                             <body>
                                 <div class="container">
                                     <h1>Email enviado correctamente</h1>                        
-                                    <a href="../index.html" class="button">Volver</a>
+                                    <a href="../index.php" class="button">Volver</a>
                                 </div>
                             </body>
                         </html>
@@ -182,7 +180,7 @@ function sendMail()
                             <body>
                                 <div class="container">
                                     <h1>Porfavor llene todos los campos</h1>                        
-                                    <a href="../index.html" class="button">Volver</a>
+                                    <a href="../index.php" class="button">Volver</a>
                                 </div>
                             </body>
                         </html>
