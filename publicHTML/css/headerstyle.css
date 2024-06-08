@@ -353,7 +353,7 @@ header #btnperfil img {
 }
 
 /*/ PC /*/
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1100px) {
 
     nav ul li, #btnreservar {
         
@@ -526,7 +526,7 @@ header #btnperfil img {
 }
 
 /*/ Tablets y Smart Phones anchos /*/
-@media screen and (max-width: 899px) and (min-width: 401px) {
+@media screen and (max-width: 1099px) and (min-width: 401px) {
 
     header #imglogo {
 

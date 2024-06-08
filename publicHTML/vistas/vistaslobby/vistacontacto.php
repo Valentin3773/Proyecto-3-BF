@@ -1,5 +1,5 @@
 <section class="container row mx-auto">
-    <h1 class="col-12 text-center mt-3" id="titulo">Contactanos</h1>
+    <h1 class="col-12 text-center mt-3" id="titulo">Contáctanos</h1>
     <div class="infocontacto p-xl-4 p-lg-4 p-0 pt-xl-3 pt-lg-3 pt-md-0 pt-sm-0 pt-0 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 
         <article>

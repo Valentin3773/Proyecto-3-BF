@@ -18,8 +18,6 @@ function addListeners() {
 
     $('#contacto, #contactom').on('click', cargarVistaContacto);
 
-
-
     $('#btnchat').on('click', () => window.open('https://api.whatsapp.com/send/?phone=598091814295', '_blank'));
 }
 
@@ -88,13 +86,13 @@ function cargarVistaContacto() {
 }
 
 function cargarVistaNosotros() {
+
     window.scrollTo({top: 0, behavior: 'smooth'});
 
     $.get("vistas/vistaslobby/vistanosotros.php", data => {
 
         $('main').html(data);
         console.log("Cargando vista de 'Nosotros'");
-
 
         // history.pushState({}, '', 'contacto');
     });

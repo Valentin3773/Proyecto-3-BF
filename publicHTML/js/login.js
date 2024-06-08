@@ -1,11 +1,11 @@
 $(() => {
 
-    cargarVistaLogin(); 
+    cargarVistaLogin();
 });
 
 function cargarVistaLogin() {
 
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     $.get("vistas/vistaslogin/vistalogin.php", data => {
 
@@ -15,56 +15,60 @@ function cargarVistaLogin() {
         $('#btnvolver').on('click', volverInicio);
         $('#btnregistrarsel').on('click', cargarVistaRegistro);
         $('#ingresar').on('click', function (event) {
+
             event.preventDefault();
             let data = new FormData($('#formLogin')[0]);
             loginComfirm(data);
         });
         $('#inemail').focus();
-
-
     });
 
 
 }
 
 function loginComfirm(datos) {
-if ($('#jejeje').val() === '') {
-    $.ajax({
+
+    if ($('#jejeje').val() === '') {
+
+        $.ajax({
+
             type: "POST",
             url: "backend/loginmanager.php",
             data: datos,
-            processData:false,
-            contentType:false,
-            success: function (response) {
-                if (response.error === undefined ){
+            processData: false,
+            contentType: false,
+            success: response => {
+
+                if (response.error === undefined) {
+
                     window.location.href = "index.php?iniciado=1";
-                } else {
+                } 
+                else {
+
                     alert(response.error);
                 }
             },
-            error: function(jqXHR, estado, outputError){
-                console.error(estado,outputError);
+            error: (jqXHR, estado, outputError) => {
+
+                console.error(estado, outputError);
             }
-        
-    });
+        });
+    } 
+    else {
 
-
-} else {
-    console.log("Fuera bot hijueputa!!!");
-}
+        console.log("Fuera bot hijueputa!!!");
+    }
 }
 
 function volverInicio() {
 
-    window.scrollTo({top: 0, behavior: 'smooth'});
-    window.location.href = "index.php"; 
-    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.location.href = "index.php";
 }
-
 
 function cargarVistaRegistro() {
 
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     $.get("vistas/vistaslogin/vistaregistro.php", data => {
 
@@ -73,6 +77,7 @@ function cargarVistaRegistro() {
 
         $('#btnvolver').on('click', volverInicio);
         $('#rbtnregistrarsel').on('click', function (event) {
+
             event.preventDefault();
             let data = new FormData($('#formRegistrar')[0]);
             registerComfirm(data);
@@ -84,29 +89,35 @@ function cargarVistaRegistro() {
 }
 
 function registerComfirm(datos) {
+
     if ($('#jejeje').val() === '') {
-        alert("empezo");
+
         $.ajax({
-                type: "POST",
-                url: "backend/registromanager.php",
-                data: datos,
-                processData:false,
-                contentType:false,
-                success: function (response) {
-                    if (response.error === undefined ){
-                        console.log("entro");
-                    } else {
-                        alert(response.error);
-                    }
-                },
-                error: function(jqXHR, estado, outputError){
-                    console.error(estado,outputError);
+
+            type: "POST",
+            url: "backend/registromanager.php",
+            data: datos,
+            processData: false,
+            contentType: false,
+            success: response => {
+
+                if (response.error === undefined) {
+
+                    console.log("entro");
+                } 
+                else {
+
+                    alert(response.error);
                 }
-            
+            },
+            error: (jqXHR, estado, outputError) => {
+
+                console.error(estado, outputError);
+            }
         });
-    
-    
-    } else {
+    } 
+    else {
+
         console.log("Fuera bot hijueputa!!!");
     }
 }

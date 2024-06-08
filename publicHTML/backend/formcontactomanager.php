@@ -9,10 +9,12 @@ require 'PHPMailer/SMTP.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['enviar'])) {
 
-    // Verifica si el campo 'jejeje' está vacío
     if (empty(trim($_POST["jejeje"]))) {
+
         sendMail();
-    } else {
+    } 
+    else {
+
         echo "Fuera bot hijueputa!!!";
     }
 }
@@ -34,12 +36,13 @@ function sendMail()
     $mail->CharSet = 'UTF-8';
 
     try {
+
         if (isset($_POST['enviar'])) {
 
             if (!empty($_POST['nombre']) && !empty($_POST['telefono']) && !empty($_POST['email']) && !empty($_POST['mensaje'])) {
 
                 //Destinatario
-                $destino = "laprogramarmy@gmail.com";
+                $destino = "themystymysty@gmail.com";
 
                 $nombre = $_POST["nombre"];
                 $telefono = $_POST["telefono"];
@@ -50,8 +53,7 @@ function sendMail()
                 // Asunto del correo
                 $asunto = "Nueva Solicitud de Contacto: $nombre";
 
-                //Aca va el cuerpo del mensaje
-               $mensaje = "
+                $mensaje = "
                             <!DOCTYPE html>
                                 <html>
                                     <head>
@@ -63,7 +65,7 @@ function sendMail()
                                         padding: 0;
                                       }
                                       .container {
-                                        background-color: #ffffff;
+                                        background-color: #000000;
                                         width: 80%;
                                         margin: 20px auto;
                                         padding: 20px;
@@ -71,7 +73,7 @@ function sendMail()
                                         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                                       }
                                       h1 {
-                                        color: #333333;
+                                        color: #ffffff;
                                       }
                                       h3, p {
                                         font-size: 16px;
@@ -106,7 +108,7 @@ function sendMail()
                 $headers .= "Content-type: text/html; charset=utf-8\r\n";
 
                 // Enviar correo con PHPMailer
-                $mail->setFrom($email, $nombre,$headers);
+                $mail->setFrom($email, $nombre, $headers);
                 $mail->addAddress($destino);
                 $mail->Subject = $asunto;
                 $mail->Body    = $mensaje;
