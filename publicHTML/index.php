@@ -93,6 +93,10 @@ if(isset($_SESSION['paciente'])) {
                                 <a href="javascript:void(0)" id="contacto" title="Contacto">Contacto</a>
                             </li>
 
+                            <li>
+                                <a href="javascript:void(0)" id="nosotros" title="Nosotros">Sobre Nosotros</a>
+                            </li>
+
                         </ul>
 
                     </nav>

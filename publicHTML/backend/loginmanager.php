@@ -30,7 +30,7 @@ function loginCheckUser($pdo) {
     if ($stmt->execute()) {
 
         if ($stmt->rowCount() > 0) {
-
+            
             $_SESSION['paciente'] = array();
 
             $tupla = $stmt->fetchAll()[0];

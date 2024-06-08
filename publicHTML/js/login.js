@@ -14,7 +14,6 @@ function cargarVistaLogin() {
 
         $('#btnvolver').on('click', volverInicio);
         $('#btnregistrarsel').on('click', cargarVistaRegistro);
-
         $('#inemail').focus();
 
 
