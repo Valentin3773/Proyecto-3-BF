@@ -16,7 +16,7 @@ function processRegisterForm($pdo) {
     $direccion = isset($_POST['direccion']) ? trim($_POST['direccion']) : null;
     $email = isset($_POST['email']) ? trim($_POST['email']) : null;
     $contrasenia = isset($_POST['contrasenia']) ? trim($_POST['contrasenia']) : null;
-    $concontrasenia = isset($_POST['concontrasenia']) ? trim($_POST['concontrasenia']) : null
+    $concontrasenia = isset($_POST['concontrasenia']) ? trim($_POST['concontrasenia']) : null;
 
     if ($contrasenia == $concontrasenia) {
 
