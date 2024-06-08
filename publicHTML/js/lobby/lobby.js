@@ -10,7 +10,7 @@ function addListeners() {
 
     $('#logo').on('click', cargarVistaInicio);
 
-    $('#nosotros').on('click', cargarVistaNosotros);
+    $('#nosotros, #nosotrosm').on('click', cargarVistaNosotros);
 
     $('#inicio, #iniciom').on('click', cargarVistaInicio);
 
