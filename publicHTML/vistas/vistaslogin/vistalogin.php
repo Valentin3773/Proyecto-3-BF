@@ -12,7 +12,7 @@
 
         <div class="container d-flex justify-content-center mt-3" id="formcontainer">
 
-            <form action="./backend/loginmanager.php" method="POST" class="p-3">
+            <form id="formLogin" method="POST" class="p-3">
             
                 <div id="contenedor_formulario" class="mb-4">
 

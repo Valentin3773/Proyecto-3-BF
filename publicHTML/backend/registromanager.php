@@ -2,28 +2,21 @@
 
 include("conexion.php");
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrarse'])) {
-
-    if (empty(trim($_POST["jejeje"]))) {
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
         processRegisterForm($pdo);
-    } 
-    else {
-
-        echo "Fuera bot hijueputa!!!";
-    }
+        echo "adasd";
 }
 
 function processRegisterForm($pdo) {
 
-    $nombre = trim($_POST["nombre"]);
-    $apellidos = trim($_POST["apellido"]);
-    $documento = trim($_POST["documento"]);
-    $telefono = trim($_POST["telefono"]);
-    $direccion = trim($_POST["direccion"]);
-    $email = trim($_POST["email"]);
-    $contrasenia = trim($_POST["contrasenia"]);
-    $concontrasenia = trim($_POST["concontrasenia"]);
+    $nombre = isset($_POST['nombre']) ? trim($_POST['nombre']) : null;
+    $apellidos = isset($_POST['apellido']) ? trim($_POST['apellido']) : null;
+    $documento = isset($_POST['documento']) ? trim($_POST['documento']) : null;
+    $telefono = isset($_POST['telefono']) ? trim($_POST['telefono']) : null;
+    $direccion = isset($_POST['direccion']) ? trim($_POST['direccion']) : null;
+    $email = isset($_POST['email']) ? trim($_POST['email']) : null;
+    $contrasenia = isset($_POST['contrasenia']) ? trim($_POST['contrasenia']) : null;
+    $concontrasenia = isset($_POST['concontrasenia']) ? trim($_POST['concontrasenia']) : null
 
     if ($contrasenia == $concontrasenia) {
 
@@ -42,11 +35,13 @@ function processRegisterForm($pdo) {
                 echo '</script>';
             } 
             else {
+                
+                $hashedPassword = password_hash($contrasenia,PASSWORD_BCRYPT);
 
                 $sql = "INSERT INTO paciente (documento, nombre, apellido, email, contrasenia, direccion, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $pdo->prepare($sql);
 
-                if ($stmt->execute([$documento, $nombre, $apellidos, $email, $contrasenia, $direccion, $telefono])) {
+                if ($stmt->execute([$documento, $nombre, $apellidos, $email, $hashedPassword, $direccion, $telefono])) {
 
                     header("Location: ../login.php");
                     exit();

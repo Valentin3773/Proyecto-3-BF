@@ -8,7 +8,7 @@
 
 <div class="container pb-4" id="registercontent">
 
-    <form action="./backend/registromanager.php" method="POST" id="formulario" class="mt-3 row p-3">
+    <form method="POST" id="formRegistrar" class="mt-3 row p-3">
 
         <div id="contenedor_formulario_registro" class="mb-3 col-xl-6 col-lg-6 col-12">
 

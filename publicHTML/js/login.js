@@ -14,12 +14,44 @@ function cargarVistaLogin() {
 
         $('#btnvolver').on('click', volverInicio);
         $('#btnregistrarsel').on('click', cargarVistaRegistro);
+        $('#ingresar').on('click', function (event) {
+            event.preventDefault();
+            let data = new FormData($('#formLogin')[0]);
+            loginComfirm(data);
+        });
         $('#inemail').focus();
 
 
     });
 
 
+}
+
+function loginComfirm(datos) {
+if ($('#jejeje').val() === '') {
+    $.ajax({
+            type: "POST",
+            url: "backend/loginmanager.php",
+            data: datos,
+            processData:false,
+            contentType:false,
+            success: function (response) {
+                if (response.error === undefined ){
+                    window.location.href = "index.php?iniciado=1";
+                } else {
+                    alert(response.error);
+                }
+            },
+            error: function(jqXHR, estado, outputError){
+                console.error(estado,outputError);
+            }
+        
+    });
+
+
+} else {
+    console.log("Fuera bot hijueputa!!!");
+}
 }
 
 function volverInicio() {
@@ -40,8 +72,41 @@ function cargarVistaRegistro() {
         console.log("Cargando vista de 'Registro'");
 
         $('#btnvolver').on('click', volverInicio);
+        $('#rbtnregistrarsel').on('click', function (event) {
+            event.preventDefault();
+            let data = new FormData($('#formRegistrar')[0]);
+            registerComfirm(data);
+        });
         $('#innombre').focus();
     });
 
     $('html, body').css("height", "unset");
+}
+
+function registerComfirm(datos) {
+    if ($('#jejeje').val() === '') {
+        alert("empezo");
+        $.ajax({
+                type: "POST",
+                url: "backend/registromanager.php",
+                data: datos,
+                processData:false,
+                contentType:false,
+                success: function (response) {
+                    if (response.error === undefined ){
+                        console.log("entro");
+                    } else {
+                        alert(response.error);
+                    }
+                },
+                error: function(jqXHR, estado, outputError){
+                    console.error(estado,outputError);
+                }
+            
+        });
+    
+    
+    } else {
+        console.log("Fuera bot hijueputa!!!");
+    }
 }

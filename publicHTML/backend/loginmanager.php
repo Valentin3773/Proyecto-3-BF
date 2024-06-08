@@ -4,65 +4,66 @@ include("conexion.php");
 
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ingresar'])) {
-    
-    if (empty(trim($_POST["jejeje"]))) {
-
-        loginCheckUser($pdo);
-    } 
-    else {
-
-        echo "Fuera bot hijueputa!!!";
-    }
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    loginCheckUser($pdo);
 }
 
 function loginCheckUser($pdo) {
 
-    $email = trim($_POST["email"]);
-    $contrasenia = trim($_POST["contrasenia"]);
+    // Funciona como operador ternario, osea verifica que si no esta definida sea null
+    $email = isset($_POST['email']) ? $_POST['email'] : null;
+    $contrasenia = isset($_POST['contrasenia']) ? $_POST['contrasenia'] : null;
 
-    $chekeo = "SELECT * FROM paciente WHERE email = :email AND contrasenia = :contrasenia";
-    $stmt = $pdo->prepare($chekeo);
 
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt->bindParam(':contrasenia', $contrasenia, PDO::PARAM_STR);
+    $datos = array();
 
-    if ($stmt->execute()) {
+    //chequeos adicionales
+    if ($email === null || $email === '') {
 
-        if ($stmt->rowCount() > 0) {
-            
-            $_SESSION['paciente'] = array();
+        $datos['error'] = "Email no proporcionado.";
 
-            $tupla = $stmt->fetchAll()[0];
+    } elseif ($contrasenia === null || $contrasenia === '') {
 
-            $_SESSION['paciente']['nombre'] = $tupla['nombre'];
-            $_SESSION['paciente']['apellido'] = $tupla['apellido'];
-            $_SESSION['paciente']['documento'] = $tupla['documento'];
-            $_SESSION['paciente']['telefono'] = $tupla['telefono'];
-            $_SESSION['paciente']['direccion'] = $tupla['direccion'];
-            $_SESSION['paciente']['email'] = $email;
+        $datos['error'] = "Contraseña no proporcionada.";
 
-            header("location:../index.php?iniciado=1");
-            exit();
-        } 
-        else {
-                    
-            echo '<script type="text/javascript">';
-            echo 'alert("Error: Cheque los datos ingresados");';
-            echo 'window.location.href = "../login.php";';
-            echo '</script>';
-
-        }
-    } 
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+    {
+        $datos['error'] = "Correo en formato no reconocible";
+    }   
     else {
+        $chekeo = "SELECT * FROM paciente WHERE email = :email";
+        $stmt = $pdo->prepare($chekeo);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+ 
 
-        echo '<script type="text/javascript">';
-        echo 'alert("Error: Al ejecutar la consulta");';
-        echo 'window.location.href = "../login.php";';
-        echo '</script>';
+        if ($stmt->execute() && $stmt->rowCount() > 0) {
+            $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
+            $hashedPassword = $tupla['contrasenia'];
+
+            if (password_verify($contrasenia, $hashedPassword)) {
+
+                    //Se quita la contraseña de la variable tupla para evitar fuga de datos
+                    unset($tupla['contrasenia']);
+                    $_SESSION['paciente'] = $tupla;
+                    $datos = $tupla;
+
+                } else {
+                    
+                    $datos['error'] = "Credenciales Incorrectas";
+                }
+            } else {
+
+                $datos['error'] = "Usuario no encontrado.";
+            
+            }
+
         
     }
 
-    unset($stmt);
-    unset($pdo);
+    header('Content-Type: application/json');
+    echo json_encode($datos);
+    exit();
 }
+
+
+?>
