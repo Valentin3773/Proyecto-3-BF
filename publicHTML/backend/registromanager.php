@@ -3,8 +3,7 @@
 include("conexion.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        processRegisterForm($pdo);
-        echo "adasd";
+    processRegisterForm($pdo);
 }
 
 function processRegisterForm($pdo) {
@@ -16,51 +15,71 @@ function processRegisterForm($pdo) {
     $direccion = isset($_POST['direccion']) ? trim($_POST['direccion']) : null;
     $email = isset($_POST['email']) ? trim($_POST['email']) : null;
     $contrasenia = isset($_POST['contrasenia']) ? trim($_POST['contrasenia']) : null;
-    $concontrasenia = isset($_POST['concontrasenia']) ? trim($_POST['concontrasenia']) : null
+    $concontrasenia = isset($_POST['concontrasenia']) ? trim($_POST['concontrasenia']) : null;
 
-    if ($contrasenia == $concontrasenia) {
+    $datos = array();
 
-        $chekeo = "SELECT documento FROM paciente WHERE documento = :documento OR email = :email";
-        $stmt = $pdo->prepare($chekeo);
-        $stmt->bindParam(':documento', $documento);
-        $stmt->bindParam(':email', $email);
+    if ($nombre === null || $nombre === '') {
+        $datos['error'] = "Nombre no proporcionado.";
+    } 
+    else if ($apellidos === null || $apellidos === '') {
+        $datos['error'] = "Apellidos no proporcionados.";
+    } 
+    else if ($documento === null || $documento === '') {
+        $datos['error'] = "Documento no proporcionado.";
+    } 
+    else if ($email === null || $email === '') {
+        $datos['error'] = "Email no proporcionado.";
+    } 
+    else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $datos['error'] = "Correo en formato no reconocible";
+    } 
+    else if ($contrasenia === null || $contrasenia === '') {
+        $datos['error'] = "Contraseña no proporcionada.";
+    } 
+    else if ($concontrasenia === null || $concontrasenia === '') {
+        $datos['error'] = "Confirmación de contraseña no proporcionada.";
+    } 
+    else if ($contrasenia !== $concontrasenia) {
+        $datos['error'] = "Las contraseñas no coinciden.";
+    } else {
 
-        if ($stmt->execute()) {
+            $chekeo = "SELECT documento FROM paciente WHERE documento = :documento OR email = :email";
+            $stmt = $pdo->prepare($chekeo);
+            $stmt->bindParam(':documento', $documento);
+            $stmt->bindParam(':email', $email);
 
-            if ($stmt->rowCount() > 0) {
+            if ($stmt->execute()) {
 
-                echo '<script type="text/javascript">';
-                echo 'alert("Usuario ya registrado");';
-                echo 'window.location.href = "../login.php";';
-                echo '</script>';
-            } 
-            else {
-                
-                $hashedPassword = password_hash($contrasenia,PASSWORD_BCRYPT);
+                if ($stmt->rowCount() > 0) {
 
-                $sql = "INSERT INTO paciente (documento, nombre, apellido, email, contrasenia, direccion, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $pdo->prepare($sql);
+                    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $datos['error'] = "Usuario existente: $email";
 
-                if ($stmt->execute([$documento, $nombre, $apellidos, $email, $hashedPassword, $direccion, $telefono])) {
-
-                    header("Location: ../login.php");
-                    exit();
                 } 
                 else {
+                    
+                    $hashedPassword = password_hash($contrasenia,PASSWORD_BCRYPT);
 
-                    echo "Lo siento! Se ha presentado un error.";
+                    $sql = "INSERT INTO paciente (documento, nombre, apellido, email, contrasenia, direccion, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    $stmt = $pdo->prepare($sql);
+
+                    if ($stmt->execute([$documento, $nombre, $apellidos, $email, $hashedPassword, $direccion, $telefono])) {
+
+                        $datos['registrado'] = "Usuario Registrado";
+
+                    } 
+                    else {
+                        $datos['error'] = "Lo siento! Se ha presentado un error.";
+                    }
                 }
             }
-        } 
-        else {
-
-            echo "Error al ejecutar la consulta.";
-        }
-    } 
-    else {
-
-        echo "Ingrese correctamente las contraseñas";
     }
-    unset($stmt);
-    unset($pdo);
-}
+       
+    header('Content-Type: application/json');
+    echo json_encode($datos);
+    exit();
+
+} 
+
+?>

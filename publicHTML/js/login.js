@@ -75,17 +75,24 @@ function cargarVistaRegistro() {
         $('main').html(data);
         console.log("Cargando vista de 'Registro'");
 
-        $('#btnvolver').on('click', volverInicio);
-        $('#rbtnregistrarsel').on('click', function (event) {
+        $('#btnvolver').on('click', volverLogin);
+        $('#btnregistrarsel').on('click', function (event) {
 
             event.preventDefault();
             let data = new FormData($('#formRegistrar')[0]);
             registerComfirm(data);
+            
         });
         $('#innombre').focus();
     });
 
     $('html, body').css("height", "unset");
+}
+
+function volverLogin() {
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.location.href = "login.php";
 }
 
 function registerComfirm(datos) {
@@ -103,7 +110,7 @@ function registerComfirm(datos) {
 
                 if (response.error === undefined) {
 
-                    console.log("entro");
+                    alert(response.registrado);
                 } 
                 else {
 
@@ -114,7 +121,9 @@ function registerComfirm(datos) {
 
                 console.error(estado, outputError);
             }
+            
         });
+    
     } 
     else {
 
