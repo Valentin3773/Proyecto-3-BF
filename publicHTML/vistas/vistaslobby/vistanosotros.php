@@ -8,7 +8,7 @@
 
     <h1 class="w-100 text-center">Odontólogos</h1>
 
-    <div class="container-fluid contenidopersonal row gap-md-3 gap-sm-5">
+    <div class="contenidopersonal row gap-md-3 gap-sm-5">
 
         <div class="col-xl-2 col-lg-2"></div>
         <div class="col-xl-4 col-lg-4 col-12 d-flex justify-content-center align-items-center">
@@ -41,7 +41,7 @@
 
     <h1 class="w-100 text-center">Asistentes</h1>
 
-    <div class="container-fluid contenidopersonal d-flex justify-content-center">
+    <div class="contenidopersonal d-flex justify-content-center">
 
         <div class="card">
 

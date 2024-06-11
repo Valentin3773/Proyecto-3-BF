@@ -160,7 +160,7 @@ if(isset($_SESSION['paciente'])) {
             <div id="hrelleno"></div>
 
             <main class=""></main>
-
+            
             <div id="btnchat" title="Envíanos un mensaje">
                 
                 <img src="img/iconosvg/whatsapp.svg" alt="Ícono de chat">
@@ -170,6 +170,18 @@ if(isset($_SESSION['paciente'])) {
             <div id="btnup">
 
                 <i class="fas fa-arrow-up"></i>
+
+            </div>
+
+            <div id="modal" class="visible d-flex flex-column justify-content-center align-items-center gap-3">
+
+                <div id="modalcontainer">
+
+                    gregergreg
+
+                </div>
+
+                <button id="closemodal">Cerrar</button>
 
             </div>
 

@@ -3,7 +3,6 @@ $(() => {
     addListeners();
 
     cargarVistaInicio();
-
 });
 
 function addListeners() {
@@ -19,6 +18,8 @@ function addListeners() {
     $('#contacto, #contactom').on('click', cargarVistaContacto);
 
     $('#btnchat').on('click', () => window.open('https://api.whatsapp.com/send/?phone=598091814295', '_blank'));
+
+    $('#closemodal').on('click', () => $('#modal').addClass('oculto').removeClass('visible'));
 }
 
 function cargarVistaInicio() {
@@ -143,4 +144,13 @@ function cargarVistaNosotros() {
     $('#nosotros').css({ 'text-decoration': 'underline' });
 
     $('#seccionescss').attr('href', 'css/nosotros.css');
+}
+
+function createModalWindow(contenido) {
+
+    let modal = $('#modal');
+
+    modal.append(contenido);
+
+    modal.addClass('visible').removeClass('oculto');
 }

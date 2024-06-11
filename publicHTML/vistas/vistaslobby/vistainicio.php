@@ -59,19 +59,23 @@
             <button type="button" data-bs-target="#carrusel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carrusel" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carrusel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carrusel" data-bs-slide-to="3" aria-label="Slide 4"></button>
 
         </div>
 
         <article class="carousel-inner">
 
             <div class="carousel-item active">
-                <img src="img/imagenesEmpresa/Ejemplo2.jpg" class="d-block w-100 img-thumbnail" alt="...">
+                <img src="img/imagenesEmpresa/consultorio2.jpg" class="d-block w-100 img-thumbnail" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="img/imagenesEmpresa/Ejemplo2.jpg" class="d-block w-100 img-thumbnail" alt="...">
+                <img src="img/imagenesEmpresa/sala2.jpg" class="d-block w-100 img-thumbnail" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="img/imagenesEmpresa/Ejemplo2.jpg" class="d-block w-100 img-thumbnail" alt="...">
+                <img src="img/imagenesEmpresa/sala3.jpg" class="d-block w-100 img-thumbnail" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="img/imagenesEmpresa/consultorio3.jpg" class="d-block w-100 img-thumbnail" alt="...">
             </div>
 
         </article>

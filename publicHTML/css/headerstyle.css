@@ -364,6 +364,47 @@ header #btnperfil img {
     transition-duration: 300ms;
 }
 
+#modal {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+#modal.oculto {
+
+    pointer-events: none;
+    background-color: transparent;
+}
+
+#modal.oculto #modalcontainer {
+
+    display: none;
+}
+
+#modal.oculto #closemodal {
+
+    display: none;
+}
+
+#modal.visible {
+
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: all;
+}
+
+#modal.visible #modalcontainer {
+
+    background-color: white;
+    width: 50%;
+    height: 50%;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 /*/ PC /*/
 @media screen and (min-width: 900px) {
 
