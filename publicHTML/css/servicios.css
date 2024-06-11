@@ -3,6 +3,7 @@
     background-color: #79ffd5;
     display: flex;
     justify-content: space-between;
+    clip-path: ellipse(85% 50% at 50% 50%);
 }
 
 .card {

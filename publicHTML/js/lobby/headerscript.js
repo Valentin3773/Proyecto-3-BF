@@ -9,7 +9,7 @@ $(() => {
 
     $('#btnopciones').on('click', desplegarMenu);
 
-    $('#btnup').on('click', gototop);
+    $('#btnup').on('click', gototop).hide();
 
     $('#iniciom, #serviciosm, #contactom, #perfilm').on('click', () => desplegarMenu());
 });
@@ -37,15 +37,21 @@ function checkHeaderPosition() {
     let header = $('header');
     let mnav = $('#navmobile');
 
+    let btnup = $('#btnup');
+
     if ($(window).scrollTop() > 1) {
 
         header.addClass('comprimido').removeClass('extendido');
         mnav.css({'top': '100px'});
+
+        btnup.fadeIn();
     } 
     else {
 
         header.addClass('extendido').removeClass('comprimido');
         mnav.css({'top': '120px'});
+
+        btnup.fadeOut();
     }
 }
 

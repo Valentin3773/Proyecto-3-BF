@@ -81,7 +81,6 @@ function cargarVistaRegistro() {
             event.preventDefault();
             let data = new FormData($('#formRegistrar')[0]);
             registerComfirm(data);
-            
         });
         $('#innombre').focus();
     });
@@ -121,9 +120,7 @@ function registerComfirm(datos) {
 
                 console.error(estado, outputError);
             }
-            
         });
-    
     } 
     else {
 

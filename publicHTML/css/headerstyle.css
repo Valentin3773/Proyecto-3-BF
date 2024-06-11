@@ -308,6 +308,7 @@ header #btnperfil img {
     
     cursor: pointer;
     position: fixed !important;
+    z-index: 5;
 }
 
 #navmobile.marboliviano {
@@ -348,7 +349,7 @@ header #btnperfil img {
     position: fixed;
     bottom: 20px;
     left: 20px;
-    background-color: rgba(136, 206, 221, 1);
+    background-color: #0AF0AB;
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -360,10 +361,11 @@ header #btnperfil img {
     cursor: pointer;
     font-size: 150%;
     z-index: 5;
+    transition-duration: 300ms;
 }
 
 /*/ PC /*/
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 900px) {
 
     nav ul li, #btnreservar {
         
@@ -485,8 +487,8 @@ header #btnperfil img {
 
     #contFooter {
 
-        width: 750px;
-        height: 75px;
+        width: 570px;
+        height: 65px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -499,7 +501,7 @@ header #btnperfil img {
 
         text-shadow: 1px 1px 0 #9B9B9B;
         font-family: Huballi, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        font-size: 100%;
+        font-size: 70%;
     }
 
     #pablo {
@@ -1229,6 +1231,12 @@ header #btnperfil img {
 #btnchat:hover {
 
     box-shadow: 2px 4px 0 #9B9B9B, #0AF0AB 10px 10px 15px -5px;
+    transform: scale(1.05);
+}
+
+#btnup:hover {
+
+    box-shadow: 2px 4px 0 #9B9B9B, #4294FF 10px 10px 15px -5px;
     transform: scale(1.05);
 }
 

@@ -76,7 +76,7 @@
                 <label for="incontrasenia" class="text-end row">Contraseña</label>
             </div>
             <div id="div_input">
-                <input type="text" name="contrasenia" id="incontrasenia" title="Ingrese su contraseña" placeholder="Ingrese su contraseña" required>
+                <input type="password" name="contrasenia" id="incontrasenia" title="Ingrese su contraseña" placeholder="Ingrese su contraseña" required>
             </div>
 
         </div>
@@ -86,7 +86,7 @@
                 <label for="inconcontrasenia" class="text-end row">Confirmar Contraseña</label>
             </div>
             <div id="div_input">
-                <input type="text" name="concontrasenia" id="inconcontrasenia" title="Ingrese nuevamente su contraseña" placeholder="Ingrese nuevamente su contraseña" required>
+                <input type="password" name="concontrasenia" id="inconcontrasenia" title="Ingrese nuevamente su contraseña" placeholder="Ingrese nuevamente su contraseña" required>
             </div>
 
         </div>
