@@ -7,16 +7,8 @@ require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['enviar'])) {
-
-    if (empty(trim($_POST["jejeje"]))) {
-
-        sendMail();
-    } 
-    else {
-
-        echo "Fuera bot hijueputa!!!";
-    }
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  sendMail();
 }
 
 function sendMail()
@@ -37,17 +29,39 @@ function sendMail()
 
     try {
 
-        if (isset($_POST['enviar'])) {
+          $email = isset($_POST['email']) ? $_POST['email'] : null;
+          $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
+          $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : null;
+          $mensajec = isset($_POST['mensaje']) ? $_POST['mensaje'] : null;
 
-            if (!empty($_POST['nombre']) && !empty($_POST['telefono']) && !empty($_POST['email']) && !empty($_POST['mensaje'])) {
+          $datos = array();
 
+        if ($nombre === null || $nombre === '') {
+            $datos['error'] = "Nombre no proporcionado.";
+        } 
+        else if ($email === null || $email === '') {
+            $datos['error'] = "Email no proporcionado.";
+        } 
+        else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+          $datos['error'] = "Correo en formato no reconocible";
+        } 
+        else if ($telefono === null || $telefono === '') {
+            $datos['error'] = "Teléfono no proporcionado.";
+        } 
+        //Verifica que lo ingresado sean numeros
+        else if (!ctype_digit($telefono)) {
+          $datos['error'] = "El teléfono debe ser ingresado solo con números y sin espacios.";
+        }
+        //Verifica que si el largo del numero de telefono no es igual a 9 digitos
+        else if (strlen($telefono) != 9) {
+          $datos['error'] = "El teléfono debe tener exactamente 9 dígitos.";
+        }
+        else if ($mensajec === null || $mensajec === '') {
+            $datos['error'] = "Mensaje no proporcionado.";
+        }   
+        else {
                 //Destinatario
-                $destino = "themystymysty@gmail.com";
-
-                $nombre = $_POST["nombre"];
-                $telefono = $_POST["telefono"];
-                $email = $_POST["email"];
-                $mensajec = $_POST['mensaje'];
+                $destino = "andresfelcapo2017@gmail.com";
                 $mail->isHTML(true);
 
                 // Asunto del correo
@@ -115,82 +129,16 @@ function sendMail()
 
                 $mail->send(); //Enviar correo
 
-                echo '
-                        <!DOCTYPE html>
-                        <html lang="es">
-                            <head>
-                                <meta charset="UTF-8">
-                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                                <style>
-                                    body {
-                                        font-family: Arial, sans-serif;
-                                        background-color: #f4f4f4;
-                                        margin: 0;
-                                        padding: 0;
-                                      }
-                                      .container {
-                                        background-color: #ffffff;
-                                        width: 80%;
-                                        margin: 20px auto;
-                                        padding: 20px;
-                                        border-radius: 10px;
-                                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                                      }
-                                      h1 {
-                                        color: #333333;
-                                      }  
-                                </style>
-                            </head>
-                            <body>
-                                <div class="container">
-                                    <h1>Email enviado correctamente</h1>                        
-                                    <a href="../index.php" class="button">Volver</a>
-                                </div>
-                            </body>
-                        </html>
-                        ';
-            } 
-            else {
-
-                echo '
-                        <!DOCTYPE html>
-                        <html lang="es">
-                            <head>
-                                <meta charset="UTF-8">
-                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                                <style>
-                                    body {
-                                        font-family: Arial, sans-serif;
-                                        background-color: #f4f4f4;
-                                        margin: 0;
-                                        padding: 0;
-                                      }
-                                      .container {
-                                        background-color: #ffffff;
-                                        width: 80%;
-                                        margin: 20px auto;
-                                        padding: 20px;
-                                        border-radius: 10px;
-                                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                                      }
-                                      h1 {
-                                        color: #333333;
-                                      }     
-                                </style>
-                            </head>
-                            <body>
-                                <div class="container">
-                                    <h1>Porfavor llene todos los campos</h1>                        
-                                    <a href="../index.php" class="button">Volver</a>
-                                </div>
-                            </body>
-                        </html>
-                        ';
-            }
+                $datos['enviar'] = "Consultad enviada con exito";
+          } 
+            
+        } catch (Exception $e) {
+          $datos['error'] = "Oh!! ah ocurrido un error $mail->ErrorInfo}";
         }
-    } 
-    catch (Exception $e) {
-
-        echo "Error al enviar el correo: {$mail->ErrorInfo}";
-    }
+        header('Content-Type: application/json');
+        echo json_encode($datos);
+        exit();
 }
+
+
+?>

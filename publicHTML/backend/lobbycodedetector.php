@@ -2,7 +2,7 @@
 
     <script>
 
-        alert("Ha iniciado sesión")
+        alert("Ha iniciado sesión");
 
     </script>
 

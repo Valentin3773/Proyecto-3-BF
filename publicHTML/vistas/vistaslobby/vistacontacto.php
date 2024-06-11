@@ -96,7 +96,7 @@
 
     <aside class="p-xl-2 p-lg-2 p-0 pt-3 pb-4 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 
-        <form action="backend/formcontactomanager.php" method="POST" id="formemail" class="p-2 d-flex flex-column justify-content-center">
+        <form  method="POST" id="formEmail" class="p-2 d-flex flex-column justify-content-center">
             
             <div class="subtitulocontainer d-flex justify-content-center mb-3">
 

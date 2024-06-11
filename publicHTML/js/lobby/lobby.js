@@ -71,6 +71,12 @@ function cargarVistaContacto() {
 
         $('main').html(data);
         console.log("Cargando vista de 'Contacto'");
+        $('#enviarmail').on('click', function (event) {
+
+            event.preventDefault();
+            let data = new FormData($('#formEmail')[0]);
+            emailComfirm(data);
+        });
 
         $('#innombre').focus();
 
@@ -84,6 +90,40 @@ function cargarVistaContacto() {
 
     $('#seccionescss').attr('href', 'css/contacto.css');
 }
+
+function emailComfirm(datos) {
+    if ($('#jejeje').val() === '') {
+
+        $.ajax({
+
+            type: "POST",
+            url: "backend/formcontactomanager.php",
+            data: datos,
+            processData: false,
+            contentType: false,
+            success: response => {
+
+                if (response.error === undefined) {
+
+                    alert(response.enviar);
+                } 
+                else {
+
+                    alert(response.error);
+                }
+            },
+            error: (jqXHR, estado, outputError) => {
+
+                console.error(estado, outputError);
+            }
+        });
+    } 
+    else {
+
+        console.log("Fuera bot hijueputa!!!");
+    }
+}
+
 
 function cargarVistaNosotros() {
 

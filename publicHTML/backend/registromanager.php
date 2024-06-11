@@ -28,6 +28,12 @@ function processRegisterForm($pdo) {
     else if ($documento === null || $documento === '') {
         $datos['error'] = "Documento no proporcionado.";
     } 
+    else if (!ctype_digit($documento)) {
+        $datos['error'] = "El documento debe ser ingresado solo con números y sin guines.";
+    }
+    else if (strlen($documento) != 8) {
+        $datos['error'] = "El documento debe tener exactamente 9 dígitos.";
+    }
     else if ($email === null || $email === '') {
         $datos['error'] = "Email no proporcionado.";
     } 
