@@ -33,8 +33,8 @@ if(isset($_SESSION['paciente'])) {
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
         <!-- CSS -->
-        <link rel="stylesheet" href="css/headerstyle.css">
-        <link id="seccionescss" rel="stylesheet" href="css/inicio.css">
+        <link rel="stylesheet" href="css/lobby/headerstyle.css">
+        <link id="seccionescss" rel="stylesheet" href="css/lobby/inicio.css">
 
         <!-- Scripts -->
         <script src="js/preloader.js"></script>
@@ -173,7 +173,7 @@ if(isset($_SESSION['paciente'])) {
 
             </div>
 
-            <div id="modal" class="visible d-flex flex-column justify-content-center align-items-center gap-3">
+            <div id="modal" class="oculto d-flex flex-column justify-content-center align-items-center gap-3">
 
                 <div id="modalcontainer">
 

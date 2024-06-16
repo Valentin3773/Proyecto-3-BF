@@ -39,7 +39,27 @@ function cargarVistaInicio() {
     $('#contacto, #contactom').css({ 'text-decoration': 'none' });
     $('#nosotros').css({ 'text-decoration': 'none' });
 
-    $('#seccionescss').attr('href', 'css/inicio.css');
+    $('#seccionescss').attr('href', 'css/lobby/inicio.css');
+}
+
+function cargarVistaNosotros() {
+
+    window.scrollTo({top: 0, behavior: 'smooth'});
+
+    $.get("vistas/vistaslobby/vistanosotros.php", data => {
+
+        $('main').html(data);
+        console.log("Cargando vista de 'Nosotros'");
+
+        // history.pushState({}, '', 'contacto');
+    });
+
+    $('#inicio, #iniciom').css({ 'text-decoration': 'none' });
+    $('#servicios, #serviciosm').css({ 'text-decoration': 'none' });
+    $('#contacto, #contactom').css({ 'text-decoration': 'none' });
+    $('#nosotros').css({ 'text-decoration': 'underline' });
+
+    $('#seccionescss').attr('href', 'css/lobby/nosotros.css');
 }
 
 function cargarVistaServicios() {
@@ -61,7 +81,7 @@ function cargarVistaServicios() {
     $('#contacto, #contactom').css({ 'text-decoration': 'none' });
     $('#nosotros').css({ 'text-decoration': 'none' });
 
-    $('#seccionescss').attr('href', 'css/servicios.css');
+    $('#seccionescss').attr('href', 'css/lobby/servicios.css');
 }
 
 function cargarVistaContacto() {
@@ -89,10 +109,11 @@ function cargarVistaContacto() {
     $('#servicios, #serviciosm').css({ 'text-decoration': 'none' });
     $('#nosotros').css({ 'text-decoration': 'none' });
 
-    $('#seccionescss').attr('href', 'css/contacto.css');
+    $('#seccionescss').attr('href', 'css/lobby/contacto.css');
 }
 
 function emailComfirm(datos) {
+    
     if ($('#jejeje').val() === '') {
 
         $.ajax({
@@ -123,27 +144,6 @@ function emailComfirm(datos) {
 
         console.log("Fuera bot hijueputa!!!");
     }
-}
-
-
-function cargarVistaNosotros() {
-
-    window.scrollTo({top: 0, behavior: 'smooth'});
-
-    $.get("vistas/vistaslobby/vistanosotros.php", data => {
-
-        $('main').html(data);
-        console.log("Cargando vista de 'Nosotros'");
-
-        // history.pushState({}, '', 'contacto');
-    });
-
-    $('#inicio, #iniciom').css({ 'text-decoration': 'none' });
-    $('#servicios, #serviciosm').css({ 'text-decoration': 'none' });
-    $('#contacto, #contactom').css({ 'text-decoration': 'none' });
-    $('#nosotros').css({ 'text-decoration': 'underline' });
-
-    $('#seccionescss').attr('href', 'css/nosotros.css');
 }
 
 function createModalWindow(contenido) {

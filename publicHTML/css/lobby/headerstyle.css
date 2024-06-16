@@ -1,21 +1,20 @@
 @font-face {
 
     font-family: Huballi;
-    src: url(../font/Hubballi-Regular.ttf);
+    src: url(../../font/Hubballi-Regular.ttf);
 }
 
 @font-face {
 
     font-family: RobotoSerif;
-    src: url(../font/Roboto_Serif/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf);
+    src: url(../../font/Roboto_Serif/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf);
 }
 
 @font-face {
 
     font-family: Francois;
-    src: url(../font/JacquesFrancois-Regular.ttf);
+    src: url(../../font/JacquesFrancois-Regular.ttf);
 }
-
 
 html, body {
 

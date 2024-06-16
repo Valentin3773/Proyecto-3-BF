@@ -22,8 +22,6 @@ function cargarVistaLogin() {
         });
         $('#inemail').focus();
     });
-
-
 }
 
 function loginComfirm(datos) {
