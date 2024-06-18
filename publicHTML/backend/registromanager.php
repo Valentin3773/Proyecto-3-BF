@@ -15,7 +15,7 @@ function processRegisterForm($pdo) {
     $direccion = isset($_POST['direccion']) ? trim($_POST['direccion']) : null;
     $email = isset($_POST['email']) ? trim($_POST['email']) : null;
     $contrasenia = isset($_POST['contrasenia']) ? trim($_POST['contrasenia']) : null;
-    $concontrasenia = isset($_POST['concontrasenia']) ? trim($_POST['concontrasenia']) : null;
+    $concontrasenia = isset($_POST['concontrasenia']) ? trim($_POST['concontrasenia'])  : null;
 
     $datos = array();
 
@@ -29,10 +29,10 @@ function processRegisterForm($pdo) {
         $datos['error'] = "Documento no proporcionado.";
     } 
     else if (!ctype_digit($documento)) {
-        $datos['error'] = "El documento debe ser ingresado solo con números y sin guines.";
+        $datos['error'] = "El documento debe ser ingresado solo con números y sin guiones.";
     }
     else if (strlen($documento) != 8) {
-        $datos['error'] = "El documento debe tener exactamente 9 dígitos.";
+        $datos['error'] = "El documento debe tener exactamente 8 dígitos.";
     }
     else if ($email === null || $email === '') {
         $datos['error'] = "Email no proporcionado.";
@@ -48,14 +48,22 @@ function processRegisterForm($pdo) {
     } 
     else if ($contrasenia !== $concontrasenia) {
         $datos['error'] = "Las contraseñas no coinciden.";
-    } else {
+    } 
+    else {
 
-            $chekeo = "SELECT documento FROM paciente WHERE documento = :documento OR email = :email";
-            $stmt = $pdo->prepare($chekeo);
-            $stmt->bindParam(':documento', $documento);
-            $stmt->bindParam(':email', $email);
+        $nombre = $pdo->quote($nombre);
+        $apellidos = $pdo->quote($apellidos);
+        $documento = $pdo->quote($documento);
+        $telefono = $pdo->quote($telefono);
+        $direccion = $pdo->quote($direccion);
+        $email = $pdo->quote($email);
+    
+        $chekeo = "SELECT documento FROM paciente WHERE documento = :documento OR email = :email";
+        $stmt = $pdo->prepare($chekeo);
+        $stmt->bindParam(':documento', $documento);
+        $stmt->bindParam(':email', $email);
 
-            if ($stmt->execute()) {
+        if ($stmt->execute()) {
 
                 if ($stmt->rowCount() > 0) {
 
@@ -79,7 +87,7 @@ function processRegisterForm($pdo) {
                         $datos['error'] = "Lo siento! Se ha presentado un error.";
                     }
                 }
-            }
+        }
     }
        
     header('Content-Type: application/json');

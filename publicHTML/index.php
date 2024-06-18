@@ -1,9 +1,10 @@
 <?php
 session_start();
 
-if(isset($_SESSION['paciente'])) {
+if( isset($_SESSION['paciente'])) {
     
    // echo $_SESSION['paciente']['nombre'];
+
 }
 
 ?>
