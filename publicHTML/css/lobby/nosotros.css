@@ -125,3 +125,12 @@ section h1 {
     background: var(--bg-color);
     color: var(--main-color);
 }
+
+@media screen and (max-width: 600px) {
+    
+    #titequipo {
+
+        font-size: 250%;
+        width: 90%;
+    }
+}

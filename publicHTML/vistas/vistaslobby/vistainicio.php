@@ -6,7 +6,7 @@
 
         <div class="contReservar lh-1">
 
-            <a href="" id="btnreservar" title="Reservar una consulta"><span>Reservar</span><br><span>Consulta</span></a>
+            <a href="" id="btnreservar" title="Reservar una consulta">Reservar<br>Consulta</a>
 
         </div>
 

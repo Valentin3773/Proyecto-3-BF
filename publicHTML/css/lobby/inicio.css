@@ -90,7 +90,11 @@ main {
 
     font-size: 300%;
     padding: 15px 20px;
-    box-shadow: 0 1px 10px rgba(0, 0, 0, .7);
+}
+
+#bienvenida .contReservar {
+
+    max-width: none !important;
 }
 
 #secdatos {
@@ -127,18 +131,23 @@ main {
         font-size: 250%;
         padding: 0;
     }
+
+    .contdatos .numeron {
+
+        font-size: 300%;
+    }
+    
+    .contdatos h3 {
+    
+        font-size: 150%;
+    }
 }
 
 @media screen and (max-width: 400px) {
 
-    #bienvenida article h1 {
-
-        font-size: 1.5rem !important;
-    }
-
     #bienvenida #btnreservar {
 
-        font-size: 100%;
+        font-size: 200%;
         padding: 0;
     }
     
