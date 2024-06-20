@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 function loginCheckAdmin($pdo) {
 
     $email = isset($_POST['email']) ? $_POST['email'] : null;
-    $contrasenia = isset($_POST['contrasenia']) ? $_POST['email'] : null;
+    $contrasenia = isset($_POST['contrasenia']) ? $_POST['contrasenia'] : null;
 
     $datos = array();
     
@@ -41,11 +41,13 @@ function loginCheckAdmin($pdo) {
             $hashedPassword = $tupla['contrasenia'];
 
             if (password_verify($contrasenia, $hashedPassword)) {
-
+                    
                     $_SESSION = array();
                     unset($tupla['contrasenia']);
                     $_SESSION['odontologo'] = $tupla;
                     $datos = $tupla;
+
+                    $datos['admin'] = "Iniciando Sesion";
                 } 
                 else {
                     

@@ -35,6 +35,7 @@ else {
         <!-- CSS -->
         <link id="seccionescss" rel="stylesheet" href="">
         <link rel="stylesheet" href="css/administrador/adminheader.css">
+        <link rel="stylesheet" href="css/administrador/consultas.css">
 
         <!-- JS -->
         <script defer src="js/administrador/administrador.js"></script>
@@ -80,7 +81,7 @@ else {
 
                     <div id="odontologocontainer">
 
-                        <h2 class="m-0">Odontólogo: Alice Carcabelos</h2>
+                        <h2 class="m-0">Odontólogo: <?php echo $_SESSION['odontologo']['nombre']; ?></h2>
 
                     </div>
 

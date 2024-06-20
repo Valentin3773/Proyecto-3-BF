@@ -6,8 +6,8 @@ $(() => {
 function addAdminListeners() {
 
     $('#btnconsultas').on('click', cargarVistaConsultas);
-    $('#btnpacientes').on('click', );
-    $('#btnservicios').on('click', );
+    $('#btnpacientes').on('click', cargarVistaPacientes);
+    $('#btnservicios').on('click', cargarVistaServicios);
 }
 
 function cargarVistaConsultas() {
@@ -16,6 +16,11 @@ function cargarVistaConsultas() {
 
         $('.sidebar').html(data);
         console.log("Cargando vista de 'Consultas'");
+        $.get("vistas/vistasadmin/vistaconsultas.php", data => {
+
+            $('main').html(data);
+    
+        });
     });
 
     $('#seccionescss').attr('href', 'css/administrador/consultas.css');
@@ -28,6 +33,9 @@ function cargarVistaPacientes() {
 
         $('main').html(data);
         console.log("Cargando vista de 'Pacientes'");
+        $.get("vistas/vistasadmin/sidebarpacientes.php", data => {
+            $('.sidebar').html(data);
+        });
     });
 
     $('#seccionescss').attr('href', 'css/administrador/pacientes.css');

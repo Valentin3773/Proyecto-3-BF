@@ -110,7 +110,7 @@
     font-size: 170%;
 }
 
-.sidebar .paciente {
+.sidebar .paciente, .consultaside {
 
     background-color: #00B2FF;
     color: white;
@@ -122,10 +122,16 @@
     box-shadow: 3px 6px 1px rgba(0, 0, 0, .25);
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     padding: 10px;
+    margin: 10px 0px;
     transition-duration: .3s;
 }
 
 .sidebar .paciente:hover {
+
+    scale: 1.03;
+}
+
+.sidebar .consultaside:hover {
 
     scale: 1.03;
 }

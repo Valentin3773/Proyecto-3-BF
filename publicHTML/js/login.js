@@ -1,5 +1,4 @@
 $(() => {
-
     cargarVistaLogin();
 });
 
@@ -56,7 +55,7 @@ function cargarVistaLoginAdmin() {
         $('main').html(data);
         console.log("Cargando vista de 'Login'");
         $('#btnvolver').on('click', volverInicio);
-        $('#ingresar').on('click', function (event) {
+        $('#ingresarad').on('click', function (event) {
 
             event.preventDefault();
             let data = new FormData($('#formLogin')[0]);
@@ -161,8 +160,9 @@ function loginAdminConfirm(datos) {
 
                 if (response.error === undefined) {
 
+                    alert(response.admin);
                     window.location.href = "administrador.php";
-                    alert(response.registrado);
+
                 } 
                 else {
 

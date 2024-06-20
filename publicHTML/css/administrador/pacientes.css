@@ -1,0 +1,27 @@
+
+  .p-contenedor {
+    display:inline-flex;
+    background-color: #7CB9E8;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    width:fit-content;
+  }
+  .perfil {
+    width: auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .foto {
+    border-radius: 50%;
+  }
+  .Nombre {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+  }
+  .Telefono,.Documento {
+    color: #ffffff;
+  }
