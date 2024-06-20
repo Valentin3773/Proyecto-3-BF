@@ -1,0 +1,131 @@
+#tituloconsultas {
+
+    background-color: #4294FF;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    font-size: 350%;
+    padding: 5px;
+    text-shadow: 0 4px 4px #878787;
+    font-family: RobotoSerif, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 5px;
+    box-shadow: 1px 4px 4px #9B9B9B;
+}
+
+.separador {
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.separador hr {
+
+    display: block;
+    width: 95%;
+    height: 3px;
+    border: 0;
+    background-color: black;
+}
+
+.separador span {
+
+    color: #00B2FF;
+    width: 45%;
+    text-align: center;
+    font-size: 2rem;
+    letter-spacing: 5px;
+}
+
+.consulta {
+
+    background-color: #7CB9E8;
+    border-radius: 20px;
+    padding: 1rem;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    border: 3px solid rgba(0, 0, 0, .2);
+    cursor: pointer;
+    transition-duration: .3s;
+}
+
+.consulta > div {
+
+    background-color: white;
+    width: 33.3%;
+    color: #4294FF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 450;
+    box-shadow: 0 0 2px black;
+}
+
+.consulta .fechacontainer {
+
+    border-radius: 20px 0 0 20px;
+}
+
+#consultasencurso .consulta .horacontainer {
+
+    border-radius: 20px 0 0 20px;
+}
+
+#consultasencurso .consulta > div {
+
+    width: 50%;
+}
+
+.consulta .asuntocontainer {
+
+    border-radius: 0 20px 20px 0;
+}
+
+#consultasfuturas, #consultasprevias, #consultasencurso {
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.consulta:hover {
+
+    border: 3px solid #0AF0AB;
+}
+
+.sidebar > h2 {
+
+    color: #00B2FF;
+    text-align: center;
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 500;
+    font-size: 170%;
+}
+
+.sidebar .paciente {
+
+    background-color: #00B2FF;
+    color: white;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 150%;
+    box-shadow: 3px 6px 1px rgba(0, 0, 0, .25);
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 10px;
+    transition-duration: .3s;
+}
+
+.sidebar .paciente:hover {
+
+    scale: 1.03;
+}

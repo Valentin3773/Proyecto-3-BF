@@ -119,7 +119,7 @@ function emailComfirm(datos) {
         $.ajax({
 
             type: "POST",
-            url: "backend/formcontactomanager.php",
+            url: "backend/lobby/formcontactomanager.php",
             data: datos,
             processData: false,
             contentType: false,

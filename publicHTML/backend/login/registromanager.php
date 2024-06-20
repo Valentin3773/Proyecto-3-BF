@@ -20,33 +20,43 @@ function processRegisterForm($pdo) {
     $datos = array();
 
     if ($nombre === null || $nombre === '') {
+
         $datos['error'] = "Nombre no proporcionado.";
     } 
     else if ($apellidos === null || $apellidos === '') {
+
         $datos['error'] = "Apellidos no proporcionados.";
     } 
     else if ($documento === null || $documento === '') {
+
         $datos['error'] = "Documento no proporcionado.";
     } 
     else if (!ctype_digit($documento)) {
+
         $datos['error'] = "El documento debe ser ingresado solo con números y sin guiones.";
     }
     else if (strlen($documento) != 8) {
+
         $datos['error'] = "El documento debe tener exactamente 8 dígitos.";
     }
     else if ($email === null || $email === '') {
+
         $datos['error'] = "Email no proporcionado.";
     } 
     else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
         $datos['error'] = "Correo en formato no reconocible";
     } 
     else if ($contrasenia === null || $contrasenia === '') {
+
         $datos['error'] = "Contraseña no proporcionada.";
     } 
     else if ($concontrasenia === null || $concontrasenia === '') {
+
         $datos['error'] = "Confirmación de contraseña no proporcionada.";
     } 
     else if ($contrasenia !== $concontrasenia) {
+        
         $datos['error'] = "Las contraseñas no coinciden.";
     } 
     else {

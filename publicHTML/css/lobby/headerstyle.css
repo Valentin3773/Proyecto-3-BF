@@ -578,7 +578,7 @@ header #btnperfil img {
 }
 
 /*/ Tablets y Smart Phones anchos /*/
-@media screen and (max-width: 1099px) and (min-width: 401px) {
+@media screen and (max-width: 899px) and (min-width: 401px) {
 
     header #imglogo {
 

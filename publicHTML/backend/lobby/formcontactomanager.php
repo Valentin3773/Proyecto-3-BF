@@ -3,12 +3,12 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/Exception.php';
-require 'PHPMailer/PHPMailer.php';
-require 'PHPMailer/SMTP.php';
+require '../PHPMailer/Exception.php';
+require '../PHPMailer/PHPMailer.php';
+require '../PHPMailer/SMTP.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  sendMail();
+    sendMail();
 }
 
 function sendMail()
@@ -29,45 +29,52 @@ function sendMail()
 
     try {
 
-          $email = isset($_POST['email']) ? $_POST['email'] : null;
-          $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
-          $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : null;
-          $mensajec = isset($_POST['mensaje']) ? $_POST['mensaje'] : null;
+        $email = isset($_POST['email']) ? $_POST['email'] : null;
+        $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
+        $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : null;
+        $mensajec = isset($_POST['mensaje']) ? $_POST['mensaje'] : null;
 
-          $datos = array();
+        $datos = array();
 
         if ($nombre === null || $nombre === '') {
+
             $datos['error'] = "Nombre no proporcionado.";
         } 
         else if ($email === null || $email === '') {
+
             $datos['error'] = "Email no proporcionado.";
         } 
         else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-          $datos['error'] = "Correo en formato no reconocible";
+
+            $datos['error'] = "Correo en formato no reconocible";
         } 
         else if ($telefono === null || $telefono === '') {
+
             $datos['error'] = "Teléfono no proporcionado.";
-        } 
+        }
         //Verifica que lo ingresado sean numeros
         else if (!ctype_digit($telefono)) {
-          $datos['error'] = "El teléfono debe ser ingresado solo con números y sin espacios.";
+
+            $datos['error'] = "El teléfono debe ser ingresado solo con números y sin espacios.";
         }
         //Verifica que si el largo del numero de telefono no es igual a 9 digitos
         else if (strlen($telefono) != 9) {
-          $datos['error'] = "El teléfono debe tener exactamente 9 dígitos.";
-        }
+
+            $datos['error'] = "El teléfono debe tener exactamente 9 dígitos.";
+        } 
         else if ($mensajec === null || $mensajec === '') {
+
             $datos['error'] = "Mensaje no proporcionado.";
-        }   
+        } 
         else {
-                //Destinatario
-                $destino = "andresfelcapo2017@gmail.com";
-                $mail->isHTML(true);
+            //Destinatario
+            $destino = "andresfelcapo2017@gmail.com";
+            $mail->isHTML(true);
 
-                // Asunto del correo
-                $asunto = "Nueva Solicitud de Contacto: $nombre";
+            // Asunto del correo
+            $asunto = "Nueva Solicitud de Contacto: $nombre";
 
-                $mensaje = "
+            $mensaje = "
                             <!DOCTYPE html>
                                 <html>
                                     <head>
@@ -117,28 +124,26 @@ function sendMail()
                                 </html>
                         ";
 
-                // Cabeceras del correo
-                $headers = "MIME-Version: 1.0\r\n";
-                $headers .= "Content-type: text/html; charset=utf-8\r\n";
+            // Cabeceras del correo
+            $headers = "MIME-Version: 1.0\r\n";
+            $headers .= "Content-type: text/html; charset=utf-8\r\n";
 
-                // Enviar correo con PHPMailer
-                $mail->setFrom($email, $nombre, $headers);
-                $mail->addAddress($destino);
-                $mail->Subject = $asunto;
-                $mail->Body    = $mensaje;
+            // Enviar correo con PHPMailer
+            $mail->setFrom($email, $nombre, $headers);
+            $mail->addAddress($destino);
+            $mail->Subject = $asunto;
+            $mail->Body    = $mensaje;
 
-                $mail->send(); //Enviar correo
+            $mail->send(); //Enviar correo
 
-                $datos['enviar'] = "Consultad enviada con exito";
-          } 
-            
-        } catch (Exception $e) {
-          $datos['error'] = "Oh!! ah ocurrido un error $mail->ErrorInfo}";
+            $datos['enviar'] = "Consultad enviada con exito";
         }
-        header('Content-Type: application/json');
-        echo json_encode($datos);
-        exit();
+    } 
+    catch (Exception $e) {
+
+        $datos['error'] = "Oh!! ah ocurrido un error $mail->ErrorInfo}";
+    }
+    header('Content-Type: application/json');
+    echo json_encode($datos);
+    exit();
 }
-
-
-?>

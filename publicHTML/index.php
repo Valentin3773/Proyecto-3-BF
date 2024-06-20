@@ -4,7 +4,6 @@ session_start();
 if( isset($_SESSION['paciente'])) {
     
    // echo $_SESSION['paciente']['nombre'];
-
 }
 
 ?>

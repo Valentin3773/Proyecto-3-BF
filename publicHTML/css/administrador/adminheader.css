@@ -16,6 +16,16 @@
     src: url(../../font/JacquesFrancois-Regular.ttf);
 }
 
+h1, h2, h3, h4, h5 {
+
+    text-wrap: balance;
+}
+
+p {
+
+    text-wrap: pretty;
+}
+
 .lds-spinner,
 .lds-spinner div,
 .lds-spinner div:after {
@@ -170,7 +180,12 @@ nav ul {
     margin-bottom: 0 !important;
 }
 
-nav ul li a {
+nav li {
+
+    transition-duration: .3s;
+}
+
+nav a {
 
     text-decoration: none;
     color: white;
@@ -181,6 +196,17 @@ nav ul li a {
     box-shadow: 2px 4px 1px rgba(0, 0, 0, .25);
     font-family: RobotoSerif, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 500;
+    transition-duration: .3s;
+}
+
+nav li:hover {
+
+    scale: 1.05;
+}   
+
+nav li:hover a {
+
+    color: white;
 }
 
 #container {
@@ -204,6 +230,14 @@ nav ul li a {
     box-shadow: 2px 0 4px rgba(0, 0, 0, .25);
     padding: 10px;
     background-clip: padding-box;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    transition-duration: .3s;
+}
+
+.sidebar::-webkit-scrollbar {
+
+    display: none;
 }
 
 .actionbar {
@@ -221,9 +255,35 @@ main {
     height: 84dvh !important;
     max-height: 84dvh !important;
     box-shadow: -2px -4px 4px rgba(0, 0, 0, .25);
+    transition-duration: .3s;
 }
 
 .row > div {
 
-    padding-left: 0 !important;
+    padding-left: 0;
+}
+
+#odontologocontainer {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#odontologocontainer h2 {
+
+    background-color: #4294FF;
+    color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 2px 4px 1px rgba(0, 0, 0, .25);
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 150%;
+    font-weight: 500;
+    transition-duration: .3s;
+}
+
+#odontologocontainer h2:hover {
+
+    scale: 1.05;
 }
