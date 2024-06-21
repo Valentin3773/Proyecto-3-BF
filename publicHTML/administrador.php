@@ -8,7 +8,7 @@ if(isset($_SESSION['odontologo'])) {
 } 
 else {
 
-    // header('Location: index.php');
+    header('Location: index.php');
 };
 
 ?>
@@ -81,7 +81,7 @@ else {
 
                     <div id="odontologocontainer">
 
-                        <h2 class="m-0">Odontólogo: <?php echo $_SESSION['odontologo']['nombre']; ?></h2>
+                        <h2 class="m-0">Odontólogo: <?php echo $_SESSION['odontologo']['nombre']; ?> </h2>
 
                     </div>
 

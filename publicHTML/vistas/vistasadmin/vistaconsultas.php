@@ -1,47 +1,34 @@
 <?php
+
 include("../../backend/conexion.php");
+
 session_start();
 
-//Datos
-$consultasFuturas = array();
-$consultasPrevias = array();
-$consultasActuales = array();
-
-//Identificador
 $id = $_SESSION['odontologo']['idodontologo'];
 
-//Zone y Tiempo
-$fechaActual = date('Y-m-d');
-date_default_timezone_set('America/Argentina/Jujuy');
-$horaActual = date('H:i:s');
+function getConsultas($sql) {
 
-//Inicio de carga de consultas Futuras
-$consulta = "SELECT * FROM consulta WHERE fecha > :fechaActual and idodontologo = :id";
-$stmt = $pdo->prepare($consulta);
-$stmt->bindParam(':fechaActual', $fechaActual);
-$stmt->bindParam(':id', $id);
+    global $pdo;
+    global $id;
 
-if ($stmt->execute() && $stmt->rowCount() > 0) {
-    while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $consultasFuturas[] = $tupla;
+    $consultas = array();
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':ido', $id);
+
+    if ($stmt->execute() && $stmt->rowCount() > 0) {
+
+        while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+            $consultas[] = $tupla;
+        }
+        return $consultas;
     }
 }
-//Fin
 
-
-//Inicio de carga de consultas Futuras
-$consulta = "SELECT * FROM consulta WHERE idodontologo = :id AND hora > :horaActual AND fecha = :fechaActual";
-$stmt = $pdo->prepare($consulta);
-$stmt->bindParam(':id', $id);
-$stmt->bindParam(':horaActual', $horaActual);
-$stmt->bindParam(':fechaActual', $fechaActual);
-
-if ($stmt->execute() && $stmt->rowCount() > 0) {
-    while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $consultasPrevias[] = $tupla;
-    }
-}
-//Fin
+$consultasFuturas = getConsultas("SELECT fecha, hora, asunto FROM consulta WHERE fecha > CURDATE() AND hora > CURTIME() AND idodontologo = :ido");
+$consultasPrevias = getConsultas("SELECT fecha, hora, asunto FROM consulta WHERE fecha < SELECT CURDATE() AND hora < CURTIME() AND idodontologo = :ido");
+$consultasActuales = getConsultas("SELECT hora, asunto FROM consulta WHERE fecha = CURDATE() AND hora > CURTIME() AND idodontologo = :ido");
 
 ?>
 
@@ -58,56 +45,43 @@ if ($stmt->execute() && $stmt->rowCount() > 0) {
     <hr>
 
 </div>
-<?php
 
-foreach ($consultasActuales as $consultaActual) {
-    $asuntoA = $consultaActual['asunto'];
-    $horaA = $consultaActual ['hora'];
-
-echo '
 <div id="consultasencurso">
 
-    <div class="consulta">
+    <?php
 
-        <div class="horacontainer">
+    foreach ($consultasActuales as $consultaActual) {
 
-            <span>Hasta:</span>
-            <span>'.$horaA.'</span>
+        $asuntoA = $consultaActual['asunto'];
+        $horaA = $consultaActual ['hora'];
 
-        </div>
+        echo '
 
-        <div class="asuntocontainer">
+        <div id="consultasencurso">
 
-            <span>'.$asuntoA.'</span>
+            <div class="consulta">
 
-        </div>
+                <div class="horacontainer">
 
-    </div>
+                    <span>Hasta:</span>
+                    <span>'.$horaA.'</span>
 
-</div>
+                </div>
 
-';
+                <div class="asuntocontainer">
 
-}
-?>
-<div id="consultasencurso">
+                    <span>'.$asuntoA.'</span>
 
-    <div class="consulta">
+                </div>
 
-        <div class="horacontainer">
-
-            <span>Hasta:</span>
-            <span>15:00</span>
+            </div>
 
         </div>
 
-        <div class="asuntocontainer">
+        ';
 
-            <span>Control de Ortodoncia</span>
-
-        </div>
-
-    </div>
+    }
+    ?>
 
 </div>
 
@@ -121,42 +95,46 @@ echo '
 
 <div id="consultasfuturas">
 
-<?php
+    <?php
 
-foreach ($consultasFuturas as $consultasFutura) {
-    $asuntof = $consultasFutura['asunto'];
-    $fechaf = $consultasFutura['fecha'];
-    $horaf = $consultasFutura ['hora'];
+    foreach ($consultasFuturas as $consultasFutura) {
+        
+        $asuntof = $consultasFutura['asunto'];
+        $fechaf = $consultasFutura['fecha'];
+        $horaf = $consultasFutura ['hora'];
 
-echo '
-    <div class="consulta">
+    echo '
+        <div class="consulta">
 
-        <div class="fechacontainer">
+            <div class="fechacontainer">
 
-            <span>Fecha:</span>
-            <span>'.$fechaf.'</span>
+                <span>Fecha:</span>
+                <span>'.$fechaf.'</span>
+
+            </div>
+
+            <div class="horacontainer">
+
+                <span>Hora:</span>
+                <span>'.$horaf.'</span>
+
+            </div>
+
+            <div class="asuntocontainer">
+
+                <span>'.$asuntof.'</span>
+
+            </div>
 
         </div>
 
-        <div class="horacontainer">
+    ';
 
-            <span>Hora:</span>
-            <span>'.$horaf.'</span>
+    }
 
-        </div>
-
-        <div class="asuntocontainer">
-
-            <span>'.$asuntof.'</span>
-
-        </div>
-
-    </div>
-
-';
-
-}
 ?>
+
+</div>
 
 <div class="separador my-3">
 
@@ -168,37 +146,40 @@ echo '
 
 <div id="consultasprevias">
 
-<?php
-foreach ($consultasPrevias as $consultaPrevia) {
-    $asuntoP = $consultaPrevia['asunto'];
-    $horaP = $consultaPrevia['hora'];
-    $fechaP = $consultaPrevia['fecha'];
+    <?php
 
-    echo '
-    <div class="consulta">
+    foreach ($consultasPrevias as $consultaPrevia) {
         
-        <div class="fechacontainer">
+        $asuntoP = $consultaPrevia['asunto'];
+        $horaP = $consultaPrevia['hora'];
+        $fechaP = $consultaPrevia['fecha'];
 
-            <span>Fecha:</span>
-            <span>'.$fechaP.'</span>
+        echo '
+        <div class="consulta">
+            
+            <div class="fechacontainer">
 
-        </div>
+                <span>Fecha:</span>
+                <span>'.$fechaP.'</span>
 
-        <div class="horacontainer">
+            </div>
 
-            <span>Hasta:</span>
-            <span>' . $horaP . '</span>
+            <div class="horacontainer">
 
-        </div>
+                <span>Hasta:</span>
+                <span>' . $horaP . '</span>
 
-        <div class="asuntocontainer">
+            </div>
 
-            <span>' . $asuntoP . '</span>
+            <div class="asuntocontainer">
 
-        </div>
+                <span>' . $asuntoP . '</span>
 
-    </div>';
-}
-?>
+            </div>
+
+        </div>';
+    }
+
+    ?>
 
 </div>

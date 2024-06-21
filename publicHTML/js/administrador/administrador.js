@@ -12,10 +12,14 @@ function addAdminListeners() {
 
 function cargarVistaConsultas() {
 
+    $('.sidebar')[0].scrollTo({top: 0, behavior: 'smooth'});
+    $('main')[0].scrollTo({top: 0, behavior: 'smooth'});
+
     $.get("vistas/vistasadmin/sidebarconsultas.php", data => {
 
         $('.sidebar').html(data);
         console.log("Cargando vista de 'Consultas'");
+
         $.get("vistas/vistasadmin/vistaconsultas.php", data => {
 
             $('main').html(data);
@@ -28,6 +32,9 @@ function cargarVistaConsultas() {
 }
 
 function cargarVistaPacientes() {
+
+    $('.sidebar')[0].scrollTo({top: 0, behavior: 'smooth'});
+    $('main')[0].scrollTo({top: 0, behavior: 'smooth'});
 
     $.get("vistas/vistasadmin/vistapacientes.php", data => {
 
@@ -42,6 +49,9 @@ function cargarVistaPacientes() {
 }
 
 function cargarVistaServicios() {
+
+    $('.sidebar')[0].scrollTo({top: 0, behavior: 'smooth'});
+    $('main')[0].scrollTo({top: 0, behavior: 'smooth'});
 
     $.get("vistas/vistasadmin/vistaservicios.php", data => {
 
