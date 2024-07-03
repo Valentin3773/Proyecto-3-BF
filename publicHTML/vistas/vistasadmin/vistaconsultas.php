@@ -1,55 +1,78 @@
 <?php
-
 include("../../backend/conexion.php");
-
 session_start();
 
+//Datos
+$consultasFuturas = array();
+$consultasPrevias = array();
+$consultasActuales = array();
 if(isset($_GET['idpaciente'])) {
 
+    //Identificador
     $ido = $_SESSION['odontologo']['idodontologo'];
     $idp = $_GET['idpaciente'];
 
-    $consultasPrevias = array();
-    $consultasFuturas = array();
-    $consultasActuales = array();
 
-    $sql = 'SELECT c.fecha, c.hora, c.asunto FROM consulta_paciente cp JOIN consulta c ON c.fecha = cp.fecha AND c.hora = cp.hora AND c.idodontologo = cp.idodontologo WHERE c.idodontologo = :ido AND cp.idpaciente = :idp AND (c.fecha > CURDATE() OR (c.fecha = CURDATE() AND CURTIME() < c.hora))';
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':ido', $ido);
+    //Inicio de carga de consultas Futuras
+    //$consulta = "SELECT * FROM consulta WHERE fecha > :fechaActual and idodontologo = :ido";
+    $consulta = "SELECT * FROM consulta_paciente cp JOIN consulta c ON c.idodontologo = cp.idodontologo AND c.fecha = cp.fecha AND c.hora = cp.hora WHERE cp.idpaciente = :idp AND c.idodontologo = :ido AND ((c.fecha > CURDATE()) OR (c.fecha = CURDATE() AND CURTIME() < c.hora))";
+    $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
+    $stmt->bindParam(':ido', $ido);
+
 
     if ($stmt->execute() && $stmt->rowCount() > 0) {
-
         while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
             $consultasFuturas[] = $tupla;
         }
     }
-    $sql = 'SELECT c.fecha, c.hora, c.asunto FROM consulta_paciente cp JOIN consulta c ON c.fecha = cp.fecha AND c.hora = cp.hora AND c.idodontologo = cp.idodontologo WHERE c.idodontologo = :ido AND cp.idpaciente = :idp AND (c.fecha < CURDATE() OR (c.fecha = CURDATE() AND ADDTIME(c.hora, SEC_TO_TIME(c.duracion * 60)) < CURTIME()));';
-    $stmt = $pdo->prepare($sql);
+    //Fin
+
+
+    //Inicio de carga de consultas Previas
+    $consulta = "SELECT *
+    FROM consulta_paciente cp
+    JOIN consulta c ON c.idodontologo = cp.idodontologo AND c.fecha = cp.fecha AND c.hora = cp.hora
+    WHERE cp.idpaciente = :idp
+      AND c.idodontologo = :ido
+      AND (c.fecha = CURDATE() AND ADDTIME(c.hora, SEC_TO_TIME(c.duracion * 60)) > NOW());";
+
+    $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':ido', $ido);
     $stmt->bindParam(':idp', $idp);
+
+
+
     if ($stmt->execute() && $stmt->rowCount() > 0) {
-
         while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
             $consultasPrevias[] = $tupla;
         }
     }
-    $sql = 'SELECT c.hora, c.asunto FROM consulta_paciente cp JOIN consulta c ON c.fecha = cp.fecha AND c.hora = cp.hora AND c.idodontologo = cp.idodontologo WHERE c.idodontologo = :ido AND cp.idpaciente = :idp AND ((CURDATE() = c.fecha AND CURTIME() BETWEEN c.hora AND ADDTIME(c.hora, SEC_TO_TIME(c.duracion * 60))) OR (CURDATE() = DATE_ADD(c.fecha, INTERVAL 1 DAY) AND CURTIME() < ADDTIME(c.hora, SEC_TO_TIME(c.duracion * 60)) AND ADDTIME(c.hora,SEC_TO_TIME(c.duracion * 60)) > "24:00:00"))';
-    $stmt = $pdo->prepare($sql);
+    //Fin
+
+    //Inicio de carga de consultas Consulta
+    $consulta = "SELECT *
+    FROM consulta_paciente cp
+    JOIN consulta c ON c.idodontologo = cp.idodontologo AND c.fecha = cp.fecha AND c.hora = cp.hora
+    WHERE cp.idpaciente = :idp
+        AND c.idodontologo = :ido
+        AND (c.fecha = CURDATE() AND ADDTIME(c.hora, SEC_TO_TIME(c.duracion * 60)) < NOW());";
+    
+
+    $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':ido', $ido);
     $stmt->bindParam(':idp', $idp);
 
+
+
     if ($stmt->execute() && $stmt->rowCount() > 0) {
-
         while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
             $consultasActuales[] = $tupla;
         }
     }
-}
+    //Fin
 
+}
 ?>
 
 <div id="tituconsultascontainer" class="d-flex justify-content-center gx-0 mt-3">
