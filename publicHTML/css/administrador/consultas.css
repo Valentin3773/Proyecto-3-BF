@@ -126,7 +126,7 @@
     transition-duration: .3s;
 }
 
-.sidebar .paciente:hover {
+.sidebar .paciente:hover, .sidebar .pacientec:hover {
 
     scale: 1.03;
 }

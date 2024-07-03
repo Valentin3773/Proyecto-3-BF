@@ -13,7 +13,7 @@ if(isset($_GET['idpaciente'])) {
     $consultasFuturas = array();
     $consultasActuales = array();
 
-    $sql = 'SELECT c.fecha, c.hora, c.asunto FROM consulta_paciente cp JOIN consulta c ON c.fecha = cp.fecha AND c.hora = cp.hora AND c.idodontologo = cp.idodontologo WHERE c.idodontologo = :ido AND cp.idpaciente = :idp AND (c.fecha > CURDATE() OR (c.fecha = CURDATE() AND CURTIME() < ADDTIME(c.hora, SEC_TO_TIME(c.duracion * 60))))';
+    $sql = 'SELECT c.fecha, c.hora, c.asunto FROM consulta_paciente cp JOIN consulta c ON c.fecha = cp.fecha AND c.hora = cp.hora AND c.idodontologo = cp.idodontologo WHERE c.idodontologo = :ido AND cp.idpaciente = :idp AND (c.fecha > CURDATE() OR (c.fecha = CURDATE() AND CURTIME() < c.hora))';
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':ido', $ido);
     $stmt->bindParam(':idp', $idp);
@@ -25,7 +25,7 @@ if(isset($_GET['idpaciente'])) {
             $consultasFuturas[] = $tupla;
         }
     }
-    $sql = 'SELECT c.fecha, c.hora, c.asunto FROM consulta_paciente cp JOIN consulta c ON c.fecha = cp.fecha AND c.hora = cp.hora AND c.idodontologo = cp.idodontologo WHERE c.idodontologo = :ido AND cp.idpaciente = :idp AND (c.fecha < CURDATE() OR (c.fecha = CURDATE() AND c.hora < CURTIME()));';
+    $sql = 'SELECT c.fecha, c.hora, c.asunto FROM consulta_paciente cp JOIN consulta c ON c.fecha = cp.fecha AND c.hora = cp.hora AND c.idodontologo = cp.idodontologo WHERE c.idodontologo = :ido AND cp.idpaciente = :idp AND (c.fecha < CURDATE() OR (c.fecha = CURDATE() AND ADDTIME(c.hora, SEC_TO_TIME(c.duracion * 60)) < CURTIME()));';
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':ido', $ido);
     $stmt->bindParam(':idp', $idp);
