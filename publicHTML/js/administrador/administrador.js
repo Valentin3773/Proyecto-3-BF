@@ -18,12 +18,23 @@ function cargarVistaConsultas() {
     $.get("vistas/vistasadmin/sidebarconsultas.php", data => {
 
         $('.sidebar').html(data);
+        $('main').html('');
         console.log("Cargando vista de 'Consultas'");
 
-        $.get("vistas/vistasadmin/vistaconsultas.php", data => {
+        $('.pacientec').on('click', function() {
 
-            $('main').html(data);
+            $('.pacientec').css({'text-decoration': 'none'});
+            $(this).css({'text-decoration': 'underline'});
+
+            let url = 'vistas/vistasadmin/vistaconsultas.php?idpaciente=' + $(this).attr('id');
     
+            console.log(url);
+    
+            $.get(url, data => {
+    
+                $('main').html(data);
+        
+            });
         });
     });
 
@@ -40,7 +51,9 @@ function cargarVistaPacientes() {
 
         $('main').html(data);
         console.log("Cargando vista de 'Pacientes'");
+
         $.get("vistas/vistasadmin/sidebarpacientes.php", data => {
+
             $('.sidebar').html(data);
         });
     });
@@ -60,4 +73,9 @@ function cargarVistaServicios() {
     });
 
     $('#seccionescss').attr('href', 'css/administrador/servicios.css');
+}
+
+function addPacienteListener() {
+
+    
 }

@@ -110,7 +110,7 @@
     font-size: 170%;
 }
 
-.sidebar .paciente, .consultaside {
+.sidebar .paciente, .sidebar .pacientec, .consultaside {
 
     background-color: #00B2FF;
     color: white;

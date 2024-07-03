@@ -2,11 +2,15 @@
 
 include("../../backend/conexion.php");
 
+session_start();
+
 $pacientes = array();
 $consulta = "SELECT DISTINCT p.idpaciente, p.nombre, p.apellido FROM odontologo o JOIN consulta c ON o.idodontologo = c.idodontologo JOIN consulta_paciente cp ON c.fecha = cp.fecha AND c.hora = cp.hora AND c.idodontologo = cp.idodontologo JOIN paciente p ON cp.idpaciente = p.idpaciente WHERE o.idodontologo = :idodontologo";
 
+$ido = $_SESSION['odontologo']['idodontologo'];
+
 $stmt = $pdo->prepare($consulta);
-$stmt->bindParam(':idodontologo', $_SESSION['odontologo']['idodontologo']);
+$stmt->bindParam(':idodontologo', $ido);
 
 if ($stmt->execute() && $stmt->rowCount() > 0) {
 
@@ -30,7 +34,7 @@ if ($stmt->execute() && $stmt->rowCount() > 0) {
         $nombre = $paciente['nombre'];
         $apellido = $paciente['apellido'];
 
-        echo '<button class="paciente" id="'.$idPaciente.'">' . $nombre . ' ' . $apellido . '</button>';
+        echo '<button class="pacientec" id="'.$idPaciente.'">' . $nombre . ' ' . $apellido . '</button>';
     }
 
     ?>
