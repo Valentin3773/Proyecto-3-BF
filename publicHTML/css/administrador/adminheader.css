@@ -287,3 +287,14 @@ main {
 
     scale: 1.05;
 }
+
+#logo img {
+
+    transition-duration: .25s;
+}
+
+#logo:hover img {
+
+    scale: 1.05;
+    filter: brightness(1.2);
+}

@@ -59,7 +59,7 @@ else {
 
                     <div class="w-100 h-100 logocontainer d-flex justify-content-center align-items-center">
 
-                        <img src="img/logaso.png" alt="Logo" class="img-thumbnail">
+                        <a id="logo" href="javascript:void(0)"><img src="img/logaso.png" alt="Logo" class="img-thumbnail" title="Volver al inicio"></a>
 
                     </div>
                     

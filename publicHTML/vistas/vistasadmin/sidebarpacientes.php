@@ -2,10 +2,15 @@
 
 include("../../backend/conexion.php");
 
-$clientes = array();
-$consulta = "SELECT idpaciente, nombre, apellido FROM paciente";
+session_start();
+
+$pacientes = array();
+$consulta = "SELECT DISTINCT p.idpaciente, p.nombre, p.apellido FROM odontologo o JOIN consulta c ON o.idodontologo = c.idodontologo JOIN paciente p ON c.idpaciente = p.idpaciente WHERE o.idodontologo = :ido ORDER BY nombre ASC";
+
+$ido = $_SESSION['odontologo']['idodontologo'];
 
 $stmt = $pdo->prepare($consulta);
+$stmt->bindParam(':ido', $ido);
 
 if ($stmt->execute() && $stmt->rowCount() > 0) {
 

@@ -1,21 +1,25 @@
 <?php
+
 include("../../backend/conexion.php");
+
 session_start();
 
-//Datos
 $consultasFuturas = array();
 $consultasPrevias = array();
 $consultasActuales = array();
+
 if(isset($_GET['idpaciente'])) {
 
+    $nompaciente = "";
+    
     $ido = $_SESSION['odontologo']['idodontologo'];
-    $idp = $_GET['idpaciente'];
+    $idp = isset($_GET['idpaciente']) ? $_GET['idpaciente'] : null;
 
-    $consulta = "SELECT * FROM consulta_paciente cp JOIN consulta c ON c.idodontologo = cp.idodontologo AND c.fecha = cp.fecha AND c.hora = cp.hora WHERE cp.idpaciente = :idp AND c.idodontologo = :ido AND ((c.fecha > CURDATE()) OR (c.fecha = CURDATE() AND CURTIME() < c.hora))";
+    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) ORDER BY fecha ASC, hora ASC";
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
     $stmt->bindParam(':ido', $ido);
-
+    
     if ($stmt->execute() && $stmt->rowCount() > 0) {
 
         while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -24,7 +28,7 @@ if(isset($_GET['idpaciente'])) {
         }
     }
 
-    $consulta = "SELECT * FROM consulta_paciente cp JOIN consulta c ON c.idodontologo = cp.idodontologo AND c.fecha = cp.fecha AND c.hora = cp.hora WHERE cp.idpaciente = :idp AND c.idodontologo = :ido AND ((c.fecha < CURDATE()) OR (c.fecha = CURDATE() AND ADDTIME(c.hora, SEC_TO_TIME(c.duracion * 60)) < CURTIME()))";
+    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND ((fecha < CURDATE()) OR (fecha = CURDATE() AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) < CURTIME())) ORDER BY fecha ASC, hora ASC";
 
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':ido', $ido);
@@ -38,7 +42,7 @@ if(isset($_GET['idpaciente'])) {
         }
     }
 
-    $consulta = "SELECT * FROM consulta_paciente cp JOIN consulta c ON c.idodontologo = cp.idodontologo AND c.fecha = cp.fecha AND c.hora = cp.hora WHERE cp.idpaciente = :idp AND c.idodontologo = :ido AND (c.fecha = CURDATE() AND ADDTIME(c.hora, SEC_TO_TIME(c.duracion * 60)) < NOW())";
+    $consulta = "SELECT ADDTIME(hora, SEC_TO_TIME(duracion * 60)) as horafinalizacion, asunto FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND CURDATE() = fecha AND CURTIME() BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) ORDER BY fecha ASC, hora ASC";
     
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':ido', $ido);
@@ -51,12 +55,25 @@ if(isset($_GET['idpaciente'])) {
             $consultasActuales[] = $tupla;
         }
     }
+
+    $consulta = "SELECT nombre, apellido FROM paciente WHERE idpaciente = :idp";
+
+    $stmt = $pdo->prepare($consulta);
+    $stmt->bindParam(':idp', $idp);
+    
+    if ($stmt->execute() && $stmt->rowCount() > 0) {
+
+        $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        $nompaciente = $tupla['nombre'] . " " . $tupla['apellido'];
+    }
 }
+
 ?>
 
 <div id="tituconsultascontainer" class="d-flex justify-content-center gx-0 mt-3">
 
-    <h1 id="tituloconsultas" class="text-center">Consultas</h1>
+    <h1 id="tituloconsultas" class="text-center">Consultas <?php if(!empty($nompaciente)) echo " de " . $nompaciente; ?> </h1>
 
 </div>
 
@@ -75,7 +92,7 @@ if(isset($_GET['idpaciente'])) {
     foreach ($consultasActuales as $consultaActual) {
 
         $asuntoA = $consultaActual['asunto'];
-        $horaA = $consultaActual ['hora'];
+        $horaA = $consultaActual ['horafinalizacion'];
 
         echo '
 
@@ -188,7 +205,7 @@ if(isset($_GET['idpaciente'])) {
 
             <div class="horacontainer">
 
-                <span>Hasta:</span>
+                <span>Hora:</span>
                 <span>' . $horaP . '</span>
 
             </div>

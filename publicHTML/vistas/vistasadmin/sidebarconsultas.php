@@ -5,7 +5,7 @@ include("../../backend/conexion.php");
 session_start();
 
 $pacientes = array();
-$consulta = "SELECT DISTINCT p.idpaciente, p.nombre, p.apellido FROM odontologo o JOIN consulta c ON o.idodontologo = c.idodontologo JOIN consulta_paciente cp ON c.fecha = cp.fecha AND c.hora = cp.hora AND c.idodontologo = cp.idodontologo JOIN paciente p ON cp.idpaciente = p.idpaciente WHERE o.idodontologo = :idodontologo";
+$consulta = "SELECT DISTINCT p.idpaciente, p.nombre, p.apellido FROM odontologo o JOIN consulta c ON o.idodontologo = c.idodontologo JOIN paciente p ON c.idpaciente = p.idpaciente WHERE o.idodontologo = :idodontologo ORDER BY nombre ASC";
 
 $ido = $_SESSION['odontologo']['idodontologo'];
 

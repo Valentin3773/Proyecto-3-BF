@@ -267,6 +267,17 @@ nav ul li a {
     transition-duration: 300ms;
 }
 
+#imglogo {
+
+    transition-duration: 250ms;
+}
+
+#imglogo:hover {
+
+    scale: 1.1;
+    filter: brightness(1.35);
+}
+
 footer {
 
     font-family: RobotoSerif, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
