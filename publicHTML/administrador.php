@@ -36,6 +36,7 @@ else {
         <link id="seccionescss" rel="stylesheet" href="">
         <link rel="stylesheet" href="css/administrador/adminheader.css">
         <link rel="stylesheet" href="css/administrador/consultas.css">
+        <link rel="stylesheet" href="css/administrador/consultapaciente.css">
 
         <!-- JS -->
         <script defer src="js/administrador/administrador.js"></script>

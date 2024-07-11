@@ -1,0 +1,163 @@
+.contenedor_ConsultaPaciente{
+    background-color: #7CB9E8;
+    height:max-content;
+    margin: 10px;
+    border-radius: 10px;
+    color: white;
+}
+
+
+.contConsultaAsunto{
+ margin-bottom:5pc;   
+}
+
+.headerConsulta {
+    background-color: #00B2FF;
+    border-radius: 10px 10px 0 0 ;
+}
+
+h1 {margin-bottom: 0;}
+
+.contAsunto {
+    background-color: #0AF0AB;
+    filter: brightness(1.1);
+    margin: 0;
+}
+.contInteractivo{
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+    background-color: #00B2FF;
+}
+
+.tituloHora{
+    background-color: #0AF0AB;
+    filter: brightness(1.1);
+    width: fit-content; 
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px 10px 0 0;
+}
+.contentHora{
+    background-color: white;
+    color: #000;
+    width: 100%;
+    padding: 10px;
+    border-radius: 0 10px 10px 10px;
+    text-align: center;
+}
+
+.contHora,.contFecha{
+    width: 40%;
+}
+
+.contFecha{
+    direction: rtl;
+}
+.tituloFecha{
+    background-color: #0AF0AB;
+    filter: brightness(1.1);
+    display: flex;
+    width: fit-content; 
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px 10px 0 0;
+}
+.divTituloFecha{
+    align-items: end;
+}
+
+.contentFecha{
+    background-color: white;
+    color: #000;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px 0 10px 10px;
+    text-align: center;
+}
+
+.tituloDuracion{
+    background-color: #0AF0AB;
+    filter: brightness(1.1);
+    width: fit-content; 
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px 10px 0 0;
+}
+.contentDuracion{
+    background-color: white;
+    width: 100%;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+}
+
+.contResumen{
+    width: fit-content;
+    padding: 30px;
+}
+
+.tituloResumen{
+    background-color: #0AF0AB; 
+    filter: brightness(1.1);
+    width: fit-content; 
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px 10px 0 0;
+    
+}
+#resumen-CP{
+    width: 100%;
+    height: 180px;
+}
+.contentResumen{
+    width: 50vw;
+}
+
+.btnInteractivo{
+    background-color: #0AF0AB;
+    filter: brightness(1.1);
+    border-color: transparent;
+    border-radius: 10px;
+    box-shadow: 2px 4px 1px rgba(0, 0, 0, .25);
+    transition-duration: .3s;
+    
+}
+.btnInteractivo:hover{
+    scale: 1.05;
+}
+.btnInteractivo:hover{
+    color: white;
+}
+
+
+
+select {
+    appearance: none;
+    width: fit-content !important;
+    background-color:  #0AF0AB !important;
+    border: solid;
+    padding: 10px !important;
+    border-color:transparent;
+    border-radius: 10px;
+    box-shadow: 2px 2px 0 2px rgba(0, 0, 0, .25);
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+}
+
+input {
+    appearance: none;
+    width: fit-content !important;
+    background-color: transparent;
+    border: transparent;
+}
+
+h2 input {
+    appearance: none;
+    width: 100px !important;
+    background-color: transparent;
+    border: transparent;
+}
+
+button {color: white;}
