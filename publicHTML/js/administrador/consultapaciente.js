@@ -47,6 +47,8 @@ function funcionCancelar() {
     $('#duracion-CP').prop('disabled', true);
     $('#fecha-CP').prop('disabled', true);
     $('#resumen-CP').prop('disabled', true);
+    $("#hora-CP").val($("#hora-CP option:first").val());
+    $("#fecha-CP").val($("#fecha-CP option:first").val());
 }
 
 function funcionGuardar() {
@@ -80,12 +82,28 @@ function funcionGuardar() {
         type: 'POST',
         url: url,
         data: JSON.stringify(data),
-        contentType: 'application/json', // Establece el tipo de contenido
+        contentType: 'application/json',
         success: response => {
             if (response.error === undefined) {
-                alert(response.enviar);
+                let titulo = "Nuevo Aviso";
+                    $('#div-mensaje-popup').hide(); 
+                    $.get("popupmensaje.php ? Contenido="+response.enviar+"&Aviso="+titulo+"", data => {
+                        $("#div-mensaje-popup").fadeIn(500);
+                        $('#div-mensaje-popup').html(data);
+                        $('#btnCerrar').on("click",function () { 
+                            $("#div-mensaje-popup").fadeOut(500);
+                         });
+                    });
             } else {
-                alert(response.error);
+                let titulo = "Nuevo Aviso";
+                    $('#div-mensaje-popup').hide(); 
+                    $.get("popupmensaje.php ? Contenido="+response.error+"&Aviso="+titulo+"", data => {
+                        $("#div-mensaje-popup").fadeIn(500);
+                        $('#div-mensaje-popup').html(data);
+                        $('#btnCerrar').on("click",function () { 
+                            $("#div-mensaje-popup").fadeOut(500);
+                         });
+                    });
             }
         },
         error: (jqXHR, estado, outputError) => {

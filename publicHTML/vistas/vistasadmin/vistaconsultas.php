@@ -136,38 +136,24 @@ if(isset($_GET['idpaciente'])) {
         
         $asuntof = $consultasFutura['asunto'];
         $fechaf = $consultasFutura['fecha'];
-        $horaf = $consultasFutura ['hora'];
+        $horaf = $consultasFutura['hora'];
 
-    echo '
-        <div class="consulta" data-fecha="'.$fechaf.'" data-hora="'.$horaf.'>
-
+        echo '
+        <div class="consulta" data-fecha="'.$fechaf.'" data-hora="'.$horaf.'">
             <div class="fechacontainer">
-
                 <span>Fecha:</span>
                 <span id="fecha">'.$fechaf.'</span>
-
             </div>
-
             <div class="horacontainer">
-
                 <span>Hora:</span>
                 <span id="hora">'.$horaf.'</span>
-
             </div>
-
             <div class="asuntocontainer">
-
                 <span id="asunto">'.$asuntof.'</span>
-
             </div>
-
-        </div>
-
-    ';
-
+        </div>';
     }
-
-?>
+    ?>
 
 </div>
 
@@ -190,7 +176,7 @@ if(isset($_GET['idpaciente'])) {
         $fechaP = $consultaPrevia['fecha'];
 
         echo '
-        <div class="consulta" data-fecha="'.$fechaP.'" data-hora="'.$horaP.'">
+        <div class="consulta" data-fecha='.$fechaP.' data-hora='.$horaP.'>
             
             <div class="fechacontainer">
 

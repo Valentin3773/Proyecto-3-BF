@@ -1,9 +1,10 @@
 .contenedor_ConsultaPaciente{
     background-color: #7CB9E8;
-    height:max-content;
+    height: 98%;
     margin: 10px;
     border-radius: 10px;
     color: white;
+
 }
 
 
@@ -19,10 +20,15 @@
 h1 {margin-bottom: 0;}
 
 .contAsunto {
-    background-color: #0AF0AB;
+    background-color: #0059CD;
     filter: brightness(1.1);
     margin: 0;
 }
+
+.contAsunto h1 input {
+    color: white;
+}
+
 .contInteractivo{
     padding: 10px;
     border-radius: 0 0 10px 10px;
@@ -30,7 +36,7 @@ h1 {margin-bottom: 0;}
 }
 
 .tituloHora{
-    background-color: #0AF0AB;
+    background-color: #0059CD;
     filter: brightness(1.1);
     width: fit-content; 
     text-align: center;
@@ -45,6 +51,9 @@ h1 {margin-bottom: 0;}
     border-radius: 0 10px 10px 10px;
     text-align: center;
 }
+.contentHora h1{
+    font-size: xx-large;
+}
 
 .contHora,.contFecha{
     width: 40%;
@@ -54,7 +63,7 @@ h1 {margin-bottom: 0;}
     direction: rtl;
 }
 .tituloFecha{
-    background-color: #0AF0AB;
+    background-color: #0059CD;
     filter: brightness(1.1);
     display: flex;
     width: fit-content; 
@@ -74,9 +83,12 @@ h1 {margin-bottom: 0;}
     border-radius: 10px 0 10px 10px;
     text-align: center;
 }
+.contentFecha h1{
+    font-size: xx-large;
+}
 
 .tituloDuracion{
-    background-color: #0AF0AB;
+    background-color: #0059CD;
     filter: brightness(1.1);
     width: fit-content; 
     text-align: center;
@@ -97,7 +109,7 @@ h1 {margin-bottom: 0;}
 }
 
 .tituloResumen{
-    background-color: #0AF0AB; 
+    background-color: #0059CD; 
     filter: brightness(1.1);
     width: fit-content; 
     text-align: center;
@@ -120,6 +132,8 @@ h1 {margin-bottom: 0;}
     border-radius: 10px;
     box-shadow: 2px 4px 1px rgba(0, 0, 0, .25);
     transition-duration: .3s;
+    width: 25%;
+    height: 100%;
     
 }
 .btnInteractivo:hover{
@@ -136,14 +150,14 @@ select {
     width: fit-content !important;
     background-color:  #0AF0AB !important;
     border: solid;
-    padding: 10px !important;
     border-color:transparent;
     border-radius: 10px;
     box-shadow: 2px 2px 0 2px rgba(0, 0, 0, .25);
-    font-family: inherit;
+    font-family: RobotoSerif,Arial, Helvetica, sans-serif;
     font-size: inherit;
     cursor: inherit;
     line-height: inherit;
+    
 }
 
 input {

@@ -47,7 +47,7 @@ if( isset($_SESSION['paciente'])) {
     </head>
 
     <body>
-
+        <div id="div-mensaje-popup"></div>
         <div id="preloader" class="d-flex justify-content-center align-items-center">
 
             <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
@@ -201,7 +201,7 @@ if( isset($_SESSION['paciente'])) {
             </footer>
 
         </div>
-
+        
     </body>
 
 </html>

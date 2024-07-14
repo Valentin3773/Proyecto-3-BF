@@ -45,6 +45,7 @@ function loginCheckUser($pdo) {
                     unset($tupla['contrasenia']);
                     $_SESSION['paciente'] = $tupla;
                     $datos = $tupla;
+                    $datos['enviar'] = "Iniciando Sesion";
                 } 
                 else {
                     

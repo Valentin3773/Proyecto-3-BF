@@ -1,12 +1,14 @@
 <?php
 
-include("conexion.php");
+include("../conexion.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    processRegisterForm($pdo);
+    processRegisterForm();
 }
 
-function processRegisterForm($pdo) {
+function processRegisterForm() {
+
+    global $pdo;
 
     $nombre = isset($_POST['nombre']) ? trim($_POST['nombre']) : null;
     $apellidos = isset($_POST['apellido']) ? trim($_POST['apellido']) : null;
@@ -99,7 +101,6 @@ function processRegisterForm($pdo) {
                 }
         }
     }
-       
     header('Content-Type: application/json');
     echo json_encode($datos);
     exit();
