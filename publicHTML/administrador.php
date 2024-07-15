@@ -2,14 +2,7 @@
 
 session_start();
 
-if(isset($_SESSION['odontologo'])) {
-
-        
-} 
-else {
-
-    header('Location: index.php');
-};
+if(!isset($_SESSION['odontologo'])) header('Location: index.php');
 
 ?>
 
@@ -35,7 +28,6 @@ else {
         <!-- CSS -->
         <link id="seccionescss" rel="stylesheet" href="">
         <link rel="stylesheet" href="css/administrador/adminheader.css">
-        <link rel="stylesheet" href="css/administrador/consultas.css">
 
         <!-- JS -->
         <script defer src="js/administrador/administrador.js"></script>
@@ -95,57 +87,15 @@ else {
 
                     <div class="sidebarcontainer w-100 h-100 d-flex flex-column">
                         
-                        <div class="sidebar h-75 w-100">
+                        <div class="sidebar h-75 w-100"></div>
 
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-
-                        </div>
                         <div class="actionbar h-25 w-100"></div>
-
+                        
                     </div>
 
                 </div>
                 
-                <main class="col-xl-10 col-lg-10 col-md-10">
-
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, soluta quas. Quos, cumque soluta illo dicta esse laboriosam aliquam optio consequatur non quisquam odit deserunt, nobis distinctio blanditiis possimus quam!</p>
-
-                </main>
+                <main class="col-xl-10 col-lg-10 col-md-10"></main>
 
             </div>
 

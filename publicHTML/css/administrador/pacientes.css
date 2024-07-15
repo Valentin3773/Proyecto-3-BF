@@ -119,7 +119,7 @@
 
 .datos .clave {
 
-    background-color: #0AF0AB;
+    background-color: #05e5a2;
     padding: 1rem;
     border-radius: 20px 0 0 20px;
     text-align: center;
@@ -158,4 +158,40 @@
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 1.5rem;
     font-weight: 500;
+}
+
+.sidebar > h2 {
+
+    color: #00B2FF;
+    text-align: center;
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 500;
+    font-size: 170%;
+}
+
+.sidebar .paciente,
+.consultaside {
+
+    background-color: #00B2FF;
+    color: white;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 150%;
+    box-shadow: 3px 6px 1px rgba(0, 0, 0, .25);
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 10px;
+    margin: 10px 0px;
+    transition-duration: .3s;
+}
+
+.sidebar .paciente:hover {
+
+    scale: 1.03;
+}
+
+.sidebar .consultaside:hover {
+
+    scale: 1.03;
 }

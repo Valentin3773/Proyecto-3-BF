@@ -9,17 +9,13 @@ function addAdminListeners() {
     $('#btnpacientes').on('click', cargarVistaPacientes);
     $('#btnservicios').on('click', cargarVistaServicios);
 
-    $('#logo').on('click', () => {
-
-        $('.sidebar').html('');
-        $('main').html('');
-    });
+    $('#logo').on('click', resetAdmin);
 }
 
 function cargarVistaConsultas() {
 
-    $('.sidebar').html('');
-    $('main').html('');
+    $('.sidebar').empty();
+    $('main').empty();
 
     $('.sidebar')[0].scrollTo({top: 0, behavior: 'smooth'});
     $('main')[0].scrollTo({top: 0, behavior: 'smooth'});
@@ -32,7 +28,7 @@ function cargarVistaConsultas() {
 
         $('.pacientec').on('click', function() {
 
-            $('main').html('');
+            $('main').empty();
 
             $('.pacientec').css({'text-decoration': 'none'});
             $(this).css({'text-decoration': 'underline'});
@@ -54,8 +50,8 @@ function cargarVistaConsultas() {
 
 function cargarVistaPacientes() {
     
-    $('.sidebar').html('');
-    $('main').html('');
+    $('.sidebar').empty();
+    $('main').empty();
 
     $('.sidebar')[0].scrollTo({top: 0, behavior: 'smooth'});
     $('main')[0].scrollTo({top: 0, behavior: 'smooth'});
@@ -72,7 +68,7 @@ function cargarVistaPacientes() {
 
             $('.paciente, .p-contenedor').on('click', function() {
 
-                $('main').html('');
+                $('main').empty();
 
                 $('.paciente').css({'text-decoration': 'none'});
                 $(this).css({'text-decoration': 'underline'});
@@ -96,8 +92,8 @@ function cargarVistaPacientes() {
 
 function cargarVistaServicios() {
 
-    $('.sidebar').html('');
-    $('main').html('');
+    $('.sidebar').empty();
+    $('main').empty();
 
     $('.sidebar')[0].scrollTo({top: 0, behavior: 'smooth'});
     $('main')[0].scrollTo({top: 0, behavior: 'smooth'});
@@ -111,4 +107,12 @@ function cargarVistaServicios() {
     $('#seccionescss').attr('href', 'css/administrador/servicios.css');
     $('nav a').css({'text-decoration': 'none'});
     $('#btnservicios').css({'text-decoration': 'underline'});
+}
+
+function resetAdmin() {
+
+    $('.sidebar').html('');
+    $('main').html('');
+
+    $('nav a').css({'text-decoration': 'none'});
 }

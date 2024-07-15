@@ -62,7 +62,7 @@ if( isset($_SESSION['paciente'])) {
                     
                     <a href="javascript:void(0)" id="logo" title="Ir al inicio">
 
-                        <img src="img/logaso.png" alt="Logo" id="imglogo">
+                        <img src="img/logaso.png" alt="Logo" id="imglogo" class="img-thumbnail">
 
                     </a>
                     

@@ -1,4 +1,5 @@
 $(() => {
+    
     cargarVistaLogin();
 });
 
@@ -78,6 +79,8 @@ function volverLogin() {
 }
 
 function loginConfirm(datos) {
+
+    console.log(datos);
 
     if ($('#jejeje').val() === '') {
 

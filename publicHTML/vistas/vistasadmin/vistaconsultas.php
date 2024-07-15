@@ -4,6 +4,8 @@ include("../../backend/conexion.php");
 
 session_start();
 
+if(!isset($_SESSION['odontologo'])) header('Location: ../../index.php');
+
 $consultasFuturas = array();
 $consultasPrevias = array();
 $consultasActuales = array();

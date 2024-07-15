@@ -54,7 +54,7 @@
     transition-duration: .3s;
 }
 
-.consulta>div {
+.consulta > div {
 
     background-color: white;
     width: 33.3%;
@@ -79,7 +79,7 @@
     border-radius: 20px 0 0 20px;
 }
 
-#consultasencurso .consulta>div {
+#consultasencurso .consulta > div {
 
     width: 50%;
 }
@@ -103,7 +103,7 @@
     border: 3px solid #0AF0AB;
 }
 
-.sidebar>h2 {
+.sidebar > h2 {
 
     color: #00B2FF;
     text-align: center;
@@ -112,7 +112,6 @@
     font-size: 170%;
 }
 
-.sidebar .paciente,
 .sidebar .pacientec,
 .consultaside {
 
@@ -130,7 +129,6 @@
     transition-duration: .3s;
 }
 
-.sidebar .paciente:hover,
 .sidebar .pacientec:hover {
 
     scale: 1.03;
