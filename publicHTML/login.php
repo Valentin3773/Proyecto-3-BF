@@ -30,15 +30,16 @@ session_start();
     </head>
 
     <body>
-        
+        <div id="div-mensaje-popup"></div>
         <div id="preloader" class="d-flex justify-content-center align-items-center">
 
             <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         
         </div>
-
-        <main></main>
-
+        
+        <main>
+            
+        </main>
     </body>
-
+    
 </html>

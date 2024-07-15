@@ -1,6 +1,5 @@
 <div class="row">
     
-
     <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 col-12" id="logincontent">
     <button class="volver" id="btnvolver">
             <div class="volver-box">

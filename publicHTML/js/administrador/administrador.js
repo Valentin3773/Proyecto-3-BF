@@ -34,13 +34,31 @@ function cargarVistaConsultas() {
             $(this).css({'text-decoration': 'underline'});
 
             let url = 'vistas/vistasadmin/vistaconsultas.php?idpaciente=' + $(this).attr('id');
+            const nombreP = $(this).html();
 
             $.get(url, data => {
     
                 $('main').html(data);
-        
+
+                $('.consulta').click(function (e) { 
+                    e.preventDefault();
+                     const fecha = $(this).attr('data-fecha');
+                     const hora = $(this).attr('data-hora');
+                     
+
+                    $('main').html('');
+                    let ventanaconsultapaciente = 'vistas/vistasadmin/vistaconsultapaciente.php? hora='+hora+'&fecha='+fecha+' &nombreP='+nombreP+'';
+
+                    $.get(ventanaconsultapaciente,ventana => {
+
+                        $('main').html(ventana);
+
+                    });
+                });
             });
+
         });
+
     });
 
     $('#seccionescss').attr('href', 'css/administrador/consultas.css');

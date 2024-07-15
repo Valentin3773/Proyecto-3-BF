@@ -16,7 +16,6 @@ if(isset($_GET['idpaciente'])) {
     
     $ido = $_SESSION['odontologo']['idodontologo'];
     $idp = isset($_GET['idpaciente']) ? $_GET['idpaciente'] : null;
-
     $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) ORDER BY fecha ASC, hora ASC";
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
@@ -44,7 +43,7 @@ if(isset($_GET['idpaciente'])) {
         }
     }
 
-    $consulta = "SELECT ADDTIME(hora, SEC_TO_TIME(duracion * 60)) as horafinalizacion, asunto FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND CURDATE() = fecha AND CURTIME() BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) ORDER BY fecha ASC, hora ASC";
+    $consulta = "SELECT ADDTIME(hora, SEC_TO_TIME(duracion * 60)) as horafinalizacion, asunto, fecha, hora FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND CURDATE() = fecha AND CURTIME() BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) ORDER BY fecha ASC, hora ASC";
     
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':ido', $ido);
@@ -95,29 +94,26 @@ if(isset($_GET['idpaciente'])) {
 
         $asuntoA = $consultaActual['asunto'];
         $horaA = $consultaActual ['horafinalizacion'];
-
+        $hora = $consultaActual ['hora'];
+        $fechaA = $consultaActual ['fecha'];
         echo '
 
-        <div id="consultasencurso">
-
-            <div class="consulta">
+            <div class="consulta" data-fecha="'.$fechaA.'" data-hora="'.$hora.'">
 
                 <div class="horacontainer">
 
                     <span>Hasta:</span>
-                    <span>'.$horaA.'</span>
+                    <span id="hora">'.$horaA.'</span>
 
                 </div>
 
                 <div class="asuntocontainer">
 
-                    <span>'.$asuntoA.'</span>
+                    <span id="asunto">'.$asuntoA.'</span>
 
                 </div>
 
             </div>
-
-        </div>
 
         ';
 
@@ -142,38 +138,24 @@ if(isset($_GET['idpaciente'])) {
         
         $asuntof = $consultasFutura['asunto'];
         $fechaf = $consultasFutura['fecha'];
-        $horaf = $consultasFutura ['hora'];
+        $horaf = $consultasFutura['hora'];
 
-    echo '
-        <div class="consulta">
-
+        echo '
+        <div class="consulta" data-fecha="'.$fechaf.'" data-hora="'.$horaf.'">
             <div class="fechacontainer">
-
                 <span>Fecha:</span>
-                <span>'.$fechaf.'</span>
-
+                <span id="fecha">'.$fechaf.'</span>
             </div>
-
             <div class="horacontainer">
-
                 <span>Hora:</span>
-                <span>'.$horaf.'</span>
-
+                <span id="hora">'.$horaf.'</span>
             </div>
-
             <div class="asuntocontainer">
-
-                <span>'.$asuntof.'</span>
-
+                <span id="asunto">'.$asuntof.'</span>
             </div>
-
-        </div>
-
-    ';
-
+        </div>';
     }
-
-?>
+    ?>
 
 </div>
 
@@ -196,25 +178,25 @@ if(isset($_GET['idpaciente'])) {
         $fechaP = $consultaPrevia['fecha'];
 
         echo '
-        <div class="consulta">
+        <div class="consulta" data-fecha='.$fechaP.' data-hora='.$horaP.'>
             
             <div class="fechacontainer">
 
                 <span>Fecha:</span>
-                <span>'.$fechaP.'</span>
+                <span id="fecha">'.$fechaP.'</span>
 
             </div>
 
             <div class="horacontainer">
 
                 <span>Hora:</span>
-                <span>' . $horaP . '</span>
+                <span id="hora">' . $horaP . '</span>
 
             </div>
 
             <div class="asuntocontainer">
 
-                <span>' . $asuntoP . '</span>
+                <span id="asunto">' . $asuntoP . '</span>
 
             </div>
 

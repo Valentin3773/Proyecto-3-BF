@@ -127,11 +127,27 @@ function emailComfirm(datos) {
 
                 if (response.error === undefined) {
 
-                    alert(response.enviar);
+                    let titulo = "Nuevo Aviso";
+                    $('#div-mensaje-popup').hide(); 
+                    $.get("popupmensaje.php ? Contenido="+response.enviar+"&Aviso="+titulo+"", data => {
+                        $("#div-mensaje-popup").fadeIn(500);
+                        $('#div-mensaje-popup').html(data);
+                        $('#btnCerrar').on("click",function () { 
+                            $("#div-mensaje-popup").fadeOut(500);
+                         });
+                    });
                 } 
                 else {
 
-                    alert(response.error);
+                    let titulo = "Nuevo Aviso";
+                    $('#div-mensaje-popup').hide(); 
+                    $.get("popupmensaje.php ? Contenido="+response.error+"&Aviso="+titulo+"", data => {
+                        $("#div-mensaje-popup").fadeIn(500);
+                        $('#div-mensaje-popup').html(data);
+                        $('#btnCerrar').on("click",function () { 
+                            $("#div-mensaje-popup").fadeOut(500);
+                         });
+                    });
                 }
             },
             error: (jqXHR, estado, outputError) => {
@@ -144,13 +160,4 @@ function emailComfirm(datos) {
 
         console.log("Fuera bot hijueputa!!!");
     }
-}
-
-function createModalWindow(contenido) {
-
-    let modal = $('#modal');
-
-    modal.append(contenido);
-
-    modal.addClass('visible').removeClass('oculto');
 }

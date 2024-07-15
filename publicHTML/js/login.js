@@ -44,7 +44,7 @@ function cargarVistaRegistro() {
         $('#innombre').focus();
     });
 
-    $('html, body').css("height", "unset");
+    $('html, body').css("height", "100%");
 }
 
 function cargarVistaLoginAdmin() {
@@ -83,23 +83,39 @@ function loginConfirm(datos) {
     console.log(datos);
 
     if ($('#jejeje').val() === '') {
-
         $.ajax({
-
+            
             type: "POST",
             url: "backend/login/loginmanager.php",
             data: datos,
             processData: false,
             contentType: false,
             success: response => {
-
+               
                 if (response.error === undefined) {
-
-                    window.location.href = "index.php?iniciado=1";
+                    let titulo = "Nuevo Aviso";
+                    $('#div-mensaje-popup').hide(); 
+                    $.get("popupmensaje.php ? Contenido="+response.enviar+"&Aviso="+titulo+"", data => {
+                        $("#div-mensaje-popup").fadeIn(500);
+                        $('#div-mensaje-popup').html(data);
+                        $('#btnCerrar').on("click",function () { 
+                            $("#div-mensaje-popup").fadeOut(500);
+                            window.location.href = "index.php?iniciado=1";
+                         });
+                    });
+                    
                 } 
                 else {
 
-                    alert(response.error);
+                    let titulo = "Nuevo Aviso"; 
+                    $('#div-mensaje-popup').hide(); 
+                    $.get("popupmensaje.php ? Contenido="+response.error+"&Aviso="+titulo+"", data => {
+                        $("#div-mensaje-popup").fadeIn(500);
+                        $('#div-mensaje-popup').html(data);
+                        $('#btnCerrar').on("click",function () { 
+                            $("#div-mensaje-popup").fadeOut(500);
+                         });
+                    });
                 }
             },
             error: (jqXHR, estado, outputError) => {
@@ -109,15 +125,13 @@ function loginConfirm(datos) {
         });
     } 
     else {
-
+        
         console.log("Fuera bot hijueputa!!!");
     }
 }
 
 function registerConfirm(datos) {
-
     if ($('#jejeje').val() === '') {
-
         $.ajax({
 
             type: "POST",
@@ -128,17 +142,31 @@ function registerConfirm(datos) {
             success: response => {
 
                 if (response.error === undefined) {
-
-                    alert(response.registrado);
+                    let titulo = "Nuevo Aviso";
+                    $("#div-mensaje-popup").hide(); 
+                    $.get("popupmensaje.php ? Contenido="+response.registrar+"&Aviso="+titulo+"", data => {
+                        $("#div-mensaje-popup").fadeIn(500);
+                        $('#div-mensaje-popup').html(data);
+                        $('#btnCerrar').on("click",function () {
+                            $("#div-mensaje-popup").fadeOut(500);
+                         });
+                    });
                 } 
                 else {
-
-                    alert(response.error);
+                    let titulo = "Nuevo Aviso";
+                    $("#div-mensaje-popup").hide();
+                    $.get("popupmensaje.php ? Contenido="+response.error+"&Aviso="+titulo+"", data => {
+                        $("#div-mensaje-popup").fadeIn(500);
+                        $('#div-mensaje-popup').html(data);
+                        $('#btnCerrar').on("click",function () { 
+                            $("#div-mensaje-popup").fadeOut(500);
+                         });
+                    });
                 }
             },
             error: (jqXHR, estado, outputError) => {
 
-                console.error(estado, outputError);
+                console.log(jqXHR,estado, outputError);
             }
         });
     } 
@@ -162,14 +190,29 @@ function loginAdminConfirm(datos) {
             success: response => {
 
                 if (response.error === undefined) {
-
-                    alert(response.admin);
-                    window.location.href = "administrador.php";
+                    let titulo = "Nuevo Aviso"; 
+                    $('#div-mensaje-popup').hide(); 
+                    $.get("popupmensaje.php ? Contenido="+response.admin+"&Aviso="+titulo+"", data => {
+                        $("#div-mensaje-popup").fadeIn(500);
+                        $('#div-mensaje-popup').html(data);
+                        $('#btnCerrar').on("click",function () { 
+                            $("#div-mensaje-popup").fadeOut(500);
+                            window.location.href = "administrador.php";
+                         });
+                    });             
 
                 } 
                 else {
 
-                    alert(response.error);
+                    let titulo = "Nuevo Aviso"; 
+                    $('#div-mensaje-popup').hide(); 
+                    $.get("popupmensaje.php ? Contenido="+response.error+"&Aviso="+titulo+"", data => {
+                        $("#div-mensaje-popup").fadeIn(500);
+                        $('#div-mensaje-popup').html(data);
+                        $('#btnCerrar').on("click",function () { 
+                            $("#div-mensaje-popup").fadeOut(500);
+                         });
+                    });
                 }
             },
             error: (jqXHR, estado, outputError) => {
