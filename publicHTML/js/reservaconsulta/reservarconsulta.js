@@ -217,6 +217,23 @@ function cargarVistaHora() {
         if (infoconsulta.paso >= 3) $('#elegirhora #btnsmov #anteriorform').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).on('click', cargarVistaFecha);
         else $('#elegirhora #btnsmov #anteriorform, #enviarreserva').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, .45)' });
 
+        $('#elegirhora #btnsmov #siguienteform').on('click', function(evt) {
+
+            let horasplit = $('.odontologo input:checked').val().split[':'];
+
+            if (horasplit) {
+                
+                 infoconsulta.hora.hora = Number(horasplit[0]);
+                 infoconsulta.hora.minuto = Number(horasplit[1]);
+            }
+
+            infoconsulta.hora = null;
+
+            if (infoconsulta.paso <= 4) infoconsulta.paso = 4;
+            
+            cargarVistaConfirmar();
+        });
+
         $.ajax({
 
             type: 'POST',
@@ -236,23 +253,6 @@ function cargarVistaHora() {
                 alert("Ha ocurrido un error");
                 console.error("Error fatal");
             }
-        });
-
-        $('#elegirhora #btnsmov #siguienteform').on('click', () => {
-
-            let horasplit = $('.odontologo input:checked').val().split[':'];
-
-            if (horasplit) {
-                
-                infoconsulta.hora.hora = Number(horasplit[0]);
-                infoconsulta.hora.minuto = Number(horasplit[1]);
-            }
-
-            else infoconsulta.hora = null;
-
-            if (infoconsulta.paso <= 4) infoconsulta.paso = 4;
-
-            cargarVistaConfirmar();
         });
     });
 }

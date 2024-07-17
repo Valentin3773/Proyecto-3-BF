@@ -6,15 +6,17 @@
 
         <div class="contReservar lh-1">
 
-            <a href="" id="btnreservar" title="Reservar una consulta">Reservar<br>Consulta</a>
+            <a href="reservarconsulta.php" id="btnreservar" title="Reservar una consulta">Reservar<br>Consulta</a>
 
         </div>
 
     </article>
 
     <div class="imgcontainer">
+
         <img src="img/imagenesEmpresa/Ejemplo3.jpg" alt="" id="Ejemplo1" class="h-100 w-100">
         <div class="negron"></div>
+
     </div>
 
 </section>

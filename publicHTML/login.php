@@ -24,9 +24,10 @@ session_start();
         <link rel="stylesheet" href="css/volver.css">
 
         <!-- JS -->
-        <script defer src="js/login.js"></script>
         <script src="js/preloader.js"></script>
-
+        <script src="js/utilidades.js"></script>
+        <script defer src="js/login.js"></script>
+        
     </head>
 
     <body>

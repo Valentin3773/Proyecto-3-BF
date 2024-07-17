@@ -7,12 +7,9 @@ require '../PHPMailer/Exception.php';
 require '../PHPMailer/PHPMailer.php';
 require '../PHPMailer/SMTP.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    sendMail();
-}
+if ($_SERVER["REQUEST_METHOD"] == "POST") sendMail();
 
-function sendMail()
-{
+function sendMail() {
 
     // Configuración de PHPMailer
 
@@ -68,7 +65,7 @@ function sendMail()
         } 
         else {
             //Destinatario
-            $destino = "andresfelcapo2017@gmail.com";
+            $destino = "themystymysty@gmail.com";
             $mail->isHTML(true);
 
             // Asunto del correo
@@ -113,8 +110,8 @@ function sendMail()
                                       <div class='container'>
                                         <h1>Consulta</h1>
                                         <h3>De: $nombre</ph3>
-                                        <h3>Numero de Telefono: $telefono</h3>
-                                        <h3>Correo Electronico: $email</h3>
+                                        <h3>Teléfono: $telefono</h3>
+                                        <h3>Correo Electrónico: $email</h3>
 
                                         <h2>Mensaje</h2>
                                         <p>$mensajec</p>
@@ -134,14 +131,14 @@ function sendMail()
             $mail->Subject = $asunto;
             $mail->Body    = $mensaje;
 
-            $mail->send(); //Enviar correo
+            $mail->send(); // Enviar correo
 
             $datos['enviar'] = "Consultad enviada con exito";
         }
     } 
     catch (Exception $e) {
 
-        $datos['error'] = "Oh!! ah ocurrido un error $mail->ErrorInfo}";
+        $datos['error'] = "Oh!! Ha ocurrido un error $mail->ErrorInfo}";
     }
     header('Content-Type: application/json');
     echo json_encode($datos);

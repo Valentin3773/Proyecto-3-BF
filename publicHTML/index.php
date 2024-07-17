@@ -38,6 +38,7 @@ if( isset($_SESSION['paciente'])) {
 
         <!-- Scripts -->
         <script src="js/preloader.js"></script>
+        <script src="js/utilidades.js"></script>
         <script defer src="js/lobby/headerscript.js"></script>
         <script defer src="js/lobby/servicios.js"></script>
         <script defer src="js/lobby/lobby.js"></script>
@@ -47,7 +48,7 @@ if( isset($_SESSION['paciente'])) {
     </head>
 
     <body>
-        <div id="div-mensaje-popup"></div>
+        
         <div id="preloader" class="d-flex justify-content-center align-items-center">
 
             <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
@@ -98,7 +99,7 @@ if( isset($_SESSION['paciente'])) {
 
                     <div class="contReservar lh-1">
 
-                        <a href="" id="btnreservar" title="Reservar una consulta">Reservar Consulta</a>
+                        <a href="reservarconsulta.php" id="btnreservar" title="Reservar una consulta">Reservar Consulta</a>
 
                     </div>
 

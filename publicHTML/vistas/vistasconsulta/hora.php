@@ -10,7 +10,7 @@
 
             <button id='anteriorform'>Anterior</button>
 
-            <button id='siguienteform'>Siguiente</button>
+            <button type="button" id='siguienteform'>Siguiente</button>
 
         </div>
 

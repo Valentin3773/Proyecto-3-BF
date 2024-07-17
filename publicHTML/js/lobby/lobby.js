@@ -125,30 +125,9 @@ function emailComfirm(datos) {
             contentType: false,
             success: response => {
 
-                if (response.error === undefined) {
-
-                    let titulo = "Nuevo Aviso";
-                    $('#div-mensaje-popup').hide(); 
-                    $.get("popupmensaje.php ? Contenido="+response.enviar+"&Aviso="+titulo+"", data => {
-                        $("#div-mensaje-popup").fadeIn(500);
-                        $('#div-mensaje-popup').html(data);
-                        $('#btnCerrar').on("click",function () { 
-                            $("#div-mensaje-popup").fadeOut(500);
-                         });
-                    });
-                } 
-                else {
-
-                    let titulo = "Nuevo Aviso";
-                    $('#div-mensaje-popup').hide(); 
-                    $.get("popupmensaje.php ? Contenido="+response.error+"&Aviso="+titulo+"", data => {
-                        $("#div-mensaje-popup").fadeIn(500);
-                        $('#div-mensaje-popup').html(data);
-                        $('#btnCerrar').on("click",function () { 
-                            $("#div-mensaje-popup").fadeOut(500);
-                         });
-                    });
-                }
+                if (response.error === undefined) createPopup('Nuevo Aviso', response.enviar);
+                
+                else createPopup('Nuevo Aviso', response.error);
             },
             error: (jqXHR, estado, outputError) => {
 
@@ -156,8 +135,5 @@ function emailComfirm(datos) {
             }
         });
     } 
-    else {
-
-        console.log("Fuera bot hijueputa!!!");
-    }
+    else console.log("Fuera bot hijueputa!!!");
 }

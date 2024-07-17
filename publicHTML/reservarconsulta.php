@@ -21,6 +21,7 @@
 
         <!-- JS -->
         <script src="js/preloader.js"></script>
+        <script src="js/utilidades.js"></script>
         <script defer src="js/reservaconsulta/calendario.js"></script>
         <script defer src="js/reservaconsulta/reservarconsulta.js"></script>
 

@@ -30,9 +30,10 @@ if(!isset($_SESSION['odontologo'])) header('Location: index.php');
         <link rel="stylesheet" href="css/administrador/adminheader.css">
 
         <!-- JS -->
-        <script defer src="js/administrador/administrador.js"></script>
         <script src="js/preloader.js"></script>
-
+        <script src="js/utilidades.js"></script>
+        <script defer src="js/administrador/administrador.js"></script>
+        
     </head>
 
     <body>
