@@ -1,0 +1,81 @@
+#confirmardatos {  
+
+    width: 100%;
+    height: 100%;
+    color: white;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, .25), -2px -4px 4px rgba(0, 0, 0, .25);
+    border-radius: 10px;
+    position: relative;
+}
+
+#formbody {
+
+    overflow: hidden;
+    width: 100%;
+    height: 90%;
+    padding-top: 15px;
+    padding-bottom: 1rem;
+}
+
+#formheader {
+
+    width: 100%;
+    background-color: #0059CD;
+    padding: .5rem;
+    font-size: 2rem;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    margin: 0;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#detallescontainer {
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+#detalles {
+
+    width: 90%;
+    box-shadow: 0 0 4px black;
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+#detalles .campo {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+#detalles .clave {
+
+    background-color: #05e5a2;
+    padding: 0.6rem;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, .15);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, .25);
+}
+
+#detalles .valor {
+
+    background-color: #00B2FF;
+    padding: 1rem;  
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, .15);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, .25);
+}

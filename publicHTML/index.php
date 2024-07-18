@@ -17,17 +17,14 @@ if( isset($_SESSION['paciente'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- JQuery -->
-        <script src="js/jquery-3.7.1.min.js"></script>
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="css/bootstrap-5.2.3-dist/css/bootstrap.min.css">
-        <script defer src="css/bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
-        <!-- Slick -->
-        <link rel="stylesheet" href="css/slick/slick.css">
-        <script defer src="css/slick/slick.min.js"></script>
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="css/fontawesome-free-5.15.4-web/css/all.min.css">
-        <script defer src="css/fontawesome-free-5.15.4-web/js/all.min.js"></script>
+        <!-- Librerias -->
+        <script src="lib/jquery-3.7.1.min.js"></script>
+        <link rel="stylesheet" href="lib/bootstrap-5.2.3-dist/css/bootstrap.min.css">
+        <script defer src="lib/bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="lib/slick/slick.css">
+        <script defer src="lib/slick/slick.min.js"></script>
+        <link rel="stylesheet" href="lib/fontawesome-free-5.15.4-web/css/all.min.css">
+        <script defer src="lib/fontawesome-free-5.15.4-web/js/all.min.js"></script>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">

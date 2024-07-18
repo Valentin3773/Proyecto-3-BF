@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../PHPMailer/Exception.php';
-require '../PHPMailer/PHPMailer.php';
-require '../PHPMailer/SMTP.php';
+require '../../lib/PHPMailer/PHPMailer.php';
+require '../../lib/PHPMailer/Exception.php';
+require '../../lib/PHPMailer/SMTP.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") sendMail();
 

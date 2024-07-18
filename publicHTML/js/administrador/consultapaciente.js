@@ -85,28 +85,9 @@ function funcionGuardar() {
         contentType: 'application/json',
         success: response => {
 
-            if (response.error === undefined) {
+            if (response.error === undefined) createPopup('Nuevo Aviso', response.enviar);
 
-                let titulo = "Nuevo Aviso";
-                $('#div-mensaje-popup').hide(); 
-                $.get("popupmensaje.php ? Contenido=" + response.enviar + "&Aviso=" + titulo, data => {
-                    
-                    $("#div-mensaje-popup").fadeIn(500);
-                    $('#div-mensaje-popup').html(data);
-                    $('#btnCerrar').on("click", () => $("#div-mensaje-popup").fadeOut(500));
-                });
-            } 
-            else {
-
-                let titulo = "Nuevo Aviso";
-                $('#div-mensaje-popup').hide(); 
-                $.get("popupmensaje.php ? Contenido=" + response.error + "&Aviso=" + titulo, data => {
-                    
-                    $("#div-mensaje-popup").fadeIn(500);
-                    $('#div-mensaje-popup').html(data);
-                    $('#btnCerrar').on("click", () => $("#div-mensaje-popup").fadeOut(500));
-                });
-            }
+            else createPopup('Nuevo Aviso', response.error);
         },
         error: (jqXHR, estado, outputError) => {
 
