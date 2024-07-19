@@ -114,18 +114,19 @@ function getDatesFromRange($fechainicio, $fechafin) {
 }
 
 function getAdjustedHoursFromRange($hora_inicio, $hora_fin) {
+
     $horas = [];
     $hora_actual = strtotime($hora_inicio);
     $hora_fin = strtotime($hora_fin);
 
     while ($hora_actual <= $hora_fin) {
 
-        // Suma cada 30 minutos a la hora actual
         $hora_actual += 30 * 60; 
 
-        // Ajusta para que quede en 30 minutos exactos
         $minutos_restantes = date('i', $hora_actual) % 30;
+        
         if ($minutos_restantes > 0) {
+
             $hora_actual += (30 - $minutos_restantes) * 60;
         }
 

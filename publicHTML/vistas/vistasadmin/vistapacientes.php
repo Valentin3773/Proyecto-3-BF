@@ -57,7 +57,8 @@ if (!isset($_GET['idpaciente'])) {
 
 <?php
 
-} else {
+} 
+else {
 
     $idp = isset($_GET['idpaciente']) ? $_GET['idpaciente'] : null;
 
@@ -65,32 +66,22 @@ if (!isset($_GET['idpaciente'])) {
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
 
-    if ($stmt->execute() && $stmt->rowCount() > 0) {
-
-        $paciente = $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
-    $enfermedades = "";
-    $medicacion = "";
+    if($stmt->execute() && $stmt->rowCount() > 0) $paciente = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    $enfermedades = array();
+    $medicacion = array();
 
     $consulta = "SELECT enfermedad FROM enfermedades WHERE idpaciente = :idp ORDER BY enfermedad ASC";
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
 
-    if ($stmt->execute() && $stmt->rowCount() > 0) {
-
-        $enfermedades = $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+    if($stmt->execute() && $stmt->rowCount() > 0) while($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $enfermedades[] = $tupla;
 
     $consulta = "SELECT medicacion FROM medicacion WHERE idpaciente = :idp ORDER BY medicacion ASC";
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
 
-    if ($stmt->execute() && $stmt->rowCount() > 0) {
-
-        $medicacion = $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
+    if($stmt->execute() && $stmt->rowCount() > 0) while($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $medicacion[] = $tupla;
 ?>
 
     <div id="pcontainer">
@@ -154,7 +145,7 @@ if (!isset($_GET['idpaciente'])) {
 
                     <ul class="valor">
 
-                        <?php foreach ($enfermedades as $enfermedad) echo "<li class='enfermedad'>" . $enfermedad . "</li>"; ?>
+                        <?php foreach ($enfermedades as $enfermedad) echo "<li class='enfermedad'>" . $enfermedad['enfermedad'] . "</li>"; ?>
 
                     </ul>
 
@@ -169,7 +160,7 @@ if (!isset($_GET['idpaciente'])) {
 
                     <ul class="valor">
 
-                        <?php foreach ($medicacion as $medicamento) echo "<li class='medicamento'>" . $medicamento . "</li>"; ?>
+                        <?php foreach ($medicacion as $medicamento) echo "<li class='medicamento'>" . $medicamento['medicacion'] . "</li>"; ?>
 
                     </ul>
 

@@ -62,13 +62,6 @@ function processRegisterForm() {
         $datos['error'] = "Las contraseñas no coinciden.";
     } 
     else {
-
-        $nombre = $pdo->quote($nombre);
-        $apellidos = $pdo->quote($apellidos);
-        $documento = $pdo->quote($documento);
-        $telefono = $pdo->quote($telefono);
-        $direccion = $pdo->quote($direccion);
-        $email = $pdo->quote($email);
     
         $chekeo = "SELECT documento FROM paciente WHERE documento = :documento OR email = :email";
         $stmt = $pdo->prepare($chekeo);

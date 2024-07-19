@@ -281,8 +281,6 @@ function cargarVistaConfirmar() {
 
         infoconsulta.vistaactual = 'confirmar';
 
-        $('#confirmardatos #btnsmov #siguienteform').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, .45)' });
-
         moveProgressBar();
 
         $('#seccionescss').prop('href', 'css/reservarconsulta/confirmar.css');
@@ -290,12 +288,34 @@ function cargarVistaConfirmar() {
         $('#progressbar .paso').css({ 'text-decoration': 'none' });
         $('#progressbar .confirmar').css({ 'text-decoration': 'underline' });
 
-        if (infoconsulta.paso >= 4) $('#confirmardatos #btnsmov #anteriorform').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).on('click', cargarVistaHora);
-        else $('#confirmardatos #btnsmov #anteriorform, #enviarreserva').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, .45)' });
+        $('#enviarreserva').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, .45)' });
 
-        $('#confirmardatos #detalles .odontologo.valor').html('');
-        $('#confirmardatos #detalles .fecha.valor').html('');
-        $('#confirmardatos #detalles .hora.valor').html('');
+        $.ajax({
+
+            type: 'POST',
+            url: 'backend/consulta/getodontologo.php',
+            data: JSON.stringify(infoconsulta),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: respuesta => $('#confirmardatos #detalles .odontologo .valor').html(`${respuesta.nombre} ${respuesta.apellido}`),
+            error: function (xhr, status, error) {
+
+                infoconsulta.paso = 3;
+                cargarVistaHora();
+                alert("Ha ocurrido un error");
+                console.error("Error fatal");
+            }
+        });
+
+        $('#confirmardatos #detalles .fecha .valor').html(`${infoconsulta.fecha.getDate()} / ${infoconsulta.fecha.getMonth()} / ${infoconsulta.fecha.getFullYear()}`);
+        
+        infoconsulta.hora.minuto !== 0 ? $('#confirmardatos #detalles .hora .valor').html(`${infoconsulta.hora.hora}:${infoconsulta.hora.minuto}`) : $('#confirmardatos #detalles .hora .valor').html(`${infoconsulta.hora.hora}:${infoconsulta.hora.minuto}0`);
+    
+        $('#inasunto').on('input', () => {
+
+            if($('#inasunto').val().length >= 5) $('#enviarreserva').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }) 
+            else $('#enviarreserva').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, .45)' });
+        });
     });
 }
 

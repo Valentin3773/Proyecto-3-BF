@@ -19,13 +19,7 @@ if($data) {
 
     $horarios = array();
 
-    if($stmt->execute() && $stmt->rowCount() > 0) {
-
-        while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-            $horarios[] = $tupla;
-        }
-    }
+    if($stmt->execute() && $stmt->rowCount() > 0) while($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $horarios[] = $tupla;
 
     $horasDisponibles = horasDisponibles($fecha, $ido);
 
