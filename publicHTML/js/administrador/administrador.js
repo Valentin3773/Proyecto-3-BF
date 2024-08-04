@@ -5,9 +5,9 @@ $(() => {
 
 function addAdminListeners() {
 
-    $('#btnconsultas').on('click', cargarVistaConsultas);
-    $('#btnpacientes').on('click', cargarVistaPacientes);
-    $('#btnservicios').on('click', cargarVistaServicios);
+    $('#btnconsultas, nav.mobile #btnconsultas').on('click', cargarVistaConsultas);
+    $('#btnpacientes, nav.mobile #btnpacientes').on('click', cargarVistaPacientes);
+    $('#btnservicios, nav.mobile #btnservicios').on('click', cargarVistaServicios);
 
     $('#logo').on('click', resetAdmin);
 }
@@ -62,8 +62,8 @@ function cargarVistaConsultas() {
     });
 
     $('#seccionescss').attr('href', 'css/administrador/consultas.css');
-    $('nav a').css({'text-decoration': 'none'});
-    $('#btnconsultas').css({'text-decoration': 'underline'});
+    $('nav a, nav.mobile a').css({'text-decoration': 'none'});
+    $('#btnconsultas, nav.mobile #btnconsultas').css({'text-decoration': 'underline'});
 }
 
 function cargarVistaPacientes() {
@@ -104,8 +104,8 @@ function cargarVistaPacientes() {
     });
 
     $('#seccionescss').attr('href', 'css/administrador/pacientes.css');
-    $('nav a').css({'text-decoration': 'none'});
-    $('#btnpacientes').css({'text-decoration': 'underline'});
+    $('nav a, nav.mobile a').css({'text-decoration': 'none'});
+    $('#btnpacientes, nav.mobile #btnpacientes').css({'text-decoration': 'underline'});
 }
 
 function cargarVistaServicios() {
@@ -123,14 +123,14 @@ function cargarVistaServicios() {
     });
 
     $('#seccionescss').attr('href', 'css/administrador/servicios.css');
-    $('nav a').css({'text-decoration': 'none'});
-    $('#btnservicios').css({'text-decoration': 'underline'});
+    $('nav a, nav.mobile a').css({'text-decoration': 'none'});
+    $('#btnservicios, nav.mobile #btnservicios').css({'text-decoration': 'underline'});
 }
 
 function resetAdmin() {
 
-    $('.sidebar').html('');
-    $('main').html('');
+    $('.sidebar').empty();
+    $('main').empty();
 
-    $('nav a').css({'text-decoration': 'none'});
+    $('nav a, nav.mobile a').css({'text-decoration': 'none'});
 }
