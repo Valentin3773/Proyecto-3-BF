@@ -155,7 +155,7 @@ header {
     box-shadow: 0 4px 0 #9B9B9B;
     display: flex;
     justify-content: space-between;
-
+    overflow: visible;
     z-index: 5;
 }
 
@@ -175,6 +175,69 @@ header.comprimido {
 .comprimido #btnperfil img {
 
     transform: scale(0.9);
+}
+
+#btnperfil ul.invisible {
+
+    display: none;
+}
+
+#btnperfil ul.visible {
+
+    position: absolute;
+    width: 500px;
+    right: 0;
+    bottom: -270%;
+    display: flex;
+    flex-direction: column;
+    background-color: #4294FF;
+    z-index: 30;
+    padding: 20px;
+    list-style: none;
+    text-align: center;
+    border-radius: 10px;
+    gap: 5px;
+    font-family: RobotoSerif, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #4294FF;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, .5);
+}
+
+#btnperfil li button {
+
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: #4294FF;
+    width: 100%;
+    height: 50px;
+    font-weight: 550;
+    font-size: 1.2rem;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+    transition-duration: 250ms;
+}
+
+#btnperfil li img {
+
+    width: 30px;
+    box-shadow: none;
+    padding: 0;
+    margin-left: 5px;
+}
+
+#btnperfil li button:hover {
+
+    scale: 1.03;
+    filter: brightness(1.1);
+}
+
+#btnperfil hr {
+
+    color: white;
+    background-color: white;
+    height: 3px;
+    border-radius: 5px;
+    opacity: 1;
 }
 
 #btnchat, #btnreservar {

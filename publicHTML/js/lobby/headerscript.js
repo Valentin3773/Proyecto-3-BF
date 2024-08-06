@@ -12,6 +12,12 @@ $(() => {
     $('#btnup').on('click', gototop).hide();
 
     $('#iniciom, #serviciosm, #contactom, #perfilm').on('click', () => desplegarMenu());
+
+    $('#btnperfil').on('click', desplegarMenuPerfil);
+
+    $('#btnperfil ul #iniciar').on('click', () => window.location.href = 'login.php?estado=1');
+
+    $('#btnperfil ul #registrarse').on('click', () => window.location.href = 'login.php?estado=2');
 });
 
 function checkButtonPosition() {
@@ -69,6 +75,13 @@ function desplegarMenu() {
 
         mdesplegado = false;
     }
+}
+
+function desplegarMenuPerfil() {
+
+    if($('#btnperfil ul').hasClass('visible')) $('#btnperfil ul').addClass('invisible').removeClass('visible');
+
+    else $('#btnperfil ul').addClass('visible').removeClass('invisible');
 }
 
 function gototop() {

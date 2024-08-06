@@ -1,6 +1,10 @@
 <?php 
+
 session_start();
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="es" id="html">
 
@@ -30,6 +34,7 @@ session_start();
     </head>
 
     <body>
+
         <div id="div-mensaje-popup"></div>
         <div id="preloader" class="d-flex justify-content-center align-items-center">
 
@@ -37,9 +42,29 @@ session_start();
         
         </div>
         
-        <main>
-            
+        <main> 
+
+            <?php
+
+            if(!isset($_GET['estado']) || (isset($_GET['estado']) && $_GET['estado'] == 1)) {
+
+                include("vistas/vistaslogin/vistalogin.php");
+            }  
+
+            else if(isset($_GET['estado']) && $_GET['estado'] == 2) {
+
+                include("vistas/vistaslogin/vistaregistro.php");
+            } 
+
+            else if(isset($_GET['estado']) && $_GET['estado'] == 3) {
+                
+                include("vistas/vistaslogin/vistaloginadmin.php");
+            }
+
+            ?> 
+
         </main>
+
     </body>
     
 </html>

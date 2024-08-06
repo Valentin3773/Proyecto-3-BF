@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if( isset($_SESSION['paciente'])) {
+if(isset($_SESSION['paciente'])) {
     
-   // echo $_SESSION['paciente']['nombre'];
+   // echo $_SESSION['paciente']['foto'];
 }
 
 ?>
@@ -100,11 +100,52 @@ if( isset($_SESSION['paciente'])) {
 
                     </div>
 
-                    <a href="login.php" title="Mi perfil" id="btnperfil">
+                    <a href="javascript:void(0)" title="Mi perfil" id="btnperfil">
 
-                        <img src="img/iconoperfil.png" alt="Mi Perfil">
+                        <?php
+                        
+                        if(!isset($_SESSION['paciente']) || (isset($_SESSION['paciente']) && !isset($_SESSION['paciente']['foto']))) {
+
+                            echo "<img src='img/iconoperfil.png' alt='Foto de Perfil' title='Mi Perfil'>";
+                        }
+                        else echo "<img src='{$_SESSION["paciente"]["foto"]}' alt='Foto de Perfil' title='Mi Perfil'>";
+
+                        ?>
+
+                        <?php
+
+                        if(isset($_SESSION['paciente']) || isset($_SESSION['odontologo'])) {
+
+                        ?>
+
+                            <ul class="invisible" id="menuiniciado">
+
+                                <li><button id="iniciar">Iniciar sesión</button></li>
+                                <li><button id="iniciargoogle">Iniciar con Google <img src="img/iconosvg/google.svg" alt="Google Icon"></button></li>
+
+                                <hr>
+
+                                <li><button id="registrarse">Registrarse</button></li>
+
+                            </ul>
+
+                        <?php
+
+                        }
+                        else {
+
+                        ?>
+
+                            <ul class="invisible" id="menuiniciado">
+
+                                
+
+                            </ul>
+                        
+                        <?php } ?>
 
                     </a>
+                    
                     <div id="opcionescontainer">
 
                         <a href="javascript:void(0)" id="btnopciones" title="Desplegar menú">
@@ -157,7 +198,7 @@ if( isset($_SESSION['paciente'])) {
 
             <div id="hrelleno"></div>
 
-            <main class=""></main>
+            <main class=""> <?php include("vistas/vistaslobby/vistainicio.php") ?> </main>
             
             <div id="btnchat" title="Envíanos un mensaje">
                 

@@ -1,8 +1,6 @@
 $(() => {
 
     addListeners();
-
-    cargarVistaInicio();
 });
 
 function addListeners() {

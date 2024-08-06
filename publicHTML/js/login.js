@@ -1,8 +1,3 @@
-$(() => {
-    
-    cargarVistaLogin();
-});
-
 function cargarVistaLogin() {
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
