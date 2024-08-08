@@ -47,25 +47,46 @@
         text-align: center;
         text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
         cursor: pointer;
+        transition-duration: .5s;
     }
 </style>
 
 <script>
+
     function moveBar(paso) {
 
         switch (paso) {
 
-            case 1: $('#progressbarbb').css({ '--barwidth': '25%' });
-                break;
+            case 1: 
 
-            case 2: $('#progressbarbb').css({ '--barwidth': '50%' });
-                break;
+                $('#progressbarbb').css({ '--barwidth': '25%' });
+                $('.paso.odontologo').css({'color': '#006eff'});
+                $('.paso.fecha, .paso.hora, .paso.confirmar').css({'color': 'white'});
 
-            case 3: $('#progressbarbb').css({ '--barwidth': '75%' });
-                break;
+            break;
 
-            case 4: $('#progressbarbb').css({ '--barwidth': '110%' });
-                break;
+            case 2: 
+
+                $('#progressbarbb').css({ '--barwidth': '50%' });
+                $('.paso.odontologo, .paso.fecha').css({'color': '#006eff'});
+                $('.paso.hora, .paso.confirmar').css({'color': 'white'});
+
+            break;
+
+            case 3:
+                
+                $('#progressbarbb').css({ '--barwidth': '75%' });
+                $('.paso.odontologo, .paso.fecha, .paso.hora').css({'color': '#006eff'});
+                $('.paso.confirmar').css({'color': 'white'});
+            
+            break;
+
+            case 4: 
+                
+                $('#progressbarbb').css({ '--barwidth': '110%' });
+                $('.paso.odontologo, .paso.fecha, .paso.hora, .paso.confirmar').css({'color': '#006eff'});
+            
+            break;
         }
     }
 </script>

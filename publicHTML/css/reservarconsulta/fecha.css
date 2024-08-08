@@ -96,7 +96,7 @@
 
 #calendario #semana {
 
-    background-color: #7AE8FF90;
+    background-color: #0059CD;
 }
 
 #calendario #semana {
@@ -195,7 +195,8 @@ td {
 
     width: 30%;
     color: white;
-    background-color: rgb(255, 217, 0);
+    background-color: #0AF0AB;
+    font-weight: 600;
     padding: 5px;
     border-radius: 5px;
     text-shadow: 0 0 3px rgba(0, 0, 0, .5);

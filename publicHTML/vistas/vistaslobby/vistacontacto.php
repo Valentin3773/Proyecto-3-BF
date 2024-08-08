@@ -107,7 +107,7 @@
             <div id="contenedor_formulario" class="mb-4">
                 <div id="titulo_input"><label for="innombre" class="text-end row">Nombre</label></div>
                 <div>
-                    <input type="text" name="nombre" id="innombre" title="Ingrese su nombre" placeholder="Ingrese su nombre" required autofocus>
+                    <input type="text" name="nombre" id="innombre" title="Ingrese su nombre" placeholder="Ingrese su nombre" required>
                 </div>
             </div>
 

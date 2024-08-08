@@ -2,6 +2,11 @@
 
 session_start();
 
+if(!isset($_GET['estado']) || (isset($_GET['estado']) && $_GET['estado'] == 1)) $estado = 1;
+
+else if(isset($_GET['estado']) && $_GET['estado'] == 2) $estado = 2;
+
+else if(isset($_GET['estado']) && $_GET['estado'] == 3) $estado = 3;
 
 ?>
 
@@ -42,26 +47,18 @@ session_start();
         
         </div>
         
-        <main> 
+        <main data-vista="<?= $estado ?>">
 
             <?php
+            
+            switch($estado) {
 
-            if(!isset($_GET['estado']) || (isset($_GET['estado']) && $_GET['estado'] == 1)) {
+                case 1: include("vistas/vistaslogin/vistalogin.php"); break;
 
-                include("vistas/vistaslogin/vistalogin.php");
-            }  
-
-            else if(isset($_GET['estado']) && $_GET['estado'] == 2) {
-
-                include("vistas/vistaslogin/vistaregistro.php");
-            } 
-
-            else if(isset($_GET['estado']) && $_GET['estado'] == 3) {
-                
-                include("vistas/vistaslogin/vistaloginadmin.php");
+                case 2: include("vistas/vistaslogin/vistaregistro.php"); break;
             }
-
-            ?> 
+            
+            ?>
 
         </main>
 

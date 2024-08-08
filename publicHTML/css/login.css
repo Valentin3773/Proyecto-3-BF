@@ -234,6 +234,11 @@ form {
     width: 100%;
 }
 
+#formRegistrar {
+
+    background-color: rgba(96,245,255,.4);
+}
+
 #sideimg {
 
     background-color: gray;
@@ -251,6 +256,7 @@ form {
     font-weight: 600;
     letter-spacing: 1px;
     padding: 5px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
 
 .row {
@@ -279,6 +285,13 @@ h1 {
     background-size: cover;
     background-repeat: no-repeat;
     filter: contrast(1);
+}
+
+#registercontent {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #logincontent span {

@@ -1,3 +1,15 @@
+$(() => {
+
+    let estado = $('main').data('vista');
+
+    switch(estado) {
+
+        case 1: cargarVistaLogin(); break;
+
+        case 2: cargarVistaRegistro(); break;
+    }
+});
+
 function cargarVistaLogin() {
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -18,6 +30,7 @@ function cargarVistaLogin() {
         });
         $('#inemail').focus();
     });
+    $('html, body').css("height", "100%");
 }
 
 function cargarVistaRegistro() {
@@ -39,7 +52,7 @@ function cargarVistaRegistro() {
         $('#innombre').focus();
     });
 
-    $('html, body').css("height", "100%");
+    $('html, body').css("height", "unset");
 }
 
 function cargarVistaLoginAdmin() {
@@ -59,6 +72,7 @@ function cargarVistaLoginAdmin() {
         });
         $('#inemail').focus();
     });
+    $('html, body').css("height", "100%");
 }
 
 function volverInicio() {

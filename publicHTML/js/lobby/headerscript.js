@@ -1,8 +1,8 @@
-let mdesplegado = false;
-
 $(() => {
     
     $('#navmobile').show().addClass('marboliviano');
+
+    $('#navmobile a#btnopciones').remove();
 
     $(window).on('scroll', checkButtonPosition);
     $(window).on('scroll', checkHeaderPosition);
@@ -11,13 +11,20 @@ $(() => {
 
     $('#btnup').on('click', gototop).hide();
 
-    $('#iniciom, #serviciosm, #contactom, #perfilm').on('click', () => desplegarMenu());
+    $('#iniciom, #nosotrosm, #serviciosm, #contactom, #perfilm').on('click', () => desplegarMenu());
 
-    $('#btnperfil').on('click', desplegarMenuPerfil);
+    $('#btnperfil, #btnperfilm').on('click', desplegarMenuPerfil);
 
     $('#btnperfil ul #iniciar').on('click', () => window.location.href = 'login.php?estado=1');
 
     $('#btnperfil ul #registrarse').on('click', () => window.location.href = 'login.php?estado=2');
+
+    $('main').on('click', () => {
+
+        if($('#btnperfil ul').hasClass('visible')) desplegarMenuPerfil();
+
+        if($('#navmobile').hasClass('desplegado')) desplegarMenu();
+    });
 });
 
 function checkButtonPosition() {
@@ -41,40 +48,28 @@ function checkButtonPosition() {
 function checkHeaderPosition() {
 
     let header = $('header');
-    let mnav = $('#navmobile');
 
     let btnup = $('#btnup');
 
     if ($(window).scrollTop() > 1) {
 
         header.addClass('comprimido').removeClass('extendido');
-        mnav.css({'top': '100px'});
-
+        
         btnup.fadeIn();
     } 
     else {
 
         header.addClass('extendido').removeClass('comprimido');
-        mnav.css({'top': '120px'});
-
+        
         btnup.fadeOut();
     }
 }
 
 function desplegarMenu() {
 
-    if(!mdesplegado) {
-
-        $('#navmobile').addClass('desplegado').removeClass('marboliviano');
-
-        mdesplegado = true;
-    }
-    else {
-
-        $('#navmobile').removeClass('desplegado').addClass('marboliviano');
-
-        mdesplegado = false;
-    }
+    if($('#navmobile').hasClass('marboliviano')) $('#navmobile').addClass('desplegado').removeClass('marboliviano');
+    
+    else $('#navmobile').removeClass('desplegado').addClass('marboliviano');
 }
 
 function desplegarMenuPerfil() {

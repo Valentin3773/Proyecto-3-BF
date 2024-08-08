@@ -187,7 +187,7 @@ header.comprimido {
     position: absolute;
     width: 500px;
     right: 0;
-    bottom: -270%;
+    top: 110%;
     display: flex;
     flex-direction: column;
     background-color: #4294FF;
@@ -196,7 +196,7 @@ header.comprimido {
     list-style: none;
     text-align: center;
     border-radius: 10px;
-    gap: 5px;
+    gap: 10px;
     font-family: RobotoSerif, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: #4294FF;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, .5);
@@ -890,10 +890,10 @@ header #btnperfil img {
     .desplegado {
 
         display: block !important;
-        position: fixed;
+        position: absolute;
         z-index: 3;
-        top: 130px;
-        right: 0.5%;
+        top: 120%;
+        right: 0;
         width: 50%;
     }
 
@@ -950,10 +950,10 @@ header #btnperfil img {
     .desplegado {
 
         display: block !important;
-        position: fixed;
+        position: absolute;
         z-index: 3;
-        top: 115px;
-        right: 1%;
+        top: 120%;
+        right: 0;
         width: 80%;
     }
 
@@ -1157,10 +1157,10 @@ header #btnperfil img {
     #navmobile.desplegado {
 
         display: block !important;
-        position: fixed;
+        position: absolute;
         z-index: 3;
-        top: 110px;
-        right: 0.5%;
+        top: 120%;
+        right: 0;
         width: 100%;
     }
 
@@ -1425,11 +1425,13 @@ footer #contFooter:hover {
 @keyframes chatup {
 
     from {
+
         margin: 0;
     }
 
     to {
-        margin-bottom: 80px;
+
+        margin-bottom: 15%;
     }
 
 }
@@ -1438,7 +1440,7 @@ footer #contFooter:hover {
 
     from {
 
-        margin-bottom: 80px;
+        margin-bottom: 15%;
     }
 
     to {

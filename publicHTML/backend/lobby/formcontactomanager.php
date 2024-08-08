@@ -133,7 +133,7 @@ function sendMail() {
 
             $mail->send(); // Enviar correo
 
-            $datos['enviar'] = "Consultad enviada con exito";
+            $datos['enviar'] = "Correo enviado con exito";
         }
     } 
     catch (Exception $e) {
