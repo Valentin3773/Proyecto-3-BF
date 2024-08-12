@@ -19,6 +19,8 @@ $(() => {
 
     $('#btnperfil ul #registrarse').on('click', () => window.location.href = 'login.php?estado=2');
 
+    $('#btnperfil ul #cerrarsesion').on('click', () => window.location.href = 'login.php?estado=3')
+
     $('main').on('click', () => {
 
         if($('#btnperfil ul').hasClass('visible')) desplegarMenuPerfil();

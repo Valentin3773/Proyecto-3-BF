@@ -149,7 +149,12 @@ if (isset($_SESSION['paciente'])) {
 
                         <ul class="invisible" id="menuiniciado">
 
+                            <li><button id="miperfil">Mi Perfil</button></li>
+                            <li><button id="misconsultas">Mis Consultas</button></li>
 
+                            <hr>
+
+                            <li><button id="cerrarsesion">Cerrar Sesión</button></li>
 
                         </ul>
 

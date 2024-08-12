@@ -7,6 +7,8 @@ $(() => {
         case 1: cargarVistaLogin(); break;
 
         case 2: cargarVistaRegistro(); break;
+
+        case 3: cerrarSesion(); break;
     }
 });
 
@@ -102,9 +104,9 @@ function loginConfirm(datos) {
             contentType: false,
             success: response => {
 
-                if (response.error === undefined) createPopup('Nuevo Aviso', response.enviar);
+                if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.enviar, 'index.php');
 
-                else createPopup('Nuevo Aviso', response.error)
+                else createPopup('Nuevo Aviso', response.error);
             },
             error: (jqXHR, estado, outputError) => {
 
@@ -131,9 +133,9 @@ function registerConfirm(datos) {
             contentType: false,
             success: response => {
 
-                if (response.error === undefined) createPopup('Nuevo Aviso', response.registrado);
+                if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.registrado, cargarVistaLogin);
 
-                else createPopup('Nuevo Aviso', response.error)
+                else createPopup('Nuevo Aviso', response.error);
             },
             error: (jqXHR, estado, outputError) => {
 
@@ -160,9 +162,9 @@ function loginAdminConfirm(datos) {
             contentType: false,
             success: response => {
 
-                if (response.error === undefined) createPopup('Nuevo Aviso', response.admin);
+                if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.admin, 'administrador.php');
 
-                else createPopup('Nuevo Aviso', response.error)
+                else createPopup('Nuevo Aviso', response.error);
             },
             error: (jqXHR, estado, outputError) => {
 
@@ -174,4 +176,26 @@ function loginAdminConfirm(datos) {
 
         console.log("Fuera bot hijueputa!!!");
     }
+}
+
+function cerrarSesion() {
+
+    $.ajax({
+
+        type: "POST",
+        url: "backend/login/cerrarsesion.php",
+        data: true,
+        processData: false,
+        contentType: JSON,
+        success: respuesta => {
+
+            if (respuesta.error === undefined) createHeaderPopup('Nuevo Aviso', respuesta.exito, 'index.php');
+
+            else createHeaderPopup('Nuevo Aviso', respuesta.error, 'index.php');
+        },
+        error: (jqXHR, estado, outputError) => {
+
+            console.log(jqXHR,estado, outputError);
+        }
+    });
 }
