@@ -206,6 +206,7 @@ button[type='submit'],
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 130%;
     border: .5px solid rgba(0, 0, 0, 0.4);
+    transition-duration: .3s;
 }
 
 label {
@@ -242,6 +243,7 @@ form {
 #sideimg {
 
     background-color: gray;
+    height: 100dvh;
 }
 
 #ingresar,
@@ -257,6 +259,18 @@ form {
     letter-spacing: 1px;
     padding: 5px;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+#ingresar:hover, #btnregistrarsel:hover, #ingresarad:hover {
+
+    scale: 1.01;
+    filter: brightness(1.05);
+}
+
+input:hover {
+
+    filter: brightness(1.05);
+    box-shadow: 1.5px 3px 0 #9B9B9B, 2px 4px 4px 3px rgba(0, 0, 0, 0.4);
 }
 
 .row {
@@ -285,6 +299,9 @@ h1 {
     background-size: cover;
     background-repeat: no-repeat;
     filter: contrast(1);
+    height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 #registercontent {
@@ -308,6 +325,7 @@ h1 {
     background-repeat: no-repeat;
     background-position: center center;
     filter: contrast(1.3);
+    height: 100dvh;
 }
 
 .contconcontrasenia #titulo_input {
