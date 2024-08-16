@@ -24,8 +24,6 @@
 
         <h1 class="text-center w-100 mt-3">Administración</h1>
 
-        <h1 class="text-center w-100 mt-3">Iniciar Sesión como Odontólogo</h1>
-
         <div class="container d-flex justify-content-center mt-3" id="formcontainer">
 
             <form id="formLogin" method="POST" class="p-3">

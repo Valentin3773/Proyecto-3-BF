@@ -1,8 +1,6 @@
 $(() => {
 
-    let estado = $('main').data('vista');
-
-    switch(estado) {
+    switch($('main').data('vista')) {
 
         case 1: cargarVistaLogin(); break;
 
@@ -28,6 +26,9 @@ function cargarVistaLogin() {
 
             event.preventDefault();
             let data = new FormData($('#formLogin')[0]);
+
+            $('#ingresar').prop('disabled', true).css({'background-color': 'rgb(0, 178, 255, .5)'}).html('<i class="fas fa-spinner fa-pulse"></i>');
+
             loginConfirm(data);
         });
         $('#inemail').focus();
@@ -49,9 +50,11 @@ function cargarVistaRegistro() {
 
             event.preventDefault();
             let data = new FormData($('#formRegistrar')[0]);
+
+            $('#btnregistrarsel').prop('disabled', true).css({'background-color': 'rgb(0, 178, 255, .5)'}).html('<i class="fas fa-spinner fa-pulse"></i>');
+
             registerConfirm(data);
         });
-        $('#innombre').focus();
     });
 
     $('html, body').css("height", "unset");
@@ -70,9 +73,11 @@ function cargarVistaLoginAdmin() {
 
             event.preventDefault();
             let data = new FormData($('#formLogin')[0]);
+
+            $('#ingresarad').prop('disabled', true).css({'background-color': 'rgb(0, 178, 255, .5)'}).html('<i class="fas fa-spinner fa-pulse"></i>');
+
             loginAdminConfirm(data);
         });
-        $('#inemail').focus();
     });
     $('html, body').css("height", "100%");
 }
@@ -107,6 +112,8 @@ function loginConfirm(datos) {
                 if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.enviar, 'index.php');
 
                 else createPopup('Nuevo Aviso', response.error);
+
+                $('#ingresar').prop('disabled', false).css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Ingresar');
             },
             error: (jqXHR, estado, outputError) => {
 
@@ -136,6 +143,8 @@ function registerConfirm(datos) {
                 if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.registrado, cargarVistaLogin);
 
                 else createPopup('Nuevo Aviso', response.error);
+
+                $('#btnregistrarsel').prop('disabled', false).css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Registrarse');
             },
             error: (jqXHR, estado, outputError) => {
 
@@ -165,6 +174,8 @@ function loginAdminConfirm(datos) {
                 if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.admin, 'administrador.php');
 
                 else createPopup('Nuevo Aviso', response.error);
+
+                $('#ingresarad').prop('disabled', false).css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Ingresar');
             },
             error: (jqXHR, estado, outputError) => {
 

@@ -87,6 +87,6 @@
 
     </div>
 
-    <div class="col-xl-7 col-lg-6 col-0" id="sideimg"></div>
+    <div class="col-xl-7 col-lg-6 col-md-0 col-sm-0 col-0" id="sideimg"></div>
 
 </div>
