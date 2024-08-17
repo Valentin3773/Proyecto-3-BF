@@ -1,3 +1,5 @@
+$(() => $('head').append('<link rel="stylesheet" href="css/popupmensaje.css">'));
+
 function createPopup(titulo, contenido) {
 
     console.log('Creando Popup');
@@ -27,7 +29,7 @@ function createHeaderPopup(titulo, contenido, accion) {
     $('#div-mensaje-popup').hide();
     $.get("vistas/popupmensaje.php ? Contenido=" + contenido + "&Aviso=" + titulo, data => {
 
-        $("#div-mensaje-popup").fadeIn(500).html(data);
+        $("#div-mensaje-popup").html(data).fadeIn(500);
         $('#btnCerrar').on("click", () => {
 
             $("#div-mensaje-popup").fadeOut(500);

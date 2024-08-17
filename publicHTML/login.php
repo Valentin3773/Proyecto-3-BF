@@ -42,7 +42,6 @@ else if(isset($_GET['estado']) && $_GET['estado'] == 3) $estado = 3;
 
     <body>
 
-        <div id="div-mensaje-popup"></div>
         <div id="preloader" class="d-flex justify-content-center align-items-center">
 
             <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>

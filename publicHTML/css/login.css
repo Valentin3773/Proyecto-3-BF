@@ -26,7 +26,7 @@ html {
 
 body {
 
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 main {
@@ -245,6 +245,8 @@ form {
 #formRegistrar {
 
     background-color: rgba(96,245,255,.4);
+    height: 70dvh;
+    overflow-y: scroll;
 }
 
 #sideimg {

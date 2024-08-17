@@ -313,10 +313,15 @@ function cargarVistaConfirmar() {
     
         $('#inasunto').on('input', () => {
 
-            if($('#inasunto').val().length >= 5) $('#enviarreserva').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }) 
+            if($('#inasunto').val().length >= 5) $('#enviarreserva').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).on('click', () => enviarReserva()); 
             else $('#enviarreserva').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, .45)' });
         });
     });
+}
+
+function enviarReserva() {
+
+    
 }
 
 function addSelectListener() {

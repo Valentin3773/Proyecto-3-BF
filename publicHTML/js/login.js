@@ -56,8 +56,6 @@ function cargarVistaRegistro() {
             registerConfirm(data);
         });
     });
-
-    $('html, body').css("height", "unset");
 }
 
 function cargarVistaLoginAdmin() {
