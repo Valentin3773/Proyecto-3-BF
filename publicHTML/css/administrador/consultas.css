@@ -197,14 +197,19 @@ h1 {
 }
 
 .tituloHora {
-
     background-color: #0059CD;
     filter: brightness(1.1);
     width: fit-content;
     text-align: center;
     padding: 5px;
     border-radius: 10px 10px 0 0;
+   
 }
+
+.tituloHora h1{
+    font-size: 2vw;
+}
+
 
 .contentHora {
 
@@ -212,13 +217,12 @@ h1 {
     color: #000;
     width: 100%;
     padding: 10px;
-    border-radius: 0 10px 10px 10px;
+    border-radius:10px 10px 10px 10px;
     text-align: center;
 }
 
 .contentHora h1 {
-
-    font-size: xx-large;
+    font-size: 2vw;
 }
 
 .contHora,
@@ -242,39 +246,40 @@ h1 {
     padding: 5px;
     border-radius: 10px 10px 0 0;
 }
-
-.divTituloFecha {
-
-    align-items: end;
+.tituloFecha h1 {
+    font-size: 2vw;
 }
 
-.contentFecha {
 
+.contentFecha {
     background-color: white;
     color: #000;
     width: 100%;
     padding: 10px;
-    border-radius: 10px 0 10px 10px;
+    border-radius: 10px 10px 10px 10px;
     text-align: center;
 }
 
 .contentFecha h1 {
-
-    font-size: xx-large;
+    font-size: 2vw;
 }
 
 .tituloDuracion {
 
     background-color: #0059CD;
     filter: brightness(1.1);
-    width: fit-content;
+    width: 100%;
     text-align: center;
     padding: 5px;
     border-radius: 10px 10px 0 0;
 }
 
-.contentDuracion {
+.tituloDuracion h1 {
+    font-size: 2vw;
+}
 
+.contentDuracion {
+    font-size: 3vw;
     background-color: white;
     width: 100%;
     padding: 10px;
@@ -282,11 +287,14 @@ h1 {
     text-align: center;
 }
 
-.contResumen {
+.fatherContResumen{
+    background-color: red;
+}
 
-    width: fit-content;
+.contResumen {
     padding: 30px;
 }
+
 
 .tituloResumen {
 
@@ -304,10 +312,6 @@ h1 {
     height: 180px;
 }
 
-.contentResumen {
-
-    width: 50vw;
-}
 
 .btnInteractivo {
 

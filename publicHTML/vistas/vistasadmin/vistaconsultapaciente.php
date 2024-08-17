@@ -59,15 +59,16 @@ $consultaPaciente = array();
         </div>
     </div>
 
-    <div>
-        <div class=" d-flex justify-content-evenly">
-            <div class="contHora m-0">
+    <div >
+
+        <div class="row container d-flex m-auto justify-content-center">
+            <div class="col-5 contHora m-0">
                 <div class="tituloHora">
                     <h1>Hora</h1>
                  </div>
-                <div class="contentHora d-flex justify-content-evenly">
-                    <h1><?= $tupla['hora'] ?></h1>
-                    <select name="" id="hora-CP" class="form-select" disabled>
+                <div class="contentHora row justify-content-center">
+                    <h1 class="col-6"><?= $tupla['hora'] ?></h1>
+                    <select name="" id="hora-CP" class="col-6 form-select" disabled>
                         <option value="">Elija un horario</option>
                         <?php
                             foreach ($conjHoras as $horaValue) {
@@ -77,23 +78,23 @@ $consultaPaciente = array();
                     </select>
                 </div>
             </div>
-            <div class="contDuracion m-0">
-                <div class="tituloDuracion">
+            <div class="col-2 row contDuracion m-0">
+                <div class="col-6 tituloDuracion">
                     <h1>Duración</h1>
                 </div>
-                <div class="contentDuracion">
+                <div class="col-6 contentDuracion">
                     <h2><input id="duracion-CP"  type="number" value=<?= $tupla['duracion'] ?> disabled></h2>
                 </div>
             </div>
-            <div class="contFecha m-0">
+            <div class="col-5 contFecha m-0">
                 <div class="divTituloFecha">
                     <div class="tituloFecha">
                         <h1>Fecha</h1>
                     </div>
                 </div>
-                <div class="contentFecha d-flex justify-content-evenly">
-                    <h1><?= $tupla['fecha'] ?></h1>
-                    <select name="" id="fecha-CP" class="form-select" disabled>
+                <div class="contentFecha row d-flex justify-content-evenly">
+                    <h1 class="col-6"><?= $tupla['fecha'] ?></h1>
+                    <select name="" id="fecha-CP" class="form-select col-6" disabled>
                         <option value="">Elija una fecha</option>
                         <?php
                             foreach ($conjFechas as $fechaValue) {
@@ -110,8 +111,8 @@ $consultaPaciente = array();
 
         </div>
 
-        <div class="d-flex">
-            <div class="contResumen">
+        <div class="container fatherContResumen m-auto">
+            <div class="contResumen row flex-column justify-content-center">
                 <div class="tituloResumen"><h1>Resumen</h1></div>
                 <div class="contentResumen">
                     <textarea name="" id="resumen-CP" disabled>

@@ -37,7 +37,6 @@ if (!isset($_SESSION['odontologo'])) header('Location: index.php');
 
 <body>
 
-    <div id="div-mensaje-popup"></div>
     <div id="preloader" class="d-flex justify-content-center align-items-center">
 
         <div class="lds-spinner">
