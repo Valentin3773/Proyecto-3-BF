@@ -5,9 +5,11 @@ function addBTNListeners() {
     $('#btnModificar').on('click', function () { funcionModificar() });
     $('#btnCancelar').on('click', function () { funcionCancelar() });
     $('#btnGuardar').on('click', function () { funcionGuardar() });
+    $('#btnEliminar').on('click', function () { functionEliminar()});
 
     $('#btnCancelar').css("opacity", 0.5);
     $('#btnGuardar').css("opacity", 0.5);
+    $('#btnEliminar').css("opacity", 0.5);
 }
 
 function funcionModificar() {
@@ -15,17 +17,20 @@ function funcionModificar() {
     console.log("Modificar");
     $('#btnCancelar').css("opacity", 1);
     $('#btnGuardar').css("opacity", 1);
+    $('#btnEliminar').css("opacity", 1);
 
     $('#btnModificar').css("opacity", 0.5);
     $('#btnModificar').prop('disabled', true);
 
     $('#btnCancelar').removeAttr('disabled');
     $('#btnGuardar').removeAttr('disabled');
+    $('#btnEliminar').removeAttr('disabled');
     $('#asunto-CP').removeAttr('disabled');
     $('#hora-CP').removeAttr('disabled');
     $('#duracion-CP').removeAttr('disabled');
     $('#fecha-CP').removeAttr('disabled');
     $('#resumen-CP').removeAttr('disabled');
+
 }
 
 function funcionCancelar() {
@@ -33,12 +38,14 @@ function funcionCancelar() {
     console.log("Cancelar");
     $('#btnCancelar').css("opacity", 0.5);
     $('#btnGuardar').css("opacity", 0.5);
+    $('#btnEliminar').css("opacity", 0.5);
 
     $('#btnModificar').css("opacity", 1);
     $('#btnModificar').removeAttr('disabled');
 
     $('#btnCancelar').prop('disabled', true);
     $('#btnGuardar').prop('disabled', true);
+    $('#btnEliminar').prop('disabled', true);
     $('#asunto-CP').prop('disabled', true);
     $('#hora-CP').prop('disabled', true);
     $('#duracion-CP').prop('disabled', true);
@@ -85,6 +92,40 @@ function funcionGuardar() {
         contentType: 'application/json',
         success: response => {
 
+            if (response.error === undefined) createPopup('Nuevo Aviso', response.enviar);
+
+            else createPopup('Nuevo Aviso', response.error);
+        },
+        error: (jqXHR, estado, outputError) => {
+
+            alert("Error al procesar la solicitud: " + outputError);
+        }
+    });
+
+}
+
+function functionEliminar(){
+    console.log("Eliminar");
+
+    const url = 'backend/admin/deleteConsultaPaciente.php';
+    const data = {
+
+        asunto: ($('#asunto-CP').val()),
+        hora: ($('#hora-CP option:selected').html()),
+        duracion: Number($('#duracion-CP').val()),
+        fecha: ($('#fecha-CP option:selected').html()),
+        resumen: ($('#resumen-CP').val()),
+        fechaV: $('.contentFecha h1').html(),
+        horaV: $('.contentHora h1').html()
+    };
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        success: function (response) {
+            
             if (response.error === undefined) createPopup('Nuevo Aviso', response.enviar);
 
             else createPopup('Nuevo Aviso', response.error);

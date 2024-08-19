@@ -1,0 +1,193 @@
+body {
+    background-color: #526755;
+}
+
+section {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#logopa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #A2F798;
+    width: 175px;
+    height: 175px;
+    position: relative;
+    top: 50px;
+    border-radius: 75%;
+    border: 2px solid #000;
+}
+
+@font-face {
+    font-family: "Kodchasan-Bold";
+    src: url('../font/Kodchasan/Kodchasan-Bold.ttf');
+    font-weight: normal;
+}
+
+#titulo {
+    font-family: Kodchasan-Bold;
+    color: #fff;
+    font-size: 30px;
+    width: 80%;
+}
+
+#logo {
+    width: 85px;
+    border-radius: 1%;
+}
+
+@font-face {
+    font-family: "JejuGothic";
+    src: url("../font/JejuGothic/jejugothic/JejuGothic-Regular.ttf");
+    font-weight: normal;
+}
+
+
+#contenedormision {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+    height: 150px;
+    background-color: #74A77A;
+    position: relative;
+    top: 100px;
+    left: 250px;
+    border-radius: 15px;
+
+}
+
+#mision {
+    font-family: JejuGothic;
+    color: #fff;
+    font-size: 22px;
+    position: relative;
+    right:35px;
+}
+
+
+#contenedorvision {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+    height: 150px;
+    background-color: #74A77A;
+    position: relative;
+    top: 150px;
+    left: 250px;
+    border-radius: 15px;
+
+}
+
+#vision {
+    font-family: JejuGothic;
+    color: #fff;
+    font-size: 22px;
+    position:relative;
+    right: 35px;
+    
+
+}
+
+#miembros {
+    color: #fff;
+    position: relative;
+    top: 300px;
+    left: 650px;
+    font-family: Kodchasan-Bold;
+    font-size: 25px;
+
+}
+
+#contenedormiembros {
+    display: flex;
+    background-color: #74A77A;
+    display: flex;
+    position: relative;
+    width: 700px;
+    height: 700px;
+    top: 300px;
+    border-radius: 15px;
+    left: 425px;
+    margin-bottom: 25%;
+}
+
+#leader {
+    font-family: Kodchasan-Bold;
+    color: #fff;
+    position: relative;
+    left: 45px;
+}
+
+#imgl {
+    width: 153px;
+    height: 158px;
+    position: relative;
+    top: 65px;
+    right: 85px;
+}
+
+#manager {
+    font-family: Kodchasan-Bold;
+    color: #fff;
+    position: relative;
+    left: 10px;
+}
+
+#imgm {
+    width: 153px;
+    height: 158px;
+    position: relative;
+    top: 65px;
+    right: 140px;
+}
+
+#developer {
+    font-family: Kodchasan-Bold;
+    color: #fff;
+    position: relative;
+    left: -40px;
+}
+
+#imgd {
+    width: 153px;
+    height: 158px;
+    position: relative;
+    top: 65px;
+    right: 210px;
+}
+#developer2 {
+    font-family: Kodchasan-Bold;
+    color: #fff;
+    position: relative;
+    left: -490px;
+    top: 300px;
+}
+#imgd2 {
+    width: 153px;
+    height: 158px;
+    position: relative;
+    top: 65px;
+    right: 650px;
+    top: 380px;
+}
+#subleader {
+    font-family: Kodchasan-Bold;
+    color: #fff;
+    position: relative;
+    top: 250px;
+    right: 1020px;
+    
+}
+#imgsl {
+    width: 153px;
+    height: 158px;
+    position: relative;
+    top: 65px;
+    right: 1150px;
+    top: 380px;
+}
