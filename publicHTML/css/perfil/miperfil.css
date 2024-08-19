@@ -1,0 +1,110 @@
+#fotowrapper {
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+#fotoperfilcontainer {
+
+    position: relative;
+}
+
+#fotoperfil {
+
+    border-radius: 50%;
+    width: 170px;
+    box-shadow: 4px 4px 4px #00b3ff7d, 0 0 3px 1px rgba(0, 0, 0, .5);
+}
+
+.lapizeditar {
+
+    background-color: #0AF0AB;
+    border-radius: 30%;
+    padding: 10px;
+    z-index: 2;
+    box-shadow: 0 0 6px 1px rgba(0, 0, 0, .5);
+    transition-duration: .3s;
+    cursor: pointer;
+}
+
+#fotoperfilcontainer .lapizeditar {
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.lapizeditar:hover {
+
+    scale: 1.05;
+    filter: brightness(1.1);
+}
+
+.lapizeditar > img {
+
+    width: 40px;
+}
+
+#fotoperfilcontainer .lapizeditar > img {
+
+    width: 30px;
+}
+
+.datocontainer {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    padding: 0 !important;
+}
+
+.lapizcontainer {
+
+    height: 90px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 2px solid #7CB9E8;
+}
+
+.dato {
+
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dato h4 {
+
+    margin: 0;
+    text-align: center;
+    color: #4294FF;
+    font-size: 2.3rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-shadow: 0 0 2px rgba(0, 0, 0, .25);
+}
+
+.datowrapper {
+
+    margin-top: 1rem;
+}
+
+.datowrapper label {
+
+    width: 100%;
+    text-align: center;
+    color: #00d335;
+    font-size: 1.5rem;
+    text-shadow: 0 0 1px rgba(0, 0, 0, .5);
+    letter-spacing: 2px;
+}

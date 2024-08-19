@@ -34,7 +34,11 @@ p {
     text-wrap: pretty;
 }
 
-body { background-color: rgb(217, 253, 239); } 
+body { 
+    
+    background-color: rgb(217, 253, 239); 
+    scrollbar-gutter: stable both-edges;
+} 
 
 .hidden { display: none; }
 
@@ -375,6 +379,11 @@ header #btnperfil img {
 .contReservar, #btnopciones {
 
     transition-duration: 300ms;
+}
+
+.contReservar:hover {
+
+    filter: brightness(1.1);
 }
 
 #btnchat {

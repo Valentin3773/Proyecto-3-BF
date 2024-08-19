@@ -3,6 +3,12 @@
 include('../conexion.php');
 include('../extractor.php');
 
+if($_SERVER['REQUEST_METHOD'] != 'POST') {
+
+    header('Location: ../../index.php');
+    exit();
+}
+
 $json = file_get_contents('php://input');
 
 $data = json_decode($json, true);
@@ -29,7 +35,9 @@ if($data) {
         'horarios' => $horarios
     ];
 
+    header('Content-Type: application/json');
     echo json_encode($respuesta);
+    exit();
 }
 
 ?>

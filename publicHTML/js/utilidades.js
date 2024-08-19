@@ -1,4 +1,7 @@
-$(() => $('head').append('<link rel="stylesheet" href="css/popupmensaje.css">'));
+$(() => {
+    
+    $('head').append('<link rel="stylesheet" href="css/popupmensaje.css">');
+});
 
 function createPopup(titulo, contenido) {
 

@@ -74,9 +74,11 @@ if(isset($_GET['idpaciente'])) {
 
 <div id="tituconsultascontainer" class="d-flex justify-content-center gx-0 mt-3">
 
-    <h1 id="tituloconsultas" class="text-center">Consultas <?php if(!empty($nompaciente)) echo " de " . $nompaciente; ?> </h1>
+    <h1 id="tituloconsultas" class="text-center">Consultas <?php if(!empty($nompaciente)) echo " de {$nompaciente}"; ?> </h1>
 
 </div>
+
+<?php if(!empty($consultasActuales)): ?>
 
 <div class="separador my-3">
 
@@ -122,6 +124,13 @@ if(isset($_GET['idpaciente'])) {
 
 </div>
 
+<?php 
+
+endif; 
+if(!empty($consultasFuturas)):
+
+?>
+
 <div class="separador my-3">
 
     <hr>
@@ -158,6 +167,13 @@ if(isset($_GET['idpaciente'])) {
     ?>
 
 </div>
+
+<?php 
+
+endif; 
+if(!empty($consultasPrevias)):
+
+?>
 
 <div class="separador my-3">
 
@@ -206,3 +222,5 @@ if(isset($_GET['idpaciente'])) {
     ?>
 
 </div>
+
+<?php endif; ?>

@@ -5,15 +5,17 @@ $(() => {
 
 function addListeners() {
 
-    $('#logo').on('click', cargarVistaInicio);
+    $('#nosotros, #nosotrosm').on('click', () => {
 
-    $('#nosotros, #nosotrosm').on('click', cargarVistaNosotros);
+        $('main').fadeOut(300, cargarVistaNosotros); 
+        $('#hrelleno').css({'height': '10000px'});
+    });
 
-    $('#inicio, #iniciom').on('click', cargarVistaInicio);
+    $('#inicio, #iniciom, #logo').on('click', () => {$('main').fadeOut(300, cargarVistaInicio)});
 
-    $('#servicios, #serviciosm').on('click', cargarVistaServicios);
+    $('#servicios, #serviciosm').on('click', () => {$('main').fadeOut(300, cargarVistaServicios)});
 
-    $('#contacto, #contactom').on('click', cargarVistaContacto);
+    $('#contacto, #contactom').on('click', () => {$('main').fadeOut(300, cargarVistaContacto)});
 
     $('#btnchat').on('click', () => window.open('https://api.whatsapp.com/send/?phone=598091814295', '_blank'));
 
@@ -26,7 +28,7 @@ function cargarVistaInicio() {
 
     $.get("vistas/vistaslobby/vistainicio.php", data => {
 
-        $('main').html(data);
+        $('main').empty().html(data).fadeIn(300, () => $('#hrelleno').css({'height': '120px'}));
         console.log("Cargando vista de 'Inicio'");
 
         // history.pushState({}, '', 'inicio');
@@ -43,10 +45,11 @@ function cargarVistaInicio() {
 function cargarVistaNosotros() {
 
     window.scrollTo({top: 0, behavior: 'smooth'});
+    $('#hrelleno').css({'height': '120px'});
 
     $.get("vistas/vistaslobby/vistanosotros.php", data => {
 
-        $('main').html(data);
+        $('main').empty().html(data).fadeIn(300);
         console.log("Cargando vista de 'Nosotros'");
 
         // history.pushState({}, '', 'contacto');
@@ -66,7 +69,7 @@ function cargarVistaServicios() {
 
     $.get("vistas/vistaslobby/vistaservicios.php", data => {
 
-        $('main').html(data);
+        $('main').empty().html(data).fadeIn(300);
         console.log("Cargando vista de 'Servicios'");
 
         iniciarServicios();
@@ -88,7 +91,7 @@ function cargarVistaContacto() {
 
     $.get("vistas/vistaslobby/vistacontacto.php", data => {
 
-        $('main').html(data);
+        $('main').empty().html(data).fadeIn(300);
         console.log("Cargando vista de 'Contacto'");
         $('#enviarmail').on('click', function (event) {
 

@@ -172,7 +172,7 @@ function cargarVistaFecha() {
 
                 infoconsulta.paso = 1
                 cargarVistaOdontologo();
-                alert("Ha ocurrido un error");
+                createPopup('Error', 'Ha ocurrido un error');
                 console.error("Error fatal");
             }
         });
@@ -226,6 +226,8 @@ function cargarVistaHora() {
             dataType: 'json',
             success: function (respuesta) {
                 
+                console.log(respuesta.horasDisponibles);
+
                 cargarHorasDisponibles(respuesta.horasDisponibles, respuesta.horarios);
 
                 if(infoconsulta.hora != null) {
@@ -241,7 +243,7 @@ function cargarVistaHora() {
 
                 infoconsulta.paso = 2;
                 cargarVistaFecha();
-                alert("Ha ocurrido un error");
+                createPopup('Error', 'Ha ocurrido un error');
                 console.error("Error fatal");
             }
         });
@@ -249,7 +251,6 @@ function cargarVistaHora() {
         $('#elegirhora #btnsmov #siguienteform').on('click', () => {
 
             let horasplit = $('.hora input:checked').val().split(':');
-            console.log(horasplit);
 
             if (horasplit) {
                 
@@ -302,7 +303,7 @@ function cargarVistaConfirmar() {
 
                 infoconsulta.paso = 3;
                 cargarVistaHora();
-                alert("Ha ocurrido un error");
+                createPopup('Error', 'Ha ocurrido un error');
                 console.error("Error fatal");
             }
         });
@@ -313,7 +314,11 @@ function cargarVistaConfirmar() {
     
         $('#inasunto').on('input', () => {
 
-            if($('#inasunto').val().length >= 5) $('#enviarreserva').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).on('click', () => enviarReserva()); 
+            if($('#inasunto').val().length >= 5) $('#enviarreserva').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).on('click', () => {
+
+                infoconsulta.asunto = $('#inasunto').val();
+                enviarReserva();
+            }); 
             else $('#enviarreserva').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, .45)' });
         });
     });
@@ -321,7 +326,22 @@ function cargarVistaConfirmar() {
 
 function enviarReserva() {
 
-    
+    $.ajax({
+
+        type: 'POST',
+        url: 'backend/consulta/reservar.php',
+        data: JSON.stringify(infoconsulta),
+        dataType: 'json',
+        success: function (response) {
+
+            console.log(response.debug); 
+        },
+        error: function (xhr, status, error) {
+
+            createPopup('Error', 'Ha ocurrido un error');
+            console.error(`Error fatal ${xhr} ${status} ${error}`);
+        }
+    });
 }
 
 function addSelectListener() {

@@ -1,0 +1,53 @@
+#noconsultascontainer {
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#noconsultas {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #00d33560;
+    padding: 1rem;
+    width: 70%;
+    border-radius: 15px;
+    margin-top: 6rem;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, .35);
+}
+
+#btnreservar {
+
+    background-color: #4294FF;
+    width: fit-content;
+    color: white;
+    padding: 15px 25px 15px 25px;
+    font-size: 2rem;
+    border-radius: 15px;
+    font-weight: 600;
+    text-shadow: 2px 1px 0 rgb(78, 78, 78);
+    box-shadow: 4px 4px 0 #9B9B9B;
+    line-height: 1;
+    text-decoration: none;
+    transition-duration: .3s;
+}
+
+#btnreservar:hover {
+
+    scale: 1.05;
+    filter: brightness(1.1);
+}
+
+h3, span {
+
+    width: 100%;
+    text-align: center;
+    color: rgb(0, 157, 255);
+    text-shadow: 0 0 1px rgba(0, 0, 0, .35);
+}
