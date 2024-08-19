@@ -111,7 +111,7 @@ $consultaPaciente = array();
 
         </div>
 
-        <div class="container fatherContResumen m-auto">
+        <div class="container  m-auto">
             <div class="contResumen row flex-column justify-content-center">
                 <div class="tituloResumen"><h1>Resumen</h1></div>
                 <div class="contentResumen">
@@ -126,6 +126,7 @@ $consultaPaciente = array();
             <button  id="btnModificar" class="btnInteractivo" value="Modificar"><h1>Modificar</h1></button>
             <button  id="btnCancelar" class="btnInteractivo"  value="Cancelar" disabled ><h1>Cancelar</h1></button>
             <button  id="btnGuardar"  class="btnInteractivo"  value="Guardar" disabled><h1>Guardar</h1></button>
+            <button  id="btnEliminar"  class="btnInteractivo"  value="Eliminar" disabled><h1>Eliminar</h1></button>
         </div>
     </div>
 
