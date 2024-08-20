@@ -283,4 +283,42 @@ function horasDisponibles($fecha, $idodontologo) {
     return $horasDisponibles;
 }
 
+function reloadSession() {
+
+    global $pdo;
+
+    if(isset($_SESSION['paciente'])) {
+
+        $idp = $_SESSION['paciente']['idpaciente'];
+
+        $sql = "SELECT * FROM paciente WHERE idpaciente = :idp";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':idp', $idp);
+
+        if($stmt->execute() && $stmt->rowCount() == 1) {
+
+            $tupla = $stmt->fetch(); 
+
+            $_SESSION['paciente'] = $tupla;
+        }
+    }
+    else if(isset($_SESSION['odontologo'])) {
+
+        $idp = $_SESSION['odontologo']['idodontologo'];
+
+        $sql = "SELECT * FROM odontologo WHERE idodontologo = :ido";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':ido', $ido);
+
+        if($stmt->execute() && $stmt->rowCount() == 1) {
+
+            $tupla = $stmt->fetch(); 
+
+            $_SESSION['odontologo'] = $tupla;
+        }
+    }
+}
+
 ?>
