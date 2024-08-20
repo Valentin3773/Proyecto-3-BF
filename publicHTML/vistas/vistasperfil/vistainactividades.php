@@ -1,0 +1,1 @@
+<h1 class="subtitulo">Mis Inactividades</h1>

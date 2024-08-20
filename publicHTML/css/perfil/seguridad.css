@@ -1,0 +1,80 @@
+#titulo_input {
+
+    background: #00B2FF;
+    display: inline-flex;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 1.5px 3px 0 #9B9B9B;
+    padding: 10px;
+    width: 35%;
+    justify-content: center;
+    border: .5px solid rgba(0, 0, 0, 0.3);
+}
+
+#titulo_input label {
+
+    background-color: unset;
+}
+
+input {
+
+    width: 100%;
+    border: none;
+    padding: 10px;
+    border-radius: 0 10px 10px 10px;
+    box-shadow: 1.5px 3px 0 #9B9B9B;
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 110%;
+    border: .5px solid rgba(0, 0, 0, 0.3);
+}
+
+label {
+
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-size: 110%;
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center !important;
+}
+
+#titulocambiarpass {
+
+    color: #00B2FF;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    font-size: 2.5rem;
+}
+
+#formcambiar {
+
+    background-color: #78B3FF;
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+#cambiarpasscontainer {
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cambiarpass {
+
+    background-color: #0AF0AB;
+    border: none;
+    color: white;
+    padding: .8rem;
+    border-radius: 10px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.65);
+    font-size: 1.6rem;
+    box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.35);
+    transition-duration: .3s;
+}
+
+#cambiarpass:hover {
+
+    scale: 1.05;
+    filter: brightness(1.1);
+}
