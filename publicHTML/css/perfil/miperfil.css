@@ -83,8 +83,9 @@
     align-items: center;
 }
 
-.dato h4 {
+.dato input {
 
+    border: none;
     margin: 0;
     text-align: center;
     color: #4294FF;

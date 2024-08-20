@@ -37,7 +37,9 @@ else if (isset($_GET['estado']) && $_GET['estado'] == 3) $estado = 3;
     <!-- JS -->
     <script src="js/preloader.js"></script>
     <script src="js/utilidades.js"></script>
+    <script defer src="js/perfil/updateProfile.js"></script>
     <script defer src="js/perfil/perfil.js"></script>
+    
 
 </head>
 

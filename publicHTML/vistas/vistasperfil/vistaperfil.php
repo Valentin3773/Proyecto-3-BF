@@ -4,11 +4,11 @@ session_start();
 
 $usertipo = isset($_SESSION['paciente']) ? false : true;
 
-$usuario = $_SESSION['paciente'] ?? $_SESSION['odontologo'];
+$usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odontologo'];
 
 ?>
 
-<h1 class="subtitulo">Mi Perfil</h1>
+<h1 class="subtitulo" id="$$$" data-type="$<?= $usertipo ?>">Mi Perfil</h1>
 
 <div id="fotowrapper">
 
@@ -24,15 +24,15 @@ $usuario = $_SESSION['paciente'] ?? $_SESSION['odontologo'];
 
         ?>
 
-        <div class="lapizeditar">
-            <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
+        <div class="lapizeditar" id="mdF">
+            <img src="img/iconosvg/lapiz.svg" id="mdF" alt="Modificar" title="Modificar">
         </div>
 
     </div>
 
 </div>
 
-<div class="row px-2">
+<div class="row px-2" id="contenedorPadre">
 
     <div class="col-xl-6 col-lg-6 col-12">
 
@@ -44,14 +44,14 @@ $usuario = $_SESSION['paciente'] ?? $_SESSION['odontologo'];
 
                 <div id="nombre" class="dato">
 
-                    <h4><?= $usuario['nombre'] ?></h4>
+                    <input type="text" value="<?= $usuario['nombre'] ?>" id="inNombre" disabled>
 
                 </div>
 
                 <div class="lapizcontainer">
 
-                    <div class="lapizeditar">
-                        <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
+                    <div class="lapizeditar" id="mdN">
+                        <img src="img/iconosvg/lapiz.svg" id="mdN" alt="Modificar" title="Modificar">
                     </div>
 
                 </div>
@@ -72,14 +72,14 @@ $usuario = $_SESSION['paciente'] ?? $_SESSION['odontologo'];
 
                 <div id="apellido" class="dato">
 
-                    <h4><?= $usuario['apellido'] ?></h4>
+                <input type="text" value="<?= $usuario['apellido'] ?>" id="inApellido" disabled>
 
                 </div>
 
                 <div class="lapizcontainer">
 
-                    <div class="lapizeditar">
-                        <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
+                    <div class="lapizeditar" id="mdA">
+                        <img src="img/iconosvg/lapiz.svg" id="mdA" alt="Modificar" title="Modificar">
                     </div>
 
                 </div>
@@ -100,14 +100,14 @@ $usuario = $_SESSION['paciente'] ?? $_SESSION['odontologo'];
 
             <div id="telefono" class="dato">
 
-                <h4><?= $usuario['telefono'] ?></h4>
+             <input type="text" value="<?= $usuario['telefono'] ?>" id="inTelefono" disabled>
 
             </div>
 
             <div class="lapizcontainer">
 
-                <div class="lapizeditar">
-                    <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
+                <div class="lapizeditar" id="mdT">
+                    <img src="img/iconosvg/lapiz.svg" id="mdT" alt="Modificar" title="Modificar">
                 </div>
 
             </div>
@@ -131,14 +131,14 @@ $usuario = $_SESSION['paciente'] ?? $_SESSION['odontologo'];
 
             <div id="direccion" class="dato">
 
-                <h4><?= $usuario['direccion'] ?></h4>
+             <input type="text" value="<?= $usuario['direccion'] ?>" id="inDireccion" disabled>
 
             </div>
 
             <div class="lapizcontainer">
 
-                <div class="lapizeditar">
-                    <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
+                <div class="lapizeditar" id="mdD">
+                    <img src="img/iconosvg/lapiz.svg" id="mdD" alt="Modificar" title="Modificar">
                 </div>
 
             </div>
@@ -157,14 +157,14 @@ $usuario = $_SESSION['paciente'] ?? $_SESSION['odontologo'];
 
             <div id="email" class="dato">
 
-                <h4><?= $usuario['email'] ?></h4>
+             <input type="text" value="<?= $usuario['email'] ?>" id="inEmail" disabled>
 
             </div>
 
             <div class="lapizcontainer">
 
-                <div class="lapizeditar">
-                    <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
+                <div class="lapizeditar" id="mdE">
+                    <img src="img/iconosvg/lapiz.svg" id="mdE" alt="Modificar" title="Modificar">
                 </div>
 
             </div>
@@ -172,5 +172,5 @@ $usuario = $_SESSION['paciente'] ?? $_SESSION['odontologo'];
         </div>
 
     </div>
-
+    <div id="btnGC"></div>
 </div>
