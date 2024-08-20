@@ -2,7 +2,7 @@
 
 session_start();
 
-$usertipo = $_SESSION['paciente'] ? false : true;
+$usertipo = isset($_SESSION['paciente']) ? false : true;
 
 $usuario = $_SESSION['paciente'] ?? $_SESSION['odontologo'];
 
@@ -20,6 +20,7 @@ $usuario = $_SESSION['paciente'] ?? $_SESSION['odontologo'];
 
             echo "<img id='fotoperfil' src='{$usuario["foto"]}' alt='Foto de perfil' title='Foto de perfil'>";
         }
+        else echo "<img id='fotoperfil' src='img/profile.jpg' alt='Foto de perfil' title='Foto de perfil'>";
 
         ?>
 
