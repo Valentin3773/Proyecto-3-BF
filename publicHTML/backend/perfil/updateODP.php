@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 function UPDATEPROFILE_ODONTOLOGO($pdo) {
     $respuesta = array();
-    $respuesta['error'] = $_POST['name'];
+    $respuesta['error'] = "Puede ser que sí ".$_POST['name'];
 
     header('Content-Type: application/json');
     echo json_encode($respuesta);

@@ -2,8 +2,8 @@ function funcionguardarCambios($data){
     alert("Funca: "+$data['dato']+" / "+$data['tipo']+" / "+$data['namedata']);
 
     if($data['tipo'] === "$1"){
-        let url = "backend/perfil/updateODP.php";const svdata = {name: $data['namedata'], value: $data['dato']};
-        alert(svdata['name']+"/"+svdata['value']);
+        let url = "backend/perfil/updateODP.php";let svdata = {name: $data['namedata'], value: $data['dato'], oldvalue: $data['old']};
+        alert(svdata['name']+"/"+svdata['value']+"/"+svdata['oldvalue']);
 
         $.ajax({
 
@@ -24,8 +24,9 @@ function funcionguardarCambios($data){
         });
 
     } else if ($data['tipo'] === "$") {
-        let url = "backend/perfil/updateCLP.php";const svdata = {name: $data['namedata'], value: $data['dato']};
-        alert(svdata['name']+"/"+svdata['value']);
+        let url = "backend/perfil/updateCLP.php";let svdata = {name: $data['namedata'], value: $data['dato'], oldvalue: $data['old']};
+        alert(svdata['name']+"/"+svdata['value']+"/"+svdata['oldvalue']);
+        
         $.ajax({
 
             type: 'POST',
