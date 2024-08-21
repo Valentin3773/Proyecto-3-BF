@@ -39,7 +39,7 @@ function cargarVistaPerfil() {
 
         //Listeners con datos importantes
         $('#mdF').on('click', function () {console.log("Foto");});
-        $('#mdN').on('click', function () {console.log("Nombre");Datos['namedata']="nombre";$('#inNombre').removeAttr('disabled');Datos['old'] = $('#inNombre').val();Datos['id']="#inNombre";integrarBoton(Datos)});
+        $('#mdN').on('click', function () {console.log("Nombre"); Datos['namedata']="nombre";$('#inNombre').removeAttr('disabled');Datos['old'] = $('#inNombre').val();Datos['id']="#inNombre";integrarBoton(Datos)});
         $('#mdA').on('click', function () {console.log("Apellido"); Datos['namedata']="apellido";$('#inApellido').removeAttr('disabled');Datos['old'] = $('#inApellido').val();Datos['id']="#inApellido";integrarBoton(Datos)});
         $('#mdT').on('click', function () {console.log("Telefono"); Datos['namedata']="telefono";$('#inTelefono').removeAttr('disabled');Datos['old'] = $('#inTelefono').val();Datos['id']="#inTelefono";integrarBoton(Datos)});
         $('#mdD').on('click', function () {console.log("Direccion"); Datos['namedata']="direccion";$('#inDireccion').removeAttr('disabled');Datos['old'] = $('#inDireccion').val();Datos['id']="#inDireccion";integrarBoton(Datos)});
