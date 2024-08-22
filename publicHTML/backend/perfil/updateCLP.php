@@ -26,17 +26,17 @@ function UPDATEPROFILE_PACIENTE() {
     $oldvalue = $data['oldvalue'];
     $nameROW = $data['name'];
 
-    //Consulta para modificar paciente
-    $consulta = "UPDATE paciente SET $name = :val1 WHERE $nameROW = :val2";
-    $stmt = $pdo->prepare($consulta);
-    $stmt->bindParam(':val1', $value);
-    $stmt->bindParam(':val2', $oldvalue);
-
     try {
+        // Consulta para modificar paciente
+        $consulta = "UPDATE paciente SET $name = :val1 WHERE $nameROW = :val2 and idpaciente = :idp";
+        $stmt = $pdo->prepare($consulta);
+        $stmt->bindParam(':val1', $value);
+        $stmt->bindParam(':val2', $oldvalue);
+        $stmt->bindParam(':idp', $idp);
         $stmt->execute();
         $respuesta['enviar'] = "Datos Actualizados";
-    } catch (Throwable $th) {
-        $respuesta['error'] = "Ha ocurrido un error: " . $th->getMessage();
+    } catch (PDOException $e) {
+        $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
     }
 
     // Respuesta

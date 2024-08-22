@@ -2,22 +2,21 @@
 include("../conexion.php");
 session_start();
 
-if($_SERVER['REQUEST_METHOD'] == "POST"){
-    UPDATEPROFILE_ODONTOLOGO(global $pdo);
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    UPDATEPROFILE_ODONTOLOGO($pdo);
 } else {
     echo "FUERA";
     exit();
 }
 
 function UPDATEPROFILE_ODONTOLOGO($pdo) {
-    $respuesta = array();
-    $respuesta['error'] = "Puede ser que sí ".$_POST['name'];
     // Se descodifica el objeto JSON para poder utilizar su contenido
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
+    $respuesta = array();
 
-    //Id del paciente
-    $idp = $_SESSION['paciente']['idpaciente'];
+    // Id del paciente
+    $ido = $_SESSION['odontologo']['idodontologo'];
 
     // Variables
     $name = $data['name'];
@@ -25,17 +24,18 @@ function UPDATEPROFILE_ODONTOLOGO($pdo) {
     $oldvalue = $data['oldvalue'];
     $nameROW = $data['name'];
 
-    //Consulta para modificar paciente
-    $consulta = "UPDATE paciente SET $name = :val1 WHERE $nameROW = :val2";
-    $stmt = $pdo->prepare($consulta);
-    $stmt->bindParam(':val1', $value);
-    $stmt->bindParam(':val2', $oldvalue);
 
     try {
+            // Consulta para modificar odontólogo
+        $consulta = "UPDATE odontologo SET $name = :val1 WHERE $nameROW = :val2 and idodontologo = :ido";
+        $stmt = $pdo->prepare($consulta);
+        $stmt->bindParam(':val1', $value);
+        $stmt->bindParam(':val2', $oldvalue);
+        $stmt->bindParam(':ido', $ido);
         $stmt->execute();
         $respuesta['enviar'] = "Datos Actualizados";
-    } catch (Throwable $th) {
-        $respuesta['error'] = "Ha ocurrido un error: " . $th->getMessage();
+    } catch (PDOException $e) {
+        $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
     }
     header('Content-Type: application/json');
     echo json_encode($respuesta);

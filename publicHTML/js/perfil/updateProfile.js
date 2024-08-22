@@ -13,9 +13,9 @@ function funcionguardarCambios($data){
             contentType: 'application/json',
             success: response => {
     
-                if (response.error === undefined) alert('Nuevo Aviso 1'+response.enviar);
+                if (response.error === undefined) alert('Nuevo Aviso 1: '+response.enviar);
     
-                else alert('Nuevo Aviso 2'+response.error);
+                else alert('Nuevo Aviso 2: '+response.error);
             },
             error: (jqXHR, estado, outputError) => {
     
