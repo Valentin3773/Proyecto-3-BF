@@ -299,6 +299,7 @@ function reloadSession() {
         if($stmt->execute() && $stmt->rowCount() == 1) {
 
             $tupla = $stmt->fetch(); 
+            unset($tupla['contrasenia']);
 
             $_SESSION['paciente'] = $tupla;
         }
@@ -315,6 +316,7 @@ function reloadSession() {
         if($stmt->execute() && $stmt->rowCount() == 1) {
 
             $tupla = $stmt->fetch(); 
+            unset($tupla['contrasenia']);
 
             $_SESSION['odontologo'] = $tupla;
         }

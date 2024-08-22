@@ -1,5 +1,7 @@
 <?php
 include("../conexion.php");
+include("../extractor.php");
+
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -10,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 
 function UPDATEPROFILE_ODONTOLOGO($pdo) {
+
     // Se descodifica el objeto JSON para poder utilizar su contenido
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
@@ -26,7 +29,7 @@ function UPDATEPROFILE_ODONTOLOGO($pdo) {
 
 
     try {
-            // Consulta para modificar odontólogo
+        // Consulta para modificar odontólogo
         $consulta = "UPDATE odontologo SET $name = :val1 WHERE $nameROW = :val2 and idodontologo = :ido";
         $stmt = $pdo->prepare($consulta);
         $stmt->bindParam(':val1', $value);
@@ -37,6 +40,7 @@ function UPDATEPROFILE_ODONTOLOGO($pdo) {
     } catch (PDOException $e) {
         $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
     }
+    
     header('Content-Type: application/json');
     echo json_encode($respuesta);
     exit();

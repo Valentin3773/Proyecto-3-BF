@@ -35,6 +35,7 @@ function UPDATEPROFILE_PACIENTE() {
         $stmt->bindParam(':idp', $idp);
         $stmt->execute();
         $respuesta['enviar'] = "Datos Actualizados";
+        reloadSession();
     } catch (PDOException $e) {
         $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
     }

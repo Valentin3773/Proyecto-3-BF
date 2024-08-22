@@ -1,9 +1,9 @@
 function funcionguardarCambios($data){
-    alert("Funca: "+$data['dato']+" / "+$data['tipo']+" / "+$data['namedata']);
+    alert("Funcaaaa: 1"+$data['dato']+" / "+$data['tipo']+" / "+$data['namedata']+" / "+$data['old']);
 
     if($data['tipo'] === "$1"){
         let url = "backend/perfil/updateODP.php";let svdata = {name: $data['namedata'], value: $data['dato'], oldvalue: $data['old']};
-        alert(svdata['name']+"/"+svdata['value']+"/"+svdata['oldvalue']);
+        alert("Funca: 2"+svdata['name']+"/"+svdata['value']+"/"+svdata['oldvalue']);
 
         $.ajax({
 

@@ -22,7 +22,7 @@ $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odo
 
         ?>
 
-        <div class="lapizeditar" id="mdF">
+        <div class="lapizeditar">
             <img src="img/iconosvg/lapiz.svg" id="mdF" alt="Modificar" title="Modificar">
         </div>
 
@@ -48,7 +48,7 @@ $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odo
 
                 <div class="lapizcontainer">
 
-                    <div class="lapizeditar" id="mdN">
+                    <div class="lapizeditar">
                         <img src="img/iconosvg/lapiz.svg" id="mdN" alt="Modificar" title="Modificar">
                     </div>
 
@@ -76,7 +76,7 @@ $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odo
 
                 <div class="lapizcontainer">
 
-                    <div class="lapizeditar" id="mdA">
+                    <div class="lapizeditar">
                         <img src="img/iconosvg/lapiz.svg" id="mdA" alt="Modificar" title="Modificar">
                     </div>
 
@@ -104,7 +104,7 @@ $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odo
 
             <div class="lapizcontainer">
 
-                <div class="lapizeditar" id="mdT">
+                <div class="lapizeditar">
                     <img src="img/iconosvg/lapiz.svg" id="mdT" alt="Modificar" title="Modificar">
                 </div>
 
@@ -135,7 +135,7 @@ $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odo
 
             <div class="lapizcontainer">
 
-                <div class="lapizeditar" id="mdD">
+                <div class="lapizeditar">
                     <img src="img/iconosvg/lapiz.svg" id="mdD" alt="Modificar" title="Modificar">
                 </div>
 
@@ -161,7 +161,7 @@ $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odo
 
             <div class="lapizcontainer">
 
-                <div class="lapizeditar" id="mdE">
+                <div class="lapizeditar">
                     <img src="img/iconosvg/lapiz.svg" id="mdE" alt="Modificar" title="Modificar">
                 </div>
 
