@@ -1,7 +1,6 @@
 <?php
 include("../conexion.php");
 include("../extractor.php");
-
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -37,6 +36,7 @@ function UPDATEPROFILE_ODONTOLOGO($pdo) {
         $stmt->bindParam(':ido', $ido);
         $stmt->execute();
         $respuesta['enviar'] = "Datos Actualizados";
+        reloadSession();
     } catch (PDOException $e) {
         $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
     }
