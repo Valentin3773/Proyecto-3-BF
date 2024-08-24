@@ -1,9 +1,7 @@
 function funcionguardarCambios($data){
-    alert("Funcaaaa: 1"+$data['dato']+" / "+$data['tipo']+" / "+$data['namedata']+" / "+$data['old']);
 
     if($data['tipo'] === "$1"){
         let url = "backend/perfil/updateODP.php";let svdata = {name: $data['namedata'], value: $data['dato'], oldvalue: $data['old']};
-        alert("Funca: 2"+svdata['name']+"/"+svdata['value']+"/"+svdata['oldvalue']);
 
         $.ajax({
 
@@ -13,9 +11,9 @@ function funcionguardarCambios($data){
             contentType: 'application/json',
             success: response => {
     
-                if (response.error === undefined) alert('Nuevo Aviso 1: '+response.enviar);
+                if (response.error === undefined) createPopup('Nuevo Aviso',response.enviar);
     
-                else alert('Nuevo Aviso 2: '+response.error);
+                else createPopup('Nuevo Aviso',response.error);
             },
             error: (jqXHR, estado, outputError) => {
     
@@ -25,7 +23,6 @@ function funcionguardarCambios($data){
 
     } else if ($data['tipo'] === "$") {
         let url = "backend/perfil/updateCLP.php";let svdata = {name: $data['namedata'], value: $data['dato'], oldvalue: $data['old']};
-        alert(svdata['name']+"/"+svdata['value']+"/"+svdata['oldvalue']);
         
         $.ajax({
 
@@ -35,9 +32,9 @@ function funcionguardarCambios($data){
             contentType: 'application/json',
             success: response => {
     
-                if (response.error === undefined) alert('Nuevo Aviso '+response.enviar);
+                if (response.error === undefined) createPopup('Nuevo Aviso',response.enviar);
     
-                else alert('Nuevo Aviso '+response.error);
+                else createPopup('Nuevo Aviso',response.error);
             },
             error: (jqXHR, estado, outputError) => {
     
@@ -46,10 +43,6 @@ function funcionguardarCambios($data){
         });
 
     } else {
-        alert("A Sucedido un Error Inseperado");
+        createPopup("Nuevo Aviso","A Sucedido un Error Inseperado");
     }
-}
-
-function funcioncancelarCambios($data){
-    alert("AAA: "+$data['old']);
 }
