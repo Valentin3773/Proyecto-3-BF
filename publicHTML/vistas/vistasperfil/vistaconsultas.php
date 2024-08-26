@@ -4,6 +4,8 @@ include("../../backend/conexion.php");
 
 session_start();
 
+include("../../backend/extractor.php");
+
 reloadSession();
 
 if (!isset($_SESSION['paciente'])) header('Location: ../../index.php');
