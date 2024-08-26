@@ -89,8 +89,3 @@ body {
 
     transition-duration: .5s;
 }
-body.blurry {
-
-    filter: unset !important;
-    overflow: hidden !important;
-}

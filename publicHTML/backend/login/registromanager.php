@@ -2,11 +2,9 @@
 
 include("../conexion.php");
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    processRegisterForm();
-}
+if ($_SERVER["REQUEST_METHOD"] == "POST") processRegisterForm();
 
-function processRegisterForm() {
+function processRegisterForm() : void {
 
     global $pdo;
 
@@ -36,11 +34,11 @@ function processRegisterForm() {
     else if (!ctype_digit($documento)) {
 
         $datos['error'] = "El documento debe ser ingresado solo con números y sin guiones.";
-    }
+    } 
     else if (strlen($documento) != 8) {
 
         $datos['error'] = "El documento debe tener exactamente 8 dígitos.";
-    }
+    } 
     else if ($email === null || $email === '') {
 
         $datos['error'] = "Email no proporcionado.";
@@ -58,11 +56,11 @@ function processRegisterForm() {
         $datos['error'] = "Confirmación de contraseña no proporcionada.";
     } 
     else if ($contrasenia !== $concontrasenia) {
-        
+
         $datos['error'] = "Las contraseñas no coinciden.";
     } 
     else {
-    
+
         $chekeo = "SELECT documento FROM paciente WHERE documento = :documento OR email = :email";
         $stmt = $pdo->prepare($chekeo);
         $stmt->bindParam(':documento', $documento);
@@ -70,34 +68,29 @@ function processRegisterForm() {
 
         if ($stmt->execute()) {
 
-                if ($stmt->rowCount() > 0) {
+            if ($stmt->rowCount() > 0) {
 
-                    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-                    $datos['error'] = "Usuario existente: $email";
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                $datos['error'] = "Usuario existente: $email";
+            } 
+            else {
 
+                $hashedPassword = password_hash($contrasenia, PASSWORD_BCRYPT);
+
+                $sql = "INSERT INTO paciente (documento, nombre, apellido, email, contrasenia, direccion, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $pdo->prepare($sql);
+
+                if ($stmt->execute([$documento, $nombre, $apellidos, $email, $hashedPassword, $direccion, $telefono])) {
+
+                    $datos['registrado'] = "Usuario Registrado";
                 } 
                 else {
-                    
-                    $hashedPassword = password_hash($contrasenia,PASSWORD_BCRYPT);
-
-                    $sql = "INSERT INTO paciente (documento, nombre, apellido, email, contrasenia, direccion, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                    $stmt = $pdo->prepare($sql);
-
-                    if ($stmt->execute([$documento, $nombre, $apellidos, $email, $hashedPassword, $direccion, $telefono])) {
-
-                        $datos['registrado'] = "Usuario Registrado";
-
-                    } 
-                    else {
-                        $datos['error'] = "Lo siento! Se ha presentado un error.";
-                    }
+                    $datos['error'] = "Lo siento! Se ha presentado un error.";
                 }
+            }
         }
     }
     header('Content-Type: application/json');
     echo json_encode($datos);
     exit();
-
-} 
-
-?>
+}

@@ -4,6 +4,8 @@ include("../../backend/conexion.php");
 
 session_start();
 
+reloadSession();
+
 if (!isset($_SESSION['paciente'])) header('Location: ../../index.php');
 
 $consultasFuturas = array();

@@ -1,6 +1,10 @@
 <?php
 
+include('backend/extractor.php');
+
 session_start();
+
+reloadSession();
 
 if (!isset($_GET['estado']) || (isset($_GET['estado']) && $_GET['estado'] == 1)) $estado = 1;
 

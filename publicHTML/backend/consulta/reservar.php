@@ -35,7 +35,7 @@ if($data && isset($_SESSION['paciente'])) {
         $sql = 'INSERT INTO consulta (fecha, hora, idodontologo, idpaciente, asunto) VALUES (:fecha, :hora, :ido, :idp, :asunto)';
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':fecha', $fecha);
-        $stmt->bindParam(':fecha', $hora->format('H:i:s'));
+        $stmt->bindValue(':hora', "{$hora->format('H:i')}:00");
         $stmt->bindParam(':ido', $ido);
         $stmt->bindParam(':idp', $idp); 
         $stmt->bindParam(':asunto', $asunto);

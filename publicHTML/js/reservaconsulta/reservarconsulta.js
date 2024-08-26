@@ -326,6 +326,8 @@ function cargarVistaConfirmar() {
 
 function enviarReserva() {
 
+    $('#enviarreserva').prop('disabled', true).css({'background-color': 'rgb(0, 178, 255, .5)'}).html('<i class="fas fa-spinner fa-pulse"></i>');
+
     $.ajax({
 
         type: 'POST',
@@ -334,7 +336,11 @@ function enviarReserva() {
         dataType: 'json',
         success: function (response) {
 
-            console.log(response.debug); 
+            if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.exito, 'index.php');
+
+            else createPopup('Nuevo Aviso', response.error);
+
+            $('#enviarreserva').prop('disabled', false).css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Enviar');
         },
         error: function (xhr, status, error) {
 

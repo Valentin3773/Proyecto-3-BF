@@ -1,12 +1,20 @@
 <?php 
 
+include('backend/extractor.php');
+
 session_start();
+
+reloadSession();
 
 if(!isset($_GET['estado']) || (isset($_GET['estado']) && $_GET['estado'] == 1)) $estado = 1;
 
 else if(isset($_GET['estado']) && $_GET['estado'] == 2) $estado = 2;
 
 else if(isset($_GET['estado']) && $_GET['estado'] == 3) $estado = 3;
+
+else if(isset($_GET['estado']) && $_GET['estado'] == 4) $estado = 4;    
+
+else if(isset($_GET['estado']) && $_GET['estado'] == 5) $estado = 5;
 
 ?>
 

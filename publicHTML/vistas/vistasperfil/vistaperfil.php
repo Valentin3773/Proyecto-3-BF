@@ -2,6 +2,10 @@
 
 session_start();
 
+include("../../backend/extractor.php");
+
+reloadSession();
+
 $usertipo = isset($_SESSION['paciente']) ? false : true;
 
 $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odontologo'];

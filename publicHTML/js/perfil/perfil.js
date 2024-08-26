@@ -17,6 +17,7 @@ $(() => {
 });
 
 var Datos = {
+
     tipo: "",
     dato: "",
     namedata: "",
@@ -34,7 +35,6 @@ function cargarVistaPerfil() {
 
         $('main').empty().html(contenido).fadeIn(200);
         integrarEventos();
-
     });
 
     $('#sidebar #btnsuperiores button').css({ 'text-decoration': 'none' });
@@ -43,12 +43,17 @@ function cargarVistaPerfil() {
 }
 
 function integrarBoton($datos, $id) {
+
     //Aca sucede la magia
     if ($($id).attr('src', 'img/iconosvg/Guardar.svg')) {
+
         console.log(0)
         quitarEventos();
+
         $($id).on('click', function () {
+
             if ($($datos['inputID']).val() != $datos['old']) {
+
                 integrarEventos();
                 $datos['tipo'] = $("#\\$\\$\\$").attr('data-type');
                 $datos['dato'] = $($datos['inputID']).val();
@@ -56,7 +61,9 @@ function integrarBoton($datos, $id) {
                 $($datos['inputID']).prop('disabled', true);
                 funcionguardarCambios($datos);
                 console.log("Guardar");
-            } else {
+            } 
+            else {
+
                 $($datos['inputID']).val($datos['old']);
                 $($id).attr('src', 'img/iconosvg/lapiz.svg');
                 $($datos['inputID']).prop('disabled', true);
@@ -65,14 +72,12 @@ function integrarBoton($datos, $id) {
             }
             //window.location.replace("index.php");
         });
-    } else {
-        $($id).attr('src', 'img/iconosvg/Guardar.svg');
-    }
-
-
+    } 
+    else $($id).attr('src', 'img/iconosvg/Guardar.svg');
 }
 
 function integrarEventos() {
+
     //Listeners con datos importantes
     $('#mdF').on('click', function () { console.log("Foto"); });
     $('#mdN').on('click', function () { Datos['namedata'] = "nombre"; $('#inNombre').removeAttr('disabled'); Datos['old'] = $('#inNombre').val(); Datos['inputID'] = "#inNombre"; integrarBoton(Datos, "#mdN"); });
@@ -83,6 +88,7 @@ function integrarEventos() {
 }
 
 function quitarEventos() {
+
     $('#mdF').off("click");
     $('#mdN').off("click");
     $('#mdA').off("click");

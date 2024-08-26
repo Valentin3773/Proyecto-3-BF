@@ -85,6 +85,8 @@
 
 .dato input {
 
+    width: 100%;
+    background-color: white;
     border: none;
     margin: 0;
     text-align: center;

@@ -6,10 +6,12 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    loginCheckAdmin($pdo);
+    loginCheckAdmin();
 }
 
-function loginCheckAdmin($pdo) {
+function loginCheckAdmin() {
+
+    global $pdo;
 
     $email = isset($_POST['email']) ? $_POST['email'] : null;
     $contrasenia = isset($_POST['contrasenia']) ? $_POST['contrasenia'] : null;
@@ -45,7 +47,6 @@ function loginCheckAdmin($pdo) {
                     $_SESSION = array();
                     unset($tupla['contrasenia']);
                     $_SESSION['odontologo'] = $tupla;
-                    $datos = $tupla;
 
                     $datos['admin'] = "Iniciando Sesion";
                 } 

@@ -1,10 +1,10 @@
-<?php
+<?php 
+
+include('backend/extractor.php');
+
 session_start();
 
-if (isset($_SESSION['paciente'])) {
-
-    // echo $_SESSION['paciente']['foto'];
-}
+reloadSession();
 
 ?>
 
@@ -120,7 +120,8 @@ if (isset($_SESSION['paciente'])) {
                     if (!isset($_SESSION['paciente']) || (isset($_SESSION['paciente']) && !isset($_SESSION['paciente']['foto']))) {
 
                         echo "<img src='img/iconoperfil.png' alt='Foto de Perfil' title='Mi Perfil'>";
-                    } else echo "<img src='{$_SESSION["paciente"]["foto"]}' alt='Foto de Perfil' title='Mi Perfil'>";
+                    } 
+                    else echo "<img src='{$_SESSION["paciente"]["foto"]}' alt='Foto de Perfil' title='Mi Perfil'>";
 
                     ?>
 

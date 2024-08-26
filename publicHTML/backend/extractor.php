@@ -2,6 +2,15 @@
 
 // Extractor es un modulo que incluye funciones que mejoran la calidad de vida de los programadores.
 
+$dir = "{$_SERVER['DOCUMENT_ROOT']}/Proyecto-3-BF/publicHTML/";
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require $dir."lib/PHPMailer/PHPMailer.php";
+require $dir."lib/PHPMailer/Exception.php";
+require $dir."lib/PHPMailer/SMTP.php";
+
 include('conexion.php');
 
 function getDatesFromRange($fechainicio, $fechafin) {
@@ -26,10 +35,10 @@ function getAdjustedHoursFromRange($hora_inicio, $hora_fin) {
 
     while ($hora_actual <= $hora_fin) {
 
-        $hora_actual += 30 * 60; 
+        $hora_actual += 30 * 60;
 
         $minutos_restantes = date('i', $hora_actual) % 30;
-        
+
         if ($minutos_restantes > 0) {
 
             $hora_actual += (30 - $minutos_restantes) * 60;
@@ -61,17 +70,24 @@ function getHoraActual() {
     return $resultado['hora'];
 }
 
-function sumarFecha($fecha, $intervalo, $cantidad) {
+function sumarFecha($fecha, $intervalo, $cantidad)
+{
 
     global $pdo;
 
-    switch($intervalo) {
-        
-        case "dia": $intervalont = "DAY"; break;
+    switch ($intervalo) {
 
-        case "mes": $intervalont = "MONTH"; break;
+        case "dia":
+            $intervalont = "DAY";
+            break;
 
-        case "año": $intervalont = "YEAR"; break;
+        case "mes":
+            $intervalont = "MONTH";
+            break;
+
+        case "año":
+            $intervalont = "YEAR";
+            break;
     }
 
     $sql = "SELECT DATE_ADD(:fecha, INTERVAL :cantidad " . $intervalont . ") AS sumafecha";
@@ -85,7 +101,8 @@ function sumarFecha($fecha, $intervalo, $cantidad) {
     return $resultado['sumafecha'];
 }
 
-function fechaDisponible($fecha, $idodontologo) {
+function fechaDisponible($fecha, $idodontologo): bool
+{
 
     global $pdo;
 
@@ -97,7 +114,7 @@ function fechaDisponible($fecha, $idodontologo) {
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':ido', $idodontologo);
     $stmt->bindParam(':dia', $dayOfWeek);
-    if($stmt->execute()) {
+    if ($stmt->execute()) {
 
         $horarios = $stmt->fetchAll();
 
@@ -111,7 +128,7 @@ function fechaDisponible($fecha, $idodontologo) {
     $stmt->bindParam(':ido', $idodontologo);
     $stmt->bindParam(':fecha', $fecha);
 
-    if($stmt->execute()) {
+    if ($stmt->execute()) {
 
         $inactividades = $stmt->fetchAll();
     }
@@ -123,7 +140,7 @@ function fechaDisponible($fecha, $idodontologo) {
     $stmt->bindParam(':ido', $idodontologo);
     $stmt->bindParam(':fecha', $fecha);
 
-    if($stmt->execute()) {
+    if ($stmt->execute()) {
 
         $consultas = $stmt->fetchAll();
     }
@@ -169,7 +186,7 @@ function fechaDisponible($fecha, $idodontologo) {
                 }
             }
             // Verificar si la hora está ocupada por otra consulta
-            
+
             if (in_array($hora, $horasOcupadas)) $disponible = false;
 
             if ($disponible) return true;
@@ -180,7 +197,8 @@ function fechaDisponible($fecha, $idodontologo) {
     return false;
 }
 
-function horasDisponibles($fecha, $idodontologo) {
+function horasDisponibles($fecha, $idodontologo): array
+{
 
     global $pdo;
 
@@ -195,7 +213,7 @@ function horasDisponibles($fecha, $idodontologo) {
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':ido', $idodontologo);
     $stmt->bindParam(':dia', $dayOfWeek);
-    if($stmt->execute()) {
+    if ($stmt->execute()) {
 
         $horarios = $stmt->fetchAll();
 
@@ -209,7 +227,7 @@ function horasDisponibles($fecha, $idodontologo) {
     $stmt->bindParam(':ido', $idodontologo);
     $stmt->bindParam(':fecha', $fecha);
 
-    if($stmt->execute()) {
+    if ($stmt->execute()) {
 
         $inactividades = $stmt->fetchAll();
     }
@@ -221,7 +239,7 @@ function horasDisponibles($fecha, $idodontologo) {
     $stmt->bindParam(':ido', $idodontologo);
     $stmt->bindParam(':fecha', $fecha);
 
-    if($stmt->execute()) {
+    if ($stmt->execute()) {
 
         $consultas = $stmt->fetchAll();
     }
@@ -268,11 +286,12 @@ function horasDisponibles($fecha, $idodontologo) {
                 }
             }
             // Verificar si la hora está ocupada por otra consulta
-            
+
             if (in_array($hora, $horasOcupadas)) $disponible = false;
 
             // Si la fecha es hoy, verificar que la hora de inicio sea al menos 1 hora después de la hora actual
             if ($fecha == $fechaActual)
+            
                 if (strtotime($fecha . ' ' . $hora) <= strtotime('+1 hour', strtotime($fechaActual . ' ' . $horaActual))) $disponible = false;
 
             if ($disponible) $horasDisponibles[] = $hora;
@@ -283,11 +302,11 @@ function horasDisponibles($fecha, $idodontologo) {
     return $horasDisponibles;
 }
 
-function reloadSession() {
+function reloadSession(): void {
 
     global $pdo;
 
-    if(isset($_SESSION['paciente'])) {
+    if (isset($_SESSION['paciente'])) {
 
         $idp = $_SESSION['paciente']['idpaciente'];
 
@@ -296,15 +315,14 @@ function reloadSession() {
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':idp', $idp);
 
-        if($stmt->execute() && $stmt->rowCount() == 1) {
+        if ($stmt->execute() && $stmt->rowCount() == 1) {
 
             $tupla = $stmt->fetch(); 
             unset($tupla['contrasenia']);
 
             $_SESSION['paciente'] = $tupla;
         }
-    }
-    else if(isset($_SESSION['odontologo'])) {
+    } else if (isset($_SESSION['odontologo'])) {
 
         $idp = $_SESSION['odontologo']['idodontologo'];
 
@@ -313,7 +331,7 @@ function reloadSession() {
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':ido', $ido);
 
-        if($stmt->execute() && $stmt->rowCount() == 1) {
+        if ($stmt->execute() && $stmt->rowCount() == 1) {
 
             $tupla = $stmt->fetch(); 
             unset($tupla['contrasenia']);
@@ -323,4 +341,143 @@ function reloadSession() {
     }
 }
 
-?>
+function generateToken($key, $length = 32) {
+
+    $randomNumber = random_int(100000, 999999);
+    return [hash_hmac('sha256', $randomNumber, $key), $randomNumber];
+}
+
+function enviarEmailVerificador(string $destino, int $idp, string $verificador) {
+
+    $mail = new PHPMailer(true);
+
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'laprogramarmy@gmail.com';
+    $mail->Password = 'khpr cean piib ssiu';
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+    $mail->CharSet = 'UTF-8';
+    $mail->isHTML(true);
+
+    $mensaje = "
+            <!DOCTYPE html>
+            <html lang='es'>
+            <head>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f4f4f4;
+                        margin: 0;
+                        padding: 0;
+                    }
+                    .container {
+                        background-color: #000000;
+                        width: 80%;
+                        margin: 20px auto;
+                        padding: 20px;
+                        border-radius: 10px;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    }
+                    h1 {
+                        color: #ffffff;
+                        text-align: center;
+                    }
+                    h3,
+                    p {
+                        font-size: 16px;
+                        line-height: 1.5;
+                        color: #666666;
+                        text-align: center;
+                    }
+                    .footer {
+                        text-align: center;
+                        margin-top: 20px;
+                        font-size: 12px;
+                        color: #aaaaaa;
+                    }
+                    #linkcontainer {
+
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    /* From Uiverse.io by adamgiebl */
+                    a {
+                        position: relative;
+                        display: inline-block;
+                        margin: 15px;
+                        padding: 15px 30px;
+                        text-align: center;
+                        font-size: 18px;
+                        letter-spacing: 1px;
+                        text-decoration: none;
+                        color: #725AC1;
+                        background: transparent;
+                        cursor: pointer;
+                        transition: ease-out 0.5s;
+                        border: 2px solid #725AC1;
+                        border-radius: 10px;
+                        box-shadow: inset 0 0 0 0 #725AC1;
+                    }
+                    a:hover {
+                        color: white;
+                        box-shadow: inset 0 -100px 0 0 #725AC1;
+                    }
+                    a:active {
+                        transform: scale(0.9);
+                    }
+                </style>
+            </head>
+            <body>
+                <div class='container'>
+                    <h1>Verifica tu cuenta de la clínica</h1>
+                    <div id='linkcontainer'>
+                        <a href='localhost/Proyecto-3-BF/publicHTML/backend/login/verificaremail.php?idp={$idp}&verificador={$verificador}'>Verificar cuenta</a>
+                    </div>
+                    <p class='footer'>Este es un mensaje automático, por favor no responda directamente a este correo.</p>
+                </div>
+            </body>
+            </html>
+        ";
+
+    // Cabeceras del correo
+    $headers = "MIME-Version: 1.0\r\n";
+    $headers .= "Content-type: text/html; charset=utf-8\r\n";
+
+    // Enviar correo con PHPMailer
+    $mail->setFrom('clinicasaludbucal@gmail.com', 'Clinica Salud Bucal', $headers);
+    $mail->addAddress($destino);
+    $mail->Subject = 'Verifica tu cuenta';
+    $mail->Body    = $mensaje;
+
+    $mail->send(); // Enviar correo
+}
+
+function verificarCuentaActivada(string $destino, int $idp): void {
+
+    global $pdo;
+
+    $sql = "SELECT verificador FROM paciente WHERE idpaciente = :idp";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':idp', $idp);
+
+    if ($stmt->execute() && $stmt->rowCount() == 1) {
+
+        if ($stmt->fetch()['verificador'] == 'verificado') return;
+
+        $verificador = generateToken('tremendaclinica2024');
+
+        $sql = "UPDATE paciente SET verificador = :verificador WHERE idpaciente = :idp";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':verificador', $verificador[0]);
+        $stmt->bindParam(':idp', $idp);
+
+        $stmt->execute();
+
+        enviarEmailVerificador($destino, $idp, $verificador[1]);
+    }
+    else return;
+}

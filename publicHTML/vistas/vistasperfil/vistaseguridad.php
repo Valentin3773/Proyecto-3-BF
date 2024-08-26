@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+
+include("../../backend/extractor.php");
+
+reloadSession();
+
+?>
+
 <h1 class="subtitulo">Seguridad</h1>
     
 <!-- <h2 id="titulocambiarpass" class="mt-4">Privacidad</h2> -->

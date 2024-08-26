@@ -7,6 +7,10 @@ $(() => {
         case 2: cargarVistaRegistro(); break;
 
         case 3: cerrarSesion(); break;
+
+        case 4: createHeaderPopup('Nuevo Aviso', 'El código de verificación no es válido', 'index.php'); break;
+
+        case 5: createHeaderPopup('Nuevo Aviso', 'Su cuenta se ha verificado y activado', 'index.php'); break;
     }
 });
 
@@ -106,6 +110,8 @@ function loginConfirm(datos) {
             processData: false,
             contentType: false,
             success: response => {
+                
+                console.log(response);
 
                 if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.enviar, 'index.php');
 

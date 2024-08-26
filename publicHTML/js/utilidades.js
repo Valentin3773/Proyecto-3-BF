@@ -12,13 +12,13 @@ function createPopup(titulo, contenido) {
     $('#div-mensaje-popup').hide();
     $.get(`vistas/popupmensaje.php ? Contenido=${contenido}&Aviso=${titulo}`, data => {
 
-        $('body').addClass('blurry');
+        //$('body').addClass('blurry');
 
         $("#div-mensaje-popup").html(data).fadeIn(500);
         $('#btnCerrar').on("click", () => {
 
             $("#div-mensaje-popup").fadeOut(500);
-            $('body').removeClass('blurry');
+            //$('body').removeClass('blurry');
         });
     });
 }
