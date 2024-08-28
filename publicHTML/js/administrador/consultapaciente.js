@@ -1,11 +1,18 @@
 $(() => addBTNListeners());
+var iniData = {
+    asunto: ($('#asunto-CP').val()),
+    duracion: Number($('#duracion-CP').val()),
+    resumen: ($('#resumen-CP').val()),
+    fechaV: $('.contentFecha h1').html(),
+    horaV: $('.contentHora h1').html()
+}
 
 function addBTNListeners() {
 
     $('#btnModificar').on('click', function () { funcionModificar() });
     $('#btnCancelar').on('click', function () { funcionCancelar() });
     $('#btnGuardar').on('click', function () { funcionGuardar() });
-    $('#btnEliminar').on('click', function () { functionEliminar()});
+    $('#btnEliminar').on('click', function () { functionEliminar() });
 
     $('#btnCancelar').css("opacity", 0.5);
     $('#btnGuardar').css("opacity", 0.5);
@@ -34,7 +41,7 @@ function funcionModificar() {
 }
 
 function funcionCancelar() {
-    
+
     console.log("Cancelar");
     $('#btnCancelar').css("opacity", 0.5);
     $('#btnGuardar').css("opacity", 0.5);
@@ -53,6 +60,10 @@ function funcionCancelar() {
     $('#resumen-CP').prop('disabled', true);
     $("#hora-CP").val($("#hora-CP option:first").val());
     $("#fecha-CP").val($("#fecha-CP option:first").val());
+
+    $('#asunto-CP').val(iniData['asunto']);
+    $('#duracion-CP').val(iniData['duracion']);
+    $('#resumen-CP').val(iniData['resumen']);
 }
 
 function funcionGuardar() {
@@ -104,35 +115,52 @@ function funcionGuardar() {
 
 }
 
-function functionEliminar(){
+function functionEliminar() {
     console.log("Eliminar");
 
     const url = 'backend/admin/deleteConsultaPaciente.php';
     const data = {
-
-        asunto: ($('#asunto-CP').val()),
-        hora: ($('#hora-CP option:selected').html()),
-        duracion: Number($('#duracion-CP').val()),
-        fecha: ($('#fecha-CP option:selected').html()),
-        resumen: ($('#resumen-CP').val()),
         fechaV: $('.contentFecha h1').html(),
         horaV: $('.contentHora h1').html()
     };
+    
+    var Confirmar = prompt("¿Está seguro?", "Ingrese Confirmar");
+    if (Confirmar === null) {
+        console.log("Cancelado");
+        $('#btnCancelar').css("opacity", 0.5);
+        $('#btnGuardar').css("opacity", 0.5);
+        $('#btnEliminar').css("opacity", 0.5);
 
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: JSON.stringify(data),
-        contentType: 'application/json',
-        success: function (response) {
-            
-            if (response.error === undefined) createPopup('Nuevo Aviso', response.enviar);
+        $('#btnModificar').css("opacity", 1);
+        $('#btnModificar').removeAttr('disabled');
 
-            else createPopup('Nuevo Aviso', response.error);
-        },
-        error: (jqXHR, estado, outputError) => {
+        $('#btnCancelar').prop('disabled', true);
+        $('#btnGuardar').prop('disabled', true);
+        $('#btnEliminar').prop("disabled", true);
+        $('#asunto-CP').prop('disabled', true);
+        $('#hora-CP').prop('disabled', true);
+        $('#duracion-CP').prop('disabled', true);
+        $('#fecha-CP').prop('disabled', true);
+        $('#resumen-CP').prop('disabled', true);
 
-            alert("Error al procesar la solicitud: " + outputError);
-        }
-    });
+    } else if (Confirmar.toLowerCase() === "confirmar") {
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function (response) {
+                if (response.error === undefined) {
+                    createPopup('Nuevo Aviso', response.enviar);
+                    window.location.href = "administrador.php";
+                } else {
+                    createPopup('Nuevo Aviso', response.error);
+                }
+            },
+            error: function (jqXHR, estado, outputError) {
+                alert("Error al procesar la solicitud: " + outputError);
+            }
+        });
+    }
 }
+

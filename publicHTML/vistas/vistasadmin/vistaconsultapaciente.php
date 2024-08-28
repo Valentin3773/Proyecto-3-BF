@@ -98,7 +98,8 @@ $consultaPaciente = array();
                         <option value="">Elija una fecha</option>
                         <?php
                             foreach ($conjFechas as $fechaValue) {
-                                if(isDateAvailable($ido,$fecha)){
+                                if(fechaDisponible($fecha,$ido))
+                                {
                                 echo '<option value="">'.$fechaValue.'</option>';
                                 }
                             }

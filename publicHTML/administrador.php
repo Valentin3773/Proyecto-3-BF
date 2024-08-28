@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_SESSION['odontologo'])) header('Location: index.php');
+//if (!(isset($_SESSION['odontologo']))) header('Location: index.php');
 
 include('backend/extractor.php');
 
