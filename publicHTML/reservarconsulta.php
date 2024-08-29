@@ -1,8 +1,12 @@
 <?php
 
-include('backend/extractor.php');
-
 session_start();
+
+if(!isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) header('Location: login.php');
+
+else if(!isset($_SESSION['paciente']) && isset($_SESSION['odontologo'])) header('Location: index.php');
+
+include('backend/extractor.php');
 
 reloadSession();
 

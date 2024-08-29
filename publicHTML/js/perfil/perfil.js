@@ -12,8 +12,13 @@ $(() => {
         case 1: cargarVistaPerfil(); break;
 
         case 2: cargarVistaConsultas(); break;
+
+        case 3: cargarVistaHorarios(); break;
+
+        case 4: cargarVistaInactividades(); break;
     }
 
+    history.replaceState({path: 'perfil.php'}, '', 'perfil.php');
 });
 
 var Datos = {

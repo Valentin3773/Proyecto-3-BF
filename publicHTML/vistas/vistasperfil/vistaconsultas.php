@@ -239,7 +239,6 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
             <div id="noconsultas">
 
                 <h3>Aún no tienes ninguna consulta</h3>
-                <span>Reserva una haciendo clic aquí</span>
 
                 <a href="reservarconsulta.php" id="btnreservar" title="Reservar una consulta">Reservar<br>Consulta</a>
                 

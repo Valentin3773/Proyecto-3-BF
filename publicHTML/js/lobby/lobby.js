@@ -1,6 +1,8 @@
 $(() => {
 
     addListeners();
+
+    history.replaceState({path: 'index.php'}, '', 'index.php');
 });
 
 function addListeners() {

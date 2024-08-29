@@ -12,6 +12,8 @@ $(() => {
 
         case 5: createHeaderPopup('Nuevo Aviso', 'Su cuenta se ha verificado y activado', 'index.php'); break;
     }
+
+    history.replaceState({path: 'login.php'}, '', 'login.php');
 });
 
 function cargarVistaLogin() {
@@ -175,7 +177,7 @@ function loginAdminConfirm(datos) {
             contentType: false,
             success: response => {
 
-                if (response.error === undefined) createHeaderPopup('Nuevo Avisoaaaaaaaaaaaa', response.admin, 'administrador.php');
+                if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.admin, 'administrador.php');
 
                 else createPopup('Nuevo Aviso', response.error);
 

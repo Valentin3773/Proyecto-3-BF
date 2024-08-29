@@ -30,6 +30,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: fondo 1s infinite linear;
+    transition-duration: 300ms;
 }
 
 h1, h2, h3, h4, h5 {
@@ -179,6 +181,7 @@ main {
     padding: .7rem;
     overflow-x: hidden;
     overflow-y: scroll;
+    background-color: white;
 }
 
 #sidebar {
@@ -218,7 +221,7 @@ main {
     background-color: white;
     color: #4294FF;
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     border: none;
     padding: 15px;
     width: 90%;
@@ -279,4 +282,10 @@ main {
 
         width: 100% !important;
     }
+}
+
+@keyframes fondo {
+    
+    from {background: linear-gradient(90deg, rgba(60,219,189,1) 0%, rgba(60,219,189,1) 50%, rgba(255,255,255,1) 100%);}
+    to {background: linear-gradient(90deg, rgba(60,219,189,1) 0%, rgba(60,219,189,1) 50%, rgba(255,255,255,1) 100%);}
 }

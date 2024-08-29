@@ -151,7 +151,14 @@ reloadSession();
                         <ul class="invisible" id="menuiniciado">
 
                             <li><button id="miperfil">Mi Perfil</button></li>
-                            <li><button id="misconsultas">Mis Consultas</button></li>
+                            <?php if(isset($_SESSION['paciente'])): ?> <li><button id="misconsultas">Mis Consultas</button></li> <?php endif; ?>
+                            
+                            <?php if(isset($_SESSION['odontologo'])): ?>
+
+                                <li><button id="mishorarios">Mis Horarios</button></li>
+                                <li><button id="misinactividades">Mis Inactividades</button></li>
+
+                            <?php endif; ?>
 
                             <hr>
 

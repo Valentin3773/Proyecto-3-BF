@@ -1,3 +1,9 @@
+<?php
+
+if(isset($_SESSION['paciente']) || isset($_SESSION['odontologo'])) header('Location: index.php');
+
+?>
+
 <div class="row">
     
     <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 col-12" id="logincontent">

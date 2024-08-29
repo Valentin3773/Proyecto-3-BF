@@ -1,0 +1,51 @@
+#tituloservicios {
+
+    background-color: #4294FF;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    font-size: 350%;
+    padding: 5px;
+    text-shadow: 0 4px 4px #878787;
+    font-family: RobotoSerif, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 5px;
+    box-shadow: 1px 4px 4px #9B9B9B;
+}
+
+#servicioscontainer {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .6rem;
+    margin-top: 1rem;
+}
+
+.servicio {
+
+    background-color: #0059CD;
+    color: white;
+    padding: 1.3rem;
+    text-align: center;
+    border-radius: 10px;
+    width: 100%;
+    border: 3px solid rgba(0, 0, 0, .4);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .4);
+    cursor: pointer;
+    transition-duration: .3s;
+    font-family: RobotoSerif, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.servicio h3 {
+
+    margin: 0 !important;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.servicio:hover {
+
+    scale: 1.007;
+    filter: brightness(1.1);
+}

@@ -41,11 +41,11 @@ function cargarVistaConsultas() {
                 $('main').html(data);
 
                 $('.consulta').click(function (e) { 
-                    e.preventDefault();
-                     const fecha = $(this).attr('data-fecha');
-                     const hora = $(this).attr('data-hora');
-                     
 
+                    e.preventDefault();
+                    const fecha = $(this).attr('data-fecha');
+                    const hora = $(this).attr('data-hora');
+                     
                     $('main').html('');
                     let ventanaconsultapaciente = 'vistas/vistasadmin/vistaconsultapaciente.php? hora='+hora+'&fecha='+fecha+' &nombreP='+nombreP+'';
 
@@ -94,11 +94,7 @@ function cargarVistaPacientes() {
     
                 let url = 'vistas/vistasadmin/vistapacientes.php?idpaciente=' + $(this).attr('id');
     
-                $.get(url, data => {
-        
-                    $('main').html(data);
-            
-                });
+                $('main').load(url);
             });
         });
     });
@@ -120,6 +116,11 @@ function cargarVistaServicios() {
 
         $('main').html(data);
         console.log("Cargando vista de 'Servicios'");
+
+        $('.servicio').on('click', function() {
+
+            $('main').load(`vistas/vistasadmin/vistaservicios.php?numservicio=` + $(this).attr('id'));
+        });
     });
 
     $('#seccionescss').attr('href', 'css/administrador/servicios.css');
