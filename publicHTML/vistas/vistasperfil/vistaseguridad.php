@@ -19,7 +19,7 @@ reloadSession();
 
 <h2 id="titulocambiarpass" class="mt-4">Cambiar Contraseña</h2>
 
-<form id="formcambiar">
+<form method = "POST" id="formcambiar">
 
     <div id="contenedor_formulario" class="mb-4">
 

@@ -146,9 +146,34 @@ function cargarVistaSeguridad() {
     $.get('vistas/vistasperfil/vistaseguridad.php', contenido => {
 
         $('main').empty().html(contenido).fadeIn(200);
+        $('#cambiarpass').on('click', function (e) {
+            e.preventDefault();
+            cambiarContraseña($('#oldpass').val(),$('#newpass').val(),$('#newpassagain').val());
+        });
     });
 
     $('#sidebar #btnsuperiores button').css({ 'text-decoration': 'none' });
     $('#seguridad').css({ 'text-decoration': 'underline' });
     $('#seccionescss').prop('href', 'css/perfil/seguridad.css');
+}
+
+function cambiarContraseña($1,$2,$3){
+    let data = {old: $1,new: $2,newA:$3};let url = "./backend/perfil/changePASS.php";
+    $.ajax({
+
+        type: 'POST',
+        url: url,
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        success: response => {
+
+            if (response.error === undefined) createPopup('Nuevo Aviso',response.enviar);
+
+            else createPopup('Nuevo Aviso',response.error);
+        },
+        error: (jqXHR, estado, outputError) => {
+
+            console.log("Error al procesar la solicitud: 3" + outputError+estado+jqXHR);
+        }
+    });
 }

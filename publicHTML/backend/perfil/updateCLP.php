@@ -28,6 +28,7 @@ function UPDATEPROFILE_PACIENTE() {
     $nameROW = $data['name'];
 
     try {
+        
         // Consulta para modificar paciente
         $consulta = "UPDATE paciente SET $name = :val1 WHERE $nameROW = :val2 and idpaciente = :idp";
         $stmt = $pdo->prepare($consulta);

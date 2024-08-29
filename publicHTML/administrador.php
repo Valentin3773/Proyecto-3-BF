@@ -1,11 +1,7 @@
 <?php
-
-//if (!(isset($_SESSION['odontologo']))) header('Location: index.php');
-
 include('backend/extractor.php');
-
 session_start();
-
+if (!(isset($_SESSION['odontologo']))) header('Location: index.php');
 reloadSession();
 
 ?>
