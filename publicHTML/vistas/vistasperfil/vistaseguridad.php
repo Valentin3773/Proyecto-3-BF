@@ -54,7 +54,7 @@ reloadSession();
 
     <div id="cambiarpasscontainer">
 
-        <button class="c-button c-button--gooey"> Cambiar Contraseña
+        <button type="submit" id="cambiarpass" class="c-button c-button--gooey"> Cambiar Contraseña
             <div class="c-button__blobs">
                 <div></div>
                 <div></div>
