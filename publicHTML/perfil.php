@@ -97,7 +97,7 @@ else if (isset($_GET['estado'])) {
 
             </div>
 
-            <button id="cerrarsesion">Cerrar Sesión</button>
+            <button id="cerrarsesion"><i class="fas fa-sign-out-alt"></i>&nbsp;Cerrar Sesión</button>
 
         </div>
 

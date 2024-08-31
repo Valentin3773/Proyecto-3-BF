@@ -5,7 +5,7 @@ $(() => {
     $('#horarios').on('click', () => $('main').fadeOut(200, cargarVistaHorarios));
     $('#inactividades').on('click', () => $('main').fadeOut(200, cargarVistaInactividades));
     $('#seguridad').on('click', () => $('main').fadeOut(200, cargarVistaSeguridad));
-    $('#cerrarsesion').on('click', () => $('main').fadeOut(150, () => window.location.href = 'login.php?estado=3'));
+    $('#cerrarsesion').on('click', () => $('main').fadeOut(150, () => window.location.href = 'login.php?estado=3')).on('mouseenter', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>')).on('mouseleave', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>&nbsp;Cerrar Sesión'));
 
     switch ($('main').data('vista')) {
 

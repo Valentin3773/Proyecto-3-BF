@@ -221,6 +221,12 @@ header.comprimido {
     transition-duration: 250ms;
 }
 
+#btnperfil li #cerrarsesion {
+
+    background-color: #E84141;
+    color: white;
+}
+
 #btnperfil li img {
 
     width: 30px;

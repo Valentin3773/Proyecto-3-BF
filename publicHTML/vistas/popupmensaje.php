@@ -1,6 +1,8 @@
 <?php
-    $cont = $_GET['Contenido'];
-    $aviso = $_GET['Aviso'];
+
+$cont = $_GET['Contenido'];
+$aviso = $_GET['Aviso'];
+
 ?>
 
 <div class = "cont-mensaje-Popup d-flex">
