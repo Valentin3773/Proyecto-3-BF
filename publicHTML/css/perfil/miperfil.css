@@ -110,4 +110,5 @@
     font-size: 1.5rem;
     text-shadow: 0 0 1px rgba(0, 0, 0, .5);
     letter-spacing: 2px;
+    padding-right: calc(60px + 2rem);
 }

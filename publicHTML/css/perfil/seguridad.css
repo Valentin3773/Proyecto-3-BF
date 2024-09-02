@@ -60,6 +60,7 @@ label {
     align-items: center;
 }
 
+/* 
 #cambiarpass {
 
     background-color: #0AF0AB;
@@ -77,7 +78,8 @@ label {
 
     scale: 1.05;
     filter: brightness(1.1);
-}
+} 
+*/
 
 /* From Uiverse.io by cssbuttons-io */
 .c-button {

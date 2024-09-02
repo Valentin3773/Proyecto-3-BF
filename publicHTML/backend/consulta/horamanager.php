@@ -17,7 +17,8 @@ if($data) {
 
     $ido = $data['odontologo'];
 
-    $fecha = $data['fecha'];
+    $fecha = new DateTime($data['fecha']);
+    $fecha = $fecha->format('Y-m-d');
 
     $sql = 'SELECT horainicio, horafinalizacion, dia FROM horario h JOIN odontologo_horario oh ON h.idhorario = oh.idhorario WHERE oh.idodontologo = :ido ORDER BY dia ASC, horainicio ASC';
     $stmt = $pdo->prepare($sql);
@@ -32,7 +33,8 @@ if($data) {
     $respuesta = [
 
         'horasDisponibles' => $horasDisponibles,
-        'horarios' => $horarios
+        'horarios' => $horarios,
+        'fecha' => $fecha
     ];
 
     header('Content-Type: application/json');

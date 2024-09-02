@@ -162,7 +162,7 @@ reloadSession();
 
                             <hr>
 
-                            <li><button id="cerrarsesion">Cerrar Sesión</button></li>
+                            <li><button id="cerrarsesion"><i class="fas fa-sign-out-alt"></i>&nbsp;Cerrar Sesión</button></li>
 
                         </ul>
 

@@ -182,7 +182,6 @@ function fechaDisponible($fecha, $idodontologo): bool
                 if ($horainicio >= $inactividadInicio && $horainicio < $inactividadFin) {
 
                     $disponible = false;
-                    break;
                 }
             }
             // Verificar si la hora está ocupada por otra consulta
@@ -302,7 +301,7 @@ function horasDisponibles($fecha, $idodontologo): array
     return $horasDisponibles;
 }
 
-function reloadSession(): void {
+function reloadSession(): int {
 
     global $pdo;
 
@@ -321,10 +320,12 @@ function reloadSession(): void {
             unset($tupla['contrasenia']);
 
             $_SESSION['paciente'] = $tupla;
+            return 1;
         }
-    } else if (isset($_SESSION['odontologo'])) {
+    }
+    else if (isset($_SESSION['odontologo'])) {
 
-        $idp = $_SESSION['odontologo']['idodontologo'];
+        $ido = $_SESSION['odontologo']['idodontologo'];
 
         $sql = "SELECT * FROM odontologo WHERE idodontologo = :ido";
 
@@ -337,8 +338,10 @@ function reloadSession(): void {
             unset($tupla['contrasenia']);
 
             $_SESSION['odontologo'] = $tupla;
+            return 2;
         }
     }
+    return 3;
 }
 
 function generateToken($key, $length = 32) {

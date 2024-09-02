@@ -1,0 +1,59 @@
+#conthorarios {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.horario {
+
+    width: 100%;
+    height: 100px;
+    background-color: #7CB9E8;
+    padding: 1rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border: 3px solid rgba(0, 0, 0, .2);
+    transition-duration: .3s;
+}
+
+.horario > div {
+
+    background-color: white;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.horario > .horas {
+
+    width: 70%;
+    border-radius: 20px 0 0 20px;
+}
+
+.horario > .dia {
+
+    width: 30%;
+    border-radius: 0 20px 20px 0;
+}
+
+.horario span {
+
+    text-align: center;
+    color: #00B2FF;
+    font-weight: 600;
+    font-size: 2rem;
+    letter-spacing: 5px;
+}
+
+.horario:hover {
+
+    border: 3px solid #0AF0AB;
+}

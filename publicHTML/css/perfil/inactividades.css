@@ -1,0 +1,89 @@
+#leyendas {
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+#leyendas span {
+
+    width: 50%;
+    text-align: center;
+    text-align: center;
+    color: #00d335;
+    font-size: 1.5rem;
+    text-shadow: 0 0 1px rgba(0, 0, 0, .5);
+    letter-spacing: 2px;
+}
+
+#continactividades {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: .3rem;
+}
+
+.inactividad {
+
+    width: 100%;
+    height: 150px;
+    background-color: #7CB9E8;
+    padding: 1rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border: 3px solid rgba(0, 0, 0, .2);
+    transition-duration: .3s;
+}
+
+.inactividad > div {
+
+    background-color: white;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: .2rem;
+}
+
+.inactividad > .desde {
+
+    width: 50%;
+    border-radius: 20px 0 0 20px;
+}
+
+.inactividad > .hasta {
+
+    width: 50%;
+    border-radius: 0 20px 20px 0;
+}
+
+.inactividad span {
+
+    text-align: center;
+    color: #00B2FF;
+    font-weight: 600;
+    font-size: 2rem;
+    letter-spacing: 5px;
+}
+
+.inactividad hr {
+
+    margin: 0 !important;
+    width: 100%;
+    border: 1px solid #7CB9E8;
+    opacity: 1 !important;
+}
+
+.inactividad:hover {
+
+    border: 3px solid #0AF0AB;
+}

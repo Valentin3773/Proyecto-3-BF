@@ -49,3 +49,49 @@
     scale: 1.007;
     filter: brightness(1.1);
 }
+
+#cuerpo {
+
+    border: 2px solid rgba(0, 0, 0, .4);
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, .4);
+    border-radius: 12px;
+    margin-top: .5rem;
+    font-family: 'RobotoSerif', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#cuerpo h1 {
+
+    text-align: center;
+    background-color: #0059CD;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px 10px 0 0;
+    font-weight: 600;
+}
+
+#cuerpo .form-group {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#cuerpo .form-group label {
+
+    width: 100%;
+    text-align: center;
+    background-color: #0059CD;
+    color: white;
+    font-weight: 600;
+    padding: .7rem;
+    border-radius: 10px 10px 0 0;
+    font-size: 1.5rem;
+}
+
+#cuerpo .form-group textarea {
+
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    font-size: 1.5rem;
+}

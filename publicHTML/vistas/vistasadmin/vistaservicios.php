@@ -44,6 +44,11 @@ else if(is_numeric($_GET['numservicio']) && $_GET['numservicio'] > 0) {
     <div id="cuerpo">
 
         <h1><?= $servicio['nombre'] ?></h1>
+        <br><br><br><b><br><br><br><br><br><br><br><br><br>
+        <div class="form-group">
+            <label for="descripcion">Descripcion</label>
+            <textarea name="descripcion" id="descripcion"></textarea>
+        </div>
 
     </div>
 

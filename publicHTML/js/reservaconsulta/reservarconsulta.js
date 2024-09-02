@@ -226,7 +226,7 @@ function cargarVistaHora() {
             dataType: 'json',
             success: function (respuesta) {
                 
-                console.log(respuesta.horasDisponibles);
+                console.log(respuesta);
 
                 cargarHorasDisponibles(respuesta.horasDisponibles, respuesta.horarios);
 
