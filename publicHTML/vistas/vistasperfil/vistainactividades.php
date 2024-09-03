@@ -26,7 +26,9 @@ if(isset($_SESSION['odontologo'])):
 
     <div id="continactividades">
 
-    <?php foreach($inactividades as $inactividad) {
+    <?php 
+    
+    if(!empty($inactividades)) foreach($inactividades as $inactividad) {
 
         $horainicio = new DateTime($inactividad['tiempoinicio']);
         $horainicio = $horainicio->format('H:i');
@@ -51,6 +53,12 @@ if(isset($_SESSION['odontologo'])):
         ";
     }
     ?>
+
+    </div>
+
+    <div id="agregarinactividadcont" class="d-flex justify-content-center align-items-center mt-4">
+
+        <div id="agregarinactividad"><div class="mas"></div></div>
 
     </div>
 

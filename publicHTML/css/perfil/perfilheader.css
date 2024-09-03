@@ -235,6 +235,12 @@ main {
     scale: 1.03;
 }
 
+#sidebar button:active {
+
+    filter: brightness(1.2);
+    scale: 0.97;
+}
+
 #sidebar #cerrarsesion {
 
     background-color: #E84141;

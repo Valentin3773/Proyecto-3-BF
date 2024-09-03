@@ -67,6 +67,7 @@
     margin: 0;
     padding: 0;
 }
+
 .btnCerrar {
 
     background-color: #0AF0AB;
@@ -80,11 +81,17 @@
 .btnCerrar:hover {
 
     scale: 1.05;
-}
-.btnCerrar:hover {
-
+    filter: brightness(1.1);
     color: white;
 }
+
+.btnCerrar:active {
+
+    scale: .95;
+    filter: brightness(1.2);
+    color: white;
+}
+
 body {
 
     transition-duration: .5s;

@@ -50,6 +50,12 @@
     filter: brightness(1.1);
 }
 
+.servicio:active {
+
+    scale: .993;
+    filter: brightness(1.2);
+}
+
 #cuerpo {
 
     border: 2px solid rgba(0, 0, 0, .4);

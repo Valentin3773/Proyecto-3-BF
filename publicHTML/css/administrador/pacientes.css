@@ -189,6 +189,13 @@
 .sidebar .paciente:hover {
 
     scale: 1.03;
+    filter: brightness(1.1);
+}
+
+.sidebar .paciente:active {
+
+    scale: .97;
+    filter: brightness(1.2);
 }
 
 .sidebar .consultaside:hover {

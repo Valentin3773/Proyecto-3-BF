@@ -241,6 +241,12 @@ header.comprimido {
     filter: brightness(1.1);
 }
 
+#btnperfil li button:active {
+
+    scale: .97;
+    filter: brightness(1.2);
+}
+
 #btnperfil hr {
 
     color: white;
@@ -351,6 +357,12 @@ nav ul li a {
     filter: brightness(1.35);
 }
 
+#imglogo:active {
+
+    scale: .95;
+    filter: brightness(1.45);
+}
+
 footer {
 
     font-family: RobotoSerif, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -390,6 +402,12 @@ header #btnperfil img {
 .contReservar:hover {
 
     filter: brightness(1.1);
+}
+
+.contReservar:active {
+
+    filter: brightness(1.2);
+    scale: .95;
 }
 
 #btnchat {
@@ -1367,12 +1385,28 @@ header #btnperfil img {
 
     box-shadow: 2px 4px 0 #9B9B9B, #0AF0AB 10px 10px 15px -5px;
     transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+#btnchat:active {
+
+    box-shadow: 2px 4px 0 #9B9B9B, #0AF0AB 10px 10px 15px -5px;
+    transform: scale(.95);
+    filter: brightness(1.2);
 }
 
 #btnup:hover {
 
     box-shadow: 2px 4px 0 #9B9B9B, #4294FF 10px 10px 15px -5px;
     transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+#btnup:active {
+
+    box-shadow: 2px 4px 0 #9B9B9B, #4294FF 10px 10px 15px -5px;
+    transform: scale(.95);
+    filter: brightness(1.2);
 }
 
 .desplegado ul li a:hover {
@@ -1388,6 +1422,13 @@ header #btnperfil img {
 #btnopciones:hover {
 
     transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+#btnopciones:active {
+
+    transform: scale(.9);
+    filter: brightness(1.2);
 }
 
 header nav ul li a:hover {
@@ -1398,11 +1439,25 @@ header nav ul li a:hover {
 .extendido #btnperfil img:hover {
 
     transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+.extendido #btnperfil img:active {
+
+    transform: scale(.95);
+    filter: brightness(1.2);
 }
 
 .comprimido #btnperfil img:hover {
 
     transform: scale(1);
+    filter: brightness(1.1);
+}
+
+.comprimido #btnperfil img:active {
+
+    transform: scale(.85);
+    filter: brightness(1.2);
 }
 
 footer #contFooter:hover {

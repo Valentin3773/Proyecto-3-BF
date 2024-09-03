@@ -24,7 +24,9 @@ if(isset($_SESSION['odontologo'])):
 
     <div id="conthorarios">
 
-    <?php foreach($horarios as $horario) {
+    <?php 
+    
+    if(!empty($horarios)) foreach($horarios as $horario) {
         
         $horainicio = new DateTime($horario['horainicio']);
         $horainicio = $horainicio->format('H:i');
@@ -44,7 +46,14 @@ if(isset($_SESSION['odontologo'])):
               </div>
         ";
     }
+
     ?>
+
+    </div>
+
+    <div id="agregarhorariocont" class="d-flex justify-content-center align-items-center mt-4">
+
+        <div id="agregarhorario"><div class="mas"></div></div>
 
     </div>
 

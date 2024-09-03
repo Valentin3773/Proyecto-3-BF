@@ -43,6 +43,12 @@
     filter: brightness(1.1);
 }
 
+.lapizeditar:active {
+
+    scale: .95;
+    filter: brightness(1.2);
+}
+
 .lapizeditar > img {
 
     width: 40px;

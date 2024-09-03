@@ -220,7 +220,13 @@ nav a {
 nav li:hover {
 
     scale: 1.05;
-}   
+    filter: brightness(1.1);
+}  
+nav li:active {
+
+    scale: .95;
+    filter: brightness(1.2);
+} 
 
 nav li:hover a {
 
@@ -315,6 +321,12 @@ main {
 
     scale: 1.05;
     filter: brightness(1.2);
+}
+
+#logo:active img {
+
+    scale: .98;
+    filter: brightness(1.3);
 }
 
 @media screen and (width <= 1000px) {
