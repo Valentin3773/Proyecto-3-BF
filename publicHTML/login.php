@@ -3,11 +3,11 @@
 session_start();
 
 if((isset($_SESSION['paciente']) || isset($_SESSION['odontologo'])) && $_GET['estado'] != 3 && $_GET['estado'] != 4 && $_GET['estado'] != 5) header('Location: index.php');
-/*
+
 include('backend/extractor.php');
 
 reloadSession();
-*/
+
 if(!isset($_GET['estado']) || (isset($_GET['estado']) && $_GET['estado'] == 1)) $estado = 1;
 
 else if(isset($_GET['estado'])) $estado = $_GET['estado'];
@@ -35,7 +35,7 @@ else if(isset($_GET['estado'])) $estado = $_GET['estado'];
 
         <!-- CSS -->
         <link rel="stylesheet" href="css/login/login.css">
-        <link rel="stylesheet" href="css/login/recuperarpass.css">
+        <!-- <link rel="stylesheet" href="css/login/recuperarpass.css"> -->
         <link rel="stylesheet" href="css/volver.css">
 
         <!-- JS -->

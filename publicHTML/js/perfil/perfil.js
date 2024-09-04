@@ -172,6 +172,9 @@ function cargarVistaAgregarHorario() {
     $.get('vistas/vistasperfil/vistaagregarhorario.php', contenido => {
 
         $('main').empty().html(contenido).fadeIn(200);
+
+        $('#confirmarhorario').addClass('inactivo').removeClass('activo').prop('disabled', true);
+        $('select#horainicio, select#horafinalizacion').prop('disabled', true);
     });
 }
 

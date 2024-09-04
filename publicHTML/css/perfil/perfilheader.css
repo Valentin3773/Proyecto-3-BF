@@ -30,7 +30,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(120deg, rgba(60,219,189,.2) 0%, rgba(60,219,189,.2) 50%, rgb(0, 255, 170,.2) 100%);    transition-duration: 300ms;
+    background: linear-gradient(120deg, rgba(60,219,189,.2) 0%, rgba(60,219,189,.2) 50%, rgb(0, 255, 170,.2) 100%);    
+    transition-duration: 300ms;
 }
 
 h1, h2, h3, h4, h5 {

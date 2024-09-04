@@ -10,7 +10,7 @@
     margin-bottom: -1rem;
 }
 
-#leyendas span {
+#leyendas span, #contagregarhorario label {
 
     text-align: center;
     text-align: center;
@@ -125,4 +125,63 @@
 
     margin-top: 1rem;
     color: #00d335;
+}
+
+#contagregarhorario {
+    
+    width: 80% !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    background-color: rgb(96, 246, 255, .1);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, .3);
+}
+
+#contagregarhorario > div {
+
+    width: 100%;
+}
+
+#contagregarhorario label {
+
+    text-align: center;
+    width: 100%;
+}
+
+#confirmarhorario {
+
+    background-color: #4294FF;
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-weight: 600;
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 2px rgba(0, 0, 0, .3);
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, .3);
+    transition-duration: .3s;
+}
+
+#confirmarhorario.inactivo {
+
+    background-color: rgb(66, 148, 255, .4);
+}
+
+#confirmarhorario.activo:hover {
+
+    scale: 1.05;
+    filter: brightness(1.1);
+}
+
+#confirmarhorario.activo:active {
+
+    scale: .97;
+    filter: brightness(1.2);
 }
