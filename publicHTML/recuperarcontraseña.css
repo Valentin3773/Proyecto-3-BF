@@ -18,12 +18,20 @@ text-align: center;
     width: 10%;
     height:auto;
 }
-#contEmail{
+#contEmailH2{
     display: flex;
     width: fit-content;
-    padding: 4px;
+    padding: 0 50px 0 50px;
     border-radius:  10px 10px 0 0;
 }
-#contInEmail{
-    border-radius: 10px 0 0 0 !important;
+#contInEmail input{
+    border-radius: 0 10px 10px 10px !important;
+    box-shadow: 1px 5px 5px 1px rgba(0, 0, 0, 0.5);
+    width:55vh;
+}
+#contEmail{
+    border: transparent;
+}
+#btnEnviar, #btnRecuperar {
+    width: fit-content;
 }
