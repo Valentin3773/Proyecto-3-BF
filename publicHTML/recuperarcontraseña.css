@@ -1,0 +1,29 @@
+html,body, main{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+main {
+    background-image: url("img/fondos/fondologin.png");
+    background-size:cover;
+}
+
+#logaso{
+width: 100%;
+height: 100px;
+text-align: center;
+}
+#logaso img {
+    width: 10%;
+    height:auto;
+}
+#contEmail{
+    display: flex;
+    width: fit-content;
+    padding: 4px;
+    border-radius:  10px 10px 0 0;
+}
+#contInEmail{
+    border-radius: 10px 0 0 0 !important;
+}
