@@ -27,7 +27,8 @@ function cargarVistaLogin() {
 
         $('#btnvolver').on('click', volverInicio);
         $('#btnregistrarsel').on('click', cargarVistaRegistro);
-        $('#iniadmin').on('click', cargarVistaLoginAdmin)
+        $('#iniadmin').on('click', cargarVistaLoginAdmin);
+        $('#olvidarpass').on('click', cargarVistaRecuperarPass);
         $('#ingresar').on('click', function (event) {
 
             event.preventDefault();
@@ -72,7 +73,7 @@ function cargarVistaLoginAdmin() {
 
         $('main').html(data);
         console.log("Cargando vista de 'Login'");
-        $('#btnvolver').on('click', volverInicio);
+        $('#btnvolver').on('click', volverLogin);
         $('#ingresarad').on('click', function (event) {
 
             event.preventDefault();
@@ -84,6 +85,18 @@ function cargarVistaLoginAdmin() {
         });
     });
     $('html, body').css("height", "100%");
+}
+
+function cargarVistaRecuperarPass() {
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    $.get("vistas/vistaslogin/vistarecuperarpass.php", data => {
+
+        $('#btnvolver').on('click', volverLogin);
+
+        $('main').html(data);
+    });
 }
 
 function volverInicio() {

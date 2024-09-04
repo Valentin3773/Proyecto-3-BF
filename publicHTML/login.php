@@ -34,13 +34,14 @@ else if(isset($_GET['estado'])) $estado = $_GET['estado'];
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
         <!-- CSS -->
-        <link rel="stylesheet" href="css/login.css">
+        <link rel="stylesheet" href="css/login/login.css">
+        <link rel="stylesheet" href="css/login/recuperarpass.css">
         <link rel="stylesheet" href="css/volver.css">
 
         <!-- JS -->
         <script src="js/preloader.js"></script>
         <script src="js/utilidades.js"></script>
-        <script defer src="js/login.js"></script>
+        <script defer src="js/login/login.js"></script>
         
     </head>
 

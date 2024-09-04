@@ -4,11 +4,11 @@
     src: url(../../font/Hubballi-Regular.ttf);
 }
 
-@font-face {
+/* @font-face {
 
     font-family: RobotoSerif;
     src: url(../../font/Roboto_Serif/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf);
-}
+} */
 
 @font-face {
 
@@ -317,7 +317,7 @@ h1 {
 
 #logincontent {
 
-    background-image: url(../img/fondos/fondologin.png);
+    background-image: url(../../img/fondos/fondologin.png);
     background-size: cover;
     background-repeat: no-repeat;
     filter: contrast(1);
@@ -347,7 +347,7 @@ h1 {
 
 #sideimg {
 
-    background-image: url(../img/imagenesEmpresa/entrada.jpg);
+    background-image: url(../../img/imagenesEmpresa/entrada.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -371,7 +371,7 @@ h1 {
 body {
 
     height: 100% !important;
-    background-image: url(../img/fondos/fondologin.png);
+    background-image: url(../../img/fondos/fondologin.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -413,7 +413,7 @@ body {
 
     body {
 
-        background-image: url(../img/fondos/fondologin.png);
+        background-image: url(../../img/fondos/fondologin.png);
         background-size: cover;
         background-position: unset !important;
         background-repeat: no-repeat;
@@ -470,7 +470,7 @@ body {
 
     body {
 
-        background-image: url(../img/fondos/fondologin.png);
+        background-image: url(../../img/fondos/fondologin.png);
         background-size: cover;
         background-position: unset !important;
         background-repeat: no-repeat;
