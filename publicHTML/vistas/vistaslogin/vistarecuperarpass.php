@@ -1,4 +1,4 @@
-<button class="volver" id="btnvolver">
+<button class="volver" id="btnvolver" onclick="location.href = './login.php';">
     <div class="volver-box">
         <span class="volver-elem">
             <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
@@ -15,7 +15,7 @@
     </div>
 </button>
 
-<div class="container">
+<div class="container" id="containerRecuPass">
 <link rel="stylesheet" href="./css/login/recuperarpass.css">
         <div class="text-center">
             <div class="d-flex justify-content-center row text-center">
@@ -32,11 +32,13 @@
                         <input id="inEmail" type="email" class="form-control" name="" id="" value="Ingrese su correo electrónico">
                     </div>
                 </div>
-                <button id="contColor" class="mt-4 mb-4 btn contBTN text-white H4">Enviar Código</button>
+                <div id="buttonRecu">
+                    <button id="contColor" class="mt-4 mb-4 btn contBTN text-white H4">Enviar Código</button>
+                </div>         
             </form>
-            <div class="mt-5 row justify-content-center">
+            <div id="buttonRecu" class="mt-5 row justify-content-center">
                 <label for="" id="Serif" class="H5">¿Has olvidado tu email?</label>
-                <button id="contColor" class="mt-2 btn text-white H6">Recuperar correo electrónico</button>
+                <button id="contColor" class="mt-2 btn text-white H6 contColorH6">Recuperar correo electrónico</button>
             </div>
         </div>
 </div>
