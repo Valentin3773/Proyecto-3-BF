@@ -35,7 +35,7 @@ if(isset($_SESSION['paciente']) || isset($_SESSION['odontologo'])) header('Locat
 
         <h1 class="text-center w-100 mt-3">Iniciar Sesión</h1>
 
-        <div class="container d-flex justify-content-center mt-3" id="formcontainer">
+        <div class="container d-flex flex-column justify-content-center mt-3" id="formcontainer">
 
             <form id="formLogin" method="POST" class="p-3">
             
@@ -64,6 +64,8 @@ if(isset($_SESSION['paciente']) || isset($_SESSION['odontologo'])) header('Locat
                 <button type="submit" id="ingresar" name="ingresar">Ingresar</button>
 
             </form>
+
+            <span class="text-end">¿Olvidaste tu contraseña?</span>
 
         </div>
 

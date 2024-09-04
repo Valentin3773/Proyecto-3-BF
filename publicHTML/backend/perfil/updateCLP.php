@@ -1,24 +1,29 @@
 <?php
+
 include("../conexion.php");
 include("../extractor.php");
+
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    UPDATEPROFILE_PACIENTE();
-    
-} else {
+if(!isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) header('Location: index.php');
+
+if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) UpdateProfilePaciente();
+
+else {
+
     echo "FUERA";
     exit();
 }
 
-function UPDATEPROFILE_PACIENTE() {
+function UpdateProfilePaciente() {
+
     global $pdo;
 
     // Se descodifica el objeto JSON para poder utilizar su contenido
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
 
-    //Id del paciente
+    // ID del paciente
     $idp = $_SESSION['paciente']['idpaciente'];
 
     // Variables
@@ -31,14 +36,20 @@ function UPDATEPROFILE_PACIENTE() {
         
         // Consulta para modificar paciente
         $consulta = "UPDATE paciente SET $name = :val1 WHERE $nameROW = :val2 and idpaciente = :idp";
+        
         $stmt = $pdo->prepare($consulta);
         $stmt->bindParam(':val1', $value);
         $stmt->bindParam(':val2', $oldvalue);
         $stmt->bindParam(':idp', $idp);
-        $stmt->execute();
-        $respuesta['enviar'] = "Datos Actualizados";
-        reloadSession();
-    } catch (PDOException $e) {
+
+        if($stmt->execute()) {
+
+            $respuesta['enviar'] = "Datos actualizados";
+            reloadSession();
+        }
+    } 
+    catch (PDOException $e) {
+        
         $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
     }
 

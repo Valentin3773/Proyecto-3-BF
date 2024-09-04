@@ -1,19 +1,28 @@
 <?php 
+
 include("../conexion.php");
 include("../extractor.php");
+
 session_start();
 
-if($_SERVER['REQUEST_METHOD'] == "POST"){
-    changePassword($pdo);
-}
-function changePassword($pdo){
+if(!isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) header('Location: index.php');
+
+if($_SERVER['REQUEST_METHOD'] == "POST") changePassword($pdo);
+
+function changePassword($pdo) {
+
     $respuesta = array();
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
+
     if($data['new'] == $data['newA']){
+
         if (isset($_SESSION['odontologo'])){
+
             $ido = $_SESSION['odontologo']['idodontologo'];
+
             try {
+
                 $contraseniaOld = $data['old'];
 
                 $consulta = "SELECT contrasenia FROM odontologo WHERE idodontologo = :ido";
@@ -23,8 +32,11 @@ function changePassword($pdo){
                 $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 $hashedPassword = $tupla['contrasenia'];
-                if(password_verify($contraseniaOld,$hashedPassword)){
-                    try{
+
+                if(password_verify($contraseniaOld, $hashedPassword)) {
+
+                    try {
+
                         $pass = $data['new'];
                         $pass = password_hash($pass, PASSWORD_BCRYPT);
                         $consulta = "UPDATE odontologo SET contrasenia = :pass WHERE idodontologo = :ido";
@@ -35,18 +47,24 @@ function changePassword($pdo){
                         $respuesta['enviar'] = "Contraseña Actualizada";
                         reloadSession();
                     }
-                    catch(PDOException $e){
+                    catch(PDOException $e) {
+
                         $respuesta['enviar'] = $e;
                     }
-                } else {
-                    $respuesta['error'] = "La contraseña actual no coincide con el usuario";
-                }
-            } catch (PDOException $e) {
+                } 
+                else $respuesta['error'] = "La contraseña actual no coincide con el usuario";
+            } 
+            catch (PDOException $e) {
+
                 $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
             }
-        } else if (isset($_SESSION['paciente'])) {
+        } 
+        else if (isset($_SESSION['paciente'])) {
+
             $idp = $_SESSION['paciente']['idpaciente'];
+
             try {
+
                 $contraseniaOld = $data['old'];
 
                 $consulta = "SELECT contrasenia FROM paciente WHERE idpaciente = :idp";
@@ -56,8 +74,11 @@ function changePassword($pdo){
                 $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 $hashedPassword = $tupla['contrasenia'];
-                if(password_verify($contraseniaOld,$hashedPassword)){
-                    try{
+
+                if(password_verify($contraseniaOld, $hashedPassword)) {
+
+                    try {
+
                         $pass = $data['new'];
                         $pass = password_hash($pass, PASSWORD_BCRYPT);
                         $consulta = "UPDATE paciente SET contrasenia = :pass WHERE idpaciente = :idp";
@@ -68,21 +89,21 @@ function changePassword($pdo){
                         $respuesta['enviar'] = "Contraseña Actualizada";
                         reloadSession();
                     }
-                    catch(PDOException $e){
+                    catch(PDOException $e) {
+
                         $respuesta['enviar'] = $e;
                     }
-                } else {
-                    $respuesta['error'] = "La contraseña actual no coincide con el usuario";
-                }
-            } catch (PDOException $e) {
+                } else $respuesta['error'] = "La contraseña actual no coincide con el usuario";
+            } 
+            catch (PDOException $e) {
+
                 $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
             }
-        } else {
-            $respuesta['error'] = "Ohh no, ah ocurrido un error";
-        }
-    } else {
-        $respuesta['error'] = "Las contraseñas repetidas no son iguales";
-    }
+        } 
+        else $respuesta['error'] = "Ohh no, ah ocurrido un error";
+
+    } else $respuesta['error'] = "Las contraseñas repetidas no son iguales";
+    
     header('Content-Type: application/json');
     echo json_encode($respuesta);
 }

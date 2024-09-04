@@ -15,43 +15,50 @@ if(isset($_SESSION['odontologo'])):
     $stmt->bindParam(':ido', $ido);
     
     if($stmt->execute() && $stmt->rowCount() > 0) $inactividades = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
     <h1 class="subtitulo">Mis Inactividades</h1>
 
-    <div id="leyendas">
-        <span class="desde">Desde</span>
-        <span class="hasta">Hasta</span>
-    </div>
-
     <div id="continactividades">
 
-    <?php 
+    <?php
     
-    if(!empty($inactividades)) foreach($inactividades as $inactividad) {
-
-        $horainicio = new DateTime($inactividad['tiempoinicio']);
-        $horainicio = $horainicio->format('H:i');
-        $horafinalizacion = new DateTime($inactividad['tiempofinalizacion']);
-        $horafinalizacion = $horafinalizacion->format('H:i');
-        $fechainicio = new DateTime($inactividad['fechainicio']);
-        $fechainicio = $fechainicio->format('d/m/Y');
-        $fechafinalizacion = new DateTime($inactividad['fechafinalizacion']);
-        $fechafinalizacion = $fechafinalizacion->format('d/m/Y');
+    if(!empty($inactividades)) {
         
-        echo "<div id='{$inactividad["idinactividad"]}' class='inactividad'>
+        echo '
+            <div id="leyendas">
+                <span class="desde">Desde</span>
+                <span class="hasta">Hasta</span>
+            </div>
+        ';
+        
+        foreach($inactividades as $inactividad) {
 
-                <div class='desde'>
-                    <span>{$fechainicio}</span><hr><span>{$horainicio}</span>
+            $horainicio = new DateTime($inactividad['tiempoinicio']);
+            $horainicio = $horainicio->format('H:i');
+            $horafinalizacion = new DateTime($inactividad['tiempofinalizacion']);
+            $horafinalizacion = $horafinalizacion->format('H:i');
+            $fechainicio = new DateTime($inactividad['fechainicio']);
+            $fechainicio = $fechainicio->format('d/m/Y');
+            $fechafinalizacion = new DateTime($inactividad['fechafinalizacion']);
+            $fechafinalizacion = $fechafinalizacion->format('d/m/Y');
+            
+            echo "<div id='{$inactividad["idinactividad"]}' class='inactividad'>
+
+                    <div class='desde'>
+                        <span>{$fechainicio}</span><hr><span>{$horainicio}</span>
+                    </div>
+
+                    <div class='hasta'>
+                        <span>{$fechafinalizacion}</span><hr><span>{$horafinalizacion}</span>
+                    </div>
+
                 </div>
-
-                <div class='hasta'>
-                    <span>{$fechafinalizacion}</span><hr><span>{$horafinalizacion}</span>
-                </div>
-
-              </div>
-        ";
+            ";
+        }
     }
+    else echo "<h3 id='noinactividades'>No tienes ninguna inactividad</h3>";
     ?>
 
     </div>

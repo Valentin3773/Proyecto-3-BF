@@ -174,7 +174,14 @@ main {
 
 #googlebutton:hover {
 
-    transform: scale(1.02);
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+#googlebutton:active {
+
+    transform: scale(.97);
+    filter: brightness(1.2);
 }
 
 #logocontainer img {
@@ -274,6 +281,12 @@ form {
 
     scale: 1.01;
     filter: brightness(1.15);
+}
+
+#ingresar:active, #btnregistrarsel:active, #ingresarad:active {
+
+    scale: .99;
+    filter: brightness(1.25);
 }
 
 input:hover {

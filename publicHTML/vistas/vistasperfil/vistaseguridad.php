@@ -26,7 +26,7 @@ reloadSession();
         <div id="titulo_input"><label for="oldpass" class="text-center">Contraseña actual</label></div>
         <div>
 
-            <input type="text" id="oldpass" name="oldpass" title="Ingrese su contraseña actual" placeholder="Ingrese su contraseña actual" required>
+            <input type="password" id="oldpass" name="oldpass" title="Ingrese su contraseña actual" placeholder="Ingrese su contraseña actual" required>
 
         </div>
 
@@ -36,7 +36,7 @@ reloadSession();
         <div id="titulo_input"><label for="newpass" class="text-center">Nueva contraseña</label></div>
         <div>
 
-            <input type="text" id="newpass" name="newpass" title="Ingrese su nueva contraseña" placeholder="Ingrese su nueva contraseña" required>
+            <input type="password" id="newpass" name="newpass" title="Ingrese su nueva contraseña" placeholder="Ingrese su nueva contraseña" required>
 
         </div>
 
@@ -46,7 +46,7 @@ reloadSession();
         <div id="titulo_input"><label for="oldpass" class="text-center">Repetir nueva contraseña</label></div>
         <div>
 
-            <input type="text" id="newpassagain" name="newpassagain" title="Repita su nueva contraseña" placeholder="Repita su nueva contraseña" required>
+            <input type="password" id="newpassagain" name="newpassagain" title="Repita su nueva contraseña" placeholder="Repita su nueva contraseña" required>
 
         </div>
 

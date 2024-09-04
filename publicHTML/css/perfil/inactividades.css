@@ -4,7 +4,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1.5rem;
 }
 
 #leyendas span {
@@ -124,4 +123,10 @@
 
     scale: 0.95;
     filter: brightness(1.2);
+}
+
+#noinactividades {
+
+    margin-top: 1rem;
+    color: #00d335;
 }

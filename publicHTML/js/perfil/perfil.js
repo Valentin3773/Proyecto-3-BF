@@ -75,7 +75,7 @@ function integrarBoton($datos, $id) {
                 integrarEventos();
                 console.log("Cancelar" + $datos['old']);
             }
-            //window.location.replace("index.php");
+            // window.location.replace("index.php");
         });
     } 
     else $($id).attr('src', 'img/iconosvg/Guardar.svg');
@@ -123,6 +123,7 @@ function cargarVistaHorarios() {
     $.get('vistas/vistasperfil/vistahorarios.php', contenido => {
 
         $('main').empty().html(contenido).fadeIn(200);
+        $('#agregarhorario').on('click', () => $('main').fadeOut(200, cargarVistaAgregarHorario));
     });
 
     $('#sidebar #btnsuperiores button').css({ 'text-decoration': 'none' });
@@ -137,6 +138,7 @@ function cargarVistaInactividades() {
     $.get('vistas/vistasperfil/vistainactividades.php', contenido => {
 
         $('main').empty().html(contenido).fadeIn(200);
+        $('#agregarinactividad').on('click', () => $('main').fadeOut(200, cargarVistaAgregarInactividad));
     });
 
     $('#sidebar #btnsuperiores button').css({ 'text-decoration': 'none' });
@@ -152,6 +154,7 @@ function cargarVistaSeguridad() {
 
         $('main').empty().html(contenido).fadeIn(200);
         $('#cambiarpass').on('click', function (e) {
+            
             e.preventDefault();
             cambiarContraseña($('#oldpass').val(),$('#newpass').val(),$('#newpassagain').val());
         });
@@ -162,8 +165,37 @@ function cargarVistaSeguridad() {
     $('#seccionescss').prop('href', 'css/perfil/seguridad.css');
 }
 
-function cambiarContraseña($1,$2,$3){
-    let data = {old: $1,new: $2,newA:$3};let url = "./backend/perfil/changePASS.php";
+function cargarVistaAgregarHorario() {
+
+    console.log("Cargando vista de 'Agregar Horario'");
+
+    $.get('vistas/vistasperfil/vistaagregarhorario.php', contenido => {
+
+        $('main').empty().html(contenido).fadeIn(200);
+    });
+}
+
+function cargarVistaAgregarInactividad() {
+
+    console.log("Cargando vista de 'Agregar Inactividad'");
+
+    $.get('vistas/vistasperfil/vistaagregarinactividad.php', contenido => {
+
+        $('main').empty().html(contenido).fadeIn(200);
+    });
+}
+
+function cambiarContraseña($1, $2, $3) {
+
+    let data = {
+        
+        old: $1,
+        new: $2,
+        newA: $3
+    };
+
+    let url = "./backend/perfil/changePASS.php";
+
     $.ajax({
 
         type: 'POST',
