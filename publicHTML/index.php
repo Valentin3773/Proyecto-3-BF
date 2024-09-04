@@ -1,11 +1,11 @@
 <?php 
-
+/*
 include('backend/extractor.php');
-
+*/
 session_start();
-
+/*
 reloadSession();
-
+*/
 ?>
 
 <!DOCTYPE html>

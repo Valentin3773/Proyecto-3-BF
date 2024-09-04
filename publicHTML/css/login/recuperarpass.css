@@ -1,43 +1,54 @@
-#logaso {
-
+html,body{
+    margin: 0;
+    padding: 0;
     width: 100%;
-    height: 100px;
-    text-align: center;
+    height: 100%;
 }
-
-#logaso img {
-
-    width: 10%;
-    height: auto;
-}
-
-#olvidarpass {
-
-    cursor: pointer;
-}
-
-#contEmailH2 {
-
+.container {
     display: flex;
-    width: fit-content;
-    padding: 0 50px 0 50px;
-    border-radius: 10px 10px 0 0;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-#contInEmail input {
-
-    border-radius: 0 10px 10px 10px !important;
-    box-shadow: 1px 5px 5px 1px rgba(0, 0, 0, 0.5);
-    width: 55vh;
+#contColor{
+    background-color: #00B2FF;
+    font-weight: bold;
+}
+.contBTN{
+    width: -webkit-fill-available;
+}
+#inEmail{
+    border-radius: 0px 10px 10px 10px;
+    padding: 10px 0 10px 0;
 }
 
-#contEmail {
-
-    border: transparent;
+@font-face {
+    font-family: RobotoSerif;
+    src: url(../../font/Roboto_Serif/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf);
 }
 
-#btnEnviar,
-#btnRecuperar {
+#Serif, #contColor, #inEmail{
+    font-family: RobotoSerif !important;
+}
 
-    width: fit-content;
+.H1{
+    font-weight: bold !important;
+    font-size: xx-large !important;
+    color: #00B2FF !important;
+    text-shadow: 2px 2px gray !important;
+}
+.H2,.H5{
+    color: unset !important;
+    font-weight: normal !important;
+    text-shadow: none;
+}
+.H4,.H6{
+    font-size: xx-large;
+}
+#logaso{
+    width: 10rem;
+}
+#formRecuPass{
+    box-shadow: none;
 }
