@@ -9,70 +9,87 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/sectionmid.css">
     <link rel="stylesheet" href="css/footer.css">
-
 </head>
 
 <body>
-    <div>
+    <div class="contaiener">
         <header>
-            <h1 id="aboutus">About Us</h1>
+            <h1 id="aboutus" class="text-center my-4">About Us</h1>
         </header>
     </div>
 
     <section>
-        <div id="logopa">
-            <img id="logo" src="img/PA.png" alt="Logo de la Program Army">
+        <div id="logopa" class="container text-center my-4">
+            <img id="logo" src="img/logopa.png" alt="Logo de la Program Army" class="img-fluid">
+            <p id="titulo" class="mt-3"> La Program Army</p>
         </div>
-        <p id="titulo"> La Program Army</p>
-
     </section>
 
-    <div id="contenedormision">
-        <pre id="mision">
-
-                                                                &lt;Mission&gt;
-              We focus on creating applications and solutions of high quality and 
-                                        adaptability for any of our clients' needs.
-                                                                &lt;/Mission&gt;                     
-        </pre>
-
-    </div>
-
-    <div id="contenedorvision">
-        <pre id="vision">
-
-                                              &lt;Vision&gt;
-                Being an average company leading the inner 
-                                    market of software in Uruguay.
-                                              &lt;/Vision&gt;                     
-        </pre>
-    </div>
-
-    <p id="miembros">Member of Company</p>
-
-    <div id="contenedormiembros">
-        <h1 id="leader">Leader</h1>
-        <img id="imgl" src="img/image 22.png" alt="Leader">
-        <h1 id="manager">Manager</h1>
-        <img id="imgm" src="img/image 22.png" alt="Manager">
-        <h1 id="developer"> Developer</h1>
-        <img id="imgd" src="img/image 22.png" alt="Developer">
-        <h1 id="developer2">Developer</h1>
-        <img id="imgd2" src="img/image 22.png" alt="Developer">
-        <h1 id="subleader">Sub Leader</h1>
-        <img id="imgsl" src="img/image 22.png" alt="Sub Leader">
-    </div>
-
-    <div>
-        <footer>
-            <h1 id="derechos">©️ Todos los derechos reservados</h1>
-            <div id="contenedorflogo">
-                <img id="flogo" src="img/PA.png" alt="La Program Army">
+    <div class="container my-4">
+        <div class="text-center" id="contenedormision">
+            <div id="mision">
+                <p>&lt;Mission&gt;</p>
+                <p>We focus on creating applications and solutions of high quality and adaptability for any of our clients' needs.</p>
+                <p>&lt;/Mission&gt;</p>                    
             </div>
+        </div>
+    </div>
+
+    <div class="container my-4">
+        <div id="contenedorvision" class="text-center">
+            <div id="vision">
+                <p>&lt;Vision&gt;</p>
+                <p>Being an average company leading the inner market of software in Uruguay.</p>
+                <p>&lt;/Vision&gt;</p>                   
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center my-4">
+
+        <p id="miembros">Members of Company</p>
+
+        <div id="contenedormiembros" class="row">
+
+            <div class="col-sm-6 col-md-4 mb-4">
+                <h1 id="leader">Leader</h1>
+                <img id="imgl" src="img/image 22.png" alt="Leader" class="img-fluid">
+            </div>
+
+            <div class="col-sm-6 col-md-4 mb-4">
+                <h1 id="subleader">Sub Leader</h1>
+                <img id="imgsl" src="img/image 22.png" alt="Sub Leader" class="img-fluid">
+            </div>
+
+            <div class="col-sm-6 col-md-4 mb-4">
+                <h1 id="manager">Manager</h1>
+                <img id="imgm" src="img/image 22.png" alt="Manager" class="img-fluid">
+            </div>
+
+            <div class="col-sm-6 col-md-4 mb-4">
+                <h1 id="developer"> Developer</h1>
+                <img id="imgd" src="img/image 22.png" alt="Developer" class="img-fluid">
+            </div>
+
+            <div class="col-sm-6 col-md-4 mb-4">
+                <h1 id="developer2">Developer</h1>
+                <img id="imgd2" src="img/image 22.png" alt="Developer" class="img-fluid">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container text-center my-4">
+        <footer>
+
+            <h1 id="derechos">©️ Todos los derechos reservados</h1>
+
+            <div id="contenedorflogo">
+                <img id="flogo" src="img/logopa.png" alt="La Program Army" class="img-fluid">
+            </div>
+            
         </footer>
     </div>
-
-
 </body>
 
 </html>

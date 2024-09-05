@@ -2,23 +2,20 @@ body {
     background-color: #526755;
 }
 
-section {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+#logopa {
+    max-width: 100%;
+    margin: 20px auto;
+    text-align: center;
+    height: auto;
 }
 
-#logopa {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #A2F798;
-    width: 175px;
-    height: 175px;
-    position: relative;
-    top: 50px;
-    border-radius: 75%;
-    border: 2px solid #000;
+#logopa img {
+    width: 300px;
+    height: auto;
+}
+
+#logopa p {
+    font-size: 45px;
 }
 
 @font-face {
@@ -30,13 +27,7 @@ section {
 #titulo {
     font-family: Kodchasan-Bold;
     color: #fff;
-    font-size: 30px;
-    width: 80%;
-}
-
-#logo {
-    width: 85px;
-    border-radius: 1%;
+    font-size: 24px;
 }
 
 @font-face {
@@ -46,148 +37,47 @@ section {
 }
 
 
-#contenedormision {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 1000px;
-    height: 150px;
-    background-color: #74A77A;
-    position: relative;
-    top: 100px;
-    left: 250px;
-    border-radius: 15px;
-
+#contenedormision, #contenedorvision {
+    margin-top: 20px;
 }
 
-#mision {
+#mision, #vision{
     font-family: JejuGothic;
     color: #fff;
-    font-size: 22px;
-    position: relative;
-    right:35px;
-}
-
-
-#contenedorvision {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 1000px;
-    height: 150px;
-    background-color: #74A77A;
-    position: relative;
-    top: 150px;
-    left: 250px;
-    border-radius: 15px;
-
-}
-
-#vision {
-    font-family: JejuGothic;
-    color: #fff;
-    font-size: 22px;
-    position:relative;
-    right: 35px;
-    
-
+    background-color: #A2F798;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
 }
 
 #miembros {
     color: #fff;
-    position: relative;
-    top: 300px;
-    left: 650px;
+    margin-top: 40px;
     font-family: Kodchasan-Bold;
-    font-size: 25px;
-
+    font-size: 28px;
+    text-align: center;
 }
 
-#contenedormiembros {
-    display: flex;
-    background-color: #74A77A;
-    display: flex;
-    position: relative;
-    width: 700px;
-    height: 700px;
-    top: 300px;
-    border-radius: 15px;
-    left: 425px;
-    margin-bottom: 25%;
+#contenedormiembros h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: white;
 }
 
-#leader {
-    font-family: Kodchasan-Bold;
-    color: #fff;
-    position: relative;
-    left: 45px;
+#contenedormiembros img{
+    max-width: 100px;
+    margin: 10px auto;
+    display: block;
+    border-radius: 50%;
+    height: auto;
 }
 
-#imgl {
-    width: 153px;
-    height: 158px;
+#contenedormiembros .col-sm-6 {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
     position: relative;
-    top: 65px;
-    right: 85px;
-}
-
-#manager {
-    font-family: Kodchasan-Bold;
-    color: #fff;
-    position: relative;
-    left: 10px;
-}
-
-#imgm {
-    width: 153px;
-    height: 158px;
-    position: relative;
-    top: 65px;
-    right: 140px;
-}
-
-#developer {
-    font-family: Kodchasan-Bold;
-    color: #fff;
-    position: relative;
-    left: -40px;
-}
-
-#imgd {
-    width: 153px;
-    height: 158px;
-    position: relative;
-    top: 65px;
-    right: 210px;
-}
-#developer2 {
-    font-family: Kodchasan-Bold;
-    color: #fff;
-    position: relative;
-    left: -490px;
-    top: 300px;
-}
-#imgd2 {
-    width: 153px;
-    height: 158px;
-    position: relative;
-    top: 65px;
-    right: 650px;
-    top: 380px;
-}
-#subleader {
-    font-family: Kodchasan-Bold;
-    color: #fff;
-    position: relative;
-    top: 250px;
-    right: 1020px;
-    
-}
-#imgsl {
-    width: 153px;
-    height: 158px;
-    position: relative;
-    top: 65px;
-    right: 1150px;
-    top: 380px;
+    margin: 10px auto;
 }
