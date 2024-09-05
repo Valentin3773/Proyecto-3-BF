@@ -28,8 +28,9 @@ $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odo
 
         <div class="lapizeditar">
             <img src="img/iconosvg/lapiz.svg" id="mdF" alt="Modificar" title="Modificar">
+            <input type="file" id="inFile" accept="image/*">
         </div>
-
+        <div id="fotoperfilIMG"></div>
     </div>
 
 </div>

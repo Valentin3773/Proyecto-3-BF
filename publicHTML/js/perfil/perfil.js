@@ -18,7 +18,7 @@ $(() => {
         case 4: cargarVistaInactividades(); break;
     }
 
-    history.replaceState({path: 'perfil.php'}, '', 'perfil.php');
+    history.replaceState({ path: 'perfil.php' }, '', 'perfil.php');
 });
 
 var Datos = {
@@ -66,7 +66,7 @@ function integrarBoton($datos, $id) {
                 $($datos['inputID']).prop('disabled', true);
                 funcionguardarCambios($datos);
                 console.log("Guardar");
-            } 
+            }
             else {
 
                 $($datos['inputID']).val($datos['old']);
@@ -77,14 +77,31 @@ function integrarBoton($datos, $id) {
             }
             // window.location.replace("index.php");
         });
-    } 
+    }
     else $($id).attr('src', 'img/iconosvg/Guardar.svg');
 }
 
 function integrarEventos() {
 
     //Listeners con datos importantes
-    $('#mdF').on('click', function () { console.log("Foto"); });
+    $('#mdF').on('click', function () {
+        $('#inFile').click();
+        $('#inFile').change(function (event) {
+            var file = event.target.files[0];
+            try {
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#fotoperfil').prop('src',e.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                    
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        });
+    });
     $('#mdN').on('click', function () { Datos['namedata'] = "nombre"; $('#inNombre').removeAttr('disabled'); Datos['old'] = $('#inNombre').val(); Datos['inputID'] = "#inNombre"; integrarBoton(Datos, "#mdN"); });
     $('#mdA').on('click', function () { Datos['namedata'] = "apellido"; $('#inApellido').removeAttr('disabled'); Datos['old'] = $('#inApellido').val(); Datos['inputID'] = "#inApellido"; integrarBoton(Datos, "#mdA") });
     $('#mdT').on('click', function () { Datos['namedata'] = "telefono"; $('#inTelefono').removeAttr('disabled'); Datos['old'] = $('#inTelefono').val(); Datos['inputID'] = "#inTelefono"; integrarBoton(Datos, "#mdT") });
@@ -154,9 +171,9 @@ function cargarVistaSeguridad() {
 
         $('main').empty().html(contenido).fadeIn(200);
         $('#cambiarpass').on('click', function (e) {
-            
+
             e.preventDefault();
-            cambiarContraseña($('#oldpass').val(),$('#newpass').val(),$('#newpassagain').val());
+            cambiarContraseña($('#oldpass').val(), $('#newpass').val(), $('#newpassagain').val());
         });
     });
 
@@ -191,7 +208,7 @@ function cargarVistaAgregarInactividad() {
 function cambiarContraseña($1, $2, $3) {
 
     let data = {
-        
+
         old: $1,
         new: $2,
         newA: $3
@@ -207,13 +224,13 @@ function cambiarContraseña($1, $2, $3) {
         contentType: 'application/json',
         success: response => {
 
-            if (response.error === undefined) createPopup('Nuevo Aviso',response.enviar);
+            if (response.error === undefined) createPopup('Nuevo Aviso', response.enviar);
 
-            else createPopup('Nuevo Aviso',response.error);
+            else createPopup('Nuevo Aviso', response.error);
         },
         error: (jqXHR, estado, outputError) => {
 
-            console.log("Error al procesar la solicitud: 3" + outputError+estado+jqXHR);
+            console.log("Error al procesar la solicitud: 3" + outputError + estado + jqXHR);
         }
     });
 }
