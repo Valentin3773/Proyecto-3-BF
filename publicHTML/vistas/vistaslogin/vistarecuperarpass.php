@@ -16,30 +16,31 @@
 </button>
 
 <div class="container" id="containerRecuPass">
-<link rel="stylesheet" href="./css/login/recuperarpass.css">
-        <div class="text-center">
-            <div class="d-flex justify-content-center row text-center">
-                <img src="./img/logaso.png" id="logaso" alt="">
-                <label for="" id="Serif" class="H1">Recuperar Contraseña</label>
-            </div>
-            <form class="form-control mt-3 pt-4 px-4" id="formRecuPass" action="" method="post">
-                <label id="Serif" for="" class="H2">Se enviará un código de verificación a tu casilla de correo electrónico.</label>
-                <div class="form-group row d-flex mt-4">
-                    <div class="d-flex">
-                        <label for="" id="contColor" class="text-white px-5 rounded-top">Email</label>
-                    </div>
-                    <div>
-                        <input id="inEmail" type="email" class="form-control" name="" id="" value="Ingrese su correo electrónico">
-                    </div>
-                </div>
-                <div id="buttonRecu">
-                    <button id="contColor" class="mt-4 mb-4 btn contBTN text-white H4">Enviar Código</button>
-                </div>         
-            </form>
-            <div id="buttonRecu" class="mt-5 row justify-content-center">
-                <label for="" id="Serif" class="H5">¿Has olvidado tu email?</label>
-                <button id="contColor" class="mt-2 btn text-white H6 contColorH6">Recuperar correo electrónico</button>
-            </div>
+    
+    <link rel="stylesheet" href="./css/login/recuperarpass.css">
+    <div class="text-center">
+        <div class="d-flex justify-content-center row text-center">
+            <img src="./img/logaso.png" id="logaso" alt="">
+            <label for="" id="Serif" class="H1">Recuperar Contraseña</label>
         </div>
-  
+        <form class="form-control mt-3 pt-4 px-4" id="formRecuPass" action="" method="post">
+            <label id="Serif" for="" class="H2">Se enviará un código de verificación a tu casilla de correo electrónico.</label>
+            <div class="form-group row d-flex mt-4">
+                <div class="d-flex">
+                    <label for="" id="contColor" class="text-white px-5 rounded-top">Email</label>
+                </div>
+                <div>
+                    <input id="inEmail" type="email" class="form-control" name="" id="" value="Ingrese su correo electrónico">
+                </div>
+            </div>
+            <div id="buttonRecu">
+                <button id="contColor" class="mt-4 mb-4 btn contBTN text-white H4">Enviar Código</button>
+            </div>
+        </form>
+        <div id="buttonRecu" class="mt-5 row justify-content-center">
+            <label for="" id="Serif" class="H5">¿Has olvidado tu email?</label>
+            <button id="contColor" class="mt-2 btn text-white H6 contColorH6">Recuperar correo electrónico</button>
+        </div>
+    </div>
+
 </div>

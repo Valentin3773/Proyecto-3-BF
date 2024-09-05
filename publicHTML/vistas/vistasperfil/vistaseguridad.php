@@ -12,14 +12,18 @@ reloadSession();
 
 <!-- <h2 id="titulocambiarpass" class="mt-4">Privacidad</h2> -->
 
-<div id="privacidad">
+<h2 id="tituloprivacidad" class="mt-4">Privacidad</h2>
 
+<form id="privacidad" class="d-flex justify-content-center align-items-center gap-4">
 
-</div>
+    <label for="nomolestar" class="form-check-label fs-4">¿Desea recibir notificaciones?</label>
+    <input type="checkbox" name="nomolestar" id="nomolestar" class="form-check-input m-0" required>
+
+</form>
 
 <h2 id="titulocambiarpass" class="mt-4">Cambiar Contraseña</h2>
 
-<form method = "POST" id="formcambiar">
+<form method="POST" id="formcambiar">
 
     <div id="contenedor_formulario" class="mb-4">
 

@@ -4,6 +4,8 @@ include('backend/extractor.php');
 
 session_start();
 
+if(!isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) header('Location: index.php');
+
 reloadSession();
 
 if (!isset($_GET['estado']) || (isset($_GET['estado']) && $_GET['estado'] == 1)) $estado = 1;
@@ -29,6 +31,7 @@ else if (isset($_GET['estado'])) {
 
     <!-- Librerias -->
     <script src="lib/jquery-3.7.1.min.js"></script>
+    <script src="lib/jquery-ui-1.14.0/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="lib/bootstrap-5.2.3-dist/css/bootstrap.min.css">
     <script defer src="lib/bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="lib/fontawesome-free-5.15.4-web/css/all.min.css">
@@ -47,7 +50,6 @@ else if (isset($_GET['estado'])) {
     <script defer src="js/perfil/updateProfile.js"></script>
     <script defer src="js/perfil/perfil.js"></script>
     
-
 </head>
 
 <body>

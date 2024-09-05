@@ -37,7 +37,7 @@ label {
     text-align: center !important;
 }
 
-#titulocambiarpass {
+#titulocambiarpass, #tituloprivacidad {
 
     color: #00B2FF;
     text-align: center;
@@ -45,11 +45,17 @@ label {
     font-size: 2.5rem;
 }
 
-#formcambiar {
+#formcambiar, #privacidad {
 
     background-color: #78B3FF;
     padding: 2rem;
     border-radius: 15px;
+}
+
+#privacidad input {
+
+    width: 2em !important;
+    height: 2em !important;
 }
 
 #cambiarpasscontainer {

@@ -22,8 +22,6 @@ if(isset($_SESSION['odontologo'])):
     
     <h1 class="subtitulo">Mis Horarios</h1>
     
-    <div id="conthorarios">
-    
     <?php 
     
     if(!empty($horarios)) {
@@ -33,6 +31,7 @@ if(isset($_SESSION['odontologo'])):
                 <span class="horas">Horas</span>
                 <span class="dia">Día</span>
             </div>
+            <div id="conthorarios">
         ';
 
         foreach($horarios as $horario) {
@@ -55,12 +54,11 @@ if(isset($_SESSION['odontologo'])):
                 </div>
             ";
         }
+        echo "</div>";
     }
     else echo "<h3 id='nohorarios'>Aún no tienes ningún horario</h3>";
 
     ?>
-
-    </div>
 
     <div id="agregarhorariocont" class="d-flex justify-content-center align-items-center mt-4">
 

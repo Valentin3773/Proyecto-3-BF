@@ -16,7 +16,7 @@ $semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Dom
             <select name="dia" id="dia" class="form-select">
 
                 <option selected>Seleccione un día</option>
-                <?php for($i = 0; $i < sizeof($semana); $i++) echo "<option value='". ($i + 1) ."'>{$semana[$i]}</option>"; ?>
+                <?php for($i = 0; $i < sizeof($semana); $i++) echo "<option class='py-5' value='". ($i + 1) ."'>{$semana[$i]}</option>"; ?>
 
             </select>
 

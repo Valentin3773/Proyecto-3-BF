@@ -20,8 +20,6 @@ if(isset($_SESSION['odontologo'])):
 
     <h1 class="subtitulo">Mis Inactividades</h1>
 
-    <div id="continactividades">
-
     <?php
     
     if(!empty($inactividades)) {
@@ -31,6 +29,7 @@ if(isset($_SESSION['odontologo'])):
                 <span class="desde">Desde</span>
                 <span class="hasta">Hasta</span>
             </div>
+            <div id="continactividades">
         ';
         
         foreach($inactividades as $inactividad) {
@@ -57,11 +56,10 @@ if(isset($_SESSION['odontologo'])):
                 </div>
             ";
         }
+        echo "</div>";
     }
     else echo "<h3 id='noinactividades'>No tienes ninguna inactividad</h3>";
     ?>
-
-    </div>
 
     <div id="agregarinactividadcont" class="d-flex justify-content-center align-items-center mt-4">
 
