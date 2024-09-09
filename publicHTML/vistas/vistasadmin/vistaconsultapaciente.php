@@ -10,7 +10,7 @@ $nombreP = $_GET['nombreP'];
 
 $consultaPaciente = array();
 
-    //Obtiene la consulta del paciente referente
+    // Obtiene la consulta del paciente referente
     $consulta = ' SELECT * FROM consulta WHERE hora = :hora AND fecha =:fecha AND idodontologo = :ido ';
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':ido', $ido);
@@ -20,31 +20,25 @@ $consultaPaciente = array();
     if ($stmt->execute() && $stmt->rowCount() > 0) {
 
         $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    else echo "Error al ejecutar la consulta";
 
-    }else { 
-        echo "Error al ejecutar la consulta";
-    } //Fin
-
-    //Obtiene un array de fechas
+    // Obtiene un array de fechas
     $fechaA = getFechaActual();
     $consulta = "SELECT DATE_ADD(:fechaA, INTERVAL 2 MONTH)";
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':fechaA', $fechaA);
     
-    if ($stmt->execute() && $stmt->rowCount() > 0) {
-        $fechaF = $stmt->fetchColumn();
-    } else {
-        echo "Error al ejecutar la consulta";
-    }
+    if ($stmt->execute() && $stmt->rowCount() > 0) $fechaF = $stmt->fetchColumn();
+    
+    else echo "Error al ejecutar la consulta";
+    
     $conjFechas = getDatesFromRange($fechaA, $fechaF);
-    //fin
+    // fin
 
     $conjHoras = array();
 
-
-
-    $conjHoras = getAdjustedHoursFromRange('07:00:00','22:00:00');
-
+    $conjHoras = getHoursFromRange('07:00:00','22:00:00');
 
 ?>
 <script src="js/administrador/consultapaciente.js"></script>

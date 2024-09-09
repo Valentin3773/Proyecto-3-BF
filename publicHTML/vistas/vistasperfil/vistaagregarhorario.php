@@ -15,7 +15,7 @@ $semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Dom
             <label for="dia">Día</label>
             <select name="dia" id="dia" class="form-select">
 
-                <option selected>Seleccione un día</option>
+                <option selected value="">Seleccione un día</option>
                 <?php for($i = 0; $i < sizeof($semana); $i++) echo "<option class='py-5' value='". ($i + 1) ."'>{$semana[$i]}</option>"; ?>
 
             </select>
@@ -27,7 +27,7 @@ $semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Dom
             <label for="horainicio">Hora de inicio</label>
             <select name="horainicio" id="horainicio" class="form-select" disabled>
 
-                <option selected>Seleccione la hora de inicio</option>
+                <option selected value="">Seleccione la hora de inicio</option>
 
             </select>
 
@@ -38,7 +38,7 @@ $semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Dom
             <label for="horafinalizacion">Hora de finalización</label>
             <select name="horafinalizacion" id="horafinalizacion" class="form-select" disabled>
 
-                <option selected>Seleccione la hora de finalización</option>
+                <option selected value="">Seleccione la hora de finalización</option>
 
             </select>
 

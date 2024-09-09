@@ -10,7 +10,7 @@ if(isset($_SESSION['odontologo'])):
 
     $ido = $_SESSION['odontologo']['idodontologo'] ?? null;
 
-    $sql = "SELECT i.idinactividad, i.fechainicio, i.fechafinalizacion, i.tiempoinicio, i.tiempofinalizacion FROM odontologo_inactividad oi JOIN inactividad i ON oi.idinactividad = i.idinactividad WHERE oi.idodontologo = :ido ORDER BY fechainicio ASC, tiempoinicio ASC";
+    $sql = "SELECT idinactividad, fechainicio, fechafinalizacion, tiempoinicio, tiempofinalizacion FROM inactividad WHERE idodontologo = :ido ORDER BY fechainicio ASC, tiempoinicio ASC";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':ido', $ido);
     

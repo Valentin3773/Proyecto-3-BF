@@ -11,7 +11,7 @@ if(isset($_SESSION['odontologo'])):
 
     $ido = $_SESSION['odontologo']['idodontologo'] ?? null;
     
-    $sql = "SELECT h.idhorario, h.horainicio, h.horafinalizacion, h.dia FROM odontologo_horario oh JOIN horario h ON oh.idhorario = h.idhorario WHERE oh.idodontologo = :ido ORDER BY h.dia ASC, h.horainicio ASC";
+    $sql = "SELECT idhorario, horainicio, horafinalizacion, dia FROM horario WHERE idodontologo = :ido ORDER BY dia ASC, horainicio ASC";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':ido', $ido);
     
