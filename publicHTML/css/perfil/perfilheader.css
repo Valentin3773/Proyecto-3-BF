@@ -175,6 +175,7 @@ p {
 
 main {
 
+    position: relative;
     width: 80% !important;
     border-radius: 0 28px 28px 0;
     /* box-shadow: -1px 0 10px rgba(60, 219, 189, .2); */

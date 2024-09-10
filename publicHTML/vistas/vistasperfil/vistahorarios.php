@@ -51,6 +51,8 @@ if(isset($_SESSION['odontologo'])):
                         <span>{$semana[$horario["dia"] - 1]}</span>
                     </div>
 
+                    <div class='tachito invisible' data-horario='{$horario["idhorario"]}'><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div>
+
                 </div>
             ";
         }
@@ -60,9 +62,11 @@ if(isset($_SESSION['odontologo'])):
 
     ?>
 
-    <div id="agregarhorariocont" class="d-flex justify-content-center align-items-center mt-4">
+    <div id="agregarhorariocont" class="d-flex justify-content-center align-items-center mt-4 p-3">
 
         <div id="agregarhorario"><div class="mas"></div></div>
+        
+        <div id="eliminarhorario"><i class="fas fa-trash-alt" style="color: #ffffff;"></i></div>
 
     </div>
 

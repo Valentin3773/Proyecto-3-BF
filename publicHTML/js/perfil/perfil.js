@@ -170,6 +170,45 @@ function cargarVistaHorarios() {
             containment: 'parent',
             delay: 300
         });
+        $('#eliminarhorario').on('click', () => {
+
+            console.log($('#eliminarhorario').attr('data-eliminar'));
+
+            if($('#eliminarhorario').attr('data-eliminar') != 'si') {
+
+                $('.horario .tachito').addClass('visible').removeClass('invisible');
+                $('#eliminarhorario').html('<i class="fas fa-window-close" style="color: #ffffff;"></i>').attr('data-eliminar', 'si');
+            }
+            else {
+
+                $('.horario .tachito').addClass('invisible').removeClass('visible');
+                $('#eliminarhorario').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').attr('data-eliminar', 'no');
+            }
+        });
+
+        $('.horario .tachito').on('click', function() {
+
+            $('#eliminarhorario').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').attr('data-eliminar', 'no');
+            $('.horario .tachito').addClass('invisible').removeClass('visible');
+
+            $.ajax({
+
+                type: "POST",
+                url: "backend/perfil/eliminarHorario.php",
+                data: JSON.stringify({horario: $(this).attr('data-horario')}),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (response) {
+
+                    if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaHorarios);
+
+                    else createPopup('Nuevo Aviso', response.error);
+                },
+                error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
+            });
+        });
+
+        $()
     });
 
     $('#sidebar #btnsuperiores button').css({ 'text-decoration': 'none' });
@@ -324,8 +363,6 @@ function cargarVistaAgregarHorario() {
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (response) {
-
-                    console.log(response);
 
                     if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, () => $('main').fadeOut(200, cargarVistaHorarios));
 
