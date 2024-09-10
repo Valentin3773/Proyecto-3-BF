@@ -90,11 +90,34 @@ function integrarEventos() {
             var file = event.target.files[0];
             try {
                 if (file) {
+
+                    //Mostrar la imagen
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         $('#fotoperfil').prop('src', e.target.result);
                     }
                     reader.readAsDataURL(file);
+
+                    //Parseo de la imagen
+                    var formData = new FormData();//
+                    formData.append('file', file)
+
+                    $.ajax({
+                        type: "POST",
+                        url: "./backend/perfil/subirIMG.php",
+                        data: formData,    
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            if(response.error == undefined){
+                                window.location.reload();
+                            }
+                            else {console.log(response.error);}
+                        },  error: (jqXHR, estado, outputError) => {
+    
+                            console.log("Error al procesar la solicitud: 3" + outputError+estado+jqXHR);
+                        }
+                    });
 
                 }
             } catch (error) {

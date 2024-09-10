@@ -20,7 +20,7 @@ $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odo
 
         <?php
 
-        if (isset($usuario['foto'])) echo "<img id='fotoperfil' src='{$usuario["foto"]}' alt='Foto de perfil' title='Foto de perfil'>";
+        if (isset($usuario['foto'])) echo "<img id='fotoperfil' src='img/imgPerfil/$usuario[foto]' alt='Foto de perfil' title='Foto de perfil'>";
         
         else echo "<img id='fotoperfil' src='img/iconoperfil.png' alt='Foto de perfil' title='Foto de perfil'>";
 
