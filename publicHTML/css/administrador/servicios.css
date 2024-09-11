@@ -73,6 +73,7 @@
     padding: 1rem;
     border-radius: 10px 10px 0 0;
     font-weight: 600;
+    margin: 0;
 }
 
 #cuerpo .form-group {
@@ -100,4 +101,76 @@
     width: 100%;
     border-radius: 0 0 10px 10px;
     font-size: 1.5rem;
+}
+
+#leyendascontainer {
+
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#contimg span {
+
+    text-align: center;
+    color: #00d335;
+    font-size: 1.5rem;
+    text-shadow: 0 0 1px rgba(0, 0, 0, .5);
+    letter-spacing: 2px;
+}
+
+#contimg {
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#contimg #iconocontainer, #contimg #imgcontainer {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#imgservicio, #icoservicio {
+
+    height: 150px;
+    box-shadow: 4px 4px 4px #00b3ff7d, 0 0 3px 1px rgba(0, 0, 0, .5);
+    padding: .5rem;
+    border-radius: 15px;
+}
+
+.lapizeditar {
+
+    background-color: #0AF0AB;
+    border-radius: 30%;
+    padding: 10px;
+    z-index: 2;
+    box-shadow: 0 0 6px 1px rgba(0, 0, 0, .5);
+    transition-duration: .3s;
+    cursor: pointer;
+    position: absolute;
+    bottom: -7%;
+    right: -7%;
+}
+
+.lapizeditar:hover {
+
+    scale: 1.05;
+    filter: brightness(1.1);
+}
+
+.lapizeditar:active {
+
+    scale: .95;
+    filter: brightness(1.2);
+}
+
+.lapizeditar > img {
+
+    width: 30px;
 }
