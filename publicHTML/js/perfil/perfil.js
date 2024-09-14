@@ -49,10 +49,9 @@ function cargarVistaPerfil() {
 
 function integrarBoton($datos, $id) {
 
-    //Aca sucede la magia
+    // Aca sucede la magia
     if ($($id).attr('src', 'img/iconosvg/Guardar.svg')) {
 
-        console.log(0)
         quitarEventos();
 
         $($id).on('click', function () {
@@ -85,51 +84,56 @@ function integrarEventos() {
 
     //Listeners con datos importantes
     $('#mdF').on('click', function () {
+
         $('#inFile').click();
         $('#inFile').change(function (event) {
-            var file = event.target.files[0];
+
+            let file = event.target.files[0];
             try {
+
                 if (file) {
 
-                    //Mostrar la imagen
-                    var reader = new FileReader();
+                    // Mostrar la imagen
+                    let reader = new FileReader();
                     reader.onload = function (e) {
                         $('#fotoperfil').prop('src', e.target.result);
                     }
                     reader.readAsDataURL(file);
 
-                    //Parseo de la imagen
-                    var formData = new FormData();//
-                    formData.append('file', file)
+                    // Parseo de la imagen
+                    let formData = new FormData();
+                    formData.append('file', file);
 
                     $.ajax({
+
                         type: "POST",
                         url: "./backend/perfil/subirIMG.php",
                         data: formData,    
                         processData: false,
                         contentType: false,
                         success: function (response) {
-                            if(response.error == undefined){
-                                window.location.reload();
-                            }
-                            else {console.log(response.error);}
+
+                            if(response.error == undefined) window.location.reload();
+                            
+                            else {console.log(response.error);
+                        }
                         },  error: (jqXHR, estado, outputError) => {
     
-                            console.log("Error al procesar la solicitud: 3" + outputError+estado+jqXHR);
+                            console.log("Error al procesar la solicitud: 3" + outputError + estado + jqXHR);
                         }
                     });
-
                 }
             } catch (error) {
+
                 console.log(error);
             }
         });
     });
-    $('#mdN').on('click', function () { Datos['namedata'] = "nombre"; $('#inNombre').removeAttr('disabled'); Datos['old'] = $('#inNombre').val(); Datos['inputID'] = "#inNombre"; integrarBoton(Datos, "#mdN"); });
-    $('#mdA').on('click', function () { Datos['namedata'] = "apellido"; $('#inApellido').removeAttr('disabled'); Datos['old'] = $('#inApellido').val(); Datos['inputID'] = "#inApellido"; integrarBoton(Datos, "#mdA") });
-    $('#mdT').on('click', function () { Datos['namedata'] = "telefono"; $('#inTelefono').removeAttr('disabled'); Datos['old'] = $('#inTelefono').val(); Datos['inputID'] = "#inTelefono"; integrarBoton(Datos, "#mdT") });
-    $('#mdD').on('click', function () { Datos['namedata'] = "direccion"; $('#inDireccion').removeAttr('disabled'); Datos['old'] = $('#inDireccion').val(); Datos['inputID'] = "#inDireccion"; integrarBoton(Datos, "#mdD") });
-    $('#mdE').on('click', function () { Datos['namedata'] = "email"; $('#inEmail').removeAttr('disabled'); Datos['old'] = $('#inEmail').val(); Datos['inputID'] = "#inEmail"; integrarBoton(Datos, "#mdE") });
+    $('#mdN').on('click', function () { Datos['namedata'] = "nombre"; $('#inNombre').prop('disabled', false); Datos['old'] = $('#inNombre').val(); Datos['inputID'] = "#inNombre"; integrarBoton(Datos, "#mdN"); $('#inNombre').focus(); });
+    $('#mdA').on('click', function () { Datos['namedata'] = "apellido"; $('#inApellido').prop('disabled', false); Datos['old'] = $('#inApellido').val(); Datos['inputID'] = "#inApellido"; integrarBoton(Datos, "#mdA"); $('#inApellido').focus(); });
+    $('#mdT').on('click', function () { Datos['namedata'] = "telefono"; $('#inTelefono').prop('disabled', false); Datos['old'] = $('#inTelefono').val(); Datos['inputID'] = "#inTelefono"; integrarBoton(Datos, "#mdT"); $('#inTelefono').focus(); });
+    $('#mdD').on('click', function () { Datos['namedata'] = "direccion"; $('#inDireccion').prop('disabled', false); Datos['old'] = $('#inDireccion').val(); Datos['inputID'] = "#inDireccion"; integrarBoton(Datos, "#mdD"); $('#inDireccion').focus(); });
+    $('#mdE').on('click', function () { Datos['namedata'] = "email"; $('#inEmail').prop('disabled', false); Datos['old'] = $('#inEmail').val(); Datos['inputID'] = "#inEmail"; integrarBoton(Datos, "#mdE"); $('#inEmail').focus(); });
 }
 
 function quitarEventos() {
@@ -164,6 +168,8 @@ function cargarVistaHorarios() {
 
         $('main').empty().html(contenido).fadeIn(200);
         $('#agregarhorario').on('click', () => $('main').fadeOut(200, cargarVistaAgregarHorario));
+        if($('.subtitulo').attr('data-cantidad') != 0) $('#eliminarhorario').addClass('visible').removeClass('invisible');
+        else $('#eliminarhorario').addClass('invisible').removeClass('visible');
         $('#conthorarios').sortable({
 
             axis: 'y',
@@ -180,7 +186,7 @@ function cargarVistaHorarios() {
                 $('#eliminarhorario').html('<i class="fas fa-window-close" style="color: #ffffff;"></i>').attr('data-eliminar', 'si');
             }
             else {
-
+                
                 $('.horario .tachito').addClass('invisible').removeClass('visible');
                 $('#eliminarhorario').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').attr('data-eliminar', 'no');
             }
@@ -207,8 +213,6 @@ function cargarVistaHorarios() {
                 error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
             });
         });
-
-        $()
     });
 
     $('#sidebar #btnsuperiores button').css({ 'text-decoration': 'none' });
@@ -229,6 +233,45 @@ function cargarVistaInactividades() {
             axis: 'y',
             containment: 'parent',
             delay: 300
+        });
+        if($('.subtitulo').attr('data-cantidad') != 0) $('#eliminarinactividad').addClass('visible').removeClass('invisible');
+        else $('#eliminarinactividad').addClass('invisible').removeClass('visible');
+        $('#eliminarinactividad').on('click', () => {
+
+            console.log($('#eliminarinactividad').attr('data-eliminar'));
+
+            if($('#eliminarinactividad').attr('data-eliminar') != 'si') {
+
+                $('.inactividad .tachito').addClass('visible').removeClass('invisible');
+                $('#eliminarinactividad').html('<i class="fas fa-window-close" style="color: #ffffff;"></i>').attr('data-eliminar', 'si');
+            }
+            else {
+
+                $('.inactividad .tachito').addClass('invisible').removeClass('visible');
+                $('#eliminarinactividad').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').attr('data-eliminar', 'no');
+            }
+        });
+
+        $('.inactividad .tachito').on('click', function() {
+
+            $('#eliminarinactividad').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').attr('data-eliminar', 'no');
+            $('.inactividad .tachito').addClass('invisible').removeClass('visible');
+
+            $.ajax({
+
+                type: "POST",
+                url: "backend/perfil/eliminarInactividad.php",
+                data: JSON.stringify({inactividad: $(this).attr('data-inactividad')}),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (response) {
+
+                    if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaInactividades);
+
+                    else createPopup('Nuevo Aviso', response.error);
+                },
+                error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
+            });
         });
     });
 

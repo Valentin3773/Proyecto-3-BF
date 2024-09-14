@@ -41,6 +41,7 @@
     border: 3px solid rgba(0, 0, 0, .2);
     transition-duration: .3s;
     cursor: pointer;
+    position: relative;
 }
 
 .inactividad > div {
@@ -88,6 +89,10 @@
     border: 3px solid #0AF0AB;
 }
 
+#agregarinactividadcont {
+
+    position: relative;
+}
 
 #agregarinactividad {
 
@@ -130,4 +135,60 @@
     margin-top: 1rem;
     color: #00d335;
     text-align: center;
+}
+
+
+#eliminarinactividad {
+
+    position: absolute;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    border-radius: 30px;
+    padding: 2.2rem;
+    transition-duration: .3s;
+    cursor: pointer;
+}
+
+#eliminarinactividad:hover {
+
+    scale: 1.05;
+    filter: brightness(1.1);
+}
+
+#eliminarinactividad:active {
+
+    scale: .97;
+    filter: brightness(1.2);
+}
+
+#eliminarinactividad svg {
+
+    height: fit-content;
+    width: unset;
+}
+
+.inactividad .tachito {
+
+    position: absolute;
+    right: 0;
+    width: 50px;
+    height: 100%;
+    background-color: red;
+    border-radius: 0 18px 18px 0;
+    transition-duration: .3s;
+}
+
+.inactividad .tachito.invisible {
+
+    display: none;
+}
+
+.inactividad .tachito:hover {
+
+    width: 100px;
 }

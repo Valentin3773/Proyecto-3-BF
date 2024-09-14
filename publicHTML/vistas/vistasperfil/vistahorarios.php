@@ -18,21 +18,24 @@ if(isset($_SESSION['odontologo'])):
     if($stmt->execute() && $stmt->rowCount() > 0) $horarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+
+    if(!empty($horarios)) $sizehorarios = sizeof($horarios);
+    else $sizehorarios = 0;
 ?>
     
-    <h1 class="subtitulo">Mis Horarios</h1>
+    <h1 class="subtitulo" data-cantidad="<?= $sizehorarios ?>">Mis Horarios</h1>
     
     <?php 
     
     if(!empty($horarios)) {
-        
-        echo '
-            <div id="leyendas">
-                <span class="horas">Horas</span>
-                <span class="dia">Día</span>
+
+        echo "
+            <div id='leyendas'>
+                <span class='horas'>Horas</span>
+                <span class='dia'>Día</span>
             </div>
-            <div id="conthorarios">
-        ';
+            <div id='conthorarios'>
+        ";
 
         foreach($horarios as $horario) {
         
@@ -66,7 +69,7 @@ if(isset($_SESSION['odontologo'])):
 
         <div id="agregarhorario"><div class="mas"></div></div>
         
-        <div id="eliminarhorario"><i class="fas fa-trash-alt" style="color: #ffffff;"></i></div>
+        <div id="eliminarhorario" class="invisible"><i class="fas fa-trash-alt" style="color: #ffffff;"></i></div>
 
     </div>
 
