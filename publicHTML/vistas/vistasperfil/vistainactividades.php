@@ -16,21 +16,23 @@ if(isset($_SESSION['odontologo'])):
     
     if($stmt->execute() && $stmt->rowCount() > 0) $inactividades = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    if(!empty($inactividades)) $sizeinactividades = sizeof($inactividades);
+    else $sizeinactividades = 0;
 ?>
 
-    <h1 class="subtitulo">Mis Inactividades</h1>
+    <h1 class="subtitulo" data-cantidad="<?= $sizeinactividades ?>">Mis Inactividades</h1>
 
     <?php
     
     if(!empty($inactividades)) {
-        
-        echo '
-            <div id="leyendas">
-                <span class="desde">Desde</span>
-                <span class="hasta">Hasta</span>
+
+        echo "
+            <div id='leyendas'>
+                <span class='desde'>Desde</span>
+                <span class='hasta'>Hasta</span>
             </div>
-            <div id="continactividades">
-        ';
+            <div id='continactividades'>
+        ";
         
         foreach($inactividades as $inactividad) {
 
@@ -52,6 +54,8 @@ if(isset($_SESSION['odontologo'])):
                     <div class='hasta'>
                         <span>{$fechafinalizacion}</span><hr><span>{$horafinalizacion}</span>
                     </div>
+                    
+                    <div class='tachito invisible' data-inactividad='{$inactividad["idinactividad"]}'><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div>
 
                 </div>
             ";
@@ -64,6 +68,8 @@ if(isset($_SESSION['odontologo'])):
     <div id="agregarinactividadcont" class="d-flex justify-content-center align-items-center mt-4">
 
         <div id="agregarinactividad"><div class="mas"></div></div>
+        
+        <div id="eliminarinactividad" class="invisible"><i class="fas fa-trash-alt" style="color: #ffffff;"></i></div>
 
     </div>
 
