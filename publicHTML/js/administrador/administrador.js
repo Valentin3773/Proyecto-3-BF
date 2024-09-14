@@ -116,12 +116,19 @@ function cargarVistaServicios() {
 
         $('main').html(data);
         console.log("Cargando vista de 'Servicios'");
-
+    
         $('.servicio').on('click', function() {
 
-            $('main').load(`vistas/vistasadmin/vistaservicios.php?numservicio=` + $(this).attr('id'));
+            $('main').load(`vistas/vistasadmin/vistaservicios.php?numservicio=` + $(this).attr('id'),function(){
+                $('[id="mdF"]').on('click', function () {
+                    $(this).css('display','none');
+                });
+            });
         });
+   
+
     });
+    
 
     $('#seccionescss').attr('href', 'css/administrador/servicios.css');
     $('nav a, nav.mobile a').css({'text-decoration': 'none'});
