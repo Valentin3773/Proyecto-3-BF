@@ -120,8 +120,14 @@ function cargarVistaServicios() {
 
         $('.servicio').on('click', function() {
 
-            $('main').load(`vistas/vistasadmin/vistaservicios.php?numservicio=` + $(this).attr('id'));
+            $('main').load(`vistas/vistasadmin/vistaservicios.php?numservicio=` + $(this).attr('id'),function(){
+                $('[id="mdF"]').on('click', function () {
+                    $(this).css('display','none');
+                });
+            });
         });
+   
+
     });
 
     slideActionBar(true);
