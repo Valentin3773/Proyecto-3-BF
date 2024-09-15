@@ -6,20 +6,29 @@ include("../../backend/extractor.php");
 
 reloadSession();
 
+if(isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) {
+
+    if($_SESSION['paciente']['nomolestar'] == 0) $checked = "checked";
+
+    else $checked = "";
+}
+
 ?>
 
 <h1 class="subtitulo">Seguridad</h1>
 
-<!-- <h2 id="titulocambiarpass" class="mt-4">Privacidad</h2> -->
+<?php if(isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])): ?>
 
-<h2 id="tituloprivacidad" class="mt-4">Privacidad</h2>
+    <h2 id="tituloprivacidad" class="mt-4">Privacidad</h2>
 
-<form id="privacidad" class="d-flex justify-content-center align-items-center gap-4">
+    <form id="privacidad" class="d-flex justify-content-center align-items-center gap-4">
 
-    <label for="nomolestar" class="form-check-label fs-4">¿Desea recibir notificaciones?</label>
-    <input type="checkbox" name="nomolestar" id="nomolestar" class="form-check-input m-0" required>
+        <label for="nomolestar" class="form-check-label fs-4">¿Desea recibir notificaciones?</label>
+        <input type="checkbox" name="nomolestar" id="nomolestar" class="form-check-input m-0" required <?= $checked ?> >
 
-</form>
+    </form>
+
+<?php endif; ?>
 
 <h2 id="titulocambiarpass" class="mt-4">Cambiar Contraseña</h2>
 

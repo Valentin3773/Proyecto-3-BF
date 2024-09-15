@@ -1,5 +1,7 @@
 $(() => addBTNListeners());
+
 var iniData = {
+
     asunto: ($('#asunto-CP').val()),
     duracion: Number($('#duracion-CP').val()),
     resumen: ($('#resumen-CP').val()),
@@ -9,10 +11,10 @@ var iniData = {
 
 function addBTNListeners() {
 
-    $('#btnModificar').on('click', function () { funcionModificar() });
-    $('#btnCancelar').on('click', function () { funcionCancelar() });
-    $('#btnGuardar').on('click', function () { funcionGuardar() });
-    $('#btnEliminar').on('click', function () { functionEliminar() });
+    $('#btnModificar').on('click', funcionModificar);
+    $('#btnCancelar').on('click', funcionCancelar);
+    $('#btnGuardar').on('click', funcionGuardar);
+    $('#btnEliminar').on('click', functionEliminar);
 
     $('#btnCancelar').css("opacity", 0.5);
     $('#btnGuardar').css("opacity", 0.5);
@@ -116,6 +118,7 @@ function funcionGuardar() {
 }
 
 function functionEliminar() {
+
     console.log("Eliminar");
 
     const url = 'backend/admin/deleteConsultaPaciente.php';
@@ -125,8 +128,11 @@ function functionEliminar() {
     };
     
     var Confirmar = prompt("¿Está seguro?", "Ingrese Confirmar");
+
     if (Confirmar === null) {
+
         console.log("Cancelado");
+
         $('#btnCancelar').css("opacity", 0.5);
         $('#btnGuardar').css("opacity", 0.5);
         $('#btnEliminar').css("opacity", 0.5);
@@ -144,20 +150,26 @@ function functionEliminar() {
         $('#resumen-CP').prop('disabled', true);
 
     } else if (Confirmar.toLowerCase() === "confirmar") {
+
         $.ajax({
+
             type: "POST",
             url: url,
             data: JSON.stringify(data),
             contentType: 'application/json',
             success: function (response) {
                 if (response.error === undefined) {
+
                     createPopup('Nuevo Aviso', response.enviar);
                     window.location.href = "administrador.php";
-                } else {
+                } 
+                else {
+
                     createPopup('Nuevo Aviso', response.error);
                 }
             },
             error: function (jqXHR, estado, outputError) {
+
                 alert("Error al procesar la solicitud: " + outputError);
             }
         });

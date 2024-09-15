@@ -120,9 +120,11 @@ reloadSession();
 
                 <div class="sidebarcontainer w-100 h-100 d-flex flex-column">
 
-                    <div class="sidebar h-75 w-100"></div>
+                    <div class="sidebar w-100"></div>
 
-                    <div class="actionbar h-25 w-100"></div>
+                    <div class="actionbar w-100 d-flex justify-content-center align-items-center">
+                        <div id="agregar" class="invisible"><div class="mas"></div></div>
+                    </div>
 
                 </div>
 
