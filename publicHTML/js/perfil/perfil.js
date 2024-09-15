@@ -1,10 +1,10 @@
 $(() => {
 
-    $('#miperfil').on('click', () => $('main').fadeOut(200, cargarVistaPerfil));
-    $('#misconsultas').on('click', () => $('main').fadeOut(200, cargarVistaConsultas));
-    $('#horarios').on('click', () => $('main').fadeOut(200, cargarVistaHorarios));
-    $('#inactividades').on('click', () => $('main').fadeOut(200, cargarVistaInactividades));
-    $('#seguridad').on('click', () => $('main').fadeOut(200, cargarVistaSeguridad));
+    $('#miperfil').on('click', () => changeView(cargarVistaPerfil));
+    $('#misconsultas').on('click', () => changeView(cargarVistaConsultas));
+    $('#horarios').on('click', () => changeView(cargarVistaHorarios));
+    $('#inactividades').on('click', () => changeView(cargarVistaInactividades));
+    $('#seguridad').on('click', () => changeView(cargarVistaSeguridad));
     $('#cerrarsesion').on('click', () => $('main').fadeOut(150, () => window.location.href = 'login.php?estado=3')).on('mouseenter', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>')).on('mouseleave', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>&nbsp;Cerrar Sesión'));
 
     switch ($('main').data('vista')) {
@@ -38,7 +38,7 @@ function cargarVistaPerfil() {
 
     $.get('vistas/vistasperfil/vistaperfil.php', contenido => {
 
-        $('main').empty().html(contenido).fadeIn(200);
+        loadView(contenido);
         integrarEventos();
     });
 
@@ -152,7 +152,7 @@ function cargarVistaConsultas() {
 
     $.get('vistas/vistasperfil/vistaconsultas.php', contenido => {
 
-        $('main').empty().html(contenido).fadeIn(200);
+        loadView(contenido);
     });
 
     $('#sidebar #btnsuperiores button').css({ 'text-decoration': 'none' });
@@ -166,7 +166,7 @@ function cargarVistaHorarios() {
 
     $.get('vistas/vistasperfil/vistahorarios.php', contenido => {
 
-        $('main').empty().html(contenido).fadeIn(200);
+        loadView(contenido);
         $('#agregarhorario').on('click', () => $('main').fadeOut(200, cargarVistaAgregarHorario));
         if($('.subtitulo').attr('data-cantidad') != 0) $('#eliminarhorario').addClass('visible').removeClass('invisible');
         else $('#eliminarhorario').addClass('invisible').removeClass('visible');
@@ -226,7 +226,7 @@ function cargarVistaInactividades() {
 
     $.get('vistas/vistasperfil/vistainactividades.php', contenido => {
 
-        $('main').empty().html(contenido).fadeIn(200);
+        loadView(contenido);
         $('#agregarinactividad').on('click', () => $('main').fadeOut(200, cargarVistaAgregarInactividad));
         $('#continactividades').sortable({
 
@@ -291,6 +291,43 @@ function cargarVistaSeguridad() {
 
             e.preventDefault();
             cambiarContrasenia($('#oldpass').val(), $('#newpass').val(), $('#newpassagain').val());
+        });
+        $('#nomolestar').on('click', () => {
+
+            if($('#nomolestar').is(':checked')) {
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "backend/perfil/cambiarnomolestar.php",
+                    data: JSON.stringify({nomolestar: false}),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+
+                        if(response.exito.length > 0) createPopup('Nuevo Aviso', response.exito);
+                        else createPopup('Nuevo Aviso', response.error);
+                    },
+                    error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
+                });
+            }
+            else {
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "backend/perfil/cambiarnomolestar.php",
+                    data: JSON.stringify({nomolestar: true}),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+
+                        if(response.exito.length > 0) createPopup('Nuevo Aviso', response.exito);
+                        else createPopup('Nuevo Aviso', response.error);
+                    },
+                    error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
+                });
+            }
         });
     });
 
@@ -407,7 +444,7 @@ function cargarVistaAgregarHorario() {
                 dataType: 'json',
                 success: function (response) {
 
-                    if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, () => $('main').fadeOut(200, cargarVistaHorarios));
+                    if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, () => changeView(cargarVistaHorarios));
 
                     else createPopup('Nuevo Aviso', response.error);
                 },
@@ -423,7 +460,7 @@ function cargarVistaAgregarInactividad() {
 
     $.get('vistas/vistasperfil/vistaagregarinactividad.php', contenido => {
 
-        $('main').empty().html(contenido).fadeIn(200);
+        loadView(contenido);
     });
 }
 
@@ -458,4 +495,14 @@ function cambiarContrasenia($1, $2, $3) {
             console.log("Error al procesar la solicitud: 3" + outputError + estado + jqXHR);
         }
     });
+}
+
+function changeView(vista) {
+
+    $('main').fadeOut(200, vista);
+}
+
+function loadView(contenido) {
+
+    $('main').empty().html(contenido).fadeIn(200);
 }

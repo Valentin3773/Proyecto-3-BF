@@ -45,7 +45,7 @@
     background-color: #7CB9E8;
     border-radius: 20px;
     padding: 1rem;
-    height: 150px;
+    height: 130px;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -66,7 +66,7 @@
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 1.8rem;
     font-weight: 450;
-    box-shadow: 0 0 2px black;
+    box-shadow: 0 0 3px rgba(0, 0, 0, .45);
 }
 
 .consulta .fechacontainer {
@@ -165,7 +165,6 @@
     margin: 10px;
     border-radius: 10px;
     color: white;
-
 }
 
 .contConsultaAsunto {
@@ -204,21 +203,22 @@ h1 {
 }
 
 .tituloHora {
+
     background-color: #0059CD;
     filter: brightness(1.1);
     width: fit-content;
     text-align: center;
     padding: 5px;
     border-radius: 10px 10px 0 0;
-   
 }
 
-.tituloHora h1{
+.tituloHora h1 {
+    
     font-size: 2vw;
 }
 
-
 .contentHora {
+
     margin-left: 1px;
     background-color: white;
     color: #000;
@@ -229,11 +229,11 @@ h1 {
 }
 
 .contentHora h1 {
+
     font-size: 2vw;
 }
 
-.contHora,
-.contFecha {
+.contHora, .contFecha {
 
     width: 40%;
 }
@@ -253,12 +253,14 @@ h1 {
     padding: 5px;
     border-radius: 10px 10px 0 0;
 }
+
 .tituloFecha h1 {
+
     font-size: 2vw;
 }
 
-
 .contentFecha {
+
     background-color: white;
     color: #000;
     width: 100%;
@@ -267,6 +269,7 @@ h1 {
     text-align: center;
     margin-right: 1px;
 }
+
 .contentFecha h1 {
     font-size: 2vw;
 }
@@ -286,6 +289,7 @@ h1 {
 }
 
 .contentDuracion {
+
     font-size: 3vw;
     background-color: white;
     width: 100%;
@@ -294,14 +298,15 @@ h1 {
     text-align: center;
 }
 
-#duracion-CP{
+#duracion-CP { 
+
     text-align: center;
 }
 
 .contResumen {
+
     padding: 30px;
 }
-
 
 .tituloResumen {
 
@@ -318,7 +323,6 @@ h1 {
     width: 100%;
     height: 180px;
 }
-
 
 .btnInteractivo {
 
