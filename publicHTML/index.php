@@ -121,8 +121,8 @@ reloadSession();
 
                         echo "<img src='img/iconoperfil.png' alt='Foto de Perfil' title='Mi Perfil'>";
                     } 
-                    else echo "<img src='img/imgPerfil/{$_SESSION["paciente"]["foto"]}' alt='Foto de Perfil' title='Mi Perfil'>";
-
+                    else echo "<img src='backend/almacenamiento/fotosdeperfil/{$_SESSION["paciente"]["foto"]}' alt='Foto de Perfil' title='Mi Perfil'>";
+                    
                     ?>
 
                     <?php

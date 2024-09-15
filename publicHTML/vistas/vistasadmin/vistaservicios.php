@@ -53,13 +53,14 @@ if (!isset($_GET['numservicio'])) {
                 <div id="icowrapper">
 
                     <?php
-                    if (isset($servicio["icono"])) echo "<img src='backend/almacenamiento/icoservicios/{$servicio["icono"]}' alt='Icono del servicio' id='icoservicio'>";
+                    if (isset($servicio["icono"])) echo "<img src='backend/almacenamiento/iconservice/{$servicio["icono"]}' alt='Icono del servicio' id='icoservicio'>";
 
                     else echo "<img src='img/logaso.png' alt='Icono del servicio' id='icoservicio'>";
                     ?>
 
                     <div class="lapizeditar">
                         <img src="img/iconosvg/lapiz.svg" id="mdF" alt="Modificar" title="Modificar">
+                        <input type="file" id="inFile1" accept="image/*">
                     </div>
 
                 </div>
@@ -72,13 +73,14 @@ if (!isset($_GET['numservicio'])) {
                 <div id="imgwrapper">
 
                     <?php
-                    if (isset($servicio["imagen"])) echo "<img src='backend/almacenamiento/imgservicios/{$servicio["imagen"]}' alt='Imagen del servicio' id='imgservicio'>";
+                    if (isset($servicio["imagen"])) echo "<img src='backend/almacenamiento/imgservice/{$servicio["imagen"]}' alt='Imagen del servicio' id='imgservicio'>";
 
                     else echo "<img src='img/logaso.png' alt='Imagen del servicio' id='imgservicio'>";
                     ?>
 
                     <div class="lapizeditar">
                         <img src="img/iconosvg/lapiz.svg" id="mdF" alt="Modificar" title="Modificar">
+                        <input type="file" id="inFile2" accept="image/*">
                     </div>
 
                 </div>
@@ -88,7 +90,7 @@ if (!isset($_GET['numservicio'])) {
 
         <div class="form-group p-3">
             <label for="descripcion">Descripcion</label>
-            <textarea name="descripcion" id="descripcion"></textarea>
+            <textarea name="descripcion" id="descripcion"><?=$servicio['descripcion']?></textarea>
         </div>
 
     </div>
