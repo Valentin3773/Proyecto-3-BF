@@ -158,226 +158,67 @@
     border: 2px solid rgba(0, 0, 0, .15);
 }
 
-.contenedor_ConsultaPaciente {
-
-    background-color: #7CB9E8;
-    height: 98%;
-    margin: 10px;
-    border-radius: 10px;
-    color: white;
-}
-
-.contConsultaAsunto {
-
-    margin-bottom: 5pc;
-}
-
-.headerConsulta {
-
-    background-color: #00B2FF;
-    border-radius: 10px 10px 0 0;
-}
-
-h1 {
-
-    margin-bottom: 0;
-}
-
-.contAsunto {
-
-    background-color: #0059CD;
-    filter: brightness(1.1);
-    margin: 0;
-}
-
-.contAsunto h1 input {
-
-    color: white;
-}
-
-.contInteractivo {
-
-    padding: 10px;
-    border-radius: 0 0 10px 10px;
-    background-color: #00B2FF;
-}
-
-.tituloHora {
-
-    background-color: #0059CD;
-    filter: brightness(1.1);
-    width: fit-content;
-    text-align: center;
-    padding: 5px;
-    border-radius: 10px 10px 0 0;
-}
-
-.tituloHora h1 {
+#contagregarconsulta {
     
-    font-size: 2vw;
-}
-
-.contentHora {
-
-    margin-left: 1px;
-    background-color: white;
-    color: #000;
-    width: 100%;
-    padding: 10px;
-    border-radius: 0px 10px 10px 10px;
-    text-align: center;
-}
-
-.contentHora h1 {
-
-    font-size: 2vw;
-}
-
-.contHora, .contFecha {
-
-    width: 40%;
-}
-
-.contFecha {
-
-    direction: rtl;
-}
-
-.tituloFecha {
-
-    background-color: #0059CD;
-    filter: brightness(1.1);
+    width: 80% !important;
     display: flex;
-    width: fit-content;
-    text-align: center;
-    padding: 5px;
-    border-radius: 10px 10px 0 0;
-}
-
-.tituloFecha h1 {
-
-    font-size: 2vw;
-}
-
-.contentFecha {
-
-    background-color: white;
-    color: #000;
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px 0px 10px 10px;
-    text-align: center;
-    margin-right: 1px;
-}
-
-.contentFecha h1 {
-    font-size: 2vw;
-}
-
-.tituloDuracion {
-
-    background-color: #0059CD;
-    filter: brightness(1.1);
-    width: 100%;
-    text-align: center;
-    padding: 5px;
-    border-radius: 10px 10px 0 0;
-}
-
-.tituloDuracion h1 {
-    font-size: 2vw;
-}
-
-.contentDuracion {
-
-    font-size: 3vw;
-    background-color: white;
-    width: 100%;
-    padding: 10px;
-    border-radius: 0 0 10px 10px;
-    text-align: center;
-}
-
-#duracion-CP { 
-
-    text-align: center;
-}
-
-.contResumen {
-
-    padding: 30px;
-}
-
-.tituloResumen {
-
-    background-color: #0059CD;
-    filter: brightness(1.1);
-    width: fit-content;
-    text-align: center;
-    padding: 5px;
-    border-radius: 10px 10px 0 0;
-}
-
-#resumen-CP {
-    border-radius: 0 10px 10px;
-    width: 100%;
-    height: 180px;
-}
-
-.btnInteractivo {
-
-    background-color: #0AF0AB;
-    filter: brightness(1.1);
-    border-color: transparent;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    background-color: rgb(96, 246, 255, .1);
+    padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 2px 4px 1px rgba(0, 0, 0, .25);
-    transition-duration: .3s;
-    width: 20%;
-    height: 100%;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, .3);
 }
 
-.btnInteractivo:hover {
+#contagregarconsulta > div {
+
+    width: 100%;
+}
+
+#contagregarconsulta label {
+
+    text-align: center;
+    text-align: center;
+    color: #00d335;
+    font-size: 1.5rem;
+    text-shadow: 0 0 1px rgba(0, 0, 0, .5);
+    letter-spacing: 2px;
+    text-align: center;
+    width: 100%;
+}
+
+#agregarconsulta {
+
+    background-color: #4294FF;
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-weight: 600;
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 2px rgba(0, 0, 0, .3);
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, .3);
+    transition-duration: .3s;
+}
+
+#agregarconsulta.inactivo {
+
+    background-color: rgb(66, 148, 255, .4);
+}
+
+#agregarconsulta.activo:hover {
 
     scale: 1.05;
+    filter: brightness(1.1);
 }
 
-.btnInteractivo:hover {
+#agregarconsulta.activo:active {
 
-    color: white;
-}
-
-select {
-
-    appearance: none;
-    width: fit-content !important;
-    background-color: #0AF0AB !important;
-    border: solid;
-    border-color: transparent;
-    border-radius: 10px;
-    box-shadow: 2px 2px 0 2px rgba(0, 0, 0, .25);
-    font-family: RobotoSerif, Arial, Helvetica, sans-serif;
-    font-size: inherit;
-    cursor: inherit;
-    line-height: inherit;
-}
-
-input {
-
-    appearance: none;
-    width: fit-content !important;
-    background-color: transparent;
-    border: transparent;
-}
-
-h2 input {
-
-    appearance: none;
-    width: 100px !important;
-    background-color: transparent;
-    border: transparent;
-}
-
-button {
-
-    color: white;
+    scale: .97;
+    filter: brightness(1.2);
 }

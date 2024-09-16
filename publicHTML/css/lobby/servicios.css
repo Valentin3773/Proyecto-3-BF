@@ -110,6 +110,7 @@
 .seccontainer img {
 
     width: 700px;
+    max-height: 700px;
     transform: scaleY(0.9);
 }
 

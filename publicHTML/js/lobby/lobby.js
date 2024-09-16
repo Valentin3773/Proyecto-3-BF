@@ -74,7 +74,7 @@ function cargarVistaServicios() {
         $('main').empty().html(data).fadeIn(300);
         console.log("Cargando vista de 'Servicios'");
 
-        iniciarServicios();
+        $.get('backend/lobby/apiservicios.php', data => iniciarServicios(data));
 
         // history.pushState({}, '', 'servicios');
     });

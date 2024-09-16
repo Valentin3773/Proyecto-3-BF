@@ -1,6 +1,25 @@
-function iniciarServicios() {
+function iniciarServicios(servicios) {
 
-    addServListeners();
+    servicios.forEach(elemento => {
+        
+        let slideservicio = $(`<div id="${elemento.numero}" class="card btn${elemento.nombre}"></div>`);
+
+        if(elemento.icono != null) slideservicio.append(`<img src="backend/almacenamiento/iconservice/${elemento.icono}" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`);
+
+        else slideservicio.append(`<img src="img/logaso.png" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`);
+        
+        slideservicio.append(`<div class="card-body"><h3 class="card-title text-center">${elemento.nombre}</h3></div>`);
+
+        $('.navslider').append(slideservicio);
+
+        let secservicio = $(`<section id="${elemento.numero}" class="mt-5 gx-0"><div class="sectitcontainer text-center"><h2 class="sectitulo">${elemento.nombre}</h2></div><div class="seccontainer row mt-5 gx-0"><div class="col-xl-1 col-lg-1"></div><article class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 d-flex align-items-center p-3"><p>${elemento.descripcion}</p></article><aside class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 d-flex justify-content-center align-items-center"></aside><div class="col-xl-1 col-lg-1"></div></div></section>`);
+
+        if(elemento.imagen != null) secservicio.find('aside').html(`<img src="backend/almacenamiento/imgservice/${elemento.imagen}" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`)
+
+        else secservicio.find('aside').html(`<img src="img/logaso.png" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`);
+
+        $('main #sectionservicecontainer').append(secservicio);
+    });
 
     setTimeout(() => $('.navslider').slick({
 
@@ -63,69 +82,21 @@ function iniciarServicios() {
         
     }), 0);
 
-    $('.slick-prev').html('');
-    $('.slick-next').html('');
+    $('.slick-prev').empty();
+    $('.slick-next').empty();
+
+    addServListeners(servicios);
 }
 
-function addServListeners() {
+function addServListeners(servicios) {
 
-    $('.btnortodoncia').on('click', evt => {
+    servicios.forEach(elemento => $(`.navslider #${elemento.numero}`).on('click', evt => window.scrollTo({
 
-        window.scrollTo({
+        top: $(`#sectionservicecontainer #${elemento.numero}`)[0].offsetTop - 160,
+        behavior: 'smooth'
 
-            top: $('#ortodoncia')[0].offsetTop - 160,
-            behavior: 'smooth'
-        });
-    });
-    $('.btnodontopediatria').on('click', evt => {
-
-        window.scrollTo({
-
-            top: $('#odontopediatria')[0].offsetTop - 160,
-            behavior: 'smooth'
-        });
-    });
-    $('.btnprotesis').on('click', evt => {
-
-        window.scrollTo({
-
-            top: $('#protesis')[0].offsetTop - 160,
-            behavior: 'smooth'
-        });
-    });
-    $('.btnoperatoria').on('click', evt => {
-
-        window.scrollTo({
-
-            top: $('#operatoria')[0].offsetTop - 160,
-            behavior: 'smooth'
-        });
-    });
-    $('.btnortopedia').on('click', evt => {
-
-        window.scrollTo({
-
-            top: $('#ortopedia')[0].offsetTop - 160,
-            behavior: 'smooth'
-        });
-    });
-    $('.btncirugia').on('click', evt => {
-
-        window.scrollTo({
-
-            top: $('#cirugia')[0].offsetTop - 160,
-            behavior: 'smooth'
-        });
-    });
-    $('.btnimplantes').on('click', evt => {
-
-        window.scrollTo({
-
-            top: $('#implantes')[0].offsetTop - 160,
-            behavior: 'smooth'
-        });
-    });
-
+    })));
+    
     let blocked = false;
     let blockTimeout = null;
     let prevDeltaY = 0;
