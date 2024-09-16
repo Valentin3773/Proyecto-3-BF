@@ -252,7 +252,7 @@ reloadSession();
                 <img src="img/logaso.png" alt="logofooter" id="logofooter" title="Clínica Salud Bucal">
                 <p class="mb-0">
 
-                    &copy;2024 <span id="ftFont"> Clínica Salud Bucal </span> | Developed by <a href="" target="_blank"><img id="logopa" src="img/logopa.png" alt="La Program Army"></a>
+                    &copy;2024 <span id="ftFont"> Clínica Salud Bucal </span> | Developed by <a href="aboutUs/aboutus.php" target="_blank"><img id="logopa" src="img/logopa.png" alt="La Program Army"></a>
 
                 </p>
 

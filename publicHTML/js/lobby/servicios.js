@@ -8,7 +8,7 @@ function iniciarServicios(servicios) {
 
         else slideservicio.append(`<img src="img/logaso.png" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`);
         
-        slideservicio.append(`<div class="card-body"><h3 class="card-title text-center">${elemento.nombre}</h3></div>`);
+        slideservicio.append(`<div class="card-body"><h3 class="card-title text-center m-0">${elemento.nombre}</h3></div>`);
 
         $('.navslider').append(slideservicio);
 

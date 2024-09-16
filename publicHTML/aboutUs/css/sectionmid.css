@@ -1,8 +1,28 @@
+@font-face {
+
+    font-family: "JejuGothic";
+    src: url("../font/JejuGothic/jejugothic/JejuGothic-Regular.ttf");
+    font-weight: normal;
+}
+@font-face {
+
+    font-family: "Kodchasan-Bold";
+    src: url('../font/Kodchasan/Kodchasan-Bold.ttf');
+    font-weight: normal;
+}
+
 body {
+
     background-color: #526755;
 }
 
+#container {
+
+    width: 60%;
+}
+
 #logopa {
+
     max-width: 100%;
     margin: 20px auto;
     text-align: center;
@@ -10,62 +30,64 @@ body {
 }
 
 #logopa img {
+
     width: 300px;
     height: auto;
+    border-radius: 10px;
 }
 
 #logopa p {
-    font-size: 45px;
-}
 
-@font-face {
-    font-family: "Kodchasan-Bold";
-    src: url('../font/Kodchasan/Kodchasan-Bold.ttf');
-    font-weight: normal;
+    font-size: 3.5rem;
 }
 
 #titulo {
+
     font-family: Kodchasan-Bold;
     color: #fff;
     font-size: 24px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, .5);
 }
-
-@font-face {
-    font-family: "JejuGothic";
-    src: url("../font/JejuGothic/jejugothic/JejuGothic-Regular.ttf");
-    font-weight: normal;
-}
-
 
 #contenedormision, #contenedorvision {
+
     margin-top: 20px;
 }
 
-#mision, #vision{
+#mision, #vision {
+
     font-family: JejuGothic;
     color: #fff;
     background-color: #A2F798;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+    font-size: 1.5rem;
 }
 
 #miembros {
+
     color: #fff;
     margin-top: 40px;
     font-family: Kodchasan-Bold;
-    font-size: 28px;
+    font-size: 2rem;
     text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, .5);
 }
 
 #contenedormiembros h1 {
-    font-size: 20px;
+
+    font-size: 1.6rem;
     margin-bottom: 10px;
     text-align: center;
     color: white;
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, .5);
 }
 
-#contenedormiembros img{
+#contenedormiembros img {
+    
     max-width: 100px;
     margin: 10px auto;
     display: block;
@@ -74,10 +96,27 @@ body {
 }
 
 #contenedormiembros .col-sm-6 {
+
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
     position: relative;
     margin: 10px auto;
+}
+
+@media screen and (width <= 900px) {
+    
+    #container {
+
+        width: 80%;
+    }
+}
+
+@media screen and (width <= 500px) {
+    
+    #container {
+
+        width: 100%;
+    }
 }

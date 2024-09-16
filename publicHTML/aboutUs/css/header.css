@@ -1,17 +1,31 @@
-header {
-    text-align: center;
-    background-color: #A2F798;
-    padding: 20px;
-    border-radius: 10px;
-}
 @font-face {
+
     font-family: "Inika-Bold";
     src: url('../font/Inika/Inika-Bold.ttf');
     font-weight: normal;
 }
+
+header {
+
+    text-align: center;
+    background-color: #A2F798;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+body {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #aboutus {
+
     color: #fff;
     font-family: Inika-Bold;
-    font-size: 36px;
+    font-size: 3rem;
     text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+    letter-spacing: 4px;
 }

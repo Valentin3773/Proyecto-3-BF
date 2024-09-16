@@ -1,19 +1,23 @@
-footer{
+footer {
+
     background-color: #A2F798;
     color: white;
     padding: 20px;
     text-align: center;
     border-radius: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, .5);
 }
 
-#derechos{
+#derechos {
+
     font-family: Inika-Bold;
     color: #fff;
     font-size: 18px;
     margin-bottom: 20px;
 }
 
-#contenedorflogo{
+#contenedorflogo {
+
     width: 100%;
     display: flex;
     justify-content: center;
@@ -22,5 +26,6 @@ footer{
 }
 
 #contenedorflogo img {
+
     max-width: 100px;
 }
