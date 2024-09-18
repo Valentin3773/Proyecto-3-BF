@@ -6,6 +6,10 @@ footer {
     text-align: center;
     border-radius: 10px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
 #derechos {
@@ -13,12 +17,10 @@ footer {
     font-family: Inika-Bold;
     color: #fff;
     font-size: 18px;
-    margin-bottom: 20px;
 }
 
 #contenedorflogo {
 
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,5 +29,5 @@ footer {
 
 #contenedorflogo img {
 
-    max-width: 100px;
+    width: 17px;
 }

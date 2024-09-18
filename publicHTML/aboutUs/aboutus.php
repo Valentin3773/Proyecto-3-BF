@@ -24,7 +24,7 @@
 
             <section>
                 <div id="logopa" class="container text-center my-4">
-                    <img id="logo" src="img/logopa.png" alt="Logo de la Program Army" class="img-fluid">
+                <img id="logo" src="img/logopa.png" alt="Logo de la Program Army" class="img-fluid">
                     <p id="titulo" class="mt-3"> La Program Army</p>
                 </div>
             </section>
