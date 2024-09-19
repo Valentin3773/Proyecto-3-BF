@@ -38,11 +38,7 @@ if($stmt->execute()) $pacientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div id="contfecha">
 
             <label for="fecha">Fecha</label>
-            <select name="fecha" id="fecha" class="form-select" disabled required>
-
-                <option selected value="">Seleccione la fecha</option>
-
-            </select>
+            <input type="text" id="fecha" class="form-control" title="Seleccione una fecha" placeholder="Seleccione una fecha" required>
 
         </div>
 

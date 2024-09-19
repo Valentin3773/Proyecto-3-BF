@@ -22,6 +22,8 @@ reloadSession();
 
     <!-- Librerias -->
     <script src="lib/jquery-3.7.1.min.js"></script>
+    <script src="lib/jquery-ui-1.14.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="lib/jquery-ui-1.14.0/jquery-ui.min.css">
     <link rel="stylesheet" href="lib/bootstrap-5.2.3-dist/css/bootstrap.min.css">
     <script defer src="lib/bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
 

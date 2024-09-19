@@ -178,5 +178,77 @@
 }
 
 #inFile1, #inFile2 {
+
     display: none !important;
+}
+
+#contagregarservicio {
+    
+    width: 80% !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    background-color: rgb(96, 246, 255, .1);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, .3);
+}
+
+#contagregarservicio > div {
+
+    width: 100%;
+}
+
+#contagregarservicio label {
+
+    text-align: center;
+    text-align: center;
+    color: #00d335;
+    font-size: 1.5rem;
+    text-shadow: 0 0 1px rgba(0, 0, 0, .5);
+    letter-spacing: 2px;
+    text-align: center;
+    width: 100%;
+}
+
+#contagregarservicio #descripcion {
+
+    max-height: 18rem;
+}
+
+
+#agregarservicio {
+
+    background-color: #4294FF;
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-weight: 600;
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 2px rgba(0, 0, 0, .3);
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, .3);
+    transition-duration: .3s;
+}
+
+#agregarservicio.inactivo {
+
+    background-color: rgb(66, 148, 255, .4);
+}
+
+#agregarservicio.activo:hover {
+
+    scale: 1.05;
+    filter: brightness(1.1);
+}
+
+#agregarservicio.activo:active {
+
+    scale: .97;
+    filter: brightness(1.2);
 }

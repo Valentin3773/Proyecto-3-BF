@@ -21,14 +21,15 @@ if (!isset($_GET['numservicio'])) {
 
     </div>
     <div id="servicioscontainer">
-        <?php
+        
+        <?php foreach ($servicios as $servicio) echo "<div id='{$servicio["numero"]}' class='servicio'><h3>{$servicio["nombre"]}<h3></div>"; ?> 
 
-        foreach ($servicios as $servicio)
+    </div> 
+    
+<?php
 
-            echo "<div id='{$servicio["numero"]}' class='servicio'><h3>{$servicio["nombre"]}<h3></div>";
-
-        ?> </div> <?php
-                } else if (is_numeric($_GET['numservicio']) && $_GET['numservicio'] > 0) {
+} 
+else if (is_numeric($_GET['numservicio']) && $_GET['numservicio'] > 0) {
 
                     $numservicio = $_GET['numservicio'];
 
@@ -95,6 +96,4 @@ if (!isset($_GET['numservicio'])) {
 
     </div>
 
-<?php
-                }
-?>
+<?php } ?>

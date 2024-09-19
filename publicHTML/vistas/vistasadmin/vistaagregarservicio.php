@@ -25,17 +25,49 @@ if(!isset($_SESSION['odontologo'])) exit();
         <div id="contdescripcion">
 
             <label for="descripcion">Descripción</label>
-            <input type="text" class="form-control" id="descripcion" title="Ingrese la descripción" placeholder="Ingrese la descripción" required>
+            <textarea type="text" class="form-control" id="descripcion" title="Ingrese la descripción" placeholder="Ingrese la descripción" disabled required></textarea>
 
         </div>
 
-        <div id="contimg">
-            
+        <div id="contimg" class="mt-3 mb-5">
+
+            <div id="iconocontainer">
+
+                <span class="leyenda">Icono</span>
+
+                <div id="icowrapper">
+
+                    <img src='img/logaso.png' alt='Icono del servicio' id='icoservicio'>
+
+                    <div class="lapizeditar">
+                        <img src="img/iconosvg/lapiz.svg" id="mdF" alt="Modificar" title="Modificar">
+                        <input type="file" id="inFile1" accept="image/*">
+                    </div>
+
+                </div>
+
+            </div>
+            <div id="imgcontainer">
+
+                <span class="leyenda">Imagen</span>
+
+                <div id="imgwrapper">
+
+                    <img src='img/logaso.png' alt='Imagen del servicio' id='imgservicio'>
+
+                    <div class="lapizeditar">
+                        <img src="img/iconosvg/lapiz.svg" id="mdF" alt="Modificar" title="Modificar">
+                        <input type="file" id="inFile2" accept="image/*">
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
         <div id="contbtnagregar" class="d-flex justify-content-center align-items-center">
 
-            <button type="button" id="agregarconsulta" class="inactivo" disabled>Agregar</button>
+            <button type="button" id="agregarservicio" class="inactivo" disabled>Agregar</button>
 
         </div>
 

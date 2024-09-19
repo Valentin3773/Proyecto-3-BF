@@ -157,6 +157,7 @@ reloadSession();
 
                                 <li><button id="mishorarios">Mis Horarios</button></li>
                                 <li><button id="misinactividades">Mis Inactividades</button></li>
+                                <li><button id="administrador">Administrador</button></li>
 
                             <?php endif; ?>
 

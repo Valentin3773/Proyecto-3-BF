@@ -25,6 +25,7 @@ $(() => {
     $('#btnperfil ul #misconsultas').on('click', () => window.location.href = 'perfil.php?estado=2');
     $('#btnperfil ul #mishorarios').on('click', () => window.location.href = 'perfil.php?estado=3');
     $('#btnperfil ul #misinactividades').on('click', () => window.location.href = 'perfil.php?estado=4');
+    $('#btnperfil ul #administrador').on('click', () => window.location.href = 'administrador.php');
 
     $('main').on('click', () => {
 
