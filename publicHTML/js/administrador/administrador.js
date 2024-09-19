@@ -106,6 +106,65 @@ function cargarVistaAgregarServicio() {
     $.get('vistas/vistasadmin/vistaagregarservicio.php', contenido => {
 
         loadView(contenido);
+        let formData = new FormData();
+
+
+        $('[id="mdF"]').eq(0).on('click', function () {
+            $('#inFile1').click();
+            $('#inFile1').change(function (event) {
+
+                try {
+                    let file1 = event.target.files[0];
+                    if (file1) {
+
+                        // Mostrar la imagen
+                        let reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#icoservicio').prop('src', e.target.result);
+                        }
+
+                        // Incrusto la imagen
+                        reader.readAsDataURL(file1);
+
+                        // Preparo el formulario
+                        formData.append('file1', file1);
+                    }
+                }
+                catch (error) {
+
+                    console.log(error);
+                }
+            });
+        });
+        
+        $('[id="mdF"]').eq(1).on('click', function () {
+            $('#inFile2').click();
+            $('#inFile2').change(function (event) {
+
+                try {
+                    let file2 = event.target.files[0];
+                    if (file2) {
+
+                        // Mostrar la imagen
+                        let reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#imgservicio').prop('src', e.target.result);
+                        }
+
+                        // Incrusto la imagen
+                        reader.readAsDataURL(file2);
+
+                        // Preparo el formulario
+                        formData.append('file2', file2);
+
+                    }
+                }
+                catch (error) {
+
+                    console.log(error);
+                }
+            });
+        });
 
         $('#nombre').on('input', () => {
 
@@ -127,13 +186,12 @@ function cargarVistaAgregarServicio() {
 
         $('#agregarservicio').on('click', () => {
 
-            let datos = JSON.stringify({ nombre: $('#nombre').val(), descripcion: $('#descripcion').val() });
+            formData.append('nombre', $('#nombre').val()); formData.append('descripcion',$('#descripcion').val());
 
             if ($('#nombre').val().length >= 4 && $('#descripcion').val().length >= 20) $.ajax({
-
                 type: "POST",
                 url: "backend/admin/agregarservicio.php",
-                data: datos,
+                data: formData,
                 processData: false,
                 contentType: false,
                 success: function (response) {
