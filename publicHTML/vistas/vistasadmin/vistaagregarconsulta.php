@@ -20,7 +20,7 @@ if($stmt->execute()) $pacientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="d-flex justify-content-center align-items-center">
 
-    <div id="contagregarconsulta">
+    <form id="contagregarconsulta">
 
         <div id="contpaciente">
 
@@ -38,7 +38,7 @@ if($stmt->execute()) $pacientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div id="contfecha">
 
             <label for="fecha">Fecha</label>
-            <input type="text" id="fecha" class="form-control" title="Seleccione una fecha" placeholder="Seleccione una fecha" required>
+            <input type="text" id="fecha" name="fecha" value="" class="form-control" title="Seleccione una fecha" placeholder="Seleccione una fecha" disabled readonly required>
 
         </div>
 
@@ -67,7 +67,7 @@ if($stmt->execute()) $pacientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div id="contasunto">
 
             <label for="asunto">Asunto</label>
-            <input type="text" class="form-control" title="Escriba el asunto de la consulta" placeholder="Escriba el asunto" disabled required>
+            <input  name="asunto" id="asunto" type="text" class="form-control" value="" title="Escriba el asunto de la consulta" placeholder="Escriba el asunto" disabled required>
 
         </div>
 
@@ -77,6 +77,6 @@ if($stmt->execute()) $pacientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         </div>
 
-    </div>
+    </form>
 
 </div>

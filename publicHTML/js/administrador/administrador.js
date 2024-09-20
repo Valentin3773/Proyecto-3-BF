@@ -3,6 +3,7 @@ $(() => {
     addAdminListeners();
 
     $.datepicker.regional['es'] = {
+
         closeText: 'Cerrar',
         prevText: 'Anterior',
         nextText: 'Siguiente',
@@ -19,6 +20,7 @@ $(() => {
         showMonthAfterYear: false,
         yearSuffix: ''
     };
+
     $.datepicker.setDefaults($.datepicker.regional['es']);
 });
 
@@ -92,9 +94,121 @@ function cargarVistaAgregarConsulta() {
 
         loadView(contenido);
 
-        $('#fecha').datepicker({
+        $.get('backend/admin/fechamanagerad.php', data => fechasPermitidas = data.fechasDisponibles);
 
-            beforeShowDay: permitirFechas
+        $('#contagregarconsulta #paciente').on('change', () => {
+
+            $('#contagregarconsulta #hora').html('<option selected value="">Seleccione una hora</option>').prop('disabled', true);
+            $('#contagregarconsulta #duracion').html('<option selected value="">Seleccione la duración</option>').prop('disabled', true);
+            $('#agregarconsulta').prop('disabled', true).removeClass('activo').addClass('inactivo');
+
+            if ($('#contagregarconsulta #paciente').val() !== '') $('#contagregarconsulta #fecha, #contagregarconsulta #asunto').val('').prop('disabled', false);
+
+            else $('#contagregarconsulta #fecha, #contagregarconsulta #asunto').val('').prop('disabled', true);
+        });
+
+        $('#contagregarconsulta #fecha').datepicker({ beforeShowDay: permitirFechas }).on('change', () => {
+
+            let fechapamandar = $('#contagregarconsulta #fecha').val().split('/');
+
+            let datos = JSON.stringify({
+
+                dia: fechapamandar[0],
+                mes: fechapamandar[1],
+                anio: fechapamandar[2]
+            });
+
+            if ($('#contagregarconsulta #fecha').val() !== '') $.ajax({
+
+                type: "POST",
+                url: "backend/admin/horamanagerad.php",
+                data: datos,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+
+                    $('#contagregarconsulta #hora').html('<option selected value="">Seleccione una hora</option>').prop('disabled', false);
+
+                    response.horasDisponibles.forEach(elemento => {
+
+                        $('#contagregarconsulta #hora').append(`<option value="${elemento}">${elemento}</option>`);
+                    });
+                },
+                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+            });
+
+            $('#contagregarconsulta #duracion').html('<option selected value="">Seleccione la duración</option>').prop('disabled', true);
+            $('#agregarconsulta').prop('disabled', true).removeClass('activo').addClass('inactivo');
+        });
+
+        $('#contagregarconsulta #hora').on('change', () => {
+
+            let fechapamandar = $('#contagregarconsulta #fecha').val().split('/');
+
+            let datos = JSON.stringify({
+
+                dia: fechapamandar[0],
+                mes: fechapamandar[1],
+                anio: fechapamandar[2],
+                hora: $('#contagregarconsulta #hora').val()
+            });
+
+            if ($('#contagregarconsulta #hora').val() !== '') $.ajax({
+
+                type: "POST",
+                url: "backend/admin/duracionmanager.php",
+                data: datos,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+
+                    $('#contagregarconsulta #duracion').html('<option selected value="">Seleccione la duración</option>').prop('disabled', false);
+
+                    response.duracionesDisponibles.forEach(elemento => {
+
+                        $('#contagregarconsulta #duracion').append(`<option value="${elemento}">${fancyHoras(elemento)}</option>`);
+                    });
+                },
+                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+            });
+            else $('#contagregarconsulta #duracion').html('<option selected value="">Seleccione la duración</option>').prop('disabled', true);
+            
+            $('#agregarconsulta').prop('disabled', true).removeClass('activo').addClass('inactivo');
+        });
+
+        $('#contagregarconsulta #duracion').on('change', () => {
+
+            if($('#contagregarconsulta #duracion').val() !== '' && $('#contagregarconsulta #asunto').val().length >= 6) $('#agregarconsulta').prop('disabled', false).removeClass('inactivo').addClass('activo');
+
+            else $('#agregarconsulta').prop('disabled', true).removeClass('activo').addClass('inactivo');
+        });
+
+        $('#contagregarconsulta #asunto').on('input', () => {
+
+            if($('#contagregarconsulta #duracion').val() !== '' && $('#contagregarconsulta #asunto').val().length >= 6) $('#agregarconsulta').prop('disabled', false).removeClass('inactivo').addClass('activo');
+
+            else $('#agregarconsulta').prop('disabled', true).removeClass('activo').addClass('inactivo');
+        });
+
+        $('#agregarconsulta').on('click', () => {
+
+            let formdatos = new FormData($('#contagregarconsulta')[0]);
+
+            $.ajax({
+
+                type: "POST",
+                url: "backend/admin/agregarconsulta.php",
+                data: formdatos,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+
+                    if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaConsultas);
+
+                    else createPopup('Nuevo Aviso', response.error);
+                },
+                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+            });
         });
     });
 }
@@ -136,7 +250,7 @@ function cargarVistaAgregarServicio() {
                 }
             });
         });
-        
+
         $('[id="mdF"]').eq(1).on('click', function () {
             $('#inFile2').click();
             $('#inFile2').change(function (event) {
@@ -186,9 +300,10 @@ function cargarVistaAgregarServicio() {
 
         $('#agregarservicio').on('click', () => {
 
-            formData.append('nombre', $('#nombre').val()); formData.append('descripcion',$('#descripcion').val());
+            formData.append('nombre', $('#nombre').val()); formData.append('descripcion', $('#descripcion').val());
 
             if ($('#nombre').val().length >= 4 && $('#descripcion').val().length >= 20) $.ajax({
+
                 type: "POST",
                 url: "backend/admin/agregarservicio.php",
                 data: formData,
@@ -228,7 +343,7 @@ function cargarVistaPacientes() {
 
                 let url = 'vistas/vistasadmin/vistapacientes.php?idpaciente=' + $(this).attr('id');
 
-                $('main').load(url);
+                changeView(() => $.get(url, contenido => loadView(contenido)));
             });
         });
 
@@ -253,7 +368,9 @@ function cargarVistaServicios() {
 
             let id = ($(this).attr('id'));
             $('main').load(`vistas/vistasadmin/vistaservicios.php?numservicio=` + $(this).attr('id'), function () {
+
                 $('[id="mdF"]').eq(0).on('click', function () {
+
                     $('#inFile1').click();
                     $('#inFile1').change(function (event) {
 
@@ -402,9 +519,25 @@ function permitirFechas(date) {
     var day = ("0" + date.getDate()).slice(-2);
     var dateString = day + "-" + month + "-" + year;
 
-    if ($.inArray(dateString, fechasPermitidas) !== -1)  return [true, "", "Fecha disponible"];
-    
-    else return [false, "", "Fecha no disponible"];
+    if ($.inArray(dateString, fechasPermitidas) !== -1) return [true, 'fechadisponible', "Fecha disponible"];
+
+    else return [false, 'fechanodisponible', "Fecha no disponible"];
+}
+
+function fancyHoras(minutos) {
+
+    const horas = Math.floor(minutos / 60);
+    const minutosRestantes = minutos % 60;
+
+    let resultado = '';
+
+    if (horas > 0) resultado += horas + ' hora' + (horas > 1 ? 's' : '');
+
+    if (horas > 0 && minutosRestantes > 0) resultado += ' y ';
+
+    if (minutosRestantes > 0) resultado += minutosRestantes + ' minuto' + (minutosRestantes > 1 ? 's' : '');
+
+    return resultado || '0 minutos';
 }
 
 function changeView(vista) {

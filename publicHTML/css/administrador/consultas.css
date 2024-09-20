@@ -222,3 +222,23 @@
     scale: .97;
     filter: brightness(1.2);
 }
+
+.fechadisponible a, .fechanodisponible span {
+
+    border-radius: 10px !important;
+    color: white !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    text-shadow: 0 0 2px rgba(0, 0, 0, .3);
+}
+
+.fechadisponible a {
+
+    background-color: #00c388 !important;
+    cursor: pointer;
+}
+
+.fechanodisponible span {
+
+    background-color: #E84141 !important;
+}

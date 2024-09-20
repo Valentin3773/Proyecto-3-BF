@@ -3,6 +3,9 @@
 include('../conexion.php');
 include('../extractor.php');
 
+session_start();
+reloadSession();
+
 if($_SERVER['REQUEST_METHOD'] != 'POST') {
 
     header('Location: ../../index.php');
@@ -15,9 +18,9 @@ $data = json_decode($json, true);
 
 if($data) {
 
-    $ido = $data['odontologo'];
+    $ido = $_SESSION['odontologo']['idodontologo'];
 
-    $fecha = new DateTime($data['fecha']);
+    $fecha = DateTime::createFromFormat('d-m-Y', "{$data["dia"]}-{$data["mes"]}-{$data["anio"]}");
     $fecha = $fecha->format('Y-m-d');
 
     $sql = 'SELECT horainicio, horafinalizacion, dia FROM horario WHERE idodontologo = :ido ORDER BY dia ASC, horainicio ASC';

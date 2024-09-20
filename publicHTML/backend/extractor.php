@@ -15,8 +15,9 @@ include('conexion.php');
 
 $defaults = [
 
-    'horaminima' => '01:00:00',
-    'horamaxima' => '23:30:00'
+    'horaminima' => '01:00:00', // Hora minima posible para un horario
+    'horamaxima' => '23:30:00', // Hora máxima posible para un horario
+    'duracionmaxima' => 180 // Duración máxima (en minutos) de una consulta
 ];
 
 function getDatesFromRange($fechainicio, $fechafin): array {
@@ -115,7 +116,7 @@ function sumarFecha($fecha, $intervalo, $cantidad): string {
 
 function fechaDisponible($fecha, $idodontologo): bool {
 
-    if(!empty(horasDisponibles($fecha ,$idodontologo))) return true;
+    if(!empty(horasDisponibles($fecha, $idodontologo))) return true;
 
     else return false;
 }
@@ -131,20 +132,21 @@ function horasDisponibles($fecha, $idodontologo): array {
 
     // 1) Obtener horarios
 
-    $sql = "SELECT h.horainicio, h.horafinalizacion FROM horario h JOIN odontologo_horario oh ON h.idhorario = oh.idhorario WHERE oh.idodontologo = :ido AND h.dia = :dia";
+    $sql = "SELECT horainicio, horafinalizacion FROM horario WHERE idodontologo = :ido AND dia = :dia";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':ido', $idodontologo);
     $stmt->bindParam(':dia', $dayOfWeek);
+
     if ($stmt->execute()) {
 
         $horarios = $stmt->fetchAll();
 
-        if (empty($horarios)) return false;
+        if (empty($horarios)) return [];
     }
 
     // 2) Obtener inactividades
 
-    $sql = "SELECT fechainicio, tiempoinicio, fechafinalizacion, tiempofinalizacion FROM inactividad i JOIN odontologo_inactividad oi ON i.idinactividad = oi.idinactividad WHERE oi.idodontologo = :ido AND (:fecha BETWEEN fechainicio AND fechafinalizacion)";
+    $sql = "SELECT fechainicio, tiempoinicio, fechafinalizacion, tiempofinalizacion FROM inactividad WHERE idodontologo = :ido AND (:fecha BETWEEN fechainicio AND fechafinalizacion)";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':ido', $idodontologo);
     $stmt->bindParam(':fecha', $fecha);
@@ -222,6 +224,24 @@ function horasDisponibles($fecha, $idodontologo): array {
         }
     }
     return $horasDisponibles;
+}
+
+function duracionesDisponibles($fecha, $hora, $idodontologo): array {
+
+    global $defaults;
+
+    $extendedHours = [];
+
+    foreach(horasDisponibles($fecha->format('Y-m-d'), $idodontologo) as $horon) $horasLuego[] = $horon . ':00';
+
+    $horasLuego = array_values(array_diff($horasLuego, getHoursFromRange($defaults["horaminima"], $hora)));
+    $horasLuego[] = $hora;
+
+    if(sizeof($horasLuego) <= $defaults["duracionmaxima"]/30) for($i = 1; $i <= sizeof($horasLuego); $i++) $extendedHours[] = $i * 30;
+
+    else for($i = 1; $i <= $defaults["duracionmaxima"]/30; $i++) $extendedHours[] = $i * 30;
+
+    return $extendedHours;
 }
 
 function reloadSession(): int {

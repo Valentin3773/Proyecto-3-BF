@@ -265,6 +265,11 @@ main {
     text-align: center;
 }
 
+.form-select:disabled {
+
+    color: #6C757D !important;
+}
+
 @media screen and (width < 1000px) {
 
     #sidebar {

@@ -31,15 +31,16 @@ if (!isset($_GET['numservicio'])) {
 } 
 else if (is_numeric($_GET['numservicio']) && $_GET['numservicio'] > 0) {
 
-                    $numservicio = $_GET['numservicio'];
+    $numservicio = $_GET['numservicio'];
 
-                    $sql = "SELECT * FROM servicio WHERE numero = :numservicio ORDER BY nombre ASC";
+    $sql = "SELECT * FROM servicio WHERE numero = :numservicio ORDER BY nombre ASC";
 
-                    $stmt = $pdo->prepare($sql);
-                    $stmt->bindParam(':numservicio', $numservicio);
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':numservicio', $numservicio);
 
-                    if ($stmt->execute() && $stmt->rowCount() == 1) $servicio = $stmt->fetch(PDO::FETCH_ASSOC);
-                    ?>
+    if ($stmt->execute() && $stmt->rowCount() == 1) $servicio = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+?>
 
     <div id="cuerpo">
 
