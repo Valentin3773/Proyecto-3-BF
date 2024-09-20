@@ -58,26 +58,31 @@
                     <div class="col-sm-6 col-md-4 mb-4">
                         <h1 id="leader">Leader</h1>
                         <img id="imgl" src="img/image 22.png" alt="Leader" class="img-fluid">
+                        <h1 id="leader">Valentin Ibarra</h1>
                     </div>
 
                     <div class="col-sm-6 col-md-4 mb-4">
                         <h1 id="subleader">Sub Leader</h1>
                         <img id="imgsl" src="img/image 22.png" alt="Sub Leader" class="img-fluid">
+                        <h1 id="subleader">Andrés Ferreira</h1>
                     </div>
 
                     <div class="col-sm-6 col-md-4 mb-4">
                         <h1 id="manager">Manager</h1>
                         <img id="imgm" src="img/image 22.png" alt="Manager" class="img-fluid">
+                        <h1 id="manager">Santiago Vargas</h1>
                     </div>
 
                     <div class="col-sm-6 col-md-4 mb-4">
-                        <h1 id="developer"> Developer</h1>
+                        <h1 id="developer">Developer</h1>
                         <img id="imgd" src="img/image 22.png" alt="Developer" class="img-fluid">
+                        <h1 id="developer">Felipe Leal</h1>
                     </div>
 
                     <div class="col-sm-6 col-md-4 mb-4">
                         <h1 id="developer2">Developer</h1>
                         <img id="imgd2" src="img/image 22.png" alt="Developer" class="img-fluid">
+                        <h1 id="developer2">Agustín Perdomo</h1>
                     </div>
 
                 </div>
