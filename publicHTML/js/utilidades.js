@@ -45,7 +45,7 @@ function createHeaderPopup(titulo, contenido, accion) {
     });
 }
 
-function createConfirmPopup(titulo, contenido, botonestxt) {
+function createConfirmPopup(titulo, contenido, botonestxt = ['Cancelar', 'Confirmar']) {
 
     let promesa = new Promise(respuesta => {
 

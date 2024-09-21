@@ -194,9 +194,9 @@ function cargarVistaHorarios() {
 
         $('.horario .tachito').on('click', async function() {
 
-            if(await createConfirmPopup('Confirmación', '¿Está seguro de que desea eliminar el horario?', ['No', 'Sí'])) {
+            if(await createConfirmPopup('Confirmación', '¿Estas seguro de que deseas eliminar el horario?', ['No', 'Sí'])) {
 
-                $('#eliminarhorario').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').attr('data-eliminar', 'no');
+                $('#eliminarhorario').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true).attr('data-eliminar', 'no');
                 $('.horario .tachito').addClass('invisible').removeClass('visible');
 
                 $.ajax({
@@ -207,6 +207,8 @@ function cargarVistaHorarios() {
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (response) {
+                        
+                        $('#eliminarhorario').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').prop('disabled', false);
 
                         if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaHorarios);
 
@@ -255,26 +257,31 @@ function cargarVistaInactividades() {
             }
         });
 
-        $('.inactividad .tachito').on('click', function() {
+        $('.inactividad .tachito').on('click', async function() {
 
-            $('#eliminarinactividad').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').attr('data-eliminar', 'no');
-            $('.inactividad .tachito').addClass('invisible').removeClass('visible');
+            if(await createConfirmPopup('Confirmación', '¿Estas seguro de que deseas eliminar la inactividad?', ['No', 'Sí'])) {
 
-            $.ajax({
+                $('#eliminarinactividad').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true).attr('data-eliminar', 'no');
+                $('.inactividad .tachito').addClass('invisible').removeClass('visible');
 
-                type: "POST",
-                url: "backend/perfil/eliminarInactividad.php",
-                data: JSON.stringify({inactividad: $(this).attr('data-inactividad')}),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                success: function (response) {
+                $.ajax({
 
-                    if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaInactividades);
+                    type: "POST",
+                    url: "backend/perfil/eliminarInactividad.php",
+                    data: JSON.stringify({inactividad: $(this).attr('data-inactividad')}),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
 
-                    else createPopup('Nuevo Aviso', response.error);
-                },
-                error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
-            });
+                        $('#eliminarinactividad').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').prop('disabled', false);
+
+                        if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaInactividades);
+
+                        else createPopup('Nuevo Aviso', response.error);
+                    },
+                    error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
+                });
+            }
         });
     });
 
@@ -360,7 +367,7 @@ function cargarVistaAgregarHorario() {
         $('#contagregarhorario select#dia').on('change', function() {
 
             if($(this).val() != '') {
-
+                
                 $.ajax({
 
                     type: "POST",
@@ -438,6 +445,8 @@ function cargarVistaAgregarHorario() {
 
         $('#confirmarhorario').on('click', () => {
 
+            $('#confirmarhorario').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true);
+
             if(horario.dia != null && horario.horainicio != null && horario.horafinalizacion != null) $.ajax({
 
                 type: "POST",
@@ -446,6 +455,8 @@ function cargarVistaAgregarHorario() {
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (response) {
+
+                    $('#confirmarhorario').html('Agregar').prop('disabled', false);
 
                     if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, () => changeView(cargarVistaHorarios));
 
