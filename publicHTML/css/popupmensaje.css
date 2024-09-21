@@ -54,6 +54,10 @@
     background-color: #1679fa;
     border-radius: 0 0 10px 10px;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
 }
 .popup-Contenido {
 
@@ -68,7 +72,7 @@
     padding: 0;
 }
 
-.btnCerrar {
+.btnCerrar, .btnConfirmar, .btnCancelar {
 
     background-color: #0AF0AB;
     filter: brightness(1.1);
@@ -76,16 +80,17 @@
     border-radius: 10px;
     box-shadow: 2px 4px 1px rgba(0, 0, 0, .25);   
     transition-duration: .3s;
+    width: 30%;
 }
 
-.btnCerrar:hover {
+.btnCerrar:hover, .btnConfirmar:hover, .btnCancelar:hover {
 
     scale: 1.05;
     filter: brightness(1.1);
     color: white;
 }
 
-.btnCerrar:active {
+.btnCerrar:active, .btnConfirmar:active, .btnCancelar:active {
 
     scale: .95;
     filter: brightness(1.2);

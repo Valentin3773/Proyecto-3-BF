@@ -385,6 +385,18 @@ main {
     color: #6C757D !important;
 }
 
+.ui-datepicker {
+
+    width: 25em !important;
+}
+
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-prev-hover, .ui-datepicker .ui-datepicker-next, .ui-datepicker .ui-datepicker-next-hover {
+
+    top: .2em !important;
+    right: 1px !important;
+    cursor: pointer;
+}
+
 @media screen and (width <= 1000px) {
 
     #headerpc, .actionbar, .sidebar {

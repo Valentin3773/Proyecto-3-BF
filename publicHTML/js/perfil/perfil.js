@@ -192,26 +192,29 @@ function cargarVistaHorarios() {
             }
         });
 
-        $('.horario .tachito').on('click', function() {
+        $('.horario .tachito').on('click', async function() {
 
-            $('#eliminarhorario').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').attr('data-eliminar', 'no');
-            $('.horario .tachito').addClass('invisible').removeClass('visible');
+            if(await createConfirmPopup('Confirmación', '¿Está seguro de que desea eliminar el horario?', ['No', 'Sí'])) {
 
-            $.ajax({
+                $('#eliminarhorario').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').attr('data-eliminar', 'no');
+                $('.horario .tachito').addClass('invisible').removeClass('visible');
 
-                type: "POST",
-                url: "backend/perfil/eliminarHorario.php",
-                data: JSON.stringify({horario: $(this).attr('data-horario')}),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                success: function (response) {
+                $.ajax({
 
-                    if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaHorarios);
+                    type: "POST",
+                    url: "backend/perfil/eliminarHorario.php",
+                    data: JSON.stringify({horario: $(this).attr('data-horario')}),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
 
-                    else createPopup('Nuevo Aviso', response.error);
-                },
-                error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
-            });
+                        if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaHorarios);
+
+                        else createPopup('Nuevo Aviso', response.error);
+                    },
+                    error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
+                });
+            }
         });
     });
 
