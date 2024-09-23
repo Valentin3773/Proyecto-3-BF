@@ -58,6 +58,58 @@ function generarCalendario(fechaAc, fechasDispon, mes, year, fechaselec) {
     }
 }
 
+function generarCalendarioComun(fechaAc, mes, year, fechasDispon) {
+
+    const monthyear = $('#monthyear h2');
+    const calendarbody = $('#calendarbody tbody');
+
+    calendarbody.empty();
+
+    const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio', 'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    
+    fechaActual = new Date(fechaAc);
+
+    let fechasDisponibles = [];
+
+    fechasDispon.forEach(element => fechasDisponibles.push(new Date(element)));
+    fechasDisponibles.forEach(element => element.setHours(24, 0, 0, 0));
+    
+    monthyear.text(meses[mes] + ', ' + year);
+
+    const primerDia = !(new Date(year, mes, 1).getDay() === 0) ? new Date(year, mes, 1).getDay() - 1 : 6;
+    
+    const diasDelMes = new Date(year, mes + 1, 0).getDate();
+
+    let dateCount = 1;
+
+    let fechaDia;
+
+    for (let i = 0; i < 6; i++) {
+
+        let fila = $(`<tr class="semana vacia" data-semana="${i + 1}"></tr>`);
+
+        for (let j = 0; j < 7; j++) {
+
+            if ((i === 0 && j < primerDia) || (dateCount > diasDelMes)) fila.append('<td></td>');
+            
+            else {
+                
+                fila.removeClass('vacia').addClass('novacia');
+
+                fechaDia = new Date(year, mes, dateCount);
+
+                if(!fechasDisponibles.some(f => f.getTime() === fechaDia.getTime())) fila.append('<td><div id="dia" class="pasado" data-dia="' + dateCount + '" data-mes="' + mes + '" data-year="' + year + '">' + dateCount + '</div></td>');
+
+                else fila.append('<td><div id="dia" class="disponible" data-dia="' + dateCount + '" data-mes="' + mes + '" data-year="' + year + '">' + dateCount + '</div></td>');
+        
+                dateCount++;
+            }
+        }
+
+        calendarbody.append(fila);
+    }
+}
+
 function cargarHorasDisponibles(horasDispo, horarios) {
 
     const conthoras = $('#elegirhora #horasdisponibles');

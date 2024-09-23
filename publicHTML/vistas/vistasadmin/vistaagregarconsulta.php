@@ -16,7 +16,7 @@ if($stmt->execute()) $pacientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
-<h1 class="subtitulo">Agregar consulta</h1>
+<h1 class="subtitulo">Agendar Consulta</h1>
 
 <div class="d-flex justify-content-center align-items-center">
 

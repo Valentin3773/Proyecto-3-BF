@@ -146,18 +146,6 @@
     scale: 1.03;
 }
 
-.titdefconsultas {
-
-    color: white;
-    background-color: #0AF0AB;
-    padding: 1.5rem;
-    border-radius: 15px;
-    text-shadow: 2px 1px 0 rgb(78, 78, 78);
-    font-size: 2.5rem;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, .25);
-    border: 2px solid rgba(0, 0, 0, .15);
-}
-
 #contagregarconsulta {
     
     width: 80% !important;
@@ -254,4 +242,198 @@
 
     scale: .98 !important;
     filter: brightness(1.2) !important;
+}
+
+h1#titverpor {
+
+    color: #00B2FF;
+    text-align: center;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+select#verpor {
+
+    width: 60%;
+}
+
+section#calendariocontainer {
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+#calendario {
+
+    background-color: white;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, .25);
+    color: white;
+    width: 60%;
+    margin-bottom: 1rem;
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 10px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, .25);
+}
+
+#calendario #monthyear {
+
+    background-color: #0AF0AB;
+    padding: 0.5rem;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#calendario #monthyear h2 {
+
+    margin: 0;
+    font-weight: 600;
+}
+
+#calendario .arrowright, #calendario .arrowleft {
+
+    background-color: rgb(255, 255, 255);
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    transition-duration: 300ms;
+}
+
+#calendario .arrowright {
+
+    clip-path: polygon(100% 50%, 0 100%, 0 0);
+}
+
+#calendario .arrowleft {
+
+    clip-path: polygon(0 50%, 100% 100%, 100% 0);
+}
+
+#calendario #semana {
+
+    background-color: #0059CD;
+}
+
+#calendario #semana {
+
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+#calendario #calendarbody {
+
+    height: 300px;
+    width: 100%;
+}
+
+#calendarbody thead {
+
+    width: 100%;
+}
+
+#calendario .columna {
+
+    width: 14.28%;
+}
+
+#calendario #dia {
+
+    height: 50px;
+    width: 80%;
+    background-color: #E84141;
+    border-radius: 50%;
+    text-align: center;
+    padding: 10px;
+    font-size: 2rem;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, .35);
+    font-weight: 600;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: .3s;
+}
+
+#calendarbody #dia .ocupado {
+
+    background-color: #E84141 !important;
+}
+
+#calendarbody .pasado {
+
+    background-color: #CECECE !important;
+}
+
+#calendarbody .disponible {
+
+    background-color: #0AF0AB !important;
+    cursor: pointer;
+}
+
+#calendarbody .seleccionado {
+
+    border: 5px solid rgb(255, 217, 0);
+    box-shadow: 0 0 0 2px rgb(0, 0, 0, .25), 0 2px 1px rgba(0, 0, 0, .35), #7AE8FF90 0px 54px 55px, #7AE8FF90 0px -12px 30px, #7AE8FF90 0px 4px 6px, #7AE8FF90 0px 12px 13px, #7AE8FF90 0px -3px 5px !important;
+    filter: brightness(1.06);
+}
+
+#calendario .vacio {
+
+    height: 50px;
+    width: 50px;
+}
+
+#calendario td {
+
+    position: relative;
+    height: 60px;
+}
+
+#calendario .arrowright:hover, #calendario .arrowleft:hover {
+
+    scale: 1.1;
+    filter: drop-shadow(30px 10px 4px #4444dd) brightness(1.1);
+    background-color: #4294FF;
+}
+
+#calendario .arrowright:active, #calendario .arrowleft:active {
+
+    scale: .95;
+    filter: drop-shadow(30px 10px 4px #6a6aff) brightness(1.2);
+    background-color: #4294FF;
+}
+
+#calendario.pordia .disponible:hover {
+
+    scale: 1.03;
+    filter: brightness(1.1) drop-shadow(0 0 2mm #74d5ff);
+}
+
+#calendario.pordia .disponible:active {
+
+    scale: .97;
+    filter: brightness(1.2) drop-shadow(0 0 2mm #74d5ff);
+}
+
+#calendario.porsemana .semana {
+
+    transition-duration: .3s;
+    cursor: pointer;
+}
+
+#calendario.porsemana .semana.novacia:hover {
+
+    filter: drop-shadow(0 0 10px rgb(255, 217, 0));
+    background-color: rgb(255, 217, 0, .2);
+    border-radius: 50%;
 }

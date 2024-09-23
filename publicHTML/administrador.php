@@ -37,6 +37,7 @@ reloadSession();
     <!-- JS -->
     <script src="js/preloader.js"></script>
     <script src="js/utilidades.js"></script>
+    <script defer src="js/reservaconsulta/calendario.js"></script>
     <script defer src="js/administrador/administrador.js"></script>
 
 </head>
@@ -125,6 +126,7 @@ reloadSession();
                     <div class="sidebar w-100"></div>
 
                     <div class="actionbar w-100 d-flex justify-content-center align-items-center">
+                        <h3 id="titactionbar">Agregar Consulta</h3>
                         <div id="agregar" class="invisible"><div class="mas"></div></div>
                     </div>
 

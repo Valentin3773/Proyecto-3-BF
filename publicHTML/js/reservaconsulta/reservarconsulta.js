@@ -146,7 +146,7 @@ function cargarVistaFecha() {
                     if (mesc < 11) mesc++;
 
                     else if (new Date(respuesta.fechaActual).getFullYear() + 1 > yearc) {
-
+                        
                         mesc = 0;
                         yearc++;
                     }

@@ -22,6 +22,8 @@ $(() => {
     };
 
     $.datepicker.setDefaults($.datepicker.regional['es']);
+
+    changeView(() => loadView('<div class="w-100 h-100 d-flex justify-content-center align-items-center"><h1 class="titinformativo">Bienvenido al administrador</h1></div>'));
 });
 
 function addAdminListeners() {
@@ -35,21 +37,66 @@ function addAdminListeners() {
 
 function cargarVistaConsultas() {
 
+    let mesc;
+    let yearc;
+
     $.get("vistas/vistasadmin/sidebarconsultas.php", data => {
 
         $('.sidebar').html(data);
-        loadView('<div class="w-100 h-100 d-flex justify-content-center align-items-center"><h1 class="titdefconsultas">Has clic en un paciente para ver sus consultas</h1></div>');
+        $.get('vistas/vistasadmin/vistaconsultacalendario.php', data => {
+
+            loadView(data);
+
+            $.get('backend/admin/getFechaHoraActual.php', respuesta => {
+
+                mesc = new Date(respuesta.fechaActual).getMonth();
+                yearc = new Date(respuesta.fechaActual).getFullYear();
+
+                let fechasDisponibles = respuesta.fechasDisponibles.map(objeto => objeto.fecha)
+
+                generarCalendarioComun(respuesta.fechaActual, mesc, yearc, fechasDisponibles);
+                
+                $('#calendario .arrowright').on('click', () => {
+
+                    if (mesc < 11) mesc++;
+
+                    else if (new Date(respuesta.fechaActual).getFullYear() + 5 > yearc) {
+
+                        mesc = 0;
+                        yearc++;
+                    }
+
+                    generarCalendarioComun(respuesta.fechaActual, mesc, yearc, fechasDisponibles);
+                    addCalendarioListeners();
+                });
+                $('#calendario .arrowleft').on('click', () => {
+
+                    if (mesc > 0) mesc--;
+
+                    else if (new Date(respuesta.fechaActual).getFullYear() - 5 < yearc) {
+
+                        mesc = 11;
+                        yearc--;
+                    }
+                    generarCalendarioComun(respuesta.fechaActual, mesc, yearc, fechasDisponibles);
+                    addCalendarioListeners();
+                });
+                addCalendarioListeners();
+            });
+
+            $('select#verpor').on('change', addCalendarioListeners);
+        });
+
         console.log("Cargando vista de 'Consultas'");
 
-        $('.pacientec').on('click', function () {
+        $('.pacientec').on('click', function() {
 
-            $('.pacientec').css({ 'text-decoration': 'none' });
+            $('.pacientec, .paciente').css({ 'text-decoration': 'none' });
             $(this).css({ 'text-decoration': 'underline' });
 
             let url = 'vistas/vistasadmin/vistaconsultas.php?idpaciente=' + $(this).attr('id');
-            const nombreP = $(this).html();
 
-            $.get(url, data => {
+            changeView(() => $.get(url, data => {
 
                 loadView(data);
 
@@ -64,7 +111,7 @@ function cargarVistaConsultas() {
 
                     $('main').html('');
 
-                    let ventanaconsultapaciente = 'vistas/vistasadmin/vistaconsultapaciente.php?hora=' + hora + '&fecha=' + fecha + ' &nombreP=' + nombreP + '';
+                    let ventanaconsultapaciente = 'vistas/vistasadmin/vistaconsultapaciente.php?hora=' + hora + '&fecha=' + fecha;
 
                     $.get(ventanaconsultapaciente, ventana => {
 
@@ -73,17 +120,115 @@ function cargarVistaConsultas() {
                         slideActionBar(false);
                     });
                 });
-            });
+            }));
         });
 
         slideActionBar(true);
 
+        $('#titactionbar').html('Agendar Consulta');
         $('#agregar').off().on('click', () => $('main').fadeOut(300, cargarVistaAgregarConsulta));
     });
 
     $('#seccionescss').attr('href', 'css/administrador/consultas.css');
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnconsultas, nav.mobile #btnconsultas').css({ 'text-decoration': 'underline' });
+}
+
+function addCalendarioListeners() {
+
+    let opcion = $('select#verpor').val();
+
+    $('#calendarbody div#dia.disponible').off();
+    $('#calendarbody .semana').off();
+
+    if(opcion === 'dia') {
+        
+        $('#calendario').removeClass('porsemana').addClass('pordia');
+
+        $('#calendarbody div#dia.disponible').off().on('click', function () {
+
+            let fecha = new Date($(this).attr('data-year'), Number($(this).attr('data-mes')) + 1, $(this).attr('data-dia'));
+
+            let url = `vistas/vistasadmin/vistaconsultas.php?anio=${fecha.getFullYear()}&mes=${fecha.getMonth()}&dia=${fecha.getDate()}`;
+
+            console.log(url);
+
+            changeView(() => $.get(url, contenido => {
+                
+                loadView(contenido);
+
+                $('.consulta').click(function (e) {
+
+                    e.preventDefault();
+
+                    const fecha = $(this).attr('data-fecha');
+                    const hora = $(this).attr('data-hora');
+
+                    $('main').empty();
+
+                    let ventanaconsultapaciente = 'vistas/vistasadmin/vistaconsultapaciente.php?hora=' + hora + '&fecha=' + fecha;
+
+                    $.get(ventanaconsultapaciente, ventana => {
+
+                        $('main').html(ventana);
+
+                        slideActionBar(false);
+                    });
+                });
+            }));
+        });
+    }
+    else if(opcion === 'semana') {
+        
+        $('#calendario').removeClass('pordia').addClass('porsemana');
+
+        $('#calendarbody .semana.novacia').off().on('click', function() {
+
+            let unDia = $(this).children().find('#dia');
+
+            let unaFecha = `${unDia.attr('data-year')}-${Number(unDia.attr('data-mes')) + 1}-${unDia.attr('data-dia')}`;
+            
+            console.log(unaFecha);
+
+            let fechasSemana = getWeekDates(unaFecha);
+
+            fecha1 = fechasSemana[0]; // Primer fecha de la semana
+            fecha2 = fechasSemana[fechasSemana.length - 1]; // Última fecha de la semana
+
+            fecha1 = `${fecha1.getFullYear()}-${Number(fecha1.getMonth()) + 1}-${fecha1.getDate()}`;
+            fecha2 = `${fecha2.getFullYear()}-${Number(fecha2.getMonth()) + 1}-${fecha2.getDate()}`;
+
+            console.log(fecha1, fecha2);
+
+            let url = `vistas/vistasadmin/vistaconsultas.php?fecha1=${fecha1}&fecha2=${fecha2}`;
+
+            console.log(url);
+
+            changeView(() => $.get(url, contenido => {
+                
+                loadView(contenido);
+
+                $('.consulta').click(function (e) {
+
+                    e.preventDefault();
+
+                    const fecha = $(this).attr('data-fecha');
+                    const hora = $(this).attr('data-hora');
+
+                    $('main').empty();
+
+                    let ventanaconsultapaciente = 'vistas/vistasadmin/vistaconsultapaciente.php?hora=' + hora + '&fecha=' + fecha;
+
+                    $.get(ventanaconsultapaciente, ventana => {
+
+                        $('main').html(ventana);
+
+                        slideActionBar(false);
+                    });
+                });
+            }));
+        }); 
+    }
 }
 
 function cargarVistaAgregarConsulta() {
@@ -172,20 +317,20 @@ function cargarVistaAgregarConsulta() {
                 error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
             });
             else $('#contagregarconsulta #duracion').html('<option selected value="">Seleccione la duración</option>').prop('disabled', true);
-            
+
             $('#agregarconsulta').prop('disabled', true).removeClass('activo').addClass('inactivo');
         });
 
         $('#contagregarconsulta #duracion').on('change', () => {
 
-            if($('#contagregarconsulta #duracion').val() !== '' && $('#contagregarconsulta #asunto').val().length >= 6) $('#agregarconsulta').prop('disabled', false).removeClass('inactivo').addClass('activo');
+            if ($('#contagregarconsulta #duracion').val() !== '' && $('#contagregarconsulta #asunto').val().length >= 6) $('#agregarconsulta').prop('disabled', false).removeClass('inactivo').addClass('activo');
 
             else $('#agregarconsulta').prop('disabled', true).removeClass('activo').addClass('inactivo');
         });
 
         $('#contagregarconsulta #asunto').on('input', () => {
 
-            if($('#contagregarconsulta #duracion').val() !== '' && $('#contagregarconsulta #asunto').val().length >= 6) $('#agregarconsulta').prop('disabled', false).removeClass('inactivo').addClass('activo');
+            if ($('#contagregarconsulta #duracion').val() !== '' && $('#contagregarconsulta #asunto').val().length >= 6) $('#agregarconsulta').prop('disabled', false).removeClass('inactivo').addClass('activo');
 
             else $('#agregarconsulta').prop('disabled', true).removeClass('activo').addClass('inactivo');
         });
@@ -439,6 +584,7 @@ function cargarVistaServicios() {
 
     slideActionBar(true);
 
+    $('#titactionbar').html('Agregar Servicio');
     $('#agregar').off().on('click', () => changeView(cargarVistaAgregarServicio));
 
     $('#seccionescss').attr('href', 'css/administrador/servicios.css');
@@ -489,7 +635,8 @@ function enviarIMGServicio($data, $tipo) {
 function resetAdmin() {
 
     $('.sidebar').empty();
-    $('main').empty();
+
+    changeView(() => loadView('<div class="w-100 h-100 d-flex justify-content-center align-items-center"><h1 class="titinformativo">Bienvenido al administrador</h1></div>'));
 
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
 
@@ -511,34 +658,6 @@ function slideActionBar(estado) {
 }
 
 let fechasPermitidas = ['20-09-2024'];
-
-function permitirFechas(date) {
-
-    var year = date.getFullYear();
-    var month = ("0" + (date.getMonth() + 1)).slice(-2);
-    var day = ("0" + date.getDate()).slice(-2);
-    var dateString = day + "-" + month + "-" + year;
-
-    if ($.inArray(dateString, fechasPermitidas) !== -1) return [true, 'fechadisponible', "Fecha disponible"];
-
-    else return [false, 'fechanodisponible', "Fecha no disponible"];
-}
-
-function fancyHoras(minutos) {
-
-    const horas = Math.floor(minutos / 60);
-    const minutosRestantes = minutos % 60;
-
-    let resultado = '';
-
-    if (horas > 0) resultado += horas + ' hora' + (horas > 1 ? 's' : '');
-
-    if (horas > 0 && minutosRestantes > 0) resultado += ' y ';
-
-    if (minutosRestantes > 0) resultado += minutosRestantes + ' minuto' + (minutosRestantes > 1 ? 's' : '');
-
-    return resultado || '0 minutos';
-}
 
 function changeView(vista) {
 

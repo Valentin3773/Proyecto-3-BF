@@ -7,17 +7,13 @@ $(() => {
 
 function addListeners() {
 
-    $('#nosotros, #nosotrosm').on('click', () => {
+    $('#inicio, #iniciom, #logo').on('click', () => changeView(cargarVistaInicio));
 
-        $('main').fadeOut(300, cargarVistaNosotros); 
-        $('#hrelleno').css({'height': '10000px'});
-    });
+    $('#nosotros, #nosotrosm').on('click', () => changeView(cargarVistaNosotros));
 
-    $('#inicio, #iniciom, #logo').on('click', () => {$('main').fadeOut(300, cargarVistaInicio)});
+    $('#servicios, #serviciosm').on('click', () => changeView(cargarVistaServicios));
 
-    $('#servicios, #serviciosm').on('click', () => {$('main').fadeOut(300, cargarVistaServicios)});
-
-    $('#contacto, #contactom').on('click', () => {$('main').fadeOut(300, cargarVistaContacto)});
+    $('#contacto, #contactom').on('click', () => changeView(cargarVistaContacto));
 
     $('#btnchat').on('click', () => window.open('https://api.whatsapp.com/send/?phone=598091814295', '_blank'));
 
@@ -30,7 +26,7 @@ function cargarVistaInicio() {
 
     $.get("vistas/vistaslobby/vistainicio.php", data => {
 
-        $('main').empty().html(data).fadeIn(300, () => $('#hrelleno').css({'height': '120px'}));
+        loadView(data);
         console.log("Cargando vista de 'Inicio'");
 
         // history.pushState({}, '', 'inicio');
@@ -51,7 +47,7 @@ function cargarVistaNosotros() {
 
     $.get("vistas/vistaslobby/vistanosotros.php", data => {
 
-        $('main').empty().html(data).fadeIn(300);
+        loadView(data);
         console.log("Cargando vista de 'Nosotros'");
 
         // history.pushState({}, '', 'contacto');
@@ -71,7 +67,7 @@ function cargarVistaServicios() {
 
     $.get("vistas/vistaslobby/vistaservicios.php", data => {
 
-        $('main').empty().html(data).fadeIn(300);
+        loadView(data);
         console.log("Cargando vista de 'Servicios'");
 
         $.get('backend/lobby/apiservicios.php', data => iniciarServicios(data));
@@ -93,7 +89,7 @@ function cargarVistaContacto() {
 
     $.get("vistas/vistaslobby/vistacontacto.php", data => {
 
-        $('main').empty().html(data).fadeIn(300);
+        loadView(data);
         console.log("Cargando vista de 'Contacto'");
         $('#enviarmail').on('click', function (event) {
 
@@ -135,11 +131,18 @@ function emailComfirm(datos) {
 
                 $('#formEmail')[0].reset();
             },
-            error: (jqXHR, estado, outputError) => {
-
-                console.error(estado, outputError);
-            }
+            error: (jqXHR, estado, outputError) => console.error(jqXHR, estado, outputError)
         });
     } 
     else console.log("Fuera bot hijueputa!!!");
+}
+
+function changeView(vista) {
+
+    $('main, footer').fadeOut(200, vista);
+}
+
+function loadView(contenido) {
+
+    $('main').empty().html(contenido).fadeIn(200, () => $('footer').fadeIn(200));
 }

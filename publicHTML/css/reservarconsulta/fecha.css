@@ -185,6 +185,13 @@ td {
     background-color: #4294FF;
 }
 
+#calendario .arrowright:active, #calendario .arrowleft:active {
+
+    scale: .95;
+    filter: drop-shadow(30px 10px 4px #6a6aff);
+    background-color: #4294FF;
+}
+
 .disponible:hover {
 
     scale: 1.03;

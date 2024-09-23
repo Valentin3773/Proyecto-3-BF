@@ -270,6 +270,51 @@ main {
     color: #6C757D !important;
 }
 
+.ui-datepicker {
+
+    width: 25em !important;
+}
+
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-prev-hover, .ui-datepicker .ui-datepicker-next, .ui-datepicker .ui-datepicker-next-hover {
+
+    top: .2em !important;
+    right: 1px !important;
+    cursor: pointer;
+}
+
+.fechadisponible a, .fechanodisponible span {
+
+    border-radius: 10px !important;
+    color: white !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    text-shadow: 0 0 2px rgba(0, 0, 0, .3);
+    transition-duration: .25s;
+}
+
+.fechadisponible a {
+
+    background-color: #00c388 !important;
+    cursor: pointer;
+}
+
+.fechanodisponible span {
+
+    background-color: #E84141 !important;
+}
+
+.fechadisponible:hover a, .fechanodisponible:hover span {
+
+    scale: 1.04 !important;
+    filter: brightness(1.1) !important;
+}
+
+.fechadisponible:active a, .fechanodisponible:active span {
+
+    scale: .98 !important;
+    filter: brightness(1.2) !important;
+}
+
 @media screen and (width < 1000px) {
 
     #sidebar {

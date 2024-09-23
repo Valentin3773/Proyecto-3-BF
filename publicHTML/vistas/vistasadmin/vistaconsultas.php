@@ -69,6 +69,73 @@ if(isset($_GET['idpaciente'])) {
         $nompaciente = $tupla['nombre'] . " " . $tupla['apellido'];
     }
 }
+else if(isset($_GET['anio']) && isset($_GET['mes']) && isset($_GET['dia'])) {
+
+    $fecha = DateTime::createFromFormat('Y-m-d', "{$_GET['anio']}-{$_GET['mes']}-{$_GET['dia']}");
+    $fechastring = $fecha->format('Y-m-d');
+    $ido = $_SESSION['odontologo']['idodontologo'];
+    
+    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE fecha = :fechaelegida AND idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) ORDER BY fecha ASC, hora ASC";
+    $stmt = $pdo->prepare($consulta);
+    $stmt->bindParam(':fechaelegida', $fechastring);
+    $stmt->bindParam(':ido', $ido);
+    
+    if ($stmt->execute() && $stmt->rowCount() > 0) while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $consultasFuturas[] = $tupla;
+
+    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE fecha = :fechaelegida AND idodontologo = :ido AND ((fecha < CURDATE()) OR (fecha = CURDATE() AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) < CURTIME())) ORDER BY fecha ASC, hora ASC";
+
+    $stmt = $pdo->prepare($consulta);
+    $stmt->bindParam(':fechaelegida', $fechastring);
+    $stmt->bindParam(':ido', $ido);
+
+    if ($stmt->execute() && $stmt->rowCount() > 0) while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $consultasPrevias[] = $tupla;
+
+    $consulta = "SELECT ADDTIME(hora, SEC_TO_TIME(duracion * 60)) as horafinalizacion, asunto, fecha, hora FROM consulta WHERE fecha = :fechaelegida AND idodontologo = :ido AND CURDATE() = fecha AND CURTIME() BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) ORDER BY fecha ASC, hora ASC";
+    
+    $stmt = $pdo->prepare($consulta);
+    $stmt->bindParam(':fechaelegida', $fechastring);
+    $stmt->bindParam(':ido', $ido);
+
+    if ($stmt->execute() && $stmt->rowCount() > 0) while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $consultasActuales[] = $tupla;
+}
+else if(isset($_GET['fecha1']) && isset($_GET['fecha2'])) {
+
+    $fecha1 = new DateTime($_GET['fecha1']);
+    $fecha2 = new DateTime($_GET['fecha2']);
+
+    $fecha1 = $fecha1->format('Y-m-d');
+    $fecha2 = $fecha2->format('Y-m-d');
+
+    $ido = $_SESSION['odontologo']['idodontologo'];
+    
+    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE (fecha BETWEEN :primerdiasemana AND :ultimodiasemana) AND idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) ORDER BY fecha ASC, hora ASC";
+    $stmt = $pdo->prepare($consulta);
+    $stmt->bindParam(':primerdiasemana', $fecha1);
+    $stmt->bindParam(':ultimodiasemana', $fecha2);
+    $stmt->bindParam(':ido', $ido);
+    
+    if ($stmt->execute() && $stmt->rowCount() > 0) while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $consultasFuturas[] = $tupla;
+
+    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE (fecha BETWEEN :primerdiasemana AND :ultimodiasemana) AND idodontologo = :ido AND ((fecha < CURDATE()) OR (fecha = CURDATE() AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) < CURTIME())) ORDER BY fecha ASC, hora ASC";
+
+    $stmt = $pdo->prepare($consulta);
+    $stmt->bindParam(':primerdiasemana', $fecha1);
+    $stmt->bindParam(':ultimodiasemana', $fecha2);
+    $stmt->bindParam(':ido', $ido);
+
+    if ($stmt->execute() && $stmt->rowCount() > 0) while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $consultasPrevias[] = $tupla;
+
+    $consulta = "SELECT ADDTIME(hora, SEC_TO_TIME(duracion * 60)) as horafinalizacion, asunto, fecha, hora FROM consulta WHERE (fecha BETWEEN :primerdiasemana AND :ultimodiasemana) AND idodontologo = :ido AND CURDATE() = fecha AND CURTIME() BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) ORDER BY fecha ASC, hora ASC";
+    
+    $stmt = $pdo->prepare($consulta);
+    $stmt->bindParam(':primerdiasemana', $fecha1);
+    $stmt->bindParam(':ultimodiasemana', $fecha2);
+    $stmt->bindParam(':ido', $ido);
+
+    if ($stmt->execute() && $stmt->rowCount() > 0) while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $consultasActuales[] = $tupla;
+}
+
+if(isset($_GET['idpaciente'])):
 
 ?>
 
@@ -77,6 +144,8 @@ if(isset($_GET['idpaciente'])) {
     <h1 id="tituloconsultas" class="text-center">Consultas <?php if(!empty($nompaciente)) echo " de {$nompaciente}"; ?> </h1>
 
 </div>
+
+<?php endif; ?>
 
 <?php if(!empty($consultasActuales)): ?>
 
@@ -134,7 +203,10 @@ if(!empty($consultasFuturas)):
 <div class="separador my-3">
 
     <hr>
-    <span>FUTURAS</span>
+    <?php 
+    if(sizeof($consultasFuturas) > 1) echo "<span>FUTURAS</span>";
+    else echo "<span>FUTURA</span>";
+    ?>
     <hr>
 
 </div>
@@ -178,7 +250,10 @@ if(!empty($consultasPrevias)):
 <div class="separador my-3">
 
     <hr>
-    <span>PREVIAS</span>
+    <?php 
+    if(sizeof($consultasPrevias) > 1) echo "<span>PREVIAS</span>";
+    else echo "<span>PREVIA</span>";
+    ?>
     <hr>
 
 </div>
@@ -223,4 +298,7 @@ if(!empty($consultasPrevias)):
 
 </div>
 
-<?php endif; ?>
+<?php
+endif;
+if(empty($consultasPrevias) && empty($consultasActuales) && empty($consultasFuturas)) echo '<div class="w-100 h-100 d-flex justify-content-center align-items-center"><h1 class="titdefconsultas">Lo sentimos, no hay consultas disponibles</h1></div>';
+?>
