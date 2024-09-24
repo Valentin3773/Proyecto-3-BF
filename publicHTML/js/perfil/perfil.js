@@ -5,8 +5,12 @@ $(() => {
     $('#horarios').on('click', () => changeView(cargarVistaHorarios));
     $('#inactividades').on('click', () => changeView(cargarVistaInactividades));
     $('#seguridad').on('click', () => changeView(cargarVistaSeguridad));
-    $('#cerrarsesion').on('click', () => $('main').fadeOut(150, () => window.location.href = 'login.php?estado=3')).on('mouseenter', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>')).on('mouseleave', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>&nbsp;Cerrar Sesión'));
+    $('#cerrarsesion').on('click', () => changeView(async () => {
+        
+        if(await createConfirmPopup('Confirmación', '¿Estás seguro de cerrar sesión?', ['No', 'Sí'])) window.location.href = 'login.php?estado=3'
 
+    })).on('mouseenter', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>')).on('mouseleave', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>&nbsp;Cerrar Sesión'));
+    
     switch ($('main').data('vista')) {
 
         case 1: cargarVistaPerfil(); break;
@@ -464,27 +468,30 @@ function cargarVistaAgregarHorario() {
             }
         });
 
-        $('#confirmarhorario').on('click', () => {
+        $('#confirmarhorario').on('click', async () => {
 
-            $('#confirmarhorario').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true);
+            if(await createConfirmPopup('Confirmación', '¿Estás seguro de agregar el horario?')) {
 
-            if(horario.dia != null && horario.horainicio != null && horario.horafinalizacion != null) $.ajax({
+                $('#confirmarhorario').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true);
 
-                type: "POST",
-                url: "backend/perfil/agregarHorario.php",
-                data: JSON.stringify(horario),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                success: function (response) {
+                if(horario.dia != null && horario.horainicio != null && horario.horafinalizacion != null) $.ajax({
 
-                    $('#confirmarhorario').html('Agregar').prop('disabled', false);
+                    type: "POST",
+                    url: "backend/perfil/agregarHorario.php",
+                    data: JSON.stringify(horario),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
 
-                    if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, () => changeView(cargarVistaHorarios));
+                        $('#confirmarhorario').html('Agregar').prop('disabled', false);
 
-                    else createPopup('Nuevo Aviso', response.error);
-                },
-                error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
-            });
+                        if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, () => changeView(cargarVistaHorarios));
+
+                        else createPopup('Nuevo Aviso', response.error);
+                    },
+                    error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
+                });
+            }
         });
     });
 }

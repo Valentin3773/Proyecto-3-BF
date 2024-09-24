@@ -138,7 +138,10 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
         <div class="separador my-3">
 
             <hr>
-            <span>FUTURAS</span>
+            <?php 
+            if(sizeof($consultasFuturas) > 1) echo "<span>FUTURAS</span>";
+            else echo "<span>FUTURA</span>";
+            ?>
             <hr>
 
         </div>
@@ -183,7 +186,10 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
         <div class="separador my-3">
 
             <hr>
-            <span>PREVIAS</span>
+            <?php 
+            if(sizeof($consultasPrevias) > 1) echo "<span>PREVIAS</span>";
+            else echo "<span>PREVIA</span>";
+            ?>
             <hr>
 
         </div>

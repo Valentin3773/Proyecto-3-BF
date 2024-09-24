@@ -80,7 +80,7 @@ function iniciarServicios(servicios) {
             }
         ]
         
-    }), 0);
+    }), 10);
 
     $('.slick-prev').empty();
     $('.slick-next').empty();

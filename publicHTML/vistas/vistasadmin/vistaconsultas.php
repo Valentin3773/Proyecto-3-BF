@@ -300,5 +300,5 @@ if(!empty($consultasPrevias)):
 
 <?php
 endif;
-if(empty($consultasPrevias) && empty($consultasActuales) && empty($consultasFuturas)) echo '<div class="w-100 h-100 d-flex justify-content-center align-items-center"><h1 class="titdefconsultas">Lo sentimos, no hay consultas disponibles</h1></div>';
+if(empty($consultasPrevias) && empty($consultasActuales) && empty($consultasFuturas)) echo '<div class="w-100 h-100 d-flex justify-content-center align-items-center"><h1 class="titinformativo">Lo sentimos, no hay consultas disponibles</h1></div>';
 ?>

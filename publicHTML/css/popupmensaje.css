@@ -75,19 +75,20 @@
 .btnCerrar, .btnConfirmar, .btnCancelar {
 
     background-color: #0AF0AB;
+    color: white;
     filter: brightness(1.1);
     border-color: transparent;
     border-radius: 10px;
     box-shadow: 2px 4px 1px rgba(0, 0, 0, .25);   
     transition-duration: .3s;
     width: 30%;
+    text-shadow: 0 0 5px rgba(0, 0, 0, .45);
 }
 
 .btnCerrar:hover, .btnConfirmar:hover, .btnCancelar:hover {
 
     scale: 1.05;
     filter: brightness(1.1);
-    color: white;
 }
 
 .btnCerrar:active, .btnConfirmar:active, .btnCancelar:active {

@@ -146,11 +146,11 @@ function loginConfirm(datos) {
     }
 }
 
-function registerConfirm(datos) {
+async function registerConfirm(datos) {
     
     if ($('#jejeje').val() === '') {
 
-        $.ajax({
+        if(await createConfirmPopup('Confirmación', '¿Estás seguro de crear el usuario?', ['No', 'Sí'])) $.ajax({
 
             type: "POST",
             url: "backend/login/registromanager.php",
@@ -165,16 +165,10 @@ function registerConfirm(datos) {
 
                 $('#btnregistrarsel').prop('disabled', false).css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Registrarse');
             },
-            error: (jqXHR, estado, outputError) => {
-
-                console.log(jqXHR,estado, outputError);
-            }
+            error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
         });
-    } 
-    else {
-
-        console.log("Fuera bot hijueputa!!!");
     }
+    else console.log("Fuera bot hijueputa!!!");
 }
 
 function loginAdminConfirm(datos) {
@@ -196,16 +190,10 @@ function loginAdminConfirm(datos) {
 
                 $('#ingresarad').prop('disabled', false).css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Ingresar');
             },
-            error: (jqXHR, estado, outputError) => {
-
-                console.log(jqXHR,estado, outputError);
-            }
+            error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
         });
     } 
-    else {
-
-        console.log("Fuera bot hijueputa!!!");
-    }
+    else console.log("Fuera bot hijueputa!!!");
 }
 
 function cerrarSesion() {
@@ -223,9 +211,6 @@ function cerrarSesion() {
 
             else createHeaderPopup('Nuevo Aviso', respuesta.error, 'index.php');
         },
-        error: (jqXHR, estado, outputError) => {
-
-            console.log(jqXHR,estado, outputError);
-        }
+        error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
     });
 }

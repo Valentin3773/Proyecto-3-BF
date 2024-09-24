@@ -15,17 +15,20 @@ $(() => {
 
     $('#btnperfil, #btnperfilm').on('click', desplegarMenuPerfil);
 
-    $('#btnperfil ul #iniciar').on('click', () => window.location.href = 'login.php?estado=1');
+    $('#btnperfil ul #iniciar').on('click', () => changePage(() => window.location.href = 'login.php?estado=1'));
 
-    $('#btnperfil ul #registrarse').on('click', () => window.location.href = 'login.php?estado=2');
+    $('#btnperfil ul #registrarse').on('click', () => changePage(() => window.location.href = 'login.php?estado=2'));
 
-    $('#btnperfil ul #cerrarsesion').on('click', () => window.location.href = 'login.php?estado=3');
+    $('#btnperfil ul #cerrarsesion').on('click', async () => {
+        
+        if(await createConfirmPopup('Confirmación', '¿Estás seguro de cerrar sesión?')) changePage(() => window.location.href = 'login.php?estado=3');
+    });
 
-    $('#btnperfil ul #miperfil').on('click', () => window.location.href = 'perfil.php');
-    $('#btnperfil ul #misconsultas').on('click', () => window.location.href = 'perfil.php?estado=2');
-    $('#btnperfil ul #mishorarios').on('click', () => window.location.href = 'perfil.php?estado=3');
-    $('#btnperfil ul #misinactividades').on('click', () => window.location.href = 'perfil.php?estado=4');
-    $('#btnperfil ul #administrador').on('click', () => window.location.href = 'administrador.php');
+    $('#btnperfil ul #miperfil').on('click', () => changePage(() => window.location.href = 'perfil.php'));
+    $('#btnperfil ul #misconsultas').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=2'));
+    $('#btnperfil ul #mishorarios').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=3'));
+    $('#btnperfil ul #misinactividades').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=4'));
+    $('#btnperfil ul #administrador').on('click',  () => changePage(() => window.location.href = 'administrador.php'));
 
     $('main').on('click', () => {
 
@@ -90,4 +93,21 @@ function desplegarMenuPerfil() {
 function gototop() {
 
     window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function changePage(funcion) {
+
+    $('body').fadeOut(300, funcion);
+}
+
+function changeView(vista) {
+
+    $('main, footer').fadeOut(300, vista);
+    setTimeout(() => $('#hrelleno').css({'height': '10000px'}), 300);
+}
+
+function loadView(contenido) {
+
+    setTimeout(() => $('#hrelleno').css({'height': '120px'}), 10);
+    $('main').empty().html(contenido).fadeIn(300, () => $('footer').fadeIn(200));
 }

@@ -335,25 +335,32 @@ function cargarVistaAgregarConsulta() {
             else $('#agregarconsulta').prop('disabled', true).removeClass('activo').addClass('inactivo');
         });
 
-        $('#agregarconsulta').on('click', () => {
+        $('#agregarconsulta').on('click', async () => {
+            
+            if(await createConfirmPopup('Confirmación', '¿Estás seguro de agendar la consulta?')) {
+                
+                $('#agregarservicio').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true);
 
-            let formdatos = new FormData($('#contagregarconsulta')[0]);
+                let formdatos = new FormData($('#contagregarconsulta')[0]);
 
-            $.ajax({
+                $.ajax({
 
-                type: "POST",
-                url: "backend/admin/agregarconsulta.php",
-                data: formdatos,
-                processData: false,
-                contentType: false,
-                success: function (response) {
+                    type: "POST",
+                    url: "backend/admin/agregarconsulta.php",
+                    data: formdatos,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
 
-                    if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaConsultas);
+                        $('#agregarservicio').html('Agregar').prop('disabled', false);
 
-                    else createPopup('Nuevo Aviso', response.error);
-                },
-                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
-            });
+                        if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaConsultas);
+
+                        else createPopup('Nuevo Aviso', response.error);
+                    },
+                    error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+                });
+            }
         });
     });
 }
@@ -373,12 +380,14 @@ function cargarVistaAgregarServicio() {
             $('#inFile1').change(function (event) {
 
                 try {
+
                     let file1 = event.target.files[0];
                     if (file1) {
 
                         // Mostrar la imagen
                         let reader = new FileReader();
                         reader.onload = function (e) {
+
                             $('#icoservicio').prop('src', e.target.result);
                         }
 
@@ -397,16 +406,19 @@ function cargarVistaAgregarServicio() {
         });
 
         $('[id="mdF"]').eq(1).on('click', function () {
+
             $('#inFile2').click();
             $('#inFile2').change(function (event) {
 
                 try {
+
                     let file2 = event.target.files[0];
                     if (file2) {
 
                         // Mostrar la imagen
                         let reader = new FileReader();
                         reader.onload = function (e) {
+
                             $('#imgservicio').prop('src', e.target.result);
                         }
 
@@ -415,7 +427,6 @@ function cargarVistaAgregarServicio() {
 
                         // Preparo el formulario
                         formData.append('file2', file2);
-
                     }
                 }
                 catch (error) {
@@ -443,25 +454,32 @@ function cargarVistaAgregarServicio() {
             else $('#agregarservicio').prop('disabled', true).removeClass('activo').addClass('inactivo');
         })
 
-        $('#agregarservicio').on('click', () => {
+        $('#agregarservicio').on('click', async () => {
+            
+            if(await createConfirmPopup('Confirmación', '¿Estás seguro de agregar el servicio?')) {
 
-            formData.append('nombre', $('#nombre').val()); formData.append('descripcion', $('#descripcion').val());
+                $('#agregarservicio').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true);
 
-            if ($('#nombre').val().length >= 4 && $('#descripcion').val().length >= 20) $.ajax({
+                formData.append('nombre', $('#nombre').val()); formData.append('descripcion', $('#descripcion').val());
 
-                type: "POST",
-                url: "backend/admin/agregarservicio.php",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (response) {
+                if ($('#nombre').val().length >= 4 && $('#descripcion').val().length >= 20) $.ajax({
 
-                    if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaServicios);
+                    type: "POST",
+                    url: "backend/admin/agregarservicio.php",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
 
-                    else createPopup('Nuevo Aviso', response.error);
-                },
-                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
-            });
+                        $('#agregarservicio').html('Agregar').prop('disabled', false);
+
+                        if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaServicios);
+
+                        else createPopup('Nuevo Aviso', response.error);
+                    },
+                    error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+                });
+            }
         });
     });
 }

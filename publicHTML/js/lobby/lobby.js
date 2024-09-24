@@ -43,7 +43,6 @@ function cargarVistaInicio() {
 function cargarVistaNosotros() {
 
     window.scrollTo({top: 0, behavior: 'smooth'});
-    $('#hrelleno').css({'height': '120px'});
 
     $.get("vistas/vistaslobby/vistanosotros.php", data => {
 
@@ -110,11 +109,11 @@ function cargarVistaContacto() {
     $('#seccionescss').attr('href', 'css/lobby/contacto.css');
 }
 
-function emailComfirm(datos) {
+async function emailComfirm(datos) {
     
     if ($('#jejeje').val() === '') {
 
-        $.ajax({
+        if(await createConfirmPopup('Confirmación', '¿Estás seguro de enviar el email?')) $.ajax({
 
             type: "POST",
             url: "backend/lobby/formcontactomanager.php",
@@ -135,14 +134,4 @@ function emailComfirm(datos) {
         });
     } 
     else console.log("Fuera bot hijueputa!!!");
-}
-
-function changeView(vista) {
-
-    $('main, footer').fadeOut(200, vista);
-}
-
-function loadView(contenido) {
-
-    $('main').empty().html(contenido).fadeIn(200, () => $('footer').fadeIn(200));
 }
