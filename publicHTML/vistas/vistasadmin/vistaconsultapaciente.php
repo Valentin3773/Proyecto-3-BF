@@ -7,47 +7,43 @@ session_start();
 
 reloadSession();
 
-if(!isset($_SESSION['odontologo'])) exit();
+if (!isset($_SESSION['odontologo'])) exit();
 
 $ido = $_SESSION['odontologo']['idodontologo'];
 $hora = $_GET['hora'];
 $fecha = $_GET['fecha'];
-$nombreP = $_GET['nombreP'];
 
 $consultaPaciente = array();
 
-// Obtiene la consulta del paciente referente
-$consulta = 'SELECT * FROM consulta WHERE hora = :hora AND fecha = :fecha AND idodontologo = :ido';
-$stmt = $pdo->prepare($consulta);
+$sql = 'SELECT * FROM consulta c JOIN paciente p ON c.idpaciente = p.idpaciente WHERE hora = :hora AND fecha = :fecha AND idodontologo = :ido';
+$stmt = $pdo->prepare($sql);
 $stmt->bindParam(':ido', $ido);
 $stmt->bindParam(':hora', $hora);
 $stmt->bindParam(':fecha', $fecha);
 
-if ($stmt->execute() && $stmt->rowCount() > 0) {
-    $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
-} else {
-    echo "Error al ejecutar la consulta";
-}
+if ($stmt->execute() && $stmt->rowCount() > 0) $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
+
+else echo "Error al ejecutar la consulta";
+
+$nombreP = $tupla["nombre"];
 
 // Obtiene un array de fechas
 $fechaA = getFechaActual();
-$consulta = "SELECT DATE_ADD(:fechaA, INTERVAL 2 MONTH)";
-$stmt = $pdo->prepare($consulta);
-$stmt->bindParam(':fechaA', $fechaA);
+$fechaF = sumarFecha($fechaA, "mes", 3);
 
-if ($stmt->execute() && $stmt->rowCount() > 0) {
-    $fechaF = $stmt->fetchColumn();
-} else {
-    echo "Error al ejecutar la consulta";
-}
+$conjFechas = [];
 
-$conjFechas = getDatesFromRange($fechaA, $fechaF);
-$conjHoras = getHoursFromRange('07:00:00', '22:00:00');
+foreach (getDatesFromRange($fechaA, $fechaF) as $dateFromRange) if (fechaDisponible($dateFromRange, $ido)) $conjFechas[] = $dateFromRange;
+
+$conjHoras = horasDisponibles($fecha, $ido);
 
 ?>
-<script src="js/administrador/consultapaciente.js"></script>
 
-<div class="contenedor_ConsultaPaciente row justify-content-center gx-0">
+<script src="js/administrador/consultapaciente.js"></script>
+<link rel="stylesheet" href="css/administrador/consultapaciente.css">
+
+<div class="contenedor_ConsultaPaciente gx-0">
+
     <div class="contConsultaAsunto">
         <div class="headerConsulta w-auto text-center">
             <h1>Consulta de <?= $nombreP ?></h1>
@@ -57,57 +53,36 @@ $conjHoras = getHoursFromRange('07:00:00', '22:00:00');
         </div>
     </div>
 
-    <div>
-        <div class="row container d-flex m-auto justify-content-center">
-            <div class="col-5 contHora m-0">
+    <div class="px-3">
+
+        <div class="row w-100 gx-0">
+            <div class="col-xl-5 col-lg-5 col-12 contHora m-0">
                 <div class="tituloHora">
                     <h1>Hora</h1>
                 </div>
-                <div class="contentHora row justify-content-center">
-                    <h1 class="col-6"><?= $tupla['hora'] ?></h1>
-                    <select id="hora-CP" class="col-6 form-select" disabled>
-                        <option value="">Elija un horario</option>
-                        <?php
-                        foreach ($conjHoras as $horaValue) {
-                            echo '<option value="">' . $horaValue . '</option>';
-                        }
-                        ?>
-                    </select>
+                <div class="contentHora">
+                    
                 </div>
             </div>
-            <div class="col-2 row contDuracion m-0">
-                <div class="col-6 tituloDuracion">
+            <div class="col-xl-2 col-lg-2 col-12 contDuracion">
+                <div class="tituloDuracion">
                     <h1>Duración</h1>
                 </div>
-                <div class="col-6 contentDuracion">
-                    <h2><input id="duracion-CP" type="number" value="<?= $tupla['duracion'] ?>" disabled></h2>
-                </div>
+                <div class="contentDuracion"></div>
             </div>
-            <div class="col-5 contFecha m-0">
+            <div class="col-xl-5 col-lg-5 col-12 contFecha m-0">
                 <div class="divTituloFecha">
                     <div class="tituloFecha">
                         <h1>Fecha</h1>
                     </div>
                 </div>
-                <div class="contentFecha row d-flex justify-content-evenly">
-                    <h1 class="col-6"><?= $tupla['fecha'] ?></h1>
-                    <select id="fecha-CP" class="form-select col-6" disabled>
-                        <option value="">Elija una fecha</option>
-                        <?php
-                        foreach ($conjFechas as $fechaValue) {
-                            if (fechaDisponible($fecha, $ido)) {
-                                echo '<option value="">' . $fechaValue . '</option>';
-                            }
-                        }
-                        ?>
-                    </select>
+                <div class="contentFecha">
+                    
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="container m-auto">
-        <div class="contResumen row flex-column justify-content-center">
+        <div class="contResumen mt-3">
             <div class="tituloResumen">
                 <h1>Resumen</h1>
             </div>
@@ -115,7 +90,9 @@ $conjHoras = getHoursFromRange('07:00:00', '22:00:00');
                 <textarea name="" id="resumen-CP" disabled><?= $tupla['resumen'] ?></textarea>
             </div>
         </div>
+
     </div>
+
     <div class="contInteractivo d-flex justify-content-evenly">
         <button id="btnModificar" class="btnInteractivo" value="Modificar">
             Modificar

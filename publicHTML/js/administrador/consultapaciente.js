@@ -1,3 +1,5 @@
+/*
+
 $(() => addBTNListeners());
 
 var iniData = {
@@ -175,4 +177,4 @@ function functionEliminar() {
         });
     }
 }
-
+*/
