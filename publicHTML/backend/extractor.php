@@ -20,7 +20,7 @@ $defaults = [
     'duracionmaxima' => 180 // Duración máxima (en minutos) de una consulta
 ];
 
-function getDatesFromRange($fechainicio, $fechafin): array {
+function getDatesFromRange(string $fechainicio, string $fechafin): array {
 
     $fechas = [];
     $fechaactual = strtotime($fechainicio);
@@ -34,7 +34,7 @@ function getDatesFromRange($fechainicio, $fechafin): array {
     return $fechas;
 }
 
-function getHoursFromRange($hora_inicio, $hora_fin): array {
+function getHoursFromRange(string $hora_inicio, string $hora_fin): array {
 
     $horas = [];
     $hora_actual = strtotime($hora_inicio);
@@ -84,7 +84,7 @@ function getHoraActual(): string {
     return $resultado['hora'];
 }
 
-function sumarFecha($fecha, $intervalo, $cantidad): string {
+function sumarFecha(string $fecha, string $intervalo, int $cantidad): string {
 
     global $pdo;
 
@@ -114,14 +114,114 @@ function sumarFecha($fecha, $intervalo, $cantidad): string {
     return $resultado['sumafecha'];
 }
 
-function fechaDisponible($fecha, $idodontologo): bool {
+function fechaMayor(string $fecha1, string $fecha2): bool {
+
+    $fechona1 = new DateTime($fecha1);
+    $fechona2 = new DateTime($fecha2);
+
+    if($fechona1 > $fechona2) return true;
+
+    else return false;
+}
+
+function fechaMayorOIgual(string $fecha1, string $fecha2): bool {
+
+    $fechona1 = new DateTime($fecha1);
+    $fechona2 = new DateTime($fecha2);
+
+    if($fechona1 >= $fechona2) return true;
+
+    else return false;
+}
+
+function fechaMenorOIgual(string $fecha1, string $fecha2): bool {
+
+    $fechona1 = new DateTime($fecha1);
+    $fechona2 = new DateTime($fecha2);
+
+    if($fechona1 <= $fechona2) return true;
+
+    else return false;
+}
+
+function fechaMenor(string $fecha1, string $fecha2): bool {
+
+    $fechona1 = new DateTime($fecha1);
+    $fechona2 = new DateTime($fecha2);
+
+    if($fechona1 < $fechona2) return true;
+
+    else return false;
+}
+
+function fechaIgual(string $fecha1, string $fecha2): bool {
+
+    $fechona1 = new DateTime($fecha1);
+    $fechona2 = new DateTime($fecha2);
+
+    if($fechona1 == $fechona2) return true;
+
+    else return false;
+}
+
+function horaMayor(string $hora1, string $hora2): bool {
+
+    $horona1 = DateTime::createFromFormat('H:i:s', $hora1);
+    $horona2 = DateTime::createFromFormat('H:i:s', $hora2);
+
+    if($horona1 > $horona2) return true;
+
+    else return false;
+}
+
+function horaMenor(string $hora1, string $hora2): bool {
+
+    $horona1 = DateTime::createFromFormat('H:i:s', $hora1);
+    $horona2 = DateTime::createFromFormat('H:i:s', $hora2);
+
+    if($horona1 < $horona2) return true;
+
+    else return false;
+}
+
+function horaMayorOIgual(string $hora1, string $hora2): bool {
+
+    $horona1 = DateTime::createFromFormat('H:i:s', $hora1);
+    $horona2 = DateTime::createFromFormat('H:i:s', $hora2);
+
+    if($horona1 >= $horona2) return true;
+
+    else return false;
+}
+
+function horaMenorOIgual(string $hora1, string $hora2): bool {
+
+    $horona1 = DateTime::createFromFormat('H:i:s', $hora1);
+    $horona2 = DateTime::createFromFormat('H:i:s', $hora2);
+
+    if($horona1 <= $horona2) return true;
+
+    else return false;
+}
+
+function horaIgual(string $hora1, string $hora2): bool {
+
+    $horona1 = DateTime::createFromFormat('H:i:s', $hora1);
+    $horona2 = DateTime::createFromFormat('H:i:s', $hora2);
+
+    if($horona1 == $horona2) return true;
+
+    else return false;
+}
+
+function fechaDisponible(string $fecha, int $idodontologo): bool {
 
     if(!empty(horasDisponibles($fecha, $idodontologo))) return true;
 
     else return false;
 }
 
-function horasDisponibles($fecha, $idodontologo): array {
+function horasDisponibles(string $fecha, int $idodontologo): array {
 
     global $pdo;
 
@@ -151,10 +251,7 @@ function horasDisponibles($fecha, $idodontologo): array {
     $stmt->bindParam(':ido', $idodontologo);
     $stmt->bindParam(':fecha', $fecha);
 
-    if ($stmt->execute()) {
-
-        $inactividades = $stmt->fetchAll();
-    }
+    if ($stmt->execute()) $inactividades = $stmt->fetchAll();
 
     // 3) Obtener consultas
 
@@ -163,10 +260,7 @@ function horasDisponibles($fecha, $idodontologo): array {
     $stmt->bindParam(':ido', $idodontologo);
     $stmt->bindParam(':fecha', $fecha);
 
-    if ($stmt->execute()) {
-
-        $consultas = $stmt->fetchAll();
-    }
+    if ($stmt->execute()) $consultas = $stmt->fetchAll();
 
     // Crear un array de horas ocupadas
 
@@ -190,11 +284,15 @@ function horasDisponibles($fecha, $idodontologo): array {
     foreach ($horarios as $horario) {
 
         $horainicio = strtotime($horario['horainicio']);
+        // $horafechainicio = strtotime($horario['horainicio'] . ' ' . $horario['horainicio']);
         $horafinalizacion = strtotime($horario['horafinalizacion']);
+        // $horafechafinalizacion = strtotime($horario['horafinalizacion']);
 
         while ($horainicio < $horafinalizacion) {
 
             $hora = date('H:i', $horainicio);
+            $horafecha = strtotime($fecha, $hora);
+            echo $horafecha;
             $disponible = true;
 
             // Verificar si la hora está dentro de alguna inactividad
@@ -203,14 +301,14 @@ function horasDisponibles($fecha, $idodontologo): array {
 
                 $inactividadInicio = strtotime($inactividad['fechainicio'] . ' ' . $inactividad['tiempoinicio']);
                 $inactividadFin = strtotime($inactividad['fechafinalizacion'] . ' ' . $inactividad['tiempofinalizacion']);
-                if ($horainicio >= $inactividadInicio && $horainicio < $inactividadFin) {
+                if ($horafecha >= $inactividadInicio && $horainicio < $inactividadFin) {
 
                     $disponible = false;
                     break;
                 }
             }
-            // Verificar si la hora está ocupada por otra consulta
 
+            // Verificar si la hora está ocupada por otra consulta
             if (in_array($hora, $horasOcupadas)) $disponible = false;
 
             // Si la fecha es hoy, verificar que la hora de inicio sea al menos 1 hora después de la hora actual
@@ -226,7 +324,7 @@ function horasDisponibles($fecha, $idodontologo): array {
     return $horasDisponibles;
 }
 
-function duracionesDisponibles($fecha, $hora, $idodontologo): array {
+function duracionesDisponibles(DateTime $fecha, string $hora, int $idodontologo): array {
 
     global $defaults;
 
@@ -287,7 +385,7 @@ function reloadSession(): int {
     return 3;
 }
 
-function generateToken($key, $length = 32): array {
+function generateToken(string $key, int $length = 32): array {
 
     $randomNumber = random_int(100000, 999999);
     return [hash_hmac('sha256', $randomNumber, $key), $randomNumber];
@@ -428,7 +526,7 @@ function verificarCuentaActivada(string $destino, int $idp): void {
     else return;
 }
 
-function getHorasInicioHorario($dia, $ido): array {
+function getHorasInicioHorario(int $dia, int $ido): array {
 
     global $pdo;
     global $defaults;
@@ -462,7 +560,7 @@ function getHorasInicioHorario($dia, $ido): array {
     else return array_diff(getDefaultHours(), [$defaults['horamaxima']]);
 }
 
-function getHorasFinalizacionHorario($dia, $horaini, $ido): array {
+function getHorasFinalizacionHorario(int $dia, string $horaini, int $ido): array {
 
     global $pdo;
     global $defaults;
@@ -497,4 +595,70 @@ function getHorasFinalizacionHorario($dia, $horaini, $ido): array {
         return $horas;
     }
     else return array_diff(getDefaultHours(), getHoursFromRange($defaults['horaminima'], $horainicio));
+}
+
+function fechaInicioInactividadDisponible(string $fecha, int $ido): bool {
+
+    if(!empty(getHorasInicioInactividad($fecha, $ido))) return true;
+
+    else return false;
+}
+
+function getHorasInicioInactividad(string $fecha, int $ido): array {
+
+    global $pdo;
+    global $defaults;
+
+    $fechaActual = getFechaActual();
+
+    if(fechaMenor($fecha, $fechaActual)) return [];
+
+    $sql = "SELECT * FROM inactividad WHERE idodontologo = :ido";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':ido', $ido);
+
+    if($stmt->execute() && $stmt->rowCount() > 0) {
+
+        $inactividades = $stmt->fetchAll();
+
+        $horasDisponibles = getDefaultHours();
+
+        foreach($inactividades as $inactividad) {
+            
+            $fechainicioinactividad = $inactividad['fechainicio'];
+            $fechafinalizacioninactividad = $inactividad['fechafinalizacion'];
+
+            $adjustedhorainicio = new DateTime($inactividad['tiempoinicio']);
+            $adjustedhorainicio->sub(new DateInterval('PT30M'));
+            $adjustedhorainicio = $adjustedhorainicio->format('H:i:s');
+            $adjustedhorafinalizacion = new DateTime($inactividad['tiempofinalizacion']);
+            $adjustedhorafinalizacion = $adjustedhorafinalizacion->format('H:i:s');
+            
+            if(fechaIgual($fecha, $fechainicioinactividad) && fechaIgual($fecha, $fechafinalizacioninactividad)) $horasDisponibles = array_diff($horasDisponibles, getHoursFromRange($adjustedhorainicio, $adjustedhorafinalizacion));
+            
+            else if(fechaIgual($fecha, $fechainicioinactividad) && fechaMenor($fecha, $fechafinalizacioninactividad)) $horasDisponibles = array_diff($horasDisponibles, getHoursFromRange($adjustedhorainicio, $defaults['horamaxima']));
+
+            else if(fechaMayor($fecha, $fechainicioinactividad) && fechaIgual($fecha, $fechafinalizacioninactividad)) $horasDisponibles = array_diff($horasDisponibles, getHoursFromRange($defaults['horaminima'], $adjustedhorafinalizacion));
+
+            else if(fechaMayor($fecha, $fechainicioinactividad) && fechaMenor($fecha, $fechafinalizacioninactividad)) return [];
+        }
+        return array_values($horasDisponibles);
+    }
+    else return getDefaultHours();
+}
+
+function fechaFinalizacionInactividadDisponible(string $fechainicio, string $horainicio, string $fechafinalizacion, int $ido): bool {
+
+    if(!empty(getHorasFinalizacionInactividad($fechainicio, $horainicio, $fechafinalizacion, $ido))) return true;
+
+    else return false;
+}
+
+function getHorasFinalizacionInactividad(string $fechainicio, string $horainicio, string $fechafinalizacion, int $ido): array {
+
+    global $pdo;
+    global $defaults;
+
+    return [];
 }

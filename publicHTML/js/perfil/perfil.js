@@ -508,7 +508,7 @@ function cargarVistaAgregarInactividad() {
 
         $('#contagregarinactividad #fechainicio').datepicker({ beforeShowDay: permitirFechas }).on('change', () => {
             
-
+            
         });
     });
 }
