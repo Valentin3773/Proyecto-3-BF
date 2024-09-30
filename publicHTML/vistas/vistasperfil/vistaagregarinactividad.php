@@ -7,7 +7,7 @@
         <div id="contfechainicio">
 
             <label for="fechainicio">Fecha de Inicio</label>
-            <input type="text" id="fechainicio" class="form-control" title="Ingrese la fecha de inicio" placeholder="Ingrese la fecha de inicio" required>
+            <input type="text" id="fechainicio" class="form-control" title="Ingrese la fecha de inicio" placeholder="Ingrese la fecha de inicio" required readonly>
 
         </div>
 
@@ -25,7 +25,7 @@
         <div id="contfechafinalizacion">
 
             <label for="fechafinalizacion">Fecha de Finalización</label>
-            <input type="text" id="fechafinalizacion" class="form-control" title="Ingrese la fecha de finalización" placeholder="Ingrese la fecha de finalización" required disabled>
+            <input type="text" id="fechafinalizacion" class="form-control" title="Ingrese la fecha de finalización" placeholder="Ingrese la fecha de finalización" required readonly disabled>
 
         </div>
 

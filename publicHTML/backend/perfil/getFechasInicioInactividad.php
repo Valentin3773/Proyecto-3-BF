@@ -1,8 +1,13 @@
 <?php
 
-include('extractor.php');
+include('../extractor.php');
 
-$ido = 1;
+session_start();
+reloadSession();
+
+if(!isset($_SESSION['odontologo']) || $_SERVER['REQUEST_METHOD'] != 'GET') exit();
+
+$ido = $_SESSION['odontologo']['idodontologo'];
 
 $fechaActual = getFechaActual();
 
@@ -14,7 +19,11 @@ $fechas = getDatesFromRange($fechaActual, $fechaFinal);
 
 $fechasDisponibles = array();
 
-foreach ($fechas as $fecha) if (fechaInicioInactividadDisponible($fecha, $ido)) $fechasDisponibles[] = $fecha;
+foreach ($fechas as $fecha) {
+    
+    $fechona = new DateTime($fecha);
+    if(fechaInicioInactividadDisponible($fecha, $ido)) $fechasDisponibles[] = $fechona->format('d-m-Y');
+}
 
 $respuesta = [
 
@@ -24,5 +33,6 @@ $respuesta = [
 
 header('Content-Type: application/json');
 echo json_encode($respuesta);
+exit();
 
 ?>

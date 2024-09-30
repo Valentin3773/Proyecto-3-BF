@@ -98,14 +98,14 @@ function getWeekDates(date) {
     return weekDates;
 }
 
-function permitirFechas(date) {
+function permitirFechas(date, fechasPermitidasas) {
 
     var year = date.getFullYear();
     var month = ("0" + (date.getMonth() + 1)).slice(-2);
     var day = ("0" + date.getDate()).slice(-2);
     var dateString = day + "-" + month + "-" + year;
 
-    if ($.inArray(dateString, fechasPermitidas) !== -1) return [true, 'fechadisponible', "Fecha disponible"];
+    if ($.inArray(dateString, fechasPermitidasas) !== -1) return [true, 'fechadisponible', "Fecha disponible"];
 
     else return [false, 'fechanodisponible', "Fecha no disponible"];
 }

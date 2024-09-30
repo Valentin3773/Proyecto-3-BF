@@ -7,9 +7,7 @@ session_start();
 
 if($_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_SESSION['odontologo'])) exit();
 
-$json = file_get_contents('php://input');
-
-$data = json_decode($json, true);
+$data = json_decode(file_get_contents('php://input'), true);
 
 $respuesta = array();
 

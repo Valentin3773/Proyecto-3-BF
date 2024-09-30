@@ -252,7 +252,7 @@ function cargarVistaAgregarConsulta() {
             else $('#contagregarconsulta #fecha, #contagregarconsulta #asunto').val('').prop('disabled', true);
         });
 
-        $('#contagregarconsulta #fecha').datepicker({ beforeShowDay: permitirFechas }).on('change', () => {
+        $('#contagregarconsulta #fecha').datepicker({ beforeShowDay: date => permitirFechas(date, fechasPermitidas) }).on('change', () => {
 
             let fechapamandar = $('#contagregarconsulta #fecha').val().split('/');
 
@@ -274,10 +274,7 @@ function cargarVistaAgregarConsulta() {
 
                     $('#contagregarconsulta #hora').html('<option selected value="">Seleccione una hora</option>').prop('disabled', false);
 
-                    response.horasDisponibles.forEach(elemento => {
-
-                        $('#contagregarconsulta #hora').append(`<option value="${elemento}">${elemento}</option>`);
-                    });
+                    response.horasDisponibles.forEach(elemento => $('#contagregarconsulta #hora').append(`<option value="${elemento}">${elemento}</option>`));
                 },
                 error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
             });
@@ -309,10 +306,7 @@ function cargarVistaAgregarConsulta() {
 
                     $('#contagregarconsulta #duracion').html('<option selected value="">Seleccione la duración</option>').prop('disabled', false);
 
-                    response.duracionesDisponibles.forEach(elemento => {
-
-                        $('#contagregarconsulta #duracion').append(`<option value="${elemento}">${fancyHoras(elemento)}</option>`);
-                    });
+                    response.duracionesDisponibles.forEach(elemento => $('#contagregarconsulta #duracion').append(`<option value="${elemento}">${fancyHoras(elemento)}</option>`));
                 },
                 error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
             });

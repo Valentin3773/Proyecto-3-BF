@@ -6,11 +6,11 @@ $(() => {
     $('#inactividades').on('click', () => changeView(cargarVistaInactividades));
     $('#seguridad').on('click', () => changeView(cargarVistaSeguridad));
     $('#cerrarsesion').on('click', () => changeView(async () => {
-        
-        if(await createConfirmPopup('Confirmación', '¿Estás seguro de cerrar sesión?', ['No', 'Sí'])) window.location.href = 'login.php?estado=3'
+
+        if (await createConfirmPopup('Confirmación', '¿Estás seguro de cerrar sesión?', ['No', 'Sí'])) window.location.href = 'login.php?estado=3'
 
     })).on('mouseenter', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>')).on('mouseleave', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>&nbsp;Cerrar Sesión'));
-    
+
     switch ($('main').data('vista')) {
 
         case 1: cargarVistaPerfil(); break;
@@ -133,17 +133,18 @@ function integrarEventos() {
 
                         type: "POST",
                         url: "./backend/perfil/subirIMG.php",
-                        data: formData,    
+                        data: formData,
                         processData: false,
                         contentType: false,
                         success: function (response) {
 
-                            if(response.error == undefined) window.location.reload();
-                            
-                            else {console.log(response.error);
-                        }
-                        },  error: (jqXHR, estado, outputError) => {
-    
+                            if (response.error == undefined) window.location.reload();
+
+                            else {
+                                console.log(response.error);
+                            }
+                        }, error: (jqXHR, estado, outputError) => {
+
                             console.log("Error al procesar la solicitud: 3" + outputError + estado + jqXHR);
                         }
                     });
@@ -181,7 +182,7 @@ function cargarVistaConsultas() {
     });
 
     $('#sidebar #btnsuperiores button').css({ 'text-decoration': 'none' });
-    $('#misconsultas').css({'text-decoration': 'underline' });
+    $('#misconsultas').css({ 'text-decoration': 'underline' });
     $('#seccionescss').prop('href', 'css/perfil/consultas.css');
 }
 
@@ -193,7 +194,7 @@ function cargarVistaHorarios() {
 
         loadView(contenido);
         $('#agregarhorario').on('click', () => $('main').fadeOut(200, cargarVistaAgregarHorario));
-        if($('.subtitulo').attr('data-cantidad') != 0) $('#eliminarhorario').addClass('visible').removeClass('invisible');
+        if ($('.subtitulo').attr('data-cantidad') != 0) $('#eliminarhorario').addClass('visible').removeClass('invisible');
         else $('#eliminarhorario').addClass('invisible').removeClass('visible');
         $('#conthorarios').sortable({
 
@@ -205,21 +206,21 @@ function cargarVistaHorarios() {
 
             console.log($('#eliminarhorario').attr('data-eliminar'));
 
-            if($('#eliminarhorario').attr('data-eliminar') != 'si') {
+            if ($('#eliminarhorario').attr('data-eliminar') != 'si') {
 
                 $('.horario .tachito').addClass('visible').removeClass('invisible');
                 $('#eliminarhorario').html('<i class="fas fa-window-close" style="color: #ffffff;"></i>').attr('data-eliminar', 'si');
             }
             else {
-                
+
                 $('.horario .tachito').addClass('invisible').removeClass('visible');
                 $('#eliminarhorario').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').attr('data-eliminar', 'no');
             }
         });
 
-        $('.horario .tachito').on('click', async function() {
+        $('.horario .tachito').on('click', async function () {
 
-            if(await createConfirmPopup('Confirmación', '¿Estas seguro de que deseas eliminar el horario?', ['No', 'Sí'])) {
+            if (await createConfirmPopup('Confirmación', '¿Estas seguro de que deseas eliminar el horario?', ['No', 'Sí'])) {
 
                 $('#eliminarhorario').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true).attr('data-eliminar', 'no');
                 $('.horario .tachito').addClass('invisible').removeClass('visible');
@@ -228,18 +229,18 @@ function cargarVistaHorarios() {
 
                     type: "POST",
                     url: "backend/perfil/eliminarHorario.php",
-                    data: JSON.stringify({horario: $(this).attr('data-horario')}),
+                    data: JSON.stringify({ horario: $(this).attr('data-horario') }),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (response) {
-                        
+
                         $('#eliminarhorario').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').prop('disabled', false);
 
-                        if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaHorarios);
+                        if (response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaHorarios);
 
                         else createPopup('Nuevo Aviso', response.error);
                     },
-                    error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
+                    error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
                 });
             }
         });
@@ -264,13 +265,13 @@ function cargarVistaInactividades() {
             containment: 'parent',
             delay: 300
         });
-        if($('.subtitulo').attr('data-cantidad') != 0) $('#eliminarinactividad').addClass('visible').removeClass('invisible');
+        if ($('.subtitulo').attr('data-cantidad') != 0) $('#eliminarinactividad').addClass('visible').removeClass('invisible');
         else $('#eliminarinactividad').addClass('invisible').removeClass('visible');
         $('#eliminarinactividad').on('click', () => {
 
             console.log($('#eliminarinactividad').attr('data-eliminar'));
 
-            if($('#eliminarinactividad').attr('data-eliminar') != 'si') {
+            if ($('#eliminarinactividad').attr('data-eliminar') != 'si') {
 
                 $('.inactividad .tachito').addClass('visible').removeClass('invisible');
                 $('#eliminarinactividad').html('<i class="fas fa-window-close" style="color: #ffffff;"></i>').attr('data-eliminar', 'si');
@@ -282,9 +283,9 @@ function cargarVistaInactividades() {
             }
         });
 
-        $('.inactividad .tachito').on('click', async function() {
+        $('.inactividad .tachito').on('click', async function () {
 
-            if(await createConfirmPopup('Confirmación', '¿Estas seguro de que deseas eliminar la inactividad?', ['No', 'Sí'])) {
+            if (await createConfirmPopup('Confirmación', '¿Estas seguro de que deseas eliminar la inactividad?', ['No', 'Sí'])) {
 
                 $('#eliminarinactividad').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true).attr('data-eliminar', 'no');
                 $('.inactividad .tachito').addClass('invisible').removeClass('visible');
@@ -293,18 +294,18 @@ function cargarVistaInactividades() {
 
                     type: "POST",
                     url: "backend/perfil/eliminarInactividad.php",
-                    data: JSON.stringify({inactividad: $(this).attr('data-inactividad')}),
+                    data: JSON.stringify({ inactividad: $(this).attr('data-inactividad') }),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (response) {
 
                         $('#eliminarinactividad').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').prop('disabled', false);
 
-                        if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaInactividades);
+                        if (response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaInactividades);
 
                         else createPopup('Nuevo Aviso', response.error);
                     },
-                    error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
+                    error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
                 });
             }
         });
@@ -329,18 +330,18 @@ function cargarVistaSeguridad() {
         });
         $('#nomolestar').on('click', () => {
 
-            if($('#nomolestar').is(':checked')) {
+            if ($('#nomolestar').is(':checked')) {
 
                 $.ajax({
 
                     type: "POST",
                     url: "backend/perfil/cambiarnomolestar.php",
-                    data: JSON.stringify({nomolestar: false}),
+                    data: JSON.stringify({ nomolestar: false }),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (response) {
 
-                        if(response.exito.length > 0) createPopup('Nuevo Aviso', response.exito);
+                        if (response.exito.length > 0) createPopup('Nuevo Aviso', response.exito);
                         else createPopup('Nuevo Aviso', response.error);
                     },
                     error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
@@ -352,12 +353,12 @@ function cargarVistaSeguridad() {
 
                     type: "POST",
                     url: "backend/perfil/cambiarnomolestar.php",
-                    data: JSON.stringify({nomolestar: true}),
+                    data: JSON.stringify({ nomolestar: true }),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (response) {
 
-                        if(response.exito.length > 0) createPopup('Nuevo Aviso', response.exito);
+                        if (response.exito.length > 0) createPopup('Nuevo Aviso', response.exito);
                         else createPopup('Nuevo Aviso', response.error);
                     },
                     error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
@@ -389,24 +390,24 @@ function cargarVistaAgregarHorario() {
         $('#confirmarhorario').addClass('inactivo').removeClass('activo').prop('disabled', true);
         $('select#horainicio, select#horafinalizacion').prop('disabled', true);
 
-        $('#contagregarhorario select#dia').on('change', function() {
+        $('#contagregarhorario select#dia').on('change', function () {
 
-            if($(this).val() != '') {
-                
+            if ($(this).val() != '') {
+
                 $.ajax({
 
                     type: "POST",
                     url: "backend/perfil/getHorasInicio.php",
-                    data: JSON.stringify({dia: $(this).val()}),
+                    data: JSON.stringify({ dia: $(this).val() }),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (response) {
-                        
+
                         let horasinicio = Object.values(response.horasInicio);
 
                         $('#confirmarhorario').addClass('inactivo').removeClass('activo').prop('disabled', true);
 
-                        if(horasinicio.length > 0) {
+                        if (horasinicio.length > 0) {
 
                             $('#contagregarhorario select#horainicio').prop('disabled', false).html('<option selected value="">Seleccione la hora de inicio</option>');
                             $('#contagregarhorario select#horafinalizacion').html('<option selected value="">Seleccione la hora de finalización</option>').prop('disabled', true);
@@ -414,7 +415,7 @@ function cargarVistaAgregarHorario() {
                             horario.dia = Number($('select#dia').val());
                         }
                     },
-                    error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
+                    error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
                 });
             }
             else {
@@ -425,44 +426,44 @@ function cargarVistaAgregarHorario() {
             }
         });
 
-        $('#contagregarhorario select#horainicio').on('change', function() {
+        $('#contagregarhorario select#horainicio').on('change', function () {
 
-            if($(this).val() != '') {
+            if ($(this).val() != '') {
 
                 $.ajax({
 
                     type: "POST",
                     url: "backend/perfil/getHorasFinalizacion.php",
-                    data: JSON.stringify({dia: $('select#dia').val(), horainicio: $(this).val()}),
+                    data: JSON.stringify({ dia: $('select#dia').val(), horainicio: $(this).val() }),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (response) {
-                        
+
                         let horasfinalizacion = Object.values(response.horasFinalizacion);
 
                         $('#confirmarhorario').addClass('inactivo').removeClass('activo').prop('disabled', true);
 
-                        if(horasfinalizacion.length > 0) {
+                        if (horasfinalizacion.length > 0) {
 
                             $('#contagregarhorario select#horafinalizacion').prop('disabled', false).empty().append('<option selected value="">Seleccione la hora de finalización</option>');
                             horasfinalizacion.forEach(elemento => $('#contagregarhorario select#horafinalizacion').append(`<option value='${elemento}'>${elemento}</option>`));
                             horario.horainicio = $('select#horainicio').val();
                         }
                     },
-                    error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
+                    error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
                 });
             }
             else {
-                
+
                 $('#confirmarhorario').addClass('inactivo').removeClass('activo').prop('disabled', true);
                 $('select#horafinalizacion').prop('disabled', true).html('<option selected value="">Seleccione la hora de finalización</option>');
             }
         });
 
-        $('#contagregarhorario select#horafinalizacion').on('change', function() {
+        $('#contagregarhorario select#horafinalizacion').on('change', function () {
 
-            if($(this).val() != '') { 
-                
+            if ($(this).val() != '') {
+
                 $('#confirmarhorario').addClass('activo').removeClass('inactivo').prop('disabled', false);
                 horario.horafinalizacion = $('select#horafinalizacion').val();
             }
@@ -470,11 +471,11 @@ function cargarVistaAgregarHorario() {
 
         $('#confirmarhorario').on('click', async () => {
 
-            if(await createConfirmPopup('Confirmación', '¿Estás seguro de agregar el horario?')) {
+            if (await createConfirmPopup('Confirmación', '¿Estás seguro de agregar el horario?')) {
 
-                $('#confirmarhorario').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true);
+                $('#confirmarhorario').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true).css({ 'background-color': 'rgb(66, 148, 255, .4)' });
 
-                if(horario.dia != null && horario.horainicio != null && horario.horafinalizacion != null) $.ajax({
+                if (horario.dia != null && horario.horainicio != null && horario.horafinalizacion != null) $.ajax({
 
                     type: "POST",
                     url: "backend/perfil/agregarHorario.php",
@@ -483,20 +484,21 @@ function cargarVistaAgregarHorario() {
                     dataType: 'json',
                     success: function (response) {
 
-                        $('#confirmarhorario').html('Agregar').prop('disabled', false);
+                        $('#confirmarhorario').html('Agregar').prop('disabled', false).css({ 'background-color': 'rgb(66, 148, 255, 1)' });
 
-                        if(response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, () => changeView(cargarVistaHorarios));
+                        if (response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, () => changeView(cargarVistaHorarios));
 
                         else createPopup('Nuevo Aviso', response.error);
                     },
-                    error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
+                    error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
                 });
             }
         });
     });
 }
 
-let fechasPermitidas = [];
+let fechasPermitidasInicioInactividad = [];
+let fechasPermitidasFinalizacionInactividad = [];
 
 function cargarVistaAgregarInactividad() {
 
@@ -504,11 +506,157 @@ function cargarVistaAgregarInactividad() {
 
     $.get('vistas/vistasperfil/vistaagregarinactividad.php', contenido => {
 
+        let inactividad = {
+
+            fechainicio: null,
+            horainicio: null,
+            fechafinalizacion: null,
+            horafinalizacion: null
+        }
+
         loadView(contenido);
 
-        $('#contagregarinactividad #fechainicio').datepicker({ beforeShowDay: permitirFechas }).on('change', () => {
-            
-            
+        $.get('backend/perfil/getFechasInicioInactividad.php', data => fechasPermitidasInicioInactividad = data.fechasDisponibles);
+
+        $('#confirmarinactividad').prop('disabled', true).css({ 'background-color': 'rgb(66, 148, 255, .4)' });
+
+        $('#contagregarinactividad #fechainicio').datepicker({ beforeShowDay: date => permitirFechas(date, fechasPermitidasInicioInactividad) }).on('change', function () {
+
+            $('input#fechafinalizacion').prop('disabled', true).val('');
+            $('select#horafinalizacion').prop('disabled', true).html('<option selected value="">Seleccione la hora de finalización<option>');
+            $('#confirmarinactividad').prop('disabled', true).css({ 'background-color': 'rgb(66, 148, 255, .4)' });
+
+            if ($(this).val() !== '') {
+
+                $('select#horainicio').prop('disabled', false).val('');
+
+                let fechapamandar = $(this).val().split('/');
+
+                let datos = JSON.stringify({
+
+                    dia: fechapamandar[0],
+                    mes: fechapamandar[1],
+                    anio: fechapamandar[2]
+                });
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "backend/perfil/getHorasInicioInactividad.php",
+                    data: datos,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+
+                        $('select#horainicio').html('<option selected value="">Seleccione una hora</option>').prop('disabled', false);
+
+                        response.horasDisponibles.forEach(elemento => $('select#horainicio').append(`<option value="${elemento}">${elemento}</option>`));
+
+                        inactividad.fechainicio = $('select#fechainicio').val();
+                    },
+                    error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+                });
+            }
+
+            else $('select#horainicio').prop('disabled', true).val('');
+        });
+
+        $('#contagregarinactividad #horainicio').on('change', function () {
+
+            $('select#horafinalizacion').prop('disabled', true).html('<option selected value="">Seleccione la hora de finalización<option>');
+            $('#confirmarinactividad').prop('disabled', true).css({ 'background-color': 'rgb(66, 148, 255, .4)' });
+
+            if ($(this).val() !== '') {
+
+                $('input#fechafinalizacion').prop('disabled', false).val('');
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "backend/perfil/getFechasFinalizacionInactividad.php",
+                    data: JSON.stringify(inactividad),
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+
+                        fechasPermitidasFinalizacionInactividad = response.fechasDisponibles;
+
+                        inactividad.horainicio = $('select#horainicio').val();
+                    },
+                    error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+                });
+            }
+
+            else $('input#fechafinalizacion').prop('disabled', true).val('');
+        });
+
+        $('#contagregarinactividad #fechafinalizacion').datepicker({ beforeShowDay: date => permitirFechas(date, fechasPermitidasFinalizacionInactividad) }).on('change', function () {
+
+            $('#confirmarinactividad').prop('disabled', true).css({ 'background-color': 'rgb(66, 148, 255, .4)' });
+
+            if ($(this).val() !== '') {
+
+                $('select#horafinalizacion').prop('disabled', false).val('');
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "backend/perfil/getHorasFinalizacionInactividad.php",
+                    data: JSON.stringify(inactividad),
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+
+                        $('select#horafinalizacion').html('<option selected value="">Seleccione una hora</option>').prop('disabled', false);
+
+                        response.horasDisponibles.forEach(elemento => $('select#horafinalizacion').append(`<option value="${elemento}">${elemento}</option>`));
+
+                        inactividad.fechafinalizacion = $('select#fechafinalizacion').val();
+                    },
+                    error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+                });
+            }
+
+            else $('select#horafinalizacion').prop('disabled', true).val('');
+        });
+
+        $('#contagregarinactividad #horafinalizacion').on('change', function () {
+
+            $('#confirmarinactividad').prop('disabled', true).css({ 'background-color': 'rgb(66, 148, 255, .4)' });
+
+            if ($(this).val() !== '') {
+
+                $('#confirmarinactividad').prop('disabled', false).css({ 'background-color': 'rgb(66, 148, 255, .4)' });
+
+                inactividad.horafinalizacion = $('select#horafinalizacion').val();
+            }
+            else $('#confirmarinactividad').prop('disabled', true).css({ 'background-color': 'rgb(66, 148, 255, .4)' });
+        });
+
+        $('#confirmarinactividad').on('click', async () => {
+
+            if (await createConfirmPopup('Confirmación', '¿Estás seguro de agregar la inactividad?')) {
+
+                $('#confirmarinactividad').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true).css({ 'background-color': 'rgb(66, 148, 255, .4)' });
+
+                if (inactividad.fechainicio != null && inactividad.horainicio != null && inactividad.fechafinalizacion != null && inactividad.horafinalizacion != null) $.ajax({
+
+                    type: "POST",
+                    url: "backend/perfil/agregarInactividad.php",
+                    data: JSON.stringify(horario),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+
+                        $('#confirmarinactividad').html('Agregar').prop('disabled', false).css({ 'background-color': 'rgb(66, 148, 255, 1)' });
+
+                        if (response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, () => changeView(cargarVistaInactividades));
+
+                        else createPopup('Nuevo Aviso', response.error);
+                    },
+                    error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
+                });
+            }
         });
     });
 }
@@ -533,7 +681,7 @@ function cambiarContrasenia($1, $2, $3) {
         success: response => {
 
             if (response.error === undefined) {
-                
+
                 createPopup('Nuevo Aviso', response.enviar);
                 $('form#formcambiar')[0].reset();
             }

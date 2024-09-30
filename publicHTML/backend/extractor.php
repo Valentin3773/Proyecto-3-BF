@@ -284,15 +284,12 @@ function horasDisponibles(string $fecha, int $idodontologo): array {
     foreach ($horarios as $horario) {
 
         $horainicio = strtotime($horario['horainicio']);
-        // $horafechainicio = strtotime($horario['horainicio'] . ' ' . $horario['horainicio']);
         $horafinalizacion = strtotime($horario['horafinalizacion']);
-        // $horafechafinalizacion = strtotime($horario['horafinalizacion']);
 
         while ($horainicio < $horafinalizacion) {
 
             $hora = date('H:i', $horainicio);
-            $horafecha = strtotime($fecha, $hora);
-            echo $horafecha;
+            $horafecha = strtotime($fecha . ' ' . $hora);
             $disponible = true;
 
             // Verificar si la hora está dentro de alguna inactividad
@@ -301,14 +298,14 @@ function horasDisponibles(string $fecha, int $idodontologo): array {
 
                 $inactividadInicio = strtotime($inactividad['fechainicio'] . ' ' . $inactividad['tiempoinicio']);
                 $inactividadFin = strtotime($inactividad['fechafinalizacion'] . ' ' . $inactividad['tiempofinalizacion']);
-                if ($horafecha >= $inactividadInicio && $horainicio < $inactividadFin) {
+
+                if ($horafecha >= $inactividadInicio && $horafecha <= $inactividadFin) {
 
                     $disponible = false;
                     break;
                 }
             }
 
-            // Verificar si la hora está ocupada por otra consulta
             if (in_array($hora, $horasOcupadas)) $disponible = false;
 
             // Si la fecha es hoy, verificar que la hora de inicio sea al menos 1 hora después de la hora actual
