@@ -126,11 +126,13 @@ function loginConfirm(datos) {
             contentType: false,
             success: response => {
                 
-                console.log(response);
-
                 if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.enviar, 'index.php');
 
-                else createPopup('Nuevo Aviso', response.error);
+                else {
+                    
+                    createPopup('Nuevo Aviso', response.error);
+                    $('#ingresar').prop('disabled', false);
+                }
 
                 $('#ingresar').css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Ingresar');
             },
@@ -140,10 +142,7 @@ function loginConfirm(datos) {
             }
         });
     } 
-    else {
-        
-        console.log("Fuera bot hijueputa!!!");
-    }
+    else console.log("Fuera bot hijueputa!!!");
 }
 
 async function registerConfirm(datos) {
@@ -186,9 +185,13 @@ function loginAdminConfirm(datos) {
 
                 if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.admin, 'index.php');
 
-                else createPopup('Nuevo Aviso', response.error);
+                else {
+                    
+                    createPopup('Nuevo Aviso', response.error);
+                    $('#ingresar').prop('disabled', false);
+                }
 
-                $('#ingresarad').prop('disabled', false).css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Ingresar');
+                $('#ingresarad').css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Ingresar');
             },
             error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
         });
