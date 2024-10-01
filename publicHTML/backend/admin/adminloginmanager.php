@@ -4,6 +4,8 @@ include("../conexion.php");
 
 session_start();
 
+if(isset($_SESSION['paciente']) || isset($_SESSION['odontologo'])) exit();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     loginCheckAdmin();

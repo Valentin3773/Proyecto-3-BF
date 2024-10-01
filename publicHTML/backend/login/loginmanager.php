@@ -48,8 +48,6 @@ function loginCheckUser() {
                 unset($tupla['contrasenia']);
                 $_SESSION['paciente'] = $tupla;
                 $datos['enviar'] = "Iniciando Sesion";
-
-                verificarCuentaActivada($tupla['email'], $tupla['idpaciente']);
             } 
             else $datos['error'] = "Credenciales Incorrectas";
         } 

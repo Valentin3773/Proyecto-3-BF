@@ -22,7 +22,6 @@ function verifyUserEmail() : void {
 
         header('Location: ../../index.php');
         return;
-        echo 1;
     }
 
     $sql = "SELECT idpaciente, verificador FROM paciente WHERE idpaciente = :idp";

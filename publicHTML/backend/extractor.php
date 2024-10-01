@@ -388,7 +388,7 @@ function generateToken(string $key, int $length = 32): array {
     return [hash_hmac('sha256', $randomNumber, $key), $randomNumber];
 }
 
-function enviarEmailVerificador(string $destino, int $idp, string $verificador): void {
+function enviarEmailVerificador(string $destino, int $idp, string $verificador): bool {
 
     $mail = new PHPMailer(true);
 
@@ -494,10 +494,12 @@ function enviarEmailVerificador(string $destino, int $idp, string $verificador):
     $mail->Subject = 'Verifica tu cuenta';
     $mail->Body    = $mensaje;
 
-    $mail->send(); // Enviar correo
+    if($mail->send()) return true;
+
+    else return false;
 }
 
-function verificarCuentaActivada(string $destino, int $idp): void {
+function verificarCuentaActivada(string $destino, int $idp): bool {
 
     global $pdo;
 
@@ -507,7 +509,7 @@ function verificarCuentaActivada(string $destino, int $idp): void {
 
     if ($stmt->execute() && $stmt->rowCount() == 1) {
 
-        if ($stmt->fetch()['verificador'] == 'verificado') return;
+        if ($stmt->fetch()['verificador'] == 'verificado') return false;
 
         $verificador = generateToken('tremendaclinica2024');
 
@@ -516,11 +518,11 @@ function verificarCuentaActivada(string $destino, int $idp): void {
         $stmt->bindParam(':verificador', $verificador[0]);
         $stmt->bindParam(':idp', $idp);
 
-        $stmt->execute();
-
-        enviarEmailVerificador($destino, $idp, $verificador[1]);
+        if($stmt->execute() && enviarEmailVerificador($destino, $idp, $verificador[1])) return true;
+    
+        else return false;
     }
-    else return;
+    else return false;
 }
 
 function getHorasInicioHorario(int $dia, int $ido): array {

@@ -16,33 +16,40 @@ else {
     exit();
 }
 
-function UpdateProfileOdontologo($pdo) {
+function UpdateProfileOdontologo() {
 
-    // Se descodifica el objeto JSON para poder utilizar su contenido
+    global $pdo;
+
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
     $respuesta = array();
 
-    // Id del paciente
     $ido = $_SESSION['odontologo']['idodontologo'];
 
-    // Variables
     $name = $data['name'];
     $value = $data['value'];
     $oldvalue = $data['oldvalue'];
     $nameROW = $data['name'];
 
+    if($name == 'documento' || $name == 'contrasenia' || $name == 'verificador') return;
+
     try {
 
-        // Consulta para modificar odontólogo
-        $consulta = "UPDATE odontologo SET $name = :val1 WHERE $nameROW = :val2 and idodontologo = :ido";
+        $consulta = "UPDATE odontologo SET :namee = :val1 WHERE :namerow = :val2 and idodontologo = :ido";
+        
         $stmt = $pdo->prepare($consulta);
+        $stmt->bindParam('namee', $name);
+        $stmt->bindParam(':namerow', $nameROW);
         $stmt->bindParam(':val1', $value);
         $stmt->bindParam(':val2', $oldvalue);
         $stmt->bindParam(':ido', $ido);
-        $stmt->execute();
-        $respuesta['enviar'] = "Datos actualizados";
-        reloadSession();
+
+        if($stmt->execute()) {
+
+            $respuesta['enviar'] = "Datos actualizados";
+            reloadSession();
+        }
+        else $respuesta['error'] = "Ha ocurrido un error";
     } 
     catch (PDOException $e) {
 

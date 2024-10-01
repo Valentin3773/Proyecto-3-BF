@@ -5,11 +5,11 @@ $(() => {
     $('#horarios').on('click', () => changeView(cargarVistaHorarios));
     $('#inactividades').on('click', () => changeView(cargarVistaInactividades));
     $('#seguridad').on('click', () => changeView(cargarVistaSeguridad));
-    $('#cerrarsesion').on('click', () => changeView(async () => {
+    $('#cerrarsesion').on('click', async () => {
 
-        if (await createConfirmPopup('Confirmación', '¿Estás seguro de cerrar sesión?', ['No', 'Sí'])) window.location.href = 'login.php?estado=3'
+        if (await createConfirmPopup('Confirmación', '¿Estás seguro de cerrar sesión?', ['No', 'Sí'])) changeView(() => window.location.href = 'login.php?estado=3');
 
-    })).on('mouseenter', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>')).on('mouseleave', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>&nbsp;Cerrar Sesión'));
+    }).on('mouseenter', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>')).on('mouseleave', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>&nbsp;Cerrar Sesión'));
 
     switch ($('main').data('vista')) {
 
@@ -323,16 +323,18 @@ function cargarVistaSeguridad() {
     $.get('vistas/vistasperfil/vistaseguridad.php', contenido => {
 
         $('main').empty().html(contenido).fadeIn(200);
-        $('#cambiarpass').on('click', function (e) {
+        $('#cambiarpass').on('click', async function (e) {
 
             e.preventDefault();
-            cambiarContrasenia($('#oldpass').val(), $('#newpass').val(), $('#newpassagain').val());
+            if(await createConfirmPopup('Confirmación', '¿Estás seguro de cambiar tu contraseña?', ['No', 'Sí'])) cambiarContrasenia($('#oldpass').val(), $('#newpass').val(), $('#newpassagain').val());
         });
-        $('#nomolestar').on('click', () => {
+        $('#nomolestar').on('click', async evt => {
 
-            if ($('#nomolestar').is(':checked')) {
+            evt.preventDefault();
+            
+            if(await createConfirmPopup('Confirmación', '¿Estás seguro de cambiar tus preferencias de privacidad?', ['No', 'Sí'])) {
 
-                $.ajax({
+                if ($('#nomolestar').is(':checked')) $.ajax({
 
                     type: "POST",
                     url: "backend/perfil/cambiarnomolestar.php",
@@ -346,10 +348,8 @@ function cargarVistaSeguridad() {
                     },
                     error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
                 });
-            }
-            else {
 
-                $.ajax({
+                else $.ajax({
 
                     type: "POST",
                     url: "backend/perfil/cambiarnomolestar.php",
@@ -362,6 +362,33 @@ function cargarVistaSeguridad() {
                         else createPopup('Nuevo Aviso', response.error);
                     },
                     error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
+                });
+
+                if($('#nomolestar').is(':checked')) $('#nomolestar').prop('checked', false);
+
+                else $('#nomolestar').prop('checked', true);
+            }
+        });
+
+        $('#verificaremail').on('click', async function() {
+            
+            if(await createConfirmPopup('Confirmación', '¿Estas seguro de enviar un correo de verificación?', ['No', 'Sí'])) {
+
+                $(this).prop('disabled', true).css({ 'background-color': 'rgb(0, 224, 157, .4)' }).html('<i class="fas fa-spinner fa-pulse"></i>');
+
+                $.ajax({
+
+                type: "POST",
+                url: "backend/login/enviaremailverificador.php",
+                success: function (response) {
+                    
+                    $('#verificaremail').prop('disabled', false).css({ 'background-color': 'rgb(0, 224, 157, 1)' }).html('Verificar email');
+
+                    if (response.exito.length > 0) createPopup('Nuevo Aviso', response.exito);
+                    else createPopup('Nuevo Aviso', response.error);
+                },
+                error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError) 
+
                 });
             }
         });
@@ -663,6 +690,8 @@ function cargarVistaAgregarInactividad() {
 
 function cambiarContrasenia($1, $2, $3) {
 
+    $('#cambiarpass').prop('disabled', true).css({ 'background-color': 'rgb(0, 224, 157, .4)' }).html('<i class="fas fa-spinner fa-pulse"></i>');
+
     let data = {
 
         old: $1,
@@ -679,6 +708,8 @@ function cambiarContrasenia($1, $2, $3) {
         data: JSON.stringify(data),
         contentType: 'application/json',
         success: response => {
+
+            $('#cambiarpass').prop('disabled', false).css({ 'background-color': 'rgb(0, 224, 157, 1)' }).html('Cambiar contraseña');
 
             if (response.error === undefined) {
 

@@ -1,9 +1,8 @@
 <?php
 
-session_start();
-
 include("../../backend/extractor.php");
 
+session_start();
 reloadSession();
 
 if(isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) {
@@ -12,6 +11,10 @@ if(isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) {
 
     else $checked = "";
 }
+
+if(!isset($_SESSION['paciente']['verificador']) || (isset($_SESSION['paciente']['verificador']) && $_SESSION['paciente']['verificador'] != 'verificado')) $verificado = false;
+
+else $verificado = true;
 
 ?>
 
@@ -28,9 +31,25 @@ if(isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) {
 
     </form>
 
+    <h2 id="tituloverificar" class="mt-4">Verificación de email</h2>
+
+    <form id="verificar" class="d-flex justify-content-center align-items-center gap-4">
+
+        <?php if(!$verificado) { ?>
+            
+            <button type="button" id="verificaremail" name="verificaremail" title="Verificar email" required>Verificar email</button>
+            
+        <?php } else { ?>
+
+            <span class="fs-4">Su email está verificado</span>
+
+        <?php } ?>
+
+    </form>
+
 <?php endif; ?>
 
-<h2 id="titulocambiarpass" class="mt-4">Cambiar Contraseña</h2>
+<h2 id="titulocambiarpass" class="mt-4">Cambiar contraseña</h2>
 
 <form method="POST" id="formcambiar">
 
@@ -67,22 +86,7 @@ if(isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) {
 
     <div id="cambiarpasscontainer">
 
-        <button type="submit" id="cambiarpass" class="c-button c-button--gooey"> Cambiar Contraseña
-            <div class="c-button__blobs">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </button>
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: block; height: 0; width: 0;">
-            <defs>
-                <filter id="goo">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
-                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo"></feColorMatrix>
-                    <feBlend in="SourceGraphic" in2="goo"></feBlend>
-                </filter>
-            </defs>
-        </svg>
+        <button type="submit" id="cambiarpass">Cambiar contraseña</button>
 
     </div>
 

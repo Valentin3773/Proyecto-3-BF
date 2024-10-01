@@ -132,7 +132,7 @@ function loginConfirm(datos) {
 
                 else createPopup('Nuevo Aviso', response.error);
 
-                $('#ingresar').prop('disabled', false).css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Ingresar');
+                $('#ingresar').css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Ingresar');
             },
             error: (jqXHR, estado, outputError) => {
 
@@ -163,7 +163,7 @@ async function registerConfirm(datos) {
 
                 else createPopup('Nuevo Aviso', response.error);
 
-                $('#btnregistrarsel').prop('disabled', false).css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Registrarse');
+                $('#btnregistrarsel').css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Registrarse');
             },
             error: (jqXHR, estado, outputError) => console.log(jqXHR,estado, outputError)
         });
