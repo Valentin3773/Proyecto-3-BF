@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include('backend/extractor.php');
 
@@ -16,6 +16,8 @@ reloadSession();
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta description="Ofrecemos atención odontológica de alta calidad">
+    <meta name="Inicio">
 
     <!-- Librerias -->
     <script src="lib/jquery-3.7.1.min.js"></script>
@@ -120,9 +122,8 @@ reloadSession();
                     if (!isset($_SESSION['paciente']) || (isset($_SESSION['paciente']) && !isset($_SESSION['paciente']['foto']))) {
 
                         echo "<img src='img/iconoperfil.png' alt='Foto de Perfil' title='Mi Perfil'>";
-                    } 
-                    else echo "<img src='backend/almacenamiento/fotosdeperfil/{$_SESSION["paciente"]["foto"]}' alt='Foto de Perfil' title='Mi Perfil'>";
-                    
+                    } else echo "<img src='backend/almacenamiento/fotosdeperfil/{$_SESSION["paciente"]["foto"]}' alt='Foto de Perfil' title='Mi Perfil'>";
+
                     ?>
 
                     <?php
@@ -151,9 +152,9 @@ reloadSession();
                         <ul class="invisible" id="menuiniciado">
 
                             <li><button id="miperfil">Mi Perfil</button></li>
-                            <?php if(isset($_SESSION['paciente'])): ?> <li><button id="misconsultas">Mis Consultas</button></li> <?php endif; ?>
-                            
-                            <?php if(isset($_SESSION['odontologo'])): ?>
+                            <?php if (isset($_SESSION['paciente'])): ?> <li><button id="misconsultas">Mis Consultas</button></li> <?php endif; ?>
+
+                            <?php if (isset($_SESSION['odontologo'])): ?>
 
                                 <li><button id="mishorarios">Mis Horarios</button></li>
                                 <li><button id="misinactividades">Mis Inactividades</button></li>
@@ -177,7 +178,7 @@ reloadSession();
 
                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
 
-                            <path stroke="black" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"/>
+                            <path stroke="black" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14" />
 
                         </svg>
 
@@ -209,6 +210,50 @@ reloadSession();
                             </ul>
 
                         </div>
+
+                        <?php
+
+                        if (!isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) {
+
+                        ?>
+
+                            <ul class="invisible" id="menunoiniciadom">
+
+                                <li><button id="iniciar">Iniciar sesión</button></li>
+                                <li><button id="iniciargoogle">Iniciar con Google <img src="img/iconosvg/google.svg" alt="Google Icon"></button></li>
+
+                                <hr>
+
+                                <li><button id="registrarse">Registrarse</button></li>
+
+                            </ul>
+
+                        <?php
+
+                        } else {
+
+                        ?>
+
+                            <ul class="invisible" id="menuiniciadom">
+
+                                <li><button id="miperfil">Mi Perfil</button></li>
+                                <?php if (isset($_SESSION['paciente'])): ?> <li><button id="misconsultas">Mis Consultas</button></li> <?php endif; ?>
+
+                                <?php if (isset($_SESSION['odontologo'])): ?>
+
+                                    <li><button id="mishorarios">Mis Horarios</button></li>
+                                    <li><button id="misinactividades">Mis Inactividades</button></li>
+                                    <li><button id="administrador">Administrador</button></li>
+
+                                <?php endif; ?>
+
+                                <hr>
+
+                                <li><button id="cerrarsesion"><i class="fas fa-sign-out-alt"></i>&nbsp;Cerrar Sesión</button></li>
+
+                            </ul>
+
+                        <?php } ?>
 
                     </a>
 

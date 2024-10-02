@@ -728,6 +728,7 @@ function cambiarContrasenia($1, $2, $3) {
 function changeView(vista) {
 
     $('main').fadeOut(200, vista);
+    $('main')[0].scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function loadView(contenido) {

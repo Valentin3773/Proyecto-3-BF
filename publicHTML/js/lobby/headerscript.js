@@ -1,5 +1,8 @@
 $(() => {
     
+    $('#btnopciones').append($('#opcionescontainer > ul'));
+    $('#opcionescontainer > ul').remove();
+
     $('#navmobile').show().addClass('marboliviano');
 
     $('#navmobile a#btnopciones').remove();
@@ -7,32 +10,43 @@ $(() => {
     $(window).on('scroll', checkButtonPosition);
     $(window).on('scroll', checkHeaderPosition);
 
-    $('#btnopciones').on('click', desplegarMenu);
+    $('#btnopciones').on('click', () => {
+        
+        if($('#btnopciones ul').hasClass('visible')) desplegarMenuPerfilMobile();
+
+        else desplegarMenu();
+    });
 
     $('#btnup').on('click', gototop).hide();
 
     $('#iniciom, #nosotrosm, #serviciosm, #contactom, #perfilm').on('click', () => desplegarMenu());
 
-    $('#btnperfil, #btnperfilm').on('click', desplegarMenuPerfil);
+    $('#btnperfil').on('click', desplegarMenuPerfil);
 
-    $('#btnperfil ul #iniciar').on('click', () => changePage(() => window.location.href = 'login.php?estado=1'));
+    $('#btnperfilm').on('click', desplegarMenuPerfilMobile);
 
-    $('#btnperfil ul #registrarse').on('click', () => changePage(() => window.location.href = 'login.php?estado=2'));
+    $('#btnperfil ul #iniciar, #btnopciones ul #iniciar').on('click', () => changePage(() => window.location.href = 'login.php?estado=1'));
 
-    $('#btnperfil ul #cerrarsesion').on('click', async () => {
+    $('#btnperfil ul #registrarse, #btnopciones ul #iniciar').on('click', () => changePage(() => window.location.href = 'login.php?estado=2'));
+    
+    $('#btnperfil ul #cerrarsesion, #btnopciones ul #cerrarsesion').on('click', async () => {
         
         if(await createConfirmPopup('Confirmación', '¿Estás seguro de cerrar sesión?')) changePage(() => window.location.href = 'login.php?estado=3');
     });
 
-    $('#btnperfil ul #miperfil').on('click', () => changePage(() => window.location.href = 'perfil.php'));
-    $('#btnperfil ul #misconsultas').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=2'));
-    $('#btnperfil ul #mishorarios').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=3'));
-    $('#btnperfil ul #misinactividades').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=4'));
-    $('#btnperfil ul #administrador').on('click',  () => changePage(() => window.location.href = 'administrador.php'));
+    $('#btnperfil ul #miperfil, #btnopciones ul #miperfil').on('click', () => changePage(() => window.location.href = 'perfil.php'));
+    $('#btnperfil ul #misconsultas, #btnopciones ul #miperfil').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=2'));
+    $('#btnperfil ul #mishorarios, #btnopciones ul #mishorarios').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=3'));
+    $('#btnperfil ul #misinactividades, #btnopciones ul #misinactividades').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=4'));
+    $('#btnperfil ul #administrador, #btnopciones ul #administrador').on('click',  () => changePage(() => window.location.href = 'administrador.php'));
 
     $('main').on('click', () => {
 
-        if($('#btnperfil ul').hasClass('visible')) desplegarMenuPerfil();
+        if($('#btnperfil ul, #btnopciones ul').hasClass('visible')) {
+
+            desplegarMenuPerfil();
+            desplegarMenuPerfilMobile();
+        }
 
         if($('#navmobile').hasClass('desplegado')) desplegarMenu();
     });
@@ -44,14 +58,9 @@ function checkButtonPosition() {
     
     if(window.innerWidth < 600) {
            
-        if (posFooter.top <= $(window).height()) {
-            
-            $('#btnchat').css({ 'animation': 'chatup 0.6s ease forwards' });
-        } 
-        else {
-
-            $('#btnchat').css({ 'animation': 'chatdown 0.6s ease forwards' });
-        }
+        if (posFooter.top <= $(window).height()) $('#btnchat').css({ 'animation': 'chatup 0.6s ease forwards' });
+        
+        else $('#btnchat').css({ 'animation': 'chatdown 0.6s ease forwards' });
     }
 
 }
@@ -88,6 +97,17 @@ function desplegarMenuPerfil() {
     if($('#btnperfil ul').hasClass('visible')) $('#btnperfil ul').addClass('invisible').removeClass('visible');
 
     else $('#btnperfil ul').addClass('visible').removeClass('invisible');
+}
+
+function desplegarMenuPerfilMobile() {
+
+    if($('#btnopciones ul').hasClass('visible')) $('#btnopciones ul').addClass('invisible').removeClass('visible');
+
+    else {
+        
+        $('#btnopciones ul').addClass('visible').removeClass('invisible');
+        desplegarMenu();
+    }
 }
 
 function gototop() {

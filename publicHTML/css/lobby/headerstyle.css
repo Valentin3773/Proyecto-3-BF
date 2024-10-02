@@ -182,17 +182,17 @@ header.comprimido {
     padding-bottom: 10px;
 }
 
-.comprimido #btnperfil img {
+.comprimido #btnperfil img, .comprimido #btnopciones > ul img {
 
     transform: scale(0.9);
 }
 
-#btnperfil ul.invisible {
+#btnperfil ul.invisible, #btnopciones > ul.invisible {
 
     display: none;
 }
 
-#btnperfil ul.visible {
+#btnperfil ul.visible, #btnopciones > ul.visible {
 
     position: absolute;
     width: 500px;
@@ -212,7 +212,12 @@ header.comprimido {
     box-shadow: 1px 1px 4px rgba(0, 0, 0, .5);
 }
 
-#btnperfil li button {
+#btnopciones > ul.visible {
+
+    width: 300px;
+}
+
+#btnperfil li button, #btnopciones > ul li button {
 
     background-color: white;
     padding: 10px;
@@ -227,13 +232,13 @@ header.comprimido {
     transition-duration: 250ms;
 }
 
-#btnperfil li #cerrarsesion {
+#btnperfil li #cerrarsesion, #btnopciones > ul li #cerrarsesion {
 
     background-color: #E84141;
     color: white;
 }
 
-#btnperfil li img {
+#btnperfil li img, #btnopciones > ul li img {
 
     width: 30px;
     box-shadow: none;
@@ -241,19 +246,19 @@ header.comprimido {
     margin-left: 5px;
 }
 
-#btnperfil li button:hover {
+#btnperfil li button:hover, #btnopciones > ul li button:hover {
 
     scale: 1.03;
     filter: brightness(1.1);
 }
 
-#btnperfil li button:active {
+#btnperfil li button:active, #btnopciones > ul li button:active {
 
     scale: .97;
     filter: brightness(1.2);
 }
 
-#btnperfil hr {
+#btnperfil hr, #btnopciones > ul hr {
 
     color: white;
     background-color: white;

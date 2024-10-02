@@ -160,7 +160,11 @@ async function registerConfirm(datos) {
 
                 if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.registrado, cargarVistaLogin);
 
-                else createPopup('Nuevo Aviso', response.error);
+                else {
+                    
+                    createPopup('Nuevo Aviso', response.error);
+                    $('#btnregistrarsel').prop('disabled', false);
+                }
 
                 $('#btnregistrarsel').css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Registrarse');
             },

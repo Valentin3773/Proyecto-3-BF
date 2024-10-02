@@ -26,6 +26,8 @@ else if (isset($_GET['estado'])) {
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta description="Administra tu perfil de usuario">
+    <meta name="Mi perfil">
 
     <title>Perfil</title>
 

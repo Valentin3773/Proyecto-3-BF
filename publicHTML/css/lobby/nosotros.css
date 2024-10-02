@@ -26,6 +26,10 @@ section h1 {
     background-color: #78B3FF;
     padding: 50px;
     width: unset !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
 }
 
 .card {
