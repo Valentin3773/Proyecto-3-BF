@@ -182,17 +182,17 @@ header.comprimido {
     padding-bottom: 10px;
 }
 
-.comprimido #btnperfil img, .comprimido #btnopciones > ul img {
+.comprimido #btnperfil img, .comprimido #opcionescontainer > ul img {
 
     transform: scale(0.9);
 }
 
-#btnperfil ul.invisible, #btnopciones > ul.invisible {
+#btnperfil ul.invisible, #opcionescontainer > ul.invisible {
 
     display: none;
 }
 
-#btnperfil ul.visible, #btnopciones > ul.visible {
+#btnperfil ul.visible, #opcionescontainer > ul.visible {
 
     position: absolute;
     width: 500px;
@@ -212,12 +212,12 @@ header.comprimido {
     box-shadow: 1px 1px 4px rgba(0, 0, 0, .5);
 }
 
-#btnopciones > ul.visible {
+#opcionescontainer > ul.visible {
 
-    width: 300px;
+    width: 100%;
 }
 
-#btnperfil li button, #btnopciones > ul li button {
+#btnperfil li button, #opcionescontainer > ul li button {
 
     background-color: white;
     padding: 10px;
@@ -232,13 +232,13 @@ header.comprimido {
     transition-duration: 250ms;
 }
 
-#btnperfil li #cerrarsesion, #btnopciones > ul li #cerrarsesion {
+#btnperfil li #cerrarsesion, #opcionescontainer > ul li #cerrarsesion {
 
     background-color: #E84141;
     color: white;
 }
 
-#btnperfil li img, #btnopciones > ul li img {
+#btnperfil li img, #opcionescontainer > ul li img {
 
     width: 30px;
     box-shadow: none;
@@ -246,19 +246,19 @@ header.comprimido {
     margin-left: 5px;
 }
 
-#btnperfil li button:hover, #btnopciones > ul li button:hover {
+#btnperfil li button:hover, #opcionescontainer > ul li button:hover {
 
     scale: 1.03;
     filter: brightness(1.1);
 }
 
-#btnperfil li button:active, #btnopciones > ul li button:active {
+#btnperfil li button:active, #opcionescontainer > ul li button:active {
 
     scale: .97;
     filter: brightness(1.2);
 }
 
-#btnperfil hr, #btnopciones > ul hr {
+#btnperfil hr, #opcionescontainer > ul hr {
 
     color: white;
     background-color: white;
@@ -439,6 +439,7 @@ header #btnperfil img {
     transition-duration: 300ms;
     display: none;
     z-index: 10;
+    width: 100% !important;
 }
 
 .contReservar {
@@ -997,7 +998,7 @@ header #btnperfil img {
         display: block !important;
         position: absolute;
         z-index: 3;
-        top: 120%;
+        top: 110%;
         right: 0;
         width: 80%;
     }
@@ -1204,7 +1205,7 @@ header #btnperfil img {
         display: block !important;
         position: absolute;
         z-index: 3;
-        top: 120%;
+        top: 110%;
         right: 0;
         width: 100%;
     }

@@ -1,7 +1,7 @@
 $(() => {
     
-    $('#btnopciones').append($('#opcionescontainer > ul'));
-    $('#opcionescontainer > ul').remove();
+    // $('#btnopciones').append($('#opcionescontainer > ul'));
+    // $('#opcionescontainer > ul').remove();
 
     $('#navmobile').show().addClass('marboliviano');
 
@@ -12,7 +12,7 @@ $(() => {
 
     $('#btnopciones').on('click', () => {
         
-        if($('#btnopciones ul').hasClass('visible')) desplegarMenuPerfilMobile();
+        if($('#opcionescontainer .menuperfilm').hasClass('visible')) desplegarMenuPerfilMobile();
 
         else desplegarMenu();
     });
@@ -25,24 +25,24 @@ $(() => {
 
     $('#btnperfilm').on('click', desplegarMenuPerfilMobile);
 
-    $('#btnperfil ul #iniciar, #btnopciones ul #iniciar').on('click', () => changePage(() => window.location.href = 'login.php?estado=1'));
+    $('#btnperfil ul #iniciar, #opcionescontainer .menuperfilm #iniciar').on('click', () => changePage(() => window.location.href = 'login.php?estado=1'));
 
-    $('#btnperfil ul #registrarse, #btnopciones ul #iniciar').on('click', () => changePage(() => window.location.href = 'login.php?estado=2'));
+    $('#btnperfil ul #registrarse, #opcionescontainer .menuperfilm #registrarse').on('click', () => changePage(() => window.location.href = 'login.php?estado=2'));
     
-    $('#btnperfil ul #cerrarsesion, #btnopciones ul #cerrarsesion').on('click', async () => {
+    $('#btnperfil ul #cerrarsesion, #opcionescontainer .menuperfilm #cerrarsesion').on('click', async () => {
         
         if(await createConfirmPopup('Confirmación', '¿Estás seguro de cerrar sesión?')) changePage(() => window.location.href = 'login.php?estado=3');
     });
 
-    $('#btnperfil ul #miperfil, #btnopciones ul #miperfil').on('click', () => changePage(() => window.location.href = 'perfil.php'));
-    $('#btnperfil ul #misconsultas, #btnopciones ul #miperfil').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=2'));
-    $('#btnperfil ul #mishorarios, #btnopciones ul #mishorarios').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=3'));
-    $('#btnperfil ul #misinactividades, #btnopciones ul #misinactividades').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=4'));
-    $('#btnperfil ul #administrador, #btnopciones ul #administrador').on('click',  () => changePage(() => window.location.href = 'administrador.php'));
+    $('#btnperfil ul #miperfil, #opcionescontainer .menuperfilm #miperfil').on('click', () => changePage(() => window.location.href = 'perfil.php'));
+    $('#btnperfil ul #misconsultas, #opcionescontainer .menuperfilm #miperfil').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=2'));
+    $('#btnperfil ul #mishorarios, #opcionescontainer .menuperfilm #mishorarios').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=3'));
+    $('#btnperfil ul #misinactividades, #opcionescontainer .menuperfilm #misinactividades').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=4'));
+    $('#btnperfil ul #administrador, #opcionescontainer .menuperfilm #administrador').on('click',  () => changePage(() => window.location.href = 'administrador.php'));
 
     $('main').on('click', () => {
 
-        if($('#btnperfil ul, #btnopciones ul').hasClass('visible')) {
+        if($('#btnperfil ul, #opcionescontainer .menuperfilm').hasClass('visible')) {
 
             desplegarMenuPerfil();
             desplegarMenuPerfilMobile();
@@ -58,11 +58,10 @@ function checkButtonPosition() {
     
     if(window.innerWidth < 600) {
            
-        if (posFooter.top <= $(window).height()) $('#btnchat').css({ 'animation': 'chatup 0.6s ease forwards' });
+        if (posFooter.top <= $(window).height()) $('#btnchat, #btnup').css({ 'animation': 'chatup 0.6s ease forwards' });
         
-        else $('#btnchat').css({ 'animation': 'chatdown 0.6s ease forwards' });
+        else $('#btnchat, #btnup').css({ 'animation': 'chatdown 0.6s ease forwards' });
     }
-
 }
 
 function checkHeaderPosition() {
@@ -101,11 +100,11 @@ function desplegarMenuPerfil() {
 
 function desplegarMenuPerfilMobile() {
 
-    if($('#btnopciones ul').hasClass('visible')) $('#btnopciones ul').addClass('invisible').removeClass('visible');
+    if($('#opcionescontainer .menuperfilm').hasClass('visible')) $('#opcionescontainer .menuperfilm').addClass('invisible').removeClass('visible');
 
     else {
         
-        $('#btnopciones ul').addClass('visible').removeClass('invisible');
+        $('#opcionescontainer .menuperfilm').addClass('visible').removeClass('invisible');
         desplegarMenu();
     }
 }

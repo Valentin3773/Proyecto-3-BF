@@ -132,7 +132,7 @@ reloadSession();
 
                     ?>
 
-                        <ul class="invisible" id="menunoiniciado">
+                        <ul class="invisible menuperfilm" id="menunoiniciado">
 
                             <li><button id="iniciar">Iniciar sesión</button></li>
                             <li><button id="iniciargoogle">Iniciar con Google <img src="img/iconosvg/google.svg" alt="Google Icon"></button></li>
@@ -149,7 +149,7 @@ reloadSession();
 
                     ?>
 
-                        <ul class="invisible" id="menuiniciado">
+                        <ul class="invisible menuperfilm" id="menuiniciado">
 
                             <li><button id="miperfil">Mi Perfil</button></li>
                             <?php if (isset($_SESSION['paciente'])): ?> <li><button id="misconsultas">Mis Consultas</button></li> <?php endif; ?>
@@ -217,7 +217,7 @@ reloadSession();
 
                         ?>
 
-                            <ul class="invisible" id="menunoiniciadom">
+                            <ul class="invisible menuperfilm" id="menunoiniciadom">
 
                                 <li><button id="iniciar">Iniciar sesión</button></li>
                                 <li><button id="iniciargoogle">Iniciar con Google <img src="img/iconosvg/google.svg" alt="Google Icon"></button></li>
@@ -234,7 +234,7 @@ reloadSession();
 
                         ?>
 
-                            <ul class="invisible" id="menuiniciadom">
+                            <ul class="invisible menuperfilm" id="menuiniciadom">
 
                                 <li><button id="miperfil">Mi Perfil</button></li>
                                 <?php if (isset($_SESSION['paciente'])): ?> <li><button id="misconsultas">Mis Consultas</button></li> <?php endif; ?>

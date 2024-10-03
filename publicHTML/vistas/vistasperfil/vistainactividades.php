@@ -10,7 +10,7 @@ if(isset($_SESSION['odontologo'])):
 
     $ido = $_SESSION['odontologo']['idodontologo'] ?? null;
 
-    $sql = "SELECT idinactividad, fechainicio, fechafinalizacion, tiempoinicio, tiempofinalizacion FROM inactividad WHERE idodontologo = :ido ORDER BY fechainicio ASC, tiempoinicio ASC";
+    $sql = "SELECT idinactividad, tiempoinicio, tiempofinalizacion FROM inactividad WHERE idodontologo = :ido ORDER BY tiempoinicio ASC";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':ido', $ido);
     
@@ -36,14 +36,12 @@ if(isset($_SESSION['odontologo'])):
         
         foreach($inactividades as $inactividad) {
 
-            $horainicio = new DateTime($inactividad['tiempoinicio']);
-            $horainicio = $horainicio->format('H:i');
-            $horafinalizacion = new DateTime($inactividad['tiempofinalizacion']);
-            $horafinalizacion = $horafinalizacion->format('H:i');
-            $fechainicio = new DateTime($inactividad['fechainicio']);
-            $fechainicio = $fechainicio->format('d/m/Y');
-            $fechafinalizacion = new DateTime($inactividad['fechafinalizacion']);
-            $fechafinalizacion = $fechafinalizacion->format('d/m/Y');
+            $tiempoinicio = new DateTime($inactividad['tiempoinicio']);
+            $tiempofinalizacion = new DateTime($inactividad['tiempofinalizacion']);
+            $fechainicio = $tiempoinicio->format('d/m/Y');
+            $horainicio = $tiempoinicio->format('H:i');
+            $fechafinalizacion = $tiempofinalizacion->format('d/m/Y');
+            $horafinalizacion = $tiempofinalizacion->format('H:i');
             
             echo "<div id='{$inactividad["idinactividad"]}' class='inactividad'>
 

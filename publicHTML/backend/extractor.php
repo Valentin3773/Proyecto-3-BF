@@ -246,7 +246,7 @@ function horasDisponibles(string $fecha, int $idodontologo): array {
 
     // 2) Obtener inactividades
 
-    $sql = "SELECT fechainicio, tiempoinicio, fechafinalizacion, tiempofinalizacion FROM inactividad WHERE idodontologo = :ido AND (:fecha BETWEEN fechainicio AND fechafinalizacion)";
+    $sql = "SELECT tiempoinicio, tiempofinalizacion FROM inactividad WHERE idodontologo = :ido AND (:fecha BETWEEN fechainicio AND fechafinalizacion)";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':ido', $idodontologo);
     $stmt->bindParam(':fecha', $fecha);
@@ -296,8 +296,8 @@ function horasDisponibles(string $fecha, int $idodontologo): array {
 
             foreach ($inactividades as $inactividad) {
 
-                $inactividadInicio = strtotime($inactividad['fechainicio'] . ' ' . $inactividad['tiempoinicio']);
-                $inactividadFin = strtotime($inactividad['fechafinalizacion'] . ' ' . $inactividad['tiempofinalizacion']);
+                $inactividadInicio = strtotime($inactividad['tiempoinicio']);
+                $inactividadFin = strtotime($inactividad['tiempofinalizacion']);
 
                 if ($horafecha >= $inactividadInicio && $horafecha <= $inactividadFin) {
 
@@ -625,15 +625,17 @@ function getHorasInicioInactividad(string $fecha, int $ido): array {
 
         foreach($inactividades as $inactividad) {
             
-            $fechainicioinactividad = $inactividad['fechainicio'];
-            $fechafinalizacioninactividad = $inactividad['fechafinalizacion'];
+            $tiempoinicioinactividad = new DateTime($inactividad['tiempoinicio']);
+            $tiempofinalizacioninactividad = new DateTime($inactividad['tiempofinalizacion']);
 
-            $adjustedhorainicio = new DateTime($inactividad['tiempoinicio']);
+            $fechainicioinactividad = $tiempoinicioinactividad->format('Y-m-d');
+            $adjustedhorainicio = new DateTime($tiempoinicioinactividad->format('H:i:s'));
             $adjustedhorainicio->sub(new DateInterval('PT30M'));
             $adjustedhorainicio = $adjustedhorainicio->format('H:i:s');
-            $adjustedhorafinalizacion = new DateTime($inactividad['tiempofinalizacion']);
-            $adjustedhorafinalizacion = $adjustedhorafinalizacion->format('H:i:s');
-            
+
+            $fechafinalizacioninactividad = $tiempofinalizacioninactividad->format('Y-m-d');
+            $adjustedhorafinalizacion = $tiempoinicioinactividad->format('H:i:s');
+
             if(fechaIgual($fecha, $fechainicioinactividad) && fechaIgual($fecha, $fechafinalizacioninactividad)) $horasDisponibles = array_diff($horasDisponibles, getHoursFromRange($adjustedhorainicio, $adjustedhorafinalizacion));
             
             else if(fechaIgual($fecha, $fechainicioinactividad) && fechaMenor($fecha, $fechafinalizacioninactividad)) $horasDisponibles = array_diff($horasDisponibles, getHoursFromRange($adjustedhorainicio, $defaults['horamaxima']));
@@ -659,5 +661,23 @@ function getHorasFinalizacionInactividad(string $fechainicio, string $horainicio
     global $pdo;
     global $defaults;
 
-    return [];
+    if(fechaMayor($fechainicio, $fechafinalizacion)) return [];
+
+    $sql = "SELECT * FROM inactividad WHERE idodontologo = :ido";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':ido', $ido);
+
+    if($stmt->execute() && $stmt->rowCount() > 0) {
+
+        $inactividades = $stmt->fetchAll();
+
+        $horasDisponibles = getDefaultHours();
+
+        foreach($inactividades as $inactividad) {
+
+            // juansonlanson
+        }
+    }
+    else return getDefaultHours();
 }

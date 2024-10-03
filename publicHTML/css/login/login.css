@@ -340,6 +340,13 @@ h1 {
     color: rgba(0, 0, 0, .8);
 }
 
+#olvidarpass {
+
+    color: var(--bs-link-color);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 #formLogin {
 
     background-color: rgba(96,245,255,.2);
