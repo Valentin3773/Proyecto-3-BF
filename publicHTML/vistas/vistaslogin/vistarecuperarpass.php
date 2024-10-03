@@ -30,11 +30,11 @@
                     <label for="" id="contColor" class="text-white px-5 rounded-top">Email</label>
                 </div>
                 <div>
-                    <input id="inEmail" type="email" class="form-control" name="" id="" value="Ingrese su correo electrónico">
+                    <input id="inEmail" type="email" class="form-control" name="" id="" title="Ingrese su correo electrónico" placeholder="Ingrese su correo electrónico">
                 </div>
             </div>
             <div id="buttonRecu">
-                <button id="contColor" class="mt-4 mb-4 btn contBTN text-white H4">Enviar Código</button>
+                <button id="contColor" class="btnRecu mt-4 mb-4 btn contBTN text-white H4">Enviar Código</button>
             </div>
         </form>
         <div id="buttonRecu" class="mt-5 row justify-content-center">

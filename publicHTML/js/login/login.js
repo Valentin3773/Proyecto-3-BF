@@ -94,11 +94,32 @@ function cargarVistaRecuperarPass() {
     $.get("vistas/vistaslogin/vistarecuperarpass.php", data => {
 
         $('#btnvolver').on('click', volverLogin);
-
         $('main').html(data);
+        $('.btnRecu').off("click");
+        $('.btnRecu').on('click', function (e) {
+            e.preventDefault();
+            $email = $('#inEmail').val();
+            recucontra($email);
+        });
     });
 }
-
+function recucontra($email){
+    $email
+    let formData = new FormData();
+    formData.append('email',$email);
+    $.ajax({
+        type: "POST",
+        url: "backend/login/cambiarpass.php",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            alert(response);
+        }, error:()=>{
+            alert('oooooooo');
+        }
+    });
+}
 function volverInicio() {
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
