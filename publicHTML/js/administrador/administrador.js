@@ -24,6 +24,8 @@ $(() => {
     $.datepicker.setDefaults($.datepicker.regional['es']);
 
     changeView(() => loadView('<div class="w-100 h-100 d-flex justify-content-center align-items-center"><h1 class="titinformativo">Bienvenido al administrador</h1></div>'));
+
+    console.log(getWeekDates('2024-10-14'));
 });
 
 function addAdminListeners() {
@@ -198,11 +200,11 @@ function addCalendarioListeners() {
             fecha1 = `${fecha1.getFullYear()}-${Number(fecha1.getMonth()) + 1}-${fecha1.getDate()}`;
             fecha2 = `${fecha2.getFullYear()}-${Number(fecha2.getMonth()) + 1}-${fecha2.getDate()}`;
 
-            console.log(fecha1, fecha2);
+            console.log(fechasSemana);
 
             let url = `vistas/vistasadmin/vistaconsultas.php?fecha1=${fecha1}&fecha2=${fecha2}`;
 
-            console.log(url);
+            // console.log(url);
 
             changeView(() => $.get(url, contenido => {
                 

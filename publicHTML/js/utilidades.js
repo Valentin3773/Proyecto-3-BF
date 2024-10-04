@@ -80,15 +80,19 @@ function createConfirmPopup(titulo, contenido, botonestxt = ['Cancelar', 'Confir
 function getWeekDates(date) {
 
     const currentDate = new Date(date);
+  
+    // Obtener el día de la semana (0=domingo, 1=lunes, ..., 6=sábado)
+    let dayOfWeek = currentDate.getDay();
 
-    const dayOfWeek = currentDate.getDay();
-    
-    // Ajustar para que el lunes sea el primer día de la semana
+    // Calcular el inicio de la semana (lunes)
     const startOfWeek = new Date(currentDate);
-    startOfWeek.setDate(currentDate.getDate() - ((dayOfWeek + 6) % 7)); // Resta para llegar al lunes
+    const daysToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
     
+    // Calcular el lunes de la semana actual
+    startOfWeek.setDate(currentDate.getDate() + daysToMonday);
+
+    // Crear un arreglo con las fechas de la semana (lunes a domingo)
     const weekDates = [];
-    
     for (let i = 0; i < 7; i++) {
         
         const tempDate = new Date(startOfWeek);

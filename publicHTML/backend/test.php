@@ -2,27 +2,29 @@
 
 include('extractor.php');
 
-$ido = 1;
+echo json_encode(getDefaultHours());
 
-$fechaActual = getFechaActual();
+// $ido = 1;
 
-$fechaFinal = new DateTime(sumarFecha($fechaActual, 'mes', 5));
-$fechaFinal->modify('last day of this month');
-$fechaFinal = $fechaFinal->format('Y-m-d');
+// $fechaActual = getFechaActual();
 
-$fechas = getDatesFromRange($fechaActual, $fechaFinal);
+// $fechaFinal = new DateTime(sumarFecha($fechaActual, 'mes', 5));
+// $fechaFinal->modify('last day of this month');
+// $fechaFinal = $fechaFinal->format('Y-m-d');
 
-$fechasDisponibles = array();
+// $fechas = getDatesFromRange($fechaActual, $fechaFinal);
 
-foreach ($fechas as $fecha) if (fechaInicioInactividadDisponible($fecha, $ido)) $fechasDisponibles[] = $fecha;
+// $fechasDisponibles = array();
 
-$respuesta = [
+// foreach ($fechas as $fecha) if (fechaInicioInactividadDisponible($fecha, $ido)) $fechasDisponibles[] = $fecha;
 
-    'fechaActual' => $fechaActual,
-    'fechasDisponibles' => $fechasDisponibles
-];
+// $respuesta = [
 
-header('Content-Type: application/json');
-echo json_encode($respuesta);
+//     'fechaActual' => $fechaActual,
+//     'fechasDisponibles' => $fechasDisponibles
+// ];
+
+// header('Content-Type: application/json');
+// echo json_encode($respuesta);
 
 ?>

@@ -103,11 +103,13 @@ function cargarVistaRecuperarPass() {
         });
     });
 }
-function recucontra($email){
-    $email
+function recucontra($email) {
+    
     let formData = new FormData();
-    formData.append('email',$email);
+    formData.append('email', $email);
+
     $.ajax({
+
         type: "POST",
         url: "backend/login/cambiarpass.php",
         data: formData,
@@ -115,7 +117,8 @@ function recucontra($email){
         contentType: false,
         success: function (response) {
             alert(response);
-        }, error:()=>{
+        }, 
+        error: () => {
             alert('oooooooo');
         }
     });
@@ -213,7 +216,7 @@ function loginAdminConfirm(datos) {
                 else {
                     
                     createPopup('Nuevo Aviso', response.error);
-                    $('#ingresar').prop('disabled', false);
+                    $('#ingresarad').prop('disabled', false);
                 }
 
                 $('#ingresarad').css({'background-color': 'rgb(0, 178, 255, 1)'}).html('Ingresar');

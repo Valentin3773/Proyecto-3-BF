@@ -663,6 +663,8 @@ function getHorasFinalizacionInactividad(string $fechainicio, string $horainicio
 
     if(fechaMayor($fechainicio, $fechafinalizacion)) return [];
 
+    // $tiempoinicio = new DateTime("{$fechainicio} {$horainicio}");
+
     $sql = "SELECT * FROM inactividad WHERE idodontologo = :ido";
 
     $stmt = $pdo->prepare($sql);
@@ -676,8 +678,20 @@ function getHorasFinalizacionInactividad(string $fechainicio, string $horainicio
 
         foreach($inactividades as $inactividad) {
 
-            // juansonlanson
+            $otrainactividadtiempoinicio = new DateTime($inactividad['tiempoinicio']);
+            $otrainactividadtiempofinalizacion = new DateTime($inactividad['tiempofinalizacion']);
+
+            foreach(getDefaultHours() as $hora) {
+
+                $inactividadtiempofinalizacion = new DateTime("{$fechafinalizacion} {$hora}");
+
+                if($otrainactividadtiempoinicio >= $inactividadtiempofinalizacion && $inactividadtiempofinalizacion <= $otrainactividadtiempofinalizacion) {
+
+                    $horasDisponibles = array_diff($horasDisponibles, [$hora]);
+                }
+            }
         }
+        return $horasDisponibles;
     }
     else return getDefaultHours();
 }
