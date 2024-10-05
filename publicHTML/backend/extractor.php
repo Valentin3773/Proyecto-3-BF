@@ -663,7 +663,7 @@ function getHorasFinalizacionInactividad(string $fechainicio, string $horainicio
 
     if(fechaMayor($fechainicio, $fechafinalizacion)) return [];
 
-    // $tiempoinicio = new DateTime("{$fechainicio} {$horainicio}");
+    $inactividadtiempoinicio = new DateTime("{$fechainicio} {$horainicio}");
 
     $sql = "SELECT * FROM inactividad WHERE idodontologo = :ido";
 
@@ -676,6 +676,8 @@ function getHorasFinalizacionInactividad(string $fechainicio, string $horainicio
 
         $horasDisponibles = getDefaultHours();
 
+        if(fechaIgual($fechainicio, $fechafinalizacion)) $horasDisponibles = array_values(array_diff($horasDisponibles, getHoursFromRange($defaults['horaminima'], $horainicio)));
+
         foreach($inactividades as $inactividad) {
 
             $otrainactividadtiempoinicio = new DateTime($inactividad['tiempoinicio']);
@@ -685,9 +687,14 @@ function getHorasFinalizacionInactividad(string $fechainicio, string $horainicio
 
                 $inactividadtiempofinalizacion = new DateTime("{$fechafinalizacion} {$hora}");
 
-                if($otrainactividadtiempoinicio >= $inactividadtiempofinalizacion && $inactividadtiempofinalizacion <= $otrainactividadtiempofinalizacion) {
+                if($otrainactividadtiempoinicio <= $inactividadtiempofinalizacion && $inactividadtiempofinalizacion <= $otrainactividadtiempofinalizacion) {
 
-                    $horasDisponibles = array_diff($horasDisponibles, [$hora]);
+                    $horasDisponibles = array_values(array_diff($horasDisponibles, [$hora]));
+                }
+
+                if($inactividadtiempoinicio <= $otrainactividadtiempofinalizacion && $otrainactividadtiempofinalizacion <= new DateTime("{$fechafinalizacion} {$hora}")) {
+                    
+                    $horasDisponibles = array_values(array_diff($horasDisponibles, getHoursFromRange($hora, $defaults['horamaxima'])));
                 }
             }
         }

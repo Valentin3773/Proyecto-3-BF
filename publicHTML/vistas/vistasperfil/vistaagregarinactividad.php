@@ -2,12 +2,12 @@
 
 <div class="d-flex justify-content-center align-items-center">
 
-    <div id="contagregarinactividad">
+    <form id="contagregarinactividad">
 
         <div id="contfechainicio">
 
             <label for="fechainicio">Fecha de Inicio</label>
-            <input type="text" id="fechainicio" class="form-control" title="Ingrese la fecha de inicio" placeholder="Ingrese la fecha de inicio" required readonly>
+            <input type="text" id="fechainicio" name="fechainicio" class="form-control" title="Ingrese la fecha de inicio" placeholder="Ingrese la fecha de inicio" required readonly>
 
         </div>
 
@@ -25,7 +25,7 @@
         <div id="contfechafinalizacion">
 
             <label for="fechafinalizacion">Fecha de Finalización</label>
-            <input type="text" id="fechafinalizacion" class="form-control" title="Ingrese la fecha de finalización" placeholder="Ingrese la fecha de finalización" required readonly disabled>
+            <input type="text" id="fechafinalizacion" name="fechafinalizacion" class="form-control" title="Ingrese la fecha de finalización" placeholder="Ingrese la fecha de finalización" required readonly disabled>
 
         </div>
 
@@ -42,10 +42,10 @@
 
         <div id="contbtnagregar" class="d-flex justify-content-center align-items-center">
 
-            <button type="button" id="confirmarinactividad" disabled>Agregar</button>
+            <button type="button" id="confirmarinactividad" name="confirmarinactividad" disabled>Agregar</button>
 
         </div>
 
-    </div>
+    </form>
 
 </div>

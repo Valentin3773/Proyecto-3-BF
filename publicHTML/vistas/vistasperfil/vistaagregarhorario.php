@@ -8,7 +8,7 @@ $semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Dom
 
 <div class="d-flex justify-content-center align-items-center">
 
-    <div id="contagregarhorario">
+    <form id="contagregarhorario">
 
         <div id="contdia">
 
@@ -50,6 +50,6 @@ $semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Dom
 
         </div>
 
-    </div>
+    </form>
 
 </div>
