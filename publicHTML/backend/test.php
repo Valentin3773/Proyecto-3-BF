@@ -5,6 +5,6 @@
 
 include('extractor.php');
 
-echo json_encode(getHorasFinalizacionInactividad('09-10-2024', '05:00:00', '11-10-2024', 1));
+echo json_encode(getFechaHorasConsulta('2024-10-15', '18:00:00', 120));
 
 ?>

@@ -30,15 +30,15 @@ function UpdateProfilePaciente() {
     $oldvalue = $data['oldvalue'];
     $nameROW = $data['name'];
 
-    if($name == 'documento' || $name == 'contrasenia' || $name == 'verificador') return;
+    $datosModificables = ['nombre', 'apellido', 'email', 'telefono', 'direccion'];
+
+    if(!in_array($name, $datosModificables) || !in_array($nameROW, $datosModificables)) return;
 
     try {
         
-        $consulta = "UPDATE paciente SET :namee = :val1 WHERE :namerow = :val2 and idpaciente = :idp";
+        $consulta = "UPDATE paciente SET {$name} = :val1 WHERE {$nameROW} = :val2 and idpaciente = :idp";
         
         $stmt = $pdo->prepare($consulta);
-        $stmt->bindParam(':namee', $name);
-        $stmt->bindParam(':namerow', $nameROW);
         $stmt->bindParam(':val1', $value);
         $stmt->bindParam(':val2', $oldvalue);
         $stmt->bindParam(':idp', $idp);

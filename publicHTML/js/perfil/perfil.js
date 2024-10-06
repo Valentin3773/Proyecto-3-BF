@@ -75,7 +75,7 @@ function cargarVistaPerfil() {
 function integrarBoton($datos, $id) {
 
     // Aca sucede la magia
-    if ($($id).attr('src', 'img/iconosvg/Guardar.svg')) {
+    if ($($id).find('img').attr('src', 'img/iconosvg/Guardar.svg')) {
 
         quitarEventos();
 
@@ -86,7 +86,7 @@ function integrarBoton($datos, $id) {
                 integrarEventos();
                 $datos['tipo'] = $("#\\$\\$\\$").attr('data-type');
                 $datos['dato'] = $($datos['inputID']).val();
-                $($id).attr('src', 'img/iconosvg/lapiz.svg');
+                $($id).find('img').attr('src', 'img/iconosvg/lapiz.svg');
                 $($datos['inputID']).prop('disabled', true);
                 funcionguardarCambios($datos);
                 console.log("Guardar");
@@ -94,7 +94,7 @@ function integrarBoton($datos, $id) {
             else {
 
                 $($datos['inputID']).val($datos['old']);
-                $($id).attr('src', 'img/iconosvg/lapiz.svg');
+                $($id).find('img').attr('src', 'img/iconosvg/lapiz.svg');
                 $($datos['inputID']).prop('disabled', true);
                 integrarEventos();
                 console.log("Cancelar" + $datos['old']);
@@ -102,58 +102,61 @@ function integrarBoton($datos, $id) {
             // window.location.replace("index.php");
         });
     }
-    else $($id).attr('src', 'img/iconosvg/Guardar.svg');
+    else $($id).find('img').attr('src', 'img/iconosvg/Guardar.svg');
 }
 
 function integrarEventos() {
 
     // Listeners con datos importantes
-    $('#mdF').on('click', function () {
+    $('#mdF').on('click', function (event) {
+
+        console.log('pablo');
 
         $('#inFile').click();
-        $('#inFile').change(function (event) {
-
-            let file = event.target.files[0];
-            try {
-
-                if (file) {
-
-                    // Mostrar la imagen
-                    let reader = new FileReader();
-                    reader.onload = function (e) {
-
-                        $('#fotoperfil').prop('src', e.target.result);
-                    }
-                    reader.readAsDataURL(file);
-
-                    // Parseo de la imagen
-                    let formData = new FormData();
-                    formData.append('file', file);
-
-                    $.ajax({
-
-                        type: "POST",
-                        url: "./backend/perfil/subirIMG.php",
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function (response) {
-
-                            if (response.error == undefined) window.location.reload();
-
-                            else console.log(response.error);
-                            
-                        }, 
-                        error: (jqXHR, estado, outputError) => console.log("Error al procesar la solicitud: 3" + outputError + estado + jqXHR)
-                    });
-                }
-            } 
-            catch (error) {
-
-                console.log(error);
-            }
-        });
     });
+
+    $('#inFile').off().on('change', function (event) {
+
+        let file = event.target.files[0];
+        try {
+
+            if (file) {
+
+                // Mostrar la imagen
+                let reader = new FileReader();
+                reader.onload = function (e) {
+
+                    $('#fotoperfil').prop('src', e.target.result);
+                }
+                reader.readAsDataURL(file);
+
+                // Parseo de la imagen
+                let formData = new FormData();
+                formData.append('file', file);
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "./backend/perfil/subirIMG.php",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+
+                        if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, () => changeView(cargarVistaPerfil));
+
+                        else createPopup('Nuevo Aviso', response.error);
+                    }, 
+                    error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: 3" + outputError + estado + jqXHR)
+                });
+            }
+        } 
+        catch (error) {
+
+            console.log(error);
+        }
+    });
+
     $('#mdN').on('click', function () { Datos['namedata'] = "nombre"; $('#inNombre').prop('disabled', false); Datos['old'] = $('#inNombre').val(); Datos['inputID'] = "#inNombre"; integrarBoton(Datos, "#mdN"); $('#inNombre').focus(); });
     $('#mdA').on('click', function () { Datos['namedata'] = "apellido"; $('#inApellido').prop('disabled', false); Datos['old'] = $('#inApellido').val(); Datos['inputID'] = "#inApellido"; integrarBoton(Datos, "#mdA"); $('#inApellido').focus(); });
     $('#mdT').on('click', function () { Datos['namedata'] = "telefono"; $('#inTelefono').prop('disabled', false); Datos['old'] = $('#inTelefono').val(); Datos['inputID'] = "#inTelefono"; integrarBoton(Datos, "#mdT"); $('#inTelefono').focus(); });

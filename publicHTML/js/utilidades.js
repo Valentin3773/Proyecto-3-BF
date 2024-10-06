@@ -15,7 +15,7 @@ function createPopup(titulo, contenido) {
         //$('body').addClass('blurry');
 
         $("#div-mensaje-popup").html(data).fadeIn(500);
-        $('#btnCerrar').on("click", () => {
+        $('#btnCerrar').focus().on("click", () => {
 
             $("#div-mensaje-popup").fadeOut(500);
             //$('body').removeClass('blurry');
@@ -33,7 +33,7 @@ function createHeaderPopup(titulo, contenido, accion) {
     $.get("vistas/popupmensaje.php ? Contenido=" + contenido + "&Aviso=" + titulo, data => {
 
         $("#div-mensaje-popup").html(data).fadeIn(500);
-        $('#btnCerrar').on("click", () => {
+        $('#btnCerrar').focus().on("click", () => {
 
             $("#div-mensaje-popup").fadeOut(500);
             $("#div-mensaje-popup link").remove();
@@ -57,7 +57,7 @@ function createConfirmPopup(titulo, contenido, botonestxt = ['Cancelar', 'Confir
         $.get(`vistas/popupconfirmar.php ? Contenido=${contenido}&Aviso=${titulo}&txtcancelar=${botonestxt[0]}&txtconfirmar=${botonestxt[1]}`, data => {
 
             $("#div-mensaje-popup").html(data).fadeIn(500);
-            $('#btnCancelar').on("click", () => {
+            $('#btnCancelar').focus().on("click", () => {
 
                 $("#div-mensaje-popup").fadeOut(500);
                 $("#div-mensaje-popup link").remove();

@@ -206,6 +206,8 @@
     padding: 2.2rem;
     transition-duration: .3s;
     cursor: pointer;
+    box-shadow: 1px 1px 3px .5px rgba(0, 0, 0, .4);
+    border: 1px solid rgba(0, 0, 0, .1);
 }
 
 #eliminarhorario:hover {
