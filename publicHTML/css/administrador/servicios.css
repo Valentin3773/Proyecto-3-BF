@@ -63,9 +63,10 @@
     border-radius: 12px;
     margin-top: .5rem;
     font-family: 'RobotoSerif', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    min-height: 95%;
 }
 
-#cuerpo h1 {
+#cuerpo #titulon {
 
     text-align: center;
     background-color: #0059CD;
@@ -74,6 +75,10 @@
     border-radius: 10px 10px 0 0;
     font-weight: 600;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 #cuerpo .form-group {
@@ -86,13 +91,8 @@
 
 #cuerpo .form-group label {
 
-    width: 100%;
-    text-align: center;
-    background-color: #0059CD;
     color: white;
     font-weight: 600;
-    padding: .7rem;
-    border-radius: 10px 10px 0 0;
     font-size: 1.5rem;
 }
 
@@ -100,7 +100,8 @@
 
     width: 100%;
     border-radius: 0 0 10px 10px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    padding: .5rem;
 }
 
 #leyendascontainer {
@@ -145,7 +146,6 @@
     width: 150px;
 }
 
-
 .lapizeditar {
 
     background-color: #0AF0AB;
@@ -158,6 +158,29 @@
     position: absolute;
     bottom: -7%;
     right: -7%;
+}
+
+.lapizeditarc {
+
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    bottom: 0;
+    right: 0;
+}
+
+.encabezadolabel {
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    text-align: center;
+    background-color: #0059CD;
+    padding: .7rem;
+    border-radius: 10px 10px 0 0;
 }
 
 .lapizeditar:hover {

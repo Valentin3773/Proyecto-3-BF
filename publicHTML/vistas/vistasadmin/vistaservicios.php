@@ -21,15 +21,14 @@ if (!isset($_GET['numservicio'])) {
 
     </div>
     <div id="servicioscontainer">
-        
-        <?php foreach ($servicios as $servicio) echo "<div id='{$servicio["numero"]}' class='servicio'><h3>{$servicio["nombre"]}<h3></div>"; ?> 
 
-    </div> 
-    
+        <?php foreach ($servicios as $servicio) echo "<div id='{$servicio["numero"]}' class='servicio'><h3>{$servicio["nombre"]}<h3></div>"; ?>
+
+    </div>
+
 <?php
 
-} 
-else if (is_numeric($_GET['numservicio']) && $_GET['numservicio'] > 0) {
+} else if (is_numeric($_GET['numservicio']) && $_GET['numservicio'] > 0) {
 
     $numservicio = $_GET['numservicio'];
 
@@ -39,12 +38,15 @@ else if (is_numeric($_GET['numservicio']) && $_GET['numservicio'] > 0) {
     $stmt->bindParam(':numservicio', $numservicio);
 
     if ($stmt->execute() && $stmt->rowCount() == 1) $servicio = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
 ?>
 
     <div id="cuerpo">
 
-        <h1><?= $servicio['nombre'] ?></h1>
+        <div id="titulon">
+            <h1><?= $servicio['nombre'] ?></h1>
+            <div class="lapizeditar lapizeditarc"><img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar"></div>
+        </div>
 
         <div id="contimg" class="my-5">
 
@@ -91,8 +93,11 @@ else if (is_numeric($_GET['numservicio']) && $_GET['numservicio'] > 0) {
         </div>
 
         <div class="form-group p-3">
-            <label for="descripcion">Descripcion</label>
-            <textarea name="descripcion" id="descripcion"><?=$servicio['descripcion']?></textarea>
+            <div class="encabezadolabel">
+                <label for="descripcion">Descripcion</label>
+                <div class="lapizeditar lapizeditarc"><img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar"></div>
+            </div>
+            <textarea name="descripcion" id="descripcion" readonly><?= $servicio['descripcion'] ?></textarea>
         </div>
 
     </div>
