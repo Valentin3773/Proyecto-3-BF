@@ -50,6 +50,7 @@ label, span {
     background-color: #78B3FF;
     padding: 2rem;
     border-radius: 15px;
+    box-shadow: .3px .3px 3px .5px rgba(0, 0, 0, 0.3);
 }
 
 #privacidad input {

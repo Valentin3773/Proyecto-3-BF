@@ -4,6 +4,7 @@ include("../conexion.php");
 include("../extractor.php");
 
 session_start();
+reloadSession();
 
 if(!isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) header('Location: index.php');
 
@@ -31,15 +32,17 @@ function UpdateProfileOdontologo() {
     $oldvalue = $data['oldvalue'];
     $nameROW = $data['name'];
 
-    if($name == 'documento' || $name == 'contrasenia' || $name == 'verificador') return;
+    $datosModificables = ['nombre', 'apellido', 'email', 'telefono', 'direccion'];
+
+    if(!in_array($name, $datosModificables) || !in_array($nameROW, $datosModificables)) return;
 
     try {
 
-        $consulta = "UPDATE odontologo SET :namee = :val1 WHERE :namerow = :val2 and idodontologo = :ido";
+        $consulta = "UPDATE odontologo SET {$name} = :val1 WHERE {$nameROW} = :val2 and idodontologo = :ido";
         
         $stmt = $pdo->prepare($consulta);
-        $stmt->bindParam('namee', $name);
-        $stmt->bindParam(':namerow', $nameROW);
+        //$stmt->bindParam(':namee', $name);
+        //$stmt->bindParam(':namerow', $nameROW);
         $stmt->bindParam(':val1', $value);
         $stmt->bindParam(':val2', $oldvalue);
         $stmt->bindParam(':ido', $ido);
@@ -53,7 +56,7 @@ function UpdateProfileOdontologo() {
     } 
     catch (PDOException $e) {
 
-        $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
+        $respuesta['error'] = "UPDATE odontologo SET {$name} = {$value} WHERE {$nameROW} = {$oldvalue} and idodontologo = {$ido}";
     }
     
     header('Content-Type: application/json');

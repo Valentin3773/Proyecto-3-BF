@@ -26,11 +26,11 @@ $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odo
 
         ?>
 
-        <div class="lapizeditar">
-            <img src="img/iconosvg/lapiz.svg" id="mdF" alt="Modificar" title="Modificar">
-            <input type="file" id="inFile" accept="image/*">
+        <div class="lapizeditar" id="mdF">
+            <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
         </div>
         <div id="fotoperfilIMG"></div>
+        <input type="file" id="inFile" accept="image/*">
     </div>
 
 </div>
@@ -53,8 +53,8 @@ $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odo
 
                 <div class="lapizcontainer">
 
-                    <div class="lapizeditar">
-                        <img src="img/iconosvg/lapiz.svg" id="mdN" alt="Modificar" title="Modificar">
+                    <div class="lapizeditar" id="mdN">
+                        <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
                     </div>
 
                 </div>
@@ -81,8 +81,8 @@ $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odo
 
                 <div class="lapizcontainer">
 
-                    <div class="lapizeditar">
-                        <img src="img/iconosvg/lapiz.svg" id="mdA" alt="Modificar" title="Modificar">
+                    <div class="lapizeditar" id="mdA">
+                        <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
                     </div>
 
                 </div>
@@ -109,8 +109,8 @@ $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odo
 
             <div class="lapizcontainer">
 
-                <div class="lapizeditar">
-                    <img src="img/iconosvg/lapiz.svg" id="mdT" alt="Modificar" title="Modificar">
+                <div class="lapizeditar" id="mdT">
+                    <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
                 </div>
 
             </div>
@@ -140,8 +140,8 @@ $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odo
 
             <div class="lapizcontainer">
 
-                <div class="lapizeditar">
-                    <img src="img/iconosvg/lapiz.svg" id="mdD" alt="Modificar" title="Modificar">
+                <div class="lapizeditar" id="mdD">
+                    <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
                 </div>
 
             </div>
@@ -166,8 +166,8 @@ $usuario = isset($_SESSION['paciente']) ? $_SESSION['paciente'] : $_SESSION['odo
 
             <div class="lapizcontainer">
 
-                <div class="lapizeditar">
-                    <img src="img/iconosvg/lapiz.svg" id="mdE" alt="Modificar" title="Modificar">
+                <div class="lapizeditar" id="mdE">
+                    <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
                 </div>
 
             </div>

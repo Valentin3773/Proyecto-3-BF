@@ -42,8 +42,37 @@ in_array($horafinalizacion, getHorasFinalizacionInactividad($fechainicio, $horai
     $stmt->bindParam(':tiempofinalizacion', $tiempofinalizacion);
     $stmt->bindParam(':ido', $ido);
 
-    if($stmt->execute()) $respuesta['exito'] = "Se ha agregado la inactividad";
+    $sql2 = "SELECT p.email, c.asunto, c.fecha, c.hora FROM consulta c JOIN paciente p ON c.idpaciente = p.idpaciente WHERE idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) AND (STR_TO_DATE(CONCAT(fecha, ' ', hora), '%Y-%m-%d %H:%i:%s') BETWEEN :tiempoinicio AND :tiempofinalizacion)";
 
+    $stmt2 = $pdo->prepare($sql2);
+    $stmt2->bindParam(':tiempoinicio', $tiempoinicio);
+    $stmt2->bindParam(':tiempofinalizacion', $tiempofinalizacion);
+    $stmt2->bindParam(':ido', $ido);
+
+    $sql3 = "DELETE FROM consulta WHERE idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) AND (STR_TO_DATE(CONCAT(fecha, ' ', hora), '%Y-%m-%d %H:%i:%s') BETWEEN :tiempoinicio AND :tiempofinalizacion)";
+
+    $sql3 = $pdo->prepare($sql3);
+    $sql3->bindParam(':tiempoinicio', $tiempoinicio);
+    $sql3->bindParam(':tiempofinalizacion', $tiempofinalizacion);
+    $sql3->bindParam(':ido', $ido);
+
+    if($stmt->execute() && $stmt2->execute() && $stmt2->rowCount() > 0 && $stmt3->execute()) {
+
+        $respuesta['exito'] = "Se ha agregado la inactividad";
+
+        $emailsaenviar = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($emailsaenviar as $emailaenviar) {
+            
+            $fechaenviar = DateTime::createFromFormat('Y-m-d', $emailaenviar['fecha']);
+            $fechaenviar = $fechaenviar->format('d/m/Y');
+
+            $horaenviar = DateTime::createFromFormat('H:i:s', $emailaenviar['hora']);
+            $horaenviar = $horaenviar->format('H:i');
+
+            enviarEmailCancelador($emailaenviar['email'], $emailaenviar['asunto'], $fechaenviar, $horaenviar);
+        }
+    }
     else $respuesta['error'] = "Ha ocurrido un error al agregar la inactividad";
 }
 else $respuesta['error'] = "Ha ocurrido un error al agregar la inactividad, las fechas y/u horas no son válidas";

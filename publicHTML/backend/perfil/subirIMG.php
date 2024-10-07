@@ -1,6 +1,7 @@
 <?php 
 
 include('../conexion.php');
+include('../extractor.php');
 
 session_start();
 
@@ -73,7 +74,7 @@ function subirPacienteIMG() {
 
         if (move_uploaded_file($file['tmp_name'], $ruta_guardar_archivo)) {
 
-            $respuesta['enviar'] = "Se cambió su perfil";
+            // $respuesta['enviar'] = "Se cambió su perfil";
 
             try {
 
@@ -86,7 +87,11 @@ function subirPacienteIMG() {
                 $stmt = $pdo->prepare($consulta);
                 $stmt->bindParam(':img', $nuevo_nombre_archivo);
                 $stmt->bindParam(':idp', $_SESSION['paciente']['idpaciente']);
-                $stmt->execute();
+
+                if($stmt->execute()) $respuesta['exito'] = "Se ha actualizado tu foto de perfil";
+
+                else $respuesta['error'] = "Ha ocurrido un error al intentar actualizar tu foto de perfil";
+
                 reloadSession();
             } 
             catch (PDOException $e) {
@@ -101,6 +106,7 @@ function subirPacienteIMG() {
     }
     header('Content-Type: application/json');
     echo json_encode($respuesta);
+    exit();
 }
 
 function subirOdontologoIMG() {
@@ -123,7 +129,7 @@ function subirOdontologoIMG() {
 
         if (move_uploaded_file($file['tmp_name'], $ruta_guardar_archivo)) {
 
-            $respuesta['enviar'] = "Se cambió su perfil";
+            // $respuesta['enviar'] = "Se cambió su perfil";
 
             try {
                 
@@ -136,10 +142,14 @@ function subirOdontologoIMG() {
                 $stmt = $pdo->prepare($consulta);
                 $stmt->bindParam(':img', $nuevo_nombre_archivo);
                 $stmt->bindParam(':ido', $_SESSION['odontologo']['idodontologo']);
-                $stmt->execute();
-                reloadSession();
 
-            } catch (PDOException $e) {
+                if($stmt->execute()) $respuesta['exito'] = "Se ha actualizado tu foto de perfil";
+
+                else $respuesta['error'] = "Ha ocurrido un error al intentar actualizar tu foto de perfil";
+
+                reloadSession();
+            } 
+            catch (PDOException $e) {
 
                 $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
             }
@@ -150,8 +160,10 @@ function subirOdontologoIMG() {
 
         $respuesta['error'] = "Excepción: " . $e->getMessage();
     }
+
     header('Content-Type: application/json');
     echo json_encode($respuesta);
+    exit();
 }
 
 ?>
