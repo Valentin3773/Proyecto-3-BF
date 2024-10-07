@@ -116,17 +116,24 @@ function recucontra($email) {
         processData: false,
         contentType: false,
         success: function (response) {
-            alert(response['respuesta']);
-            verificarCodigo(response['codigo']);
+            if(response['respuesta'] != undefined){
+                createPopup("Nuevo aviso",response['respuesta']);
+                cargarCodigoEmail(response['codigo']);
+            } else {
+                createPopup("Nuevo aviso",response['noexiste']);
+            }
         }, 
         error: () => {
-            alert('Ocurrio un error :3');
+            createPopup("No puede ser",'Ocurrio un error :3');
         }
     });
 }
-function verificarCodigo($codigo){
+function verificarCodigo($codigo,$pass,$repass,$secp){
    let formData = new FormData();
    formData.append('codigo',$codigo);
+   formData.append('contraseña',$pass);
+   formData.append('recontraseña',$repass);
+   formData.append('secp', $secp);
     $.ajax({
 
         type: "POST",
@@ -140,6 +147,21 @@ function verificarCodigo($codigo){
         error: () => {
             alert('Ocurrio un error :3');
         }
+    });
+}
+function cargarCodigoEmail($codigo){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    $.get("vistas/vistaslogin/vistacodigoemail.php", data => {
+        $('main').html(data);
+        $('.btnRecu').on('click', function (e) {
+            e.preventDefault();
+            $email = $('#inEmail').val();
+            if($('#inContra').val() === $('#inConcontra').val()){
+                verificarCodigo($('#inCodigo').val(),$('#inContra').val(),$('#inConcontra').val(),$codigo);
+            } else {
+                createPopup("Parece que hubo un malentendido","Las contraseñas ingresadas no coinciden");
+            }
+        });
     });
 }
 function volverInicio() {

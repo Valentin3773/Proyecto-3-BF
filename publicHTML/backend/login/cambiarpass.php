@@ -10,36 +10,39 @@ require_once '../../lib/PHPMailer/Exception.php';
 require_once '../../lib/PHPMailer/SMTP.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    cambiarcontra($pdo);
-} 
+    cambiarcontra();
+}  else {
+    exit();
+}
 
-function cambiarcontra($pdo){
+function cambiarcontra(){
     $email = htmlspecialchars(strip_tags($_POST['email']));
     if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+        global $pdo;
+        $chekeo = "SELECT * FROM paciente WHERE email = :email";
+        $stmt = $pdo->prepare($chekeo);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
         
-        $codigo = generateToken("Pepe");
-        $_SESSION ['codigo'] = $codigo[1];
-        //No mover, demora mucho el phpmailer
-        enviarEmail($codigo, $email);
-        
+        if($stmt->rowCount() > 0){
+            $codigo = generateToken("Pepe");
+            $_SESSION['codigo'] = $codigo[1];
+            //No mover, demora mucho el phpmailer
+            enviarEmail($codigo, $email);
+        } else {
+            $respuesta = array('noexiste' => "No existe ningun usuario registrado con el email seleccionado");
+            header('Content-Type: application/json');
+            echo json_encode($respuesta);
+            exit();
+        }
     } else {
-        $respuesta = array();
-        $respuesta['respuesta'] = "Correo ingresado no válido";
+        $respuesta = array('noexiste' => "Correo ingresado no válido");
         header('Content-Type: application/json');
         echo json_encode($respuesta);
         exit();
     }
 }
 
-function generateRandomCode($length = 16) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-}
 
 function enviarEmail($codigo,$email) {
 
