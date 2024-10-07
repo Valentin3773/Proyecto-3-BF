@@ -116,10 +116,29 @@ function recucontra($email) {
         processData: false,
         contentType: false,
         success: function (response) {
+            alert(response['respuesta']);
+            verificarCodigo(response['codigo']);
+        }, 
+        error: () => {
+            alert('Ocurrio un error :3');
+        }
+    });
+}
+function verificarCodigo($codigo){
+   let formData = new FormData();
+   formData.append('codigo',$codigo);
+    $.ajax({
+
+        type: "POST",
+        url: "backend/login/verificarcodigo.php",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
             alert(response);
         }, 
         error: () => {
-            alert('oooooooo');
+            alert('Ocurrio un error :3');
         }
     });
 }
