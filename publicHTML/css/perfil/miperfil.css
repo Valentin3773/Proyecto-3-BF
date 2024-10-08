@@ -149,4 +149,10 @@
 
         width: 30px !important;
     }
+
+    #fotoperfil {
+
+        width: 150px !important;
+        height: 150px !important;
+    }
 }

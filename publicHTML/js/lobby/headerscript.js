@@ -42,11 +42,9 @@ $(() => {
 
     $('main').on('click', () => {
 
-        if($('#btnperfil ul, #opcionescontainer .menuperfilm').hasClass('visible')) {
-
-            desplegarMenuPerfil();
-            desplegarMenuPerfilMobile();
-        }
+        if($('#btnperfil ul').hasClass('visible')) desplegarMenuPerfil();
+        
+        if($('#opcionescontainer .menuperfilm').hasClass('visible')) desplegarMenuPerfilMobile();
 
         if($('#navmobile').hasClass('desplegado')) desplegarMenu();
     });

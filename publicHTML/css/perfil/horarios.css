@@ -253,3 +253,84 @@
 
     display: none !important;
 }
+
+@media screen and (width <= 1000px) {
+
+    .horario span {
+
+        font-size: 1.3rem !important;
+    }
+
+    .horario {
+
+        display: flex;
+        flex-direction: column;
+        gap: .3rem;
+        padding: .4rem;
+    }
+
+    .horario .horas {
+
+        border-radius: 20px 20px 0 0;
+        width: 100%;
+    }
+
+    .horario .dia {
+
+        border-radius: 0 0 20px 20px;
+        width: 100%;
+    }
+
+    #leyendas {
+
+        display: none;
+    }
+
+    #agregarhorario {
+
+        width: fit-content;
+        height: fit-content;
+        padding: 1.3rem;
+    }
+
+    #agregarhorario .mas {
+
+        width: 50px;
+        height: 50px;
+    }
+
+    #eliminarhorario {
+
+        width: fit-content;
+        height: fit-content;
+        padding: 1.4rem;
+    }
+
+    #eliminarhorario svg {
+
+        width: 30px;
+        height: 30px;
+    }
+
+    #conthorarios {
+
+        margin-top: 1rem !important;
+    }
+
+    #agregarhorariocont {
+
+        margin-top: 0 !important;
+    }
+
+    #contagregarhorario {
+
+        width: 100% !important;
+        margin-top: 1rem !important;
+        padding: .8rem !important;
+    }
+
+    #contagregarhorario label {
+
+        font-size: 1.3rem !important;
+    }
+}

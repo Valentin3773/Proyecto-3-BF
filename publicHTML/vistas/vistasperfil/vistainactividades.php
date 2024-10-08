@@ -63,7 +63,7 @@ if(isset($_SESSION['odontologo'])):
     else echo "<h3 id='noinactividades'>No tienes ninguna inactividad</h3>";
     ?>
 
-    <div id="agregarinactividadcont" class="d-flex justify-content-center align-items-center mt-4">
+    <div id="agregarinactividadcont" class="d-flex justify-content-center align-items-center mt-4 p-3">
 
         <div id="agregarinactividad"><div class="mas"></div></div>
         

@@ -262,3 +262,94 @@
 
     width: 100px;
 }
+
+@media screen and (width <= 1000px) {
+
+    #agregarinactividad {
+
+        width: fit-content;
+        height: fit-content;
+        padding: 1.3rem;
+    }
+
+    #agregarinactividad .mas {
+
+        width: 50px;
+        height: 50px;
+    }
+
+    #eliminarinactividad {
+
+        width: fit-content;
+        height: fit-content;
+        padding: 1.4rem;
+    }
+
+    #eliminarinactividad svg {
+
+        width: 30px;
+        height: 30px;
+    }
+
+    #leyendas {
+
+        display: none !important;
+    }
+
+    #continactividades {
+
+        margin-top: 1rem;
+    }
+
+    #agregarinactividadcont {
+
+        margin-top: 0 !important;
+    }
+
+    .inactividad span {
+
+        font-size: 1.3rem !important;
+        letter-spacing: 3px !important;
+    }
+
+    .inactividad {
+
+        flex-direction: column;
+        gap: .3rem !important;
+        padding: .4rem !important;
+        height: 120px !important;
+    }
+
+    .inactividad .desde {
+
+        border-radius: 20px 20px 0 0;
+        width: 100% !important;
+        flex-direction: row !important;
+        gap: 20px !important;
+    }
+
+    .inactividad .hasta {
+
+        border-radius: 0 0 20px 20px;
+        width: 100% !important;
+        flex-direction: row !important;
+        gap: 20px !important;
+    }
+
+    .inactividad hr {
+
+        display: none !important;
+    }
+
+    #contagregarinactividad {
+
+        width: 100% !important;
+        margin-top: 1rem !important;
+        padding: .8rem !important;
+    }
+
+    #contagregarinactividad label {
+
+        font-size: 1.3rem !important;
+    }
+}

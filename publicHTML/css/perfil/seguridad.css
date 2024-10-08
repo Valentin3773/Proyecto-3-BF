@@ -92,3 +92,31 @@ label, span {
     scale: .97;
     filter: brightness(1.2);
 }
+
+@media screen and (width <= 1000px) {
+    
+    #formcambiar, #privacidad, #verificar {
+
+        padding: .8rem !important;
+    }
+
+    #titulocambiarpass, #tituloprivacidad, #tituloverificar {
+
+        font-size: 1.8rem;
+    }
+
+    #cambiarpass, #verificaremail {
+
+        font-size: 1rem !important;
+    }
+
+    #titulo_input {
+
+        width: 65% !important;
+    }
+
+    label, input {
+
+        font-size: 100% !important;
+    }
+}

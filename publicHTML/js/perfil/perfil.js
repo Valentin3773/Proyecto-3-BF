@@ -320,7 +320,7 @@ function cargarVistaInactividades() {
     if($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
 
     $('#sidebar #btnsuperiores button, #sidebarmobile #btnsuperiores button').css({ 'text-decoration': 'none' });
-    $('#inactividades, #sidebarmobile #cerrarsesion').css({ 'text-decoration': 'underline' });
+    $('#inactividades, #sidebarmobile #inactividades').css({ 'text-decoration': 'underline' });
     $('#seccionescss').prop('href', 'css/perfil/inactividades.css');
 }
 

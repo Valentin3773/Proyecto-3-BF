@@ -53,7 +53,7 @@ else $verificado = true;
 
 <form method="POST" id="formcambiar">
 
-    <div id="contenedor_formulario" class="mb-4">
+    <div id="contenedor_formulario" class="mb-3">
 
         <div id="titulo_input"><label for="oldpass" class="text-center">Contraseña actual</label></div>
         <div>
@@ -63,7 +63,7 @@ else $verificado = true;
         </div>
 
     </div>
-    <div id="contenedor_formulario" class="mb-4">
+    <div id="contenedor_formulario" class="mb-3">
 
         <div id="titulo_input"><label for="newpass" class="text-center">Nueva contraseña</label></div>
         <div>
@@ -73,7 +73,7 @@ else $verificado = true;
         </div>
 
     </div>
-    <div id="contenedor_formulario" class="mb-4">
+    <div id="contenedor_formulario" class="mb-3">
 
         <div id="titulo_input"><label for="oldpass" class="text-center">Repetir nueva contraseña</label></div>
         <div>
