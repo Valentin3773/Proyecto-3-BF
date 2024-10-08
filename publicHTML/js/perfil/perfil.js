@@ -1,15 +1,17 @@
 $(() => {
 
-    $('#miperfil').on('click', () => changeView(cargarVistaPerfil));
-    $('#misconsultas').on('click', () => changeView(cargarVistaConsultas));
-    $('#horarios').on('click', () => changeView(cargarVistaHorarios));
-    $('#inactividades').on('click', () => changeView(cargarVistaInactividades));
-    $('#seguridad').on('click', () => changeView(cargarVistaSeguridad));
-    $('#cerrarsesion').on('click', async () => {
+    $('#miperfil, #sidebarmobile #miperfil').on('click', () => changeView(cargarVistaPerfil));
+    $('#misconsultas, #sidebarmobile #misconsultas').on('click', () => changeView(cargarVistaConsultas));
+    $('#horarios, #sidebarmobile #horarios').on('click', () => changeView(cargarVistaHorarios));
+    $('#inactividades, #sidebarmobile #inactividades').on('click', () => changeView(cargarVistaInactividades));
+    $('#seguridad, #sidebarmobile #seguridad').on('click', () => changeView(cargarVistaSeguridad));
+    $('#cerrarsesion, #sidebarmobile #cerrarsesion').on('click', async () => {
 
         if (await createConfirmPopup('Confirmación', '¿Estás seguro de cerrar sesión?', ['No', 'Sí'])) changeView(() => window.location.href = 'login.php?estado=3');
 
     }).on('mouseenter', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>')).on('mouseleave', () => $('#cerrarsesion').html('<i class="fas fa-sign-out-alt"></i>&nbsp;Cerrar Sesión'));
+
+    $('#btnopciones').on('click', desplegarSidebarMobile);
 
     switch ($('main').data('vista')) {
 
@@ -67,8 +69,10 @@ function cargarVistaPerfil() {
         integrarEventos();
     });
 
-    $('#sidebar #btnsuperiores button').css({ 'text-decoration': 'none' });
-    $('#miperfil').css({ 'text-decoration': 'underline' });
+    if($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
+
+    $('#sidebar #btnsuperiores button, #sidebarmobile #btnsuperiores button').css({ 'text-decoration': 'none' });
+    $('#miperfil, #sidebarmobile #miperfil').css({ 'text-decoration': 'underline' });
     $('#seccionescss').prop('href', 'css/perfil/miperfil.css');
 }
 
@@ -183,8 +187,10 @@ function cargarVistaConsultas() {
         loadView(contenido);
     });
 
-    $('#sidebar #btnsuperiores button').css({ 'text-decoration': 'none' });
-    $('#misconsultas').css({ 'text-decoration': 'underline' });
+    if($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
+
+    $('#sidebar #btnsuperiores button, #sidebarmobile #btnsuperiores button').css({ 'text-decoration': 'none' });
+    $('#misconsultas, #sidebarmobile #misconsultas').css({ 'text-decoration': 'underline' });
     $('#seccionescss').prop('href', 'css/perfil/consultas.css');
 }
 
@@ -246,8 +252,10 @@ function cargarVistaHorarios() {
         });
     });
 
-    $('#sidebar #btnsuperiores button').css({ 'text-decoration': 'none' });
-    $('#horarios').css({ 'text-decoration': 'underline' });
+    if($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
+
+    $('#sidebar #btnsuperiores button, #sidebarmobile #btnsuperiores button').css({ 'text-decoration': 'none' });
+    $('#horarios, #sidebarmobile #horarios').css({ 'text-decoration': 'underline' });
     $('#seccionescss').prop('href', 'css/perfil/horarios.css');
 }
 
@@ -309,8 +317,10 @@ function cargarVistaInactividades() {
         });
     });
 
-    $('#sidebar #btnsuperiores button').css({ 'text-decoration': 'none' });
-    $('#inactividades').css({ 'text-decoration': 'underline' });
+    if($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
+
+    $('#sidebar #btnsuperiores button, #sidebarmobile #btnsuperiores button').css({ 'text-decoration': 'none' });
+    $('#inactividades, #sidebarmobile #cerrarsesion').css({ 'text-decoration': 'underline' });
     $('#seccionescss').prop('href', 'css/perfil/inactividades.css');
 }
 
@@ -392,8 +402,10 @@ function cargarVistaSeguridad() {
         });
     });
 
-    $('#sidebar #btnsuperiores button').css({ 'text-decoration': 'none' });
-    $('#seguridad').css({ 'text-decoration': 'underline' });
+    if($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
+
+    $('#sidebar #btnsuperiores button, #sidebarmobile #btnsuperiores button').css({ 'text-decoration': 'none' });
+    $('#seguridad, #sidebarmobile #seguridad').css({ 'text-decoration': 'underline' });
     $('#seccionescss').prop('href', 'css/perfil/seguridad.css');
 }
 
@@ -724,6 +736,17 @@ function cambiarContrasenia($1, $2, $3) {
         },
         error: (jqXHR, estado, outputError) => console.log("Error al procesar la solicitud: 3" + outputError + estado + jqXHR)
     });
+}
+
+function desplegarSidebarMobile() {
+
+    console.log('juansonlajs');
+
+    let sidebarmobile = $('#sidebarmobile');
+
+    if(sidebarmobile.hasClass('visible')) sidebarmobile.removeClass('visible').addClass('invisible');
+
+    else sidebarmobile.removeClass('invisible').addClass('visible');
 }
 
 function changeView(vista) {

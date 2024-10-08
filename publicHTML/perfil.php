@@ -83,14 +83,44 @@ else if (isset($_GET['estado'])) {
         <div id="opcionescontainer" class="p-2">
 
             <button id="btnopciones" type="button">
-                
+
                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
 
                     <path stroke="black" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"></path>
 
                 </svg>
-            
+
             </button>
+
+            <div id="sidebarmobile" class="invisible py-4">
+
+                <div id="btnsuperiores">
+
+                    <button id="miperfil">Mi Perfil</button>
+
+                    <?php if (isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])): ?>
+
+                        <button id="misconsultas">Mis Consultas</button>
+
+                    <?php
+
+                    endif;
+                    if (isset($_SESSION['odontologo']) && !isset($_SESSION['paciente'])):
+
+                    ?>
+
+                        <button id="horarios">Horarios</button>
+                        <button id="inactividades">Inactividades</button>
+
+                    <?php endif; ?>
+
+                    <button id="seguridad">Seguridad</button>
+
+                </div>
+
+                <button id="cerrarsesion"><i class="fas fa-sign-out-alt"></i>&nbsp;Cerrar Sesión</button>
+
+            </div>
 
         </div>
 
@@ -98,7 +128,7 @@ else if (isset($_GET['estado'])) {
 
     <div id="container">
 
-        <div id="sidebar" class="oculto py-4">
+        <div id="sidebar" class="py-4">
 
             <div id="btnsuperiores">
 

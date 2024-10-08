@@ -125,3 +125,28 @@
     letter-spacing: 2px;
     padding-right: calc(62px + 2rem);
 }
+
+@media screen and (width < 1000px) {
+
+    .dato {
+
+        height: 70px !important;
+    }
+
+    .lapizcontainer {
+
+        height: 70px !important;
+        padding-right: .6rem;
+        padding-left: .6rem;
+    }
+
+    .dato input {
+
+        font-size: 1.5rem !important;
+    }
+
+    .lapizeditar > img {
+
+        width: 30px !important;
+    }
+}

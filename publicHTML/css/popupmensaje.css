@@ -20,6 +20,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10000;
 }
 
 .mensaje-Popup {
@@ -101,4 +102,17 @@
 body {
 
     transition-duration: .5s;
+}
+
+@media screen and (width < 1000px) {
+    
+    .cont-mensaje-Popup {
+
+        width: 96% !important;
+    }
+
+    .btnCerrar, .btnConfirmar, .btnCancelar {
+
+        width: 60% !important;
+    }
 }
