@@ -527,7 +527,13 @@ function cargarVistaServicios() {
 
             let id = ($(this).attr('id'));
             $('main').load(`vistas/vistasadmin/vistaservicios.php?numservicio=` + $(this).attr('id'), function () {
-
+                //Agregar lo necesario para que funcione...
+                $('[id="mdC"]').eq(0).on('click', function () {
+                    alert("A");
+                });
+                $('[id="mdC"]').eq(1).on('click', function () {
+                    alert("s");
+                });
                 $('[id="mdF"]').eq(0).on('click', function () {
 
                     $('#inFile1').click();

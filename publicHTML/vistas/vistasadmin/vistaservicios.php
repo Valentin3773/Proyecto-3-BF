@@ -45,7 +45,7 @@ if (!isset($_GET['numservicio'])) {
 
         <div id="titulon">
             <h1><?= $servicio['nombre'] ?></h1>
-            <div class="lapizeditar lapizeditarc"><img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar"></div>
+            <div class="lapizeditar lapizeditarc"><img id="mdC" src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar"></div>
         </div>
 
         <div id="contimg" class="my-5">
@@ -95,7 +95,7 @@ if (!isset($_GET['numservicio'])) {
         <div class="form-group p-3">
             <div class="encabezadolabel">
                 <label for="descripcion">Descripcion</label>
-                <div class="lapizeditar lapizeditarc"><img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar"></div>
+                <div class="lapizeditar lapizeditarc"><img id="mdC" src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar"></div>
             </div>
             <textarea name="descripcion" id="descripcion" readonly><?= $servicio['descripcion'] ?></textarea>
         </div>
