@@ -248,4 +248,49 @@ main {
 
     scale: 1.05;
     filter: brightness(1.1);
-} 
+}
+
+@media screen and (width <= 1000px) {
+    
+    div#pasocontainer {
+
+        width: 98%;
+    }
+    button {
+
+        width: unset !important;
+    }
+    #enviarreserva {
+
+        width: 70% !important;
+    }
+    #btnsmov {
+
+        gap: 5% !important;
+    }
+    #btnsmov > button {
+
+        width: 45% !important;
+    }
+
+    header {
+
+        height: 8dvh !important;
+    }
+
+    a#logo {
+
+        width: 100% !important;
+        border-radius: 0 !important;
+    }
+
+    a#logo img {
+
+        width: 100px !important;
+    }
+
+    .progressbarcontainer {
+
+        display: none !important;
+    }
+}

@@ -24,9 +24,13 @@ $odontologos = $stmt->fetchAll();
                     <li id='" . $odontologo['idodontologo'] . "' class='odontologo'>
                         <input type='radio' id='" . $odontologo['idodontologo'] . "' name='odontologo' value='" . $odontologo['idodontologo'] . "'>
                         <label for='" . $odontologo['idodontologo'] . "'>" . $odontologo['nombre'] . " " . $odontologo['apellido'] . "</label>
-                        <img src='img/profile.jpg' alt='Foto del odontólogo'>
-                    </li>
                 ";
+
+                if(isset($odontologo['foto'])) echo "<img src='backend/almacenamiento/fotosdeperfil/{$odontologo['foto']}' alt='Foto del odontólogo'>";
+                
+                else echo "<img src='img/iconoperfil.png' alt='Foto del odontólogo'>";
+
+                echo "</li>";
             }
 
             ?>

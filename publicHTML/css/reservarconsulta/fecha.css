@@ -211,3 +211,21 @@ td {
     text-align: center;
     letter-spacing: 3px;
 }
+
+@media screen and (width <= 1000px) {
+    
+    #calendario {
+
+        width: 100% !important  ;
+    }
+
+    #calendariocontainer .fechaselec {
+
+        width: 90% !important;
+    }
+    
+    #dia {
+
+        font-size: 1.5rem !important;
+    }
+}

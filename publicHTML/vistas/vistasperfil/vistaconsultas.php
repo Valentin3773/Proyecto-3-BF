@@ -79,7 +79,7 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
 
     <div id="tituconsultascontainer" class="d-flex justify-content-center gx-0">
 
-        <h1 id="tituloconsultas" class="text-center">Mis Consultas</h1>
+        <h1 id="tituloconsultas" class="text-center subtitulo">Mis Consultas</h1>
 
     </div>
 
@@ -106,17 +106,15 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
                 echo '
 
                     <div class="consulta" data-fecha="' . $fechaA . '" data-hora="' . $hora . '">
-
-                        <div class="horacontainer">
-
-                            <span>Hasta:</span>
-                            <span id="hora">' . $horaA . '</span>
-
-                        </div>
-
+                    
                         <div class="asuntocontainer">
 
                             <span id="asunto">' . $asuntoA . '</span>
+
+                        </div>
+                        <div class="horacontainer">
+
+                            <span id="hora">' . $horaA . '</span>
 
                         </div>
 
@@ -158,16 +156,16 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
 
                 echo '
                     <div class="consulta" data-fecha="' . $fechaf . '" data-hora="' . $horaf . '">
-                        <div class="fechacontainer">
-                            <span>Fecha:</span>
-                            <span id="fecha">' . $fechaf . '</span>
-                        </div>
-                        <div class="horacontainer">
-                            <span>Hora:</span>
-                            <span id="hora">' . $horaf . '</span>
-                        </div>
                         <div class="asuntocontainer">
                             <span id="asunto">' . $asuntof . '</span>
+                        </div>
+                        <div class="fechahorawrapper">
+                            <div class="fechacontainer">
+                                <span id="fecha">' . $fechaf . '</span>
+                            </div>
+                            <div class="horacontainer">
+                                <span id="hora">' . $horaf . '</span>
+                            </div>
                         </div>
                     </div>
                 ';
@@ -207,24 +205,16 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
                 echo '
                     <div class="consulta" data-fecha=' . $fechaP . ' data-hora=' . $horaP . '>
                         
-                        <div class="fechacontainer">
-
-                            <span>Fecha:</span>
-                            <span id="fecha">' . $fechaP . '</span>
-
-                        </div>
-
-                        <div class="horacontainer">
-
-                            <span>Hora:</span>
-                            <span id="hora">' . $horaP . '</span>
-
-                        </div>
-
                         <div class="asuntocontainer">
-
-                            <span id="asunto">' . $asuntoP . '</span>
-
+                            <span id="asunto">' . $asuntof . '</span>
+                        </div>
+                        <div class="fechahorawrapper">
+                            <div class="fechacontainer">
+                                <span id="fecha">' . $fechaf . '</span>
+                            </div>
+                            <div class="horacontainer">
+                                <span id="hora">' . $horaf . '</span>
+                            </div>
                         </div>
 
                     </div>

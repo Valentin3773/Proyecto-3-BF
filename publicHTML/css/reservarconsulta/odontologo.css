@@ -53,19 +53,42 @@
 #elegirodontologo .odontologo label {
 
     background-color: #00B2FF;
-    padding: 2rem;
+    padding: 0 2rem;
     font-size: 1.5rem;
     border-radius: 10px 0 0 10px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, .4);
     font-weight: 600;
     width: 50%;
     text-align: center;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #elegirodontologo .odontologo img {
 
     height: 100px;
+    width: 100px;
     border-radius: 0 10px 10px 0;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, .4);
 }
 
+@media screen and (width <= 1000px) {
+    
+    ul {
+
+        padding: 0 !important;
+    }
+    #elegirodontologo label {
+        
+        width: unset !important;
+    }
+    #elegirodontologo h1 {
+
+        font-size: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -54,7 +54,7 @@
     transition-duration: .3s;
 }
 
-.consulta > div {
+.consulta > .asuntocontainer, .consulta > .fechahorawrapper > div {
 
     background-color: white;
     width: 33.3%;
@@ -67,11 +67,8 @@
     font-size: 1.8rem;
     font-weight: 450;
     box-shadow: 0 0 3px rgba(0, 0, 0, .45);
-}
-
-.consulta .fechacontainer {
-
-    border-radius: 20px 0 0 20px;
+    padding: .3rem !important;
+    height: unset !important;
 }
 
 #consultasencurso .consulta .horacontainer {
@@ -79,7 +76,7 @@
     border-radius: 20px 0 0 20px;
 }
 
-#consultasencurso .consulta>div {
+#consultasencurso .consulta > div {
 
     width: 50%;
 }
@@ -89,6 +86,15 @@
     border-radius: 0 20px 20px 0;
 }
 
+.consulta .fechahorawrapper > div {
+
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
 #consultasfuturas,
 #consultasprevias,
 #consultasencurso {
@@ -96,6 +102,11 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.consulta .fechacontainer {
+
+    border-radius: 0 0 0 20px;
 }
 
 .consulta:hover {

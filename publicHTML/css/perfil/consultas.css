@@ -44,6 +44,49 @@
     filter: brightness(1.1);
 }
 
+.consulta {
+
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 5px 10px !important;
+}
+
+.consulta > div {
+
+    width: 100% !important;
+}
+
+.consulta .fechahorawrapper {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: transparent;
+    box-shadow: none !important;
+    width: 100% !important;
+    gap: 10px;
+}
+
+.consulta .fechahorawrapper > div {
+
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.consulta .horacontainer {
+
+    border-radius: 0 0 20px 0;
+}
+
+.consulta .asuntocontainer {
+
+    border-radius: 20px 20px 0 0 !important;
+}
+
 h3, span {
 
     width: 100%;
@@ -55,4 +98,55 @@ h3, span {
 h3 {
 
     font-size: 2rem;
+}
+
+@media screen and (width <= 1000px) {
+    
+    h3 {
+
+        font-size: 1.5rem !important;
+    }
+
+    #btnreservar {
+
+        font-size: 1.5rem !important;
+    }
+
+    .consulta {
+
+        padding: .6rem !important;
+        gap: 8px !important;
+        height: 170px !important;
+    }
+
+    .consulta span {
+
+        font-size: 1.5rem !important;
+    }
+
+    .separador span {
+
+        font-size: 1.5rem !important;
+    }
+
+    .fechahorawrapper {
+
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+
+    .fechahorawrapper > div {
+
+        width: 100% !important;
+    }
+
+    div.fechacontainer {
+
+        border-radius: 0 !important;
+    }
+
+    div.horacontainer {
+
+        border-radius: 0 0 20px 20px !important;
+    }
 }
