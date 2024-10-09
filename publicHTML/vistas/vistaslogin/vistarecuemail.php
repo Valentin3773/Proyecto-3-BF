@@ -46,7 +46,7 @@
                     <label for="" id="contColor" class="text-white px-5 rounded-top">Documento</label>
                 </div>
                 <div>
-                    <input id="inDocumento" type="text" class="form-control" name="" id="" title="Ingrese su Documento" placeholder="Ingrese su documento">
+                    <input id="inDocumento" type="number" class="form-control" name="" id="" title="Ingrese su Documento" placeholder="Ingrese su documento">
                 </div>
             </div>
 

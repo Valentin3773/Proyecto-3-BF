@@ -115,7 +115,31 @@ function cargarVistaRecuperarPass() {
     });
 }
 function recuemail($nombre,$apellido,$documento){
-    alert($nombre+$apellido+$documento);
+    if($nombre == "" || $nombre == null) {
+        createPopup("Nuevo aviso","Le falto rellenar los datos");
+    } else if ($apellido == "" || $apellido == null) {
+        createPopup("Nuevo aviso","Le falto rellenar los datos");
+    } else if ($documento == "" || $documento == null) {
+        createPopup("Nuevo aviso","Le falto rellenar los datos");
+    } else {
+        let formData = new FormData();
+        formData.append('nombre',$nombre);
+        formData.append('apellido',$apellido);
+        formData.append('documento',$documento);
+        $.ajax({
+            type: "POST",
+            url: "backend/login/recuemail.php",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                createPopup('Nuevo aviso', response);
+            }, 
+            error: () => {
+                createPopup("No puede ser",'Ocurrio un error :3');
+            }
+        });
+    }
 }
 function recucontra($email) {
     
@@ -156,10 +180,10 @@ function verificarCodigo($codigo,$pass,$repass,$secp){
         processData: false,
         contentType: false,
         success: function (response) {
-            alert(response);
+            createPopup("Nuevo aviso",response);
         }, 
         error: () => {
-            alert('Ocurrio un error :3');
+            createPopup("Nuevo aviso",'Ocurrio un error :3');
         }
     });
 }
