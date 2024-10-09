@@ -101,7 +101,21 @@ function cargarVistaRecuperarPass() {
             $email = $('#inEmail').val();
             recucontra($email);
         });
+        $('.btnEmail').off("click");
+        $('.btnEmail').on('click', function () {
+            $.get("vistas/vistaslogin/vistarecuemail.php", data => {
+                $('#btnvolver').on('click', volverLogin);
+                $('main').html(data);
+                $('.btnRecu').on('click', function (e) {
+                    e.preventDefault();
+                    recuemail($('#inNombre').val(),$('#inApellido').val(),$('#inDocumento').val());
+                });
+            });
+        });
     });
+}
+function recuemail($nombre,$apellido,$documento){
+    alert($nombre+$apellido+$documento);
 }
 function recucontra($email) {
     
@@ -155,7 +169,6 @@ function cargarCodigoEmail($codigo){
         $('main').html(data);
         $('.btnRecu').on('click', function (e) {
             e.preventDefault();
-            $email = $('#inEmail').val();
             if($('#inContra').val() === $('#inConcontra').val()){
                 verificarCodigo($('#inCodigo').val(),$('#inContra').val(),$('#inConcontra').val(),$codigo);
             } else {

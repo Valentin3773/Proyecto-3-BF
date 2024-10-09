@@ -26,7 +26,8 @@ function cambiarcontra(){
         
         if($stmt->rowCount() > 0){
             $codigo = generateToken("Pepe");
-            $_SESSION['codigo'] = $codigo[1];
+            $data = array ('codigo' => $codigo[1],'email' => $email); 
+            $_SESSION = $data;
             //No mover, demora mucho el phpmailer
             enviarEmail($codigo, $email);
         } else {
