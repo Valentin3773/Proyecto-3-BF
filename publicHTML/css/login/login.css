@@ -210,7 +210,7 @@ main {
 input,
 textarea,
 button[type='submit'],
-#btnregistrarsel {
+#btnregistrarsel, #buttonRecu button {
 
     width: 100%;
     border: none;
@@ -220,7 +220,7 @@ button[type='submit'],
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 130%;
     border: .5px solid rgba(0, 0, 0, 0.4);
-    transition-duration: .3s;
+    transition: all .3s;
 }
 
 label {
@@ -262,9 +262,7 @@ form {
     height: 100dvh;
 }
 
-#ingresar,
-#ingresarad,
-#btnregistrarsel {
+#ingresar, #ingresarad, #btnregistrarsel, #buttonRecu button {
 
     color: white;
     background-color: #00B2FF;
@@ -277,13 +275,17 @@ form {
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
 
-#ingresar:hover, #btnregistrarsel:hover, #ingresarad:hover {
+#ingresar:hover,
+#btnregistrarsel:hover,
+#ingresarad:hover, #buttonRecu button:hover {
 
     scale: 1.01;
     filter: brightness(1.15);
 }
 
-#ingresar:active, #btnregistrarsel:active, #ingresarad:active {
+#ingresar:active,
+#btnregistrarsel:active,
+#ingresarad:active, #buttonRecu button:active {
 
     scale: .99;
     filter: brightness(1.25);
@@ -349,7 +351,7 @@ h1 {
 
 #formLogin {
 
-    background-color: rgba(96,245,255,.2);
+    background-color: rgba(96, 245, 255, .2);
 }
 
 #sideimg {
@@ -363,10 +365,10 @@ h1 {
 }
 
 @media screen and (width < 992px) {
-    
+
     #sideimg {
 
-        display: none !important; 
+        display: none !important;
     }
 }
 
@@ -426,6 +428,24 @@ body {
         background-repeat: no-repeat;
         filter: contrast(1.5);
     }
+
+    #ingresar,
+    #ingresarad,
+    #btnregistrarsel,
+    #buttonRecu button {
+
+        font-size: 150% !important;
+    }
+
+    #formLogin {
+
+        padding: .6rem !important;
+    }
+
+    #logincontent span {
+
+        font-size: 100% !important;
+    }
 }
 
 
@@ -483,6 +503,21 @@ body {
         background-repeat: no-repeat;
         filter: contrast(1.5);
     }
+
+    #ingresar, #ingresarad, #btnregistrarsel, #buttonRecu button {
+
+        font-size: 140% !important;
+    }
+
+    #formLogin {
+
+        padding: .6rem !important;
+    }
+
+    #logincontent span {
+
+        font-size: 100% !important;
+    }
 }
 
 @media screen and (max-width: 1299px) and (min-width: 900px) {
@@ -515,7 +550,7 @@ body {
 
 .volver:before,
 .volver:after {
-    
+
     content: "";
     position: absolute;
     border-radius: 50%;
@@ -579,6 +614,7 @@ body {
     transition: 0.4s;
     transform: translateX(-64px);
 }
+
 body {
 
     transition-duration: .5s;

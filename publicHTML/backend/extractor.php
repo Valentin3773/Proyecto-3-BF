@@ -865,3 +865,26 @@ function getFechaHorasConsulta(string $fecha, string $hora, int $duracion): arra
 
     return $fechahoras;
 }
+
+function formatDateTime(string $tiempo, string $formatoinicial, string $formatofinal): string {
+
+    $tiempoFormateado = DateTime::createFromFormat($formatoinicial, $tiempo);
+
+    $tiempoFormateado = $tiempoFormateado->format($formatofinal);
+
+    return $tiempoFormateado;
+}
+
+function formatDateTimeArray(array $tiempos, string $formatoinicial, string $formatofinal): array {
+
+    $tiemposFormateados = [];
+
+    foreach($tiempos as $tiempo) {
+
+        $tiempoFormateado = DateTime::createFromFormat($formatoinicial, $tiempo);
+
+        $tiemposFormateados[] = $tiempoFormateado->format($formatofinal);
+    }
+
+    return $tiemposFormateados;
+}

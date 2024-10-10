@@ -375,6 +375,7 @@ header#headermobile {
         height: 100% !important;
         border: none;
         border-radius: 0 !important;
+        padding: .4rem !important;
     }
 
     header#headermobile {
@@ -401,6 +402,19 @@ header#headermobile {
         background-color: transparent !important;
         border: none !important;
         padding: .45rem;
+        transition-duration: .3s;
+    }
+
+    #headermobile #logocontainer img:hover {
+        
+        scale: 1.03;
+        filter: brightness(1.1);
+    }
+
+    #headermobile #logocontainer img:active {
+        
+        scale: .97;
+        filter: brightness(1.2);
     }
 
     #headermobile #btnopciones {
@@ -411,6 +425,13 @@ header#headermobile {
         border-radius: 12px;
         box-shadow: 4px 4px 0 #9B9B9B;
         background-color: white;
+        transition-duration: .3s;
+    }
+
+    #headermobile #btnopciones:active {
+
+        scale: .97;
+        filter: brightness(1.2);
     }
 
     .subtitulo {

@@ -45,7 +45,7 @@ if(isset($_SESSION['paciente']) || isset($_SESSION['odontologo'])) header('Locat
                         <label for="inemail" class="text-end row">Email</label>
                     </div>
                     <div>
-                        <input type="text" name="email" id="inemail" title="Ingrese su correo electrónico" placeholder="Ingrese su correo electrónico" required autofocus>
+                        <input type="email" name="email" id="inemail" title="Ingrese su correo electrónico" placeholder="Ingrese su correo electrónico" required autofocus>
                     </div>
 
                 </div>

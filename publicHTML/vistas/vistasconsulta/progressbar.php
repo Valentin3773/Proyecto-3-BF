@@ -1,7 +1,7 @@
 <style>
     #progressbar {
         height: 80%;
-        width: 70%;
+        width: 100% !important;
         background-color: #4294FF;
         border-radius: 40px;
         display: flex;

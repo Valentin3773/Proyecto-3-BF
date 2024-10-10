@@ -82,7 +82,11 @@
     }
     #elegirodontologo label {
         
-        width: unset !important;
+        font-size: 1.2rem !important;
+    }
+    #elegirodontologo input {
+        
+        width: 30px !important;
     }
     #elegirodontologo h1 {
 
@@ -90,5 +94,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    
+    #elegirodontologo .odontologo {
+
+        width: 100% !important;
     }
 }

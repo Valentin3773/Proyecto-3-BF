@@ -1,56 +1,52 @@
 #containerRecuPass {
+
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-#contColor{
+#contColor {
+
     background-color: #00B2FF;
     font-weight: bold;
 }
-#buttonRecu button{
-    box-shadow: 1.5px 3px 0 #9B9B9B, 0 4px 4px rgba(0, 0, 0, 0.25);
+
+#contenedor_formulario {
+
+    text-align: left !important;
 }
 
+.contBTN {
 
-
-.contBTN{
     width: -webkit-fill-available;
-
-}
-#inEmail{
-    border-radius: 0px 10px 10px 10px;
-    padding: 10px 0 10px 0;
 }
 
-@font-face {
-    font-family: RobotoSerif;
-    src: url(../../font/Roboto_Serif/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf);
-}
-
-#Serif, #contColor, #inEmail{
-    font-family: RobotoSerif !important;
-}
-
-.H1{
+.H1 {
     font-weight: bold !important;
     font-size: xx-large !important;
     color: #00B2FF !important;
     text-shadow: 2px 2px gray !important;
 }
-.H2,.H5{
+
+.H2,
+.H5 {
     color: unset !important;
     font-weight: normal !important;
     text-shadow: none;
 }
-.H4,.H6{
+
+.H4,
+.H6 {
     font-size: xx-large;
 }
-#logaso{
+
+#logaso {
     width: 10rem;
 }
-#formRecuPass{
+
+#formRecuPass {
+
     box-shadow: none;
     background-color: rgba(96, 245, 255, .2);
 }

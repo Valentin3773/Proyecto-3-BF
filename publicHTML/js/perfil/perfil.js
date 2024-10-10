@@ -1,6 +1,6 @@
 $(() => {
 
-    $('#miperfil, #sidebarmobile #miperfil').on('click', () => changeView(cargarVistaPerfil));
+    $('#miperfil, #sidebarmobile #miperfil, #headermobile #logocontainer > img').on('click', () => changeView(cargarVistaPerfil));
     $('#misconsultas, #sidebarmobile #misconsultas').on('click', () => changeView(cargarVistaConsultas));
     $('#horarios, #sidebarmobile #horarios').on('click', () => changeView(cargarVistaHorarios));
     $('#inactividades, #sidebarmobile #inactividades').on('click', () => changeView(cargarVistaInactividades));

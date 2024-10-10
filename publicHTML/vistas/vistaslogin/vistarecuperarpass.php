@@ -1,4 +1,4 @@
-<button class="volver" id="btnvolver" onclick="location.href = './login.php';">
+<button class="volver" id="btnvolver">
     <div class="volver-box">
         <span class="volver-elem">
             <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
@@ -16,29 +16,31 @@
 </button>
 
 <div class="container" id="containerRecuPass">
-    
+
     <link rel="stylesheet" href="./css/login/recuperarpass.css">
     <div class="text-center">
         <div class="d-flex justify-content-center row text-center">
             <img src="./img/logaso.png" id="logaso" alt="">
-            <label for="" id="Serif" class="H1">Recuperar Contraseña</label>
+            <h1 class="text-center w-100 mt-3">Recuperar Contraseña</h1>
         </div>
         <form class="form-control mt-3 pt-4 px-4" id="formRecuPass" action="" method="post">
             <label id="Serif" for="" class="H2">Se enviará un código de verificación a tu casilla de correo electrónico.</label>
-            <div class="form-group row d-flex mt-4">
-                <div class="d-flex">
-                    <label for="" id="contColor" class="text-white px-5 rounded-top">Email</label>
+            <div id="contenedor_formulario" class="mb-4">
+
+                <div id="titulo_input">
+                    <label for="inEmail" class="text-end row">Email</label>
                 </div>
                 <div>
-                    <input id="inEmail" type="email" class="form-control" name="" id="" title="Ingrese su correo electrónico" placeholder="Ingrese su correo electrónico">
+                    <input type="email" name="email" id="inEmail" title="Ingrese su correo electrónico" placeholder="Ingrese su correo electrónico" required autofocus>
                 </div>
+
             </div>
             <div id="buttonRecu">
                 <button id="contColor" class="btnRecu mt-4 mb-4 btn contBTN text-white H4">Enviar Código</button>
             </div>
         </form>
         <div id="buttonRecu" class="mt-5 row justify-content-center">
-            <label for="" id="Serif" class="H5">¿Has olvidado tu email?</label>
+            <span>¿Has olvidado tu email?</span>
             <button id="contColor" class="btnEmail mt-2 btn text-white H6 contColorH6">Recuperar correo electrónico</button>
         </div>
     </div>

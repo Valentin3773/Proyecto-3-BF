@@ -127,7 +127,7 @@
     height: 50px;
     width: 80%;
     background-color: #E84141;
-    border-radius: 50%;
+    border-radius: 25%;
     text-align: center;
     padding: 10px;
     font-size: 2rem;
@@ -227,5 +227,6 @@ td {
     #dia {
 
         font-size: 1.5rem !important;
+        border-radius: 25% !important;
     }
 }

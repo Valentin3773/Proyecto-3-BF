@@ -69,6 +69,24 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
 
         $nompaciente = "{$tupla['nombre']} {$tupla['apellido']}";
     }
+
+    foreach($consultasActuales as &$consultaActual) {
+
+        $consultaActual['fecha'] = formatDateTime($consultaActual['fecha'], 'Y-m-d', 'd/m/Y');
+        $consultaActual['hora'] = formatDateTime($consultaActual['hora'], 'H:i:s', 'H:i');
+    }
+
+    foreach($consultasFuturas as &$consultaFutura) {
+
+        $consultaFutura['fecha'] = formatDateTime($consultaFutura['fecha'], 'Y-m-d', 'd/m/Y');
+        $consultaFutura['hora'] = formatDateTime($consultaFutura['hora'], 'H:i:s', 'H:i');
+    }
+
+    foreach($consultasPrevias as &$consultaPrevia) {
+
+        $consultaPrevia['fecha'] = formatDateTime($consultaPrevia['fecha'], 'Y-m-d', 'd/m/Y');
+        $consultaPrevia['hora'] = formatDateTime($consultaPrevia['hora'], 'H:i:s', 'H:i');
+    }
 }
 
 ?>

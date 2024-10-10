@@ -1,4 +1,4 @@
-<button class="volver" id="btnvolver" onclick="location.href = './login.php';">
+<button class="volver" id="btnvolver">
     <div class="volver-box">
         <span class="volver-elem">
             <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
@@ -16,38 +16,47 @@
 </button>
 
 <div class="container" id="containerRecuPass">
-    
+
     <link rel="stylesheet" href="./css/login/recuperarpass.css">
     <div class="text-center">
         <div class="d-flex justify-content-center row text-center">
             <img src="./img/logaso.png" id="logaso" alt="">
-            <label for="" id="Serif" class="H1">Recuperar Email</label>
+            <h1 class="text-center w-100 mt-3">Recuperar Email</h1>
         </div>
         <form class="form-control mt-3 pt-4 px-4" id="formRecuPass" action="" method="post">
+
             <label id="Serif" for="" class="H2">Necesitamos que ingreses algunos datos para saber que eres el propietario.</label>
-            <div class="form-group row d-flex mt-4">
-                <div class="d-flex">
-                    <label for="" id="contColor" class="text-white px-5 rounded-top">Nombre</label>
+            <div id="contenedor_formulario" class="mb-4 text-start">
+
+                <div id="titulo_input">
+                    <label for="inNombre" class="text-end row">Nombre</label>
                 </div>
                 <div>
-                    <input id="inNombre" type="text" class="form-control" name="" id="" title="Ingrese su nombre" placeholder="Ingrese su nombre">
+                    <input id="inNombre" type="text" name="" title="Ingrese su nombre" placeholder="Ingrese su nombre">
                 </div>
+
             </div>
-            <div class="form-group row d-flex mt-4">
-                <div class="d-flex">
-                    <label for="" id="contColor" class="text-white px-5 rounded-top">Apellido</label>
+
+            <div id="contenedor_formulario" class="mb-4 text-start">
+
+                <div id="titulo_input">
+                    <label for="inApellido" class="text-end row">Apellido</label>
                 </div>
                 <div>
-                    <input id="inApellido" type="text" class="form-control" name="" id="" title="Ingrese su apellido" placeholder="Ingrese su apellido">
+                    <input id="inApellido" type="text" name="" title="Ingrese su apellido" placeholder="Ingrese su apellido">
                 </div>
+
             </div>
-            <div class="form-group row d-flex mt-4">
-                <div class="d-flex">
-                    <label for="" id="contColor" class="text-white px-5 rounded-top">Documento</label>
+
+            <div id="contenedor_formulario" class="mb-4 text-start">
+
+                <div id="titulo_input">
+                    <label for="inDocumento" class="text-end row">Documento</label>
                 </div>
-                <div>
-                    <input id="inDocumento" type="number" class="form-control" name="" id="" title="Ingrese su Documento" placeholder="Ingrese su documento">
+                <div>                                
+                    <input id="inDocumento" type="text" name="" title="Ingrese su Documento" placeholder="Ingrese su documento">
                 </div>
+                
             </div>
 
             <div id="buttonRecu">

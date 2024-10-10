@@ -157,7 +157,7 @@ header {
 
 #logo img {
 
-    width: 150px;
+    width: 130px;
     transition-duration: .25s;
 }
 
@@ -213,7 +213,7 @@ main {
 
     border-radius: 30px;
     background-color: rgb(0, 178, 255, .45);
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     padding: 1rem;
     width: 20%;
     text-decoration: none;
@@ -286,11 +286,16 @@ main {
 
     a#logo img {
 
-        width: 100px !important;
+        width: 75px !important;
     }
 
     .progressbarcontainer {
 
         display: none !important;
+    }
+
+    h1#formheader {
+
+        font-size: 1.5rem !important;
     }
 }

@@ -144,3 +144,28 @@ label {
     font-size: 110%;
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+@media screen and (width <= 1000px) {
+    
+    #detalles {
+
+        width: 100% !important;
+        padding: .7rem !important;
+        border-radius: 0 0 20px 20px !important;
+    }
+
+    #detalles .clave {
+
+        font-size: 1.2rem !important;
+    }
+
+    #detalles .valor {
+
+        font-size: 1.2rem !important;
+    }
+
+    #formbody {
+
+        padding: 0 !important;
+    }
+}

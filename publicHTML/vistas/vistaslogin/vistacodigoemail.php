@@ -1,4 +1,4 @@
-<button class="volver" id="btnvolver" onclick="location.href = './login.php';">
+<button class="volver" id="btnvolver">
     <div class="volver-box">
         <span class="volver-elem">
             <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
@@ -25,33 +25,41 @@
         </div>
         <form class="form-control mt-3 pt-4 px-4" id="formRecuPass" action="" method="post" autocomplete="off">
             <label id="Serif" for="" class="H2">Debe Ingresar el codigo que le llego a su correo, ademas de ingresar la nueva constraseña</label>
-            <div class="form-group row d-flex mt-4">
-                <div class="d-flex">
-                    <label for="" id="contColor" class="text-white px-5 rounded-top">Codigo</label>
+            <div id="contenedor_formulario" class="mb-4 text-start">
+                <div id="titulo_input">
+                    <label for="inCodigo" class="text-end row">Código</label>
                 </div>
-                <div>
-                    <input id="inCodigo" type="text" class="form-control" name="" id="" title="Ingrese el codigo aquí" placeholder="Ingrese el codigo aquí" >
-                </div>
-            </div>
-            <div class="form-group row d-flex mt-4">
-                <div class="d-flex">
-                    <label for="" id="contColor" class="text-white px-5 rounded-top">Nueva Contraseña</label>
-                </div>
-                <div>
-                    <input id="inContra" type="password" class="form-control" name="" id="" title="Ingrese su nueva contraseña" placeholder="Ingrese su nueva contraseña">
+                <div>                                
+                    <input id="inCodigo" type="text" name="" title="Ingrese el codigo aquí" placeholder="Ingrese el codigo aquí" >
                 </div>
             </div>
-            <div class="form-group row d-flex mt-4">
-                <div class="d-flex">
-                    <label for="" id="contColor" class="text-white px-5 rounded-top">Repita la Contraseña</label>
+
+            <div id="contenedor_formulario" class="mb-4 text-start">
+
+                <div id="titulo_input">
+                    <label for="inContra" class="text-end row">Nueva contraseña</label>
                 </div>
                 <div>
-                    <input id="inConcontra" type="password" class="form-control" name="" id="" title="Repita la nueva contraseña" placeholder="Repita la nueva contraseña">
+                    <input id="inContra" type="password" name="" title="Ingrese su nueva contraseña" placeholder="Ingrese su nueva contraseña">
                 </div>
+
             </div>
+
+            <div id="contenedor_formulario" class="mb-4 text-start">
+
+                <div id="titulo_input">
+                    <label for="inConcontra" class="text-end row">Repetir nueva contraseña</label>
+                </div>
+                <div>                    
+                    <input id="inConcontra" type="password" name="" title="Repita la nueva contraseña" placeholder="Repita la nueva contraseña">
+                </div>
+
+            </div>
+
             <div id="buttonRecu">
                 <button id="contColor" class="btnRecu mt-4 mb-4 btn contBTN text-white H4">Enviar Código</button>
             </div>
+
         </form>
     </div>
 
