@@ -15,10 +15,10 @@
     </div>
 </button>
 
-<div class="container" id="containerRecuPass">
+<div class="container mt-3" id="containerRecuPass">
 
     <link rel="stylesheet" href="./css/login/recuperarpass.css">
-    <div class="text-center">
+    <div class="text-center mb-3">
         <div class="d-flex justify-content-center row text-center">
             <img src="./img/logaso.png" id="logaso" alt="">
             <h1 class="text-center w-100 mt-3">Recuperar Email</h1>
@@ -56,11 +56,11 @@
                 <div>                                
                     <input id="inDocumento" type="text" name="" title="Ingrese su Documento" placeholder="Ingrese su documento">
                 </div>
-                
+            
             </div>
 
             <div id="buttonRecu">
-                <button id="contColor" class="btnRecu mt-4 mb-4 btn contBTN text-white H4">Recuperar email</button>
+                <button id="contColor" class="btnRecu mb-4 btn contBTN text-white H4">Recuperar email</button>
             </div>
         </form>
     </div>

@@ -400,6 +400,17 @@ body {
         overflow-x: hidden;
     }
 
+    #formRegistrar {
+
+        padding: .6rem !important;
+    }
+
+    #formRegistrar #contenedor_formulario_registro {
+
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+
     #sideimg {
         display: none;
     }
@@ -446,6 +457,21 @@ body {
 
         font-size: 100% !important;
     }
+        
+    label {
+
+        font-size: 120%;
+    }
+
+    #logocontainer img {
+
+        width: 140px !important;
+    }
+
+    #formRecuPass {
+
+        padding: 0 !important;
+    }
 }
 
 
@@ -461,9 +487,16 @@ body {
         overflow-x: hidden;
     }
 
+    #formRegistrar {
 
-    #contenedor_formulario_registro {
-        margin-bottom: 35px !important;
+        padding: .6rem !important;
+    }
+
+    #formRegistrar #contenedor_formulario_registro {
+
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+        /* margin-bottom: 35px !important; */
     }
 
     #sideimg {
@@ -517,6 +550,21 @@ body {
     #logincontent span {
 
         font-size: 100% !important;
+    }
+    
+    label {
+
+        font-size: 120%;
+    }
+
+    #logocontainer img {
+
+        width: 140px !important;
+    }
+
+    #formRecuPass {
+
+        padding: .5rem !important;
     }
 }
 

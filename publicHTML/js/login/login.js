@@ -117,6 +117,8 @@ function cargarVistaRecuperarPass() {
             }));
         });
     });
+
+    $('body')[0].style.setProperty('height', 'unset', 'important');
 }
 
 function recuemail($nombre, $apellido, $documento) {
@@ -214,6 +216,8 @@ function cargarCodigoEmail($codigo) {
             else createPopup("Nuevo Aviso", "Las contraseñas ingresadas no coinciden");
         });
     });
+
+    $('body')[0].style.setProperty('height', 'unset', 'important');
 }
 function volverInicio() {
 

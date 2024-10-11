@@ -15,7 +15,7 @@
     </div>
 </button>
 
-<div class="container" id="containerRecuPass">
+<div class="container mt-3" id="containerRecuPass">
 
     <link rel="stylesheet" href="./css/login/recuperarpass.css">
     <div class="text-center">
@@ -36,10 +36,10 @@
 
             </div>
             <div id="buttonRecu">
-                <button id="contColor" class="btnRecu mt-4 mb-4 btn contBTN text-white H4">Enviar Código</button>
+                <button id="contColor" class="btnRecu my-2 btn contBTN text-white H4">Enviar Código</button>
             </div>
         </form>
-        <div id="buttonRecu" class="mt-5 row justify-content-center">
+        <div id="buttonRecu" class="mt-2 px-3 row justify-content-center">
             <span>¿Has olvidado tu email?</span>
             <button id="contColor" class="btnEmail mt-2 btn text-white H6 contColorH6">Recuperar correo electrónico</button>
         </div>

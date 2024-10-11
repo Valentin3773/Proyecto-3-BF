@@ -1,11 +1,3 @@
-#containerRecuPass {
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
 #contColor {
 
     background-color: #00B2FF;
