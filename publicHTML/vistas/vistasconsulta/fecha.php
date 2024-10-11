@@ -64,9 +64,9 @@
 
         <div id="btnsmov">
 
-            <button id='anteriorform'>Anterior</button>
+            <button id='anteriorform' type="button">Anterior</button>
 
-            <button id='siguienteform'>Siguiente</button>
+            <button id='siguienteform' type="button">Siguiente</button>
 
         </div>
 

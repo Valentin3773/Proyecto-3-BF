@@ -72,7 +72,7 @@ reloadSession();
 
                 <div id="enviarcontainer">
 
-                    <button id="enviarreserva" disabled>Enviar</button>
+                    <button type="button" id="enviarreserva" disabled>Enviar</button>
 
                 </div>
 

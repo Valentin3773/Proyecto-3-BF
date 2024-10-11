@@ -1,42 +1,51 @@
 <?php 
+
 include('../extractor.php');
 session_start();
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-//uso require_once porque si no da conflicto con el namespace del phpmailer
+// uso require_once porque si no da conflicto con el namespace del phpmailer
 require_once '../../lib/PHPMailer/PHPMailer.php';
 require_once '../../lib/PHPMailer/Exception.php';
 require_once '../../lib/PHPMailer/SMTP.php';
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    cambiarcontra();
-}  else {
-    exit();
-}
+if($_SERVER['REQUEST_METHOD'] == 'POST') cambiarcontra();
 
-function cambiarcontra(){
+else exit();
+
+function cambiarcontra() {
+
+    global $pdo;
+
     $email = htmlspecialchars(strip_tags($_POST['email']));
-    if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-        global $pdo;
+
+    if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
         $chekeo = "SELECT * FROM paciente WHERE email = :email";
         $stmt = $pdo->prepare($chekeo);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         
-        if($stmt->rowCount() > 0){
+        if($stmt->rowCount() > 0) {
+
             $codigo = generateToken("Pepe");
             $data = array ('codigo' => $codigo[1],'email' => $email); 
             $_SESSION = $data;
             //No mover, demora mucho el phpmailer
             enviarEmail($codigo, $email);
-        } else {
+        } 
+        else {
+
             $respuesta = array('noexiste' => "No existe ningun usuario registrado con el email seleccionado");
             header('Content-Type: application/json');
             echo json_encode($respuesta);
             exit();
         }
-    } else {
+    }
+    else {
+
         $respuesta = array('noexiste' => "Correo ingresado no válido");
         header('Content-Type: application/json');
         echo json_encode($respuesta);
@@ -44,8 +53,7 @@ function cambiarcontra(){
     }
 }
 
-
-function enviarEmail($codigo,$email) {
+function enviarEmail($codigo, $email) {
 
     // Configuración de PHPMailer
 
@@ -106,7 +114,7 @@ function enviarEmail($codigo,$email) {
                                 </head>
                                 <body>
                                     <div class='container'>
-                                    <h1>Codigo de cambio de contraseña</h1>
+                                    <h1>Código de cambio de contraseña</h1>
                                     <h3>$codigo[1]</h3>
                                     <p class='footer'>Este es un mensaje automático, por favor no responda directamente a este correo.</p>
                                     </div>
@@ -125,11 +133,12 @@ function enviarEmail($codigo,$email) {
         $mail->Body = $mensaje;
 
         $mail->send(); // Enviar correo
+
         $datos = [
+
             "respuesta" => "Correo enviado con exito",
             "codigo" => $codigo[0]
         ];
-    
     } 
     catch (Exception $e) {
 
@@ -139,4 +148,5 @@ function enviarEmail($codigo,$email) {
     echo json_encode($datos);
     exit();
 }
+
 ?>

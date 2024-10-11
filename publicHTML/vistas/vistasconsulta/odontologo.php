@@ -39,7 +39,7 @@ $odontologos = $stmt->fetchAll();
 
         <div id="btnsmov">
 
-            <button id='siguienteform'>Siguiente</button>
+            <button id='siguienteform' type="button">Siguiente</button>
 
         </div>
 

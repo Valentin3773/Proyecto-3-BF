@@ -16,15 +16,17 @@ $(() => {
         addReservaListeners();
     });
 
-    cargarVistaOdontologo();
+    $('#logo').on('click', () => changeView(cargarVistaOdontologo));
+
+    changeView(cargarVistaOdontologo());
 });
 
 function addReservaListeners() {
 
-    $('#progressbar .odontologo').on('click', () => { if (infoconsulta.odontologo !== null && infoconsulta.vistaactual !== 'odontologo') cargarVistaOdontologo() });
-    $('#progressbar .fecha').on('click', () => { if (infoconsulta.odontologo !== null && infoconsulta.vistaactual !== 'fecha') cargarVistaFecha() });
-    $('#progressbar .hora').on('click', () => { if (infoconsulta.fecha !== null && infoconsulta.vistaactual !== 'hora') cargarVistaHora() });
-    $('#progressbar .confirmar').on('click', () => { if (infoconsulta.hora !== null && infoconsulta.vistaactual !== 'confirmar') cargarVistaConfirmar() });
+    $('#progressbar .odontologo').on('click', () => { if (infoconsulta.odontologo !== null && infoconsulta.vistaactual !== 'odontologo') changeView(cargarVistaOdontologo) });
+    $('#progressbar .fecha').on('click', () => { if (infoconsulta.odontologo !== null && infoconsulta.vistaactual !== 'fecha') changeView(cargarVistaFecha) });
+    $('#progressbar .hora').on('click', () => { if (infoconsulta.fecha !== null && infoconsulta.vistaactual !== 'hora') changeView(cargarVistaHora) });
+    $('#progressbar .confirmar').on('click', () => { if (infoconsulta.hora !== null && infoconsulta.vistaactual !== 'confirmar') changeView(cargarVistaConfirmar) });
 }
 
 function cargarVistaOdontologo() {
@@ -34,7 +36,7 @@ function cargarVistaOdontologo() {
 
     $.get("vistas/vistasconsulta/odontologo.php", data => {
         
-        $('#pasocontainer').html(data);
+        loadView(data);
         console.log("Cargando vista de 'Elegir Odontólogo'");
 
         infoconsulta.vistaactual = 'odontologo';
@@ -85,7 +87,7 @@ function cargarVistaOdontologo() {
 
             if (infoconsulta.paso <= 2) infoconsulta.paso = 2;
 
-            cargarVistaFecha();
+            changeView(cargarVistaFecha);
         });
     });
 }
@@ -103,7 +105,7 @@ function cargarVistaFecha() {
 
     $.get("vistas/vistasconsulta/fecha.php", contenido => {
 
-        $('#pasocontainer').html(contenido);
+        loadView(contenido);
         console.log("Cargando vista de 'Elegir Fecha'");
 
         infoconsulta.vistaactual = 'fecha';
@@ -122,7 +124,7 @@ function cargarVistaFecha() {
         if (infoconsulta.fecha !== null) $('#elegirfecha #btnsmov #siguienteform').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' });
         else $('#elegirfecha #btnsmov #siguienteform').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, .45)' });
 
-        if (infoconsulta.paso >= 2) $('#elegirfecha #btnsmov #anteriorform').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).on('click', cargarVistaOdontologo);
+        if (infoconsulta.paso >= 2) $('#elegirfecha #btnsmov #anteriorform').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).on('click', () => changeView(cargarVistaOdontologo));
         else $('#elegirfecha #btnsmov #anteriorform, #enviarreserva').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, .45)' });
 
         $.ajax({
@@ -171,7 +173,7 @@ function cargarVistaFecha() {
             error: function (xhr, status, error) {
 
                 infoconsulta.paso = 1
-                cargarVistaOdontologo();
+                changeView(cargarVistaOdontologo);
                 createPopup('Error', 'Ha ocurrido un error');
                 console.error("Error fatal");
             }
@@ -187,7 +189,7 @@ function cargarVistaFecha() {
 
                 fechaselec = null;
 
-                cargarVistaHora();
+                changeView(cargarVistaHora);
             }
         });
     });
@@ -200,7 +202,7 @@ function cargarVistaHora() {
     
     $.get("vistas/vistasconsulta/hora.php", contenido => {
         
-        $('#pasocontainer').html(contenido);
+        loadView(contenido);
         console.log("Cargando vista de 'Elegir Hora'");
 
         infoconsulta.vistaactual = 'hora';
@@ -214,7 +216,7 @@ function cargarVistaHora() {
         $('#progressbar .paso').css({ 'text-decoration': 'none' });
         $('#progressbar .hora').css({ 'text-decoration': 'underline' });
 
-        if (infoconsulta.paso >= 3) $('#elegirhora #btnsmov #anteriorform').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).on('click', cargarVistaFecha);
+        if (infoconsulta.paso >= 3) $('#elegirhora #btnsmov #anteriorform').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).on('click', () => changeView(cargarVistaFecha));
         else $('#elegirhora #btnsmov #anteriorform, #enviarreserva').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, .45)' });
 
         $.ajax({
@@ -242,7 +244,7 @@ function cargarVistaHora() {
             error: function (xhr, status, error) {
 
                 infoconsulta.paso = 2;
-                cargarVistaFecha();
+                changeView(cargarVistaFecha);
                 createPopup('Error', 'Ha ocurrido un error');
                 console.error("Error fatal");
             }
@@ -265,7 +267,7 @@ function cargarVistaHora() {
 
             if (infoconsulta.paso <= 4) infoconsulta.paso = 4;
 
-            cargarVistaConfirmar();
+            changeView(cargarVistaConfirmar);
         });
     });
 }
@@ -277,7 +279,7 @@ function cargarVistaConfirmar() {
     
     $.get("vistas/vistasconsulta/confirmar.php", contenido => {
 
-        $('#pasocontainer').html(contenido);
+        loadView(contenido);
         console.log("Cargando vista de 'Confirmar Datos'");
 
         infoconsulta.vistaactual = 'confirmar';
@@ -302,7 +304,7 @@ function cargarVistaConfirmar() {
             error: function (xhr, status, error) {
 
                 infoconsulta.paso = 3;
-                cargarVistaHora();
+                changeView(cargarVistaHora);
                 createPopup('Error', 'Ha ocurrido un error');
                 console.error("Error fatal");
             }
@@ -383,4 +385,20 @@ function moveProgressBar() {
 
         case 4: moveBar(4); break;
     }
+}
+
+function changeView(vista) {
+
+    $('#pasocontainer').fadeOut(200, vista);
+    $('#pasocontainer')[0].scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function loadView(contenido) {
+
+    $('#pasocontainer').empty().html(contenido).fadeIn(200);
+}
+
+function changePage(pagina) {
+
+    $('body').fadeOut(300, () => window.location.href = pagina);
 }

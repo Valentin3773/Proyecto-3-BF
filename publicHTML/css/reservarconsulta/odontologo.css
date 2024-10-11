@@ -15,6 +15,9 @@
     border-radius: 10px 10px 0 0;
     text-align: center;
     height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #elegirodontologo .innercontainer {
@@ -91,13 +94,21 @@
     #elegirodontologo h1 {
 
         font-size: 1.5rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
     
     #elegirodontologo .odontologo {
 
         width: 100% !important;
+    }
+
+    .odontologo label {
+
+        height: 80px !important;
+    }
+
+    .odontologo img {
+
+        width: 80px !important;
+        height: 80px !important;
     }
 }

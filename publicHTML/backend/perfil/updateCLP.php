@@ -51,10 +51,11 @@ function UpdateProfilePaciente() {
 
         if($name == 'email') {
 
-            $consulta = "UPDATE paciente SET verificador = '' WHERE idpaciente = :idp";
-            $stmt->bindParam(':idp', $idp);
+            $sql = "UPDATE paciente SET verificador = '' WHERE idpaciente = :idp";
+            $stmt2 = $pdo->prepare($sql);
+            $stmt2->bindParam(':idp', $idp);
 
-            if($stmt->execute()) reloadSession();
+            if($stmt2->execute()) reloadSession();
         }
     } 
     catch (PDOException $e) {

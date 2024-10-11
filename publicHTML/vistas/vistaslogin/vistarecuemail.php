@@ -25,8 +25,8 @@
         </div>
         <form class="form-control mt-3 pt-4 px-4" id="formRecuPass" action="" method="post">
 
-            <label id="Serif" for="" class="H2">Necesitamos que ingreses algunos datos para saber que eres el propietario.</label>
-            <div id="contenedor_formulario" class="mb-4 text-start">
+            <span>Necesitamos que ingreses algunos datos para saber que eres el propietario.</span>
+            <div id="contenedor_formulario" class="mb-4 mt-3 text-start">
 
                 <div id="titulo_input">
                     <label for="inNombre" class="text-end row">Nombre</label>
@@ -60,7 +60,7 @@
             </div>
 
             <div id="buttonRecu">
-                <button id="contColor" class="btnRecu mb-4 btn contBTN text-white H4">Recuperar email</button>
+                <button id="contColor" class="btnRecu mb-2 btn contBTN text-white H4">Recuperar email</button>
             </div>
         </form>
     </div>

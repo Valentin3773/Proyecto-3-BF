@@ -65,7 +65,7 @@ if(isset($_SESSION['paciente']) || isset($_SESSION['odontologo'])) header('Locat
 
             </form>
 
-            <span class="text-end"><a id="olvidarpass">¿Olvidaste tu contraseña?</a></span>
+            <span class="text-end mt-1"><a id="olvidarpass">¿Olvidaste tu contraseña?</a></span>
 
         </div>
 

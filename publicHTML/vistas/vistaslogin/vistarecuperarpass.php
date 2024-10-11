@@ -15,7 +15,7 @@
     </div>
 </button>
 
-<div class="container mt-3" id="containerRecuPass">
+<div class="container mt-3 py-2" id="containerRecuPass">
 
     <link rel="stylesheet" href="./css/login/recuperarpass.css">
     <div class="text-center">
@@ -23,9 +23,9 @@
             <img src="./img/logaso.png" id="logaso" alt="">
             <h1 class="text-center w-100 mt-3">Recuperar Contraseña</h1>
         </div>
-        <form class="form-control mt-3 pt-4 px-4" id="formRecuPass" action="" method="post">
-            <label id="Serif" for="" class="H2">Se enviará un código de verificación a tu casilla de correo electrónico.</label>
-            <div id="contenedor_formulario" class="mb-4">
+        <form class="form-control mt-3 px-4 py-3" id="formRecuPass" action="" method="post">
+            <span>Se enviará un código de verificación a tu casilla de correo electrónico.</span>
+            <div id="contenedor_formulario" class="mb-4 mt-3">
 
                 <div id="titulo_input">
                     <label for="inEmail" class="text-end row">Email</label>
@@ -39,9 +39,9 @@
                 <button id="contColor" class="btnRecu my-2 btn contBTN text-white H4">Enviar Código</button>
             </div>
         </form>
-        <div id="buttonRecu" class="mt-2 px-3 row justify-content-center">
+        <div id="buttonRecu" class="mt-3 px-3 row justify-content-center">
             <span>¿Has olvidado tu email?</span>
-            <button id="contColor" class="btnEmail mt-2 btn text-white H6 contColorH6">Recuperar correo electrónico</button>
+            <button id="contColor" class="btnEmail btn text-white H6 contColorH6">Recuperar correo electrónico</button>
         </div>
     </div>
 

@@ -14,6 +14,11 @@ $(() => {
     }
 
     history.replaceState({ path: 'login.php' }, '', 'login.php');
+
+    $(document).on('keydown', evt => {
+
+        if(evt.key === "Escape" || evt.keyCode === 27) $('#btnvolver').click();
+    });
 });
 
 function cargarVistaLogin() {
@@ -25,7 +30,7 @@ function cargarVistaLogin() {
         loadView(data);
         console.log("Cargando vista de 'Login'");
 
-        $('#btnvolver').on('click', () => changeView(volverInicio));
+        $('#btnvolver').off().on('click', () => changeView(volverInicio));
         $('#btnregistrarsel').on('click', () => changeView(cargarVistaRegistro));
         $('#iniadmin').on('click', () => changeView(cargarVistaLoginAdmin));
         $('#olvidarpass').on('click', () => changeView(cargarVistaRecuperarPass));
@@ -40,7 +45,9 @@ function cargarVistaLogin() {
         });
         $('#inemail').focus();
     });
-    $('html, body').css("height", "100%");
+    
+    $('html, body').css({ 'height': '100%' });
+    $('main').css({ 'overflow': 'hidden' });
 }
 
 function cargarVistaRegistro() {
@@ -52,7 +59,7 @@ function cargarVistaRegistro() {
         loadView(data);
         console.log("Cargando vista de 'Registro'");
 
-        $('#btnvolver').on('click', volverLogin);
+        $('#btnvolver').off().on('click', volverLogin);
         $('#btnregistrarsel').on('click', function (event) {
 
             event.preventDefault();
@@ -62,6 +69,12 @@ function cargarVistaRegistro() {
 
             registerConfirm(data);
         });
+    });
+
+    $('main').css({
+        
+        'overflow-y': 'scroll',
+        'overflow-x': 'hidden'
     });
 }
 
@@ -73,7 +86,7 @@ function cargarVistaLoginAdmin() {
 
         loadView(data);
         console.log("Cargando vista de 'Login'");
-        $('#btnvolver').on('click', volverLogin);
+        $('#btnvolver').off().on('click', volverLogin);
         $('#ingresarad').on('click', function (event) {
 
             event.preventDefault();
@@ -94,11 +107,12 @@ function cargarVistaRecuperarPass() {
     $.get("vistas/vistaslogin/vistarecuperarpass.php", data => {
 
         loadView(data);
-        $('#btnvolver').on('click', volverLogin);
+        $('#btnvolver').off().on('click', volverLogin);
         $('.btnRecu').off("click");
         $('.btnRecu').on('click', function (e) {
 
             e.preventDefault();
+
             $email = $('#inEmail').val();
             recucontra($email);
         });
@@ -108,7 +122,7 @@ function cargarVistaRecuperarPass() {
             $.get("vistas/vistaslogin/vistarecuemail.php", data => changeView(() => {
 
                 loadView(data);
-                $('#btnvolver').on('click', () => changeView(cargarVistaRecuperarPass));
+                $('#btnvolver').off().on('click', () => changeView(cargarVistaRecuperarPass));
                 $('.btnRecu').on('click', function (e) {
 
                     e.preventDefault();
@@ -118,18 +132,24 @@ function cargarVistaRecuperarPass() {
         });
     });
 
-    $('body')[0].style.setProperty('height', 'unset', 'important');
+    $('main').css({
+        
+        'overflow-y': 'scroll',
+        'overflow-x': 'hidden'
+    });
 }
 
 function recuemail($nombre, $apellido, $documento) {
 
-    if ($nombre == "" || $nombre == null) createPopup("Nuevo aviso", "Le falto rellenar los datos");
+    if ($nombre == "" || $nombre == null) createPopup("Nuevo aviso", "Debe completar los datos");
 
-    else if ($apellido == "" || $apellido == null) createPopup("Nuevo aviso", "Le falto rellenar los datos");
+    else if ($apellido == "" || $apellido == null) createPopup("Nuevo aviso", "Debe completar los datos");
 
-    else if ($documento == "" || $documento == null) createPopup("Nuevo aviso", "Le falto rellenar los datos");
+    else if ($documento == "" || $documento == null) createPopup("Nuevo aviso", "Debe completar los datos");
 
     else {
+
+        $('.btnRecu').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, .5)' }).html('<i class="fas fa-spinner fa-pulse"></i>');
 
         let formData = new FormData();
         formData.append('nombre', $nombre);
@@ -145,7 +165,13 @@ function recuemail($nombre, $apellido, $documento) {
             contentType: false,
             success: function (response) {
 
-                createPopup('Nuevo aviso', response);
+                console.log(response);
+
+                if(response.exito != undefined) createHeaderPopup('Nuevo aviso', response.exito, () => changeView(cargarVistaLogin));
+                
+                else createPopup('Nuevo aviso', response.error);
+                
+                $('.btnRecu').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).html('Recuperar email');
             },
             error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
         });
@@ -157,6 +183,8 @@ function recucontra($email) {
     let formData = new FormData();
     formData.append('email', $email);
 
+    $('.btnRecu').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, .5)' }).html('<i class="fas fa-spinner fa-pulse"></i>');
+
     $.ajax({
 
         type: "POST",
@@ -166,18 +194,26 @@ function recucontra($email) {
         contentType: false,
         success: function (response) {
 
-            if (response['respuesta'] != undefined) {
+            if (response.respuesta != undefined) {
 
-                createPopup("Nuevo aviso", response['respuesta']);
-                cargarCodigoEmail(response['codigo']);
+                createHeaderPopup("Nuevo aviso", response.respuesta, () => changeView(() => cargarCodigoEmail(response.codigo)));
+
+                $('.btnRecu').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).html('Enviar Código');
             }
-            else createPopup("Nuevo aviso", response['noexiste']);
+            else {
+                
+                createPopup("Nuevo aviso", response.noexiste);
+
+                $('.btnRecu').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).html('Enviar Código');
+            }
         },
         error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
     });
 }
 
 function verificarCodigo($codigo, $pass, $repass, $secp) {
+
+    $('.btnRecu').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, .5)' }).html('<i class="fas fa-spinner fa-pulse"></i>');
 
     let formData = new FormData();
     formData.append('codigo', $codigo);
@@ -195,6 +231,12 @@ function verificarCodigo($codigo, $pass, $repass, $secp) {
         success: function (response) {
 
             createPopup("Nuevo aviso", response);
+
+            if(response.exito != undefined) createHeaderPopup("Nuevo aviso", response.exito, () => changeView(cargarVistaLogin));
+
+            else createPopup("Nuevo aviso", response.error);
+
+            $('.btnRecu').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).html('Cambiar contraseña');
         },
         error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
     });
@@ -207,6 +249,9 @@ function cargarCodigoEmail($codigo) {
     $.get("vistas/vistaslogin/vistacodigoemail.php", data => {
 
         loadView(data);
+
+        $('#btnvolver').off().on('click', () => changeView(cargarVistaRecuperarPass));
+
         $('.btnRecu').on('click', function (e) {
 
             e.preventDefault();
@@ -217,7 +262,11 @@ function cargarCodigoEmail($codigo) {
         });
     });
 
-    $('body')[0].style.setProperty('height', 'unset', 'important');
+    $('main').css({
+        
+        'overflow-y': 'scroll',
+        'overflow-x': 'hidden'
+    });
 }
 function volverInicio() {
 
@@ -244,7 +293,7 @@ function loginConfirm(datos) {
             contentType: false,
             success: response => {
 
-                if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.enviar, 'index.php');
+                if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.enviar, volverInicio);
 
                 else {
 
@@ -273,7 +322,7 @@ async function registerConfirm(datos) {
             contentType: false,
             success: response => {
 
-                if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.registrado, cargarVistaLogin);
+                if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.registrado, () => changeView(cargarVistaLogin));
 
                 else {
 
@@ -302,7 +351,7 @@ function loginAdminConfirm(datos) {
             contentType: false,
             success: response => {
 
-                if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.admin, 'index.php');
+                if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.admin, volverInicio);
 
                 else {
 

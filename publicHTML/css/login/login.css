@@ -252,8 +252,6 @@ form {
 #formRegistrar {
 
     background-color: rgba(96, 245, 255, .2);
-    height: 70dvh;
-    overflow-y: scroll;
 }
 
 #sideimg {
@@ -387,6 +385,11 @@ body {
     filter: contrast(1.5);
 }
 
+#formRecuPass span {
+    
+    font-size: 1.35rem;
+    padding-top: .3rem;
+}
 
 /*/ Tablets y Smart Phones anchos /*/
 @media screen and (max-width: 899px) and (min-width: 401px) {
@@ -470,10 +473,15 @@ body {
 
     #formRecuPass {
 
-        padding: 0 !important;
+        padding: .6rem !important;
+    }
+
+    #formRecuPass span {
+    
+        font-size: 1.2rem;
+        padding-top: .3rem;
     }
 }
-
 
 /*/ Smart Phones /*/
 @media screen and (max-width: 400px) and (min-width: 301px) {
@@ -565,6 +573,12 @@ body {
     #formRecuPass {
 
         padding: .5rem !important;
+    }
+
+    #formRecuPass span {
+    
+        font-size: 1.2rem;
+        padding-top: .3rem;
     }
 }
 
