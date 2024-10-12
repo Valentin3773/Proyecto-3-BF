@@ -47,6 +47,12 @@
 
         </div>
 
+        <div id="btnsmov">
+
+            <button id='anteriorform' type="button" class="mb-4">Anterior</button>
+
+        </div>  
+
     </div>
 
 </form>
