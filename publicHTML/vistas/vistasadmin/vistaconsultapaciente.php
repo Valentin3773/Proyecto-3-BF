@@ -45,8 +45,8 @@ $fechaF = sumarFecha($fechaA, "mes", 3);
 $conjFechas = [];
 
 foreach (getDatesFromRange($fechaA, $fechaF) as $dateFromRange) if (fechaDisponible($dateFromRange, $ido)) $conjFechas[] = $dateFromRange;
+$conjHoras = horasDisponibles($fechaA, $ido);
 
-$conjHoras = horasDisponibles($fecha, $ido);
 
 ?>
 
@@ -72,7 +72,17 @@ $conjHoras = horasDisponibles($fecha, $ido);
                     <h1>Hora</h1>
                 </div>
                 <div class="contentHora">
-                    <input type="time" name="" id="" value="<?= $tupla['hora'] ?>" disabled>
+                    <select name="" id="" disabled>
+                        <?php 
+                            if(!empty($conjHoras)){
+                                for($i = 0; $i < count($conjHoras); $i++) {
+                                echo "<option value= '$conjHoras[$i]'>$conjHoras[$i]</option>";
+                                } 
+                            } else {
+                                echo "<option>No hay horarios disponibles</option>";
+                            }
+                        ?>
+                    </select>
                 </div>
             </div>
             <div class="col-xl-2 col-lg-2 col-12 contDuracion">
@@ -92,10 +102,14 @@ $conjHoras = horasDisponibles($fecha, $ido);
                 <div class="contentFecha">
                     <select name="" id="" disabled>
                     <?php 
-                        for($i = 0; $i < count($conjFechas); $i++) {
-                         echo "<option value= '$conjFechas[$i]'>$conjFechas[$i]</option>";
-                        } 
-                    ?>
+                            if(!empty($conjFechas)){
+                                for($i = 0; $i < count($conjFechas); $i++) {
+                                echo "<option value= '$conjFechas[$i]'>$conjFechas[$i]</option>";
+                                } 
+                            } else {
+                                echo "<option>No hay fechas disponibles</option>";
+                            }
+                        ?>
                     </select>
                 </div>
             </div>

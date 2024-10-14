@@ -73,7 +73,8 @@ function getFechaActual(): string
     global $pdo;
 
     $sql = "SELECT CURDATE() as fecha";
-    $resultado = $pdo->query($sql)->fetch();
+    $stmt = $pdo->query($sql);
+    $resultado = $stmt->fetch();
 
     return $resultado['fecha'];
 }
