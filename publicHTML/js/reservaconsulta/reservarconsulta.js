@@ -27,6 +27,13 @@ function addReservaListeners() {
     $('#progressbar .fecha').on('click', () => { if (infoconsulta.odontologo !== null && infoconsulta.vistaactual !== 'fecha') changeView(cargarVistaFecha) });
     $('#progressbar .hora').on('click', () => { if (infoconsulta.fecha !== null && infoconsulta.vistaactual !== 'hora') changeView(cargarVistaHora) });
     $('#progressbar .confirmar').on('click', () => { if (infoconsulta.hora !== null && infoconsulta.vistaactual !== 'confirmar') changeView(cargarVistaConfirmar) });
+
+    $(document).on('keydown', evt => {
+
+        if(evt.key == 'ArrowRight') $('#siguienteform').click();
+
+        else if(evt.key == 'ArrowLeft') $('#anteriorform').click();
+    });
 }
 
 function cargarVistaOdontologo() {
@@ -281,6 +288,8 @@ function cargarVistaConfirmar() {
 
         loadView(contenido);
         console.log("Cargando vista de 'Confirmar Datos'");
+
+        $('#confirmardatos #btnsmov #anteriorform').prop('disabled', false).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).on('click', () => changeView(cargarVistaHora));
 
         infoconsulta.vistaactual = 'confirmar';
 

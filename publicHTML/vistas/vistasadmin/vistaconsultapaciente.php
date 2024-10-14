@@ -7,23 +7,34 @@ session_start();
 
 reloadSession();
 
-if (!isset($_SESSION['odontologo'])) exit();
+if (!isset($_SESSION['odontologo'])) {
+    exit("No odontologo session found.");
+}
 
 $ido = $_SESSION['odontologo']['idodontologo'];
 $hora = $_GET['hora'];
 $fecha = $_GET['fecha'];
 
-$consultaPaciente = array();
+//Formateo de string a interpretación de sql
+$fechatiempoString = $fecha . ' ' . $hora;
+$formato = DateTime::createFromFormat('d/m/Y H:i', $fechatiempoString);
+$Fechaensql = $formato->format('Y-m-d');
+$Tiempoensql = $formato->format('H:i:s');
+$tupla = array();
 
-$sql = 'SELECT * FROM consulta c JOIN paciente p ON c.idpaciente = p.idpaciente WHERE hora = :hora AND fecha = :fecha AND idodontologo = :ido';
+$sql = 'SELECT * FROM consulta JOIN paciente ON consulta.idpaciente = paciente.idpaciente WHERE idodontologo = :ido AND fecha = :fecha AND hora =:hora';
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':ido', $ido);
-$stmt->bindParam(':hora', $hora);
-$stmt->bindParam(':fecha', $fecha);
+$stmt->bindParam(':fecha', $Fechaensql);
+$stmt->bindParam(':hora', $Tiempoensql);
 
-if ($stmt->execute() && $stmt->rowCount() > 0) $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
 
-else echo "Error al ejecutar la consulta";
+if($stmt->execute() && $stmt->rowCount() > 0) { 
+    $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
+} else {
+    echo "Ah ocurrido un error";
+};
+
 
 $nombreP = $tupla["nombre"];
 
@@ -61,14 +72,16 @@ $conjHoras = horasDisponibles($fecha, $ido);
                     <h1>Hora</h1>
                 </div>
                 <div class="contentHora">
-                    
+                    <input type="time" name="" id="" value="<?= $tupla['hora'] ?>" disabled>
                 </div>
             </div>
             <div class="col-xl-2 col-lg-2 col-12 contDuracion">
                 <div class="tituloDuracion">
                     <h1>Duración</h1>
                 </div>
-                <div class="contentDuracion"></div>
+                <div class="contentDuracion">
+                    <input type="number" name="" id="" value="<?= $tupla['duracion'] ?>" disabled>
+                </div>
             </div>
             <div class="col-xl-5 col-lg-5 col-12 contFecha m-0">
                 <div class="divTituloFecha">
@@ -77,7 +90,13 @@ $conjHoras = horasDisponibles($fecha, $ido);
                     </div>
                 </div>
                 <div class="contentFecha">
-                    
+                    <select name="" id="" disabled>
+                    <?php 
+                        for($i = 0; $i < count($conjFechas); $i++) {
+                         echo "<option value= '$conjFechas[$i]'>$conjFechas[$i]</option>";
+                        } 
+                    ?>
+                    </select>
                 </div>
             </div>
         </div>

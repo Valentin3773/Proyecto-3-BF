@@ -558,12 +558,68 @@ function cargarVistaServicios() {
 
             let id = ($(this).attr('id'));
             $('main').load(`vistas/vistasadmin/vistaservicios.php?numservicio=` + $(this).attr('id'), function () {
-                //Agregar lo necesario para que funcione...
+                let temp = {
+                    titulo: "",
+                    desc: ""
+                };
+                
                 $('[id="mdC"]').eq(0).on('click', function () {
-                    alert("A");
+                    if($('.contTitulon').attr('disabled')){
+                        temp['titulo'] = $('.contTitulon').val();
+                        $('.contTitulon').attr('disabled', false);
+                    } else {
+                        if(temp['titulo'] == $('.contTitulon').val()){
+                            $('.contTitulon').attr('disabled', true);
+                        } else {
+                            let formData = new FormData();
+                            formData.append('titulo', $('.contTitulon').val());
+                            formData.append('id', id);
+                            $.ajax({
+
+                                type: "POST",
+                                url: "backend/admin/actualizarDataService.php",
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function (response) {
+                    
+                                    if (response.error == undefined){ createPopup('Nuevo Aviso', response); $('.contTitulon').attr('disabled', true);}
+                    
+                                    else console.log(response.error);
+                                },
+                                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+                            });
+                        }
+                    }
                 });
                 $('[id="mdC"]').eq(1).on('click', function () {
-                    alert("s");
+                    if($('#descripcion').attr('readonly')){
+                        temp['desc'] = $('#descripcion').val();
+                        $('#descripcion').attr('readonly', false);
+                    } else {
+                        if(temp['desc'] == $('#descripcion').val()){
+                            $('#descripcion').attr('readonly', true);
+                        } else {
+                            let formData = new FormData();
+                            formData.append('descripcion', $('#descripcion').val());
+                            formData.append('id', id);
+                            $.ajax({
+
+                                type: "POST",
+                                url: "backend/admin/actualizarDataService.php",
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function (response) {
+                    
+                                    if (response.error == undefined){ createPopup('Nuevo Aviso', response); $('#descripcion').attr('readonly', true);}
+                    
+                                    else console.log(response.error);
+                                },
+                                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+                            });
+                        }
+                    }
                 });
                 $('[id="mdF"]').eq(0).on('click', function () {
 
@@ -597,7 +653,6 @@ function cargarVistaServicios() {
                         }
                     });
                 });
-
                 $('[id="mdF"]').eq(1).on('click', function () {
 
                     $('#inFile2').click();

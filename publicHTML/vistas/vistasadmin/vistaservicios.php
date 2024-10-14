@@ -44,7 +44,7 @@ if (!isset($_GET['numservicio'])) {
     <div id="cuerpo">
 
         <div id="titulon">
-            <h1><?= $servicio['nombre'] ?></h1>
+            <input class="contTitulon" type="text" value = "<?= $servicio['nombre'] ?>" disabled>
             <div class="lapizeditar lapizeditarc"><img id="mdC" src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar"></div>
         </div>
 
