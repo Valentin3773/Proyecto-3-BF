@@ -197,7 +197,14 @@
 
 .lapizeditar > img {
 
-    width: 30px;
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.lapizeditar > svg {
+
+    width: 29px !important;
+    height: 25px !important;
 }
 
 #inFile1, #inFile2 {

@@ -57,15 +57,17 @@ if (!isset($_GET['numservicio'])) {
                 <div id="icowrapper">
 
                     <?php
-                    if (isset($servicio["icono"])) echo "<img src='backend/almacenamiento/iconservice/{$servicio["icono"]}' alt='Icono del servicio' id='icoservicio'>";
-
-                    else echo "<img src='img/logaso.png' alt='Icono del servicio' id='icoservicio'>";
+                    if (isset($servicio["icono"])) {
+                        
+                        echo "<img src='backend/almacenamiento/iconservice/{$servicio["icono"]}' alt='Icono del servicio' id='icoservicio'>";
+                        echo "<div class='lapizeditar'><img src='img/iconosvg/lapiz.svg' id='mdF' alt='Modificar' title='Modificar'><input type='file' id='inFile1' accept='image/*'></div>";
+                    }
+                    else {
+                        
+                        echo "<img src='img/logaso.png' alt='Icono del servicio' id='icoservicio'>";
+                        echo "<div class='lapizeditar'><img src='img/iconosvg/lapiz.svg' id='mdF' alt='Modificar' title='Modificar'><input type='file' id='inFile1' accept='image/*'></div>";
+                    }
                     ?>
-
-                    <div class="lapizeditar">
-                        <img src="img/iconosvg/lapiz.svg" id="mdF" alt="Modificar" title="Modificar">
-                        <input type="file" id="inFile1" accept="image/*">
-                    </div>
 
                 </div>
 

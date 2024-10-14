@@ -24,8 +24,6 @@ $(() => {
     $.datepicker.setDefaults($.datepicker.regional['es']);
 
     changeView(() => loadView('<div class="w-100 h-100 d-flex justify-content-center align-items-center"><h1 class="titinformativo">Bienvenido al administrador</h1></div>'));
-
-    console.log(getWeekDates('2024-10-14'));
 });
 
 function addAdminListeners() {
@@ -370,8 +368,8 @@ function cargarVistaAgregarServicio() {
         loadView(contenido);
         let formData = new FormData();
 
-
         $('[id="mdF"]').eq(0).on('click', function () {
+
             $('#inFile1').click();
             $('#inFile1').change(function (event) {
 
@@ -385,6 +383,7 @@ function cargarVistaAgregarServicio() {
                         reader.onload = function (e) {
 
                             $('#icoservicio').prop('src', e.target.result);
+                            $('[id="mdF"]').eq(0).html('<img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">');
                         }
 
                         // Incrusto la imagen
@@ -500,9 +499,7 @@ function cargarVistaPacientes() {
                 $(this).css({ 'text-decoration': 'underline' });
                 $('.pacientescontainer #' + $(this).attr('id')).css({ 'text-decoration': 'underline' });
 
-                let url = 'vistas/vistasadmin/vistapacientes.php?idpaciente=' + $(this).attr('id');
-
-                changeView(() => $.get(url, contenido => loadView(contenido)));
+                changeView(() => cargarVistaPacienteDetalle($(this).attr('id')));
             });
         });
 
@@ -514,6 +511,40 @@ function cargarVistaPacientes() {
     $('#btnpacientes, nav.mobile #btnpacientes').css({ 'text-decoration': 'underline' });
 }
 
+function cargarVistaPacienteDetalle(id) {
+
+    let url = 'vistas/vistasadmin/vistapacientes.php?idpaciente=' + id;
+
+    $.get(url, contenido => {
+        
+        loadView(contenido);
+
+        let editar = $('#editarpaciente');
+        let guardar = $('#guardarpaciente');
+        let contenedor = $('#pcontainer .datos');
+
+        editar.on('click', () => {
+
+            if(contenedor.attr('data-editar') == 'edit') {
+
+                contenedor.attr('data-editar', 'noedit');
+                guardar.prop('disabled', true);
+
+                $('#pcontainer input.valor').prop('disabled', true);
+                $('.enfermedad .eliminarenfermedad, .medicamento .eliminarmedicamento, #agregarenfermedad, #agregarmedicacion').removeClass('visible').addClass('invisible');
+            }
+            else {
+
+                contenedor.attr('data-editar', 'edit');
+                guardar.prop('disabled', false);
+
+                $('#pcontainer input.valor').prop('disabled', false);
+                $('.enfermedad .eliminarenfermedad, .medicamento .eliminarmedicamento, #agregarenfermedad, #agregarmedicacion').removeClass('invisible').addClass('visible');
+            }
+        });
+    });
+}
+ 
 function cargarVistaServicios() {
 
     $.get("vistas/vistasadmin/vistaservicios.php", data => {
@@ -677,7 +708,7 @@ function slideActionBar(estado) {
     }
 }
 
-let fechasPermitidas = ['20-09-2024'];
+let fechasPermitidas = [];
 
 function changeView(vista) {
 

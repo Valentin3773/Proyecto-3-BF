@@ -42,14 +42,14 @@ in_array($horafinalizacion, getHorasFinalizacionInactividad($fechainicio, $horai
     $stmt->bindParam(':tiempofinalizacion', $tiempofinalizacion);
     $stmt->bindParam(':ido', $ido);
 
-    $sql2 = "SELECT p.email, c.asunto, c.fecha, c.hora FROM consulta c JOIN paciente p ON c.idpaciente = p.idpaciente WHERE idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) AND (STR_TO_DATE(CONCAT(fecha, ' ', hora), '%Y-%m-%d %H:%i:%s') BETWEEN :tiempoinicio AND :tiempofinalizacion)";
+    $sql2 = "SELECT p.email, c.asunto, c.fecha, c.hora FROM consulta c JOIN paciente p ON c.idpaciente = p.idpaciente WHERE idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) AND ((CONCAT(fecha, ' ', hora) BETWEEN :tiempoinicio AND :tiempofinalizacion) OR (ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60)) BETWEEN :tiempoinicio AND :tiempofinalizacion) OR (:tiempoinicio BETWEEN CONCAT(fecha, ' ', hora) AND ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60)) AND :tiempofinalizacion BETWEEN CONCAT(fecha, ' ', hora) AND ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60))))";
 
     $stmt2 = $pdo->prepare($sql2);
     $stmt2->bindParam(':tiempoinicio', $tiempoinicio);
     $stmt2->bindParam(':tiempofinalizacion', $tiempofinalizacion);
     $stmt2->bindParam(':ido', $ido);
 
-    $sql3 = "DELETE FROM consulta WHERE idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) AND (STR_TO_DATE(CONCAT(fecha, ' ', hora), '%Y-%m-%d %H:%i:%s') BETWEEN :tiempoinicio AND :tiempofinalizacion)";
+    $sql3 = "DELETE FROM consulta WHERE idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) AND ((CONCAT(fecha, ' ', hora) BETWEEN :tiempoinicio AND :tiempofinalizacion) OR (ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60)) BETWEEN :tiempoinicio AND :tiempofinalizacion) OR (:tiempoinicio BETWEEN CONCAT(fecha, ' ', hora) AND ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60)) AND :tiempofinalizacion BETWEEN CONCAT(fecha, ' ', hora) AND ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60))))";
 
     $sql3 = $pdo->prepare($sql3);
     $sql3->bindParam(':tiempoinicio', $tiempoinicio);

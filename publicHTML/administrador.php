@@ -28,6 +28,8 @@ reloadSession();
     <link rel="stylesheet" href="lib/jquery-ui-1.14.0/jquery-ui.min.css">
     <link rel="stylesheet" href="lib/bootstrap-5.2.3-dist/css/bootstrap.min.css">
     <script defer src="lib/bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="lib/fontawesome-free-5.15.4-web/css/all.min.css">
+    <script defer src="lib/fontawesome-free-5.15.4-web/js/all.min.js"></script>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
