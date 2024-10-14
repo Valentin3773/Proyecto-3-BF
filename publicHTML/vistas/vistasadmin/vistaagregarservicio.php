@@ -39,10 +39,10 @@ if(!isset($_SESSION['odontologo'])) exit();
 
                     <img src='img/logaso.png' alt='Icono del servicio' id='icoservicio'>
 
-                    <div class="lapizeditar">
-                        <img src="img/iconosvg/lapiz.svg" id="mdF" alt="Modificar" title="Modificar">
-                        <input type="file" id="inFile1" accept="image/*">
+                    <div id="mdF" class="lapizeditar">
+                        <i class="fas fa-upload"></i>
                     </div>
+                    <input type="file" id="inFile1" accept="image/*">
 
                 </div>
 
@@ -55,11 +55,10 @@ if(!isset($_SESSION['odontologo'])) exit();
 
                     <img src='img/logaso.png' alt='Imagen del servicio' id='imgservicio'>
 
-                    <div class="lapizeditar">
-                        <img src="img/iconosvg/lapiz.svg" id="mdF" alt="Modificar" title="Modificar">
-                        <input type="file" id="inFile2" accept="image/*">
+                    <div  id="mdF" class="lapizeditar">
+                        <i class="fas fa-upload"></i>
                     </div>
-
+                    <input type="file" id="inFile2" accept="image/*">
                 </div>
             </div>
 

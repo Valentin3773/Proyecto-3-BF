@@ -45,10 +45,12 @@
     padding: 5px;
     width: 100%;
 }
+
 .popup-contTitulo h1 {
 
     color: white;
 }
+
 .popup-contBtn {
 
     padding: 10px;
@@ -60,11 +62,13 @@
     align-items: center;
     gap: 5rem;
 }
+
 .popup-Contenido {
 
     background-color: #43c6fd;
     padding: 10px;  
     color: white !important;
+    width: 100%;
 }
 
 .mensaje-Popup h1,h2 {
@@ -75,7 +79,7 @@
 
 .btnCerrar, .btnConfirmar, .btnCancelar {
 
-    background-color: #0AF0AB;
+    background-color: rgb(10, 240, 171);
     color: white;
     filter: brightness(1.1);
     border-color: transparent;

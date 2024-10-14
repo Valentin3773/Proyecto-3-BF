@@ -4,7 +4,7 @@ include("../../backend/conexion.php");
 
 session_start();
 
-if(!isset($_SESSION['odontologo'])) header('Location: ../../index.php');
+if (!isset($_SESSION['odontologo'])) header('Location: ../../index.php');
 
 if (!isset($_GET['idpaciente'])) {
 
@@ -57,8 +57,7 @@ if (!isset($_GET['idpaciente'])) {
 
 <?php
 
-} 
-else {
+} else {
 
     $idp = isset($_GET['idpaciente']) ? $_GET['idpaciente'] : null;
 
@@ -66,8 +65,8 @@ else {
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
 
-    if($stmt->execute() && $stmt->rowCount() > 0) $paciente = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+    if ($stmt->execute() && $stmt->rowCount() > 0) $paciente = $stmt->fetch(PDO::FETCH_ASSOC);
+
     $enfermedades = array();
     $medicacion = array();
 
@@ -75,13 +74,13 @@ else {
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
 
-    if($stmt->execute() && $stmt->rowCount() > 0) while($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $enfermedades[] = $tupla;
+    if ($stmt->execute() && $stmt->rowCount() > 0) while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $enfermedades[] = $tupla;
 
     $consulta = "SELECT medicacion FROM medicacion WHERE idpaciente = :idp ORDER BY medicacion ASC";
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
 
-    if($stmt->execute() && $stmt->rowCount() > 0) while($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $medicacion[] = $tupla;
+    if ($stmt->execute() && $stmt->rowCount() > 0) while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $medicacion[] = $tupla;
 ?>
 
     <div id="pcontainer">
@@ -105,7 +104,7 @@ else {
             <div id="documento" class="campo">
 
                 <h2 class="clave">Documento</h2>
-                <h2 class="valor"> <?= $paciente['documento'] ?> </h2>
+                <input class="valor" type="text" value="<?= $paciente['documento'] ?>" disabled></input>
 
             </div>
             <?php if (!empty($paciente['direccion'])) { ?>
@@ -113,18 +112,18 @@ else {
                 <div id="direccion" class="campo">
 
                     <h2 class="clave">Dirección</h2>
-                    <h2 class="valor"> <?= $paciente['direccion'] ?> </h2>
+                    <input class="valor" type="text" value="<?= $paciente['direccion'] ?>" disabled></input>
 
                 </div>
-                
-            <?php 
+
+            <?php
             }
-            if (!empty($paciente['telefono'])) { 
+            if (!empty($paciente['telefono'])) {
             ?>
                 <div id="telefono" class="campo">
 
                     <h2 class="clave">Teléfono</h2>
-                    <h2 class="valor"> <?= $paciente['telefono'] ?> </h2>
+                    <input class="valor" type="text" value="<?= $paciente['telefono'] ?>" disabled></input>
 
                 </div>
 
@@ -133,45 +132,63 @@ else {
             <div id="email" class="campo">
 
                 <h2 class="clave">Email</h2>
-                 <h2 class="valor"> <?= $paciente['email'] ?> </h2>
+                <input class="valor" type="text" value="<?= $paciente['email'] ?>" disabled></input>
 
             </div>
 
-            <?php if (!empty($enfermedades)) { ?>
+            <div id="enfermedades">
 
-                <div id="enfermedades">
+                <h2 class="clave">Enfermedades</h2>
 
-                    <h2 class="clave">Enfermedades</h2>
+                <ul class="valor">
 
-                    <ul class="valor">
+                    <?php
 
-                        <?php foreach ($enfermedades as $enfermedad) echo "<li class='enfermedad'>" . $enfermedad['enfermedad'] . "</li>"; ?>
+                    if (empty($enfermedades)) echo "<span class='enfermedad'>No hay enfermedades</span>";
 
-                    </ul>
+                    else foreach ($enfermedades as $enfermedad) echo "<li class='enfermedad'><span>{$enfermedad['enfermedad']}</span><div class='eliminarenfermedad invisible'><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div></li>";
 
-                </div>
-            <?php
-            }
-            if (!empty($medicacion)) {
-            ?>
-                <div id="medicacion">
+                    ?>
 
-                    <h2 class="clave">Medicación</h2>
+                    <div id="contagregar" class="w-100 d-flex justify-content-center align-items-center">
+                        <div id="agregarenfermedad" class="invisible"><div class="mas"></div></div>
+                    </div>
 
-                    <ul class="valor">
+                </ul>
 
-                        <?php foreach ($medicacion as $medicamento) echo "<li class='medicamento'>" . $medicamento['medicacion'] . "</li>"; ?>
+            </div>
 
-                    </ul>
+            <div id="medicacion">
 
-                </div>
+                <h2 class="clave">Medicación</h2>
 
-            <?php } ?>
+                <ul class="valor">
+
+                    <?php
+
+                    if (empty($enfermedades)) echo "<span class='medicamento'>No hay medicación</span>";
+
+                    else foreach ($medicacion as $medicamento) echo "<li class='medicamento'><span>{$medicamento['medicacion']}</span><div class='eliminarmedicamento invisible'><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div></li>";
+
+                    ?>
+
+                    <div id="contagregar" class="w-100 d-flex justify-content-center align-items-center">
+                        <div id="agregarmedicacion" class="invisible"><div class="mas"></div></div>
+                    </div>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div id="botonespaciente">
+
+            <button type="button" id="editarpaciente">Editar</button>
+            <button type="button" id="guardarpaciente" disabled>Guardar</button>
 
         </div>
 
     </div>
 
-<?php
-}
-?>
+<?php } ?>

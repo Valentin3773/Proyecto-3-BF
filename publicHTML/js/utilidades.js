@@ -77,6 +77,46 @@ function createConfirmPopup(titulo, contenido, botonestxt = ['Cancelar', 'Confir
     return promesa;
 }
 
+function createInputPopup(titulo, placeholder, botonestxt = ['Cancelar', 'Confirmar']) {
+
+    let promesa = new Promise(respuesta => {
+
+        console.log('Creando Popup');
+
+        if($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
+
+        $('#div-mensaje-popup').hide();
+        $.get(`vistas/popupingresar.php ? placeholder=${placeholder}&Aviso=${titulo}&txtcancelar=${botonestxt[0]}&txtconfirmar=${botonestxt[1]}`, data => {
+
+            $("#div-mensaje-popup").html(data).fadeIn(500);
+            $('#popup-input').on('input', function() {
+
+                if($(this).val().length >= 3) $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, 1)' }).prop('disabled', false);
+
+                else $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, .4)' }).prop('disabled', true);
+            })
+            $('#btnCancelar').focus().on("click", () => {
+
+                $("#div-mensaje-popup").fadeOut(500);
+                $("#div-mensaje-popup link").remove();
+
+                respuesta('');
+            });
+            $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, .4)' }).prop('disabled', true).on("click", () => {
+
+                $("#div-mensaje-popup").fadeOut(500);
+                $("#div-mensaje-popup link").remove();
+
+                let texto = $('#popup-input').val();
+
+                respuesta(texto);
+            });
+        });
+    });
+
+    return promesa;
+}
+
 function getWeekDates(date) {
     
     const currentDate = new Date(date.split('-')[0], Number(date.split('-')[1]) - 1, date.split('-')[2]);

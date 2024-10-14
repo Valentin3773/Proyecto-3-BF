@@ -126,6 +126,9 @@
     width: 30%;
     border: 2px solid rgba(0, 0, 0, .15);
     box-shadow: 1px 1px 2px rgba(0, 0, 0, .25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .datos .valor {
@@ -137,6 +140,12 @@
     width: 70%;
     border: 2px solid rgba(0, 0, 0, .15);
     box-shadow: 1px 1px 2px rgba(0, 0, 0, .25);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, .5);
+    color: white;
+    font-size: 2rem !important;
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 500;
+    letter-spacing: 1px;
 }
 
 #medicacion, #enfermedades {
@@ -158,6 +167,15 @@
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 1.5rem;
     font-weight: 500;
+}
+
+.enfermedad, .medicamento {
+
+    position: relative;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .sidebar > h2 {
@@ -184,6 +202,125 @@
     padding: 10px;
     margin: 10px 0px;
     transition-duration: .3s;
+}
+
+#botonespaciente {
+
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+#editarpaciente, #guardarpaciente {
+
+    background-color: #00E09D;
+    border: none;
+    color: white;
+    padding: .7rem 4rem;
+    font-weight: 600;
+    border-radius: 10px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.65);
+    font-size: 1.6rem;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.35);
+    transition-duration: .3s;
+    opacity: 1;
+}
+
+#editarpaciente:is([disabled]), #guardarpaciente:is([disabled]) {
+
+    background-color: rgb(0, 224, 157, .4);
+}
+
+#editarpaciente {
+
+    padding: .7rem 5rem;
+}
+
+.eliminarenfermedad, .eliminarmedicamento {
+
+    position: absolute;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    border-radius: 10px;
+    padding: 1.7rem;
+    transition-duration: .3s;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px .5px rgba(0, 0, 0, .4);
+    border: 1px solid rgba(0, 0, 0, .1);
+}
+
+#agregarenfermedad, #agregarmedicacion {
+
+    height: fit-content;
+    width: fit-content;
+    background-color: #00c388;
+    border-radius: 100%;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, .4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, .3);
+    transition-duration: .3s;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+#agregarenfermedad.invisible, #agregarenfermedad.invisible .mas, #agregarmedicacion.invisible, #agregarmedicacion.invisible .mas {
+
+    height: 0 !important;
+}
+
+#agregarenfermedad .mas, #agregarmedicacion .mas {
+
+    width: 30px;
+    height: 30px;
+    background-color: rgb(235, 235, 235);
+    clip-path: polygon(45% 0%, 55% 0%, 55% 45%, 100% 45%, 100% 55%, 55% 55%, 55% 100%, 45% 100%, 45% 55%, 0% 55%, 0% 45%, 45% 45%);
+    transition-duration: .3s;
+}
+
+#agregarenfermedad:hover, #agregarmedicacion:hover {
+
+    scale: 1.05;
+    filter: brightness(1.1);
+}
+
+#agregarenfermedad:active, #agregarmedicacion:active {
+
+    scale: 0.95;
+    filter: brightness(1.2);
+}
+
+.eliminarenfermedad:hover, .eliminarmedicamento:hover {
+
+    scale: 1.05;
+    filter: brightness(1.1);
+}
+
+.eliminarenfermedad:active, .eliminarmedicamento:active {
+
+    scale: .97;
+    filter: brightness(1.2);
+}
+
+#editarpaciente:not([disabled]):hover, #guardarpaciente:not([disabled]):hover {
+
+    filter: brightness(1.1);
+    scale: 1.03;
+}
+
+#editarpaciente:not([disabled]):active, #guardarpaciente:not([disabled]):active {
+
+    filter: brightness(1.2);
+    scale: .97;
 }
 
 .sidebar .paciente:hover {
