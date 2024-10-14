@@ -293,10 +293,10 @@ if (!empty($consultasPrevias)):
             </div>
             <div class="fechahorawrapper">
                 <div class="fechacontainer">
-                    <span id="fecha">' . $fechaf . '</span>
+                    <span id="fecha">' . $fechaP . '</span>
                 </div>
                 <div class="horacontainer">
-                    <span id="hora">' . $horaf . '</span>
+                    <span id="hora">' . $horaP . '</span>
                 </div>
             </div>
 
