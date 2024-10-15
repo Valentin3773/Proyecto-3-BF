@@ -516,6 +516,17 @@ function cargarVistaPacienteDetalle(id) {
     let url = 'vistas/vistasadmin/vistapacientes.php?idpaciente=' + id;
 
     $.get(url, contenido => {
+
+        let enfermedades = {
+
+            agregar: [],
+            eliminar: []
+        }
+        let medicacion = {
+
+            agregar: [],
+            eliminar: []
+        };
         
         loadView(contenido);
 
@@ -529,6 +540,7 @@ function cargarVistaPacienteDetalle(id) {
 
                 contenedor.attr('data-editar', 'noedit');
                 guardar.prop('disabled', true);
+                editar.html('Editar').css({ 'padding': '.7rem 5rem' });
 
                 $('#pcontainer input.valor').prop('disabled', true);
                 $('.enfermedad .eliminarenfermedad, .medicamento .eliminarmedicamento, #agregarenfermedad, #agregarmedicacion').removeClass('visible').addClass('invisible');
@@ -537,10 +549,18 @@ function cargarVistaPacienteDetalle(id) {
 
                 contenedor.attr('data-editar', 'edit');
                 guardar.prop('disabled', false);
+                editar.html('Cancelar').css({ 'padding': '.7rem 4rem' });
 
                 $('#pcontainer input.valor').prop('disabled', false);
                 $('.enfermedad .eliminarenfermedad, .medicamento .eliminarmedicamento, #agregarenfermedad, #agregarmedicacion').removeClass('invisible').addClass('visible');
             }
+        });
+
+        $('#agregarmedicacion').on('click', async () => {
+
+            let enfermedad = await createInputPopup('Agregar medicación', 'Ingrese el medicamento');
+
+            createPopup('Aviso', enfermedad);
         });
     });
 }

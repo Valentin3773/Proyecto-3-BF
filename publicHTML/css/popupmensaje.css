@@ -71,7 +71,7 @@
     width: 100%;
 }
 
-.mensaje-Popup h1,h2 {
+.mensaje-Popup h1, h2 {
 
     margin: 0;
     padding: 0;
@@ -90,13 +90,13 @@
     text-shadow: 0 0 5px rgba(0, 0, 0, .45);
 }
 
-.btnCerrar:hover, .btnConfirmar:hover, .btnCancelar:hover {
+.btnCerrar:not([disabled]):hover, .btnConfirmar:not([disabled]):hover, .btnCancelar:not([disabled]):hover {
 
     scale: 1.05;
     filter: brightness(1.1);
 }
 
-.btnCerrar:active, .btnConfirmar:active, .btnCancelar:active {
+.btnCerrar:not([disabled]):active, .btnConfirmar:not([disabled]):active, .btnCancelar:not([disabled]):active {
 
     scale: .95;
     filter: brightness(1.2);
