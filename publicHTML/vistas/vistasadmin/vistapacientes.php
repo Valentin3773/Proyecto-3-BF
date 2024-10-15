@@ -164,7 +164,7 @@ if (!isset($_GET['idpaciente'])) {
 
                     <?php
 
-                    if (empty($enfermedades)) echo "<span class='enfermedad'>No hay enfermedades</span>";
+                    if (empty($enfermedades)) echo "<span class='enfermedad noenfermedades'>No hay enfermedades</span>";
 
                     else foreach ($enfermedades as $enfermedad) echo "<li class='enfermedad' data-enfermedad='{$enfermedad['enfermedad']}'><span>{$enfermedad['enfermedad']}</span><div class='eliminarenfermedad invisible' data-enfermedad='{$enfermedad['enfermedad']}'><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div></li>";
 
@@ -188,7 +188,7 @@ if (!isset($_GET['idpaciente'])) {
 
                     <?php
 
-                    if (empty($enfermedades)) echo "<span class='medicamento'>No hay medicación</span>";
+                    if (empty($enfermedades)) echo "<span class='medicamento nomedicacion'>No hay medicación</span>";
 
                     else foreach ($medicacion as $medicamento) echo "<li class='medicamento' data-medicamento='{$medicamento['medicacion']}'><span>{$medicamento['medicacion']}</span><div class='eliminarmedicamento invisible' data-medicamento='{$medicamento['medicacion']}'><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div></li>";
 

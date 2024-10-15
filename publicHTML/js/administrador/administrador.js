@@ -575,6 +575,8 @@ function cargarVistaPacienteDetalle(idp) {
 
             datospaciente.medicacion.push(medicamento);
 
+            contenedor.find('#medicacion .nomedicacion').remove();
+
             let medicamentoli = `<li class='medicamento' data-medicamento='${medicamento}'><span>${medicamento}</span><div class='eliminarmedicamento visible' data-medicamento='${medicamento}'><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div></li>`;
 
             contenedor.find('#medicacion #contagregar').before(medicamentoli);
@@ -588,6 +590,8 @@ function cargarVistaPacienteDetalle(idp) {
                 let index = datospaciente.medicacion.indexOf(medicamento);
 
                 if (index !== -1) datospaciente.medicacion.splice(index, 1);
+
+                if(datospaciente.medicacion.length === 0) contenedor.find('#medicacion > ul.valor > #contagregar').before(`<span class='medicamento nomedicacion'>No hay medicación</span>`);
             });
         });
 
@@ -598,6 +602,8 @@ function cargarVistaPacienteDetalle(idp) {
             if(enfermedad.length == 0) return;
 
             datospaciente.enfermedades.push(enfermedad);
+
+            contenedor.find('#enfermedades .noenfermedades').remove();
 
             let enfermedadli = `<li class='enfermedad' data-enfermedad='${enfermedad}'><span>${enfermedad}</span><div class='eliminarenfermedad visible' data-enfermedad='${enfermedad}'><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div></li>`;
 
@@ -612,6 +618,8 @@ function cargarVistaPacienteDetalle(idp) {
                 let index = datospaciente.enfermedades.indexOf(enfermedad);
     
                 if (index !== -1) datospaciente.enfermedades.splice(index, 1);
+
+                if(datospaciente.enfermedades.length === 0) contenedor.find('#enfermedades > ul.valor > #contagregar').before(`<span class='enfermedad noenfermedades'>No hay enfermedades</span>`);    
             });
         });
 
@@ -624,6 +632,8 @@ function cargarVistaPacienteDetalle(idp) {
             let index = datospaciente.enfermedades.indexOf(enfermedad);
 
             if (index !== -1) datospaciente.enfermedades.splice(index, 1);
+
+            if(datospaciente.enfermedades.length === 0) contenedor.find('#enfermedades > ul.valor > #contagregar').before(`<span class='enfermedad noenfermedades'>No hay enfermedades</span>`);
         });
 
         contenedor.find('.eliminarmedicamento').off().on('click', function() {
@@ -635,6 +645,8 @@ function cargarVistaPacienteDetalle(idp) {
             let index = datospaciente.medicacion.indexOf(medicamento);
 
             if (index !== -1) datospaciente.medicacion.splice(index, 1);
+
+            if(datospaciente.medicacion.length === 0) contenedor.find('#medicacion > ul.valor > #contagregar').before(`<span class='medicamento nomedicacion'>No hay medicación</span>`);
         });
 
         guardar.on('click', () => {
