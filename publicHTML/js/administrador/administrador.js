@@ -55,7 +55,7 @@ function cargarVistaConsultas() {
                 let fechasDisponibles = respuesta.fechasDisponibles.map(objeto => objeto.fecha)
 
                 generarCalendarioComun(respuesta.fechaActual, mesc, yearc, fechasDisponibles);
-                
+
                 $('#calendario .arrowright').on('click', () => {
 
                     if (mesc < 11) mesc++;
@@ -89,7 +89,7 @@ function cargarVistaConsultas() {
 
         console.log("Cargando vista de 'Consultas'");
 
-        $('.pacientec').on('click', function() {
+        $('.pacientec').on('click', function () {
 
             $('.pacientec, .paciente').css({ 'text-decoration': 'none' });
             $(this).css({ 'text-decoration': 'underline' });
@@ -141,8 +141,8 @@ function addCalendarioListeners() {
     $('#calendarbody div#dia.disponible').off();
     $('#calendarbody .semana').off();
 
-    if(opcion === 'dia') {
-        
+    if (opcion === 'dia') {
+
         $('#calendario').removeClass('porsemana').addClass('pordia');
 
         $('#calendarbody div#dia.disponible').off().on('click', function () {
@@ -154,7 +154,7 @@ function addCalendarioListeners() {
             console.log(url);
 
             changeView(() => $.get(url, contenido => {
-                
+
                 loadView(contenido);
 
                 $('.consulta').click(function (e) {
@@ -178,16 +178,16 @@ function addCalendarioListeners() {
             }));
         });
     }
-    else if(opcion === 'semana') {
-        
+    else if (opcion === 'semana') {
+
         $('#calendario').removeClass('pordia').addClass('porsemana');
 
-        $('#calendarbody .semana.novacia').off().on('click', function() {
+        $('#calendarbody .semana.novacia').off().on('click', function () {
 
             let unDia = $(this).children().find('#dia');
 
             let unaFecha = `${unDia.attr('data-year')}-${Number(unDia.attr('data-mes')) + 1}-${unDia.attr('data-dia')}`;
-            
+
             console.log(unaFecha);
 
             let fechasSemana = getWeekDates(unaFecha);
@@ -205,7 +205,7 @@ function addCalendarioListeners() {
             // console.log(url);
 
             changeView(() => $.get(url, contenido => {
-                
+
                 loadView(contenido);
 
                 $('.consulta').click(function (e) {
@@ -227,7 +227,7 @@ function addCalendarioListeners() {
                     });
                 });
             }));
-        }); 
+        });
     }
 }
 
@@ -330,9 +330,9 @@ function cargarVistaAgregarConsulta() {
         });
 
         $('#agregarconsulta').on('click', async () => {
-            
-            if(await createConfirmPopup('Confirmación', '¿Estás seguro de agendar la consulta?')) {
-                
+
+            if (await createConfirmPopup('Confirmación', '¿Estás seguro de agendar la consulta?')) {
+
                 $('#agregarservicio').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true);
 
                 let formdatos = new FormData($('#contagregarconsulta')[0]);
@@ -450,8 +450,8 @@ function cargarVistaAgregarServicio() {
         })
 
         $('#agregarservicio').on('click', async () => {
-            
-            if(await createConfirmPopup('Confirmación', '¿Estás seguro de agregar el servicio?')) {
+
+            if (await createConfirmPopup('Confirmación', '¿Estás seguro de agregar el servicio?')) {
 
                 $('#agregarservicio').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true);
 
@@ -511,32 +511,43 @@ function cargarVistaPacientes() {
     $('#btnpacientes, nav.mobile #btnpacientes').css({ 'text-decoration': 'underline' });
 }
 
-function cargarVistaPacienteDetalle(id) {
+function cargarVistaPacienteDetalle(idp) {
 
-    let url = 'vistas/vistasadmin/vistapacientes.php?idpaciente=' + id;
+    let url = 'vistas/vistasadmin/vistapacientes.php?idpaciente=' + idp;
 
     $.get(url, contenido => {
-
-        let enfermedades = {
-
-            agregar: [],
-            eliminar: []
-        }
-        let medicacion = {
-
-            agregar: [],
-            eliminar: []
-        };
         
+        let datospaciente = {
+
+            idpaciente: Number(idp),
+            documento: null,
+            direccion: null,
+            telefono: null,
+            email: null,
+
+            enfermedades: [],
+            medicacion: []
+        }
+
         loadView(contenido);
 
         let editar = $('#editarpaciente');
         let guardar = $('#guardarpaciente');
         let contenedor = $('#pcontainer .datos');
 
+        datospaciente.enfermedades = contenedor.find('.enfermedad').map(function() { return $(this).attr('data-enfermedad'); }).get();
+        datospaciente.medicacion = contenedor.find('.medicamento').map(function() { return $(this).attr('data-medicamento'); }).get();
+
+        $('#odontologocontainer').on('click', () => {
+            
+            datospaciente.medicacion.filter(String);
+            datospaciente.enfermedades.filter(String);
+            console.log(datospaciente);
+        });
+
         editar.on('click', () => {
 
-            if(contenedor.attr('data-editar') == 'edit') {
+            if (contenedor.attr('data-editar') == 'edit') {
 
                 contenedor.attr('data-editar', 'noedit');
                 guardar.prop('disabled', true);
@@ -556,15 +567,112 @@ function cargarVistaPacienteDetalle(id) {
             }
         });
 
-        $('#agregarmedicacion').on('click', async () => {
+        contenedor.find('#agregarmedicacion').on('click', async () => {
 
-            let enfermedad = await createInputPopup('Agregar medicación', 'Ingrese el medicamento');
+            let medicamento = await createInputPopup('Agregar medicación', 'Ingrese el medicamento');
 
-            createPopup('Aviso', enfermedad);
+            if(medicamento.length == 0) return;
+
+            datospaciente.medicacion.push(medicamento);
+
+            let medicamentoli = `<li class='medicamento' data-medicamento='${medicamento}'><span>${medicamento}</span><div class='eliminarmedicamento visible' data-medicamento='${medicamento}'><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div></li>`;
+
+            contenedor.find('#medicacion #contagregar').before(medicamentoli);
+
+            contenedor.find('.eliminarmedicamento').off().on('click', function() {
+
+                let medicamento = $(this).attr('data-medicamento');
+
+                contenedor.find(`.medicamento[data-medicamento='${medicamento}']`).remove();
+
+                let index = datospaciente.medicacion.indexOf(medicamento);
+
+                if (index !== -1) datospaciente.medicacion.splice(index, 1);
+            });
+        });
+
+        contenedor.find('#agregarenfermedad').on('click', async () => {
+
+            let enfermedad = await createInputPopup('Agregar enfermedad', 'Ingrese la enfermedad');
+
+            if(enfermedad.length == 0) return;
+
+            datospaciente.enfermedades.push(enfermedad);
+
+            let enfermedadli = `<li class='enfermedad' data-enfermedad='${enfermedad}'><span>${enfermedad}</span><div class='eliminarenfermedad visible' data-enfermedad='${enfermedad}'><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div></li>`;
+
+            contenedor.find('#enfermedades #contagregar').before(enfermedadli);
+
+            contenedor.find('.eliminarenfermedad').off().on('click', function () {
+
+                let enfermedad = $(this).attr('data-enfermedad');
+    
+                contenedor.find(`.enfermedad[data-enfermedad='${enfermedad}']`).remove();
+    
+                let index = datospaciente.enfermedades.indexOf(enfermedad);
+    
+                if (index !== -1) datospaciente.enfermedades.splice(index, 1);
+            });
+        });
+
+        contenedor.find('.eliminarenfermedad').off().on('click', function () {
+
+            let enfermedad = $(this).attr('data-enfermedad');
+
+            contenedor.find(`.enfermedad[data-enfermedad='${enfermedad}']`).remove();
+
+            let index = datospaciente.enfermedades.indexOf(enfermedad);
+
+            if (index !== -1) datospaciente.enfermedades.splice(index, 1);
+        });
+
+        contenedor.find('.eliminarmedicamento').off().on('click', function() {
+
+            let medicamento = $(this).attr('data-medicamento');
+
+            contenedor.find(`.medicamento[data-medicamento='${medicamento}']`).remove();
+
+            let index = datospaciente.medicacion.indexOf(medicamento);
+
+            if (index !== -1) datospaciente.medicacion.splice(index, 1);
+        });
+
+        guardar.on('click', () => {
+
+            contenedor.attr('data-editar', 'noedit');
+            guardar.prop('disabled', true);
+            editar.html('Editar').css({ 'padding': '.7rem 5rem' });
+
+            contenedor.find('input.valor').prop('disabled', true);
+            contenedor.find('.enfermedad .eliminarenfermedad, .medicamento .eliminarmedicamento, #agregarenfermedad, #agregarmedicacion').removeClass('visible').addClass('invisible');
+
+            datospaciente.documento = contenedor.find('#documento > input').val();
+            datospaciente.direccion = contenedor.find('#direccion > input').val();
+            datospaciente.telefono = contenedor.find('#telefono > input').val();
+            datospaciente.email = contenedor.find('#email > input').val();
+
+            $.ajax({
+
+                type: "POST",
+                url: "backend/admin/editarpaciente.php",
+                data: JSON.stringify(datospaciente),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+
+                    if (response.error == undefined) { 
+                        
+                        createHeaderPopup('Nuevo Aviso', response.exito, () => changeView(() => cargarVistaPacienteDetalle(idp)));
+                    }
+
+                    else createPopup('Nuevo Aviso', response.error)
+                },
+                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+            });
         });
     });
 }
- 
+
 function cargarVistaServicios() {
 
     $.get("vistas/vistasadmin/vistaservicios.php", data => {
@@ -577,23 +685,32 @@ function cargarVistaServicios() {
         $('.servicio').on('click', function () {
 
             let id = ($(this).attr('id'));
+
             $('main').load(`vistas/vistasadmin/vistaservicios.php?numservicio=` + $(this).attr('id'), function () {
+
                 let temp = {
+
                     titulo: "",
                     desc: ""
                 };
-                
+
                 $('[id="mdC"]').eq(0).on('click', function () {
-                    if($('.contTitulon').attr('disabled')){
+
+                    if ($('.contTitulon').attr('disabled')) {
+
                         temp['titulo'] = $('.contTitulon').val();
                         $('.contTitulon').attr('disabled', false);
-                    } else {
-                        if(temp['titulo'] == $('.contTitulon').val()){
-                            $('.contTitulon').attr('disabled', true);
-                        } else {
+                    } 
+                    else {
+
+                        if (temp['titulo'] == $('.contTitulon').val()) $('.contTitulon').attr('disabled', true);
+                        
+                        else {
+
                             let formData = new FormData();
                             formData.append('titulo', $('.contTitulon').val());
                             formData.append('id', id);
+
                             $.ajax({
 
                                 type: "POST",
@@ -602,10 +719,10 @@ function cargarVistaServicios() {
                                 processData: false,
                                 contentType: false,
                                 success: function (response) {
-                    
-                                    if (response.error == undefined){ createPopup('Nuevo Aviso', response); $('.contTitulon').attr('disabled', true);}
-                    
-                                    else console.log(response.error);
+
+                                    if (response.error == undefined) { createPopup('Nuevo Aviso', response); $('.contTitulon').attr('disabled', true); }
+
+                                    else createPopup('Nuevo Aviso', response);
                                 },
                                 error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
                             });
@@ -613,16 +730,22 @@ function cargarVistaServicios() {
                     }
                 });
                 $('[id="mdC"]').eq(1).on('click', function () {
-                    if($('#descripcion').attr('readonly')){
+
+                    if ($('#descripcion').attr('readonly')) {
+
                         temp['desc'] = $('#descripcion').val();
                         $('#descripcion').attr('readonly', false);
-                    } else {
-                        if(temp['desc'] == $('#descripcion').val()){
-                            $('#descripcion').attr('readonly', true);
-                        } else {
+                    } 
+                    else {
+
+                        if (temp['desc'] == $('#descripcion').val()) $('#descripcion').attr('readonly', true);
+                        
+                        else {
+
                             let formData = new FormData();
                             formData.append('descripcion', $('#descripcion').val());
                             formData.append('id', id);
+
                             $.ajax({
 
                                 type: "POST",
@@ -631,9 +754,9 @@ function cargarVistaServicios() {
                                 processData: false,
                                 contentType: false,
                                 success: function (response) {
-                    
-                                    if (response.error == undefined){ createPopup('Nuevo Aviso', response); $('#descripcion').attr('readonly', true);}
-                    
+
+                                    if (response.error == undefined) { createPopup('Nuevo Aviso', response); $('#descripcion').attr('readonly', true); }
+
                                     else console.log(response.error);
                                 },
                                 error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)

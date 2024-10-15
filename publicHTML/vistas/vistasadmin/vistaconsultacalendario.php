@@ -1,3 +1,15 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION['odontologo'])) {
+    
+    header('Location: ../../index.php');
+    exit();
+}
+
+?>
+
 <h1 id="titverpor" class="m-0 mt-5">Ver consultas por</h1>
 
 <div id="verporcontainer" class="d-flex justify-content-center align-items-center">

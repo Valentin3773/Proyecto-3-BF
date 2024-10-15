@@ -2,9 +2,17 @@
 
 session_start();
 
-if(!isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) header('Location: login.php');
+if(!isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) {
+    
+    header('Location: login.php');
+    exit();
+}
 
-else if(!isset($_SESSION['paciente']) && isset($_SESSION['odontologo'])) header('Location: index.php');
+else if(!isset($_SESSION['paciente']) && isset($_SESSION['odontologo'])) {
+    
+    header('Location: index.php');
+    exit();
+}
 
 include('backend/extractor.php');
 

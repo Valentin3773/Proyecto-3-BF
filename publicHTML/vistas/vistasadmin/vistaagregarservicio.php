@@ -5,7 +5,11 @@ include('../../backend/extractor.php');
 session_start();
 reloadSession();
 
-if(!isset($_SESSION['odontologo'])) exit();
+if(!isset($_SESSION['odontologo'])) {
+    
+    header('Location: ../../index.php');
+    exit();
+}
 
 ?>
 

@@ -5,7 +5,11 @@ include("../../backend/extractor.php");
 
 session_start();
 
-if (!isset($_SESSION['odontologo'])) header('Location: ../../index.php');
+if(!isset($_SESSION['odontologo'])) {
+    
+    header('Location: ../../index.php');
+    exit();
+}
 
 $consultasFuturas = array();
 $consultasPrevias = array();

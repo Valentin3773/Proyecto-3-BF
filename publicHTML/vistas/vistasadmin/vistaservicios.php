@@ -4,7 +4,11 @@ include("../../backend/conexion.php");
 
 session_start();
 
-if (!isset($_SESSION['odontologo'])) header('Location: ../../index.php');
+if(!isset($_SESSION['odontologo'])) {
+    
+    header('Location: ../../index.php');
+    exit();
+}
 
 if (!isset($_GET['numservicio'])) {
 

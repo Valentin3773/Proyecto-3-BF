@@ -4,11 +4,12 @@ include("../../backend/conexion.php");
 include("../../backend/extractor.php");
 
 session_start();
-
 reloadSession();
 
-if (!isset($_SESSION['odontologo'])) {
-    exit("No odontologo session found.");
+if(!isset($_SESSION['odontologo'])) {
+    
+    header('Location: ../../index.php');
+    exit();
 }
 
 $ido = $_SESSION['odontologo']['idodontologo'];

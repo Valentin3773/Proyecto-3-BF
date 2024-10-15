@@ -44,9 +44,16 @@
     gap: 1rem;
 }
 
-.foto {
+.foto, #fotoperfil > img {
 
     border-radius: 50%;
+    border: 2px solid white;
+}
+
+.foto {
+
+    width: 80px;
+    height: 77px;
 }
 
 .Nombre {

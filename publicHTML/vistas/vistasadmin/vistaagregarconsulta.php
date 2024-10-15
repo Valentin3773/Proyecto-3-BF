@@ -6,7 +6,11 @@ include('../../backend/extractor.php');
 session_start();
 reloadSession();
 
-if(!isset($_SESSION['odontologo'])) exit();
+if(!isset($_SESSION['odontologo'])) {
+    
+    header('Location: ../../index.php');
+    exit();
+}
 
 $sql = "SELECT idpaciente, nombre, apellido FROM paciente ORDER BY nombre ASC, apellido ASC";
 
