@@ -112,12 +112,7 @@ function integrarBoton($datos, $id) {
 function integrarEventos() {
 
     // Listeners con datos importantes
-    $('#mdF').on('click', function (event) {
-
-        console.log('pablo');
-
-        $('#inFile').click();
-    });
+    $('#mdF').on('click', () => $('#inFile').click());
 
     $('#inFile').off().on('change', function (event) {
 
@@ -128,10 +123,8 @@ function integrarEventos() {
 
                 // Mostrar la imagen
                 let reader = new FileReader();
-                reader.onload = function (e) {
-
-                    $('#fotoperfil').prop('src', e.target.result);
-                }
+                reader.onload = e => $('#fotoperfil').prop('src', e.target.result);
+                
                 reader.readAsDataURL(file);
 
                 // Parseo de la imagen
@@ -157,7 +150,7 @@ function integrarEventos() {
         } 
         catch (error) {
 
-            console.log(error);
+            console.error(error);
         }
     });
 

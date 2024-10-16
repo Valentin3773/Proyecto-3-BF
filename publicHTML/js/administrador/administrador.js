@@ -520,6 +520,8 @@ function cargarVistaPacienteDetalle(idp) {
         let datospaciente = {
 
             idpaciente: Number(idp),
+            nombre: null,
+            apellido: null,
             documento: null,
             direccion: null,
             telefono: null,
@@ -528,6 +530,8 @@ function cargarVistaPacienteDetalle(idp) {
             enfermedades: [],
             medicacion: []
         }
+
+        let fotopaciente = null;
 
         loadView(contenido);
 
@@ -649,6 +653,32 @@ function cargarVistaPacienteDetalle(idp) {
             if(datospaciente.medicacion.length === 0) contenedor.find('#medicacion > ul.valor > #contagregar').before(`<span class='medicamento nomedicacion'>No hay medicación</span>`);
         });
 
+        $('#pcontainer #mdF').off().on('click', () => $('#pcontainer #inFile').click());
+
+        $('#pcontainer #inFile').off().on('change', event => {
+
+            let file = event.target.files[0];
+
+            try {
+
+                if(file) {
+
+                    let reader = new FileReader();
+                    reader.onload = e => $('#pcontainer #fotoperfil > img').prop('src', e.target.result);
+                    
+                    reader.readAsDataURL(file);
+
+                    fotopaciente = new FormData();
+                    fotopaciente.append('file', file);
+                    fotopaciente.append('idpaciente', idp);
+                }
+            }
+            catch(error) {
+
+                console.error(error);
+            }
+        });
+
         guardar.on('click', () => {
 
             contenedor.attr('data-editar', 'noedit');
@@ -658,10 +688,15 @@ function cargarVistaPacienteDetalle(idp) {
             contenedor.find('input.valor').prop('disabled', true);
             contenedor.find('.enfermedad .eliminarenfermedad, .medicamento .eliminarmedicamento, #agregarenfermedad, #agregarmedicacion').removeClass('visible').addClass('invisible');
 
+            datospaciente.nombre = contenedor.find('#nombre > input').val();
+            datospaciente.apellido = contenedor.find('#apellido > input').val();
             datospaciente.documento = contenedor.find('#documento > input').val();
             datospaciente.direccion = contenedor.find('#direccion > input').val();
             datospaciente.telefono = contenedor.find('#telefono > input').val();
             datospaciente.email = contenedor.find('#email > input').val();
+
+            datospaciente.medicacion.filter(String);
+            datospaciente.enfermedades.filter(String);
 
             $.ajax({
 

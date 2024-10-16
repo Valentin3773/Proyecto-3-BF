@@ -1,5 +1,7 @@
 <?php 
+
 session_start();
+
 include("../conexion.php");
 include("checarIcono_Img.php");
 
@@ -10,7 +12,8 @@ if  ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SESSION['odontologo']){
     exit();
 }
 
-function actualizarIcono(){
+function actualizarIcono() {
+
     $respuestas = array();
     $file = $_FILES['file'];
     $id = $_POST['id'];
@@ -27,12 +30,12 @@ function actualizarIcono(){
 
             if (move_uploaded_file($file['tmp_name'], $ruta_guardar_archivo)) {
     
-    
                 try {
+
                     global $pdo;
     
                     //Borro el icono vieja del servicio
-                    $estadoIMG = checarIMGServicio('icono',$id);
+                    $estadoIMG = checarIMGServicio('icono', $id);
                     if ($estadoIMG['ok'] && file_exists($ruta_carpeta . $estadoIMG['nombre'])) unlink($ruta_carpeta . $estadoIMG['nombre']);
                     
                     // Consulta para modificar servicio
@@ -41,7 +44,7 @@ function actualizarIcono(){
                     $stmt->bindParam(':icon', $nuevo_nombre_archivo);
                     $stmt->bindParam(':num', $id);
                     $stmt->execute();
-                    $respuestas['enviar'] = "Se actualizo el Icono";
+                    $respuestas['enviar'] = "Se actualizo el icono";
                 } 
                 catch (PDOException $e) {
     

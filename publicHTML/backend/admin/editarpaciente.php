@@ -75,7 +75,7 @@ $data = [
     'documento' => '56672944',
     'direccion' => 'juansonlanson',
     'email' => 'pablonpablero@gmail.com',
-    'enfermedades' => ['Culonitis', 'Putismo'],
+    'enfermedades' => ['Andresismo', 'Felipinitis crónica'],
     'medicacion' => ['Perifar', 'Paracetamol']
 ];
 */
@@ -111,6 +111,26 @@ if($data) {
         if(!$stmt->execute()) $tuduben = false;
 
         foreach($nuevosdatos['medicacion'] as $medicamento) if(!agregarMedicacion($medicamento, $idp)) $tuduben = false;
+    }
+
+    if((isset($nuevosdatos['nombre']) && isset($viejosdatos['nombre']) && $nuevosdatos['nombre'] != $viejosdatos['nombre']) || (isset($nuevosdatos['nombre']) && !isset($viejosdatos['nombre']))) {
+
+        $sql = "UPDATE paciente SET nombre = :nombre WHERE idpaciente = :idp";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':idp', $idp);
+        $stmt->bindParam(':nombre', $nuevosdatos['nombre']);
+        
+        if(!$stmt->execute()) $tuduben = false;
+    }
+
+    if((isset($nuevosdatos['apellido']) && isset($viejosdatos['apellido']) && $nuevosdatos['apellido'] != $viejosdatos['apellido']) || (isset($nuevosdatos['apellido']) && !isset($viejosdatos['apellido']))) {
+
+        $sql = "UPDATE paciente SET apellido = :apellido WHERE idpaciente = :idp";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':idp', $idp);
+        $stmt->bindParam(':apellido', $nuevosdatos['apellido']);
+        
+        if(!$stmt->execute()) $tuduben = false;
     }
 
     if((isset($nuevosdatos['documento']) && isset($viejosdatos['documento']) && $nuevosdatos['documento'] != $viejosdatos['documento']) || (isset($nuevosdatos['documento']) && !isset($viejosdatos['documento']))) {
@@ -151,6 +171,11 @@ if($data) {
         $stmt->bindParam(':email', $nuevosdatos['email']);
         
         if(!$stmt->execute()) $tuduben = false;
+    }
+
+    if(true) {
+
+        
     }
 
     if($tuduben) $respuesta['exito'] = "Los datos del paciente han sido modificados";

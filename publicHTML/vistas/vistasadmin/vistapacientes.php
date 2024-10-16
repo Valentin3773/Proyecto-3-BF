@@ -110,7 +110,7 @@ if (!isset($_GET['idpaciente'])) {
 
         <div id="fotonom">
 
-            <div id="fotoperfil">
+            <div id="fotoperfil" class="position-relative">
 
                 <?php
 
@@ -120,13 +120,30 @@ if (!isset($_GET['idpaciente'])) {
 
                 ?>
 
-            </div>
+                <div class="lapizeditar" id="mdF">
+                    <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
+                </div>
+                <input type="file" id="inFile" accept="image/*">
 
-            <h1 data-nombre="<?= $paciente['nombre'] ?>" class="m-0"><?= "{$paciente['nombre']} {$paciente['apellido']}" ?></h1>
+            </div>
 
         </div>
 
         <div class="datos">
+
+            <div id="nombre" class="campo">
+
+                <h2 class="clave">Nombre</h2>
+                <input class="valor" type="text" value="<?= $paciente['nombre'] ?>" disabled></input>
+
+            </div>
+
+            <div id="apellido" class="campo">
+
+                <h2 class="clave">Apellido</h2>
+                <input class="valor" type="text" value="<?= $paciente['apellido'] ?>" disabled></input>
+
+            </div>
 
             <div id="documento" class="campo">
 
