@@ -1,7 +1,7 @@
 <?php
 
-include('conexion.php');
-include('extractor.php');
+include('../conexion.php');
+include('../extractor.php');
 
 session_start();
 reloadSession();
@@ -34,25 +34,32 @@ function checarIMG(int $idp)
     return $estado;
 }
 
-$respuesta = [];
-
-$file = $_FILES['file'];
-
-$idp = $_POST['idpaciente'];
-
-$ruta_carpeta = $_SERVER['DOCUMENT_ROOT'] . "/Proyecto-3-BF/publicHTML/backend/almacenamiento/fotosdeperfil/";
-
-$extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-$nuevo_nombre_archivo = uniqid('img_', true) . '.' . $extension;
-$ruta_guardar_archivo = $ruta_carpeta . $nuevo_nombre_archivo;
+$respuesta = true;
 
 try {
+
+    $file = $_FILES['file'];
+
+    if (!isset($file)) {
+
+        header('Content-Type: application/json');
+        echo json_encode($respuesta);
+        exit();
+    }
+
+    $idp = $_POST['idpaciente'];
+
+    $ruta_carpeta = $_SERVER['DOCUMENT_ROOT'] . "/Proyecto-3-BF/publicHTML/backend/almacenamiento/fotosdeperfil/";
+
+    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $nuevo_nombre_archivo = uniqid('img_', true) . '.' . $extension;
+    $ruta_guardar_archivo = $ruta_carpeta . $nuevo_nombre_archivo;
 
     if (move_uploaded_file($file['tmp_name'], $ruta_guardar_archivo)) {
 
         try {
 
-            $estadoIMG = checarIMG();
+            $estadoIMG = checarIMG($idp);
 
             if ($estadoIMG['ok'] && file_exists($ruta_carpeta . $estadoIMG['nombre'])) unlink($ruta_carpeta . $estadoIMG['nombre']);
 
@@ -61,26 +68,26 @@ try {
             $stmt->bindParam(':img', $nuevo_nombre_archivo);
             $stmt->bindParam(':idp', $idp);
 
-            if ($stmt->execute()) $respuesta['exito'] = "Se ha actualizado tu foto de perfil";
+            if ($stmt->execute()) $respuesta = true;
 
-            else $respuesta['error'] = "Ha ocurrido un error al intentar actualizar tu foto de perfil";
+            else $respuesta = false;
 
             reloadSession();
         } 
         catch (PDOException $e) {
 
-            $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
+            $respuesta = false;
         }
     } 
-    else $respuesta['error'] = "Error al mover el archivo. Verifica los permisos de la carpeta.";
+    else $respuesta = false;
 } 
 catch (Exception $e) {
 
-    $respuesta['error'] = "Excepción: " . $e->getMessage();
+    $respuesta = false;
 }
 
 header('Content-Type: application/json');
-echo json_encode($respuesta);
+echo json_encode([$respuesta]);
 exit();
 
 ?>

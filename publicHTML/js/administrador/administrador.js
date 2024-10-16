@@ -542,24 +542,21 @@ function cargarVistaPacienteDetalle(idp) {
         datospaciente.enfermedades = contenedor.find('.enfermedad').map(function() { return $(this).attr('data-enfermedad'); }).get();
         datospaciente.medicacion = contenedor.find('.medicamento').map(function() { return $(this).attr('data-medicamento'); }).get();
 
+        /*
         $('#odontologocontainer').on('click', () => {
             
             datospaciente.medicacion.filter(String);
             datospaciente.enfermedades.filter(String);
             console.log(datospaciente);
+            console.log(fotopaciente);
+            console.log($('#mdF'));
         });
+        */
 
         editar.on('click', () => {
 
-            if (contenedor.attr('data-editar') == 'edit') {
+            if (contenedor.attr('data-editar') == 'edit') changeView(() => cargarVistaPacienteDetalle(idp));
 
-                contenedor.attr('data-editar', 'noedit');
-                guardar.prop('disabled', true);
-                editar.html('Editar').css({ 'padding': '.7rem 5rem' });
-
-                $('#pcontainer input.valor').prop('disabled', true);
-                $('.enfermedad .eliminarenfermedad, .medicamento .eliminarmedicamento, #agregarenfermedad, #agregarmedicacion').removeClass('visible').addClass('invisible');
-            }
             else {
 
                 contenedor.attr('data-editar', 'edit');
@@ -568,6 +565,7 @@ function cargarVistaPacienteDetalle(idp) {
 
                 $('#pcontainer input.valor').prop('disabled', false);
                 $('.enfermedad .eliminarenfermedad, .medicamento .eliminarmedicamento, #agregarenfermedad, #agregarmedicacion').removeClass('invisible').addClass('visible');
+                $('#mdF').attr('desactivado', 'false');
             }
         });
 
@@ -595,7 +593,7 @@ function cargarVistaPacienteDetalle(idp) {
 
                 if (index !== -1) datospaciente.medicacion.splice(index, 1);
 
-                if(datospaciente.medicacion.length === 0) contenedor.find('#medicacion > ul.valor > #contagregar').before(`<span class='medicamento nomedicacion'>No hay medicación</span>`);
+                if(datospaciente.medicacion.length === 0) contenedor.find('#medicacion > ul.valor > #contagregar').before(`<span class='medicamento nomedicacion d-flex justify-content-center align-items-center'>No hay medicación</span>`);
             });
         });
 
@@ -623,7 +621,7 @@ function cargarVistaPacienteDetalle(idp) {
     
                 if (index !== -1) datospaciente.enfermedades.splice(index, 1);
 
-                if(datospaciente.enfermedades.length === 0) contenedor.find('#enfermedades > ul.valor > #contagregar').before(`<span class='enfermedad noenfermedades'>No hay enfermedades</span>`);    
+                if(datospaciente.enfermedades.length === 0) contenedor.find('#enfermedades > ul.valor > #contagregar').before(`<span class='enfermedad noenfermedades d-flex justify-content-center align-items-center'>No hay enfermedades</span>`);    
             });
         });
 
@@ -637,7 +635,7 @@ function cargarVistaPacienteDetalle(idp) {
 
             if (index !== -1) datospaciente.enfermedades.splice(index, 1);
 
-            if(datospaciente.enfermedades.length === 0) contenedor.find('#enfermedades > ul.valor > #contagregar').before(`<span class='enfermedad noenfermedades'>No hay enfermedades</span>`);
+            if(datospaciente.enfermedades.length === 0) contenedor.find('#enfermedades > ul.valor > #contagregar').before(`<span class='enfermedad noenfermedades d-flex justify-content-center align-items-center'>No hay enfermedades</span>`);
         });
 
         contenedor.find('.eliminarmedicamento').off().on('click', function() {
@@ -650,10 +648,13 @@ function cargarVistaPacienteDetalle(idp) {
 
             if (index !== -1) datospaciente.medicacion.splice(index, 1);
 
-            if(datospaciente.medicacion.length === 0) contenedor.find('#medicacion > ul.valor > #contagregar').before(`<span class='medicamento nomedicacion'>No hay medicación</span>`);
+            if(datospaciente.medicacion.length === 0) contenedor.find('#medicacion > ul.valor > #contagregar').before(`<span class='medicamento nomedicacion d-flex justify-content-center align-items-center'>No hay medicación</span>`);
         });
 
-        $('#pcontainer #mdF').off().on('click', () => $('#pcontainer #inFile').click());
+        $('#pcontainer #mdF').off().on('click', function() {
+            
+            if(contenedor.attr('data-editar') === 'edit' && $(this).attr('desactivado') === 'false') $('#pcontainer #inFile').click();
+        });
 
         $('#pcontainer #inFile').off().on('change', event => {
 
@@ -679,43 +680,66 @@ function cargarVistaPacienteDetalle(idp) {
             }
         });
 
-        guardar.on('click', () => {
+        guardar.on('click', async () => {
 
-            contenedor.attr('data-editar', 'noedit');
-            guardar.prop('disabled', true);
-            editar.html('Editar').css({ 'padding': '.7rem 5rem' });
+            if(await createConfirmPopup('Confirmación', '¿Estás seguro de modificar los datos del paciente?', ['No', 'Sí'])) {
+                
+                guardar.prop('disabled', true).html('<i class="fas fa-spinner fa-pulse"></i>');
 
-            contenedor.find('input.valor').prop('disabled', true);
-            contenedor.find('.enfermedad .eliminarenfermedad, .medicamento .eliminarmedicamento, #agregarenfermedad, #agregarmedicacion').removeClass('visible').addClass('invisible');
+                contenedor.attr('data-editar', 'noedit');
+                guardar.prop('disabled', true);
+                editar.html('Editar').css({ 'padding': '.7rem 5rem' });
 
-            datospaciente.nombre = contenedor.find('#nombre > input').val();
-            datospaciente.apellido = contenedor.find('#apellido > input').val();
-            datospaciente.documento = contenedor.find('#documento > input').val();
-            datospaciente.direccion = contenedor.find('#direccion > input').val();
-            datospaciente.telefono = contenedor.find('#telefono > input').val();
-            datospaciente.email = contenedor.find('#email > input').val();
+                contenedor.find('input.valor').prop('disabled', true);
+                contenedor.find('.enfermedad .eliminarenfermedad, .medicamento .eliminarmedicamento, #agregarenfermedad, #agregarmedicacion').removeClass('visible').addClass('invisible');
 
-            datospaciente.medicacion.filter(String);
-            datospaciente.enfermedades.filter(String);
+                datospaciente.nombre = contenedor.find('#nombre > input').val();
+                datospaciente.apellido = contenedor.find('#apellido > input').val();
+                datospaciente.documento = contenedor.find('#documento > input').val();
+                datospaciente.direccion = contenedor.find('#direccion > input').val();
+                datospaciente.telefono = contenedor.find('#telefono > input').val();
+                datospaciente.email = contenedor.find('#email > input').val();
 
-            $.ajax({
+                datospaciente.medicacion.filter(String);
+                datospaciente.enfermedades.filter(String);
 
-                type: "POST",
-                url: "backend/admin/editarpaciente.php",
-                data: JSON.stringify(datospaciente),
-                processData: false,
-                contentType: false,
-                success: function (response) {
+                $.ajax({
 
-                    if (response.error == undefined) { 
-                        
-                        createHeaderPopup('Nuevo Aviso', response.exito, () => changeView(() => cargarVistaPacienteDetalle(idp)));
-                    }
+                    type: "POST",
+                    url: "backend/admin/editarpaciente.php",
+                    data: JSON.stringify(datospaciente),
+                    processData: false,
+                    contentType: false,
+                    success: function(responso) {
 
-                    else createPopup('Nuevo Aviso', response.error)
-                },
-                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
-            });
+                        if (responso.error == undefined) { 
+
+                            $.ajax({
+
+                                type: "POST",
+                                url: "backend/admin/subirimgpaciente.php",
+                                data: fotopaciente,
+                                processData: false,
+                                contentType: false,
+                                success: function (response) {
+
+                                    if (response[0]) createHeaderPopup('Nuevo Aviso', responso.exito, () => changeView(() => cargarVistaPacienteDetalle(idp)));
+                
+                                    else createPopup('Nuevo Aviso', responso.error)
+
+                                    console.log('rigoberto');
+                                },
+                                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+                            });
+                        }
+
+                        else createPopup('Nuevo Aviso', responso.error);
+
+                        guardar.prop('disabled', false).html('Guardar');
+                    },
+                    error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+                });
+            }
         });
     });
 }
@@ -963,5 +987,5 @@ function changeView(vista) {
 
 function loadView(contenido) {
 
-    $('main').empty().html(contenido).fadeIn(200);
+    $('main').empty().html(contenido).fadeIn(200)[0].scrollTo({ top: 0, behavior: 'smooth' });
 }

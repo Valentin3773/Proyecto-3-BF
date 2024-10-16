@@ -176,6 +176,11 @@
     right: 0;
 }
 
+.lapizeditar[desactivado="true"] {
+
+    display: none !important;
+}
+
 .lapizeditar:hover {
 
     scale: 1.05;
@@ -287,6 +292,7 @@
 
     position: absolute;
     right: 0;
+    top: 0;
     width: 40px;
     height: 40px;
     display: flex;
