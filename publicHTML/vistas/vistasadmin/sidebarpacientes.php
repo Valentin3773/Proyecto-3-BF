@@ -11,7 +11,7 @@ if(!isset($_SESSION['odontologo'])) {
 }
 
 $pacientes = array();
-$consulta = "SELECT DISTINCT p.idpaciente, p.nombre, p.apellido FROM odontologo o JOIN consulta c ON o.idodontologo = c.idodontologo JOIN paciente p ON c.idpaciente = p.idpaciente WHERE o.idodontologo = :ido ORDER BY nombre ASC";
+$consulta = "SELECT DISTINCT p.idpaciente, p.nombre, p.apellido FROM odontologo o JOIN consulta c ON o.idodontologo = c.idodontologo JOIN paciente p ON c.idpaciente = p.idpaciente WHERE o.idodontologo = :ido AND vigente = 'vigente' ORDER BY nombre ASC";
 
 $ido = $_SESSION['odontologo']['idodontologo'];
 

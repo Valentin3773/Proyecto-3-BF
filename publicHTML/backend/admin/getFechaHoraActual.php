@@ -9,7 +9,7 @@ if(!isset($_SESSION['odontologo'])) exit();
 
 $ido = $_SESSION['odontologo']['idodontologo'];
 
-$sql = "SELECT fecha FROM consulta WHERE idodontologo = :ido";
+$sql = "SELECT fecha FROM consulta WHERE idodontologo = :ido AND vigente = 'vigente'";
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':ido', $ido);
 

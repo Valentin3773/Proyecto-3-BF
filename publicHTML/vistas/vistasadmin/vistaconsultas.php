@@ -21,7 +21,7 @@ if (isset($_GET['idpaciente'])) {
 
     $ido = $_SESSION['odontologo']['idodontologo'];
     $idp = isset($_GET['idpaciente']) ? $_GET['idpaciente'] : null;
-    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) ORDER BY fecha ASC, hora ASC";
+    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND vigente = 'vigente' AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) ORDER BY fecha ASC, hora ASC";
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
     $stmt->bindParam(':ido', $ido);
@@ -34,7 +34,7 @@ if (isset($_GET['idpaciente'])) {
         }
     }
 
-    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND ((fecha < CURDATE()) OR (fecha = CURDATE() AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) < CURTIME())) ORDER BY fecha ASC, hora ASC";
+    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND vigente = 'vigente' AND ((fecha < CURDATE()) OR (fecha = CURDATE() AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) < CURTIME())) ORDER BY fecha ASC, hora ASC";
 
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':ido', $ido);
@@ -48,7 +48,7 @@ if (isset($_GET['idpaciente'])) {
         }
     }
 
-    $consulta = "SELECT ADDTIME(hora, SEC_TO_TIME(duracion * 60)) as horafinalizacion, asunto, fecha, hora FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND CURDATE() = fecha AND CURTIME() BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) ORDER BY fecha ASC, hora ASC";
+    $consulta = "SELECT ADDTIME(hora, SEC_TO_TIME(duracion * 60)) as horafinalizacion, asunto, fecha, hora FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND vigente = 'vigente' AND CURDATE() = fecha AND CURTIME() BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) ORDER BY fecha ASC, hora ASC";
 
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':ido', $ido);
@@ -79,14 +79,14 @@ if (isset($_GET['idpaciente'])) {
     $fechastring = $fecha->format('Y-m-d');
     $ido = $_SESSION['odontologo']['idodontologo'];
 
-    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE fecha = :fechaelegida AND idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) ORDER BY fecha ASC, hora ASC";
+    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE fecha = :fechaelegida AND idodontologo = :ido AND vigente = 'vigente' AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) ORDER BY fecha ASC, hora ASC";
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':fechaelegida', $fechastring);
     $stmt->bindParam(':ido', $ido);
 
     if ($stmt->execute() && $stmt->rowCount() > 0) while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $consultasFuturas[] = $tupla;
 
-    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE fecha = :fechaelegida AND idodontologo = :ido AND ((fecha < CURDATE()) OR (fecha = CURDATE() AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) < CURTIME())) ORDER BY fecha ASC, hora ASC";
+    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE fecha = :fechaelegida AND idodontologo = :ido AND vigente = 'vigente' AND ((fecha < CURDATE()) OR (fecha = CURDATE() AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) < CURTIME())) ORDER BY fecha ASC, hora ASC";
 
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':fechaelegida', $fechastring);
@@ -94,7 +94,7 @@ if (isset($_GET['idpaciente'])) {
 
     if ($stmt->execute() && $stmt->rowCount() > 0) while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $consultasPrevias[] = $tupla;
 
-    $consulta = "SELECT ADDTIME(hora, SEC_TO_TIME(duracion * 60)) as horafinalizacion, asunto, fecha, hora FROM consulta WHERE fecha = :fechaelegida AND idodontologo = :ido AND CURDATE() = fecha AND CURTIME() BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) ORDER BY fecha ASC, hora ASC";
+    $consulta = "SELECT ADDTIME(hora, SEC_TO_TIME(duracion * 60)) as horafinalizacion, asunto, fecha, hora FROM consulta WHERE fecha = :fechaelegida AND idodontologo = :ido AND vigente = 'vigente' AND CURDATE() = fecha AND CURTIME() BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) ORDER BY fecha ASC, hora ASC";
 
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':fechaelegida', $fechastring);
@@ -111,7 +111,7 @@ if (isset($_GET['idpaciente'])) {
 
     $ido = $_SESSION['odontologo']['idodontologo'];
 
-    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE (fecha BETWEEN :primerdiasemana AND :ultimodiasemana) AND idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) ORDER BY fecha ASC, hora ASC";
+    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE (fecha BETWEEN :primerdiasemana AND :ultimodiasemana) AND vigente = 'vigente' AND idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) ORDER BY fecha ASC, hora ASC";
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':primerdiasemana', $fecha1);
     $stmt->bindParam(':ultimodiasemana', $fecha2);
@@ -119,7 +119,7 @@ if (isset($_GET['idpaciente'])) {
 
     if ($stmt->execute() && $stmt->rowCount() > 0) while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $consultasFuturas[] = $tupla;
 
-    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE (fecha BETWEEN :primerdiasemana AND :ultimodiasemana) AND idodontologo = :ido AND ((fecha < CURDATE()) OR (fecha = CURDATE() AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) < CURTIME())) ORDER BY fecha ASC, hora ASC";
+    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE (fecha BETWEEN :primerdiasemana AND :ultimodiasemana) AND idodontologo = :ido AND vigente = 'vigente' AND ((fecha < CURDATE()) OR (fecha = CURDATE() AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) < CURTIME())) ORDER BY fecha ASC, hora ASC";
 
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':primerdiasemana', $fecha1);
@@ -128,7 +128,7 @@ if (isset($_GET['idpaciente'])) {
 
     if ($stmt->execute() && $stmt->rowCount() > 0) while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $consultasPrevias[] = $tupla;
 
-    $consulta = "SELECT ADDTIME(hora, SEC_TO_TIME(duracion * 60)) as horafinalizacion, asunto, fecha, hora FROM consulta WHERE (fecha BETWEEN :primerdiasemana AND :ultimodiasemana) AND idodontologo = :ido AND CURDATE() = fecha AND CURTIME() BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) ORDER BY fecha ASC, hora ASC";
+    $consulta = "SELECT ADDTIME(hora, SEC_TO_TIME(duracion * 60)) as horafinalizacion, asunto, fecha, hora FROM consulta WHERE (fecha BETWEEN :primerdiasemana AND :ultimodiasemana) AND idodontologo = :ido AND vigente = 'vigente' AND CURDATE() = fecha AND CURTIME() BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) ORDER BY fecha ASC, hora ASC";
 
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':primerdiasemana', $fecha1);

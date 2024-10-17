@@ -19,7 +19,7 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
     $nompaciente = "";
     $idp = $_SESSION['paciente']['idpaciente'] ?? null;
 
-    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE idpaciente = :idp AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) ORDER BY fecha ASC, hora ASC";
+    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE idpaciente = :idp AND vigente = 'vigente' AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) ORDER BY fecha ASC, hora ASC";
 
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
@@ -32,7 +32,7 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
         }
     }
 
-    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE idpaciente = :idp AND ((fecha < CURDATE()) OR (fecha = CURDATE() AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) < CURTIME())) ORDER BY fecha ASC, hora ASC";
+    $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE idpaciente = :idp AND vigente = 'vigente' AND ((fecha < CURDATE()) OR (fecha = CURDATE() AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) < CURTIME())) ORDER BY fecha ASC, hora ASC";
 
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
@@ -45,7 +45,7 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
         }
     }
 
-    $consulta = "SELECT ADDTIME(hora, SEC_TO_TIME(duracion * 60)) as horafinalizacion, asunto, fecha, hora FROM consulta WHERE idpaciente = :idp AND CURDATE() = fecha AND CURTIME() BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) ORDER BY fecha ASC, hora ASC";
+    $consulta = "SELECT ADDTIME(hora, SEC_TO_TIME(duracion * 60)) as horafinalizacion, asunto, fecha, hora FROM consulta WHERE idpaciente = :idp AND vigente = 'vigente' AND CURDATE() = fecha AND CURTIME() BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) ORDER BY fecha ASC, hora ASC";
 
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
@@ -58,7 +58,7 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
         }
     }
 
-    $consulta = "SELECT nombre, apellido FROM paciente WHERE idpaciente = :idp";
+    $consulta = "SELECT nombre, apellido FROM paciente WHERE idpaciente = :idp AND vigente = 'vigente'";
 
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);

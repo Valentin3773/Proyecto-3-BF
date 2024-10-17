@@ -485,7 +485,7 @@ function cargarVistaPacientes() {
 
         console.log("Cargando vista de 'Pacientes'");
 
-        $('.sidebar').empty().html(data).fadeIn(200);
+        loadSidebar(data);
 
         $.get('vistas/vistasadmin/vistapacientes.php', data => {
 
@@ -751,7 +751,7 @@ function cargarVistaServicios() {
         loadView(data);
         console.log("Cargando vista de 'Servicios'");
 
-        $('.sidebar').empty().fadeIn(200);
+        loadSidebar('');
 
         $('.servicio').on('click', function () {
 
@@ -979,10 +979,15 @@ function slideActionBar(estado) {
 
 let fechasPermitidas = [];
 
+function loadSidebar(contenido) {
+
+    $('.sidebar').empty().html(contenido).fadeIn(200)[0].scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function changeView(vista) {
 
     $('main').fadeOut(200, vista);
-    $('sidebar').fadeOut(200);
+    $('.sidebar').fadeOut(200);
 }
 
 function loadView(contenido) {
