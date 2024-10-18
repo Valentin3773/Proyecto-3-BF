@@ -5,9 +5,9 @@ include('../extractor.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../../lib/PHPMailer/PHPMailer.php';
-require '../../lib/PHPMailer/Exception.php';
-require '../../lib/PHPMailer/SMTP.php';
+require_once '../../lib/PHPMailer/PHPMailer.php';
+require_once '../../lib/PHPMailer/Exception.php';
+require_once '../../lib/PHPMailer/SMTP.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") sendMail();
 

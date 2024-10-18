@@ -2,7 +2,8 @@
 
 // Extractor es un modulo que incluye funciones que mejoran la calidad de vida de los programadores.
 
-$dir = "{$_SERVER['DOCUMENT_ROOT']}/Proyecto-3-BF/publicHTML/";
+///Proyecto-3-BF/publicHTML/       agregar aquï, lo hice así para el "Hosting" trucho
+$dir = "{$_SERVER['DOCUMENT_ROOT']}";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
