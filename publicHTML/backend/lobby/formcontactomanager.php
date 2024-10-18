@@ -19,7 +19,7 @@ function sendMail() {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'laprogramarmy@gmail.com';
-    $mail->Password = 'khpr cean piib ssiu';
+    $mail->Password = 'nmlf rltr hzqx ugvh';
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';
@@ -65,7 +65,7 @@ function sendMail() {
         } 
         else {
             //Destinatario
-            $destino = "themystymysty@gmail.com";
+            $destino = "laprogramarmy@gmail.com";
             $mail->isHTML(true);
 
             // Asunto del correo

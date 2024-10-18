@@ -5,6 +5,9 @@
     margin: 10px;
     border-radius: 10px;
     color: white;
+    border: 1px solid #ccc; /* Borde del contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+
 }
 
 .contConsultaAsunto {
@@ -108,7 +111,7 @@ h1 {
 
     background-color: #0059CD;
     filter: brightness(1.1);
-    width: fit-content;
+    width: 100%;
     text-align: center;
     padding: 5px;
     border-radius: 10px 10px 0 0;
@@ -206,4 +209,53 @@ h2 input {
 button {
     
     color: white;
+}
+
+@media only screen and (max-width: 1920px) and (min-width: 1320px) {
+    .contentFecha {
+        width: 80%;
+        display: grid;
+      }
+  
+      .contentHora {
+        width: 80%;
+        display: grid;
+    }
+  
+
+      .contFecha{
+        width: 39%;
+    }
+    .contHora{
+        width: 39%;
+    }
+}
+
+@media only screen and (max-width: 1319px) {
+    .tituloHora {
+        width: 100%;
+    }
+    .tituloFecha {
+        width: 100%;
+    }
+
+    .contenedorcentral{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contHora{width: 100%;}
+    .contDuracion{width: 100%;}
+    .contFecha{width: 100%;}
+}
+
+@media only screen and (max-width: 990px) {
+    .tituloHora {
+        width: 100%;
+    }
+    .tituloFecha {
+        width: 100%;
+    }
 }

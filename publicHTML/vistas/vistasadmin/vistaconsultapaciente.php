@@ -65,8 +65,8 @@ $conjHoras = horasDisponibles($fechaA, $ido);
     </div>
 
     <div class="px-3">
-
-        <div class="row w-100 gx-0">
+    <div>
+        <div class="row w-100 gx-0 justify-content-center contenedorcentral">
             <div class="col-xl-5 col-lg-5 col-12 contHora m-0">
                 <div class="tituloHora">
                     <h1>Hora</h1>
@@ -85,7 +85,7 @@ $conjHoras = horasDisponibles($fechaA, $ido);
                     </select>
                 </div>
             </div>
-            <div class="col-xl-2 col-lg-2 col-12 contDuracion">
+            <div class="col-xl-2 col-lg-2 col-12 my-5 contDuracion">
                 <div class="tituloDuracion">
                     <h1>Duración</h1>
                 </div>
@@ -125,7 +125,7 @@ $conjHoras = horasDisponibles($fechaA, $ido);
         </div>
 
     </div>
-
+    </div>
     <div class="contInteractivo d-flex justify-content-evenly">
         <button id="btnModificar" class="btnInteractivo" value="Modificar">
             Modificar
