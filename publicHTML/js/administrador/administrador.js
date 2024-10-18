@@ -773,13 +773,16 @@ function cargarVistaServicios() {
                 $('[id="mdC"]').eq(0).on('click', function () {
 
                     if ($('.contTitulon').attr('disabled')) {
-
+                        $('[id="mdC"]').eq(0).attr('src','img/iconosvg/Guardar.svg');
                         temp['titulo'] = $('.contTitulon').val();
                         $('.contTitulon').attr('disabled', false);
                     } 
                     else {
 
-                        if (temp['titulo'] == $('.contTitulon').val()) $('.contTitulon').attr('disabled', true);
+                        if (temp['titulo'] == $('.contTitulon').val()) {
+                            $('.contTitulon').attr('disabled', true)
+                            $('[id="mdC"]').eq(0).attr('src','img/iconosvg/lapiz.svg');
+                        }
                         
                         else {
 
@@ -802,19 +805,23 @@ function cargarVistaServicios() {
                                 },
                                 error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
                             });
+                            $('[id="mdC"]').eq(0).attr('src','img/iconosvg/lapiz.svg');
                         }
                     }
                 });
                 $('[id="mdC"]').eq(1).on('click', function () {
 
                     if ($('#descripcion').attr('readonly')) {
-
+                        $('[id="mdC"]').eq(1).attr('src','img/iconosvg/Guardar.svg');
                         temp['desc'] = $('#descripcion').val();
                         $('#descripcion').attr('readonly', false);
                     } 
                     else {
 
-                        if (temp['desc'] == $('#descripcion').val()) $('#descripcion').attr('readonly', true);
+                        if (temp['desc'] == $('#descripcion').val()) { 
+                            $('#descripcion').attr('readonly', true);
+                            $('[id="mdC"]').eq(1).attr('src','img/iconosvg/lapiz.svg');
+                        }
                         
                         else {
 
@@ -837,12 +844,14 @@ function cargarVistaServicios() {
                                 },
                                 error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
                             });
+                            $('[id="mdC"]').eq(1).attr('src','img/iconosvg/lapiz.svg');
                         }
                     }
                 });
                 $('[id="mdF"]').eq(0).on('click', function () {
 
                     $('#inFile1').click();
+                    $('[id="mdF"]').eq(0).attr('src','img/iconosvg/Guardar.svg');
                     $('#inFile1').change(function (event) {
 
                         let file = event.target.files[0];
@@ -865,9 +874,10 @@ function cargarVistaServicios() {
                                 formData.append('file', file);
                                 enviarIMGServicio(formData, 0);;
                             }
+                            $('[id="mdF"]').eq(0).attr('src','img/iconosvg/lapiz.svg');
                         }
                         catch (error) {
-
+                            $('[id="mdF"]').eq(0).attr('src','img/iconosvg/lapiz.svg');
                             console.log(error);
                         }
                     });
@@ -875,6 +885,7 @@ function cargarVistaServicios() {
                 $('[id="mdF"]').eq(1).on('click', function () {
 
                     $('#inFile2').click();
+                    $('[id="mdF"]').eq(1).attr('src','img/iconosvg/Guardar.svg');
                     $('#inFile2').change(function (event) {
 
                         let file = event.target.files[0];
@@ -896,10 +907,12 @@ function cargarVistaServicios() {
                                 formData.append('file', file);
                                 enviarIMGServicio(formData, 1);
                             }
+                            $('[id="mdF"]').eq(1).attr('src','img/iconosvg/lapiz.svg');
                         }
                         catch (error) {
 
                             console.log(error);
+                            $('[id="mdF"]').eq(1).attr('src','img/iconosvg/lapiz.svg');
                         }
                     });
                 })

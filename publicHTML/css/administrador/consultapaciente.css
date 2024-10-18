@@ -213,21 +213,37 @@ button {
 
 @media only screen and (max-width: 1920px) and (min-width: 1320px) {
     .contentFecha {
-        width: 80%;
+        width: 95%;
         display: grid;
       }
   
       .contentHora {
-        width: 80%;
+        width: 95%;
         display: grid;
     }
   
+    .contDuracion {
+        justify-content: center;
+        display: grid;
+    }
 
-      .contFecha{
+    .contFecha{
         width: 39%;
     }
     .contHora{
         width: 39%;
+    }
+
+    .contInteractivo{
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+    }
+
+    .contResumen{
+        width: 100%;
+        position: fixed;
+        bottom: 0;
     }
 }
 
@@ -245,6 +261,8 @@ button {
         justify-content: center;
         align-items: center;
     }
+
+  
 
     .contHora{width: 100%;}
     .contDuracion{width: 100%;}
