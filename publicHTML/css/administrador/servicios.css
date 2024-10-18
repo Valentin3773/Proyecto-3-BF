@@ -78,15 +78,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
+    gap: .5rem;
 }
 .contTitulon {
+
     border: none;
     background-color: transparent;
     color: white;
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 2rem;
     display: flex;
+    text-align: center;
+    width: fit-content;
 }
 #cuerpo .form-group {
 

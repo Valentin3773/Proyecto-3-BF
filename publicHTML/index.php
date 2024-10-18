@@ -42,7 +42,7 @@ reloadSession();
     <script defer src="js/lobby/servicios.js"></script>
     <script defer src="js/lobby/lobby.js"></script>
 
-    <title>ClínicaSaludBucal.com</title>
+    <title>Clínica Salud Bucal</title>
 
 </head>
 

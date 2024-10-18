@@ -34,7 +34,7 @@ function actualizarIcono() {
 
                     global $pdo;
     
-                    //Borro el icono vieja del servicio
+                    // Borro el icono viejo del servicio
                     $estadoIMG = checarIMGServicio('icono', $id);
                     if ($estadoIMG['ok'] && file_exists($ruta_carpeta . $estadoIMG['nombre'])) unlink($ruta_carpeta . $estadoIMG['nombre']);
                     
@@ -44,13 +44,14 @@ function actualizarIcono() {
                     $stmt->bindParam(':icon', $nuevo_nombre_archivo);
                     $stmt->bindParam(':num', $id);
                     $stmt->execute();
-                    $respuestas['enviar'] = "Se actualizo el icono";
+                    $respuestas['enviar'] = "Se actualizó el icono";
                 } 
                 catch (PDOException $e) {
     
                     $respuestas['error'] = "Ha ocurrido un error: " . $e->getMessage();
                 }
-            } else $respuestas['error'] = "Error al mover el archivo. Verifica los permisos de la carpeta.";
+            } 
+            else $respuestas['error'] = "Error al mover el archivo. Verifica los permisos de la carpeta";
         } 
         catch (Exception $e) {
     

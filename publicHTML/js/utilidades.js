@@ -1,5 +1,5 @@
 $(() => {
-    
+
     $('head').append('<link rel="stylesheet" href="css/popupmensaje.css">');
 });
 
@@ -7,7 +7,7 @@ function createPopup(titulo, contenido) {
 
     console.log('Creando Popup');
 
-    if($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
+    if ($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
 
     $('#div-mensaje-popup').hide();
     $.get(`vistas/popupmensaje.php ? Contenido=${contenido}&Aviso=${titulo}`, data => {
@@ -20,6 +20,7 @@ function createPopup(titulo, contenido) {
             $("#div-mensaje-popup").fadeOut(500);
             //$('body').removeClass('blurry');
         });
+        setTimeout(() => $("#div-mensaje-popup").fadeOut(500), 5000);
     });
 }
 
@@ -27,7 +28,7 @@ function createHeaderPopup(titulo, contenido, accion) {
 
     console.log('Creando Popup');
 
-    if($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
+    if ($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
 
     $('#div-mensaje-popup').hide();
     $.get("vistas/popupmensaje.php ? Contenido=" + contenido + "&Aviso=" + titulo, data => {
@@ -35,13 +36,24 @@ function createHeaderPopup(titulo, contenido, accion) {
         $("#div-mensaje-popup").html(data).fadeIn(500);
         $('#btnCerrar').focus().on("click", () => {
 
-            $("#div-mensaje-popup").fadeOut(500);
+            $("#div-mensaje-popup").fadeOut(500, () => {
+
+                $("#div-mensaje-popup link").remove();
+
+                if (typeof accion == 'string') window.location.href = accion;
+
+                else if (typeof accion == 'function') accion();
+            });
+        });
+        setTimeout(() => $("#div-mensaje-popup").fadeOut(500, () => {
+
             $("#div-mensaje-popup link").remove();
 
-            if(typeof accion == 'string') window.location.href = accion;
+            if (typeof accion == 'string') window.location.href = accion;
 
-            else if(typeof accion == 'function') accion();  
-        });
+            else if (typeof accion == 'function') accion();
+            
+        }), 5000);
     });
 }
 
@@ -51,7 +63,7 @@ function createConfirmPopup(titulo, contenido, botonestxt = ['Cancelar', 'Confir
 
         console.log('Creando Popup');
 
-        if($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
+        if ($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
 
         $('#div-mensaje-popup').hide();
         $.get(`vistas/popupconfirmar.php ? Contenido=${contenido}&Aviso=${titulo}&txtcancelar=${botonestxt[0]}&txtconfirmar=${botonestxt[1]}`, data => {
@@ -83,15 +95,15 @@ function createInputPopup(titulo, placeholder, botonestxt = ['Cancelar', 'Confir
 
         console.log('Creando Popup');
 
-        if($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
+        if ($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
 
         $('#div-mensaje-popup').hide();
         $.get(`vistas/popupingresar.php ? placeholder=${placeholder}&Aviso=${titulo}&txtcancelar=${botonestxt[0]}&txtconfirmar=${botonestxt[1]}`, data => {
 
             $("#div-mensaje-popup").html(data).fadeIn(500);
-            $('#popup-input').on('input', function() {
+            $('#popup-input').on('input', function () {
 
-                if($(this).val().length >= 3) $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, 1)' }).prop('disabled', false);
+                if ($(this).val().length >= 3) $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, 1)' }).prop('disabled', false);
 
                 else $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, .4)' }).prop('disabled', true);
             })
@@ -118,7 +130,7 @@ function createInputPopup(titulo, placeholder, botonestxt = ['Cancelar', 'Confir
 }
 
 function getWeekDates(date) {
-    
+
     const currentDate = new Date(date.split('-')[0], Number(date.split('-')[1]) - 1, date.split('-')[2]);
 
     const dayOfWeek = currentDate.getDay();
@@ -127,11 +139,11 @@ function getWeekDates(date) {
     const startOfWeek = new Date(currentDate);
 
     startOfWeek.setDate(currentDate.getDate() - ((dayOfWeek + 6) % 7)); // Resta para llegar al lunes
-    
+
     const weekDates = [];
-    
+
     for (let i = 0; i < 7; i++) {
-        
+
         const tempDate = new Date(startOfWeek);
         tempDate.setDate(startOfWeek.getDate() + i);
         weekDates.push(tempDate);
@@ -168,17 +180,17 @@ function fancyHoras(minutos) {
 }
 
 function deepEqual(obj1, obj2) {
-    
+
     if (obj1 === obj2) return true;
 
     if (typeof obj1 !== 'object' || typeof obj2 !== 'object' || obj1 === null || obj2 === null) return false;
-    
+
     let keys1 = Object.keys(obj1);
     let keys2 = Object.keys(obj2);
 
     if (keys1.length !== keys2.length) return false;
 
-    for (let key of keys1) if(!keys2.includes(key) || !deepEqual(obj1[key], obj2[key])) return false;
-    
+    for (let key of keys1) if (!keys2.includes(key) || !deepEqual(obj1[key], obj2[key])) return false;
+
     return true;
 }

@@ -309,11 +309,11 @@ function loginConfirm(datos) {
     else console.log("Fuera bot hijueputa!!!");
 }
 
-async function registerConfirm(datos) {
+function registerConfirm(datos) {
 
     if ($('#jejeje').val() === '') {
 
-        if (await createConfirmPopup('Confirmación', '¿Estás seguro de crear el usuario?', ['No', 'Sí'])) $.ajax({
+        $.ajax({
 
             type: "POST",
             url: "backend/login/registromanager.php",

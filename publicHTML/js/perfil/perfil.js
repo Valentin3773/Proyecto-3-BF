@@ -333,7 +333,7 @@ function cargarVistaSeguridad() {
 
             evt.preventDefault();
             
-            if(await createConfirmPopup('Confirmación', '¿Estás seguro de cambiar tus preferencias de privacidad?', ['No', 'Sí'])) {
+            if(true) {
 
                 if ($('#nomolestar').is(':checked')) $.ajax({
 

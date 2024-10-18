@@ -49,7 +49,7 @@ if (!isset($_GET['numservicio'])) {
 
         <div id="titulon">
             <input class="contTitulon" type="text" value = "<?= $servicio['nombre'] ?>" disabled>
-            <div class="lapizeditar lapizeditarc"><img id="mdC" src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar"></div>
+            <div id="mdC" class="lapizeditar lapizeditarc"><img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar"></div>
         </div>
 
         <div id="contimg" class="my-5">
@@ -64,12 +64,12 @@ if (!isset($_GET['numservicio'])) {
                     if (isset($servicio["icono"])) {
                         
                         echo "<img src='backend/almacenamiento/iconservice/{$servicio["icono"]}' alt='Icono del servicio' id='icoservicio'>";
-                        echo "<div class='lapizeditar'><img src='img/iconosvg/lapiz.svg' id='mdF' alt='Modificar' title='Modificar'><input type='file' id='inFile1' accept='image/*'></div>";
+                        echo "<div id='mdF' class='lapizeditar'><img src='img/iconosvg/lapiz.svg' alt='Modificar' title='Modificar'></div><input type='file' id='inFile1' accept='image/*'>";
                     }
                     else {
                         
                         echo "<img src='img/logaso.png' alt='Icono del servicio' id='icoservicio'>";
-                        echo "<div class='lapizeditar'><img src='img/iconosvg/lapiz.svg' id='mdF' alt='Modificar' title='Modificar'><input type='file' id='inFile1' accept='image/*'></div>";
+                        echo "<div id='mdF' class='lapizeditar'><img src='img/iconosvg/lapiz.svg' alt='Modificar' title='Modificar'></div><input type='file' id='inFile1' accept='image/*'>";
                     }
                     ?>
 
@@ -88,10 +88,10 @@ if (!isset($_GET['numservicio'])) {
                     else echo "<img src='img/logaso.png' alt='Imagen del servicio' id='imgservicio'>";
                     ?>
 
-                    <div class="lapizeditar">
-                        <img src="img/iconosvg/lapiz.svg" id="mdF" alt="Modificar" title="Modificar">
-                        <input type="file" id="inFile2" accept="image/*">
+                    <div id="mdF" class="lapizeditar">
+                        <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
                     </div>
+                    <input type="file" id="inFile2" accept="image/*">
 
                 </div>
             </div>
@@ -101,9 +101,11 @@ if (!isset($_GET['numservicio'])) {
         <div class="form-group p-3">
             <div class="encabezadolabel">
                 <label for="descripcion">Descripcion</label>
-                <div class="lapizeditar lapizeditarc"><img id="mdC" src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar"></div>
+                <div id="mdC" class="lapizeditar lapizeditarc">
+                    <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
+                </div>
             </div>
-            <textarea name="descripcion" id="descripcion" readonly><?= $servicio['descripcion'] ?></textarea>
+            <textarea name="descripcion" id="descripcion" rows="8" readonly><?= $servicio['descripcion'] ?></textarea>
         </div>
 
     </div>
