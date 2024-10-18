@@ -23,7 +23,7 @@ $(() => {
 
     $.datepicker.setDefaults($.datepicker.regional['es']);
 
-    changeView(() => loadView('<div class="w-100 h-100 d-flex justify-content-center align-items-center"><h1 class="titinformativo">Bienvenido al administrador</h1></div>'));
+    resetAdmin();
 });
 
 function addAdminListeners() {
@@ -42,7 +42,8 @@ function cargarVistaConsultas() {
 
     $.get("vistas/vistasadmin/sidebarconsultas.php", data => {
 
-        $('.sidebar').html(data);
+        loadSidebar(data);
+
         $.get('vistas/vistasadmin/vistaconsultacalendario.php', data => {
 
             loadView(data);
@@ -147,11 +148,13 @@ function addCalendarioListeners() {
 
         $('#calendarbody div#dia.disponible').off().on('click', function () {
 
-            let fecha = new Date($(this).attr('data-year'), Number($(this).attr('data-mes')) + 1, $(this).attr('data-dia'));
+            let fecha = new Date($(this).attr('data-year'), $(this).attr('data-mes'), $(this).attr('data-dia'));
 
-            let url = `vistas/vistasadmin/vistaconsultas.php?anio=${fecha.getFullYear()}&mes=${fecha.getMonth()}&dia=${fecha.getDate()}`;
+            // console.log(fecha);
 
-            console.log(url);
+            let url = `vistas/vistasadmin/vistaconsultas.php?anio=${fecha.getFullYear()}&mes=${Number(fecha.getMonth()) + 1}&dia=${fecha.getDate()}`;
+
+            // console.log(url);
 
             changeView(() => $.get(url, contenido => {
 
@@ -361,7 +364,7 @@ function cargarVistaAgregarConsulta() {
 
 function cargarVistaAgregarServicio() {
 
-    $('.sidebar').empty();
+    loadSidebar('');
 
     $.get('vistas/vistasadmin/vistaagregarservicio.php', contenido => {
 
@@ -534,6 +537,8 @@ function cargarVistaPacienteDetalle(idp) {
         let fotopaciente = null;
 
         loadView(contenido);
+
+        $.get('vistas/vistasadmin/sidebarpacientes.php', contenido => loadSidebar(contenido));
 
         let editar = $('#editarpaciente');
         let guardar = $('#guardarpaciente');
@@ -954,9 +959,11 @@ function enviarIMGServicio($data, $tipo) {
 
 function resetAdmin() {
 
-    $('.sidebar').empty();
-
-    changeView(() => loadView('<div class="w-100 h-100 d-flex justify-content-center align-items-center"><h1 class="titinformativo">Bienvenido al administrador</h1></div>'));
+    changeView(() => {
+        
+        loadSidebar();
+        loadView('<div class="w-100 h-100 d-flex justify-content-center align-items-center"><h1 class="titinformativo">Bienvenido al administrador</h1></div>');
+    });
 
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
 

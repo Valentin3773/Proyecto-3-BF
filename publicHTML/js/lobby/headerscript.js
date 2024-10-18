@@ -35,7 +35,7 @@ $(() => {
     });
 
     $('#btnperfil ul #miperfil, #opcionescontainer .menuperfilm #miperfil').on('click', () => changePage(() => window.location.href = 'perfil.php'));
-    $('#btnperfil ul #misconsultas, #opcionescontainer .menuperfilm #miperfil').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=2'));
+    $('#btnperfil ul #misconsultas, #opcionescontainer .menuperfilm #misconsultas').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=2'));
     $('#btnperfil ul #mishorarios, #opcionescontainer .menuperfilm #mishorarios').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=3'));
     $('#btnperfil ul #misinactividades, #opcionescontainer .menuperfilm #misinactividades').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=4'));
     $('#btnperfil ul #administrador, #opcionescontainer .menuperfilm #administrador').on('click',  () => changePage(() => window.location.href = 'administrador.php'));

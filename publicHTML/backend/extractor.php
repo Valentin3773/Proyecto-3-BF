@@ -17,7 +17,8 @@ $defaults = [
 
     'horaminima' => '01:00:00', // Hora minima posible para un horario
     'horamaxima' => '23:30:00', // Hora máxima posible para un horario
-    'duracionmaxima' => 180 // Duración máxima (en minutos) de una consulta
+    'duracionmaxima' => 180, // Duración máxima (en minutos) de una consulta
+    'passemail' => 'nmlf rltr hzqx ugvh'
 ];
 
 function getDatesFromRange(string $fechainicio, string $fechafin): array
@@ -411,13 +412,15 @@ function generateToken(string $key, int $length = 32): array
 function enviarEmailVerificador(string $destino, int $idp, string $verificador): bool
 {
 
+    global $defaults;
+
     $mail = new PHPMailer(true);
 
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'laprogramarmy@gmail.com';
-    $mail->Password = 'khpr cean piib ssiu';
+    $mail->Password = $defaults['passemail'];
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';
@@ -729,13 +732,15 @@ function getHorasFinalizacionInactividad(string $fechainicio, string $horainicio
 
 function enviarEmailCancelador($emailp, $asunto, $fecha, $hora): bool {
 
+    global $defaults;
+
     $mail = new PHPMailer(true);
 
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'laprogramarmy@gmail.com';
-    $mail->Password = 'khpr cean piib ssiu';
+    $mail->Password = $defaults['passemail'];
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';

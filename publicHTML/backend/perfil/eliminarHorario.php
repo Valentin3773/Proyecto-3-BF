@@ -6,7 +6,7 @@ include('../extractor.php');
 session_start();
 reloadSession();
 
-if($_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_SESSION['odontologo'])) exit();
+if ($_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_SESSION['odontologo'])) exit();
 
 $json = file_get_contents('php://input');
 
@@ -14,7 +14,7 @@ $data = json_decode($json, true);
 
 $respuesta = array();
 
-if($data) {
+if ($data) {
 
     $idh = $data["horario"];
 
@@ -23,7 +23,7 @@ if($data) {
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':idh', $idh);
 
-    if($stmt->execute() && $stmt->rowCount() == 1) $horario = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($stmt->execute() && $stmt->rowCount() == 1) $horario = $stmt->fetch(PDO::FETCH_ASSOC);
 
     else {
 
@@ -39,57 +39,45 @@ if($data) {
     $stmt1->bindParam(':idh', $idh);
     $stmt1->bindParam(':ido', $ido);
 
-    $sql2 = "SELECT fecha, hora FROM consulta WHERE idodontologo = :ido AND vigente = 'vigente' AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) AND DAYOFWEEK(fecha) = :dia AND ((hora BETWEEN :horainicio AND :horafinalizacion) OR (ADDTIME(hora, SEC_TO_TIME(duracion * 60)) BETWEEN :horainicio AND :horafinalizacion) OR (:horainicio BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) AND :horafinalizacion BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60))))";
-
     $dia = $horario['dia'] == 7 ? 0 : $horario['dia'] + 1;
+
+    $sql2 = "SELECT p.email, c.asunto, c.fecha, c.hora FROM consulta c JOIN paciente p ON c.idpaciente = p.idpaciente WHERE idodontologo = :ido AND vigente = 'vigente' AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) AND DAYOFWEEK(fecha) = :dia AND ((hora BETWEEN :horainicio1 AND :horafinalizacion1) OR (ADDTIME(hora, SEC_TO_TIME(duracion * 60)) BETWEEN :horainicio2 AND :horafinalizacion2) OR (:horainicio3 BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) AND :horafinalizacion3 BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60))))";
 
     $stmt2 = $pdo->prepare($sql2);
     $stmt2->bindParam(':ido', $ido);
     $stmt2->bindParam(':dia', $dia);
-    $stmt2->bindParam(':horainicio', $horario['horainicio']);
-    $stmt2->bindParam(':horafinalizacion', $horario['horafinalizacion']);
+    $stmt2->bindParam(':horainicio1', $horario['horainicio']);
+    $stmt2->bindParam(':horainicio2', $horario['horainicio']);
+    $stmt2->bindParam(':horainicio3', $horario['horainicio']);
+    $stmt2->bindParam(':horafinalizacion1', $horario['horafinalizacion']);
+    $stmt2->bindParam(':horafinalizacion2', $horario['horafinalizacion']);
+    $stmt2->bindParam(':horafinalizacion3', $horario['horafinalizacion']);
 
-    $sql3 = "SELECT p.email, c.asunto, c.fecha, c.hora FROM consulta c JOIN paciente p ON c.idpaciente = p.idpaciente WHERE idodontologo = :ido AND vigente = 'vigente' AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) AND DAYOFWEEK(fecha) = :dia AND ((hora BETWEEN :horainicio AND :horafinalizacion) OR (ADDTIME(hora, SEC_TO_TIME(duracion * 60)) BETWEEN :horainicio AND :horafinalizacion) OR (:horainicio BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) AND :horafinalizacion BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60))))";
+    if ($stmt1->execute() && $stmt2->execute()) {
 
-    $stmt3 = $pdo->prepare($sql3);
-    $stmt3->bindParam(':ido', $ido);
-    $stmt3->bindParam(':dia', $dia);
-    $stmt3->bindParam(':horainicio', $horario['horainicio']);
-    $stmt3->bindParam(':horafinalizacion', $horario['horafinalizacion']);
+        $respuesta["exito"] = "{$ido} {$dia} {$horario['horainicio']} {$horario['horafinalizacion']}";
 
-    if($stmt1->execute()) {
+        if($stmt2->rowCount() > 0) {
 
-        if($stmt2->execute() && $stmt3->rowCount() > 0) {
+            $consultasaarchivar = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
-            if($stmt3->execute()) {
-            
-                $respuesta["exito"] = "Se ha eliminado el horario";
+            foreach ($consultasaarchivar as $consulta) archivarConsulta($consulta['fecha'], $consulta['hora'], $ido);
 
-                $emailsaenviar = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($consultasaarchivar as $consulta) {
 
-                $consultasaarchivar = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                $fechaenviar = DateTime::createFromFormat('Y-m-d', $consulta['fecha']);
+                $fechaenviar = $fechaenviar->format('d/m/Y');
 
-                foreach($consultasaarchivar as $consulta) archivarConsulta($consulta['fecha'], $consulta['hora'], $ido);
+                $horaenviar = DateTime::createFromFormat('H:i:s', $consulta['hora']);
+                $horaenviar = $horaenviar->format('H:i');
 
-                foreach($emailsaenviar as $emailaenviar) {
-                    
-                    $fechaenviar = DateTime::createFromFormat('Y-m-d', $emailaenviar['fecha']);
-                    $fechaenviar = $fechaenviar->format('d/m/Y');
-
-                    $horaenviar = DateTime::createFromFormat('H:i:s', $emailaenviar['hora']);
-                    $horaenviar = $horaenviar->format('H:i');
-
-                    enviarEmailCancelador($emailaenviar['email'], $emailaenviar['asunto'], $fechaenviar, $horaenviar);
-                }
+                enviarEmailCancelador($consulta['email'], $consulta['asunto'], $fechaenviar, $horaenviar);
             }
         }
     }
-
     else $respuesta["error"] = "Ha ocurrido un error al eliminar el horario";
 }
 
 header('Content-Type: application/json');
 echo json_encode($respuesta);
 exit();
-
-?>

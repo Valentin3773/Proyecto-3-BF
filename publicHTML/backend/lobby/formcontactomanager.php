@@ -1,5 +1,7 @@
 <?php
 
+include('../extractor.php');
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -11,6 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") sendMail();
 
 function sendMail() {
 
+    global $defaults;
+
     // Configuración de PHPMailer
 
     $mail = new PHPMailer(true);
@@ -19,7 +23,7 @@ function sendMail() {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'laprogramarmy@gmail.com';
-    $mail->Password = 'nmlf rltr hzqx ugvh';
+    $mail->Password = $defaults['passemail'];
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';

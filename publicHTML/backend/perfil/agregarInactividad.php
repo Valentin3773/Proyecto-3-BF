@@ -42,25 +42,24 @@ in_array($horafinalizacion, getHorasFinalizacionInactividad($fechainicio, $horai
     $stmt->bindParam(':tiempofinalizacion', $tiempofinalizacion);
     $stmt->bindParam(':ido', $ido);
 
-    $sql2 = "SELECT p.email, c.asunto, c.fecha, c.hora FROM consulta c JOIN paciente p ON c.idpaciente = p.idpaciente WHERE idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) AND ((CONCAT(fecha, ' ', hora) BETWEEN :tiempoinicio AND :tiempofinalizacion) OR (ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60)) BETWEEN :tiempoinicio AND :tiempofinalizacion) OR (:tiempoinicio BETWEEN CONCAT(fecha, ' ', hora) AND ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60)) AND :tiempofinalizacion BETWEEN CONCAT(fecha, ' ', hora) AND ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60))))";
+    $sql2 = "SELECT p.email, c.asunto, c.fecha, c.hora FROM consulta c JOIN paciente p ON c.idpaciente = p.idpaciente WHERE idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) AND ((CONCAT(fecha, ' ', hora) BETWEEN :tiempoinicio1 AND :tiempofinalizacion1) OR (ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60)) BETWEEN :tiempoinicio2 AND :tiempofinalizacion2) OR (:tiempoinicio3 BETWEEN CONCAT(fecha, ' ', hora) AND ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60)) AND :tiempofinalizacion3 BETWEEN CONCAT(fecha, ' ', hora) AND ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60))))";
 
     $stmt2 = $pdo->prepare($sql2);
-    $stmt2->bindParam(':tiempoinicio', $tiempoinicio);
-    $stmt2->bindParam(':tiempofinalizacion', $tiempofinalizacion);
+    $stmt2->bindParam(':tiempoinicio1', $tiempoinicio);
+    $stmt2->bindParam(':tiempoinicio2', $tiempoinicio);
+    $stmt2->bindParam(':tiempoinicio3', $tiempoinicio);
+    $stmt2->bindParam(':tiempofinalizacion1', $tiempofinalizacion);
+    $stmt2->bindParam(':tiempofinalizacion2', $tiempofinalizacion);
+    $stmt2->bindParam(':tiempofinalizacion3', $tiempofinalizacion);
     $stmt2->bindParam(':ido', $ido);
 
-    $sql3 = "DELETE FROM consulta WHERE idodontologo = :ido AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) AND ((CONCAT(fecha, ' ', hora) BETWEEN :tiempoinicio AND :tiempofinalizacion) OR (ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60)) BETWEEN :tiempoinicio AND :tiempofinalizacion) OR (:tiempoinicio BETWEEN CONCAT(fecha, ' ', hora) AND ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60)) AND :tiempofinalizacion BETWEEN CONCAT(fecha, ' ', hora) AND ADDTIME(CONCAT(fecha, ' ', hora), SEC_TO_TIME(duracion * 60))))";
-
-    $sql3 = $pdo->prepare($sql3);
-    $sql3->bindParam(':tiempoinicio', $tiempoinicio);
-    $sql3->bindParam(':tiempofinalizacion', $tiempofinalizacion);
-    $sql3->bindParam(':ido', $ido);
-
-    if($stmt->execute() && $stmt2->execute() && $stmt2->rowCount() > 0 && $stmt3->execute()) {
+    if($stmt->execute() && $stmt2->execute() && $stmt2->rowCount() > 0) {
 
         $respuesta['exito'] = "Se ha agregado la inactividad";
 
         $emailsaenviar = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($emailsaenviar as $emailaenviar) archivarConsulta($emailaenviar['fecha'], $emailaenviar['hora'], $ido);
 
         foreach($emailsaenviar as $emailaenviar) {
             
