@@ -98,7 +98,8 @@ function subirPacienteIMG() {
 
                 $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
             }
-        } else $respuesta['error'] = "Error al mover el archivo. Verifica los permisos de la carpeta.";
+        } 
+        else $respuesta['error'] = "Error al mover el archivo. Verifica los permisos de la carpeta.";
     } 
     catch (Exception $e) {
 

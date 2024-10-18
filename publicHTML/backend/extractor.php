@@ -239,8 +239,7 @@ function fechaDisponible(string $fecha, int $idodontologo): bool
     else return false;
 }
 
-function horasDisponibles(string $fecha, int $idodontologo): array
-{
+function horasDisponibles(string $fecha, int $idodontologo): array {
 
     global $pdo;
 
@@ -274,7 +273,7 @@ function horasDisponibles(string $fecha, int $idodontologo): array
 
     // 3) Obtener consultas
 
-    $sql = "SELECT hora, duracion FROM consulta WHERE idodontologo = :ido AND fecha = :fecha";
+    $sql = "SELECT hora, duracion FROM consulta WHERE idodontologo = :ido AND fecha = :fecha AND vigente = 'vigente'";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':ido', $idodontologo);
     $stmt->bindParam(':fecha', $fecha);
@@ -888,4 +887,41 @@ function formatDateTimeArray(array $tiempos, string $formatoinicial, string $for
     }
 
     return $tiemposFormateados;
+}
+
+function archivarConsulta(string $fecha, string $hora, int $ido): bool {
+
+    global $pdo;
+
+    while(true) {
+
+        $codigoArchivacion = random_int(0, 10000000000000000);
+
+        $sql = "SELECT * FROM consulta WHERE fecha = :fecha AND hora = :hora AND idodontologo = :ido AND vigente = :codigo";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':fecha', $fecha);
+        $stmt->bindParam(':hora', $hora);
+        $stmt->bindParam(':ido', $ido);
+        $stmt->bindParam(':codigo', $codigoArchivacion);
+
+        if($stmt->execute()) {
+
+            if($stmt->rowCount() == 0) {
+
+                $sql = "UPDATE consulta SET vigente = :codigo WHERE fecha = :fecha AND hora = :hora AND idodontologo = :ido";
+
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':fecha', $fecha);
+                $stmt->bindParam(':hora', $hora);
+                $stmt->bindParam(':ido', $ido);
+                $stmt->bindParam(':codigo', $codigoArchivacion);
+
+                if($stmt->execute()) return true;
+
+                else return false;
+            }
+        }
+        else return false;
+    }
 }

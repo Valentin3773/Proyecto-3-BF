@@ -4,7 +4,11 @@ include("../../backend/conexion.php");
 
 session_start();
 
-if (!isset($_SESSION['odontologo'])) header('Location: ../../index.php');
+if (!isset($_SESSION['odontologo'])) {
+
+    header('Location: ../../index.php');
+    exit();
+}
 
 if (!isset($_GET['idpaciente'])) {
 
@@ -12,7 +16,7 @@ if (!isset($_GET['idpaciente'])) {
 
     $pacientes = array();
 
-    $consulta = "SELECT DISTINCT p.idpaciente, p.nombre, p.apellido, p.documento, p.telefono FROM odontologo o JOIN consulta c ON o.idodontologo = c.idodontologo JOIN paciente p ON c.idpaciente = p.idpaciente WHERE o.idodontologo = :ido ORDER BY nombre ASC";
+    $consulta = "SELECT DISTINCT p.idpaciente, p.nombre, p.apellido, p.documento, p.telefono, p.foto FROM odontologo o JOIN consulta c ON o.idodontologo = c.idodontologo JOIN paciente p ON c.idpaciente = p.idpaciente WHERE o.idodontologo = :ido ORDER BY nombre ASC";
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':ido', $ido);
 
@@ -37,18 +41,35 @@ if (!isset($_GET['idpaciente'])) {
             $documento = $paciente['documento'];
             $telefono = $paciente['telefono'];
 
-            echo '
-            <div class="p-contenedor" id="' . $idp . '">
-                <div class="perfil">
-                <img src="img/profile.jpg" width="80" height="80" alt="Imágen de Perfil" class="foto">
-                <div>
-                    <h2 class="Nombre">' . $nombre . '</h2>
-                    <p class="Documento fs-5">Documento: ' . $documento . '</p>
-                    <p class="Telefono fs-5">Teléfono: ' . $documento . '</p>
+            if (!isset($paciente['foto'])) echo "
+                <div class='p-contenedor' id='{$idp}'>
+                    <div class='perfil'>
+                    <img src='img/iconoperfil.png' alt='Imágen de Perfil' class='foto'>
+                    <div>
+                        <h2 class='Nombre'>{$nombre}</h2>
+                        <p class='Documento fs-5'>Documento: {$documento} </p>
+                        <p class='Telefono fs-5'>Teléfono: {$documento}</p>
+                    </div>
+                    </div>
                 </div>
-                </div>
-            </div>
-            ';
+            ";
+            else {
+
+                $urlfoto = "backend/almacenamiento/fotosdeperfil/{$paciente['foto']}";
+
+                echo "
+                    <div class='p-contenedor' id='{$idp}'>
+                        <div class='perfil'>
+                        <img src='{$urlfoto}' alt='Imágen de Perfil' class='foto'>
+                        <div>
+                            <h2 class='Nombre'>{$nombre}</h2>
+                            <p class='Documento fs-5'>Documento: {$documento} </p>
+                            <p class='Telefono fs-5'>Teléfono: {$documento}</p>
+                        </div>
+                        </div>
+                    </div>
+                ";
+            }
         }
 
         ?>
@@ -89,17 +110,40 @@ if (!isset($_GET['idpaciente'])) {
 
         <div id="fotonom">
 
-            <div id="fotoperfil">
+            <div id="fotoperfil" class="position-relative">
 
-                <img src="img/profile.jpg" alt="Foto de Perfil">
+                <?php
+
+                if (isset($paciente['foto'])) echo "<img src='backend/almacenamiento/fotosdeperfil/{$paciente['foto']}' alt='Foto de Perfil'>";
+
+                else echo "<img src='img/iconoperfil.png' alt='Foto de Perfil'>";
+
+                ?>
+
+                <div class="lapizeditar" id="mdF" desactivado="true">
+                    <img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar">
+                </div>
+                <input type="file" id="inFile" accept="image/*">
 
             </div>
-
-            <h1> <?= $paciente['nombre'] . " " . $paciente['apellido'] ?> </h1>
 
         </div>
 
         <div class="datos">
+
+            <div id="nombre" class="campo">
+
+                <h2 class="clave">Nombre</h2>
+                <input class="valor" type="text" value="<?= $paciente['nombre'] ?>" disabled></input>
+
+            </div>
+
+            <div id="apellido" class="campo">
+
+                <h2 class="clave">Apellido</h2>
+                <input class="valor" type="text" value="<?= $paciente['apellido'] ?>" disabled></input>
+
+            </div>
 
             <div id="documento" class="campo">
 
@@ -107,27 +151,20 @@ if (!isset($_GET['idpaciente'])) {
                 <input class="valor" type="text" value="<?= $paciente['documento'] ?>" disabled></input>
 
             </div>
-            <?php if (!empty($paciente['direccion'])) { ?>
 
-                <div id="direccion" class="campo">
+            <div id="direccion" class="campo">
 
-                    <h2 class="clave">Dirección</h2>
-                    <input class="valor" type="text" value="<?= $paciente['direccion'] ?>" disabled></input>
+                <h2 class="clave">Dirección</h2>
+                <input class="valor" type="text" value="<?php if (!empty($paciente['direccion'])) echo $paciente['direccion'] ?>" disabled></input>
 
-                </div>
+            </div>
 
-            <?php
-            }
-            if (!empty($paciente['telefono'])) {
-            ?>
-                <div id="telefono" class="campo">
+            <div id="telefono" class="campo">
 
-                    <h2 class="clave">Teléfono</h2>
-                    <input class="valor" type="text" value="<?= $paciente['telefono'] ?>" disabled></input>
+                <h2 class="clave">Teléfono</h2>
+                <input class="valor" type="text" value="<?php if (!empty($paciente['telefono'])) echo $paciente['telefono'] ?>" disabled></input>
 
-                </div>
-
-            <?php } ?>
+            </div>
 
             <div id="email" class="campo">
 
@@ -144,14 +181,16 @@ if (!isset($_GET['idpaciente'])) {
 
                     <?php
 
-                    if (empty($enfermedades)) echo "<span class='enfermedad'>No hay enfermedades</span>";
+                    if (empty($enfermedades)) echo "<span class='enfermedad noenfermedades d-flex justify-content-center align-items-center'>No hay enfermedades</span>";
 
-                    else foreach ($enfermedades as $enfermedad) echo "<li class='enfermedad'><span>{$enfermedad['enfermedad']}</span><div class='eliminarenfermedad invisible'><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div></li>";
+                    else foreach ($enfermedades as $enfermedad) echo "<li class='enfermedad' data-enfermedad='{$enfermedad['enfermedad']}'><span>{$enfermedad['enfermedad']}</span><div class='eliminarenfermedad invisible' data-enfermedad='{$enfermedad['enfermedad']}'><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div></li>";
 
                     ?>
 
                     <div id="contagregar" class="w-100 d-flex justify-content-center align-items-center">
-                        <div id="agregarenfermedad" class="invisible"><div class="mas"></div></div>
+                        <div id="agregarenfermedad" class="invisible">
+                            <div class="mas"></div>
+                        </div>
                     </div>
 
                 </ul>
@@ -166,14 +205,16 @@ if (!isset($_GET['idpaciente'])) {
 
                     <?php
 
-                    if (empty($enfermedades)) echo "<span class='medicamento'>No hay medicación</span>";
+                    if (empty($medicacion)) echo "<span class='medicamento nomedicacion d-flex justify-content-center align-items-center'>No hay medicación</span>";
 
-                    else foreach ($medicacion as $medicamento) echo "<li class='medicamento'><span>{$medicamento['medicacion']}</span><div class='eliminarmedicamento invisible'><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div></li>";
+                    else foreach ($medicacion as $medicamento) echo "<li class='medicamento' data-medicamento='{$medicamento['medicacion']}'><span>{$medicamento['medicacion']}</span><div class='eliminarmedicamento invisible' data-medicamento='{$medicamento['medicacion']}'><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div></li>";
 
                     ?>
 
                     <div id="contagregar" class="w-100 d-flex justify-content-center align-items-center">
-                        <div id="agregarmedicacion" class="invisible"><div class="mas"></div></div>
+                        <div id="agregarmedicacion" class="invisible">
+                            <div class="mas"></div>
+                        </div>
                     </div>
 
                 </ul>
