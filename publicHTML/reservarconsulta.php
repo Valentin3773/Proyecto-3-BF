@@ -1,6 +1,10 @@
 <?php
 
+include('backend/conexion.php');
+include('backend/extractor.php');
+
 session_start();
+reloadSession();
 
 if(!isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) {
     
@@ -14,9 +18,9 @@ else if(!isset($_SESSION['paciente']) && isset($_SESSION['odontologo'])) {
     exit();
 }
 
-include('backend/extractor.php');
+$idp = $_SESSION['paciente']['idpaciente'];
 
-reloadSession();
+
 
 ?>
 

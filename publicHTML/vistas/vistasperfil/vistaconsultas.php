@@ -58,7 +58,7 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
         }
     }
 
-    $consulta = "SELECT nombre, apellido FROM paciente WHERE idpaciente = :idp AND vigente = 'vigente'";
+    $consulta = "SELECT nombre, apellido FROM paciente WHERE idpaciente = :idp";
 
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
@@ -224,14 +224,14 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
                     <div class="consulta" data-fecha=' . $fechaP . ' data-hora=' . $horaP . '>
                         
                         <div class="asuntocontainer">
-                            <span id="asunto">' . $asuntof . '</span>
+                            <span id="asunto">' . $asuntoP . '</span>
                         </div>
                         <div class="fechahorawrapper">
                             <div class="fechacontainer">
-                                <span id="fecha">' . $fechaf . '</span>
+                                <span id="fecha">' . $fechaP . '</span>
                             </div>
                             <div class="horacontainer">
-                                <span id="hora">' . $horaf . '</span>
+                                <span id="hora">' . $horaP . '</span>
                             </div>
                         </div>
 

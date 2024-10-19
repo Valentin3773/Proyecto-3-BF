@@ -340,6 +340,25 @@ function horasDisponibles(string $fecha, int $idodontologo): array {
     return $horasDisponibles;
 }
 
+function diferenciaFechas($fecha1, $fecha2): int {
+
+    global $pdo;
+
+    $sql = "SELECT DATEDIFF(:fecha1, :fecha2) AS diferencia";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':fecha1', $fecha1);
+    $stmt->bindParam(':fecha2', $fecha2);
+
+    if($stmt->execute() && $stmt->rowCount() > 0) {
+        
+        $diferencia = intval($stmt->fetch()[0]);
+
+        return $diferencia;
+    }
+    else return 0;
+}
+
 function duracionesDisponibles(DateTime $fecha, string $hora, int $idodontologo): array
 {
 
@@ -929,4 +948,37 @@ function archivarConsulta(string $fecha, string $hora, int $ido): bool {
         }
         else return false;
     }
+}
+
+function odontologoHabilitado($idp, $ido): bool {
+
+    global $pdo;
+    global $defaults;
+
+    $sql = "SELECT * FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':idp', $idp);
+    $stmt->bindParam(':ido', $ido);
+
+    if($stmt->execute()) {
+
+        if($stmt->rowCount() > 0) {
+
+            $consultas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $habilitado = true;
+
+            foreach($consultas as $consulta) {
+
+                $fechaconsulta = DateTime::createFromFormat('Y-m-d', $consulta['fecha']);
+
+                $fechaActual = getFechaActual();
+
+                
+            }
+        }
+        else return true;
+    }
+    else return false;
 }
