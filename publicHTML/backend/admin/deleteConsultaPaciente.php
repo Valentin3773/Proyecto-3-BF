@@ -1,5 +1,6 @@
 <?php 
 include ("../conexion.php");
+include ("../extractor.php");
 session_start();
 $response = array();
 
@@ -19,19 +20,7 @@ function eleminarConsulta($pdo){
 
     
     try {
-
-        $consulta = 'DELETE FROM consulta WHERE fecha = :fecha AND hora = :hora AND idodontologo = :idodontologo;';
-
-        $stmt = $pdo->prepare($consulta);
-        $stmt->bindParam(':fecha', $fecha);
-        $stmt->bindParam(':hora', $hora);
-        $stmt->bindParam(':idodontologo', $ido);
-
-        if ($stmt->execute()) {
-            $response['enviar'] = "Datos válidos. Consulta Eliminada, con Fecha:".$fecha."| Hora: ".$hora;
-        } else {
-            $response['error'] = "Error al ejecutar la consulta";
-        }
+        archivarConsulta($fecha,$hora,$ido);
     } catch (Throwable $th) {
         $response['error'] = $th->getMessage()." | ".$asunto." | ".$hora." | ".$duracion." | ".$fecha." | ".$resumen." | ".$ido;
     }

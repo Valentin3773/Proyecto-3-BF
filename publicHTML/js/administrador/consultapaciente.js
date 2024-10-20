@@ -1,5 +1,3 @@
-/*
-
 $(() => addBTNListeners());
 
 var iniData = {
@@ -95,9 +93,11 @@ function funcionGuardar() {
         duracion: Number($('#duracion-CP').val()),
         fecha: ($('#fecha-CP option:selected').html()),
         resumen: ($('#resumen-CP').val()),
-        fechaV: $('.contentFecha h1').html(),
-        horaV: $('.contentHora h1').html()
+        fechaV: $('.contentFecha #fechaV').html(),
+        horaV: $('.contentHora #horaV').html()
     };
+
+    console.log(data);
 
     $.ajax({
 
@@ -107,13 +107,13 @@ function funcionGuardar() {
         contentType: 'application/json',
         success: response => {
 
-            if (response.error === undefined) createPopup('Nuevo Aviso', response.enviar);
+            if (response.error === undefined) createPopup("Nuevo aviso",response);
 
-            else createPopup('Nuevo Aviso', response.error);
+            else createPopup("Nuevo aviso",response);
         },
         error: (jqXHR, estado, outputError) => {
 
-            alert("Error al procesar la solicitud: " + outputError);
+            console.error("Error al procesar la solicitud: " + outputError +jqXHR +estado);
         }
     });
 
@@ -125,8 +125,8 @@ function functionEliminar() {
 
     const url = 'backend/admin/deleteConsultaPaciente.php';
     const data = {
-        fechaV: $('.contentFecha h1').html(),
-        horaV: $('.contentHora h1').html()
+        fechaV: $('.contentFecha #fechaV').html(),
+        horaV: $('.contentHora #horaV').html()
     };
     
     var Confirmar = prompt("¿Está seguro?", "Ingrese Confirmar");
@@ -162,19 +162,18 @@ function functionEliminar() {
             success: function (response) {
                 if (response.error === undefined) {
 
-                    createPopup('Nuevo Aviso', response.enviar);
-                    window.location.href = "administrador.php";
+                    console.log(response);
+                    //window.location.href = "administrador.php";
                 } 
                 else {
 
-                    createPopup('Nuevo Aviso', response.error);
+                    console.log(response);
                 }
             },
             error: function (jqXHR, estado, outputError) {
 
-                alert("Error al procesar la solicitud: " + outputError);
+                console.error("Error al procesar la solicitud: " + outputError +jqXHR +estado);
             }
         });
     }
 }
-*/

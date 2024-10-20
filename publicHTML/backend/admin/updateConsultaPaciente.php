@@ -22,24 +22,30 @@ function updateConsulta($pdo){
     $horaV = $data['horaV'];
 
     if (empty($asunto)) {
-        $response['error'] = "El campo 'Asunto' esta vacio. Por favor, ingresa un valor.";
-    } elseif (empty($hora) || strcasecmp($hora, "Elija un horario") === 0) {
-        $response['error'] = "Debes seleccionar una hora.";
+        echo "El campo 'Asunto' esta vacio. Por favor, ingresa un valor."; exit();
+    } elseif (empty($hora) || strcasecmp($hora, "No hay horarios disponibles") === 0) {
+        echo "Debes seleccionar una hora."; exit();
     } elseif (empty($duracion) || $duracion == 0) {
-        $response['error'] = "El campo 'Duracion' no puede ser 0. Por favor, ingresa un valor.";
-    } elseif (empty($fecha) || strcasecmp($fecha, "Elija una fecha") === 0) {
-        $response['error'] = "Debes seleccionar una fecha.";
+        echo "El campo 'Duracion' no puede ser 0 o vacio    . Por favor, ingresa un valor."; exit();
+    } elseif (empty($fecha) || strcasecmp($fecha, "No hay fecha disponibles") === 0) {
+        echo "Debes seleccionar una fecha."; exit();
     } elseif (empty($resumen)) {
-        $response['error'] = "El campo 'Resumen' está vacío. Por favor, ingrese algun contenido.";
+        echo "El campo 'Resumen' está vacío. Por favor, ingrese algun contenido."; exit();
     } else {
-
+            if($fecha == "Elija una fecha"){
+                $fecha = $fechaV;
+            }
+            if($hora == "Elija una hora"){
+                $hora = $horaV;
+            }
         try {
 
             $consulta = 'UPDATE consulta
             SET fecha = :fecha,
                 hora = :hora,
                 asunto = :asunto,
-                resumen = :resumen
+                resumen = :resumen,
+                duracion = :duracion
             WHERE idodontologo = :idodontologo
               AND hora = :horaV
               AND fecha = :fechaV';
@@ -49,24 +55,22 @@ function updateConsulta($pdo){
             $stmt->bindParam(':hora', $hora);
             $stmt->bindParam(':asunto', $asunto);
             $stmt->bindParam(':resumen', $resumen);
+            $stmt->bindParam(':duracion', $duracion);
             $stmt->bindParam(':idodontologo', $ido);
             $stmt->bindParam(':fechaV', $fechaV);
             $stmt->bindParam(':horaV', $horaV);
 
 
             if ($stmt->execute()) {
-                $response['enviar'] = "Datos válidos. Procesamiento en curso...";
+                echo "Datos válidos. Procesamiento en curso... ";
             } else {
-                $response['error'] = "Error al ejecutar la consulta";
+                echo "Error al ejecutar la consulta";
             }
         } catch (Throwable $th) {
-            $response['error'] = $th->getMessage()." | ".$asunto." | ".$hora." | ".$duracion." | ".$fecha." | ".$resumen." | ".$ido;
+            echo  "$th->getMessage()";
         }
 
     }
-
-    header('Content-Type: application/json');
-    echo json_encode($response);
     exit();
 }
 ?>

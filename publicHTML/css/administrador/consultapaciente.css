@@ -1,13 +1,13 @@
 .contenedor_ConsultaPaciente {
 
     background-color: #7CB9E8;
-    height: 98%;
+    height: auto;
     margin: 10px;
     border-radius: 10px;
     color: white;
     border: 1px solid #ccc; /* Borde del contenedor */
     border-radius: 8px; /* Bordes redondeados */
-
+    line-height: 1.8 !important;
 }
 
 .contConsultaAsunto {
@@ -20,6 +20,13 @@
 
     background-color: #00B2FF;
     border-radius: 10px 10px 0 0;
+    font-family: 'RobotoSerif';
+}
+
+.headerConsulta h1{
+
+    padding: 10px;
+
 }
 
 h1 {
@@ -39,11 +46,19 @@ h1 {
     color: white;
 }
 
+.contAsunto h1{
+
+    font-size: 1.5rem;
+    font-family: 'RobotoSerif';
+    padding: 10px;
+
+}
 .contInteractivo {
 
     padding: 10px;
     border-radius: 0 0 10px 10px;
     background-color: #00B2FF;
+
 }
 
 .tituloHora {
@@ -52,8 +67,16 @@ h1 {
     filter: brightness(1.1);
     width: fit-content;
     text-align: center;
-    padding: 5px;
+    padding: 10px 60px;
     border-radius: 10px 10px 0 0;
+
+}
+
+.tituloHora h1 {
+
+    font-size: 1.5rem;
+    font-family: 'RobotoSerif';
+
 }
 
 .contentHora {
@@ -61,14 +84,10 @@ h1 {
     background-color: white;
     color: #000;
     width: 100%;
-    padding: 10px;
+    padding: 20px 20px 20px 20px;
     border-radius: 0 10px 10px 10px;
     text-align: center;
-}
-
-.contentHora h1 {
-
-    font-size: xx-large;
+    
 }
 
 .contFecha {
@@ -83,9 +102,17 @@ h1 {
     display: flex;
     width: fit-content;
     text-align: center;
-    padding: 5px;
+    padding: 10px 60px;
     border-radius: 10px 10px 0 0;
+
 }
+
+.tituloFecha h1 {
+
+    font-size: 1.5rem;
+    font-family: 'RobotoSerif';
+}
+
 
 .divTituloFecha {
 
@@ -97,7 +124,7 @@ h1 {
     background-color: white;
     color: #000;
     width: 100%;
-    padding: 10px;
+    padding: 20px 20px 20px 20px;
     border-radius: 10px 0 10px 10px;
     text-align: center;
 }
@@ -113,15 +140,20 @@ h1 {
     filter: brightness(1.1);
     width: 100%;
     text-align: center;
-    padding: 5px;
+    padding: 15px 15px !important;
     border-radius: 10px 10px 0 0;
 }
 
+.tituloDuracion h1 {
+
+    font-size: 1.5rem;
+    font-family: 'RobotoSerif';
+}
 .contentDuracion {
 
     background-color: white;
     width: 100%;
-    padding: 10px;
+    padding: 0 20px;
     border-radius: 0 0 10px 10px;
     text-align: center;
 }
@@ -135,10 +167,16 @@ h1 {
 
     background-color: #0059CD;
     filter: brightness(1.1);
-    width: fit-content;
+    width: 100%;
     text-align: center;
-    padding: 5px;
+    padding: 10px;
     border-radius: 10px 10px 0 0;
+}
+
+.tituloResumen h1 {
+
+    font-size: 1.5rem;
+    font-family: 'RobotoSerif';
 }
 
 #resumen-CP {
@@ -160,7 +198,9 @@ h1 {
     border-radius: 10px;
     box-shadow: 2px 4px 1px rgba(0, 0, 0, .25);
     transition-duration: .3s;
-    width: 25%;
+    font-weight:500 !important;
+    font-size: 2rem;
+    width: 20%;
     height: 100%;
 
 }
@@ -177,17 +217,34 @@ h1 {
 
 select {
 
+    background-color: white;
     appearance: none;
-    width: fit-content !important;
-    background-color: #0AF0AB !important;
+    text-align: center;
     border: solid;
     border-color: transparent;
     border-radius: 10px;
-    box-shadow: 2px 2px 0 2px rgba(0, 0, 0, .25);
     font-family: RobotoSerif, Arial, Helvetica, sans-serif;
-    font-size: inherit;
     cursor: inherit;
     line-height: inherit;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color:  #00B2FF;
+
+}
+
+select:hover {
+
+    border-color: #00B2FF;
+
+}
+
+
+select option {
+
+    background-color: white !important;
+    font-family: RobotoSerif, Arial, Helvetica, sans-serif;
+    color:  #00B2FF;
+
 }
 
 input {
@@ -204,11 +261,13 @@ h2 input {
     width: 100px !important;
     background-color: transparent;
     border: transparent;
+
 }
 
 button {
     
     color: white;
+    
 }
 
 @media only screen and (max-width: 1920px) and (min-width: 1320px) {
@@ -236,15 +295,28 @@ button {
 
     .contInteractivo{
         width: 100%;
-        position: fixed;
         bottom: 0;
     }
 
     .contResumen{
         width: 100%;
-        position: fixed;
         bottom: 0;
     }
+
+    .contInteractivo{
+        width: auto;
+        height: 100px;
+    }
+
+    .contentDuracion input{
+        text-align: center;
+        color: #00B2FF;
+        width: 5rem !important;
+        font-weight: bolder;
+        font-size: xx-large;
+        font-family: Roboto;
+    }
+
 }
 
 @media only screen and (max-width: 1319px) {
@@ -253,6 +325,7 @@ button {
     }
     .tituloFecha {
         width: 100%;
+        display: grid;
     }
 
     .contenedorcentral{
@@ -264,9 +337,30 @@ button {
 
   
 
-    .contHora{width: 100%;}
-    .contDuracion{width: 100%;}
-    .contFecha{width: 100%;}
+    .contHora{
+        width: 100%; 
+    }
+    .contDuracion{
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    } 
+
+    .contentDuracion input{
+        text-align: center;
+        color: #00B2FF;
+        width: 5rem !important;
+        font-weight: bolder;
+        font-size: xx-large;
+        font-family: Roboto;
+    }
+    .tituloDuracion{
+        padding: 10px 60px !important;
+    }
+    .contFecha{
+        width: 100%;
+        direction: unset;
+    }
 }
 
 @media only screen and (max-width: 990px) {

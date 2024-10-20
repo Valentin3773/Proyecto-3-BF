@@ -73,25 +73,28 @@ $conjHoras = horasDisponibles($fechaA, $ido);
                     <h1>Hora</h1>
                 </div>
                 <div class="contentHora">
-                    <select name="" id="" disabled>
-                        <?php 
+                    <select name="" id="hora-CP" disabled>
+                        <?php
                             if(!empty($conjHoras)){
+                                echo "<option>Elija una hora</option>";
+                                echo "<option id='horaV'>" . $Tiempoensql . "</option>";
                                 for($i = 0; $i < count($conjHoras); $i++) {
                                 echo "<option value= '$conjHoras[$i]'>$conjHoras[$i]</option>";
                                 } 
                             } else {
                                 echo "<option>No hay horarios disponibles</option>";
+                                echo "<option id='horaV'>" . $Tiempoensql. "</option>";
                             }
                         ?>
                     </select>
                 </div>
             </div>
-            <div class="col-xl-2 col-lg-2 col-12 my-5 contDuracion">
+            <div class="col-xl-2 col-lg-2 col-12  contDuracion">
                 <div class="tituloDuracion">
                     <h1>Duración</h1>
                 </div>
                 <div class="contentDuracion">
-                    <input type="number" name="" id="" value="<?= $tupla['duracion'] ?>" disabled>
+                    <input type="number" name="" id="duracion-CP" value="<?= $tupla['duracion'] ?>" disabled>
                 </div>
             </div>
             <div class="col-xl-5 col-lg-5 col-12 contFecha m-0">
@@ -101,14 +104,17 @@ $conjHoras = horasDisponibles($fechaA, $ido);
                     </div>
                 </div>
                 <div class="contentFecha">
-                    <select name="" id="" disabled>
+                    <select name="" id="fecha-CP" disabled>
                     <?php 
                             if(!empty($conjFechas)){
+                                echo "<option>Elija una fecha</option>";
+                                echo "<option id='fechaV'>" . $Fechaensql . "</option>";
                                 for($i = 0; $i < count($conjFechas); $i++) {
                                 echo "<option value= '$conjFechas[$i]'>$conjFechas[$i]</option>";
                                 } 
                             } else {
                                 echo "<option>No hay fechas disponibles</option>";
+                                echo "<option id='fechaV'>" . $Fechaensql . "</option>"; 
                             }
                         ?>
                     </select>
@@ -116,7 +122,7 @@ $conjHoras = horasDisponibles($fechaA, $ido);
             </div>
         </div>
 
-        <div class="contResumen mt-3">
+        <div class="contResumen mt-5">
             <div class="tituloResumen">
                 <h1>Resumen</h1>
             </div>
