@@ -1,63 +1,62 @@
 <?php
 
-include('../conexion.php');
-include('../extractor.php');
+// Este script debe ser ejecutado por una tarea cron.
+
+$ip = $_SERVER['REMOTE_ADDR'];
+
+if ($ip !== '127.0.0.1' && $ip !== '::1' && $ip !== 'localhost') {
+    
+    http_response_code(403);
+    die('Acceso no autorizado');
+}
+
+include('conexion.php');
+include('extractor.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require_once '../../lib/PHPMailer/PHPMailer.php';
-require_once '../../lib/PHPMailer/Exception.php';
-require_once '../../lib/PHPMailer/SMTP.php';
+require_once '../lib/PHPMailer/PHPMailer.php';
+require_once '../lib/PHPMailer/Exception.php';
+require_once '../lib/PHPMailer/SMTP.php';
 
-session_start();
+$pacientes = $pdo->query("SELECT idpaciente, nombre, apellido, nomolestar FROM paciente");
 
-if($_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_SESSION['paciente'])) exit();
+foreach ($pacientes as $paciente) {
 
-$json = file_get_contents('php://input');
+    $idp = $paciente['idpaciente'];
+    $nombre = $paciente['nombre'];
+    $apellido = $paciente['apellido'];
+    $nomolestar = $paciente['nomolestar'];
 
-$data = json_decode($json, true);
+    $consultaspaciente = obtenerNotificacionesPaciente($idp);
 
-$respuesta = array();
+    if (!$nomolestar) foreach ($consultaspaciente as $consultapaciente) {
 
-if($data && isset($_SESSION['paciente'])) {
+        $fechaActual = getFechaActual();
+        $horaActual = getHoraActual();
 
-    $ido = $data['odontologo'];
-    $idp = $_SESSION['paciente']['idpaciente'];
+        $fecha = $consultapaciente['fecha'];
+        $hora = $consultapaciente['hora'];
+        $ido = $consultapaciente['idodontologo'];
 
-    $fecha = new DateTime($data['fecha']);
-    $fecha = $fecha->format('Y-m-d');
+        // var_dump(diferenciaFechas($fecha, $fechaActual));
 
-    $hora = new DateTime();
-    $hora->setTime($data['hora']['hora'], $data['hora']['minuto']);
+        if (!$consultapaciente['booleanos'][0] &&
+        ( diferenciaFechas($fecha, $fechaActual) == 1 || ( diferenciaFechas($fecha, $fechaActual) == 0 && horaMenor($horaActual, $hora) ) ) 
+        && horaMayor($horaActual, '08:00:00') && horaMenor($horaActual, '23:00:00')) {
 
-    $asunto = $data['asunto'];
+            if (enviarEmailNotificador($fecha, $hora, $ido)) {
 
-    if(odontologoHabilitado($idp, $ido) && fechaDisponible($fecha, $ido) && in_array($hora->format('H:i'), horasDisponibles($fecha, $ido))) {
+                $consultapaciente['booleanos'][0] = true;
 
-        $hora = $hora->format('H:i:s');
-
-        $sql = 'INSERT INTO consulta (fecha, hora, idodontologo, idpaciente, asunto) VALUES (:fecha, :hora, :ido, :idp, :asunto)';
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':fecha', $fecha);
-        $stmt->bindParam(':hora', $hora);
-        $stmt->bindParam(':ido', $ido);
-        $stmt->bindParam(':idp', $idp); 
-        $stmt->bindParam(':asunto', $asunto);
-
-        if($stmt->execute()) $respuesta['exito'] = !enviarEmailReservador($fecha, $hora, $ido) ? 'Su consulta se ha reservado correctamente' : 'Su consulta se ha reservado correctamente, se le ha enviado un email con los detalles';
-        
-        else $respuesta['error'] = "Ha ocurrido un error al reservar la consulta";
+                modificarBooleanosNotificacionesConsulta($fecha, $hora, $ido, $consultapaciente['booleanos']);
+            }
+        }
     }
-    else $respuesta['error'] = "Ha ocurrido un error, la fecha y hora no están disponibles";
 }
-else $respuesta['error'] = 'Ha ocurrido un error de sesión';
 
-header('Content-Type: application/json');
-echo json_encode($respuesta);
-exit();
-
-function enviarEmailReservador(string $fecha, string $hora, int $ido): bool {
+function enviarEmailNotificador(string $fecha, string $hora, int $ido): bool {
 
     global $pdo;
     global $defaults;
@@ -172,7 +171,7 @@ function enviarEmailReservador(string $fecha, string $hora, int $ido): bool {
                                         Estimado {$nombrep} {$apellidop}.
                                     </p>
                                     <p class='texto'>
-                                        Has reservado una consulta con el odontólogo {$nombreo} {$apellidoo} para el día {$fechaformateada} a la hora {$horaformateada}.
+                                        Te recordamos que tienes una consulta agendada para el día {$fechaformateada} a la hora {$horaformateada}, con el odontólogo {$nombreo} {$apellidoo} por asunto de: {$asuntoc}.
                                     </p>
                                     <p class='texto'>
                                         Para más información o en caso de que desees cancelar la consulta, por favor contactanos mediante
@@ -207,5 +206,3 @@ function enviarEmailReservador(string $fecha, string $hora, int $ido): bool {
     } 
     else return false;
 }
-
-?>

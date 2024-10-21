@@ -1,6 +1,7 @@
 <?php 
 
 include('../extractor.php');
+
 session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -55,6 +56,8 @@ function cambiarcontra() {
 
 function enviarEmail($codigo, $email) {
 
+    global $defaults;
+
     // Configuración de PHPMailer
 
     $mail = new PHPMailer(true);
@@ -63,7 +66,7 @@ function enviarEmail($codigo, $email) {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'laprogramarmy@gmail.com';
-    $mail->Password = 'khpr cean piib ssiu';
+    $mail->Password = $defaults['passemail'];
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';
@@ -128,6 +131,7 @@ function enviarEmail($codigo, $email) {
         $headers .= "Content-type: text/html; charset=utf-8\r\n";
 
         // Enviar correo con PHPMailer
+        $mail->setFrom($email, 'Clínica Salud Bucal', $headers);
         $mail->addAddress($destino);
         $mail->Subject = $asunto;
         $mail->Body = $mensaje;

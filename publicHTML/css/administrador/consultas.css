@@ -54,7 +54,7 @@
     transition-duration: .3s;
 }
 
-.consulta > .asuntocontainer, .consulta > .fechahorawrapper > div {
+.consulta > .asuntocontainer, .consulta > .horafcontainer, .consulta > .fechahorawrapper > div {
 
     background-color: white;
     width: 33.3%;
@@ -71,9 +71,14 @@
     height: unset !important;
 }
 
-#consultasencurso .consulta .horacontainer {
+#consultasencurso .consulta .horafcontainer {
 
-    border-radius: 20px 0 0 20px;
+    border-radius: 0 0 20px 20px;
+}
+
+#consultasencurso .consulta {
+
+    gap: 7px !important;
 }
 
 #consultasencurso .consulta > div {

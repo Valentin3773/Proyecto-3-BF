@@ -18,7 +18,21 @@ $(() => {
 
     $('#logo').on('click', () => changeView(cargarVistaOdontologo));
 
-    changeView(cargarVistaOdontologo());
+    if($('body').attr('data-iniciado') === 'iniciado') {
+
+        if($('body').attr('data-habilitado') === 'habilitado') changeView(cargarVistaOdontologo());
+
+        else {
+
+            $('#container').remove();
+            createHeaderPopup('Nuevo Aviso', 'Lo sentimos, no puedes reservar una consulta en este momento', 'index.php');
+        }
+    }
+    else {
+
+        $('#container').remove();
+        createHeaderPopup('Nuevo Aviso', 'Debes iniciar sesión para reservar una consulta', 'login.php');
+    }
 });
 
 function addReservaListeners() {

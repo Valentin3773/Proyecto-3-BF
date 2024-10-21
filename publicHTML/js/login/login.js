@@ -230,8 +230,6 @@ function verificarCodigo($codigo, $pass, $repass, $secp) {
         contentType: false,
         success: function (response) {
 
-            createPopup("Nuevo aviso", response);
-
             if(response.exito != undefined) createHeaderPopup("Nuevo aviso", response.exito, () => changeView(cargarVistaLogin));
 
             else createPopup("Nuevo aviso", response.error);

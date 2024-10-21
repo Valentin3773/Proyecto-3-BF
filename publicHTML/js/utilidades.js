@@ -3,7 +3,7 @@ $(() => {
     $('head').append('<link rel="stylesheet" href="css/popupmensaje.css">');
 });
 
-function createPopup(titulo, contenido) {
+function createPopup(titulo, contenido, duracion = 5) {
 
     console.log('Creando Popup');
 
@@ -12,19 +12,24 @@ function createPopup(titulo, contenido) {
     $('#div-mensaje-popup').hide();
     $.get(`vistas/popupmensaje.php ? Contenido=${contenido}&Aviso=${titulo}`, data => {
 
-        //$('body').addClass('blurry');
+        $('.mensaje-Popup').css({'--progress': '0%', '--duracion': `0s`});
 
         $("#div-mensaje-popup").html(data).fadeIn(500);
+        
+        $('.mensaje-Popup').css({'--progress': '100%', '--duracion': `${duracion}s`});
+
+        let timeoutid = setTimeout(() => $("#div-mensaje-popup").fadeOut(500), duracion * 1000);
         $('#btnCerrar').focus().on("click", () => {
 
+            clearTimeout(timeoutid);
             $("#div-mensaje-popup").fadeOut(500);
             //$('body').removeClass('blurry');
         });
-        setTimeout(() => $("#div-mensaje-popup").fadeOut(500), 5000);
+       
     });
 }
 
-function createHeaderPopup(titulo, contenido, accion) {
+function createHeaderPopup(titulo, contenido, accion, duracion = 5) {
 
     console.log('Creando Popup');
 
@@ -33,8 +38,25 @@ function createHeaderPopup(titulo, contenido, accion) {
     $('#div-mensaje-popup').hide();
     $.get("vistas/popupmensaje.php ? Contenido=" + contenido + "&Aviso=" + titulo, data => {
 
+        $('.mensaje-Popup').css({'--progress': '0%', '--duracion': `0s`});
+
         $("#div-mensaje-popup").html(data).fadeIn(500);
+
+        $('.mensaje-Popup').css({'--progress': '100%', '--duracion': `${duracion}s`});
+
+        let timeoutid = setTimeout(() => $("#div-mensaje-popup").fadeOut(500, () => {
+
+            $("#div-mensaje-popup link").remove();
+
+            if (typeof accion == 'string') window.location.href = accion;
+
+            else if (typeof accion == 'function') accion();
+            
+        }), duracion * 1000);
+
         $('#btnCerrar').focus().on("click", () => {
+
+            clearTimeout(timeoutid);
 
             $("#div-mensaje-popup").fadeOut(500, () => {
 
@@ -45,15 +67,6 @@ function createHeaderPopup(titulo, contenido, accion) {
                 else if (typeof accion == 'function') accion();
             });
         });
-        setTimeout(() => $("#div-mensaje-popup").fadeOut(500, () => {
-
-            $("#div-mensaje-popup link").remove();
-
-            if (typeof accion == 'string') window.location.href = accion;
-
-            else if (typeof accion == 'function') accion();
-            
-        }), 5000);
     });
 }
 

@@ -18,7 +18,8 @@ $defaults = [
     'horaminima' => '01:00:00', // Hora minima posible para un horario
     'horamaxima' => '23:30:00', // Hora máxima posible para un horario
     'duracionmaxima' => 180, // Duración máxima (en minutos) de una consulta
-    'passemail' => 'nmlf rltr hzqx ugvh'
+    'passemail' => 'nmlf rltr hzqx ugvh',
+    'cooldownreserva' => 180
 ];
 
 function getDatesFromRange(string $fechainicio, string $fechafin): array
@@ -240,7 +241,8 @@ function fechaDisponible(string $fecha, int $idodontologo): bool
     else return false;
 }
 
-function horasDisponibles(string $fecha, int $idodontologo): array {
+function horasDisponibles(string $fecha, int $idodontologo): array
+{
 
     global $pdo;
 
@@ -340,7 +342,8 @@ function horasDisponibles(string $fecha, int $idodontologo): array {
     return $horasDisponibles;
 }
 
-function diferenciaFechas($fecha1, $fecha2): int {
+function diferenciaFechas(string $fecha1, string $fecha2): int
+{
 
     global $pdo;
 
@@ -350,13 +353,12 @@ function diferenciaFechas($fecha1, $fecha2): int {
     $stmt->bindParam(':fecha1', $fecha1);
     $stmt->bindParam(':fecha2', $fecha2);
 
-    if($stmt->execute() && $stmt->rowCount() > 0) {
-        
-        $diferencia = intval($stmt->fetch()[0]);
+    if ($stmt->execute() && $stmt->rowCount() > 0) {
+
+        $diferencia = intval($stmt->fetch()['diferencia']);
 
         return $diferencia;
-    }
-    else return 0;
+    } else return 0;
 }
 
 function duracionesDisponibles(DateTime $fecha, string $hora, int $idodontologo): array
@@ -745,11 +747,11 @@ function getHorasFinalizacionInactividad(string $fechainicio, string $horainicio
             }
         }
         return $horasDisponibles;
-    } 
-    else return getDefaultHours();
+    } else return getDefaultHours();
 }
 
-function enviarEmailCancelador($emailp, $asunto, $fecha, $hora): bool {
+function enviarEmailCancelador($emailp, $asunto, $fecha, $hora): bool
+{
 
     global $defaults;
 
@@ -867,7 +869,8 @@ function enviarEmailCancelador($emailp, $asunto, $fecha, $hora): bool {
     else return false;
 }
 
-function getHorasConsulta(string $hora, int $duracion): array {
+function getHorasConsulta(string $hora, int $duracion): array
+{
 
     $horainicio = DateTime::createFromFormat('H:i:s', $hora);
     $horainicio = $horainicio->format('H:i:s');
@@ -881,16 +884,18 @@ function getHorasConsulta(string $hora, int $duracion): array {
     return $horasConsulta;
 }
 
-function getFechaHorasConsulta(string $fecha, string $hora, int $duracion): array {
+function getFechaHorasConsulta(string $fecha, string $hora, int $duracion): array
+{
 
     $fechahoras = [];
 
-    foreach(getHorasConsulta($hora, $duracion) as $horaconsulta) $fechahoras[] = "{$fecha} {$horaconsulta}";
+    foreach (getHorasConsulta($hora, $duracion) as $horaconsulta) $fechahoras[] = "{$fecha} {$horaconsulta}";
 
     return $fechahoras;
 }
 
-function formatDateTime(string $tiempo, string $formatoinicial, string $formatofinal): string {
+function formatDateTime(string $tiempo, string $formatoinicial, string $formatofinal): string
+{
 
     $tiempoFormateado = DateTime::createFromFormat($formatoinicial, $tiempo);
 
@@ -899,11 +904,12 @@ function formatDateTime(string $tiempo, string $formatoinicial, string $formatof
     return $tiempoFormateado;
 }
 
-function formatDateTimeArray(array $tiempos, string $formatoinicial, string $formatofinal): array {
+function formatDateTimeArray(array $tiempos, string $formatoinicial, string $formatofinal): array
+{
 
     $tiemposFormateados = [];
 
-    foreach($tiempos as $tiempo) {
+    foreach ($tiempos as $tiempo) {
 
         $tiempoFormateado = DateTime::createFromFormat($formatoinicial, $tiempo);
 
@@ -913,11 +919,12 @@ function formatDateTimeArray(array $tiempos, string $formatoinicial, string $for
     return $tiemposFormateados;
 }
 
-function archivarConsulta(string $fecha, string $hora, int $ido): bool {
+function archivarConsulta(string $fecha, string $hora, int $ido): bool
+{
 
     global $pdo;
 
-    while(true) {
+    while (true) {
 
         $codigoArchivacion = random_int(0, 10000000000000000);
 
@@ -929,9 +936,9 @@ function archivarConsulta(string $fecha, string $hora, int $ido): bool {
         $stmt->bindParam(':ido', $ido);
         $stmt->bindParam(':codigo', $codigoArchivacion);
 
-        if($stmt->execute()) {
+        if ($stmt->execute()) {
 
-            if($stmt->rowCount() == 0) {
+            if ($stmt->rowCount() == 0) {
 
                 $sql = "UPDATE consulta SET vigente = :codigo WHERE fecha = :fecha AND hora = :hora AND idodontologo = :ido";
 
@@ -941,12 +948,11 @@ function archivarConsulta(string $fecha, string $hora, int $ido): bool {
                 $stmt->bindParam(':ido', $ido);
                 $stmt->bindParam(':codigo', $codigoArchivacion);
 
-                if($stmt->execute()) return true;
+                if ($stmt->execute()) return true;
 
                 else return false;
             }
-        }
-        else return false;
+        } else return false;
     }
 }
 
@@ -955,30 +961,117 @@ function odontologoHabilitado($idp, $ido): bool {
     global $pdo;
     global $defaults;
 
-    $sql = "SELECT * FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido";
+    $fechaActual = getFechaActual();
+
+    $habilitado1 = false;
+
+    $fechaFinal = new DateTime(sumarFecha($fechaActual, 'mes', 3));
+    $fechaFinal->modify('last day of this month');
+    $fechaFinal = $fechaFinal->format('Y-m-d');
+
+    $fechas = getDatesFromRange($fechaActual, $fechaFinal);
+
+    foreach ($fechas as $fecha) if(fechaDisponible($fecha, $ido)) $habilitado1 = true;
+
+    $sql = "SELECT * FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND vigente = 'vigente'";
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':idp', $idp);
     $stmt->bindParam(':ido', $ido);
 
-    if($stmt->execute()) {
+    if ($stmt->execute()) {
 
-        if($stmt->rowCount() > 0) {
+        if ($stmt->rowCount() > 0) {
 
             $consultas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $habilitado = true;
+            $habilitado2 = false;
 
-            foreach($consultas as $consulta) {
+            foreach ($consultas as $consulta) if (diferenciaFechas($consulta['fecha'], $fechaActual) >= $defaults['cooldownreserva']) $habilitado2 = true;
 
-                $fechaconsulta = DateTime::createFromFormat('Y-m-d', $consulta['fecha']);
+            return $habilitado1 && $habilitado2;
+        } 
+        else return $habilitado1;
+    } 
+    else return false;
+}
 
-                $fechaActual = getFechaActual();
+function reservaHabilitada($idp): bool {
 
-                
-            }
+    global $pdo;
+
+    $sql = "SELECT idodontologo FROM odontologo";
+    $stmt = $pdo->prepare($sql);
+
+    if ($stmt->execute() && $stmt->rowCount() > 0) {
+
+        $idsodontologo = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        $habilitado = false;
+
+        foreach ($idsodontologo as $ido) if(odontologoHabilitado($idp, $ido)) $habilitado = true;
+
+        return $habilitado;
+    } 
+    else return false;
+}
+
+function obtenerNotificacionesPaciente(int $idp): array {
+
+    global $pdo;
+
+    $sql = "SELECT fecha, hora, idodontologo, asunto, detalle FROM consulta WHERE idpaciente = :idp AND vigente = 'vigente'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':idp', $idp);
+
+    if($stmt->execute() && $stmt->rowCount() > 0) {
+
+        $consultasconbooleanos = [];
+
+        $consultas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($consultas as $consulta) {
+
+            $booleanosconsulta = [];
+
+            foreach(explode(';', $consulta['detalle']) as $cada) $booleanosconsulta[] = $cada == '1';
+            
+            $consultaconbooleanos = [];
+
+            $consultaconbooleanos['booleanos'] = $booleanosconsulta;
+            $consultaconbooleanos['fecha'] = $consulta['fecha'];
+            $consultaconbooleanos['hora'] = $consulta['hora'];
+            $consultaconbooleanos['idodontologo'] = $consulta['idodontologo'];
+            $consultaconbooleanos['asunto'] = $consulta['asunto'];
+
+            $consultasconbooleanos[] = $consultaconbooleanos;
         }
-        else return true;
+        return $consultasconbooleanos;
     }
+    return [];
+}
+
+function modificarBooleanosNotificacionesConsulta(string $fecha, string $hora, int $ido, array $booleanos): bool {
+
+    global $pdo;
+
+    if(sizeof($booleanos) != 4) return false;
+
+    $stringbooleanos = "";
+
+    foreach($booleanos as $booleano) $stringbooleanos .= $booleano ? '1;' : '0;';
+    
+    $stringbooleanos = substr($stringbooleanos, 0, -1);
+
+    $sql = "UPDATE consulta SET detalle = :stringbooleanos WHERE fecha = :fecha AND hora = :hora AND idodontologo = :ido AND vigente = 'vigente'";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':fecha', $fecha);
+    $stmt->bindParam(':hora', $hora);
+    $stmt->bindParam(':ido', $ido);
+    $stmt->bindParam(':stringbooleanos', $stringbooleanos);
+
+    if($stmt->execute() && $stmt->rowCount() > 0) return true;
+
     else return false;
 }

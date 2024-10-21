@@ -141,7 +141,7 @@ if (isset($_GET['idpaciente'])) {
 foreach ($consultasActuales as &$consultaActual) {
 
     $consultaActual['fecha'] = formatDateTime($consultaActual['fecha'], 'Y-m-d', 'd/m/Y');
-    $consultaActual['hora'] = formatDateTime($consultaActual['hora'], 'H:i:s', 'H:i');
+    $consultaActual['horafinalizacion'] = formatDateTime($consultaActual['hora'], 'H:i:s', 'H:i');
 }
 
 foreach ($consultasFuturas as &$consultaFutura) {
@@ -192,16 +192,14 @@ if (isset($_GET['idpaciente'])):
 
             <div class="consulta" data-fecha="' . $fechaA . '" data-hora="' . $hora . '">
 
-                <div class="horacontainer">
-
-                    <span>Hasta:</span>
-                    <span id="hora">' . $horaA . '</span>
-
-                </div>
-
                 <div class="asuntocontainer">
 
                     <span id="asunto">' . $asuntoA . '</span>
+
+                </div>
+                <div class="horafcontainer">
+
+                    <span id="hora">Hasta: ' . $horaA . '</span>
 
                 </div>
 

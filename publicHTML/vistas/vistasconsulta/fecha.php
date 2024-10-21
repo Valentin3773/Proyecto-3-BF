@@ -1,3 +1,16 @@
+<?php
+
+include('../../backend/extractor.php');
+
+session_start();
+reloadSession();
+
+if(!isset($_SESSION['paciente'])) exit();
+
+if(!reservaHabilitada($_SESSION['paciente']['idpaciente'])) exit();
+
+?>
+
 <form method="POST" id="elegirfecha">
 
     <h1 id="formheader">Seleccione una Fecha</h1>

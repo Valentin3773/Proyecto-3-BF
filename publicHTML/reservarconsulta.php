@@ -6,21 +6,29 @@ include('backend/extractor.php');
 session_start();
 reloadSession();
 
+$habilitacionson = false;
+$habilitacion = "nohabilitado";
+$iniciado = "noiniciado";
+
 if(!isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) {
     
-    header('Location: login.php');
-    exit();
+    
 }
-
 else if(!isset($_SESSION['paciente']) && isset($_SESSION['odontologo'])) {
     
     header('Location: index.php');
     exit();
 }
+else {
 
-$idp = $_SESSION['paciente']['idpaciente'];
+    $idp = $_SESSION['paciente']['idpaciente'];
 
+    if($idp) $iniciado = "iniciado";
 
+    $habilitacionson = reservaHabilitada($idp);
+    
+    $habilitacion = $habilitacionson ? "habilitado" : "nohabilitado";
+}
 
 ?>
 
@@ -38,6 +46,8 @@ $idp = $_SESSION['paciente']['idpaciente'];
         <script src="lib/jquery-3.7.1.min.js"></script>
         <link rel="stylesheet" href="lib/bootstrap-5.2.3-dist/css/bootstrap.min.css">
         <script defer src="lib/bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="lib/fontawesome-free-5.15.4-web/css/all.min.css">
+        <script defer src="lib/fontawesome-free-5.15.4-web/js/all.min.js"></script>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -56,13 +66,15 @@ $idp = $_SESSION['paciente']['idpaciente'];
 
     </head>
 
-    <body>
+    <body data-habilitado="<?= $habilitacion ?>" data-iniciado="<?= $iniciado ?>">
 
         <div id="preloader" class="d-flex justify-content-center align-items-center">
 
             <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
 
         </div>
+
+        <?php if($habilitacionson): ?>
 
         <div id="container" class="gx-0">
 
@@ -91,6 +103,8 @@ $idp = $_SESSION['paciente']['idpaciente'];
             </main>
 
         </div>
+
+        <?php endif; ?>
 
     </body>
 

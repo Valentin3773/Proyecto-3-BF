@@ -26,13 +26,27 @@ $(() => {
     resetAdmin();
 });
 
+let cargando = false;
+
 function addAdminListeners() {
 
-    $('#btnconsultas, nav.mobile #btnconsultas').on('click', () => changeView(cargarVistaConsultas));
-    $('#btnpacientes, nav.mobile #btnpacientes').on('click', () => changeView(cargarVistaPacientes));
-    $('#btnservicios, nav.mobile #btnservicios').on('click', () => changeView(cargarVistaServicios));
+    $('#btnconsultas, nav.mobile #btnconsultas').on('click', () => {
 
-    $('#logo').on('click', resetAdmin);
+        if(!cargando) changeView(cargarVistaConsultas)
+    });
+    $('#btnpacientes, nav.mobile #btnpacientes').on('click', () => {
+        
+        if(!cargando) changeView(cargarVistaPacientes)
+    });
+    $('#btnservicios, nav.mobile #btnservicios').on('click', () => {
+
+        if(!cargando) changeView(cargarVistaServicios)
+    });
+
+    $('#logo').on('click', () => {
+        
+        if(!cargando) resetAdmin();
+    });
 }
 
 function cargarVistaConsultas() {
@@ -92,42 +106,51 @@ function cargarVistaConsultas() {
 
         $('.pacientec').on('click', function () {
 
-            $('.pacientec, .paciente').css({ 'text-decoration': 'none' });
-            $(this).css({ 'text-decoration': 'underline' });
+            if(!cargando) {
 
-            let url = 'vistas/vistasadmin/vistaconsultas.php?idpaciente=' + $(this).attr('id');
+                $('.pacientec, .paciente').css({ 'text-decoration': 'none' });
+                $(this).css({ 'text-decoration': 'underline' });
 
-            changeView(() => $.get(url, data => {
+                let url = 'vistas/vistasadmin/vistaconsultas.php?idpaciente=' + $(this).attr('id');
 
-                loadView(data);
+                changeView(() => $.get(url, data => {
 
-                slideActionBar(true);
+                    loadView(data);
 
-                $('.consulta').click(function (e) {
+                    slideActionBar(true);
 
-                    e.preventDefault();
+                    $('.consulta').on('click', function (e) {
 
-                    const fecha = $(this).attr('data-fecha');
-                    const hora = $(this).attr('data-hora');
+                        if(!cargando) {
 
-                    $('main').html('');
+                            e.preventDefault();
 
-                    let ventanaconsultapaciente = 'vistas/vistasadmin/vistaconsultapaciente.php?hora=' + hora + '&fecha=' + fecha;
+                            const fecha = $(this).attr('data-fecha');
+                            const hora = $(this).attr('data-hora');
 
-                    $.get(ventanaconsultapaciente, ventana => {
+                            $('main').html('');
 
-                        $('main').html(ventana);
+                            let ventanaconsultapaciente = 'vistas/vistasadmin/vistaconsultapaciente.php?hora=' + hora + '&fecha=' + fecha;
 
-                        slideActionBar(false);
+                            $.get(ventanaconsultapaciente, ventana => {
+
+                                $('main').html(ventana);
+
+                                slideActionBar(false);
+                            });
+                        }
                     });
-                });
-            }));
+                }));
+            }
         });
 
         slideActionBar(true);
 
         $('#titactionbar').html('Agendar Consulta');
-        $('#agregar').off().on('click', () => $('main').fadeOut(300, cargarVistaAgregarConsulta));
+        $('#agregar').off().on('click', () => {
+            
+            if(!cargando) $('main').fadeOut(300, cargarVistaAgregarConsulta)
+        });
     });
 
     $('#seccionescss').attr('href', 'css/administrador/consultas.css');
@@ -160,7 +183,7 @@ function addCalendarioListeners() {
 
                 loadView(contenido);
 
-                $('.consulta').click(function (e) {
+                $('.consulta').on('click', function (e) {
 
                     e.preventDefault();
 
@@ -211,7 +234,7 @@ function addCalendarioListeners() {
 
                 loadView(contenido);
 
-                $('.consulta').click(function (e) {
+                $('.consulta').on('click', function (e) {
 
                     e.preventDefault();
 
@@ -266,21 +289,32 @@ function cargarVistaAgregarConsulta() {
                 anio: fechapamandar[2]
             });
 
-            if ($('#contagregarconsulta #fecha').val() !== '') $.ajax({
+            if ($('#contagregarconsulta #fecha').val() !== '') {
+                
+                cargando = true;
 
-                type: "POST",
-                url: "backend/admin/horamanagerad.php",
-                data: datos,
-                processData: false,
-                contentType: false,
-                success: function (response) {
+                $.ajax({
 
-                    $('#contagregarconsulta #hora').html('<option selected value="">Seleccione una hora</option>').prop('disabled', false);
+                    type: "POST",
+                    url: "backend/admin/horamanagerad.php",
+                    data: datos,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
 
-                    response.horasDisponibles.forEach(elemento => $('#contagregarconsulta #hora').append(`<option value="${elemento}">${elemento}</option>`));
-                },
-                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
-            });
+                        cargando = false;
+
+                        $('#contagregarconsulta #hora').html('<option selected value="">Seleccione una hora</option>').prop('disabled', false);
+
+                        response.horasDisponibles.forEach(elemento => $('#contagregarconsulta #hora').append(`<option value="${elemento}">${elemento}</option>`));
+                    },
+                    error: (jqXHR, estado, outputError) => {
+                            
+                        console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                        cargando = false;
+                    }
+                });
+            }
 
             $('#contagregarconsulta #duracion').html('<option selected value="">Seleccione la duración</option>').prop('disabled', true);
             $('#agregarconsulta').prop('disabled', true).removeClass('activo').addClass('inactivo');
@@ -298,21 +332,32 @@ function cargarVistaAgregarConsulta() {
                 hora: $('#contagregarconsulta #hora').val()
             });
 
-            if ($('#contagregarconsulta #hora').val() !== '') $.ajax({
+            if ($('#contagregarconsulta #hora').val() !== '') {
 
-                type: "POST",
-                url: "backend/admin/duracionmanager.php",
-                data: datos,
-                processData: false,
-                contentType: false,
-                success: function (response) {
+                cargando = true;
 
-                    $('#contagregarconsulta #duracion').html('<option selected value="">Seleccione la duración</option>').prop('disabled', false);
+                $.ajax({
 
-                    response.duracionesDisponibles.forEach(elemento => $('#contagregarconsulta #duracion').append(`<option value="${elemento}">${fancyHoras(elemento)}</option>`));
-                },
-                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
-            });
+                    type: "POST",
+                    url: "backend/admin/duracionmanager.php",
+                    data: datos,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+
+                        cargando = false
+
+                        $('#contagregarconsulta #duracion').html('<option selected value="">Seleccione la duración</option>').prop('disabled', false);
+
+                        response.duracionesDisponibles.forEach(elemento => $('#contagregarconsulta #duracion').append(`<option value="${elemento}">${fancyHoras(elemento)}</option>`));
+                    },
+                    error: (jqXHR, estado, outputError) => {
+                            
+                        console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                        cargando = false;
+                    }
+                });
+            }
             else $('#contagregarconsulta #duracion').html('<option selected value="">Seleccione la duración</option>').prop('disabled', true);
 
             $('#agregarconsulta').prop('disabled', true).removeClass('activo').addClass('inactivo');
@@ -336,9 +381,11 @@ function cargarVistaAgregarConsulta() {
 
             if (await createConfirmPopup('Confirmación', '¿Estás seguro de agendar la consulta?')) {
 
-                $('#agregarservicio').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true);
+                $('#agregarconsulta').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true).removeClass('activo').addClass('inactivo');
 
                 let formdatos = new FormData($('#contagregarconsulta')[0]);
+
+                cargando = true;
 
                 $.ajax({
 
@@ -349,13 +396,19 @@ function cargarVistaAgregarConsulta() {
                     contentType: false,
                     success: function (response) {
 
-                        $('#agregarservicio').html('Agregar').prop('disabled', false);
+                        cargando = false;
+
+                        $('#agregarconsulta').html('Agregar').prop('disabled', false).removeClass('inactivo').addClass('activo');
 
                         if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaConsultas);
 
                         else createPopup('Nuevo Aviso', response.error);
                     },
-                    error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+                    error: (jqXHR, estado, outputError) => {
+                            
+                        console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                        cargando = false;
+                    }
                 });
             }
         });
@@ -372,7 +425,7 @@ function cargarVistaAgregarServicio() {
         let formData = new FormData();
 
         $('[id="mdF"]').eq(0).on('click', function () {
-
+            
             $('#inFile1').click();
             $('#inFile1').change(function (event) {
 
@@ -456,27 +509,38 @@ function cargarVistaAgregarServicio() {
 
             if (await createConfirmPopup('Confirmación', '¿Estás seguro de agregar el servicio?')) {
 
-                $('#agregarservicio').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true);
+                $('#agregarservicio').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true).removeClass('activo').addClass('inactivo');
 
                 formData.append('nombre', $('#nombre').val()); formData.append('descripcion', $('#descripcion').val());
 
-                if ($('#nombre').val().length >= 4 && $('#descripcion').val().length >= 20) $.ajax({
+                if ($('#nombre').val().length >= 4 && $('#descripcion').val().length >= 20) {
+                    
+                    cargando = true;
 
-                    type: "POST",
-                    url: "backend/admin/agregarservicio.php",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
+                    $.ajax({
 
-                        $('#agregarservicio').html('Agregar').prop('disabled', false);
+                        type: "POST",
+                        url: "backend/admin/agregarservicio.php",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
 
-                        if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaServicios);
+                            cargando = false;
 
-                        else createPopup('Nuevo Aviso', response.error);
-                    },
-                    error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
-                });
+                            $('#agregarservicio').html('Agregar').prop('disabled', false).removeClass('inactivo').addClass('activo');
+
+                            if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaServicios);
+
+                            else createPopup('Nuevo Aviso', response.error);
+                        },
+                        error: (jqXHR, estado, outputError) => {
+                            
+                            console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                            cargando = false;
+                        }
+                    });
+                }
             }
         });
     });
@@ -708,6 +772,8 @@ function cargarVistaPacienteDetalle(idp) {
                 datospaciente.medicacion.filter(String);
                 datospaciente.enfermedades.filter(String);
 
+                cargando = true;
+
                 $.ajax({
 
                     type: "POST",
@@ -719,6 +785,8 @@ function cargarVistaPacienteDetalle(idp) {
 
                         if (responso.error == undefined) { 
 
+                            cargando = true;
+
                             $.ajax({
 
                                 type: "POST",
@@ -728,21 +796,32 @@ function cargarVistaPacienteDetalle(idp) {
                                 contentType: false,
                                 success: function (response) {
 
+                                    cargando = false;
+
                                     if (response[0]) createHeaderPopup('Nuevo Aviso', responso.exito, () => changeView(() => cargarVistaPacienteDetalle(idp)));
                 
-                                    else createPopup('Nuevo Aviso', responso.error)
-
-                                    console.log('rigoberto');
+                                    else createPopup('Nuevo Aviso', responso.error);
                                 },
-                                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+                                error: (jqXHR, estado, outputError) => {
+                            
+                                    console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                                    cargando = false;
+                                }
                             });
                         }
-
-                        else createPopup('Nuevo Aviso', responso.error);
+                        else {
+                            
+                            createPopup('Nuevo Aviso', responso.error);
+                            cargando = false;
+                        }
 
                         guardar.prop('disabled', false).html('Guardar');
                     },
-                    error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+                    error: (jqXHR, estado, outputError) => {
+                            
+                        console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                        cargando = false;
+                    }
                 });
             }
         });
@@ -791,6 +870,8 @@ function cargarVistaServicios() {
                             formData.append('titulo', $('.contTitulon').val());
                             formData.append('id', id);
 
+                            cargando = true;
+
                             $.ajax({
 
                                 type: "POST",
@@ -800,11 +881,17 @@ function cargarVistaServicios() {
                                 contentType: false,
                                 success: function (response) {
 
+                                    cargando = false;
+
                                     if (response.error == undefined) { createPopup('Nuevo Aviso', response); $('.contTitulon').attr('disabled', true); }
 
                                     else createPopup('Nuevo Aviso', response);
                                 },
-                                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+                                error: (jqXHR, estado, outputError) => {
+                            
+                                    console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                                    cargando = false;
+                                }
                             });
                             $('[id="mdC"]').eq(0).find('img').attr('src','img/iconosvg/lapiz.svg');
                         }
@@ -831,6 +918,8 @@ function cargarVistaServicios() {
                             formData.append('descripcion', $('#descripcion').val());
                             formData.append('id', id);
 
+                            cargando = true;
+
                             $.ajax({
 
                                 type: "POST",
@@ -840,11 +929,17 @@ function cargarVistaServicios() {
                                 contentType: false,
                                 success: function (response) {
 
+                                    cargando = false;
+
                                     if (response.error == undefined) { createPopup('Nuevo Aviso', response); $('#descripcion').attr('readonly', true); }
 
                                     else createPopup('Nuevo Aviso', response.error);
                                 },
-                                error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+                                error: (jqXHR, estado, outputError) => {
+                            
+                                    console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                                    cargando = false;
+                                }
                             });
                             $('[id="mdC"]').eq(1).find('img').attr('src','img/iconosvg/lapiz.svg');
                         }
@@ -931,6 +1026,8 @@ function enviarIMGServicio($data, $tipo) {
 
     if ($tipo == 0) {
 
+        cargando = true;
+
         $.ajax({
 
             type: "POST",
@@ -940,14 +1037,22 @@ function enviarIMGServicio($data, $tipo) {
             contentType: false,
             success: function (response) {
 
+                cargando = false;
+
                 if (response.error == undefined) createPopup('Nuevo Aviso', response.enviar); //window.location.reload();
 
                 else console.log(response.error);
             },
-            error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+            error: (jqXHR, estado, outputError) => {
+                            
+                console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                cargando = false;
+            }
         });
     }
     else if ($tipo == 1) {
+
+        cargando = true;
 
         $.ajax({
             type: "POST",
@@ -957,11 +1062,17 @@ function enviarIMGServicio($data, $tipo) {
             contentType: false,
             success: function (response) {
 
+                cargando = false;
+
                 if (response.error == undefined) createPopup('Nuevo Aviso', response.enviar); // window.location.reload();
 
                 else console.log(response.error);
             },
-            error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
+            error: (jqXHR, estado, outputError) => {
+                            
+                console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                cargando = false;
+            }
         });
     }
     else alert('Que mira bobo :3');

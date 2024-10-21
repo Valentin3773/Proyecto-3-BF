@@ -1,6 +1,7 @@
 <?php
 
-include("../conexion.php");
+include("../conexion.php"); 
+include("../extractor.php"); 
 include("checarIcono_Img.php");
 
 session_start();
@@ -11,11 +12,13 @@ else exit();
 
 function actualizarImagen() {
 
+    global $dir;
+
     $respuestas = array();
     $file = $_FILES['file'];
     $id = $_POST['id'];
 
-    $ruta_carpeta = $_SERVER['DOCUMENT_ROOT'] . "/Proyecto-3-BF/publicHTML/backend/almacenamiento/imgservice/";
+    $ruta_carpeta = "{$dir}backend/almacenamiento/imgservice/";
 
     // Genera un nombre único para que la imagen no se encuentre repetida
     $extension = pathinfo($file['name'], PATHINFO_EXTENSION);

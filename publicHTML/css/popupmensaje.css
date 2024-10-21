@@ -36,6 +36,22 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 0 3px 1px rgba(0, 0, 0, .45);
+    position: relative;
+    --progress: 0%;
+    --duracion: 5s;
+}
+
+.mensaje-Popup::after {
+
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--progress);
+    height: 2%;
+    background-color: orangered;
+    border-radius: 10px 10px 0 0;
+    transition: all var(--duracion) linear;
 }
 
 .popup-contTitulo {
@@ -118,5 +134,18 @@ body {
     .btnCerrar, .btnConfirmar, .btnCancelar {
 
         width: 60% !important;
+    }
+}
+
+@keyframes moveProgressBar {
+
+    from {
+
+        --progress: 0%;
+    }
+
+    to {
+
+        --progress: 100%;
     }
 }
