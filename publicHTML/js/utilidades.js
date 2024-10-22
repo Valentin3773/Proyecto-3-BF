@@ -12,11 +12,11 @@ function createPopup(titulo, contenido, duracion = 5) {
     $('#div-mensaje-popup').hide();
     $.get(`vistas/popupmensaje.php ? Contenido=${contenido}&Aviso=${titulo}`, data => {
 
-        $('.mensaje-Popup').css({'--progress': '0%', '--duracion': `0s`});
+        $('.mensaje-Popup').css({ '--progress': '0%', '--duracion': `0s` });
 
         $("#div-mensaje-popup").html(data).fadeIn(500);
-        
-        $('.mensaje-Popup').css({'--progress': '100%', '--duracion': `${duracion}s`});
+
+        $('.mensaje-Popup').css({ '--progress': '100%', '--duracion': `${duracion}s` });
 
         let timeoutid = setTimeout(() => $("#div-mensaje-popup").fadeOut(500), duracion * 1000);
         $('#btnCerrar').focus().on("click", () => {
@@ -25,7 +25,7 @@ function createPopup(titulo, contenido, duracion = 5) {
             $("#div-mensaje-popup").fadeOut(500);
             //$('body').removeClass('blurry');
         });
-       
+
     });
 }
 
@@ -38,11 +38,11 @@ function createHeaderPopup(titulo, contenido, accion, duracion = 5) {
     $('#div-mensaje-popup').hide();
     $.get("vistas/popupmensaje.php ? Contenido=" + contenido + "&Aviso=" + titulo, data => {
 
-        $('.mensaje-Popup').css({'--progress': '0%', '--duracion': `0s`});
+        $('.mensaje-Popup').css({ '--progress': '0%', '--duracion': `0s` });
 
         $("#div-mensaje-popup").html(data).fadeIn(500);
 
-        $('.mensaje-Popup').css({'--progress': '100%', '--duracion': `${duracion}s`});
+        $('.mensaje-Popup').css({ '--progress': '100%', '--duracion': `${duracion}s` });
 
         let timeoutid = setTimeout(() => $("#div-mensaje-popup").fadeOut(500, () => {
 
@@ -51,7 +51,7 @@ function createHeaderPopup(titulo, contenido, accion, duracion = 5) {
             if (typeof accion == 'string') window.location.href = accion;
 
             else if (typeof accion == 'function') accion();
-            
+
         }), duracion * 1000);
 
         $('#btnCerrar').focus().on("click", () => {
@@ -135,6 +135,64 @@ function createInputPopup(titulo, placeholder, botonestxt = ['Cancelar', 'Confir
                 let texto = $('#popup-input').val();
 
                 respuesta(texto);
+            });
+        });
+    });
+
+    return promesa;
+}
+
+function createFeedbackPopup(titulo, contenido, datosconsulta, botonestxt = ['Cancelar', 'Confirmar']) {
+
+    let promesa = new Promise(respuesta => {
+
+        console.log('Creando Popup');
+
+        if ($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
+
+        $('#div-mensaje-popup').hide();
+        $.get(`vistas/popupcalificar.php ? Contenido=${contenido}&Aviso=${titulo}&txtcancelar=${botonestxt[0]}&txtconfirmar=${botonestxt[1]}`, data => {
+
+            $("#div-mensaje-popup").html(data).fadeIn(500);
+            $('.estrella').on('mouseenter', function () {
+
+                let hoveredId = parseInt($(this).attr('id'));
+
+                $('.estrella').each(function() {
+
+                    let currentId = parseInt($(this).attr('id'));
+                    if (currentId <= hoveredId) $(this).addClass('activada');
+                });
+
+            }).on('mouseleave', () => {
+                
+                $('.estrella').removeClass('activada');
+            });
+            $('#div-mensaje-popup #mensaje').on('input', function () {
+
+                if ($(this).val().length >= 6) $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, 1)' }).prop('disabled', false);
+            });
+            $('#btnCancelar').focus().on("click", () => {
+
+                $("#div-mensaje-popup").fadeOut(500);
+                $("#div-mensaje-popup link").remove();
+
+                respuesta(null);
+            });
+            $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, .4)' }).prop('disabled', true).on("click", () => {
+
+                $("#div-mensaje-popup").fadeOut(500);
+                $("#div-mensaje-popup link").remove();
+
+                let msg = $('#div-mensaje-popup #mensaje').val();
+
+                respuesta({
+
+                    fecha: datosconsulta.fecha,
+                    hora: datosconsulta.hora,
+                    ido: datosconsulta.ido,
+                    mensaje: msg
+                });
             });
         });
     });
