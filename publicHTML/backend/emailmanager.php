@@ -23,7 +23,7 @@ require_once '../lib/PHPMailer/SMTP.php';
 $pacientes = $pdo->query("SELECT idpaciente, nombre, apellido, nomolestar FROM paciente");
 
 foreach ($pacientes as $paciente) {
-
+    
     $idp = $paciente['idpaciente'];
     $nombre = $paciente['nombre'];
     $apellido = $paciente['apellido'];

@@ -31,7 +31,7 @@ function createPopup(titulo, contenido, duracion = 5) {
 
 function createHeaderPopup(titulo, contenido, accion, duracion = 5) {
 
-    console.log('Creando Popup');
+    console.log('Creando Popup Redireccionador');
 
     if ($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
 
@@ -74,7 +74,7 @@ function createConfirmPopup(titulo, contenido, botonestxt = ['Cancelar', 'Confir
 
     let promesa = new Promise(respuesta => {
 
-        console.log('Creando Popup');
+        console.log('Creando Popup Confirmador');
 
         if ($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
 
@@ -106,7 +106,7 @@ function createInputPopup(titulo, placeholder, botonestxt = ['Cancelar', 'Confir
 
     let promesa = new Promise(respuesta => {
 
-        console.log('Creando Popup');
+        console.log('Creando Popup Ingresador');
 
         if ($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
 

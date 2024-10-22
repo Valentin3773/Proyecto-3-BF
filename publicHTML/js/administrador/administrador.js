@@ -785,40 +785,52 @@ function cargarVistaPacienteDetalle(idp) {
 
                         if (responso.error == undefined) { 
 
-                            cargando = true;
+                            if(fotopaciente != null) {
 
-                            $.ajax({
+                                cargando = true;
 
-                                type: "POST",
-                                url: "backend/admin/subirimgpaciente.php",
-                                data: fotopaciente,
-                                processData: false,
-                                contentType: false,
-                                success: function (response) {
+                                $.ajax({
 
-                                    cargando = false;
+                                    type: "POST",
+                                    url: "backend/admin/subirimgpaciente.php",
+                                    data: fotopaciente,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function (response) {
 
-                                    if (response[0]) createHeaderPopup('Nuevo Aviso', responso.exito, () => changeView(() => cargarVistaPacienteDetalle(idp)));
-                
-                                    else createPopup('Nuevo Aviso', responso.error);
-                                },
-                                error: (jqXHR, estado, outputError) => {
-                            
-                                    console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
-                                    cargando = false;
-                                }
-                            });
+                                        cargando = false;
+                                        console.log('a');
+
+                                        if (response[0]) createHeaderPopup('Nuevo Aviso', responso.exito, () => changeView(() => cargarVistaPacienteDetalle(idp)));
+                    
+                                        else createPopup('Nuevo Aviso', responso.error);
+                                    },
+                                    error: (jqXHR, estado, outputError) => {
+                                        
+                                        console.log('b');
+                                        console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                                        cargando = false;
+                                    }
+                                });
+                            }
+                            else {
+
+                                console.log('c');
+                                cargando = false;
+                                
+                                createHeaderPopup('Nuevo Aviso', responso.exito, () => changeView(() => cargarVistaPacienteDetalle(idp)), 500);
+                            }
                         }
                         else {
                             
+                            console.log('d');
                             createPopup('Nuevo Aviso', responso.error);
                             cargando = false;
                         }
-
                         guardar.prop('disabled', false).html('Guardar');
                     },
                     error: (jqXHR, estado, outputError) => {
-                            
+                        
                         console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
                         cargando = false;
                     }
