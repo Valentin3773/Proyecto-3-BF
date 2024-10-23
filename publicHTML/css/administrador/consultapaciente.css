@@ -5,8 +5,8 @@
     margin: 10px;
     border-radius: 10px;
     color: white;
-    border: 1px solid #ccc; /* Borde del contenedor */
-    border-radius: 8px; /* Bordes redondeados */
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
     line-height: 1.8 !important;
 }
 
@@ -130,19 +130,17 @@ h1 {
     text-align: center;
 }
 
-.contentFecha h1 {
-
-    font-size: xx-large;
-}
-
 .tituloDuracion {
 
     background-color: #0059CD;
     filter: brightness(1.1);
     width: 100%;
     text-align: center;
-    padding: 15px 15px !important;
+    padding: 2px 10px !important;
     border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .tituloDuracion h1 {
@@ -154,9 +152,11 @@ h1 {
 
     background-color: white;
     width: 100%;
-    padding: 0 20px;
+    padding: 10px;
     border-radius: 0 0 10px 10px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
 }
 
@@ -314,9 +314,9 @@ button {
         text-align: center;
         color: #00B2FF;
         width: 5rem !important;
-        font-weight: bolder;
-        font-size: xx-large;
-        font-family: Roboto;
+        font-weight: 500;
+        font-size: 1.5rem;
+        font-family: 'RobotoSerif';
     }
 
 }
@@ -337,8 +337,6 @@ button {
         align-items: center;
     }
 
-  
-
     .contHora{
         width: 100%; 
     }
@@ -352,14 +350,17 @@ button {
         text-align: center;
         color: #00B2FF;
         width: 5rem !important;
-        font-weight:500;
-        font-size: xx-large;
+        font-weight: 500;
+        font-size: 1.5rem;
         font-family: 'RobotoSerif';
     }
     .tituloDuracion{
         padding: 10px 60px !important;
     }
     .contentFecha{
+        border-radius: 0 0 10px 10px;
+    }
+    .contentHora{
         border-radius: 0 0 10px 10px;
     }
     .contFecha{
