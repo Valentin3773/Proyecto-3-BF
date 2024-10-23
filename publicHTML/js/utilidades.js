@@ -142,7 +142,7 @@ function createInputPopup(titulo, placeholder, botonestxt = ['Cancelar', 'Confir
     return promesa;
 }
 
-function createFeedbackPopup(titulo, contenido, datosconsulta, botonestxt = ['Cancelar', 'Confirmar']) {
+function createFeedbackPopup(titulo, contenido, datosconsulta, botonestxt = ['Cancelar', 'Enviar']) {
 
     let promesa = new Promise(respuesta => {
 
@@ -153,8 +153,11 @@ function createFeedbackPopup(titulo, contenido, datosconsulta, botonestxt = ['Ca
         $('#div-mensaje-popup').hide();
         $.get(`vistas/popupcalificar.php ? Contenido=${contenido}&Aviso=${titulo}&txtcancelar=${botonestxt[0]}&txtconfirmar=${botonestxt[1]}`, data => {
 
+            let estrellas = null;
+
             $("#div-mensaje-popup").html(data).fadeIn(500);
-            $('.estrella').on('mouseenter', function () {
+            $('#popup-Titulo').on('click', () => console.log(estrellas));
+            $('.estrella').on('mouseenter', function() {
 
                 let hoveredId = parseInt($(this).attr('id'));
 
@@ -163,14 +166,24 @@ function createFeedbackPopup(titulo, contenido, datosconsulta, botonestxt = ['Ca
                     let currentId = parseInt($(this).attr('id'));
                     if (currentId <= hoveredId) $(this).addClass('activada');
                 });
-
-            }).on('mouseleave', () => {
+            })
+            .on('mouseleave', function() {
                 
                 $('.estrella').removeClass('activada');
-            });
-            $('#div-mensaje-popup #mensaje').on('input', function () {
+            })
+            .on('click', function() {
 
-                if ($(this).val().length >= 6) $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, 1)' }).prop('disabled', false);
+                $('.estrella').removeClass('activa');
+
+                let id = Number($(this).attr('id'));
+                
+                estrellas = id;
+
+                for(let i = 1; i <= id; i++) $(`#${i}.estrella`).addClass('activa');
+
+                if (estrellas != null) $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, 1)' }).prop('disabled', false);
+
+                else $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, .4)' }).prop('disabled', true);
             });
             $('#btnCancelar').focus().on("click", () => {
 
@@ -186,12 +199,15 @@ function createFeedbackPopup(titulo, contenido, datosconsulta, botonestxt = ['Ca
 
                 let msg = $('#div-mensaje-popup #mensaje').val();
 
+                msg = msg.length > 0 ? msg : null;
+
                 respuesta({
 
                     fecha: datosconsulta.fecha,
                     hora: datosconsulta.hora,
                     ido: datosconsulta.ido,
-                    mensaje: msg
+                    mensaje: msg,
+                    puntaje: estrellas
                 });
             });
         });

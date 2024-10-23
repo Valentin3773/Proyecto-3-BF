@@ -24,7 +24,7 @@ $txtconfirmar = $_GET['txtconfirmar'];
                 <div class="estrella" id="5"></div>
             </div>
             <fieldset class="mt-2">
-                <h2 class="text-start mb-1">Déjanos tu opinión</h2>
+                <h4 class="text-start mb-1">Déjanos tu opinión</h4>
                 <textarea id="mensaje" class="form-control"></textarea>
             </fieldset>
         
