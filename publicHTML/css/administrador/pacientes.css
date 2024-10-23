@@ -63,6 +63,25 @@
     color: white;
 }
 
+@media only screen and (max-width: 1320px) and (min-width: 1220px) {
+    .Nombre {
+
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+    }
+}
+
+
+@media only screen and (max-width: 1220px){
+    .Nombre {
+
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: white;
+    }
+}
+
 .Telefono,
 .Documento {
 
