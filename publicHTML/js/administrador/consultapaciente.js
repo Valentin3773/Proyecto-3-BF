@@ -5,8 +5,8 @@ var iniData = {
     asunto: ($('#asunto-CP').val()),
     duracion: Number($('#duracion-CP').val()),
     resumen: ($('#resumen-CP').val()),
-    fechaV: $('.contentFecha h1').html(),
-    horaV: $('.contentHora h1').html()
+    fechaV: $('.contentFecha #fechaV').html(),
+    horaV: $('.contentHora #horaV').html()
 }
 
 function addBTNListeners() {
@@ -88,37 +88,42 @@ function funcionGuardar() {
     $('#fecha-CP').prop('disabled', true);
     $('#resumen-CP').prop('disabled', true);
 
-    const url = 'backend/admin/updateConsultaPaciente.php';
-    const data = {
+    if(iniData['asunto'] == $('#asunto-CP').val() && iniData['horaV'] == $('#hora-CP option:selected').html() && iniData['duracion'] == $('#duracion-CP').val() && iniData['fechaV'] == $('#fecha-CP option:selected').html() && iniData['resumen'] ==$('#resumen-CP').val()){
+        createPopup('Atención','No se han encontrado cambios para guardar');
+    } else {
+        
+        const url = 'backend/admin/updateConsultaPaciente.php';
+        const data = {
 
-        asunto: ($('#asunto-CP').val()),
-        hora: ($('#hora-CP option:selected').html()),
-        duracion: Number($('#duracion-CP').val()),
-        fecha: ($('#fecha-CP option:selected').html()),
-        resumen: ($('#resumen-CP').val()),
-        fechaV: $('.contentFecha #fechaV').html(),
-        horaV: $('.contentHora #horaV').html()
-    };
+            asunto: ($('#asunto-CP').val()),
+            hora: ($('#hora-CP option:selected').html()),
+            duracion: Number($('#duracion-CP').val()),
+            fecha: ($('#fecha-CP option:selected').html()),
+            resumen: ($('#resumen-CP').val()),
+            fechaV: $('.contentFecha #fechaV').html(),
+            horaV: $('.contentHora #horaV').html()
+        };
 
-    console.log(data);
+        console.log(data);
 
-    $.ajax({
+        $.ajax({
 
-        type: 'POST',
-        url: url,
-        data: JSON.stringify(data),
-        contentType: 'application/json',
-        success: response => {
+            type: 'POST',
+            url: url,
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: response => {
 
-            if (response.error === undefined) createPopup("Nuevo aviso",response);
+                if (response.error === undefined) createPopup("Nuevo aviso",response);
 
-            else createPopup("Nuevo aviso",response);
-        },
-        error: (jqXHR, estado, outputError) => {
+                else createPopup("Nuevo aviso",response);
+            },
+            error: (jqXHR, estado, outputError) => {
 
-            console.error("Error al procesar la solicitud: " + outputError +jqXHR +estado);
-        }
-    });
+                console.error("Error al procesar la solicitud: " + outputError +jqXHR +estado);
+            }
+        });
+    }
 
 }
 
@@ -150,8 +155,7 @@ async function functionEliminar() {
         $('#fecha-CP').prop('disabled', true);
         $('#resumen-CP').prop('disabled', true);
 
-    if (await createConfirmPopup("Atención"," Realmente desea eliminar esta consulta")) {
-
+    if (await createConfirmPopup("Atención","Realmente desea eliminar esta consulta")) {
         $.ajax({
 
             type: "POST",
@@ -172,5 +176,6 @@ async function functionEliminar() {
                 console.error("Error al procesar la solicitud: " + outputError +jqXHR +estado);
             }
         });
-    }
+        
+    }   
 }

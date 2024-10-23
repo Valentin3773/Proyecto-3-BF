@@ -362,6 +362,9 @@ button {
     .contentFecha{
         border-radius: 0 0 10px 10px;
     }
+    .contentHora{
+        border-radius: 0 0 10px 10px;
+    }
     .contFecha{
         width: 100%;
         direction: unset;
