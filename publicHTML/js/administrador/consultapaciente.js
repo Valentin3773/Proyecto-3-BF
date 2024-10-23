@@ -73,10 +73,13 @@ function funcionGuardar() {
     console.log("Guardar");
     $('#btnCancelar').css("opacity", 0.5);
     $('#btnGuardar').css("opacity", 0.5);
+    $('#btnEliminar').css("opacity", 0.5);
+
 
     $('#btnModificar').css("opacity", 1);
     $('#btnModificar').removeAttr('disabled');
 
+    $('#btnEliminar').prop('disabled', true);
     $('#btnCancelar').prop('disabled', true);
     $('#btnGuardar').prop('disabled', true);
     $('#asunto-CP').prop('disabled', true);
@@ -119,7 +122,7 @@ function funcionGuardar() {
 
 }
 
-function functionEliminar() {
+async function functionEliminar() {
 
     console.log("Eliminar");
 
@@ -128,10 +131,6 @@ function functionEliminar() {
         fechaV: $('.contentFecha #fechaV').html(),
         horaV: $('.contentHora #horaV').html()
     };
-    
-    var Confirmar = prompt("¿Está seguro?", "Ingrese Confirmar");
-
-    if (Confirmar === null) {
 
         console.log("Cancelado");
 
@@ -151,7 +150,7 @@ function functionEliminar() {
         $('#fecha-CP').prop('disabled', true);
         $('#resumen-CP').prop('disabled', true);
 
-    } else if (Confirmar.toLowerCase() === "confirmar") {
+    if (await createConfirmPopup("Atención"," Realmente desea eliminar esta consulta")) {
 
         $.ajax({
 
@@ -161,13 +160,11 @@ function functionEliminar() {
             contentType: 'application/json',
             success: function (response) {
                 if (response.error === undefined) {
-
-                    console.log(response);
-                    //window.location.href = "administrador.php";
+                    createHeaderPopup("Nuevo aviso","Se elimino la consulta con exito","administrador.php");
                 } 
                 else {
 
-                    console.log(response);
+                    createPopup("Nuevo aviso",response);
                 }
             },
             error: function (jqXHR, estado, outputError) {

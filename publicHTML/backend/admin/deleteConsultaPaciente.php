@@ -2,7 +2,6 @@
 include ("../conexion.php");
 include ("../extractor.php");
 session_start();
-$response = array();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     eleminarConsulta($pdo);    
@@ -11,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 function eleminarConsulta($pdo){
+    $response = array();
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
     

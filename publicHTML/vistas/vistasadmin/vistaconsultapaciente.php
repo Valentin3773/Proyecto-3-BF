@@ -67,7 +67,7 @@ $conjHoras = horasDisponibles($fechaA, $ido);
 
     <div class="px-3">
     <div>
-        <div class="row w-100 gx-0 justify-content-center contenedorcentral">
+        <div class="row w-100 gx-0 justify-content-between contenedorcentral">
             <div class="col-xl-5 col-lg-5 col-12 contHora m-0">
                 <div class="tituloHora">
                     <h1>Hora</h1>
@@ -76,14 +76,13 @@ $conjHoras = horasDisponibles($fechaA, $ido);
                     <select name="" id="hora-CP" disabled>
                         <?php
                             if(!empty($conjHoras)){
-                                echo "<option>Elija una hora</option>";
                                 echo "<option id='horaV'>" . $Tiempoensql . "</option>";
                                 for($i = 0; $i < count($conjHoras); $i++) {
                                 echo "<option value= '$conjHoras[$i]'>$conjHoras[$i]</option>";
                                 } 
                             } else {
-                                echo "<option>No hay horarios disponibles</option>";
                                 echo "<option id='horaV'>" . $Tiempoensql. "</option>";
+                                echo "<option>No hay horarios disponibles</option>";
                             }
                         ?>
                     </select>
@@ -107,14 +106,13 @@ $conjHoras = horasDisponibles($fechaA, $ido);
                     <select name="" id="fecha-CP" disabled>
                     <?php 
                             if(!empty($conjFechas)){
-                                echo "<option>Elija una fecha</option>";
                                 echo "<option id='fechaV'>" . $Fechaensql . "</option>";
                                 for($i = 0; $i < count($conjFechas); $i++) {
                                 echo "<option value= '$conjFechas[$i]'>$conjFechas[$i]</option>";
                                 } 
                             } else {
-                                echo "<option>No hay fechas disponibles</option>";
                                 echo "<option id='fechaV'>" . $Fechaensql . "</option>"; 
+                                echo "<option>No hay fechas disponibles</option>";
                             }
                         ?>
                     </select>

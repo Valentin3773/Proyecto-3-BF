@@ -39,10 +39,11 @@ h1 {
     background-color: #0059CD;
     filter: brightness(1.1);
     margin: 0;
+
 }
 
 .contAsunto h1 input {
-
+    width: 100% !important;
     color: white;
 }
 
@@ -156,6 +157,7 @@ h1 {
     padding: 0 20px;
     border-radius: 0 0 10px 10px;
     text-align: center;
+    
 }
 
 .contResumen {
@@ -350,12 +352,15 @@ button {
         text-align: center;
         color: #00B2FF;
         width: 5rem !important;
-        font-weight: bolder;
+        font-weight:500;
         font-size: xx-large;
-        font-family: Roboto;
+        font-family: 'RobotoSerif';
     }
     .tituloDuracion{
         padding: 10px 60px !important;
+    }
+    .contentFecha{
+        border-radius: 0 0 10px 10px;
     }
     .contFecha{
         width: 100%;
@@ -370,4 +375,10 @@ button {
     .tituloFecha {
         width: 100%;
     }
+
+    .btnInteractivo{
+        font-size: 1.5rem;
+    }
+
+
 }
