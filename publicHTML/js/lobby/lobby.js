@@ -2,7 +2,10 @@ $(() => {
 
     addListeners();
 
-    history.replaceState({path: 'index.php'}, '', 'index.php');
+    $.get('backend/lobby/getnotificaciones.php', respuesta => {
+
+        console.log(respuesta);
+    });
 });
 
 function addListeners() {

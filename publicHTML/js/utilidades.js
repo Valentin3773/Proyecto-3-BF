@@ -19,7 +19,7 @@ function createPopup(titulo, contenido, duracion = 5) {
         $('.mensaje-Popup').css({ '--progress': '100%', '--duracion': `${duracion}s` });
 
         let timeoutid = setTimeout(() => $("#div-mensaje-popup").fadeOut(500), duracion * 1000);
-        $('#btnCerrar').focus().on("click", () => {
+        $('#div-mensaje-popup #btnCerrar').focus().on("click", () => {
 
             clearTimeout(timeoutid);
             $("#div-mensaje-popup").fadeOut(500);
@@ -54,7 +54,7 @@ function createHeaderPopup(titulo, contenido, accion, duracion = 5) {
 
         }), duracion * 1000);
 
-        $('#btnCerrar').focus().on("click", () => {
+        $('#div-mensaje-popup #btnCerrar').focus().on("click", () => {
 
             clearTimeout(timeoutid);
 
@@ -82,14 +82,14 @@ function createConfirmPopup(titulo, contenido, botonestxt = ['Cancelar', 'Confir
         $.get(`vistas/popupconfirmar.php ? Contenido=${contenido}&Aviso=${titulo}&txtcancelar=${botonestxt[0]}&txtconfirmar=${botonestxt[1]}`, data => {
 
             $("#div-mensaje-popup").html(data).fadeIn(500);
-            $('#btnCancelar').focus().on("click", () => {
+            $('#div-mensaje-popup #btnCancelar').focus().on("click", () => {
 
                 $("#div-mensaje-popup").fadeOut(500);
                 $("#div-mensaje-popup link").remove();
 
                 respuesta(false);
             });
-            $('#btnConfirmar').on("click", () => {
+            $('#div-mensaje-popup #btnConfirmar').on("click", () => {
 
                 $("#div-mensaje-popup").fadeOut(500);
                 $("#div-mensaje-popup link").remove();
@@ -114,20 +114,20 @@ function createInputPopup(titulo, placeholder, botonestxt = ['Cancelar', 'Confir
         $.get(`vistas/popupingresar.php ? placeholder=${placeholder}&Aviso=${titulo}&txtcancelar=${botonestxt[0]}&txtconfirmar=${botonestxt[1]}`, data => {
 
             $("#div-mensaje-popup").html(data).fadeIn(500);
-            $('#popup-input').on('input', function () {
+            $('#div-mensaje-popup #popup-input').on('input', function () {
 
                 if ($(this).val().length >= 3) $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, 1)' }).prop('disabled', false);
 
                 else $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, .4)' }).prop('disabled', true);
             })
-            $('#btnCancelar').focus().on("click", () => {
+            $('#div-mensaje-popup #btnCancelar').focus().on("click", () => {
 
                 $("#div-mensaje-popup").fadeOut(500);
                 $("#div-mensaje-popup link").remove();
 
                 respuesta('');
             });
-            $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, .4)' }).prop('disabled', true).on("click", () => {
+            $('#div-mensaje-popup #btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, .4)' }).prop('disabled', true).on("click", () => {
 
                 $("#div-mensaje-popup").fadeOut(500);
                 $("#div-mensaje-popup link").remove();
@@ -156,8 +156,8 @@ function createFeedbackPopup(titulo, contenido, datosconsulta, botonestxt = ['Ca
             let estrellas = null;
 
             $("#div-mensaje-popup").html(data).fadeIn(500);
-            $('#popup-Titulo').on('click', () => console.log(estrellas));
-            $('.estrella').on('mouseenter', function() {
+            $('#div-mensaje-popup #popup-Titulo').on('click', () => console.log(estrellas));
+            $('#div-mensaje-popup .estrella').on('mouseenter', function() {
 
                 let hoveredId = parseInt($(this).attr('id'));
 
@@ -181,18 +181,18 @@ function createFeedbackPopup(titulo, contenido, datosconsulta, botonestxt = ['Ca
 
                 for(let i = 1; i <= id; i++) $(`#${i}.estrella`).addClass('activa');
 
-                if (estrellas != null) $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, 1)' }).prop('disabled', false);
+                if (estrellas != null) $('#div-mensaje-popup #btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, 1)' }).prop('disabled', false);
 
-                else $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, .4)' }).prop('disabled', true);
+                else $('#div-mensaje-popup #btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, .4)' }).prop('disabled', true);
             });
-            $('#btnCancelar').focus().on("click", () => {
+            $('#div-mensaje-popup #btnCancelar').focus().on("click", () => {
 
                 $("#div-mensaje-popup").fadeOut(500);
                 $("#div-mensaje-popup link").remove();
 
                 respuesta(null);
             });
-            $('#btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, .4)' }).prop('disabled', true).on("click", () => {
+            $('#div-mensaje-popup #btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, .4)' }).prop('disabled', true).on("click", () => {
 
                 $("#div-mensaje-popup").fadeOut(500);
                 $("#div-mensaje-popup link").remove();

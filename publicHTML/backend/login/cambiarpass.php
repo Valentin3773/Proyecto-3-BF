@@ -27,19 +27,31 @@ function cambiarcontra() {
         $chekeo = "SELECT * FROM paciente WHERE email = :email";
         $stmt = $pdo->prepare($chekeo);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->execute();
         
-        if($stmt->rowCount() > 0) {
+        if($stmt->execute() && $stmt->rowCount() > 0) {
 
-            $codigo = generateToken("Pepe");
-            $data = array ('codigo' => $codigo[1],'email' => $email); 
-            $_SESSION = $data;
-            //No mover, demora mucho el phpmailer
-            enviarEmail($codigo, $email);
+            $paciente = $stmt->fetch(PDO::FETCH_ASSOC);
+            $verificado = $paciente["verificado"] == 'verificado';
+
+            if($verificado) {
+
+                $codigo = generateToken("Pepe");
+                $data = array ('codigo' => $codigo[1],'email' => $email); 
+                $_SESSION = $data;
+                // No mover, demora mucho el phpmailer
+                enviarEmail($codigo, $email);
+            }
+            else {
+
+                $respuesta = array('noexiste' => "Lo sentimos, el usuario con el email ingresado no está verificado");
+                header('Content-Type: application/json');
+                echo json_encode($respuesta);
+                exit();
+            }
         } 
         else {
 
-            $respuesta = array('noexiste' => "No existe ningun usuario registrado con el email seleccionado");
+            $respuesta = array('noexiste' => "No existe ningún usuario registrado con el email ingresado");
             header('Content-Type: application/json');
             echo json_encode($respuesta);
             exit();
@@ -47,7 +59,7 @@ function cambiarcontra() {
     }
     else {
 
-        $respuesta = array('noexiste' => "Correo ingresado no válido");
+        $respuesta = array('noexiste' => "El correo ingresado no es válido");
         header('Content-Type: application/json');
         echo json_encode($respuesta);
         exit();

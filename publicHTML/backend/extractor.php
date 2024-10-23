@@ -1020,7 +1020,7 @@ function obtenerNotificacionesPaciente(int $idp): array {
 
     global $pdo;
 
-    $sql = "SELECT fecha, hora, idodontologo, asunto, detalle FROM consulta WHERE idpaciente = :idp AND vigente = 'vigente'";
+    $sql = "SELECT fecha, hora, idodontologo, duracion, asunto, detalle FROM consulta WHERE idpaciente = :idp AND vigente = 'vigente'";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':idp', $idp);
 
@@ -1042,6 +1042,7 @@ function obtenerNotificacionesPaciente(int $idp): array {
             $consultaconbooleanos['fecha'] = $consulta['fecha'];
             $consultaconbooleanos['hora'] = $consulta['hora'];
             $consultaconbooleanos['idodontologo'] = $consulta['idodontologo'];
+            $consultaconbooleanos['duracion'] = $consulta['duracion'];
             $consultaconbooleanos['asunto'] = $consulta['asunto'];
 
             $consultasconbooleanos[] = $consultaconbooleanos;
