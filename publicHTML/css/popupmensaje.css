@@ -179,6 +179,11 @@ body {
 
         width: 60% !important;
     }
+
+    .popup-Contenido fieldset > * {
+
+        width: 100%;
+    }
 }
 
 @keyframes moveProgressBar {
