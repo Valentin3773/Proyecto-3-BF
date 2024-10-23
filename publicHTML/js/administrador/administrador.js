@@ -558,7 +558,7 @@ function cargarVistaPacientes() {
 
             loadView(data);
 
-            $('.paciente, .p-contenedor').on('click', function () {
+            $('.paciente, .p-contenedor').off().on('click', function () {
 
                 $('main').empty();
 
@@ -603,6 +603,16 @@ function cargarVistaPacienteDetalle(idp) {
         loadView(contenido);
 
         $.get('vistas/vistasadmin/sidebarpacientes.php', contenido => loadSidebar(contenido));
+        $('.paciente, .p-contenedor').off().on('click', function () {
+
+            $('main').empty();
+
+            $('.paciente').css({ 'text-decoration': 'none' });
+            $(this).css({ 'text-decoration': 'underline' });
+            $('.pacientescontainer #' + $(this).attr('id')).css({ 'text-decoration': 'underline' });
+
+            changeView(() => cargarVistaPacienteDetalle($(this).attr('id')));
+        });
 
         let editar = $('#editarpaciente');
         let guardar = $('#guardarpaciente');

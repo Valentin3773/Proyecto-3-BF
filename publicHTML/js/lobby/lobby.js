@@ -2,9 +2,35 @@ $(() => {
 
     addListeners();
 
+    let calificaravisar = null;
+
     $.get('backend/lobby/getnotificaciones.php', respuesta => {
 
-        console.log(respuesta);
+        calificaravisar = respuesta;
+        console.log(calificaravisar);
+
+        if(calificaravisar.nomolestar == undefined) {
+
+            if(calificaravisar.avisar.length > 0) {
+
+                let meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+                calificaravisar.avisar.forEach(async elemento => {
+                
+                    let hora = elemento.hora.split(':')[0];
+                    let minuto = elemento.hora.split(':')[1];
+
+                    let dia = elemento.fecha.split('-')[2];
+                    let mes = Number(elemento.fecha.split('-')[1]);
+                    let anio = elemento.fecha.split('-')[0];
+                    
+                    let fechaformateada = `${dia} de ${meses[mes - 1]} de ${anio}`;
+                    let $horaformateada = `${hora}:${minuto}`;
+
+                    await createPopup('Nuevo Aviso', `Te recordamos que tienes una consulta para el día ${fechaformateada} a la hora ${$horaformateada}, con el odontólogo ${elemento.nombreo} ${elemento.apellidoo}, por el asunto de: "${elemento.asunto}"`, 35);
+                });
+            }
+        }
     });
 });
 

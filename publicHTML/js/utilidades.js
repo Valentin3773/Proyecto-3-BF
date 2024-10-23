@@ -1,73 +1,100 @@
 $(() => {
 
     $('head').append('<link rel="stylesheet" href="css/popupmensaje.css">');
+
+    window.mostrandoPopup = false;
 });
 
 function createPopup(titulo, contenido, duracion = 5) {
 
-    console.log('Creando Popup');
+    let promesa = new Promise(respuesta => {
 
-    if ($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
+        console.log('Creando Popup');
 
-    $('#div-mensaje-popup').hide();
-    $.get(`vistas/popupmensaje.php ? Contenido=${contenido}&Aviso=${titulo}`, data => {
+        if ($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
 
-        $('.mensaje-Popup').css({ '--progress': '0%', '--duracion': `0s` });
+        $('#div-mensaje-popup').hide();
+        $.get(`vistas/popupmensaje.php ? Contenido=${contenido}&Aviso=${titulo}`, data => {
 
-        $("#div-mensaje-popup").html(data).fadeIn(500);
+            window.mostrandoPopup = true;
 
-        $('.mensaje-Popup').css({ '--progress': '100%', '--duracion': `${duracion}s` });
+            $('.mensaje-Popup').css({ '--progress': '0%', '--duracion': `0s` });
 
-        let timeoutid = setTimeout(() => $("#div-mensaje-popup").fadeOut(500), duracion * 1000);
-        $('#div-mensaje-popup #btnCerrar').focus().on("click", () => {
+            $("#div-mensaje-popup").html(data).fadeIn(500);
 
-            clearTimeout(timeoutid);
-            $("#div-mensaje-popup").fadeOut(500);
-            //$('body').removeClass('blurry');
+            $('.mensaje-Popup').css({ '--progress': '100%', '--duracion': `${duracion}s` });
+
+            let timeoutid = setTimeout(() => {
+                
+                respuesta(true);
+                $("#div-mensaje-popup").fadeOut(500, () => window.mostrandoPopup = false)
+
+            }, duracion * 1000);
+            $('#div-mensaje-popup #btnCerrar').focus().on("click", () => {
+                
+                respuesta(true);
+
+                clearTimeout(timeoutid);
+                $("#div-mensaje-popup").fadeOut(500, () => window.mostrandoPopup = false);
+            });
         });
-
     });
+    return promesa;
 }
 
 function createHeaderPopup(titulo, contenido, accion, duracion = 5) {
 
-    console.log('Creando Popup Redireccionador');
+    let promesa = new Promise(respuesta => {
 
-    if ($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
+        console.log('Creando Popup Redireccionador');
 
-    $('#div-mensaje-popup').hide();
-    $.get("vistas/popupmensaje.php ? Contenido=" + contenido + "&Aviso=" + titulo, data => {
+        if ($("#div-mensaje-popup").length === 0) $('body').append('<div id="div-mensaje-popup"></div>');
 
-        $('.mensaje-Popup').css({ '--progress': '0%', '--duracion': `0s` });
+        $('#div-mensaje-popup').hide();
+        $.get("vistas/popupmensaje.php ? Contenido=" + contenido + "&Aviso=" + titulo, data => {
 
-        $("#div-mensaje-popup").html(data).fadeIn(500);
+            window.mostrandoPopup = true;
 
-        $('.mensaje-Popup').css({ '--progress': '100%', '--duracion': `${duracion}s` });
+            $('.mensaje-Popup').css({ '--progress': '0%', '--duracion': `0s` });
 
-        let timeoutid = setTimeout(() => $("#div-mensaje-popup").fadeOut(500, () => {
+            $("#div-mensaje-popup").html(data).fadeIn(500);
 
-            $("#div-mensaje-popup link").remove();
+            $('.mensaje-Popup').css({ '--progress': '100%', '--duracion': `${duracion}s` });
 
-            if (typeof accion == 'string') window.location.href = accion;
+            let timeoutid = setTimeout(() => $("#div-mensaje-popup").fadeOut(500, () => {
 
-            else if (typeof accion == 'function') accion();
+                respuesta(true);
 
-        }), duracion * 1000);
-
-        $('#div-mensaje-popup #btnCerrar').focus().on("click", () => {
-
-            clearTimeout(timeoutid);
-
-            $("#div-mensaje-popup").fadeOut(500, () => {
+                window.mostrandoPopup = false;
 
                 $("#div-mensaje-popup link").remove();
 
                 if (typeof accion == 'string') window.location.href = accion;
 
                 else if (typeof accion == 'function') accion();
+
+            }), duracion * 1000);
+
+            $('#div-mensaje-popup #btnCerrar').focus().on("click", () => {
+
+                clearTimeout(timeoutid);
+
+                $("#div-mensaje-popup").fadeOut(500, () => {
+
+                    window.mostrandoPopup = false;
+
+                    respuesta(true);
+
+                    $("#div-mensaje-popup link").remove();
+
+                    if (typeof accion == 'string') window.location.href = accion;
+
+                    else if (typeof accion == 'function') accion();
+                });
             });
         });
     });
+    return promesa;
 }
 
 function createConfirmPopup(titulo, contenido, botonestxt = ['Cancelar', 'Confirmar']) {
@@ -81,24 +108,25 @@ function createConfirmPopup(titulo, contenido, botonestxt = ['Cancelar', 'Confir
         $('#div-mensaje-popup').hide();
         $.get(`vistas/popupconfirmar.php ? Contenido=${contenido}&Aviso=${titulo}&txtcancelar=${botonestxt[0]}&txtconfirmar=${botonestxt[1]}`, data => {
 
+            window.mostrandoPopup = true;
+
             $("#div-mensaje-popup").html(data).fadeIn(500);
             $('#div-mensaje-popup #btnCancelar').focus().on("click", () => {
 
-                $("#div-mensaje-popup").fadeOut(500);
+                $("#div-mensaje-popup").fadeOut(500, () => window.mostrandoPopup = false);
                 $("#div-mensaje-popup link").remove();
 
                 respuesta(false);
             });
             $('#div-mensaje-popup #btnConfirmar').on("click", () => {
 
-                $("#div-mensaje-popup").fadeOut(500);
+                $("#div-mensaje-popup").fadeOut(500, () => window.mostrandoPopup = false);
                 $("#div-mensaje-popup link").remove();
 
                 respuesta(true);
             });
         });
     });
-
     return promesa;
 }
 
@@ -113,6 +141,8 @@ function createInputPopup(titulo, placeholder, botonestxt = ['Cancelar', 'Confir
         $('#div-mensaje-popup').hide();
         $.get(`vistas/popupingresar.php ? placeholder=${placeholder}&Aviso=${titulo}&txtcancelar=${botonestxt[0]}&txtconfirmar=${botonestxt[1]}`, data => {
 
+            window.mostrandoPopup = true;
+
             $("#div-mensaje-popup").html(data).fadeIn(500);
             $('#div-mensaje-popup #popup-input').on('input', function () {
 
@@ -122,14 +152,14 @@ function createInputPopup(titulo, placeholder, botonestxt = ['Cancelar', 'Confir
             })
             $('#div-mensaje-popup #btnCancelar').focus().on("click", () => {
 
-                $("#div-mensaje-popup").fadeOut(500);
+                $("#div-mensaje-popup").fadeOut(500, () => window.mostrandoPopup = false);
                 $("#div-mensaje-popup link").remove();
 
                 respuesta('');
             });
             $('#div-mensaje-popup #btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, .4)' }).prop('disabled', true).on("click", () => {
 
-                $("#div-mensaje-popup").fadeOut(500);
+                $("#div-mensaje-popup").fadeOut(500, () => window.mostrandoPopup = false);
                 $("#div-mensaje-popup link").remove();
 
                 let texto = $('#popup-input').val();
@@ -138,7 +168,6 @@ function createInputPopup(titulo, placeholder, botonestxt = ['Cancelar', 'Confir
             });
         });
     });
-
     return promesa;
 }
 
@@ -152,6 +181,8 @@ function createFeedbackPopup(titulo, contenido, datosconsulta, botonestxt = ['Ca
 
         $('#div-mensaje-popup').hide();
         $.get(`vistas/popupcalificar.php ? Contenido=${contenido}&Aviso=${titulo}&txtcancelar=${botonestxt[0]}&txtconfirmar=${botonestxt[1]}`, data => {
+            
+            window.mostrandoPopup = true;
 
             let estrellas = null;
 
@@ -187,14 +218,14 @@ function createFeedbackPopup(titulo, contenido, datosconsulta, botonestxt = ['Ca
             });
             $('#div-mensaje-popup #btnCancelar').focus().on("click", () => {
 
-                $("#div-mensaje-popup").fadeOut(500);
+                $("#div-mensaje-popup").fadeOut(500, () => window.mostrandoPopup = false);
                 $("#div-mensaje-popup link").remove();
 
                 respuesta(null);
             });
             $('#div-mensaje-popup #btnConfirmar').css({ 'background-color': 'rgb(10, 240, 171, .4)' }).prop('disabled', true).on("click", () => {
 
-                $("#div-mensaje-popup").fadeOut(500);
+                $("#div-mensaje-popup").fadeOut(500, () => window.mostrandoPopup = false);
                 $("#div-mensaje-popup link").remove();
 
                 let msg = $('#div-mensaje-popup #mensaje').val();
@@ -212,7 +243,6 @@ function createFeedbackPopup(titulo, contenido, datosconsulta, botonestxt = ['Ca
             });
         });
     });
-
     return promesa;
 }
 
