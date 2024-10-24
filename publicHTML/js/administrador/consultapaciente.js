@@ -39,7 +39,6 @@ function funcionModificar() {
     $('#duracion-CP').removeAttr('disabled');
     $('#fecha-CP').removeAttr('disabled');
     $('#resumen-CP').removeAttr('disabled');
-
 }
 
 function funcionCancelar() {
@@ -88,10 +87,12 @@ function funcionGuardar() {
     $('#fecha-CP').prop('disabled', true);
     $('#resumen-CP').prop('disabled', true);
 
-    if(iniData['asunto'] == $('#asunto-CP').val() && iniData['horaV'] == $('#hora-CP option:selected').html() && iniData['duracion'] == $('#duracion-CP').val() && iniData['fechaV'] == $('#fecha-CP option:selected').html() && iniData['resumen'] ==$('#resumen-CP').val()){
-        createPopup('Atención','No se han encontrado cambios para guardar');
-    } else {
-        
+    if (iniData['asunto'] == $('#asunto-CP').val() && iniData['horaV'] == $('#hora-CP option:selected').html() && iniData['duracion'] == $('#duracion-CP').val() && iniData['fechaV'] == $('#fecha-CP option:selected').html() && iniData['resumen'] == $('#resumen-CP').val()) {
+
+        createPopup('Atención', 'No se han encontrado cambios para guardar');
+    }
+    else {
+
         const url = 'backend/admin/updateConsultaPaciente.php';
         const data = {
 
@@ -114,17 +115,16 @@ function funcionGuardar() {
             contentType: 'application/json',
             success: response => {
 
-                if (response.error === undefined) createPopup("Nuevo aviso",response);
+                if (response.error === undefined) createPopup("Nuevo aviso", response);
 
-                else createPopup("Nuevo aviso",response);
+                else createPopup("Nuevo aviso", response);
             },
             error: (jqXHR, estado, outputError) => {
 
-                console.error("Error al procesar la solicitud: " + outputError +jqXHR +estado);
+                console.error("Error al procesar la solicitud: " + outputError + jqXHR + estado);
             }
         });
     }
-
 }
 
 async function functionEliminar() {
@@ -133,29 +133,31 @@ async function functionEliminar() {
 
     const url = 'backend/admin/deleteConsultaPaciente.php';
     const data = {
+
         fechaV: $('.contentFecha #fechaV').html(),
         horaV: $('.contentHora #horaV').html()
     };
 
-        console.log("Cancelado");
+    console.log("Cancelado");
 
-        $('#btnCancelar').css("opacity", 0.5);
-        $('#btnGuardar').css("opacity", 0.5);
-        $('#btnEliminar').css("opacity", 0.5);
+    $('#btnCancelar').css("opacity", 0.5);
+    $('#btnGuardar').css("opacity", 0.5);
+    $('#btnEliminar').css("opacity", 0.5);
 
-        $('#btnModificar').css("opacity", 1);
-        $('#btnModificar').removeAttr('disabled');
+    $('#btnModificar').css("opacity", 1);
+    $('#btnModificar').removeAttr('disabled');
 
-        $('#btnCancelar').prop('disabled', true);
-        $('#btnGuardar').prop('disabled', true);
-        $('#btnEliminar').prop("disabled", true);
-        $('#asunto-CP').prop('disabled', true);
-        $('#hora-CP').prop('disabled', true);
-        $('#duracion-CP').prop('disabled', true);
-        $('#fecha-CP').prop('disabled', true);
-        $('#resumen-CP').prop('disabled', true);
+    $('#btnCancelar').prop('disabled', true);
+    $('#btnGuardar').prop('disabled', true);
+    $('#btnEliminar').prop("disabled", true);
+    $('#asunto-CP').prop('disabled', true);
+    $('#hora-CP').prop('disabled', true);
+    $('#duracion-CP').prop('disabled', true);
+    $('#fecha-CP').prop('disabled', true);
+    $('#resumen-CP').prop('disabled', true);
 
-    if (await createConfirmPopup("Atención","Realmente desea eliminar esta consulta")) {
+    if (await createConfirmPopup("Atención", "Realmente desea eliminar esta consulta")) {
+
         $.ajax({
 
             type: "POST",
@@ -163,19 +165,15 @@ async function functionEliminar() {
             data: JSON.stringify(data),
             contentType: 'application/json',
             success: function (response) {
-                if (response.error === undefined) {
-                    createHeaderPopup("Nuevo aviso","Se elimino la consulta con exito","administrador.php");
-                } 
-                else {
 
-                    createPopup("Nuevo aviso",response);
-                }
+                if (response.error === undefined) createHeaderPopup("Nuevo aviso", "Se elimino la consulta con exito", "administrador.php");
+                
+                else createPopup("Nuevo aviso", response);
             },
             error: function (jqXHR, estado, outputError) {
 
-                console.error("Error al procesar la solicitud: " + outputError +jqXHR +estado);
+                console.error("Error al procesar la solicitud: " + outputError + jqXHR + estado);
             }
         });
-        
-    }   
+    }
 }

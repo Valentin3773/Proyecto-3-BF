@@ -37,6 +37,7 @@ reloadSession();
     <!-- CSS -->
     <link id="seccionescss" rel="stylesheet" href="">
     <link rel="stylesheet" href="css/administrador/adminheader.css">
+    <link rel="stylesheet" href="css/administrador/sidebar.css">
 
     <!-- JS -->
     <script src="js/preloader.js"></script>

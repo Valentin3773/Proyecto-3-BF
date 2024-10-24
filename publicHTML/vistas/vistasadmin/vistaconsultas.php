@@ -42,10 +42,7 @@ if (isset($_GET['idpaciente'])) {
 
     if ($stmt->execute() && $stmt->rowCount() > 0) {
 
-        while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-            $consultasPrevias[] = $tupla;
-        }
+        $consultasPrevias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     $consulta = "SELECT ADDTIME(hora, SEC_TO_TIME(duracion * 60)) as horafinalizacion, asunto, fecha, hora FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND vigente = 'vigente' AND CURDATE() = fecha AND CURTIME() BETWEEN hora AND ADDTIME(hora, SEC_TO_TIME(duracion * 60)) ORDER BY fecha ASC, hora ASC";
@@ -182,7 +179,7 @@ if (isset($_GET['idpaciente'])):
 
         <?php
 
-        foreach ($consultasActuales as $consultaActual) {
+        foreach ($consultasActuales as &$consultaActual) {
 
             $asuntoA = $consultaActual['asunto'];
             $horaA = $consultaActual['horafinalizacion'];
@@ -233,7 +230,7 @@ if (!empty($consultasFuturas)):
 
         <?php
 
-        foreach ($consultasFuturas as $consultasFutura) {
+        foreach ($consultasFuturas as &$consultasFutura) {
 
             $asuntof = $consultasFutura['asunto'];
             $fechaf = $consultasFutura['fecha'];
@@ -281,28 +278,29 @@ if (!empty($consultasPrevias)):
 
         <?php
 
-        foreach ($consultasPrevias as $consultaPrevia) {
+        foreach ($consultasPrevias as &$consultaPrevia) {
 
             $asuntoP = $consultaPrevia['asunto'];
             $horaP = $consultaPrevia['hora'];
             $fechaP = $consultaPrevia['fecha'];
 
             echo '
-        <div class="consulta" data-fecha=' . $fechaP . ' data-hora=' . $horaP . '>
-            
-            <div class="asuntocontainer">
-                <span id="asunto">' . $asuntoP . '</span>
-            </div>
-            <div class="fechahorawrapper">
-                <div class="fechacontainer">
-                    <span id="fecha">' . $fechaP . '</span>
+            <div class="consulta" data-fecha=' . $fechaP . ' data-hora=' . $horaP . '>
+                
+                <div class="asuntocontainer">
+                    <span id="asunto">' . $asuntoP . '</span>
                 </div>
-                <div class="horacontainer">
-                    <span id="hora">' . $horaP . '</span>
+                <div class="fechahorawrapper">
+                    <div class="fechacontainer">
+                        <span id="fecha">' . $fechaP . '</span>
+                    </div>
+                    <div class="horacontainer">
+                        <span id="hora">' . $horaP . '</span>
+                    </div>
                 </div>
-            </div>
 
-        </div>';
+            </div>
+            ';
         }
 
         ?>

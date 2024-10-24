@@ -956,7 +956,8 @@ function archivarConsulta(string $fecha, string $hora, int $ido): bool
     }
 }
 
-function odontologoHabilitado($idp, $ido): bool {
+function odontologoHabilitado($idp, $ido): bool
+{
 
     global $pdo;
     global $defaults;
@@ -971,7 +972,7 @@ function odontologoHabilitado($idp, $ido): bool {
 
     $fechas = getDatesFromRange($fechaActual, $fechaFinal);
 
-    foreach ($fechas as $fecha) if(fechaDisponible($fecha, $ido)) $habilitado1 = true;
+    foreach ($fechas as $fecha) if (fechaDisponible($fecha, $ido)) $habilitado1 = true;
 
     $sql = "SELECT * FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND vigente = 'vigente'";
 
@@ -990,13 +991,12 @@ function odontologoHabilitado($idp, $ido): bool {
             foreach ($consultas as $consulta) if (diferenciaFechas($consulta['fecha'], $fechaActual) >= $defaults['cooldownreserva']) $habilitado2 = true;
 
             return $habilitado1 && $habilitado2;
-        } 
-        else return $habilitado1;
-    } 
-    else return false;
+        } else return $habilitado1;
+    } else return false;
 }
 
-function reservaHabilitada($idp): bool {
+function reservaHabilitada($idp): bool
+{
 
     global $pdo;
 
@@ -1009,14 +1009,14 @@ function reservaHabilitada($idp): bool {
 
         $habilitado = false;
 
-        foreach ($idsodontologo as $ido) if(odontologoHabilitado($idp, $ido)) $habilitado = true;
+        foreach ($idsodontologo as $ido) if (odontologoHabilitado($idp, $ido)) $habilitado = true;
 
         return $habilitado;
-    } 
-    else return false;
+    } else return false;
 }
 
-function obtenerNotificacionesPaciente(int $idp): array {
+function obtenerNotificacionesPaciente(int $idp): array
+{
 
     global $pdo;
 
@@ -1024,18 +1024,18 @@ function obtenerNotificacionesPaciente(int $idp): array {
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':idp', $idp);
 
-    if($stmt->execute() && $stmt->rowCount() > 0) {
+    if ($stmt->execute() && $stmt->rowCount() > 0) {
 
         $consultasconbooleanos = [];
 
         $consultas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach($consultas as $consulta) {
+        foreach ($consultas as $consulta) {
 
             $booleanosconsulta = [];
 
-            foreach(explode(';', $consulta['detalle']) as $cada) $booleanosconsulta[] = $cada == '1';
-            
+            foreach (explode(';', $consulta['detalle']) as $cada) $booleanosconsulta[] = $cada == '1';
+
             $consultaconbooleanos = [];
 
             $consultaconbooleanos['booleanos'] = $booleanosconsulta;
@@ -1049,19 +1049,53 @@ function obtenerNotificacionesPaciente(int $idp): array {
         }
         return $consultasconbooleanos;
     }
-    return [];
+    else return [];
 }
 
-function modificarBooleanosNotificacionesConsulta(string $fecha, string $hora, int $ido, array $booleanos): bool {
+function obtenerNotificacionesConsulta(string $fecha, string $hora, int $ido): array
+{
 
     global $pdo;
 
-    if(sizeof($booleanos) != 4) return false;
+    $sql = "SELECT fecha, hora, idodontologo, duracion, asunto, detalle FROM consulta WHERE fecha = :fecha AND hora = :hora AND idodontologo = :ido AND vigente = 'vigente'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':fecha', $fecha);
+    $stmt->bindParam(':hora', $hora);
+    $stmt->bindParam(':ido', $ido);
+
+    if ($stmt->execute() && $stmt->rowCount() == 1) {
+
+        $consulta = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $booleanosconsulta = [];
+
+        foreach (explode(';', $consulta['detalle']) as $cada) $booleanosconsulta[] = $cada == '1';
+
+        $consultaconbooleanos = [];
+
+        $consultaconbooleanos['booleanos'] = $booleanosconsulta;
+        $consultaconbooleanos['fecha'] = $consulta['fecha'];
+        $consultaconbooleanos['hora'] = $consulta['hora'];
+        $consultaconbooleanos['idodontologo'] = $consulta['idodontologo'];
+        $consultaconbooleanos['duracion'] = $consulta['duracion'];
+        $consultaconbooleanos['asunto'] = $consulta['asunto'];
+
+        return $consultaconbooleanos;
+    }
+    else return [];
+}
+
+function modificarBooleanosNotificacionesConsulta(string $fecha, string $hora, int $ido, array $booleanos): bool
+{
+
+    global $pdo;
+
+    if (sizeof($booleanos) != 4) return false;
 
     $stringbooleanos = "";
 
-    foreach($booleanos as $booleano) $stringbooleanos .= $booleano ? '1;' : '0;';
-    
+    foreach ($booleanos as $booleano) $stringbooleanos .= $booleano ? '1;' : '0;';
+
     $stringbooleanos = substr($stringbooleanos, 0, -1);
 
     $sql = "UPDATE consulta SET detalle = :stringbooleanos WHERE fecha = :fecha AND hora = :hora AND idodontologo = :ido AND vigente = 'vigente'";
@@ -1072,7 +1106,7 @@ function modificarBooleanosNotificacionesConsulta(string $fecha, string $hora, i
     $stmt->bindParam(':ido', $ido);
     $stmt->bindParam(':stringbooleanos', $stringbooleanos);
 
-    if($stmt->execute() && $stmt->rowCount() > 0) return true;
+    if ($stmt->execute() && $stmt->rowCount() > 0) return true;
 
     else return false;
 }

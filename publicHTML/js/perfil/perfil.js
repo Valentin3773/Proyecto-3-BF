@@ -1,6 +1,7 @@
 $(() => {
 
-    $('#miperfil, #sidebarmobile #miperfil, #headermobile #logocontainer > img').on('click', () => changeView(cargarVistaPerfil));
+    $('#headermobile #logocontainer > img').on('click', () => changePage('index.php'));
+    $('#miperfil, #sidebarmobile #miperfil').on('click', () => changeView(cargarVistaPerfil));
     $('#misconsultas, #sidebarmobile #misconsultas').on('click', () => changeView(cargarVistaConsultas));
     $('#horarios, #sidebarmobile #horarios').on('click', () => changeView(cargarVistaHorarios));
     $('#inactividades, #sidebarmobile #inactividades').on('click', () => changeView(cargarVistaInactividades));
@@ -69,7 +70,7 @@ function cargarVistaPerfil() {
         integrarEventos();
     });
 
-    if($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
+    if ($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
 
     $('#sidebar #btnsuperiores button, #sidebarmobile #btnsuperiores button').css({ 'text-decoration': 'none' });
     $('#miperfil, #sidebarmobile #miperfil').css({ 'text-decoration': 'underline' });
@@ -124,7 +125,7 @@ function integrarEventos() {
                 // Mostrar la imagen
                 let reader = new FileReader();
                 reader.onload = e => $('#fotoperfil').prop('src', e.target.result);
-                
+
                 reader.readAsDataURL(file);
 
                 // Parseo de la imagen
@@ -143,11 +144,11 @@ function integrarEventos() {
                         if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, () => changeView(cargarVistaPerfil));
 
                         else createPopup('Nuevo Aviso', response.error);
-                    }, 
+                    },
                     error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: 3" + outputError + estado + jqXHR)
                 });
             }
-        } 
+        }
         catch (error) {
 
             console.error(error);
@@ -180,7 +181,7 @@ function cargarVistaConsultas() {
         loadView(contenido);
     });
 
-    if($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
+    if ($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
 
     $('#sidebar #btnsuperiores button, #sidebarmobile #btnsuperiores button').css({ 'text-decoration': 'none' });
     $('#misconsultas, #sidebarmobile #misconsultas').css({ 'text-decoration': 'underline' });
@@ -245,7 +246,7 @@ function cargarVistaHorarios() {
         });
     });
 
-    if($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
+    if ($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
 
     $('#sidebar #btnsuperiores button, #sidebarmobile #btnsuperiores button').css({ 'text-decoration': 'none' });
     $('#horarios, #sidebarmobile #horarios').css({ 'text-decoration': 'underline' });
@@ -310,7 +311,7 @@ function cargarVistaInactividades() {
         });
     });
 
-    if($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
+    if ($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
 
     $('#sidebar #btnsuperiores button, #sidebarmobile #btnsuperiores button').css({ 'text-decoration': 'none' });
     $('#inactividades, #sidebarmobile #inactividades').css({ 'text-decoration': 'underline' });
@@ -327,75 +328,67 @@ function cargarVistaSeguridad() {
         $('#cambiarpass').on('click', async function (e) {
 
             e.preventDefault();
-            if(await createConfirmPopup('Confirmación', '¿Estás seguro de cambiar tu contraseña?', ['No', 'Sí'])) cambiarContrasenia($('#oldpass').val(), $('#newpass').val(), $('#newpassagain').val());
+            if (await createConfirmPopup('Confirmación', '¿Estás seguro de cambiar tu contraseña?', ['No', 'Sí'])) cambiarContrasenia($('#oldpass').val(), $('#newpass').val(), $('#newpassagain').val());
         });
-        $('#nomolestar').on('click', async evt => {
+        $('#nomolestar').on('click', async () => {
 
-            evt.preventDefault();
-            
-            if(true) {
+            if ($('#nomolestar').is(':checked')) $.ajax({
 
-                if ($('#nomolestar').is(':checked')) $.ajax({
+                type: "POST",
+                url: "backend/perfil/cambiarnomolestar.php",
+                data: JSON.stringify({ nomolestar: false }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (response) {
 
-                    type: "POST",
-                    url: "backend/perfil/cambiarnomolestar.php",
-                    data: JSON.stringify({ nomolestar: false }),
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    success: function (response) {
+                    if (response.exito.length > 0) createPopup('Nuevo Aviso', response.exito);
+                    else createPopup('Nuevo Aviso', response.error);
+                },
+                error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
+            });
 
-                        if (response.exito.length > 0) createPopup('Nuevo Aviso', response.exito);
-                        else createPopup('Nuevo Aviso', response.error);
-                    },
-                    error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
-                });
+            else $.ajax({
 
-                else $.ajax({
+                type: "POST",
+                url: "backend/perfil/cambiarnomolestar.php",
+                data: JSON.stringify({ nomolestar: true }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (response) {
 
-                    type: "POST",
-                    url: "backend/perfil/cambiarnomolestar.php",
-                    data: JSON.stringify({ nomolestar: true }),
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    success: function (response) {
+                    if (response.exito.length > 0) createPopup('Nuevo Aviso', response.exito);
+                    else createPopup('Nuevo Aviso', response.error);
+                },
+                error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
+            });
 
-                        if (response.exito.length > 0) createPopup('Nuevo Aviso', response.exito);
-                        else createPopup('Nuevo Aviso', response.error);
-                    },
-                    error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
-                });
-
-                if($('#nomolestar').is(':checked')) $('#nomolestar').prop('checked', false);
-
-                else $('#nomolestar').prop('checked', true);
-            }
         });
 
-        $('#verificaremail').on('click', async function() {
-            
-            if(await createConfirmPopup('Confirmación', '¿Estas seguro de enviar un correo de verificación?', ['No', 'Sí'])) {
+        $('#verificaremail').on('click', async function () {
+
+            if (await createConfirmPopup('Confirmación', '¿Estas seguro de enviar un correo de verificación?', ['No', 'Sí'])) {
 
                 $(this).prop('disabled', true).css({ 'background-color': 'rgb(0, 224, 157, .4)' }).html('<i class="fas fa-spinner fa-pulse"></i>');
 
                 $.ajax({
 
-                type: "POST",
-                url: "backend/login/enviaremailverificador.php",
-                success: function (response) {
-                    
-                    $('#verificaremail').prop('disabled', false).css({ 'background-color': 'rgb(0, 224, 157, 1)' }).html('Verificar email');
+                    type: "POST",
+                    url: "backend/login/enviaremailverificador.php",
+                    success: function (response) {
 
-                    if (response.exito.length > 0) createPopup('Nuevo Aviso', response.exito);
-                    else createPopup('Nuevo Aviso', response.error);
-                },
-                error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError) 
+                        $('#verificaremail').prop('disabled', false).css({ 'background-color': 'rgb(0, 224, 157, 1)' }).html('Verificar email');
+
+                        if (response.exito.length > 0) createPopup('Nuevo Aviso', response.exito);
+                        else createPopup('Nuevo Aviso', response.error);
+                    },
+                    error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
 
                 });
             }
         });
     });
 
-    if($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
+    if ($('#sidebarmobile').hasClass('visible')) desplegarSidebarMobile();
 
     $('#sidebar #btnsuperiores button, #sidebarmobile #btnsuperiores button').css({ 'text-decoration': 'none' });
     $('#seguridad, #sidebarmobile #seguridad').css({ 'text-decoration': 'underline' });
@@ -610,7 +603,7 @@ function cargarVistaAgregarInactividad() {
                     success: function (response) {
 
                         fechasPermitidasFinalizacionInactividad = response.fechasDisponibles;
-       
+
                         $('input#fechafinalizacion').prop('disabled', false).val('');
                     },
                     error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
@@ -737,7 +730,7 @@ function desplegarSidebarMobile() {
 
     let sidebarmobile = $('#sidebarmobile');
 
-    if(sidebarmobile.hasClass('visible')) sidebarmobile.removeClass('visible').addClass('invisible');
+    if (sidebarmobile.hasClass('visible')) sidebarmobile.removeClass('visible').addClass('invisible');
 
     else sidebarmobile.removeClass('invisible').addClass('visible');
 }
@@ -745,7 +738,7 @@ function desplegarSidebarMobile() {
 function changeView(vista) {
 
     $('main').fadeOut(200, vista);
-    $('main')[0].scrollTo({top: 0, behavior: 'smooth'});
+    $('main')[0].scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function loadView(contenido) {

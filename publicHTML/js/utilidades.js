@@ -1,11 +1,14 @@
 $(() => {
 
+    $('body').css({ 'opacity': 1 });
     $('head').append('<link rel="stylesheet" href="css/popupmensaje.css">');
 
     window.mostrandoPopup = false;
 });
 
 function createPopup(titulo, contenido, duracion = 5) {
+    
+    $('#div-mensaje-popup').remove();
 
     let promesa = new Promise(respuesta => {
 
@@ -43,6 +46,8 @@ function createPopup(titulo, contenido, duracion = 5) {
 }
 
 function createHeaderPopup(titulo, contenido, accion, duracion = 5) {
+
+    $('#div-mensaje-popup').remove();
 
     let promesa = new Promise(respuesta => {
 
@@ -237,6 +242,7 @@ function createFeedbackPopup(titulo, contenido, datosconsulta, botonestxt = ['Ca
                     fecha: datosconsulta.fecha,
                     hora: datosconsulta.hora,
                     ido: datosconsulta.ido,
+                    asunto: contenido,
                     mensaje: msg,
                     puntaje: estrellas
                 });
@@ -310,4 +316,10 @@ function deepEqual(obj1, obj2) {
     for (let key of keys1) if (!keys2.includes(key) || !deepEqual(obj1[key], obj2[key])) return false;
 
     return true;
+}
+
+function changePage(pagina) {
+
+    $('body').css({ 'opacity': 0 });
+    setTimeout(() => window.location.href = pagina, 500)
 }

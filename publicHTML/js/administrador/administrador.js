@@ -32,130 +32,138 @@ function addAdminListeners() {
 
     $('#btnconsultas, nav.mobile #btnconsultas').on('click', () => {
 
-        if(!cargando) changeView(cargarVistaConsultas)
+        if (!cargando) changeView(cargarVistaConsultaCalendario)
     });
     $('#btnpacientes, nav.mobile #btnpacientes').on('click', () => {
-        
-        if(!cargando) changeView(cargarVistaPacientes)
+
+        if (!cargando) changeView(cargarVistaPacientes)
     });
     $('#btnservicios, nav.mobile #btnservicios').on('click', () => {
 
-        if(!cargando) changeView(cargarVistaServicios)
+        if (!cargando) changeView(cargarVistaServicios)
     });
 
     $('#logo').on('click', () => {
-        
-        if(!cargando) resetAdmin();
+
+        if (!cargando) changePage('index.php');
     });
 }
 
-function cargarVistaConsultas() {
+function cargarVistaConsultaCalendario() {
 
     let mesc;
     let yearc;
 
     $.get("vistas/vistasadmin/sidebarconsultas.php", data => {
 
-        loadSidebar(data);
-
-        $.get('vistas/vistasadmin/vistaconsultacalendario.php', data => {
-
-            loadView(data);
-
-            $.get('backend/admin/getFechaHoraActual.php', respuesta => {
-
-                mesc = new Date(respuesta.fechaActual).getMonth();
-                yearc = new Date(respuesta.fechaActual).getFullYear();
-
-                let fechasDisponibles = respuesta.fechasDisponibles.map(objeto => objeto.fecha)
-
-                generarCalendarioComun(respuesta.fechaActual, mesc, yearc, fechasDisponibles);
-
-                $('#calendario .arrowright').on('click', () => {
-
-                    if (mesc < 11) mesc++;
-
-                    else if (new Date(respuesta.fechaActual).getFullYear() + 5 > yearc) {
-
-                        mesc = 0;
-                        yearc++;
-                    }
-
-                    generarCalendarioComun(respuesta.fechaActual, mesc, yearc, fechasDisponibles);
-                    addCalendarioListeners();
-                });
-                $('#calendario .arrowleft').on('click', () => {
-
-                    if (mesc > 0) mesc--;
-
-                    else if (new Date(respuesta.fechaActual).getFullYear() - 5 < yearc) {
-
-                        mesc = 11;
-                        yearc--;
-                    }
-                    generarCalendarioComun(respuesta.fechaActual, mesc, yearc, fechasDisponibles);
-                    addCalendarioListeners();
-                });
-                addCalendarioListeners();
-            });
-
-            $('select#verpor').on('change', addCalendarioListeners);
-        });
-
-        console.log("Cargando vista de 'Consultas'");
+        loadSidebar(data)
 
         $('.pacientec').on('click', function () {
 
-            if(!cargando) {
-
-                $('.pacientec, .paciente').css({ 'text-decoration': 'none' });
-                $(this).css({ 'text-decoration': 'underline' });
-
-                let url = 'vistas/vistasadmin/vistaconsultas.php?idpaciente=' + $(this).attr('id');
-
-                changeView(() => $.get(url, data => {
-
-                    loadView(data);
-
-                    slideActionBar(true);
-
-                    $('.consulta').on('click', function (e) {
-
-                        if(!cargando) {
-
-                            e.preventDefault();
-
-                            const fecha = $(this).attr('data-fecha');
-                            const hora = $(this).attr('data-hora');
-
-                            $('main').html('');
-
-                            let ventanaconsultapaciente = 'vistas/vistasadmin/vistaconsultapaciente.php?hora=' + hora + '&fecha=' + fecha;
-
-                            $.get(ventanaconsultapaciente, ventana => {
-
-                                $('main').html(ventana);
-
-                                slideActionBar(false);
-                            });
-                        }
-                    });
-                }));
-            }
+            if (!cargando) changeView(() => cargarVistaConsultasPaciente($(this).attr('id')));
         });
+    });
 
-        slideActionBar(true);
+    $.get('vistas/vistasadmin/vistaconsultacalendario.php', data => {
 
-        $('#titactionbar').html('Agendar Consulta');
-        $('#agregar').off().on('click', () => {
-            
-            if(!cargando) $('main').fadeOut(300, cargarVistaAgregarConsulta)
+        loadView(data);
+
+        $.get('backend/admin/getFechaHoraActual.php', respuesta => {
+
+            mesc = new Date(respuesta.fechaActual).getMonth();
+            yearc = new Date(respuesta.fechaActual).getFullYear();
+
+            let fechasDisponibles = respuesta.fechasDisponibles.map(objeto => objeto.fecha)
+
+            generarCalendarioComun(respuesta.fechaActual, mesc, yearc, fechasDisponibles);
+
+            $('#calendario .arrowright').on('click', () => {
+
+                if (mesc < 11) mesc++;
+
+                else if (new Date(respuesta.fechaActual).getFullYear() + 5 > yearc) {
+
+                    mesc = 0;
+                    yearc++;
+                }
+                generarCalendarioComun(respuesta.fechaActual, mesc, yearc, fechasDisponibles);
+                addCalendarioListeners();
+            });
+            $('#calendario .arrowleft').on('click', () => {
+
+                if (mesc > 0) mesc--;
+
+                else if (new Date(respuesta.fechaActual).getFullYear() - 5 < yearc) {
+
+                    mesc = 11;
+                    yearc--;
+                }
+                generarCalendarioComun(respuesta.fechaActual, mesc, yearc, fechasDisponibles);
+                addCalendarioListeners();
+            });
+            addCalendarioListeners();
         });
+        $('select#verpor').on('change', addCalendarioListeners);
+    });
+
+    console.log("Cargando vista de 'Consultas'");
+
+    slideActionBar(true);
+
+    $('#titactionbar').html('Agendar Consulta');
+    $('#agregar').off().on('click', () => {
+
+        if (!cargando) $('main').fadeOut(300, cargarVistaAgregarConsulta)
     });
 
     $('#seccionescss').attr('href', 'css/administrador/consultas.css');
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnconsultas, nav.mobile #btnconsultas').css({ 'text-decoration': 'underline' });
+}
+
+function cargarVistaConsultasPaciente(idp) {
+
+    $('.pacientec, .paciente').css({ 'text-decoration': 'none' });
+    $(this).css({ 'text-decoration': 'underline' });
+
+    $.get("vistas/vistasadmin/sidebarconsultas.php", data => {
+
+        loadSidebar(data)
+
+        $('.pacientec').on('click', function () {
+
+            if (!cargando) changeView(() => cargarVistaConsultasPaciente($(this).attr('id')));
+        });
+    });
+
+    let url = 'vistas/vistasadmin/vistaconsultas.php?idpaciente=' + idp;
+
+    $.get(url, data => {
+
+        loadView(data);
+
+        $('.consulta').on('click', function (e) {
+
+            const fecha = $(this).attr('data-fecha');
+            const hora = $(this).attr('data-hora');
+
+            changeView(() => cargarVistaConsultaDetalle(fecha, hora));
+        });
+    });
+}
+
+function cargarVistaConsultaDetalle(fecha, hora) {
+
+    let ventanaconsultapaciente = 'vistas/vistasadmin/vistaconsultapaciente.php?hora=' + hora + '&fecha=' + fecha;
+
+    $.get(ventanaconsultapaciente, ventana => {
+
+        loadView(ventana);
+
+        loadSidebar('');
+
+        slideActionBar(false);
+    });
 }
 
 function addCalendarioListeners() {
@@ -173,33 +181,28 @@ function addCalendarioListeners() {
 
             let fecha = new Date($(this).attr('data-year'), $(this).attr('data-mes'), $(this).attr('data-dia'));
 
-            // console.log(fecha);
-
             let url = `vistas/vistasadmin/vistaconsultas.php?anio=${fecha.getFullYear()}&mes=${Number(fecha.getMonth()) + 1}&dia=${fecha.getDate()}`;
 
-            // console.log(url);
-
             changeView(() => $.get(url, contenido => {
+
+                $.get("vistas/vistasadmin/sidebarconsultas.php", data => {
+
+                    loadSidebar(data)
+            
+                    $('.pacientec').on('click', function () {
+            
+                        if (!cargando) changeView(() => cargarVistaConsultasPaciente($(this).attr('id')));
+                    });
+                });
 
                 loadView(contenido);
 
                 $('.consulta').on('click', function (e) {
 
-                    e.preventDefault();
-
                     const fecha = $(this).attr('data-fecha');
                     const hora = $(this).attr('data-hora');
 
-                    $('main').empty();
-
-                    let ventanaconsultapaciente = 'vistas/vistasadmin/vistaconsultapaciente.php?hora=' + hora + '&fecha=' + fecha;
-
-                    $.get(ventanaconsultapaciente, ventana => {
-
-                        $('main').html(ventana);
-
-                        slideActionBar(false);
-                    });
+                    changeView(() => cargarVistaConsultaDetalle(fecha, hora));
                 });
             }));
         });
@@ -214,8 +217,6 @@ function addCalendarioListeners() {
 
             let unaFecha = `${unDia.attr('data-year')}-${Number(unDia.attr('data-mes')) + 1}-${unDia.attr('data-dia')}`;
 
-            console.log(unaFecha);
-
             let fechasSemana = getWeekDates(unaFecha);
 
             fecha1 = fechasSemana[0]; // Primer fecha de la semana
@@ -224,33 +225,28 @@ function addCalendarioListeners() {
             fecha1 = `${fecha1.getFullYear()}-${Number(fecha1.getMonth()) + 1}-${fecha1.getDate()}`;
             fecha2 = `${fecha2.getFullYear()}-${Number(fecha2.getMonth()) + 1}-${fecha2.getDate()}`;
 
-            console.log(fechasSemana);
-
             let url = `vistas/vistasadmin/vistaconsultas.php?fecha1=${fecha1}&fecha2=${fecha2}`;
 
-            // console.log(url);
-
             changeView(() => $.get(url, contenido => {
+
+                $.get("vistas/vistasadmin/sidebarconsultas.php", data => {
+
+                    loadSidebar(data)
+            
+                    $('.pacientec').on('click', function () {
+            
+                        if (!cargando) changeView(() => cargarVistaConsultasPaciente($(this).attr('id')));
+                    });
+                });
 
                 loadView(contenido);
 
                 $('.consulta').on('click', function (e) {
 
-                    e.preventDefault();
-
                     const fecha = $(this).attr('data-fecha');
                     const hora = $(this).attr('data-hora');
 
-                    $('main').empty();
-
-                    let ventanaconsultapaciente = 'vistas/vistasadmin/vistaconsultapaciente.php?hora=' + hora + '&fecha=' + fecha;
-
-                    $.get(ventanaconsultapaciente, ventana => {
-
-                        $('main').html(ventana);
-
-                        slideActionBar(false);
-                    });
+                    changeView(() => cargarVistaConsultaDetalle(fecha, hora));
                 });
             }));
         });
@@ -290,7 +286,7 @@ function cargarVistaAgregarConsulta() {
             });
 
             if ($('#contagregarconsulta #fecha').val() !== '') {
-                
+
                 cargando = true;
 
                 $.ajax({
@@ -309,7 +305,7 @@ function cargarVistaAgregarConsulta() {
                         response.horasDisponibles.forEach(elemento => $('#contagregarconsulta #hora').append(`<option value="${elemento}">${elemento}</option>`));
                     },
                     error: (jqXHR, estado, outputError) => {
-                            
+
                         console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
                         cargando = false;
                     }
@@ -352,7 +348,7 @@ function cargarVistaAgregarConsulta() {
                         response.duracionesDisponibles.forEach(elemento => $('#contagregarconsulta #duracion').append(`<option value="${elemento}">${fancyHoras(elemento)}</option>`));
                     },
                     error: (jqXHR, estado, outputError) => {
-                            
+
                         console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
                         cargando = false;
                     }
@@ -400,12 +396,12 @@ function cargarVistaAgregarConsulta() {
 
                         $('#agregarconsulta').html('Agregar').prop('disabled', false).removeClass('inactivo').addClass('activo');
 
-                        if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaConsultas);
+                        if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaConsultaCalendario);
 
                         else createPopup('Nuevo Aviso', response.error);
                     },
                     error: (jqXHR, estado, outputError) => {
-                            
+
                         console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
                         cargando = false;
                     }
@@ -425,7 +421,7 @@ function cargarVistaAgregarServicio() {
         let formData = new FormData();
 
         $('[id="mdF"]').eq(0).on('click', function () {
-            
+
             $('#inFile1').click();
             $('#inFile1').change(function (event) {
 
@@ -514,7 +510,7 @@ function cargarVistaAgregarServicio() {
                 formData.append('nombre', $('#nombre').val()); formData.append('descripcion', $('#descripcion').val());
 
                 if ($('#nombre').val().length >= 4 && $('#descripcion').val().length >= 20) {
-                    
+
                     cargando = true;
 
                     $.ajax({
@@ -535,7 +531,7 @@ function cargarVistaAgregarServicio() {
                             else createPopup('Nuevo Aviso', response.error);
                         },
                         error: (jqXHR, estado, outputError) => {
-                            
+
                             console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
                             cargando = false;
                         }
@@ -583,7 +579,7 @@ function cargarVistaPacienteDetalle(idp) {
     let url = 'vistas/vistasadmin/vistapacientes.php?idpaciente=' + idp;
 
     $.get(url, contenido => {
-        
+
         let datospaciente = {
 
             idpaciente: Number(idp),
@@ -602,15 +598,19 @@ function cargarVistaPacienteDetalle(idp) {
 
         loadView(contenido);
 
-        $.get('vistas/vistasadmin/sidebarpacientes.php', contenido => {loadSidebar(contenido)
+        $.get('vistas/vistasadmin/sidebarpacientes.php', contenido => {
+
+            loadSidebar(contenido);
+
             $('.paciente, .p-contenedor').off().on('click', function () {
 
+                changeView(() => cargarVistaPacienteDetalle($(this).attr('id')));
                 $('main').empty();
-    
+
                 $('.paciente').css({ 'text-decoration': 'none' });
                 $(this).css({ 'text-decoration': 'underline' });
                 $('.pacientescontainer #' + $(this).attr('id')).css({ 'text-decoration': 'underline' });
-    
+
                 changeView(() => cargarVistaPacienteDetalle($(this).attr('id')));
             });
         });
@@ -619,8 +619,8 @@ function cargarVistaPacienteDetalle(idp) {
         let guardar = $('#guardarpaciente');
         let contenedor = $('#pcontainer .datos');
 
-        datospaciente.enfermedades = contenedor.find('.enfermedad').map(function() { return $(this).attr('data-enfermedad'); }).get();
-        datospaciente.medicacion = contenedor.find('.medicamento').map(function() { return $(this).attr('data-medicamento'); }).get();
+        datospaciente.enfermedades = contenedor.find('.enfermedad').map(function () { return $(this).attr('data-enfermedad'); }).get();
+        datospaciente.medicacion = contenedor.find('.medicamento').map(function () { return $(this).attr('data-medicamento'); }).get();
 
         /*
         $('#odontologocontainer').on('click', () => {
@@ -653,7 +653,7 @@ function cargarVistaPacienteDetalle(idp) {
 
             let medicamento = await createInputPopup('Agregar medicación', 'Ingrese el medicamento');
 
-            if(medicamento.length == 0) return;
+            if (medicamento.length == 0) return;
 
             datospaciente.medicacion.push(medicamento);
 
@@ -663,7 +663,7 @@ function cargarVistaPacienteDetalle(idp) {
 
             contenedor.find('#medicacion #contagregar').before(medicamentoli);
 
-            contenedor.find('.eliminarmedicamento').off().on('click', function() {
+            contenedor.find('.eliminarmedicamento').off().on('click', function () {
 
                 let medicamento = $(this).attr('data-medicamento');
 
@@ -673,7 +673,7 @@ function cargarVistaPacienteDetalle(idp) {
 
                 if (index !== -1) datospaciente.medicacion.splice(index, 1);
 
-                if(datospaciente.medicacion.length === 0) contenedor.find('#medicacion > ul.valor > #contagregar').before(`<span class='medicamento nomedicacion d-flex justify-content-center align-items-center'>No hay medicación</span>`);
+                if (datospaciente.medicacion.length === 0) contenedor.find('#medicacion > ul.valor > #contagregar').before(`<span class='medicamento nomedicacion d-flex justify-content-center align-items-center'>No hay medicación</span>`);
             });
         });
 
@@ -681,7 +681,7 @@ function cargarVistaPacienteDetalle(idp) {
 
             let enfermedad = await createInputPopup('Agregar enfermedad', 'Ingrese la enfermedad');
 
-            if(enfermedad.length == 0) return;
+            if (enfermedad.length == 0) return;
 
             datospaciente.enfermedades.push(enfermedad);
 
@@ -694,14 +694,14 @@ function cargarVistaPacienteDetalle(idp) {
             contenedor.find('.eliminarenfermedad').off().on('click', function () {
 
                 let enfermedad = $(this).attr('data-enfermedad');
-    
+
                 contenedor.find(`.enfermedad[data-enfermedad='${enfermedad}']`).remove();
-    
+
                 let index = datospaciente.enfermedades.indexOf(enfermedad);
-    
+
                 if (index !== -1) datospaciente.enfermedades.splice(index, 1);
 
-                if(datospaciente.enfermedades.length === 0) contenedor.find('#enfermedades > ul.valor > #contagregar').before(`<span class='enfermedad noenfermedades d-flex justify-content-center align-items-center'>No hay enfermedades</span>`);    
+                if (datospaciente.enfermedades.length === 0) contenedor.find('#enfermedades > ul.valor > #contagregar').before(`<span class='enfermedad noenfermedades d-flex justify-content-center align-items-center'>No hay enfermedades</span>`);
             });
         });
 
@@ -715,10 +715,10 @@ function cargarVistaPacienteDetalle(idp) {
 
             if (index !== -1) datospaciente.enfermedades.splice(index, 1);
 
-            if(datospaciente.enfermedades.length === 0) contenedor.find('#enfermedades > ul.valor > #contagregar').before(`<span class='enfermedad noenfermedades d-flex justify-content-center align-items-center'>No hay enfermedades</span>`);
+            if (datospaciente.enfermedades.length === 0) contenedor.find('#enfermedades > ul.valor > #contagregar').before(`<span class='enfermedad noenfermedades d-flex justify-content-center align-items-center'>No hay enfermedades</span>`);
         });
 
-        contenedor.find('.eliminarmedicamento').off().on('click', function() {
+        contenedor.find('.eliminarmedicamento').off().on('click', function () {
 
             let medicamento = $(this).attr('data-medicamento');
 
@@ -728,12 +728,12 @@ function cargarVistaPacienteDetalle(idp) {
 
             if (index !== -1) datospaciente.medicacion.splice(index, 1);
 
-            if(datospaciente.medicacion.length === 0) contenedor.find('#medicacion > ul.valor > #contagregar').before(`<span class='medicamento nomedicacion d-flex justify-content-center align-items-center'>No hay medicación</span>`);
+            if (datospaciente.medicacion.length === 0) contenedor.find('#medicacion > ul.valor > #contagregar').before(`<span class='medicamento nomedicacion d-flex justify-content-center align-items-center'>No hay medicación</span>`);
         });
 
-        $('#pcontainer #mdF').off().on('click', function() {
-            
-            if(contenedor.attr('data-editar') === 'edit' && $(this).attr('desactivado') === 'false') $('#pcontainer #inFile').click();
+        $('#pcontainer #mdF').off().on('click', function () {
+
+            if (contenedor.attr('data-editar') === 'edit' && $(this).attr('desactivado') === 'false') $('#pcontainer #inFile').click();
         });
 
         $('#pcontainer #inFile').off().on('change', event => {
@@ -742,11 +742,11 @@ function cargarVistaPacienteDetalle(idp) {
 
             try {
 
-                if(file) {
+                if (file) {
 
                     let reader = new FileReader();
                     reader.onload = e => $('#pcontainer #fotoperfil > img').prop('src', e.target.result);
-                    
+
                     reader.readAsDataURL(file);
 
                     fotopaciente = new FormData();
@@ -754,7 +754,7 @@ function cargarVistaPacienteDetalle(idp) {
                     fotopaciente.append('idpaciente', idp);
                 }
             }
-            catch(error) {
+            catch (error) {
 
                 console.error(error);
             }
@@ -762,8 +762,8 @@ function cargarVistaPacienteDetalle(idp) {
 
         guardar.on('click', async () => {
 
-            if(await createConfirmPopup('Confirmación', '¿Estás seguro de modificar los datos del paciente?', ['No', 'Sí'])) {
-                
+            if (await createConfirmPopup('Confirmación', '¿Estás seguro de modificar los datos del paciente?', ['No', 'Sí'])) {
+
                 guardar.prop('disabled', true).html('<i class="fas fa-spinner fa-pulse"></i>');
 
                 contenedor.attr('data-editar', 'noedit');
@@ -792,11 +792,11 @@ function cargarVistaPacienteDetalle(idp) {
                     data: JSON.stringify(datospaciente),
                     processData: false,
                     contentType: false,
-                    success: function(responso) {
+                    success: function (responso) {
 
-                        if (responso.error == undefined) { 
+                        if (responso.error == undefined) {
 
-                            if(fotopaciente != null) {
+                            if (fotopaciente != null) {
 
                                 cargando = true;
 
@@ -810,15 +810,13 @@ function cargarVistaPacienteDetalle(idp) {
                                     success: function (response) {
 
                                         cargando = false;
-                                        console.log('a');
 
                                         if (response[0]) createHeaderPopup('Nuevo Aviso', responso.exito, () => changeView(() => cargarVistaPacienteDetalle(idp)));
-                    
+
                                         else createPopup('Nuevo Aviso', responso.error);
                                     },
                                     error: (jqXHR, estado, outputError) => {
-                                        
-                                        console.log('b');
+
                                         console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
                                         cargando = false;
                                     }
@@ -826,22 +824,19 @@ function cargarVistaPacienteDetalle(idp) {
                             }
                             else {
 
-                                console.log('c');
                                 cargando = false;
-                                
-                                createHeaderPopup('Nuevo Aviso', responso.exito, () => changeView(() => cargarVistaPacienteDetalle(idp)), 500);
+                                createHeaderPopup('Nuevo Aviso', responso.exito, () => changeView(() => cargarVistaPacienteDetalle(idp)));
                             }
                         }
                         else {
-                            
-                            console.log('d');
+
                             createPopup('Nuevo Aviso', responso.error);
                             cargando = false;
                         }
                         guardar.prop('disabled', false).html('Guardar');
                     },
                     error: (jqXHR, estado, outputError) => {
-                        
+
                         console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
                         cargando = false;
                     }
@@ -876,16 +871,16 @@ function cargarVistaServicios() {
 
                     if ($('.contTitulon').attr('disabled')) {
 
-                        $('[id="mdC"]').eq(0).find('img').attr('src','img/iconosvg/Guardar.svg');
+                        $('[id="mdC"]').eq(0).find('img').attr('src', 'img/iconosvg/Guardar.svg');
                         temp['titulo'] = $('.contTitulon').val();
                         $('.contTitulon').prop('disabled', false).focus();
-                    } 
+                    }
                     else {
 
                         if (temp['titulo'] == $('.contTitulon').val()) {
 
                             $('.contTitulon').attr('disabled', true)
-                            $('[id="mdC"]').eq(0).find('img').attr('src','img/iconosvg/lapiz.svg');
+                            $('[id="mdC"]').eq(0).find('img').attr('src', 'img/iconosvg/lapiz.svg');
                         }
                         else {
 
@@ -911,12 +906,12 @@ function cargarVistaServicios() {
                                     else createPopup('Nuevo Aviso', response);
                                 },
                                 error: (jqXHR, estado, outputError) => {
-                            
+
                                     console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
                                     cargando = false;
                                 }
                             });
-                            $('[id="mdC"]').eq(0).find('img').attr('src','img/iconosvg/lapiz.svg');
+                            $('[id="mdC"]').eq(0).find('img').attr('src', 'img/iconosvg/lapiz.svg');
                         }
                     }
                 });
@@ -924,16 +919,16 @@ function cargarVistaServicios() {
 
                     if ($('#descripcion').attr('readonly')) {
 
-                        $('[id="mdC"]').eq(1).find('img').attr('src','img/iconosvg/Guardar.svg');
+                        $('[id="mdC"]').eq(1).find('img').attr('src', 'img/iconosvg/Guardar.svg');
                         temp['desc'] = $('#descripcion').val();
                         $('#descripcion').prop('readonly', false).focus();
-                    } 
+                    }
                     else {
 
-                        if (temp['desc'] == $('#descripcion').val()) { 
+                        if (temp['desc'] == $('#descripcion').val()) {
 
                             $('#descripcion').prop('readonly', false).focus();
-                            $('[id="mdC"]').eq(1).find('img').attr('src','img/iconosvg/lapiz.svg');
+                            $('[id="mdC"]').eq(1).find('img').attr('src', 'img/iconosvg/lapiz.svg');
                         }
                         else {
 
@@ -959,12 +954,12 @@ function cargarVistaServicios() {
                                     else createPopup('Nuevo Aviso', response.error);
                                 },
                                 error: (jqXHR, estado, outputError) => {
-                            
+
                                     console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
                                     cargando = false;
                                 }
                             });
-                            $('[id="mdC"]').eq(1).find('img').attr('src','img/iconosvg/lapiz.svg');
+                            $('[id="mdC"]').eq(1).find('img').attr('src', 'img/iconosvg/lapiz.svg');
                         }
                     }
                 });
@@ -1067,7 +1062,7 @@ function enviarIMGServicio($data, $tipo) {
                 else console.log(response.error);
             },
             error: (jqXHR, estado, outputError) => {
-                            
+
                 console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
                 cargando = false;
             }
@@ -1092,7 +1087,7 @@ function enviarIMGServicio($data, $tipo) {
                 else console.log(response.error);
             },
             error: (jqXHR, estado, outputError) => {
-                            
+
                 console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
                 cargando = false;
             }
@@ -1104,7 +1099,7 @@ function enviarIMGServicio($data, $tipo) {
 function resetAdmin() {
 
     changeView(() => {
-        
+
         loadSidebar();
         loadView('<div class="w-100 h-100 d-flex justify-content-center align-items-center"><h1 class="titinformativo">Bienvenido al administrador</h1></div>');
     });
@@ -1132,13 +1127,13 @@ let fechasPermitidas = [];
 
 function loadSidebar(contenido) {
 
-    $('.sidebar').empty().html(contenido).fadeIn(200)[0].scrollTo({ top: 0, behavior: 'smooth' });
+    $('.sidebar').empty().html(contenido).css({ 'opacity': 1 })[0].scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function changeView(vista) {
 
     $('main').fadeOut(200, vista);
-    $('.sidebar').fadeOut(200);
+    $('.sidebar').css({ 'opacity': 0 });
 }
 
 function loadView(contenido) {

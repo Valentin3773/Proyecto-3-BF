@@ -201,6 +201,8 @@ function recucontra($email) {
                 $('.btnRecu').prop('disabled', true).css({ 'background-color': 'rgb(0, 178, 255, 1)' }).html('Enviar Código');
             }
             else {
+
+                console.log(response);
                 
                 createPopup("Nuevo aviso", response.noexiste);
 
@@ -393,9 +395,4 @@ function changeView(vista) {
 function loadView(contenido) {
 
     $('main').empty().html(contenido).fadeIn(200);
-}
-
-function changePage(pagina) {
-
-    $('body').fadeOut(300, () => window.location.href = pagina);
 }

@@ -6,7 +6,12 @@ include('../extractor.php');
 session_start();
 reloadSession();
 
-if (!isset($_SESSION['paciente']) || $_SERVER['REQUEST_METHOD'] != 'GET') exit();
+if (!isset($_SESSION['paciente']) || $_SERVER['REQUEST_METHOD'] != 'GET') {
+    
+    header('Content-Type: application/json');
+    echo json_encode(['odontologo' => true]);
+    exit();
+}
 
 $idp = $_SESSION['paciente']['idpaciente'];
 $nomolestar = $_SESSION['paciente']['nomolestar'];

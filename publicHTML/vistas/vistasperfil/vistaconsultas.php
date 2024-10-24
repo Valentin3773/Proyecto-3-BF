@@ -115,7 +115,7 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
 
             <?php
 
-            foreach ($consultasActuales as $consultaActual) {
+            foreach ($consultasActuales as &$consultaActual) {
 
                 $asuntoA = $consultaActual['asunto'];
                 $horaA = $consultaActual['horafinalizacion'];
@@ -166,7 +166,7 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
 
             <?php
 
-            foreach ($consultasFuturas as $consultasFutura) {
+            foreach ($consultasFuturas as &$consultasFutura) {
 
                 $asuntof = $consultasFutura['asunto'];
                 $fechaf = $consultasFutura['fecha'];
@@ -214,7 +214,7 @@ if (isset($_SESSION['paciente']['idpaciente'])) {
 
             <?php
 
-            foreach ($consultasPrevias as $consultaPrevia) {
+            foreach ($consultasPrevias as &$consultaPrevia) {
 
                 $asuntoP = $consultaPrevia['asunto'];
                 $horaP = $consultaPrevia['hora'];

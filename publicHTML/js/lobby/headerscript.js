@@ -25,20 +25,20 @@ $(() => {
 
     $('#btnperfilm').on('click', desplegarMenuPerfilMobile);
 
-    $('#btnperfil ul #iniciar, #opcionescontainer .menuperfilm #iniciar').on('click', () => changePage(() => window.location.href = 'login.php?estado=1'));
+    $('#btnperfil ul #iniciar, #opcionescontainer .menuperfilm #iniciar').on('click', () => changePage('login.php?estado=1'));
 
-    $('#btnperfil ul #registrarse, #opcionescontainer .menuperfilm #registrarse').on('click', () => changePage(() => window.location.href = 'login.php?estado=2'));
+    $('#btnperfil ul #registrarse, #opcionescontainer .menuperfilm #registrarse').on('click', () => changePage('login.php?estado=2'));
     
     $('#btnperfil ul #cerrarsesion, #opcionescontainer .menuperfilm #cerrarsesion').on('click', async () => {
         
-        if(await createConfirmPopup('Confirmación', '¿Estás seguro de cerrar sesión?')) changePage(() => window.location.href = 'login.php?estado=3');
+        if(await createConfirmPopup('Confirmación', '¿Estás seguro de cerrar sesión?')) changePage('login.php?estado=3');
     });
 
-    $('#btnperfil ul #miperfil, #opcionescontainer .menuperfilm #miperfil').on('click', () => changePage(() => window.location.href = 'perfil.php'));
-    $('#btnperfil ul #misconsultas, #opcionescontainer .menuperfilm #misconsultas').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=2'));
-    $('#btnperfil ul #mishorarios, #opcionescontainer .menuperfilm #mishorarios').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=3'));
-    $('#btnperfil ul #misinactividades, #opcionescontainer .menuperfilm #misinactividades').on('click', () => changePage(() => window.location.href = 'perfil.php?estado=4'));
-    $('#btnperfil ul #administrador, #opcionescontainer .menuperfilm #administrador').on('click',  () => changePage(() => window.location.href = 'administrador.php'));
+    $('#btnperfil ul #miperfil, #opcionescontainer .menuperfilm #miperfil').on('click', () => changePage('perfil.php'));
+    $('#btnperfil ul #misconsultas, #opcionescontainer .menuperfilm #misconsultas').on('click', () => changePage('perfil.php?estado=2'));
+    $('#btnperfil ul #mishorarios, #opcionescontainer .menuperfilm #mishorarios').on('click', () => changePage('perfil.php?estado=3'));
+    $('#btnperfil ul #misinactividades, #opcionescontainer .menuperfilm #misinactividades').on('click', () => changePage('perfil.php?estado=4'));
+    $('#btnperfil ul #administrador, #opcionescontainer .menuperfilm #administrador').on('click',  () => changePage('administrador.php'));
 
     $('main').on('click', () => {
 
@@ -110,11 +110,6 @@ function desplegarMenuPerfilMobile() {
 function gototop() {
 
     window.scrollTo({top: 0, behavior: 'smooth'});
-}
-
-function changePage(funcion) {
-
-    $('body').fadeOut(300, funcion);
 }
 
 function changeView(vista) {

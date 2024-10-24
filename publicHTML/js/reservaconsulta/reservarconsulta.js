@@ -16,7 +16,7 @@ $(() => {
         addReservaListeners();
     });
 
-    $('#logo').on('click', () => changeView(cargarVistaOdontologo));
+    $('#logo').on('click', () => changePage('index.php'));
 
     if($('body').attr('data-iniciado') === 'iniciado') {
 
@@ -361,7 +361,7 @@ function enviarReserva() {
         dataType: 'json',
         success: function (response) {
 
-            if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.exito, 'index.php');
+            if (response.error === undefined) createHeaderPopup('Nuevo Aviso', response.exito, () => changePage('index.php'));
 
             else createPopup('Nuevo Aviso', response.error);
 
@@ -419,9 +419,4 @@ function changeView(vista) {
 function loadView(contenido) {
 
     $('#pasocontainer').empty().html(contenido).fadeIn(200);
-}
-
-function changePage(pagina) {
-
-    $('body').fadeOut(300, () => window.location.href = pagina);
 }

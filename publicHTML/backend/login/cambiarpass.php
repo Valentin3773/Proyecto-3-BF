@@ -31,7 +31,8 @@ function cambiarcontra() {
         if($stmt->execute() && $stmt->rowCount() > 0) {
 
             $paciente = $stmt->fetch(PDO::FETCH_ASSOC);
-            $verificado = $paciente["verificado"] == 'verificado';
+            $verificado = false;
+            if(isset($paciente["verificador"])) $verificado = $paciente["verificador"] == 'verificado';
 
             if($verificado) {
 
