@@ -33,10 +33,26 @@ if ($data) {
     if ($booleanos[2]) exit();
     else $booleanos[2] = true;
 
-    if (enviarEmailCalificador($fecha, $hora, $ido, $asunto, $mensaje, $puntaje) && modificarBooleanosNotificacionesConsulta($fecha, $hora, $ido, $booleanos)) {
+    $sql = "SELECT o.nombre AS nombreo, o.apellido AS apellidoo, o.email AS emailo FROM consulta c JOIN odontologo o ON c.idodontologo = o.idodontologo WHERE c.fecha = :fecha AND c.hora = :hora AND o.idodontologo = :ido AND vigente = 'vigente'";
 
-        $respuesta['exito'] = "Se ha enviado la reseña al odontólogo, gracias por tu tiempo";
-    } else $respuesta['error'] = "Ha ocurrido un error al enviar la reseña";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':fecha', $fecha);
+    $stmt->bindParam(':hora', $hora);
+    $stmt->bindParam(':ido', $ido);
+
+    if($stmt->execute() && $stmt->rowCount() == 1) {
+
+        $odontologo = $stmt->fetch(PDO::FETCH_ASSOC);
+        $nombreo = $odontologo['nombreo'];
+        $apellidoo = $odontologo['apellidoo'];
+        $emailo = $odontologo['emailo'];
+
+        if (enviarEmailCalificador($fecha, $hora, $ido, $asunto, $mensaje, $puntaje, $nombreo, $apellidoo, $emailo) && modificarBooleanosNotificacionesConsulta($fecha, $hora, $ido, $booleanos)) {
+
+            $respuesta['exito'] = "Se ha enviado la reseña al odontólogo, gracias por tu tiempo";
+        } 
+        else $respuesta['error'] = "Ha ocurrido un error al enviar la reseña";
+    }
 
     header('Content-Type: application/json');
     echo $respuesta;
@@ -44,11 +60,10 @@ if ($data) {
 } 
 else exit();
 
-function enviarEmailCalificador(string $fecha, string $hora, int $ido, string $asunto, string $mensaje, int $puntaje): bool
-{
-    /*
-    global $defaults;
+function enviarEmailCalificador(string $fecha, string $hora, int $ido, string $asunto, string $mensaje, int $puntaje, string $nombreo, string $apellidoo, string $emailo): bool {
 
+    global $defaults;
+    /*
     // Configuración de PHPMailer
 
     $mail = new PHPMailer(true);
@@ -132,8 +147,7 @@ function enviarEmailCalificador(string $fecha, string $hora, int $ido, string $a
         $mail->Body    = $mensaje;
 
         return $mail->send();
-    } 
-    catch (Exception $e) {
+    } catch (Exception $e) {
 
         return false;
     }
@@ -141,3 +155,5 @@ function enviarEmailCalificador(string $fecha, string $hora, int $ido, string $a
 
     return false;
 }
+
+?>

@@ -113,7 +113,7 @@ function sendMail() {
                                     <body>
                                       <div class='container'>
                                         <h1>Consulta</h1>
-                                        <h3>De: $nombre</ph3>
+                                        <h3>De: $nombre</h3>
                                         <h3>Teléfono: $telefono</h3>
                                         <h3>Correo Electrónico: $email</h3>
 
