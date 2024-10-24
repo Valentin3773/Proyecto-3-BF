@@ -14,7 +14,7 @@
 
     <div class="imgcontainer">
 
-        <img src="img/imagenesEmpresa/Ejemplo3.jpg" alt="" id="Ejemplo1" class="h-100 w-100">
+        <img src="img/imagenesEmpresa/Ejemplo3.jpg" alt="" id="Ejemplo1" class="h-100 w-100" loading="lazy">
         <div class="negron"></div>
 
     </div>
@@ -42,7 +42,7 @@
 
         <aside class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 d-flex justify-items-center align-items-center">
 
-            <img src="img/imagenesEmpresa/Ejemplo.png" alt="" id="Ejemplo1" class="w-100 img-thumbnail">
+            <img src="img/imagenesEmpresa/Ejemplo.png" alt="" id="Ejemplo1" class="w-100 img-thumbnail" loading="lazy">
 
         </aside>
 
@@ -68,16 +68,16 @@
         <article class="carousel-inner">
 
             <div class="carousel-item active">
-                <img src="img/imagenesEmpresa/consultorio2.jpg" class="d-block w-100 img-thumbnail" alt="...">
+                <img src="img/imagenesEmpresa/consultorio2.jpg" class="d-block w-100 img-thumbnail" alt="..." loading="lazy">
             </div>
             <div class="carousel-item">
-                <img src="img/imagenesEmpresa/sala2.jpg" class="d-block w-100 img-thumbnail" alt="...">
+                <img src="img/imagenesEmpresa/sala2.jpg" class="d-block w-100 img-thumbnail" alt="..." loading="lazy">
             </div>
             <div class="carousel-item">
-                <img src="img/imagenesEmpresa/sala3.jpg" class="d-block w-100 img-thumbnail" alt="...">
+                <img src="img/imagenesEmpresa/sala3.jpg" class="d-block w-100 img-thumbnail" alt="..." loading="lazy">
             </div>
             <div class="carousel-item">
-                <img src="img/imagenesEmpresa/consultorio3.jpg" class="d-block w-100 img-thumbnail" alt="...">
+                <img src="img/imagenesEmpresa/consultorio3.jpg" class="d-block w-100 img-thumbnail" alt="..." loading="lazy">
             </div>
 
         </article>

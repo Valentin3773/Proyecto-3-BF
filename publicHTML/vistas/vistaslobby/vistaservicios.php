@@ -10,7 +10,7 @@
         
         <div class="slidercontainer">
 
-            <article class="navslider mt-5 mb-5"></article>
+            <article class="navslider mt-5 mb-5" loading="lazy" ></article>
 
         </div>
 

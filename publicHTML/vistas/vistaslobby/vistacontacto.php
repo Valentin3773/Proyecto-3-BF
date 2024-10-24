@@ -8,7 +8,7 @@
 
                 <div id="circulito">
                     
-                    <img src="img/iconosvg/location-pin-svgrepo-com.svg" alt="">
+                    <img src="img/iconosvg/location-pin-svgrepo-com.svg" alt="" loading="lazy">
                 
                 </div>
                 <div id="contenedor_fondo">
@@ -21,7 +21,7 @@
 
                 <div id="circulito">
 
-                    <img src="img/iconosvg/cellphone-communication-handphone-svgrepo-com.svg" alt="">
+                    <img src="img/iconosvg/cellphone-communication-handphone-svgrepo-com.svg" alt="" loading="lazy">
 
                 </div>
                 <div id="contenedor_fondo">
@@ -34,7 +34,7 @@
 
                 <div id="circulito">
 
-                    <img src="img/iconosvg/telephone-receiver-material-svgrepo-com.svg" alt="">
+                    <img src="img/iconosvg/telephone-receiver-material-svgrepo-com.svg" alt="" loading="lazy">
 
                 </div>
                 <div id="contenedor_fondo">
@@ -47,7 +47,7 @@
 
                 <div id="circulito">
 
-                    <img src="img/iconosvg/email-8-svgrepo-com.svg" alt="">
+                    <img src="img/iconosvg/email-8-svgrepo-com.svg" alt="" loading="lazy">
     
                 </div>
 
@@ -88,7 +88,7 @@
 
         <article class="mt-3">
 
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d978.1062272928758!2d-57.963996335760264!3d-31.38757117546271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95addd2af164a16b%3A0x397cf16081f628b0!2sJoyería%20Y%20Optica%20Carcabelos%20central!5e0!3m2!1ses!2suy!4v1715466322409!5m2!1ses!2suy" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d978.1062272928758!2d-57.963996335760264!3d-31.38757117546271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95addd2af164a16b%3A0x397cf16081f628b0!2sJoyería%20Y%20Optica%20Carcabelos%20central!5e0!3m2!1ses!2suy!4v1715466322409!5m2!1ses!2suy" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" loading="lazy"></iframe>
         
         </article>
 
