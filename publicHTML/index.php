@@ -135,7 +135,7 @@ reloadSession();
                         <ul class="invisible menuperfilm" id="menunoiniciado">
 
                             <li><button id="iniciar">Iniciar sesión</button></li>
-                            <li><button id="iniciargoogle">Iniciar con Google <img src="img/iconosvg/google.svg" alt="Google Icon"></button></li>
+                            <li><button id="iniciargoogle" onclick="window.location.href='./loginGoogle/index.php'">Iniciar con Google <img src="img/iconosvg/google.svg" alt="Google Icon"></button></li>
 
                             <hr>
 
