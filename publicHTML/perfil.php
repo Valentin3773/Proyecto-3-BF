@@ -33,6 +33,16 @@ else if (isset($_GET['estado'])) {
     <meta description="Administra tu perfil de usuario">
     <meta name="Mi perfil">
 
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-408EQQ11WH"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-408EQQ11WH');
+        </script>
+
     <title>Perfil</title>
 
     <!-- Librerias -->

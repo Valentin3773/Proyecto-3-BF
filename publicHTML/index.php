@@ -19,6 +19,18 @@ reloadSession();
     <meta description="Ofrecemos atención odontológica de alta calidad">
     <meta name="Inicio">
 
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-408EQQ11WH"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-408EQQ11WH');
+        </script>
+
+        <script type="text/javascript" data-cmp-ab="1" src="https://cdn.consentmanager.net/delivery/autoblocking/945e0f3de1d2a.js" data-cmp-host="d.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="16"></script>
+
     <!-- Librerias -->
     <script src="lib/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="lib/bootstrap-5.2.3-dist/css/bootstrap.min.css">
@@ -307,7 +319,7 @@ reloadSession();
         </footer>
 
     </div>
-
+    <a href="?cmpscreen" class="cmpfooterlink cmpfooterlinkcmp">Privacy settings</a>
 </body>
 
 </html>

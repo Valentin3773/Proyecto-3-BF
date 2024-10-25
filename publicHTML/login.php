@@ -24,7 +24,17 @@ else if(isset($_GET['estado'])) $estado = $_GET['estado'];
         <title>Iniciar Sesión</title>
         <meta description="Inicia sesión para tener una experiencia completa en la clínica">
         <meta name="Iniciar Sesión">
-        
+
+            <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-408EQQ11WH"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-408EQQ11WH');
+            </script>
+
         <!-- Librerias -->
         <script src="lib/jquery-3.7.1.min.js"></script>
         <link rel="stylesheet" href="lib/bootstrap-5.2.3-dist/css/bootstrap.min.css">

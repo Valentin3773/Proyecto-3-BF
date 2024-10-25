@@ -20,6 +20,18 @@ reloadSession();
     <meta description="Administra las consultas, pacientes y servicios de la aplicación">
     <meta name="Administrador">
 
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-408EQQ11WH"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-408EQQ11WH');
+        </script>
+
+
+
     <title>Administrador</title>
 
     <!-- Librerias -->
@@ -44,6 +56,7 @@ reloadSession();
     <script src="js/utilidades.js"></script>
     <script defer src="js/reservaconsulta/calendario.js"></script>
     <script defer src="js/administrador/administrador.js"></script>
+
 
 </head>
 
