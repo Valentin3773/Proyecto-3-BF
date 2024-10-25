@@ -24,6 +24,11 @@
                 $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
                 unset($tupla['contrasenia']);
                 $_SESSION['paciente'] = $tupla;
+
+                $sql = "UPDATE paciente SET verificador = 'verificado' WHERE idpaciente = :idp";
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':idp', $_SESSION['paciente']['idpaciente']);
+                $stmt->execute();
                 header("Location: ../");
             } 
             else {

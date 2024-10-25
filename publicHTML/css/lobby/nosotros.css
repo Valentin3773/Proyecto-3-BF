@@ -27,7 +27,7 @@ section h1 {
     padding: 50px;
     width: unset !important;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     gap: 2rem;
 }
