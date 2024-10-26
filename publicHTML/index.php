@@ -29,7 +29,7 @@ reloadSession();
         gtag('config', 'G-408EQQ11WH');
         </script>
 
-        <script type="text/javascript" data-cmp-ab="1" src="https://cdn.consentmanager.net/delivery/autoblocking/945e0f3de1d2a.js" data-cmp-host="d.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="16"></script>
+        <script async type="text/javascript" data-cmp-ab="1" src="https://cdn.consentmanager.net/delivery/autoblocking/945e0f3de1d2a.js" data-cmp-host="d.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="16"></script>
 
     <!-- Librerias -->
     <script src="lib/jquery-3.7.1.min.js"></script>
