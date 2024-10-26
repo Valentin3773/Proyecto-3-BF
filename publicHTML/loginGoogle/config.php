@@ -12,13 +12,13 @@ require_once 'vendor/autoload.php';
 $google_client = new Google_Client();
 
 //Set the OAuth 2.0 Client ID
-$google_client->setClientId('957659811171-f67e2adiua15ske62tecu8q0kf3m8fup.apps.googleusercontent.com');
+$google_client->setClientId('');
 
 //Set the OAuth 2.0 Client Secret key
-$google_client->setClientSecret('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');
+$google_client->setClientSecret('');
 
 //Set the OAuth 2.0 Redirect URI
-$google_client->setRedirectUri('http://clinica-local.ddns.net/Proyecto-3-BF/publicHTML/loginGoogle/index.php');
+$google_client->setRedirectUri('https://clinica-local.ddns.net/Proyecto-3-BF/publicHTML/loginGoogle/index.php');
 
 // to get the email and profile 
 $google_client->addScope('email');

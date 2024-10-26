@@ -8,11 +8,9 @@
     function checaruserproces(){
        try { 
             global $pdo;
-            $chekeo = "SELECT * FROM paciente WHERE email = :email AND nombre = :nombre OR apellido = :apellido";
+            $chekeo = "SELECT * FROM paciente WHERE email = :email";
             $stmt = $pdo->prepare($chekeo);
             $stmt->bindParam(':email', $_SESSION['user_email_address']);
-            $stmt->bindParam(':nombre', $_SESSION['user_first_name']);
-            $stmt->bindParam(':apellido', $_SESSION['user_last_name']);
 
             if ($stmt->execute() && $stmt->rowCount() > 0) {
                 //Limpio los datos de google incluido los tokens
