@@ -13,10 +13,10 @@ $respuesta = array();
 
 if($data) {
 
-    $fechainicio = DateTime::createFromFormat('d/m/Y', $data['fechainicio']);
+    $fechainicio = DateTime::createFromFormat('d/m/Y', sanitizar($data['fechainicio']));
     $fechainicio = $fechainicio->format('Y-m-d');
 
-    $horainicio = DateTime::createFromFormat('H:i', $data['horainicio']);
+    $horainicio = DateTime::createFromFormat('H:i', sanitizar($data['horainicio']));
     $horainicio = $horainicio->format('H:i:s');
 
     $ido = $_SESSION['odontologo']['idodontologo'];

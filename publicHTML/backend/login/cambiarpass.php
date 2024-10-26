@@ -20,7 +20,7 @@ function cambiarcontra() {
 
     global $pdo;
 
-    $email = htmlspecialchars(strip_tags($_POST['email']));
+    $email = sanitizar($_POST['email']);
 
     if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
@@ -78,7 +78,7 @@ function enviarEmail($codigo, $email) {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'laprogramarmy@gmail.com';
+    $mail->Username = $defaults['emailclinica'];
     $mail->Password = $defaults['passemail'];
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;

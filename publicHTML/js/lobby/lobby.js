@@ -4,79 +4,100 @@ $(() => {
 
     let calificaravisar = null;
 
-    $.get('backend/lobby/getnotificaciones.php', async respuesta => {
-
-        calificaravisar = respuesta;
-
-        if(calificaravisar.nomolestar == undefined && calificaravisar.odontologo == undefined) {
-
-            if(calificaravisar.avisar.length > 0) {
-
-                let meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'setiembre', 'octubre', 'noviembre', 'diciembre'];
-
-                for(const elemento of calificaravisar.avisar) {
-                    
-                    $('#div-mensaje-popup').remove();
-
-                    let hora = elemento.hora.split(':')[0];
-                    let minuto = elemento.hora.split(':')[1];
-
-                    let dia = elemento.fecha.split('-')[2];
-                    let mes = Number(elemento.fecha.split('-')[1]);
-                    let anio = elemento.fecha.split('-')[0];
-                    
-                    let fechaformateada = `${dia} de ${meses[mes - 1]} de ${anio}`;
-                    let $horaformateada = `${hora}:${minuto}`;
-
-                    await createPopup('Nuevo Aviso', `Te recordamos que tienes una consulta para el día ${fechaformateada} a la hora ${$horaformateada}, con el odontólogo ${elemento.nombreo} ${elemento.apellidoo}, por el asunto de: "${elemento.asunto}"`, 35);
-                };
-            }
-            if(calificaravisar.calificar.length > 0) {
-
-                for(const elemento of calificaravisar.calificar) {
-
-                    $('#div-mensaje-popup').remove();
-                
-                    let calificacion = await createFeedbackPopup('¿Qué te pareció tu consulta?', elemento.asunto, {
-
-                        fecha: elemento.fecha,
-                        hora: elemento.hora,
-                        ido: elemento.idodontologo
-                    });
-
-                    console.log(calificacion);
-
-                    if(false) $.ajax({
-                        
-                        type: "POST",
-                        url: "backend/lobby/enviarfeedback.php",
-                        data: datos,
-                        processData: false,
-                        contentType: false,
-                        success: response => {
-        
-                            if (response.error === undefined) {
-                                
-                                createPopup('Nuevo Aviso', response.enviar);
-                                
-                                $('#formEmail')[0].reset();
-                            }
-                            
-                            else createPopup('Nuevo Aviso', response.error);
-                        },
-                        error: (jqXHR, estado, outputError) => console.error(jqXHR, estado, outputError)
-                    });
-                };
-            }
-        }
-    });
+    $.get('backend/lobby/getnotificaciones.php', respuesta => notificacionesManager(respuesta));
 });
+
+async function notificacionesManager(respuesta) {
+
+    let calificaravisar = respuesta;
+
+    if (calificaravisar.nomolestar == undefined && calificaravisar.odontologo == undefined) {
+
+        if (calificaravisar.avisar.length > 0) {
+
+            let meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'setiembre', 'octubre', 'noviembre', 'diciembre'];
+
+            for (const elemento of calificaravisar.avisar) {
+
+                $('#div-mensaje-popup').remove();
+
+                let hora = elemento.hora.split(':')[0];
+                let minuto = elemento.hora.split(':')[1];
+
+                let dia = elemento.fecha.split('-')[2];
+                let mes = Number(elemento.fecha.split('-')[1]);
+                let anio = elemento.fecha.split('-')[0];
+
+                let fechaformateada = `${dia} de ${meses[mes - 1]} de ${anio}`;
+                let $horaformateada = `${hora}:${minuto}`;
+
+                await createPopup('Nuevo Aviso', `Te recordamos que tienes una consulta para el día ${fechaformateada} a la hora ${$horaformateada}, con el odontólogo ${elemento.nombreo} ${elemento.apellidoo}, por el asunto de: "${elemento.asunto}"`, 35);
+            };
+        }
+        if (calificaravisar.calificar.length > 0) {
+
+            let elemento = calificaravisar.calificar[0];
+
+            $('#div-mensaje-popup').remove();
+
+            let calificacion = await createFeedbackPopup('¿Qué te pareció tu consulta?', elemento.asunto, {
+
+                fecha: elemento.fecha,
+                hora: elemento.hora,
+                ido: elemento.idodontologo
+            });
+            if (calificacion != null) await $.ajax({
+
+                type: "POST",
+                url: "backend/lobby/enviarfeedback.php",
+                data: JSON.stringify(calificacion),
+                processData: false,
+                contentType: false,
+                success: response => {
+
+                    if (response.error === undefined) createPopup('Nuevo Aviso', response.exito);
+
+                    else createPopup('Nuevo Aviso', response.error);
+                },
+                error: (jqXHR, estado, outputError) => console.error(jqXHR, estado, outputError)
+            });
+        }
+        else if (calificaravisar.calificacionclinica) {
+
+            $('#div-mensaje-popup').remove();
+
+            let calificacion = await createFeedbackPopup('¿Qué te está pareciendo la clínica?', '', {});
+
+            delete calificacion.fecha;
+            delete calificacion.hora;
+            delete calificacion.idodontologo;
+
+            calificacion.clinica = true;
+
+            if (calificacion != null) await $.ajax({
+
+                type: "POST",
+                url: "backend/lobby/enviarfeedback.php",
+                data: JSON.stringify(calificacion),
+                processData: false,
+                contentType: false,
+                success: response => {
+
+                    if (response.error === undefined) createPopup('Nuevo Aviso', response.exito);
+
+                    else createPopup('Nuevo Aviso', response.error);
+                },
+                error: (jqXHR, estado, outputError) => console.error(jqXHR, estado, outputError)
+            });
+        }
+    }
+}
 
 var listenersAdded = true;
 
 function addListeners() {
-    if (listenersAdded)
-    {
+
+    if (listenersAdded) {
 
         $('#inicio, #iniciom, #logo').on('click', () => changeView(cargarVistaInicio));
         $('#nosotros, #nosotrosm').on('click', () => changeView(cargarVistaNosotros));
@@ -85,12 +106,13 @@ function addListeners() {
         $('#btnchat').on('click', () => window.open('https://api.whatsapp.com/send/?phone=598091814295', '_blank'));
         $('#closemodal').on('click', () => $('#modal').addClass('oculto').removeClass('visible'));
         $('.cmpfooterlink.cmpfooterlinkcmp').css('display', 'none');
-    } else {
+    } 
+    else {
+
         console.log(listenersAdded);
         return listenersAdded = false;
     }
 }
-
 
 function cargarVistaInicio() {
 

@@ -16,7 +16,7 @@ $respuesta = array();
 
 if ($data) {
 
-    $idh = $data["horario"];
+    $idh = intval(sanitizar($data["horario"]));
 
     $sql = "SELECT * FROM horario WHERE idhorario = :idh";
 

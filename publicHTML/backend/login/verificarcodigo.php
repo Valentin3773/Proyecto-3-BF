@@ -15,11 +15,11 @@ function comprobarcodigo() {
 
     $respuesta = [];
 
-    $codigo = htmlspecialchars(strip_tags($_POST['codigo']));
-    $con = htmlspecialchars(strip_tags($_POST['contraseña']));
-    $recon = htmlspecialchars(strip_tags($_POST['recontraseña']));
+    $codigo = sanitizar($_POST['codigo']);
+    $con = sanitizar($_POST['contrasenia']);
+    $recon = sanitizar($_POST['recontrasenia']);
     $email = $_SESSION['email'];
-    $scupass = $_POST['secp'];
+    $scupass = sanitizar($_POST['secp']);
 
     if($con === $recon) {
 

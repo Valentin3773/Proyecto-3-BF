@@ -15,7 +15,9 @@ $respuesta = array();
 
 if($data) {
 
-    $nom = $data['nomolestar'];
+    $nom = isset($data['nomolestar']) ? $data['nomolestar'] : null;
+
+    if(!is_bool($data['nomolestar'])) exit();
     
     $idp = $_SESSION['paciente']['idpaciente'];
 

@@ -25,11 +25,11 @@ $respuesta = array();
 
 $ido = $_SESSION['odontologo']['idodontologo'];
 
-$idp = $_POST["paciente"];
-$fecha = DateTime::createFromFormat('d/m/Y', $_POST["fecha"]);
-$hora = $_POST["hora"];
-$duracion = intval($_POST["duracion"]);
-$asunto = $_POST["asunto"];
+$idp = intval(sanitizar($_POST["paciente"]));
+$fecha = DateTime::createFromFormat('d/m/Y', sanitizar($_POST["fecha"]));
+$hora = sanitizar($_POST["hora"]);
+$duracion = intval(sanitizar($_POST["duracion"]));
+$asunto = sanitizar($_POST["asunto"]);
 
 if(fechaDisponible($fecha->format('Y-m-d'), $ido) && in_array($hora, horasDisponibles($fecha->format('Y-m-d'), $ido)) && in_array($duracion, duracionesDisponibles($fecha, $hora, $ido))) {
 

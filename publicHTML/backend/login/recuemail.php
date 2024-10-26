@@ -12,9 +12,9 @@ function recuperaremail() {
 
     $respuesta = [];
 
-    $nombre = htmlspecialchars(strip_tags($_POST['nombre']));
-    $apellido = htmlspecialchars(strip_tags($_POST['apellido']));
-    $documento = htmlspecialchars(strip_tags($_POST['documento']));
+    $nombre = sanitizar($_POST['nombre']);
+    $apellido = sanitizar($_POST['apellido']);
+    $documento = sanitizar($_POST['documento']);
 
     if(!is_string($nombre) || $nombre == null || $nombre == "") $respuesta['error'] = "Los datos ingresados no son correctos";
     

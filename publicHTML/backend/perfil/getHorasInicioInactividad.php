@@ -13,6 +13,10 @@ $data = json_decode($json, true);
 
 if($data) {
 
+    $data["dia"] = sanitizar($data["dia"]);
+    $data["mes"] = sanitizar($data["mes"]);
+    $data["anio"] = sanitizar($data["anio"]);
+
     $ido = $_SESSION['odontologo']['idodontologo'];
 
     $fecha = DateTime::createFromFormat('d-m-Y', "{$data["dia"]}-{$data["mes"]}-{$data["anio"]}");

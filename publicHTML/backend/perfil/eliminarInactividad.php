@@ -14,7 +14,7 @@ $respuesta = array();
 
 if($data) {
 
-    $idi = $data["inactividad"];
+    $idi = intval(sanitizar($data["inactividad"]));
 
     $sql = "DELETE FROM inactividad WHERE idinactividad = :idi";
 

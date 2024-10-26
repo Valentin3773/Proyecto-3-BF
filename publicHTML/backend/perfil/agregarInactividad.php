@@ -12,16 +12,16 @@ $respuesta = [];
 
 $ido = $_SESSION['odontologo']['idodontologo'];
 
-$fechainicio = DateTime::createFromFormat('d/m/Y', $_POST['fechainicio']);
+$fechainicio = DateTime::createFromFormat('d/m/Y', sanitizar($_POST['fechainicio']));
 $fechainicio = $fechainicio->format('Y-m-d');
 
-$horainicio = DateTime::createFromFormat('H:i', $_POST['horainicio']);
+$horainicio = DateTime::createFromFormat('H:i', sanitizar($_POST['horainicio']));
 $horainicio = $horainicio->format('H:i:s');
 
-$fechafinalizacion = DateTime::createFromFormat('d/m/Y', $_POST['fechafinalizacion']);
+$fechafinalizacion = DateTime::createFromFormat('d/m/Y', sanitizar($_POST['fechafinalizacion']));
 $fechafinalizacion = $fechafinalizacion->format('Y-m-d');
 
-$horafinalizacion = DateTime::createFromFormat('H:i', $_POST['horafinalizacion']);
+$horafinalizacion = DateTime::createFromFormat('H:i', sanitizar($_POST['horafinalizacion']));
 $horafinalizacion = $horafinalizacion->format('H:i:s');
 
 if(fechaInicioInactividadDisponible($fechainicio, $ido) && 

@@ -1,6 +1,7 @@
 <?php
 
 include("../conexion.php");
+include("../extractor.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") processRegisterForm();
 
@@ -8,14 +9,14 @@ function processRegisterForm() : void {
 
     global $pdo;
 
-    $nombre = isset($_POST['nombre']) ? trim($_POST['nombre']) : null;
-    $apellidos = isset($_POST['apellido']) ? trim($_POST['apellido']) : null;
-    $documento = isset($_POST['documento']) ? trim($_POST['documento']) : null;
-    $telefono = isset($_POST['telefono']) ? trim($_POST['telefono']) : null;
-    $direccion = isset($_POST['direccion']) ? trim($_POST['direccion']) : null;
-    $email = isset($_POST['email']) ? trim($_POST['email']) : null;
-    $contrasenia = isset($_POST['contrasenia']) ? trim($_POST['contrasenia']) : null;
-    $concontrasenia = isset($_POST['concontrasenia']) ? trim($_POST['concontrasenia'])  : null;
+    $nombre = isset($_POST['nombre']) ? sanitizar($_POST['nombre']) : null;
+    $apellidos = isset($_POST['apellido']) ? sanitizar($_POST['apellido']) : null;
+    $documento = isset($_POST['documento']) ? sanitizar($_POST['documento']) : null;
+    $telefono = isset($_POST['telefono']) ? sanitizar($_POST['telefono']) : null;
+    $direccion = isset($_POST['direccion']) ? sanitizar($_POST['direccion']) : null;
+    $email = isset($_POST['email']) ? sanitizar($_POST['email']) : null;
+    $contrasenia = isset($_POST['contrasenia']) ? sanitizar($_POST['contrasenia']) : null;
+    $concontrasenia = isset($_POST['concontrasenia']) ? sanitizar($_POST['concontrasenia'])  : null;
 
     $datos = array();
 

@@ -13,11 +13,11 @@ $respuesta = array();
 
 if($data) {
 
-    $dia = $data['dia'];
+    $dia = intval(sanitizar($data['dia']));
 
     $ido = $_SESSION['odontologo']['idodontologo'];
 
-    $horainicio = $data['horainicio'];
+    $horainicio = sanitizar($data['horainicio']);
     
     $respuesta['horasFinalizacion'] = getHorasFinalizacionHorario($dia, $horainicio, $ido);
 }

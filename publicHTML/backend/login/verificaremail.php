@@ -14,9 +14,9 @@ function verifyUserEmail() : void {
 
     global $pdo;
 
-    $idp = $_GET['idp'] ?? null;
+    $idp = isset($_GET['idp']) ? sanitizar($_GET['idp']) : null;
 
-    $verificador = $_GET['verificador'] ?? null;
+    $verificador = isset($_GET['verificador']) ? sanitizar($_GET['verificador']) : null;
 
     if($idp == null || $verificador == null) {
 

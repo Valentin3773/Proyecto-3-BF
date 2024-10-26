@@ -20,6 +20,10 @@ if($data) {
 
     $ido = $_SESSION['odontologo']['idodontologo'];
 
+    $data['dia'] = sanitizar($data['dia']);
+    $data['mes'] = sanitizar($data['mes']);
+    $data['anio'] = sanitizar($data['anio']);
+
     $fecha = DateTime::createFromFormat('d-m-Y', "{$data["dia"]}-{$data["mes"]}-{$data["anio"]}");
     $fecha = $fecha->format('Y-m-d');
 

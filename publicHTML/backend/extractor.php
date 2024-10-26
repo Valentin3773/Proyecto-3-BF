@@ -18,6 +18,7 @@ $defaults = [
     'horaminima' => '01:00:00', // Hora minima posible para un horario
     'horamaxima' => '23:30:00', // Hora máxima posible para un horario
     'duracionmaxima' => 180, // Duración máxima (en minutos) de una consulta
+    'emailclinica' => 'laprogramarmy@gmail.com',
     'passemail' => 'nmlf rltr hzqx ugvh',
     'cooldownreserva' => 180
 ];
@@ -90,6 +91,17 @@ function getHoraActual(): string
     $resultado = $pdo->query($sql)->fetch();
 
     return $resultado['hora'];
+}
+
+function getTiempoActual(): string
+{
+
+    global $pdo;
+
+    $sql = "SELECT CONCAT(CURDATE(), ' ', CURTIME()) as tiempo";
+    $resultado = $pdo->query($sql)->fetch();
+
+    return $resultado['tiempo'];
 }
 
 function sumarFecha(string $fecha, string $intervalo, int $cantidad): string
@@ -991,8 +1003,10 @@ function odontologoHabilitado($idp, $ido): bool
             foreach ($consultas as $consulta) if (diferenciaFechas($consulta['fecha'], $fechaActual) >= $defaults['cooldownreserva']) $habilitado2 = true;
 
             return $habilitado1 && $habilitado2;
-        } else return $habilitado1;
-    } else return false;
+        } 
+        else return $habilitado1;
+    } 
+    else return false;
 }
 
 function reservaHabilitada($idp): bool
@@ -1087,7 +1101,7 @@ function obtenerNotificacionesConsulta(string $fecha, string $hora, int $ido): a
 
 function modificarBooleanosNotificacionesConsulta(string $fecha, string $hora, int $ido, array $booleanos): bool
 {
-
+    
     global $pdo;
 
     if (sizeof($booleanos) != 4) return false;
@@ -1109,4 +1123,30 @@ function modificarBooleanosNotificacionesConsulta(string $fecha, string $hora, i
     if ($stmt->execute() && $stmt->rowCount() > 0) return true;
 
     else return false;
+}
+
+function sanitizar(string $cadena): string {
+
+    // Eliminar etiquetas HTML.
+    $cadena = strip_tags($cadena);
+
+    // Convertir caracteres especiales a entidades HTML.
+    $cadena = htmlspecialchars($cadena, ENT_QUOTES, 'UTF-8');
+
+    // Eliminar espacios al principio y al final.
+    $cadena = trim($cadena);
+
+    // Reemplazar múltiples espacios internos con un solo espacio.
+    $cadena = preg_replace('/\s+/', ' ', $cadena);
+
+    return $cadena;
+}
+
+function sanitizarArray(array $cadenas) {
+
+    $nuevascadenas = [];
+
+    foreach($cadenas as $cadena) $nuevascadenas[] = sanitizar($cadena);
+
+    return $nuevascadenas;
 }

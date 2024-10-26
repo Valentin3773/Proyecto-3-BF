@@ -15,7 +15,7 @@ $respuesta = array();
 
 if($data) {
 
-    $dia = $data['dia'];
+    $dia = intval(sanitizar($data['dia']));
 
     $ido = $_SESSION['odontologo']['idodontologo'];
 

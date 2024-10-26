@@ -22,7 +22,7 @@ function sendMail() {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'laprogramarmy@gmail.com';
+    $mail->Username = $defaults['emailclinica'];
     $mail->Password = $defaults['passemail'];
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
@@ -30,10 +30,10 @@ function sendMail() {
 
     try {
 
-        $email = isset($_POST['email']) ? $_POST['email'] : null;
-        $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
-        $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : null;
-        $mensajec = isset($_POST['mensaje']) ? $_POST['mensaje'] : null;
+        $email = isset($_POST['email']) ? sanitizar($_POST['email']) : null;
+        $nombre = isset($_POST['nombre']) ? sanitizar($_POST['nombre']) : null;
+        $telefono = isset($_POST['telefono']) ? sanitizar($_POST['telefono']) : null;
+        $mensajec = isset($_POST['mensaje']) ? sanitizar($_POST['mensaje']) : null;
 
         $datos = array();
 
@@ -68,8 +68,9 @@ function sendMail() {
             $datos['error'] = "Mensaje no proporcionado.";
         } 
         else {
+          
             //Destinatario
-            $destino = "laprogramarmy@gmail.com";
+            $destino = $defaults['emailclinica'];
             $mail->isHTML(true);
 
             // Asunto del correo

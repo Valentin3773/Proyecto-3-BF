@@ -1,32 +1,36 @@
 <?php 
+
 include ("../conexion.php");
 include ("../extractor.php");
+
 session_start();
+reloadSession();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    eleminarConsulta($pdo);    
-} else {
-    echo "Error: Acceso no autorizado";
-}
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['odontologo'])) eliminarConsulta();
 
-function eleminarConsulta($pdo){
+else exit();
+
+function eliminarConsulta() {
+
     $response = array();
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
     
-    $fecha = $data['fechaV'];
-    $hora = $data['horaV'];
+    $fecha = sanitizar($data['fechaV']);
+    $hora = sanitizar($data['horaV']);
     $ido = $_SESSION['odontologo']['idodontologo'];
 
-    
     try {
-        archivarConsulta($fecha,$hora,$ido);
-    } catch (Throwable $th) {
-        $response['error'] = $th->getMessage()." | ".$asunto." | ".$hora." | ".$duracion." | ".$fecha." | ".$resumen." | ".$ido;
-    }
 
+        if(!archivarConsulta($fecha, $hora, $ido)) $response['error'] = "Ha ocurrido un error al eliminar la consulta";
+    } 
+    catch (Throwable $th) {
+
+        $response['error'] = "Ha ocurrido un error al eliminar la consulta";
+    }
     header('Content-Type: application/json');
     echo json_encode($response);
     exit();
 }
+
 ?>

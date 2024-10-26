@@ -17,9 +17,9 @@ if($data) {
 
     $ido = $_SESSION['odontologo']['idodontologo'];
 
-    $dia = $data['dia'];
-    $horainicio = $data['horainicio'];
-    $horafinalizacion = $data['horafinalizacion'];
+    $dia = intval(sanitizar($data['dia']));
+    $horainicio = sanitizar($data['horainicio']);
+    $horafinalizacion = sanitizar($data['horafinalizacion']);
 
     if(in_array($horainicio, getHorasInicioHorario($dia, $ido)) && in_array($horafinalizacion, getHorasFinalizacionHorario($dia, $horainicio, $ido))) {
 

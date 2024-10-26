@@ -10,8 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_SESSION['odontologo'])) exi
 
 $respuesta = array();
 
-function crearServicio($pdo) {
+function crearServicio() {
 
+    global $pdo;
     global $respuesta;
 
     $nombre = $_POST["nombre"];
@@ -57,6 +58,7 @@ function icono($icon) {
     global $respuesta;
 
     if($icon != null) {
+        
         $ruta_carpeta = $_SERVER['DOCUMENT_ROOT'] . "/Proyecto-3-BF/publicHTML/backend/almacenamiento/iconservice/";
         $extension = pathinfo($icon['name'], PATHINFO_EXTENSION);
         $nuevo_nombre_archivo = uniqid('img_', true) . '.' . $extension;

@@ -14,18 +14,18 @@ function loginCheckUser() {
 
     global $pdo;
 
-    $email = isset($_POST['email']) ? $_POST['email'] : null;
-    $contrasenia = isset($_POST['contrasenia']) ? $_POST['contrasenia'] : null;
+    $email = isset($_POST['email']) ? sanitizar($_POST['email']) : null;
+    $contrasenia = isset($_POST['contrasenia']) ? sanitizar($_POST['contrasenia']) : null;
 
     $datos = array();
 
     if ($email === null || $email === '') {
 
-        $datos['error'] = "Email no proporcionado.";
+        $datos['error'] = "Email no proporcionado";
     } 
     else if ($contrasenia === null || $contrasenia === '') {
 
-        $datos['error'] = "Contraseña no proporcionada.";
+        $datos['error'] = "Contraseña no proporcionada";
     } 
     else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
@@ -47,7 +47,7 @@ function loginCheckUser() {
 
                 unset($tupla['contrasenia']);
                 $_SESSION['paciente'] = $tupla;
-                $datos['enviar'] = "Iniciando Sesion";
+                $datos['enviar'] = "Iniciando Sesión";
             } 
             else $datos['error'] = "Credenciales Incorrectas";
         } 

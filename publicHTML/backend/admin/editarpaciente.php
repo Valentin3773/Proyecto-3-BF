@@ -86,23 +86,23 @@ if($data) {
 
     $nuevosdatos = $data;
 
-    $idp = $nuevosdatos['idpaciente'];
+    $idp = intval(sanitizar($nuevosdatos['idpaciente']));
 
     $viejosdatos = obtenerViejosDatos($idp);
 
     $tuduben = true;
 
-    if($nuevosdatos['enfermedades'] != $viejosdatos['enfermedades']) {
+    if(sanitizarArray($nuevosdatos['enfermedades']) != $viejosdatos['enfermedades']) {
 
         $sql = "DELETE FROM enfermedades WHERE idpaciente = :idp";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':idp', $idp);
         $stmt->execute();
 
-        foreach($nuevosdatos['enfermedades'] as $enfermedad) if(!agregarEnfermedad($enfermedad, $idp)) $tuduben = false;
+        foreach($nuevosdatos['enfermedades'] as $enfermedad) if(!agregarEnfermedad(sanitizar($enfermedad), $idp)) $tuduben = false;
     }
 
-    if((isset($nuevosdatos['medicacion']) && isset($viejosdatos['medicacion']) && $nuevosdatos['medicacion'] != $viejosdatos['medicacion']) || (isset($nuevosdatos['medicacion']) && !isset($viejosdatos['medicacion']))) {
+    if((isset($nuevosdatos['medicacion']) && isset($viejosdatos['medicacion']) && sanitizarArray($nuevosdatos['medicacion']) != $viejosdatos['medicacion']) || (isset($nuevosdatos['medicacion']) && !isset($viejosdatos['medicacion']))) {
 
         $sql = "DELETE FROM medicacion WHERE idpaciente = :idp";
         $stmt = $pdo->prepare($sql);
@@ -110,10 +110,12 @@ if($data) {
         
         if(!$stmt->execute()) $tuduben = false;
 
-        foreach($nuevosdatos['medicacion'] as $medicamento) if(!agregarMedicacion($medicamento, $idp)) $tuduben = false;
+        foreach($nuevosdatos['medicacion'] as $medicamento) if(!agregarMedicacion(sanitizar($medicamento), $idp)) $tuduben = false;
     }
 
-    if((isset($nuevosdatos['nombre']) && isset($viejosdatos['nombre']) && $nuevosdatos['nombre'] != $viejosdatos['nombre']) || (isset($nuevosdatos['nombre']) && !isset($viejosdatos['nombre']))) {
+    if((isset($nuevosdatos['nombre']) && isset($viejosdatos['nombre']) && sanitizarArray($nuevosdatos['nombre']) != $viejosdatos['nombre']) || (isset($nuevosdatos['nombre']) && !isset($viejosdatos['nombre']))) {
+
+        $nuevosdatos['nombre'] = sanitizar($nuevosdatos['nombre']);
 
         $sql = "UPDATE paciente SET nombre = :nombre WHERE idpaciente = :idp";
         $stmt = $pdo->prepare($sql);
@@ -125,6 +127,8 @@ if($data) {
 
     if((isset($nuevosdatos['apellido']) && isset($viejosdatos['apellido']) && $nuevosdatos['apellido'] != $viejosdatos['apellido']) || (isset($nuevosdatos['apellido']) && !isset($viejosdatos['apellido']))) {
 
+        $nuevosdatos['apellido'] = sanitizar($nuevosdatos['apellido']);
+
         $sql = "UPDATE paciente SET apellido = :apellido WHERE idpaciente = :idp";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':idp', $idp);
@@ -134,6 +138,8 @@ if($data) {
     }
 
     if((isset($nuevosdatos['documento']) && isset($viejosdatos['documento']) && $nuevosdatos['documento'] != $viejosdatos['documento']) || (isset($nuevosdatos['documento']) && !isset($viejosdatos['documento']))) {
+
+        $nuevosdatos['documento'] = sanitizar($nuevosdatos['documento']);
 
         $sql = "UPDATE paciente SET documento = :documento WHERE idpaciente = :idp";
         $stmt = $pdo->prepare($sql);
@@ -145,6 +151,8 @@ if($data) {
 
     if((isset($nuevosdatos['telefono']) && isset($viejosdatos['telefono']) && $nuevosdatos['telefono'] != $viejosdatos['telefono']) || (isset($nuevosdatos['telefono']) && !isset($viejosdatos['telefono']))) {
 
+        $nuevosdatos['telefono'] = sanitizar($nuevosdatos['telefono']);
+
         $sql = "UPDATE paciente SET telefono = :telefono WHERE idpaciente = :idp";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':idp', $idp);
@@ -154,6 +162,8 @@ if($data) {
     }
 
     if((isset($nuevosdatos['direccion']) && isset($viejosdatos['direccion']) && $nuevosdatos['direccion'] != $viejosdatos['direccion']) || (isset($nuevosdatos['direccion']) && !isset($viejosdatos['direccion']))) {
+
+        $nuevosdatos['direccion'] = sanitizar($nuevosdatos['direccion']);
 
         $sql = "UPDATE paciente SET direccion = :direccion WHERE idpaciente = :idp";
         $stmt = $pdo->prepare($sql);
@@ -165,17 +175,14 @@ if($data) {
 
     if((isset($nuevosdatos['email']) && isset($viejosdatos['email']) && $nuevosdatos['email'] != $viejosdatos['email']) || (isset($nuevosdatos['email']) && !isset($viejosdatos['email']))) {
 
+        $nuevosdatos['email'] = sanitizar($nuevosdatos['email']);
+
         $sql = "UPDATE paciente SET email = :email WHERE idpaciente = :idp";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':idp', $idp);
         $stmt->bindParam(':email', $nuevosdatos['email']);
         
         if(!$stmt->execute()) $tuduben = false;
-    }
-
-    if(true) {
-
-        
     }
 
     if($tuduben) $respuesta['exito'] = "Los datos del paciente han sido modificados";

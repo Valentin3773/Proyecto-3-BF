@@ -18,9 +18,13 @@ $nomolestar = $_SESSION['paciente']['nomolestar'];
 
 if (!$nomolestar) {
 
-    $respuesta = ['avisar' => [], 'calificar' => []];
+    $respuesta = ['avisar' => [], 'calificar' => [], 'calificacionclinica' => false];
+
+    $clinicacalificada = $_SESSION['paciente']['calificado'];
 
     $consultas = obtenerNotificacionesPaciente($idp);
+
+    if(sizeof($consultas) >= 5) $respuesta['calificacionclinica'] = !$clinicacalificada;
 
     foreach ($consultas as $consulta) {
 

@@ -23,12 +23,14 @@ function UpdateProfilePaciente() {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
 
+    if(!$data) exit();
+
     $idp = $_SESSION['paciente']['idpaciente'];
 
-    $name = $data['name'];
-    $value = $data['value'];
-    $oldvalue = $data['oldvalue'];
-    $nameROW = $data['name'];
+    $name = sanitizar($data['name']);
+    $value = sanitizar($data['value']);
+    $oldvalue = sanitizar($data['oldvalue']);
+    $nameROW = sanitizar($data['name']);
 
     $datosModificables = ['nombre', 'apellido', 'email', 'telefono', 'direccion'];
 

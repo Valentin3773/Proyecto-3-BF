@@ -219,8 +219,8 @@ function verificarCodigo($codigo, $pass, $repass, $secp) {
 
     let formData = new FormData();
     formData.append('codigo', $codigo);
-    formData.append('contraseña', $pass);
-    formData.append('recontraseña', $repass);
+    formData.append('contrasenia', $pass);
+    formData.append('recontrasenia', $repass);
     formData.append('secp', $secp);
 
     $.ajax({

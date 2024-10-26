@@ -25,12 +25,14 @@ function UpdateProfileOdontologo() {
     $data = json_decode($json, true);
     $respuesta = array();
 
+    if(!$data) exit();
+
     $ido = $_SESSION['odontologo']['idodontologo'];
 
-    $name = $data['name'];
-    $value = $data['value'];
-    $oldvalue = $data['oldvalue'];
-    $nameROW = $data['name'];
+    $name = sanitizar($data['name']);
+    $value = sanitizar($data['value']);
+    $oldvalue = sanitizar($data['oldvalue']);
+    $nameROW = sanitizar($data['name']);
 
     $datosModificables = ['nombre', 'apellido', 'email', 'telefono', 'direccion'];
 
@@ -41,8 +43,6 @@ function UpdateProfileOdontologo() {
         $consulta = "UPDATE odontologo SET {$name} = :val1 WHERE {$nameROW} = :val2 and idodontologo = :ido";
         
         $stmt = $pdo->prepare($consulta);
-        //$stmt->bindParam(':namee', $name);
-        //$stmt->bindParam(':namerow', $nameROW);
         $stmt->bindParam(':val1', $value);
         $stmt->bindParam(':val2', $oldvalue);
         $stmt->bindParam(':ido', $ido);

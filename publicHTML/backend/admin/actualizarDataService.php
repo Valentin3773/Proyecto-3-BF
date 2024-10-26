@@ -19,11 +19,11 @@ function subirCambios() {
 
     $desc = null;
     $titulo = null;
-    $id = htmlspecialchars(strip_tags($_POST['id']));
+    $id = sanitizar($_POST['id']);
 
-    if (!empty($_POST['descripcion'])) $desc = htmlspecialchars(strip_tags($_POST['descripcion']));
+    if (!empty($_POST['descripcion'])) $desc = sanitizar($_POST['descripcion']);
 
-    else if (!empty($_POST['titulo'])) $titulo = htmlspecialchars(strip_tags($_POST['titulo']));
+    else if (!empty($_POST['titulo'])) $titulo = sanitizar($_POST['titulo']);
 
     try {
 

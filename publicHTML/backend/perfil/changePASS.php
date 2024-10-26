@@ -7,17 +7,25 @@ session_start();
 
 if(!isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) header('Location: index.php');
 
-if($_SERVER['REQUEST_METHOD'] == "POST") changePassword($pdo);
+if($_SERVER['REQUEST_METHOD'] == "POST") changePassword();
 
-function changePassword($pdo) {
+function changePassword() {
+
+    global $pdo;
 
     $respuesta = array();
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
 
-    if($data['new'] == $data['newA']){
+    if(!$data) exit();
 
-        if (isset($_SESSION['odontologo'])){
+    $data['new'] = sanitizar($data['new']);
+    $data['newA'] = sanitizar($data['newA']);
+    $data['old'] = sanitizar($data['old']);
+
+    if($data['new'] == $data['newA']) {
+
+        if (isset($_SESSION['odontologo'])) {
 
             $ido = $_SESSION['odontologo']['idodontologo'];
 
@@ -93,19 +101,22 @@ function changePassword($pdo) {
 
                         $respuesta['enviar'] = $e;
                     }
-                } else $respuesta['error'] = "La contraseña actual no coincide con el usuario";
+                } 
+                else $respuesta['error'] = "La contraseña actual no coincide con el usuario";
             } 
             catch (PDOException $e) {
 
                 $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
             }
         } 
-        else $respuesta['error'] = "Ohh no, ah ocurrido un error";
+        else $respuesta['error'] = "Ha ocurrido un error";
 
-    } else $respuesta['error'] = "Las contraseñas repetidas no son iguales";
+    } 
+    else $respuesta['error'] = "Las contraseñas repetidas no son iguales";
     
     header('Content-Type: application/json');
     echo json_encode($respuesta);
+    exit();
 }
 
 ?>

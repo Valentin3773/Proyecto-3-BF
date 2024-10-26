@@ -13,13 +13,13 @@ $data = json_decode($json, true);
 
 if($data) {
 
-    $fechainicio = DateTime::createFromFormat('d/m/Y', $data['fechainicio']);
+    $fechainicio = DateTime::createFromFormat('d/m/Y', sanitizar($data['fechainicio']));
     $fechainicio = $fechainicio->format('Y-m-d');
 
-    $horainicio = DateTime::createFromFormat('H:i', $data['horainicio']);
+    $horainicio = DateTime::createFromFormat('H:i', sanitizar($data['horainicio']));
     $horainicio = $horainicio->format('H:i:s');
 
-    $fechafinalizacion = DateTime::createFromFormat('d/m/Y', $data['fechafinalizacion']);
+    $fechafinalizacion = DateTime::createFromFormat('d/m/Y', sanitizar($data['fechafinalizacion']));
     $fechafinalizacion = $fechafinalizacion->format('Y-m-d');
 
     $ido = $_SESSION['odontologo']['idodontologo'];
