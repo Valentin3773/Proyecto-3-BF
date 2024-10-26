@@ -35,6 +35,23 @@ function iniciarServicios(servicios) {
         $('main #sectionservicecontainer').append(secservicio);
     });
 
+    uniqueServicios.forEach(elemento => {
+        
+        let slideservicio = $(`<div id="${elemento.numero}" class="card btn${elemento.nombre}"></div>`);
+
+        if (elemento.icono != null) {
+            slideservicio.append(`<img src="backend/almacenamiento/iconservice/${elemento.icono}" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`);
+        } else {
+            slideservicio.append(`<img src="img/logaso.png" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`);
+        }
+        
+        slideservicio.append(`<div class="card-body"><h3 class="card-title text-center m-0">${elemento.nombre}</h3></div>`);
+        $('.navslider').append(slideservicio);
+
+    });
+
+
+
     setTimeout(() => $('.navslider').slick({
 
         dots: false,

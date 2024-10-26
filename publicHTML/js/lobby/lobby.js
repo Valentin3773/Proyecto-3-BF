@@ -72,7 +72,6 @@ $(() => {
     });
 });
 
-
 var listenersAdded = true;
 
 function addListeners() {
