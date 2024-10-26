@@ -1,2 +1,17 @@
 User-agent: *
+
 Disallow: /administrador.php
+Disallow: /perfil.php
+Disallow: /reservarconsulta.php
+Disallow: /Proyecto-3-BF/publicHTML/vistas/
+Disallow: /Proyecto-3-BF/publicHTML/backend/
+Disallow: /Proyecto-3-BF/publicHTML/img/
+Disallow: /Proyecto-3-BF/publicHTML/js/
+Disallow: /Proyecto-3-BF/publicHTML/lib/
+Disallow: /Proyecto-3-BF/publicHTML/font/
+Disallow: /Proyecto-3-BF/publicHTML/css/
+
+Allow: /index.php
+Allow: /aboutUs/aboutus.php
+
+Sitemap: https://clinica-local.ddns.net/sitemap.xml

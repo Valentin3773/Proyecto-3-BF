@@ -72,20 +72,26 @@ $(() => {
     });
 });
 
+
+var listenersAdded = true;
+
 function addListeners() {
+    if (listenersAdded)
+    {
 
-    $('#inicio, #iniciom, #logo').on('click', () => changeView(cargarVistaInicio));
-
-    $('#nosotros, #nosotrosm').on('click', () => changeView(cargarVistaNosotros));
-
-    $('#servicios, #serviciosm').on('click', () => changeView(cargarVistaServicios));
-
-    $('#contacto, #contactom').on('click', () => changeView(cargarVistaContacto));
-
-    $('#btnchat').on('click', () => window.open('https://api.whatsapp.com/send/?phone=598091814295', '_blank'));
-
-    $('#closemodal').on('click', () => $('#modal').addClass('oculto').removeClass('visible'));
+        $('#inicio, #iniciom, #logo').on('click', () => changeView(cargarVistaInicio));
+        $('#nosotros, #nosotrosm').on('click', () => changeView(cargarVistaNosotros));
+        $('#servicios, #serviciosm').on('click', function (){changeView(cargarVistaServicios)});
+        $('#contacto, #contactom').on('click', () => changeView(cargarVistaContacto));
+        $('#btnchat').on('click', () => window.open('https://api.whatsapp.com/send/?phone=598091814295', '_blank'));
+        $('#closemodal').on('click', () => $('#modal').addClass('oculto').removeClass('visible'));
+        $('.cmpfooterlink.cmpfooterlinkcmp').css('display', 'none');
+    } else {
+        console.log(listenersAdded);
+        return listenersAdded = false;
+    }
 }
+
 
 function cargarVistaInicio() {
 
@@ -128,17 +134,19 @@ function cargarVistaNosotros() {
 }
 
 function cargarVistaServicios() {
+    console.log("cargarVistaServicios llamada");
 
     window.scrollTo({top: 0, behavior: 'smooth'});
 
     $.get("vistas/vistaslobby/vistaservicios.php", data => {
-
         loadView(data);
         console.log("Cargando vista de 'Servicios'");
-
-        $.get('backend/lobby/apiservicios.php', data => iniciarServicios(data));
-
         // history.pushState({}, '', 'servicios');
+    });
+
+    $.get('backend/lobby/apiservicios.php', data => {
+        console.log("Llamada a iniciarServicios");
+        iniciarServicios(data);
     });
 
     $('#servicios, #serviciosm').css({ 'text-decoration': 'underline' });
@@ -148,6 +156,7 @@ function cargarVistaServicios() {
 
     $('#seccionescss').attr('href', 'css/lobby/servicios.css');
 }
+
 
 function cargarVistaContacto() {
 

@@ -18,4 +18,4 @@
 
 </section>
 
-<div id="sectionservicecontainer"></div>
+<div id="sectionservicecontainer" loading="lazy" ></div>

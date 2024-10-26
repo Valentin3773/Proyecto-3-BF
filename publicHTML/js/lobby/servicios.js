@@ -1,22 +1,36 @@
-function iniciarServicios(servicios) {
+var uniqueServicios = [];
+var visto = new Set();
 
-    servicios.forEach(elemento => {
+function iniciarServicios(servicios) {
+    
+    for (let i = 0; i < servicios.length; i++) {
+        if (!visto.has(servicios[i].numero)) {
+            visto.add(servicios[i].numero);
+            uniqueServicios.push(servicios[i]);
+        }
+    }
+   
+    uniqueServicios.forEach(elemento => {
         
         let slideservicio = $(`<div id="${elemento.numero}" class="card btn${elemento.nombre}"></div>`);
 
-        if(elemento.icono != null) slideservicio.append(`<img src="backend/almacenamiento/iconservice/${elemento.icono}" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`);
-
-        else slideservicio.append(`<img src="img/logaso.png" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`);
+        if (elemento.icono != null) {
+            slideservicio.append(`<img src="backend/almacenamiento/iconservice/${elemento.icono}" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`);
+        } else {
+            slideservicio.append(`<img src="img/logaso.png" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`);
+        }
         
         slideservicio.append(`<div class="card-body"><h3 class="card-title text-center m-0">${elemento.nombre}</h3></div>`);
 
         $('.navslider').append(slideservicio);
-
+        
         let secservicio = $(`<section id="${elemento.numero}" class="mt-5 gx-0"><div class="sectitcontainer text-center"><h2 class="sectitulo">${elemento.nombre}</h2></div><div class="seccontainer row mt-5 gx-0"><div class="col-xl-1 col-lg-1"></div><article class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 d-flex align-items-center p-3"><p>${elemento.descripcion}</p></article><aside class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 d-flex justify-content-center align-items-center"></aside><div class="col-xl-1 col-lg-1"></div></div></section>`);
 
-        if(elemento.imagen != null) secservicio.find('aside').html(`<img src="backend/almacenamiento/imgservice/${elemento.imagen}" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`)
-
-        else secservicio.find('aside').html(`<img src="img/logaso.png" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`);
+        if (elemento.imagen != null) {
+            secservicio.find('aside').html(`<img src="backend/almacenamiento/imgservice/${elemento.imagen}" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`);
+        } else {
+            secservicio.find('aside').html(`<img src="img/logaso.png" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`);
+        }
 
         $('main #sectionservicecontainer').append(secservicio);
     });
@@ -84,13 +98,17 @@ function iniciarServicios(servicios) {
 
     $('.slick-prev').empty();
     $('.slick-next').empty();
-
-    addServListeners(servicios);
+    addServListeners(uniqueServicios);
+    $('.navslider').on('afterChange', function(event, slick, currentSlide){
+        addServListeners(uniqueServicios);
+    });
 }
+
+
 
 function addServListeners(servicios) {
 
-    servicios.forEach(elemento => $(`.navslider #${elemento.numero}`).on('click', evt => window.scrollTo({
+    servicios.forEach(elemento => $(`.navslider #${elemento.numero}`).off().on('click', evt => window.scrollTo({
 
         top: $(`#sectionservicecontainer #${elemento.numero}`)[0].offsetTop - 160,
         behavior: 'smooth'
@@ -101,8 +119,8 @@ function addServListeners(servicios) {
     let blockTimeout = null;
     let prevDeltaY = 0;
 
-    $(".navslider").on('mousewheel DOMMouseScroll wheel', function (evt) {
-
+    $(".navslider").off().on('mousewheel DOMMouseScroll wheel', function (evt) {
+        addServListeners(servicios);
         let deltaY = evt.originalEvent.deltaY;
         evt.preventDefault();
         evt.stopPropagation();
@@ -126,3 +144,4 @@ function addServListeners(servicios) {
         }
     });
 }
+
