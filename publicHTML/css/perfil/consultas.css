@@ -115,7 +115,7 @@ h3 {
     .consulta {
 
         padding: .6rem !important;
-        gap: 8px !important;
+        gap: 6px !important;
         height: 170px !important;
     }
 
@@ -132,7 +132,7 @@ h3 {
     .fechahorawrapper {
 
         flex-direction: column !important;
-        gap: 8px !important;
+        gap: 6px !important;
     }
 
     .fechahorawrapper > div {

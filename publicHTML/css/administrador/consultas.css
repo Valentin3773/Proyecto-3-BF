@@ -473,7 +473,7 @@ section#calendariocontainer {
     .consulta {
 
         padding: .6rem !important;
-        gap: 8px !important;
+        gap: 6px !important;
         height: 170px !important;
     }
 
@@ -490,7 +490,7 @@ section#calendariocontainer {
     .fechahorawrapper {
 
         flex-direction: column !important;
-        gap: 8px !important;
+        gap: 6px !important;
     }
 
     .fechahorawrapper > div {

@@ -4,6 +4,7 @@ include('../conexion.php');
 include('../extractor.php');
 
 session_start();
+reloadSession();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -35,7 +36,8 @@ function checarIMG() {
         if ($stmt->execute() && $stmt->rowCount() > 0) {
 
             $estado['nombre'] = $stmt->fetch(PDO::FETCH_ASSOC)['foto'];
-            $estado['ok'] = true;
+
+            if($estado['nombre'] != null) $estado['ok'] = true;
         }
     } 
     else if (isset($_SESSION['odontologo']) && !isset($_SESSION['paciente'])) {
@@ -46,7 +48,7 @@ function checarIMG() {
         if ($stmt->execute() && $stmt->rowCount() > 0) {
 
             $estado['nombre'] = $stmt->fetch(PDO::FETCH_ASSOC)['foto'];
-            $estado['ok'] = true;
+            if($estado['nombre'] != null) $estado['ok'] = true;
         }
     }
     else return false;
@@ -78,7 +80,7 @@ function subirPacienteIMG() {
 
             try {
 
-                //Borro la imagen vieja del usuario
+                // Borro la imagen vieja del usuario
                 $estadoIMG = checarIMG();
                 if ($estadoIMG['ok'] && file_exists($ruta_carpeta . $estadoIMG['nombre'])) unlink($ruta_carpeta . $estadoIMG['nombre']);
 

@@ -14,6 +14,8 @@ $(() => {
 
     $('#btnopciones').on('click', desplegarSidebarMobile);
 
+    $('#btnvolver').on('click', () => changePage('index.php'));
+
     switch ($('main').data('vista')) {
 
         case 1: cargarVistaPerfil(); break;
@@ -725,8 +727,6 @@ function cambiarContrasenia($1, $2, $3) {
 }
 
 function desplegarSidebarMobile() {
-
-    console.log('juansonlajs');
 
     let sidebarmobile = $('#sidebarmobile');
 

@@ -2,8 +2,6 @@ $(() => {
 
     addListeners();
 
-    let calificaravisar = null;
-
     $.get('backend/lobby/getnotificaciones.php', respuesta => notificacionesManager(respuesta));
 });
 

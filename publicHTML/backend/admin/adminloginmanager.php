@@ -1,6 +1,7 @@
 <?php
 
 include("../conexion.php");
+include("../extractor.php");
 
 session_start();
 

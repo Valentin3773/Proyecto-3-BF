@@ -1,16 +1,16 @@
-<?php 
+<?php
 
 session_start();
 
-if((isset($_SESSION['paciente']) || isset($_SESSION['odontologo'])) && $_GET['estado'] != 3 && $_GET['estado'] != 4 && $_GET['estado'] != 5) header('Location: index.php');
+if ((isset($_SESSION['paciente']) || isset($_SESSION['odontologo'])) && $_GET['estado'] != 3 && $_GET['estado'] != 4 && $_GET['estado'] != 5) header('Location: index.php');
 
 include('backend/extractor.php');
 
 reloadSession();
 
-if(!isset($_GET['estado']) || (isset($_GET['estado']) && $_GET['estado'] == 1)) $estado = 1;
+if (!isset($_GET['estado']) || (isset($_GET['estado']) && $_GET['estado'] == 1)) $estado = 1;
 
-else if(isset($_GET['estado'])) $estado = $_GET['estado'];
+else if (isset($_GET['estado'])) $estado = $_GET['estado'];
 
 ?>
 
@@ -25,15 +25,17 @@ else if(isset($_GET['estado'])) $estado = $_GET['estado'];
         <meta description="Inicia sesión para tener una experiencia completa en la clínica">
         <meta name="Iniciar Sesión">
 
-            <!-- Google tag (gtag.js) -->
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-408EQQ11WH"></script>
-            <script>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-408EQQ11WH"></script>
+        <script>
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
 
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
             gtag('config', 'G-408EQQ11WH');
-            </script>
+        </script>
 
         <!-- Librerias -->
         <script src="lib/jquery-3.7.1.min.js"></script>
@@ -54,32 +56,49 @@ else if(isset($_GET['estado'])) $estado = $_GET['estado'];
         <script src="js/preloader.js"></script>
         <script src="js/utilidades.js"></script>
         <script defer src="js/login/login.js"></script>
-        
+
     </head>
 
     <body>
 
         <div id="preloader" class="d-flex justify-content-center align-items-center">
 
-            <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-        
+            <div class="lds-spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
         </div>
-        
+
         <main data-vista="<?= $estado ?>">
 
             <?php
-            
-            switch($estado) {
 
-                case 1: include("vistas/vistaslogin/vistalogin.php"); break;
+            switch ($estado) {
 
-                case 2: include("vistas/vistaslogin/vistaregistro.php"); break;
+                case 1:
+                    include("vistas/vistaslogin/vistalogin.php");
+                break;
+
+                case 2:
+                    include("vistas/vistaslogin/vistaregistro.php");
+                break;
             }
-            
+
             ?>
 
         </main>
 
     </body>
-    
+
 </html>
