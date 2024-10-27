@@ -48,11 +48,13 @@ $(() => {
 
         if($('#navmobile').hasClass('desplegado')) desplegarMenu();
     });
+
+    setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 1000);
 });
 
 function checkButtonPosition() {
 
-    var posFooter = $('footer').get(0).getBoundingClientRect();
+    var posFooter = $('footer').get(0).getBoundingClientRect(); 
     
     if(window.innerWidth < 600) {
            

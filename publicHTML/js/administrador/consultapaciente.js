@@ -115,9 +115,9 @@ function funcionGuardar() {
             contentType: 'application/json',
             success: response => {
 
-                if (response.error === undefined) createPopup("Nuevo aviso", response);
+                if (response.error === undefined) console.log(response.enviar);
 
-                else createPopup("Nuevo aviso", response);
+                else createPopup("Nuevo aviso", response.error);
             },
             error: (jqXHR, estado, outputError) => {
 

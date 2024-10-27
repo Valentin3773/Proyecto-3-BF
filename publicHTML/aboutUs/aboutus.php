@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="css/sectionmid.css">
         <link rel="stylesheet" href="css/footer.css">
         <link rel="shortcut icon" href="img/logopa.png" type="image/x-icon">
+        <link rel="canonical" href="https://clinica-local.ddns.net/Proyecto-3-BF/publicHTML/index.php" />
     </head>
 
     <body>

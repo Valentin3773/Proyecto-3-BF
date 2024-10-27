@@ -1,6 +1,42 @@
-<div class="container-fluid text-center d-flex justify-content-center">
+<div class="container-fluid text-center d-flex justify-content-center mt-2">
 
-    <h1 id="titequipo">Nuestro Equipo</h1>
+    <h1 id="titequipo" class="m-0">La Clínica</h1>
+
+</div>
+
+<section id="blkBienvenida" class="row gx-0 mt-4">
+
+    <div class="col-xl-1 col-lg-1"></div>
+    <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 row gx-0">
+
+        <article class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3 d-flex flex-column justify-content-center flex-wrap gap-2">
+
+            <h2>
+                Bienvenido
+            </h2>
+
+            <p>
+                Bienvenido a la <span>Clínica Salud Bucal</span>,
+                donde tu salud bucal es nuestra prioridad. Nuestro equipo de odontólogos expertos y amable personal se dedican a
+                proporcionar atención dental de la más alta calidad en un ambiente cálido y acogedor.
+            </p>
+
+        </article>
+
+        <aside class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 d-flex justify-items-center align-items-center">
+
+            <img src="img/imagenesEmpresa/Ejemplo.png" alt="" id="Ejemplo1" class="w-100 img-thumbnail" loading="lazy">
+
+        </aside>
+
+    </div>
+    <div class="col-xl-1 col-lg-1"></div>
+
+</section>
+
+<div class="container-fluid text-center d-flex justify-content-center mt-5">
+
+    <h1 id="titequipo" class="m-0">Nuestro Equipo</h1>
 
 </div>
 

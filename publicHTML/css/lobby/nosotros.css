@@ -14,10 +14,9 @@
 
 section h1 {
 
-    color: #78b3ff;
+    color: #4294FF !important;
     font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 900;
-    text-shadow: 0 0 3px rgba(0, 0, 0, .5);
     font-size: 300%;
 }
 
@@ -128,6 +127,36 @@ section h1 {
 
     background: var(--bg-color);
     color: var(--main-color);
+}
+
+#blkBienvenida {
+    
+    background-color: #7CB9E8;
+    font-family: RobotoSerif, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    height: 600px;
+}
+
+#blkBienvenida aside {
+
+    border-radius: 0;
+}
+
+#blkBienvenida span {
+    
+    color: aqua;
+    text-shadow: 2px 2px 1px #9B9B9B, 0 0 5px rgb(255, 183, 0);
+}
+
+#blkBienvenida p, #blkBienvenida h2 {
+
+    font-size: 150%;
+    color: white;
+    text-shadow: 2px 2px 1px #9B9B9B;
+}
+
+#blkBienvenida h2 {
+
+    font-size: 200%;
 }
 
 @media screen and (max-width: 600px) {

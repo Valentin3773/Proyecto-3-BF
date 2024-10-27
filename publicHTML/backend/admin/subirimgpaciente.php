@@ -28,7 +28,7 @@ function checarIMG(int $idp)
         if ($stmt->execute() && $stmt->rowCount() > 0) {
 
             $estado['nombre'] = $stmt->fetch(PDO::FETCH_ASSOC)['foto'];
-            $estado['ok'] = true;
+            if($estado['nombre'] != null) $estado['ok'] = true;
         }
     }
     return $estado;
@@ -87,7 +87,7 @@ catch (Exception $e) {
 }
 
 header('Content-Type: application/json');
-echo json_encode([$respuesta]);
+echo json_encode($respuesta);
 exit();
 
 ?>

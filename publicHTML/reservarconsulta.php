@@ -72,6 +72,8 @@ else {
         <script defer src="js/reservaconsulta/calendario.js"></script>
         <script defer src="js/reservaconsulta/reservarconsulta.js"></script>
 
+        <link rel="canonical" href="https://clinica-local.ddns.net/Proyecto-3-BF/publicHTML/index.php" />
+
         <title>Reservar Consulta</title>
 
     </head>
