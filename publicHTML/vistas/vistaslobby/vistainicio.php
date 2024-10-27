@@ -141,3 +141,9 @@
     <div class="col-xl-1 col-lg-1"></div>
 
 </section>
+
+<div class="container-fluid text-center d-flex justify-content-center mt-4">
+
+    <h1 id="titantesdespues" class="m-0">Antes y Después</h1>
+
+</div>

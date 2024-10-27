@@ -16,6 +16,8 @@
     overflow: visible;
     cursor: pointer;
     scale: 0.9;
+    display: flex !important;
+    padding: 1rem;
 }
 
 .card-body {
@@ -35,6 +37,7 @@
 .card img {
 
     border-radius: 5px 30px 0 0;
+    border: none !important;
 }
 
 .slick-arrow {
