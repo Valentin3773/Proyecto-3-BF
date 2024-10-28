@@ -20,38 +20,39 @@ function updateConsulta()
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
 
-    $asunto = sanitizar($data['asunto']);
-    $hora = sanitizar($data['hora']);
-    $duracion = sanitizar($data['duracion']);
-    $fecha = sanitizar($data['fecha']);
-    $resumen = sanitizar($data['resumen']);
+    $asunto = isset($data['asunto']) ? sanitizar($data['asunto']) : null;
+    $hora = isset($data['hora']) ? sanitizar($data['hora']) : null;
+    $duracion = isset($data['duracion']) ? sanitizar($data['duracion']) : null;
+    $fecha = isset($data['fecha']) ? sanitizar($data['fecha']) : null;
+    $resumen = isset($data['resumen']) ? sanitizar($data['resumen']) : null;
     $ido = $_SESSION['odontologo']['idodontologo'];
-    $fechaV = sanitizar($data['fechaV']);
-    $horaV = sanitizar($data['horaV']);
+    $fechaV = isset($data['fechaV']) ? sanitizar($data['fechaV']) : null;
+    $horaV = isset($data['horaV']) ? sanitizar($data['horaV']) : null;
 
-    header('Content-Type: application/json');
+    $hora = formatDateTime($hora,'H:i', 'H:i:s');
 
-    if (empty($asunto)) {
+    
+    if (empty($asunto) || $asunto == null) {
 
         echo "El campo 'Asunto' esta vacio. Por favor, ingresa un valor.";
         exit();
     } 
-    elseif (empty($hora) || strcasecmp($hora, "No hay horarios disponibles") === 0) {
+    elseif (empty($hora) || strcasecmp($hora, "No hay horarios disponibles") === 0 || $hora == null) {
 
         echo "Debes seleccionar una hora.";
         exit();
     } 
-    elseif (empty($duracion) || $duracion == 0) {
+    elseif (empty($duracion) || $duracion == 0 || $duracion == null) {
 
         echo "El campo 'Duracion' no puede ser 0 o vacio    . Por favor, ingresa un valor.";
         exit();
     } 
-    elseif (empty($fecha) || strcasecmp($fecha, "No hay fecha disponibles") === 0) {
+    elseif (empty($fecha) || strcasecmp($fecha, "No hay fecha disponibles") === 0 || $fecha == null) {
 
         echo "Debes seleccionar una fecha.";
         exit();
     } 
-    elseif (empty($resumen)) {
+    elseif (empty($resumen) || $resumen == null) {
 
         echo "El campo 'Resumen' está vacío. Por favor, ingrese algun contenido.";
         exit();
@@ -84,6 +85,8 @@ function updateConsulta()
 
             echo  "$th->getMessage()";
         }
+        
     }
     exit();
+
 }

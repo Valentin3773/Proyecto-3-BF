@@ -15,10 +15,65 @@ function addBTNListeners() {
     $('#btnCancelar').on('click', funcionCancelar);
     $('#btnGuardar').on('click', funcionGuardar);
     $('#btnEliminar').on('click', functionEliminar);
+    $('#fecha-CP').on('change',cambiarHorario);
 
     $('#btnCancelar').css("opacity", 0.5);
     $('#btnGuardar').css("opacity", 0.5);
     $('#btnEliminar').css("opacity", 0.5);
+}
+
+function cambiarHorario() {
+    let fecha = $('#fecha-CP option:selected').html();
+    let horaV = $('.contentHora #horaV').html();
+    const url = 'backend/admin/getHorarioDisponibles.php';
+
+    $.ajax({
+
+        type: 'POST',
+        url: url,
+        data: JSON.stringify({ fecha: fecha }),
+        contentType: 'application/json',
+        success: function(response) {
+            console.log(response);
+            let horarios = JSON.parse(response);
+            $('#hora-CP').empty();
+            for (let i = 0; i < horarios.length; i++) {
+                $('#hora-CP').append("<option value='" + horarios[i] + "'>" + horarios[i] + "</option>");
+            }
+            $('#hora-CP').append("<option id='horaV' value='" + horaV + "'>" + horaV + "</option>");
+        },
+        error: function(error) {
+            console.log('Error al enviar los datos:', error);
+        }
+    });
+
+    ajustarDuracion;
+}
+
+function ajustarDuracion(){
+    let fecha = $('#fecha-CP option:selected').html();
+    let hora = $('#hora-CP option:selected').html();
+    const url = 'backend/admin/getDuracionDisponibles.php';
+
+    $.ajax({
+
+        type: 'POST',
+        url: url,
+        data: JSON.stringify({ fecha: fecha, hora: hora}),
+        contentType: 'application/json',
+        success: function(response) {
+            console.log(response);
+            let duraciones = JSON.parse(response);
+            $('#duracion-CP').empty();
+            for (let i = 0; i < duraciones.length; i++) {
+                $('#duracion-CP').append("<option value='" + duraciones[i] + "'>" + duraciones[i] + "</option>");
+            }
+        },
+        error: function(error) {
+            console.log('Error al enviar los datos:', error);
+        }
+    });
+
 }
 
 function funcionModificar() {
@@ -105,7 +160,6 @@ function funcionGuardar() {
             horaV: $('.contentHora #horaV').html()
         };
 
-        console.log(data);
 
         $.ajax({
 
@@ -115,9 +169,16 @@ function funcionGuardar() {
             contentType: 'application/json',
             success: response => {
 
-                if (response.error === undefined) console.log(response.enviar);
+                if (response.error === undefined) {
+                    createPopup('Nuevo Aviso',response);
+                    iniData.asunto = $('#asunto-CP').val();
+                    iniData.duracion = Number($('#duracion-CP option:selected').val());
+                    iniData.fechaV = $('#fecha-CP option:selected').html();
+                    iniData.horaV = $('#hora-CP option:selected').html();
+                    iniData.resumen = $('#resumen-CP').val();
+                }
 
-                else createPopup("Nuevo aviso", response.error);
+                else createPopup("Nuevo aviso", response);
             },
             error: (jqXHR, estado, outputError) => {
 
@@ -156,7 +217,7 @@ async function functionEliminar() {
     $('#fecha-CP').prop('disabled', true);
     $('#resumen-CP').prop('disabled', true);
 
-    if (await createConfirmPopup("Atención", "Realmente desea eliminar esta consulta")) {
+    if (await createConfirmPopup("Atención", "¿Realmente desea eliminar esta consulta?")) {
 
         $.ajax({
 
@@ -166,7 +227,7 @@ async function functionEliminar() {
             contentType: 'application/json',
             success: function (response) {
 
-                if (response.error === undefined) createHeaderPopup("Nuevo aviso", "Se elimino la consulta con exito", "administrador.php");
+                if (response.error === undefined) createHeaderPopup("Nuevo aviso", "Se elimino la consulta con exito", () => changeView(cargarVistaConsultaCalendario));
                 
                 else createPopup("Nuevo aviso", response);
             },

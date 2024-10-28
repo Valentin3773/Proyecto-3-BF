@@ -46,8 +46,10 @@ $fechaF = sumarFecha($fechaA, "mes", 3);
 $conjFechas = [];
 
 foreach (getDatesFromRange($fechaA, $fechaF) as $dateFromRange) if (fechaDisponible($dateFromRange, $ido)) $conjFechas[] = $dateFromRange;
-$conjHoras = horasDisponibles($fechaA, $ido);
+$conjHoras = horasDisponibles($fecha, $ido);
+$conjDuracion = duracionesDisponibles($formato,$Tiempoensql,$ido);
 
+$Tiempoensql = formatDateTime($Tiempoensql,'H:i:s', 'H:i');
 
 ?>
 
@@ -93,7 +95,19 @@ $conjHoras = horasDisponibles($fechaA, $ido);
                     <h1>Duración</h1>
                 </div>
                 <div class="contentDuracion">
-                    <input type="number" name="" id="duracion-CP" value="<?= $tupla['duracion'] ?>" disabled>
+                    <select type="number" name="" id="duracion-CP" value="" disabled>
+                    <option><?= $tupla['duracion'] ?></option>
+                        <?php
+                                if(!empty($conjDuracion)){
+                                    for($i = 0; $i < count($conjDuracion); $i++) {
+                                    echo "<option value= '$conjDuracion[$i]'>$conjDuracion[$i]</option>";
+                                    } 
+                                } else {
+                                    echo "<option'>" .$tupla['duracion']. "</option>";
+                                    echo "<option>No hay duraciones disponibles</option>";
+                                }
+                        ?>
+                    </select>
                 </div>
             </div>
             <div class="col-xl-5 col-lg-5 col-12 contFecha m-0">
