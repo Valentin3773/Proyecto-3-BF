@@ -1,7 +1,5 @@
 $(() => {
 
-    history.pushState(null, 'Login', '/login');
-
     switch ($('main').data('vista')) {
 
         case 1: changeView(cargarVistaLogin); break;

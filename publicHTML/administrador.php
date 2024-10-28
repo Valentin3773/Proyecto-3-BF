@@ -55,6 +55,7 @@ $urlbase = getUrlDominio();
     <link rel="stylesheet" href="css/administrador/sidebar.css">
 
     <!-- JS -->
+    <script> history.pushState(null, 'Administrador', '/administrador'); </script>
     <script src="js/preloader.js"></script>
     <script src="js/utilidades.js"></script>
     <script defer src="js/reservaconsulta/calendario.js"></script>

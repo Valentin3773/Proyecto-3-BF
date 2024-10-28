@@ -1,7 +1,5 @@
 $(() => {
 
-    history.pushState(null, 'Perfil', '/perfil');
-
     $('#headermobile #logocontainer > img').on('click', () => changePage('index.php'));
     $('#miperfil, #sidebarmobile #miperfil').on('click', () => changeView(cargarVistaPerfil));
     $('#misconsultas, #sidebarmobile #misconsultas').on('click', () => changeView(cargarVistaConsultas));

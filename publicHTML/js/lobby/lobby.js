@@ -1,7 +1,5 @@
 $(() => {
 
-    history.pushState(null, 'Lobby', '/lobby');
-
     addListeners();
 
     switch($('main').data('vista')) {

@@ -56,6 +56,7 @@ $urlbase = getUrlDominio();
         <link rel="stylesheet" href="css/volver.css">
 
         <!-- JS -->
+        <script> history.pushState(null, 'Login', '/login'); </script>
         <script src="js/preloader.js"></script>
         <script src="js/utilidades.js"></script>
         <script defer src="js/login/login.js"></script>

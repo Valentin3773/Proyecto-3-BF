@@ -69,6 +69,7 @@ $urlbase = getUrlDominio();
         <link id="seccionescss" rel="stylesheet">
 
         <!-- JS -->
+        <script> history.pushState(null, 'Perfil', '/perfil'); </script>
         <script src="js/preloader.js"></script>
         <script src="js/utilidades.js"></script>
         <script defer src="js/perfil/updateProfile.js"></script>

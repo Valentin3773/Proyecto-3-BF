@@ -1,7 +1,5 @@
 $(() => {
 
-    history.pushState(null, 'Administrador', '/administrador');
-
     addAdminListeners();
 
     $.datepicker.regional['es'] = {
@@ -905,180 +903,201 @@ function cargarVistaServicios() {
 
         $('.servicio').on('click', function () {
 
-            let id = ($(this).attr('id'));
+            let numservicio = $(this).attr('id');
 
-            $('main').load(`vistas/vistasadmin/vistaservicios.php?numservicio=` + $(this).attr('id'), function () {
-
-                let temp = {
-
-                    titulo: "",
-                    desc: ""
-                };
-
-                $('[id="mdC"]').eq(0).on('click', function () {
-
-                    if ($('.contTitulon').attr('disabled')) {
-
-                        $('[id="mdC"]').eq(0).find('img').attr('src', 'img/iconosvg/Guardar.svg');
-                        temp['titulo'] = $('.contTitulon').val();
-                        $('.contTitulon').prop('disabled', false).focus();
-                    }
-                    else {
-
-                        if (temp['titulo'] == $('.contTitulon').val()) {
-
-                            $('.contTitulon').attr('disabled', true)
-                            $('[id="mdC"]').eq(0).find('img').attr('src', 'img/iconosvg/lapiz.svg');
-                        }
-                        else {
-
-                            let formData = new FormData();
-                            formData.append('titulo', $('.contTitulon').val());
-                            formData.append('id', id);
-
-                            cargando = true;
-
-                            $.ajax({
-
-                                type: "POST",
-                                url: "backend/admin/actualizarDataService.php",
-                                data: formData,
-                                processData: false,
-                                contentType: false,
-                                success: function (response) {
-
-                                    cargando = false;
-
-                                    if (response.error == undefined) { createPopup('Nuevo Aviso', response); $('.contTitulon').attr('disabled', true); }
-
-                                    else createPopup('Nuevo Aviso', response);
-                                },
-                                error: (jqXHR, estado, outputError) => {
-
-                                    console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
-                                    cargando = false;
-                                }
-                            });
-                            $('[id="mdC"]').eq(0).find('img').attr('src', 'img/iconosvg/lapiz.svg');
-                        }
-                    }
-                });
-                $('[id="mdC"]').eq(1).on('click', function () {
-
-                    if ($('#descripcion').attr('readonly')) {
-
-                        $('[id="mdC"]').eq(1).find('img').attr('src', 'img/iconosvg/Guardar.svg');
-                        temp['desc'] = $('#descripcion').val();
-                        $('#descripcion').prop('readonly', false).focus();
-                    }
-                    else {
-
-                        if (temp['desc'] == $('#descripcion').val()) {
-
-                            $('#descripcion').prop('readonly', false).focus();
-                            $('[id="mdC"]').eq(1).find('img').attr('src', 'img/iconosvg/lapiz.svg');
-                        }
-                        else {
-
-                            let formData = new FormData();
-                            formData.append('descripcion', $('#descripcion').val());
-                            formData.append('id', id);
-
-                            cargando = true;
-
-                            $.ajax({
-
-                                type: "POST",
-                                url: "backend/admin/actualizarDataService.php",
-                                data: formData,
-                                processData: false,
-                                contentType: false,
-                                success: function (response) {
-
-                                    cargando = false;
-
-                                    if (response.error == undefined) { createPopup('Nuevo Aviso', response); $('#descripcion').attr('readonly', true); }
-
-                                    else createPopup('Nuevo Aviso', response.error);
-                                },
-                                error: (jqXHR, estado, outputError) => {
-
-                                    console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
-                                    cargando = false;
-                                }
-                            });
-                            $('[id="mdC"]').eq(1).find('img').attr('src', 'img/iconosvg/lapiz.svg');
-                        }
-                    }
-                });
-                $('[id="mdF"]').eq(0).on('click', function () {
-
-                    $('#inFile1').click();
-                    $('#inFile1').change(function (event) {
-
-                        let file = event.target.files[0];
-                        try {
-
-                            if (file) {
-
-                                // Mostrar la imagen
-                                let reader = new FileReader();
-                                reader.onload = function (e) {
-                                    $('#icoservicio').prop('src', e.target.result);
-                                }
-
-                                // Incrusto la imagen
-                                reader.readAsDataURL(file);
-
-                                // Preparo el formulario
-                                let formData = new FormData();
-                                formData.append('id', id);
-                                formData.append('file', file);
-                                enviarIMGServicio(formData, 0);;
-                            }
-                        }
-                        catch (error) {
-
-                            console.error(error);
-                        }
-                    });
-                });
-                $('[id="mdF"]').eq(1).on('click', function () {
-
-                    $('#inFile2').click();
-                    $('#inFile2').change(function (event) {
-
-                        let file = event.target.files[0];
-                        try {
-
-                            if (file) {
-
-                                // Mostrar la imagen
-                                let reader = new FileReader();
-                                reader.onload = function (e) {
-                                    $('#imgservicio').prop('src', e.target.result);
-                                }
-                                // Incrusto la imagen
-                                reader.readAsDataURL(file);
-
-                                //Preparo el formulario
-                                let formData = new FormData();
-                                formData.append('id', id);
-                                formData.append('file', file);
-                                enviarIMGServicio(formData, 1);
-                            }
-                        }
-                        catch (error) {
-
-                            console.log(error);
-                        }
-                    });
-                })
-            });
+            changeView(() => cargarVistaServicioDetalle(numservicio));
         });
     });
 
     slideActionBar(true);
+
+    $('#titactionbar').html('Agregar Servicio');
+    $('#agregar').off().on('click', () => changeView(cargarVistaAgregarServicio));
+
+    $('#seccionescss').attr('href', 'css/administrador/servicios.css');
+    $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
+    $('#btnservicios, nav.mobile #btnservicios').css({ 'text-decoration': 'underline' });
+}
+
+function cargarVistaServicioDetalle(numservicio) {
+
+    history.pushState(null, 'Servicios', '/administrador/servicios');
+
+    let id = numservicio;
+
+    $.get(`vistas/vistasadmin/vistaservicios.php?numservicio=${id}`, contenido => {
+
+        console.log
+
+        loadSidebar('');
+        loadView(contenido);
+
+        let temp = {
+
+            titulo: "",
+            desc: ""
+        };
+
+        $('[id="mdC"]').eq(0).on('click', function () {
+
+            if ($('.contTitulon').attr('disabled')) {
+
+                $('[id="mdC"]').eq(0).find('img').attr('src', 'img/iconosvg/Guardar.svg');
+                temp['titulo'] = $('.contTitulon').val();
+                $('.contTitulon').prop('disabled', false).focus();
+            }
+            else {
+
+                if (temp['titulo'] == $('.contTitulon').val()) {
+
+                    $('.contTitulon').attr('disabled', true)
+                    $('[id="mdC"]').eq(0).find('img').attr('src', 'img/iconosvg/lapiz.svg');
+                }
+                else {
+
+                    let formData = new FormData();
+                    formData.append('titulo', $('.contTitulon').val());
+                    formData.append('id', id);
+
+                    cargando = true;
+
+                    $.ajax({
+
+                        type: "POST",
+                        url: "backend/admin/actualizarDataService.php",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+
+                            cargando = false;
+
+                            if (response.error == undefined) { createPopup('Nuevo Aviso', response); $('.contTitulon').attr('disabled', true); }
+
+                            else createPopup('Nuevo Aviso', response);
+                        },
+                        error: (jqXHR, estado, outputError) => {
+
+                            console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                            cargando = false;
+                        }
+                    });
+                    $('[id="mdC"]').eq(0).find('img').attr('src', 'img/iconosvg/lapiz.svg');
+                }
+            }
+        });
+        $('[id="mdC"]').eq(1).on('click', function () {
+
+            if ($('#descripcion').attr('readonly')) {
+
+                $('[id="mdC"]').eq(1).find('img').attr('src', 'img/iconosvg/Guardar.svg');
+                temp['desc'] = $('#descripcion').val();
+                $('#descripcion').prop('readonly', false).focus();
+            }
+            else {
+
+                if (temp['desc'] == $('#descripcion').val()) {
+
+                    $('#descripcion').prop('readonly', false).focus();
+                    $('[id="mdC"]').eq(1).find('img').attr('src', 'img/iconosvg/lapiz.svg');
+                }
+                else {
+
+                    let formData = new FormData();
+                    formData.append('descripcion', $('#descripcion').val());
+                    formData.append('id', id);
+
+                    cargando = true;
+
+                    $.ajax({
+
+                        type: "POST",
+                        url: "backend/admin/actualizarDataService.php",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+
+                            cargando = false;
+
+                            if (response.error == undefined) { createPopup('Nuevo Aviso', response); $('#descripcion').attr('readonly', true); }
+
+                            else createPopup('Nuevo Aviso', response.error);
+                        },
+                        error: (jqXHR, estado, outputError) => {
+
+                            console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                            cargando = false;
+                        }
+                    });
+                    $('[id="mdC"]').eq(1).find('img').attr('src', 'img/iconosvg/lapiz.svg');
+                }
+            }
+        });
+        $('[id="mdF"]').eq(0).on('click', function () {
+
+            $('#inFile1').click();
+            $('#inFile1').change(function (event) {
+
+                let file = event.target.files[0];
+                try {
+
+                    if (file) {
+
+                        // Mostrar la imagen
+                        let reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#icoservicio').prop('src', e.target.result);
+                        }
+
+                        // Incrusto la imagen
+                        reader.readAsDataURL(file);
+
+                        // Preparo el formulario
+                        let formData = new FormData();
+                        formData.append('id', id);
+                        formData.append('file', file);
+                        enviarIMGServicio(formData, 0);;
+                    }
+                }
+                catch (error) {
+
+                    console.error(error);
+                }
+            });
+        });
+        $('[id="mdF"]').eq(1).on('click', function () {
+
+            $('#inFile2').click();
+            $('#inFile2').change(function (event) {
+
+                let file = event.target.files[0];
+                try {
+
+                    if (file) {
+
+                        // Mostrar la imagen
+                        let reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#imgservicio').prop('src', e.target.result);
+                        }
+                        // Incrusto la imagen
+                        reader.readAsDataURL(file);
+
+                        //Preparo el formulario
+                        let formData = new FormData();
+                        formData.append('id', id);
+                        formData.append('file', file);
+                        enviarIMGServicio(formData, 1);
+                    }
+                }
+                catch (error) {
+
+                    console.log(error);
+                }
+            });
+        })
+    });
 
     $('#titactionbar').html('Agregar Servicio');
     $('#agregar').off().on('click', () => changeView(cargarVistaAgregarServicio));

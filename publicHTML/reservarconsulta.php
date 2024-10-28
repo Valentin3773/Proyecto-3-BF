@@ -70,6 +70,7 @@ $urlbase = getUrlDominio();
         <link rel="stylesheet" href="css/reservarconsulta/reservaheader.css">
 
         <!-- JS -->
+        <script> history.pushState(null, 'Reservar Consulta', '/reservar'); </script>
         <script src="js/preloader.js"></script>
         <script src="js/utilidades.js"></script>
         <script defer src="js/reservaconsulta/calendario.js"></script>
