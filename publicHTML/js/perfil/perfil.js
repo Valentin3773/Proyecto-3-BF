@@ -1,5 +1,7 @@
 $(() => {
 
+    history.pushState(null, 'Perfil', '/perfil');
+
     $('#headermobile #logocontainer > img').on('click', () => changePage('index.php'));
     $('#miperfil, #sidebarmobile #miperfil').on('click', () => changeView(cargarVistaPerfil));
     $('#misconsultas, #sidebarmobile #misconsultas').on('click', () => changeView(cargarVistaConsultas));
@@ -18,13 +20,19 @@ $(() => {
 
     switch ($('main').data('vista')) {
 
-        case 1: cargarVistaPerfil(); break;
+        case 1: changeView(cargarVistaPerfil); break;
 
-        case 2: cargarVistaConsultas(); break;
+        case 2:changeView(cargarVistaConsultas); break;
 
-        case 3: cargarVistaHorarios(); break;
+        case 3: changeView(cargarVistaHorarios); break;
 
-        case 4: cargarVistaInactividades(); break;
+        case 4: changeView(cargarVistaInactividades); break;
+
+        case 5: changeView(cargarVistaSeguridad); break;
+
+        case 6: changeView(cargarVistaAgregarHorario); break;
+
+        case 7: changeView(cargarVistaAgregarInactividad); break;
     }
 
     history.replaceState({ path: 'perfil.php' }, '', 'perfil.php');
@@ -61,6 +69,8 @@ var Datos = {
 };
 
 function cargarVistaPerfil() {
+
+    history.pushState(null, 'Perfil', '/perfil');
 
     $('main').prop('data-vista', 0);
 
@@ -176,6 +186,8 @@ function quitarEventos() {
 
 function cargarVistaConsultas() {
 
+    history.pushState(null, 'Mis Consultas', '/perfil/consultas');
+
     console.log("Cargando vista de 'Mis Consultas'");
 
     $.get('vistas/vistasperfil/vistaconsultas.php', contenido => {
@@ -191,6 +203,8 @@ function cargarVistaConsultas() {
 }
 
 function cargarVistaHorarios() {
+
+    history.pushState(null, 'Horarios', '/perfil/horarios');
 
     console.log("Cargando vista de 'Horarios'");
 
@@ -257,6 +271,8 @@ function cargarVistaHorarios() {
 
 function cargarVistaInactividades() {
 
+    history.pushState(null, 'Inactividades', '/perfil/inactividades');
+
     console.log("Cargando vista de 'Inactividades'");
 
     $.get('vistas/vistasperfil/vistainactividades.php', contenido => {
@@ -321,6 +337,8 @@ function cargarVistaInactividades() {
 }
 
 function cargarVistaSeguridad() {
+
+    history.pushState(null, 'Seguridad', '/perfil/seguridad');
 
     console.log("Cargando vista de 'Seguridad'");
 
@@ -398,6 +416,8 @@ function cargarVistaSeguridad() {
 }
 
 function cargarVistaAgregarHorario() {
+
+    history.pushState(null, 'Agregar Horario', '/perfil/horarios/agregar');
 
     console.log("Cargando vista de 'Agregar Horario'");
 
@@ -520,12 +540,18 @@ function cargarVistaAgregarHorario() {
             }
         });
     });
+
+    $('#sidebar #btnsuperiores button, #sidebarmobile #btnsuperiores button').css({ 'text-decoration': 'none' });
+    $('#horarios, #sidebarmobile #horarios').css({ 'text-decoration': 'underline' });
+    $('#seccionescss').prop('href', 'css/perfil/horarios.css');
 }
 
 let fechasPermitidasInicioInactividad = [];
 let fechasPermitidasFinalizacionInactividad = [];
 
 function cargarVistaAgregarInactividad() {
+
+    history.pushState(null, 'Agregar Inactividad', '/perfil/inactividades/agregar');
 
     console.log("Cargando vista de 'Agregar Inactividad'");
 
@@ -690,6 +716,10 @@ function cargarVistaAgregarInactividad() {
             }
         });
     });
+    
+    $('#sidebar #btnsuperiores button, #sidebarmobile #btnsuperiores button').css({ 'text-decoration': 'none' });
+    $('#inactividades, #sidebarmobile #inactividades').css({ 'text-decoration': 'underline' });
+    $('#seccionescss').prop('href', 'css/perfil/inactividades.css');
 }
 
 function cambiarContrasenia($1, $2, $3) {

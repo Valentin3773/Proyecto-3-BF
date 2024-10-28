@@ -16,7 +16,7 @@ $ido = $_SESSION['odontologo']['idodontologo'];
 $hora = $_GET['hora'];
 $fecha = $_GET['fecha'];
 
-//Formateo de string a interpretación de sql
+// Formateo de string a interpretación de SQL
 $fechatiempoString = $fecha . ' ' . $hora;
 $formato = DateTime::createFromFormat('d/m/Y H:i', $fechatiempoString);
 $Fechaensql = $formato->format('Y-m-d');
@@ -29,13 +29,9 @@ $stmt->bindParam(':ido', $ido);
 $stmt->bindParam(':fecha', $Fechaensql);
 $stmt->bindParam(':hora', $Tiempoensql);
 
+if($stmt->execute() && $stmt->rowCount() > 0) $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if($stmt->execute() && $stmt->rowCount() > 0) { 
-    $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
-} else {
-    echo "Ah ocurrido un error";
-};
-
+else echo "Ha ocurrido un error";
 
 $nombreP = $tupla["nombre"];
 
@@ -56,7 +52,7 @@ $Tiempoensql = formatDateTime($Tiempoensql,'H:i:s', 'H:i');
 <script src="js/administrador/consultapaciente.js"></script>
 <link rel="stylesheet" href="css/administrador/consultapaciente.css">
 
-<div class="contenedor_ConsultaPaciente gx-0">
+<div class="contenedor_ConsultaPaciente gx-0 mt-3">
 
     <div class="contConsultaAsunto">
         <div class="headerConsulta w-auto text-center">
@@ -67,7 +63,7 @@ $Tiempoensql = formatDateTime($Tiempoensql,'H:i:s', 'H:i');
         </div>
     </div>
 
-    <div class="px-3">
+    <div class="px-3 lodivcontenedor">
     <div>
         <div class="row w-100 gx-0 justify-content-between contenedorcentral">
             <div class="col-xl-5 col-lg-5 col-12 contHora m-0">
@@ -77,12 +73,16 @@ $Tiempoensql = formatDateTime($Tiempoensql,'H:i:s', 'H:i');
                 <div class="contentHora">
                     <select name="" id="hora-CP" disabled>
                         <?php
-                            if(!empty($conjHoras)){
+                            if(!empty($conjHoras)) {
+
                                 echo "<option id='horaV'>" . $Tiempoensql . "</option>";
                                 for($i = 0; $i < count($conjHoras); $i++) {
-                                echo "<option value= '$conjHoras[$i]'>$conjHoras[$i]</option>";
+
+                                    echo "<option value= '$conjHoras[$i]'>$conjHoras[$i]</option>";
                                 } 
-                            } else {
+                            } 
+                            else {
+
                                 echo "<option id='horaV'>" . $Tiempoensql. "</option>";
                                 echo "<option>No hay horarios disponibles</option>";
                             }
@@ -98,11 +98,15 @@ $Tiempoensql = formatDateTime($Tiempoensql,'H:i:s', 'H:i');
                     <select type="number" name="" id="duracion-CP" value="" disabled>
                     <option><?= $tupla['duracion'] ?></option>
                         <?php
-                                if(!empty($conjDuracion)){
+                                if(!empty($conjDuracion)) {
+
                                     for($i = 0; $i < count($conjDuracion); $i++) {
-                                    echo "<option value= '$conjDuracion[$i]'>$conjDuracion[$i]</option>";
-                                    } 
-                                } else {
+
+                                        echo "<option value= '$conjDuracion[$i]'>$conjDuracion[$i]</option>";
+                                    }
+                                } 
+                                else {
+
                                     echo "<option'>" .$tupla['duracion']. "</option>";
                                     echo "<option>No hay duraciones disponibles</option>";
                                 }
@@ -119,12 +123,15 @@ $Tiempoensql = formatDateTime($Tiempoensql,'H:i:s', 'H:i');
                 <div class="contentFecha">
                     <select name="" id="fecha-CP" disabled>
                     <?php 
-                            if(!empty($conjFechas)){
+                            if(!empty($conjFechas)) {
+
                                 echo "<option id='fechaV'>" . $Fechaensql . "</option>";
                                 for($i = 0; $i < count($conjFechas); $i++) {
-                                echo "<option value= '$conjFechas[$i]'>$conjFechas[$i]</option>";
+                                    echo "<option value= '$conjFechas[$i]'>$conjFechas[$i]</option>";
                                 } 
-                            } else {
+                            } 
+                            else {
+
                                 echo "<option id='fechaV'>" . $Fechaensql . "</option>"; 
                                 echo "<option>No hay fechas disponibles</option>";
                             }

@@ -10,6 +10,8 @@ let infoconsulta = {
 
 $(() => {
 
+    history.pushState(null, 'Reservar Consulta', '/reservar');
+
     $.get('vistas/vistasconsulta/progressbar.php', contenido => {
 
         $('.progressbarcontainer').html(contenido);

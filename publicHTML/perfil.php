@@ -3,6 +3,7 @@
 include('backend/extractor.php');
 
 session_start();
+reloadSession();
 
 if (!isset($_SESSION['paciente']) && !isset($_SESSION['odontologo'])) {
 
@@ -18,8 +19,10 @@ else if (isset($_GET['estado'])) {
 
     $estado = $_GET['estado'];
 
-    if (!isset($_SESSION['odontologo']) && ($estado == 3 || $estado == 4)) $estado = 1;
+    if (!isset($_SESSION['odontologo']) && ($estado == 3 || $estado == 4 || $estado == 6 || $estado == 7)) $estado = 1;
 }
+
+$urlbase = getUrlDominio();
 
 ?>
 
@@ -28,6 +31,7 @@ else if (isset($_GET['estado'])) {
 
     <head>
 
+        <base href="<?= $urlbase ?>">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta description="Administra tu perfil de usuario">

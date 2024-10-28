@@ -155,6 +155,12 @@ main {
     
         font-size: 150%;
     }
+
+    #titantesdespues {
+
+        font-size: 200%;
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 400px) {

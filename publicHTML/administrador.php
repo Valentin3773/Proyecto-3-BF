@@ -8,6 +8,10 @@ if (!(isset($_SESSION['odontologo']))) header('Location: index.php');
 
 reloadSession();
 
+$vista = $_GET['vista'] ?? 'inicio';
+
+$urlbase = getUrlDominio();
+
 ?>
 
 <!DOCTYPE html>
@@ -15,22 +19,21 @@ reloadSession();
 
 <head>
 
+    <base href="<?= $urlbase ?>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta description="Administra las consultas, pacientes y servicios de la aplicación">
     <meta name="Administrador">
 
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-408EQQ11WH"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-408EQQ11WH"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-        gtag('config', 'G-408EQQ11WH');
-        </script>
-
-
+    gtag('config', 'G-408EQQ11WH');
+    </script>
 
     <title>Administrador</title>
 
@@ -57,10 +60,9 @@ reloadSession();
     <script defer src="js/reservaconsulta/calendario.js"></script>
     <script defer src="js/administrador/administrador.js"></script>
 
-
 </head>
 
-<body>
+<body data-vista="<?= $vista ?>">
 
     <div id="preloader" class="d-flex justify-content-center align-items-center">
 
@@ -119,11 +121,11 @@ reloadSession();
 
         </header>
 
-        <header class="mobile">
+        <header class="mobile px-3">
 
             <div class="w-100 h-100 logocontainer d-flex justify-content-center align-items-center">
 
-                <a id="logo" href="javascript:void(0)"><img src="img/logaso.png" alt="Logo" class="img-thumbnail" title="Volver al inicio"></a>
+                <a id="logomobile" href="javascript:void(0)"><img src="img/logaso.png" alt="Logo" class="img-thumbnail" title="Volver al inicio"></a>
 
             </div>
 
@@ -137,7 +139,7 @@ reloadSession();
 
         <div class="row segfila gx-3 p-0">
 
-            <div class="col-xl-2 col-lg-2 col-md-2">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-0 col-0 firstdivsegfila">
 
                 <div class="sidebarcontainer w-100 h-100 d-flex flex-column">
 
@@ -152,7 +154,7 @@ reloadSession();
 
             </div>
 
-            <main class="col-xl-10 col-lg-10 col-md-10"></main>
+            <main class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12"></main>
 
         </div>
 

@@ -113,7 +113,7 @@ if($data) {
         foreach($nuevosdatos['medicacion'] as $medicamento) if(!agregarMedicacion(sanitizar($medicamento), $idp)) $tuduben = false;
     }
 
-    if((isset($nuevosdatos['nombre']) && isset($viejosdatos['nombre']) && sanitizarArray($nuevosdatos['nombre']) != $viejosdatos['nombre']) || (isset($nuevosdatos['nombre']) && !isset($viejosdatos['nombre']))) {
+    if((isset($nuevosdatos['nombre']) && isset($viejosdatos['nombre']) && sanitizar($nuevosdatos['nombre']) != $viejosdatos['nombre']) || (isset($nuevosdatos['nombre']) && !isset($viejosdatos['nombre']))) {
 
         $nuevosdatos['nombre'] = sanitizar($nuevosdatos['nombre']);
 
@@ -125,7 +125,7 @@ if($data) {
         if(!$stmt->execute()) $tuduben = false;
     }
 
-    if((isset($nuevosdatos['apellido']) && isset($viejosdatos['apellido']) && $nuevosdatos['apellido'] != $viejosdatos['apellido']) || (isset($nuevosdatos['apellido']) && !isset($viejosdatos['apellido']))) {
+    if((isset($nuevosdatos['apellido']) && isset($viejosdatos['apellido']) && sanitizar($nuevosdatos['apellido']) != $viejosdatos['apellido']) || (isset($nuevosdatos['apellido']) && !isset($viejosdatos['apellido']))) {
 
         $nuevosdatos['apellido'] = sanitizar($nuevosdatos['apellido']);
 
@@ -137,7 +137,7 @@ if($data) {
         if(!$stmt->execute()) $tuduben = false;
     }
 
-    if((isset($nuevosdatos['documento']) && isset($viejosdatos['documento']) && $nuevosdatos['documento'] != $viejosdatos['documento']) || (isset($nuevosdatos['documento']) && !isset($viejosdatos['documento']))) {
+    if((isset($nuevosdatos['documento']) && isset($viejosdatos['documento']) && sanitizar($nuevosdatos['documento']) != $viejosdatos['documento']) || (isset($nuevosdatos['documento']) && !isset($viejosdatos['documento']))) {
 
         $nuevosdatos['documento'] = sanitizar($nuevosdatos['documento']);
 
@@ -149,7 +149,7 @@ if($data) {
         if(!$stmt->execute()) $tuduben = false;
     }
 
-    if((isset($nuevosdatos['telefono']) && isset($viejosdatos['telefono']) && $nuevosdatos['telefono'] != $viejosdatos['telefono']) || (isset($nuevosdatos['telefono']) && !isset($viejosdatos['telefono']))) {
+    if((isset($nuevosdatos['telefono']) && isset($viejosdatos['telefono']) && sanitizar($nuevosdatos['telefono']) != $viejosdatos['telefono']) || (isset($nuevosdatos['telefono']) && !isset($viejosdatos['telefono']))) {
 
         $nuevosdatos['telefono'] = sanitizar($nuevosdatos['telefono']);
 
@@ -161,7 +161,7 @@ if($data) {
         if(!$stmt->execute()) $tuduben = false;
     }
 
-    if((isset($nuevosdatos['direccion']) && isset($viejosdatos['direccion']) && $nuevosdatos['direccion'] != $viejosdatos['direccion']) || (isset($nuevosdatos['direccion']) && !isset($viejosdatos['direccion']))) {
+    if((isset($nuevosdatos['direccion']) && isset($viejosdatos['direccion']) && sanitizar($nuevosdatos['direccion']) != $viejosdatos['direccion']) || (isset($nuevosdatos['direccion']) && !isset($viejosdatos['direccion']))) {
 
         $nuevosdatos['direccion'] = sanitizar($nuevosdatos['direccion']);
 
@@ -173,7 +173,7 @@ if($data) {
         if(!$stmt->execute()) $tuduben = false;
     }
 
-    if((isset($nuevosdatos['email']) && isset($viejosdatos['email']) && $nuevosdatos['email'] != $viejosdatos['email']) || (isset($nuevosdatos['email']) && !isset($viejosdatos['email']))) {
+    if((isset($nuevosdatos['email']) && isset($viejosdatos['email']) && sanitizar($nuevosdatos['email']) != $viejosdatos['email']) || (isset($nuevosdatos['email']) && !isset($viejosdatos['email']))) {
 
         $nuevosdatos['email'] = sanitizar($nuevosdatos['email']);
 

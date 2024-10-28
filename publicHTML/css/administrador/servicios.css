@@ -292,3 +292,16 @@
     scale: .97;
     filter: brightness(1.2);
 }
+
+@media screen and (width <= 991px) {
+    
+    h1#tituloservicios {
+
+        font-size: 250%;
+    }
+
+    .servicio > h3 {
+
+        font-size: 1.5rem;
+    }
+}

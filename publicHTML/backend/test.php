@@ -2,6 +2,6 @@
 
 include('extractor.php');
 
-
+echo getUrlDominio();
 
 ?>

@@ -6,6 +6,10 @@ session_start();
 
 reloadSession();
 
+$vista = $_GET['vista'] ?? 'inicio';
+
+$urlbase = getUrlDominio();
+
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +18,7 @@ reloadSession();
 
 <head>
 
+    <base href="<?= $urlbase ?>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="WZQCoGwsuUGYiYGQOZBqDICW3ZsbFxuc-ML5QG8_OW0" />
@@ -292,7 +297,7 @@ reloadSession();
 
         <div id="hrelleno"></div>
 
-        <main class=""> <?php include("vistas/vistaslobby/vistainicio.php") ?> </main>
+        <main data-vista="<?= $vista ?>"> <?php include("vistas/vistaslobby/vistainicio.php") ?> </main>
 
         <div id="btnchat" title="Envíanos un mensaje">
 

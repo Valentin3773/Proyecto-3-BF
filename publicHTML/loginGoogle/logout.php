@@ -6,6 +6,6 @@ $google_client->revokeToken();
 
 session_destroy();
 
-header("Location: nouser.php");
+header("Location: login.php?estado=6");
 
 ?>

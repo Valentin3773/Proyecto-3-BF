@@ -94,7 +94,7 @@ function enviarEmailReservador(string $fecha, string $hora, int $ido): bool {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'laprogramarmy@gmail.com';
+        $mail->Username = $defaults['emailclinica'];
         $mail->Password = $defaults['passemail'];
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;

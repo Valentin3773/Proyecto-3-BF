@@ -77,7 +77,7 @@
 
     <h1 class="w-100 text-center">Asistentes</h1>
 
-    <div class="contenidopersonal d-flex justify-content-center">
+    <div class="contenidopersonal d-flex justify-content-center py-5">
 
         <div class="card" loading="lazy">
 

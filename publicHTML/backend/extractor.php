@@ -452,7 +452,7 @@ function enviarEmailVerificador(string $destino, int $idp, string $verificador):
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'laprogramarmy@gmail.com';
+    $mail->Username = $defaults['emailclinica'];
     $mail->Password = $defaults['passemail'];
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
@@ -772,7 +772,7 @@ function enviarEmailCancelador($emailp, $asunto, $fecha, $hora): bool
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'laprogramarmy@gmail.com';
+    $mail->Username = $defaults['emailclinica'];
     $mail->Password = $defaults['passemail'];
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
@@ -1149,4 +1149,15 @@ function sanitizarArray(array $cadenas) {
     foreach($cadenas as $cadena) $nuevascadenas[] = sanitizar($cadena);
 
     return $nuevascadenas;
+}
+
+function getUrlDominio(): string {
+
+    $protocolo = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+    $dominio = $_SERVER['HTTP_HOST'];
+
+    $url_dominio = "{$protocolo}{$dominio}/Proyecto-3-BF/publicHTML/";
+
+    return $url_dominio;
 }

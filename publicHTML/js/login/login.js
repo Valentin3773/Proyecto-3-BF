@@ -1,16 +1,44 @@
 $(() => {
 
+    history.pushState(null, 'Login', '/login');
+
     switch ($('main').data('vista')) {
 
-        case 1: cargarVistaLogin(); break;
+        case 1: changeView(cargarVistaLogin); break;
 
-        case 2: cargarVistaRegistro(); break;
+        case 2: changeView(cargarVistaRegistro); break;
 
-        case 3: cerrarSesion(); break;
+        case 3: changeView(cerrarSesion); break;
 
-        case 4: createHeaderPopup('Nuevo Aviso', 'El código de verificación no es válido', 'index.php'); break;
+        case 4: 
+        
+        history.pushState(null, 'Login', '/login');
 
-        case 5: createHeaderPopup('Nuevo Aviso', 'Su cuenta se ha verificado y activado', 'index.php'); break;
+        createHeaderPopup('Nuevo Aviso', 'El código de verificación no es válido', () => changePage('index.php')); 
+        
+        break;
+
+        case 5: 
+
+        history.pushState(null, 'Login', '/login');
+        
+        createHeaderPopup('Nuevo Aviso', 'Su cuenta se ha verificado y activado', () => changePage('index.php')); 
+        
+        break;
+
+        case 6: 
+
+        history.pushState(null, 'Login', '/login');
+        
+        createHeaderPopup('Nuevo Aviso', 'Lo sentimos, no puede iniciar sesión con Google porque no existe un usuario asociado al correo electrónico', () => changeView(cargarVistaLogin), 10); 
+        
+        break;
+
+        case 7: changeView(cargarVistaLoginAdmin); break;
+
+        case 8: changeView(cargarVistaRecuperarPass); break;
+
+        case 9: changeView(cargarVistaRecuperarEmail); break;
     }
 
     history.replaceState({ path: 'login.php' }, '', 'login.php');
@@ -22,6 +50,8 @@ $(() => {
 });
 
 function cargarVistaLogin() {
+
+    history.pushState(null, 'Login', '/login');
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -52,6 +82,8 @@ function cargarVistaLogin() {
 
 function cargarVistaRegistro() {
 
+    history.pushState(null, 'Login', '/registro');
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     $.get("vistas/vistaslogin/vistaregistro.php", data => {
@@ -80,6 +112,8 @@ function cargarVistaRegistro() {
 
 function cargarVistaLoginAdmin() {
 
+    history.pushState(null, 'Login Admin', '/login/administrador');
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     $.get("vistas/vistaslogin/vistaloginadmin.php", data => {
@@ -102,6 +136,8 @@ function cargarVistaLoginAdmin() {
 
 function cargarVistaRecuperarPass() {
 
+    history.pushState(null, 'Recuperar', '/login/recuperar');
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     $.get("vistas/vistaslogin/vistarecuperarpass.php", data => {
@@ -117,25 +153,29 @@ function cargarVistaRecuperarPass() {
             recucontra($email);
         });
         $('.btnEmail').off("click");
-        $('.btnEmail').on('click', function () {
-
-            $.get("vistas/vistaslogin/vistarecuemail.php", data => changeView(() => {
-
-                loadView(data);
-                $('#btnvolver').off().on('click', () => changeView(cargarVistaRecuperarPass));
-                $('.btnRecu').on('click', function (e) {
-
-                    e.preventDefault();
-                    recuemail($('#inNombre').val(), $('#inApellido').val(), $('#inDocumento').val());
-                });
-            }));
-        });
+        $('.btnEmail').on('click', () => changeView(cargarVistaRecuperarEmail));
     });
 
     $('main').css({
         
         'overflow-y': 'scroll',
         'overflow-x': 'hidden'
+    });
+}
+
+function cargarVistaRecuperarEmail() {
+
+    history.pushState(null, 'Recuperar', '/login/recuperar/email');
+
+    $.get("vistas/vistaslogin/vistarecuemail.php", data => {
+
+        loadView(data);
+        $('#btnvolver').off().on('click', () => changeView(cargarVistaRecuperarPass));
+        $('.btnRecu').on('click', function (e) {
+
+            e.preventDefault();
+            recuemail($('#inNombre').val(), $('#inApellido').val(), $('#inDocumento').val());
+        });
     });
 }
 
@@ -368,6 +408,8 @@ function loginAdminConfirm(datos) {
 }
 
 function cerrarSesion() {
+
+    history.pushState(null, 'Login', '/login');
 
     $.ajax({
 

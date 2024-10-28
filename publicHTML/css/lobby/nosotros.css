@@ -164,6 +164,16 @@ section h1 {
     #titequipo {
 
         font-size: 250%;
-        width: 90%;
+        width: 100%;
+    }
+
+    section h1 {
+
+        font-size: 200%;
+    }
+
+    .contenidopersonal {
+
+        padding: 0;
     }
 }

@@ -197,7 +197,7 @@
     width: 30px;
 }
 
-#medicacion, #enfermedades {
+#medicacion {
 
     margin-bottom: 1.5rem;
 }
@@ -364,5 +364,71 @@
         font-size: 1.1rem;
         font-weight: bold;
         color: white;
+    }
+}
+
+@media screen and (width <= 991px) {
+
+    .datos .clave, .datos .valor {
+
+        width: 100%;
+    }
+
+    .datos .clave {
+
+        border-radius: 20px 20px 0 0;
+        font-size: 1.2rem !important;
+    }
+
+    .datos .valor {
+
+        border-radius: 0 0 20px 20px;
+        font-size: 1.2rem !important;
+    }
+
+    .campo {
+
+        flex-direction: column;
+    }
+
+    #pcontainer {
+
+        padding: .5rem !important;
+    }
+
+    #editarpaciente {
+
+        padding: .5rem 3rem;
+        font-size: 1.2rem;
+    }
+
+    #guardarpaciente {
+
+        padding: .5rem 2.8rem;
+        font-size: 1.2rem;
+    }
+
+    #botonespaciente {
+
+        justify-content: center;
+    }
+
+    .conpacientes {
+
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    #agregarenfermedad .mas, #agregarmedicacion .mas {
+
+        width: 25px;
+        height: 25px;
+        background-color: rgb(235, 235, 235);
+        clip-path: polygon(45% 0%, 55% 0%, 55% 45%, 100% 45%, 100% 55%, 55% 55%, 55% 100%, 45% 100%, 45% 55%, 0% 55%, 0% 45%, 45% 45%);
+        transition-duration: .3s;
+    }
+
+    #agregarenfermedad, #agregarmedicacion {
+        
+        padding: .7rem;
     }
 }

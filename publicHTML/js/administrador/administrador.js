@@ -1,5 +1,7 @@
 $(() => {
 
+    history.pushState(null, 'Administrador', '/administrador');
+
     addAdminListeners();
 
     $.datepicker.regional['es'] = {
@@ -24,6 +26,19 @@ $(() => {
     $.datepicker.setDefaults($.datepicker.regional['es']);
 
     resetAdmin();
+
+    switch($('body').data('vista')) {
+
+        case 'consultas': changeView(cargarVistaConsultaCalendario); break;
+
+        case 'agendarconsulta': changeView(cargarVistaAgregarConsulta); break;
+
+        case 'pacientes': changeView(cargarVistaPacientes); break;
+
+        case 'servicios': changeView(cargarVistaServicios); break;
+
+        case 'agregarservicio': changeView(cargarVistaAgregarServicio); break;
+    }
 });
 
 let cargando = false;
@@ -43,13 +58,15 @@ function addAdminListeners() {
         if (!cargando) changeView(cargarVistaServicios)
     });
 
-    $('#logo').on('click', () => {
+    $('#logo, #logomobile').on('click', () => {
 
         if (!cargando) changePage('index.php');
     });
 }
 
 function cargarVistaConsultaCalendario() {
+
+    history.pushState(null, 'Consultas', '/administrador/consultas');
 
     let mesc;
     let yearc;
@@ -123,6 +140,8 @@ function cargarVistaConsultaCalendario() {
 
 function cargarVistaConsultasPaciente(idp) {
 
+    history.pushState(null, 'Consultas', '/administrador/consultas');
+
     $('.pacientec, .paciente').css({ 'text-decoration': 'none' });
     $(this).css({ 'text-decoration': 'underline' });
 
@@ -154,6 +173,8 @@ function cargarVistaConsultasPaciente(idp) {
 
 function cargarVistaConsultaDetalle(fecha, hora) {
 
+    history.pushState(null, 'Consultas', '/administrador/consultas');
+
     let ventanaconsultapaciente = 'vistas/vistasadmin/vistaconsultapaciente.php?hora=' + hora + '&fecha=' + fecha;
 
     $.get(ventanaconsultapaciente, ventana => {
@@ -164,6 +185,10 @@ function cargarVistaConsultaDetalle(fecha, hora) {
 
         slideActionBar(false);
     });
+
+    $('#seccionescss').attr('href', 'css/administrador/consultas.css');
+    $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
+    $('#btnconsultas, nav.mobile #btnconsultas').css({ 'text-decoration': 'underline' });
 }
 
 function addCalendarioListeners() {
@@ -254,8 +279,10 @@ function addCalendarioListeners() {
 }
 
 function cargarVistaAgregarConsulta() {
+    
+    history.pushState(null, 'Agendar Consulta', '/administrador/consultas/agendar');
 
-    $('.sidebar').empty();
+    loadSidebar('');
 
     $.get('vistas/vistasadmin/vistaagregarconsulta.php', contenido => {
 
@@ -409,9 +436,15 @@ function cargarVistaAgregarConsulta() {
             }
         });
     });
+
+    $('#seccionescss').attr('href', 'css/administrador/consultas.css');
+    $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
+    $('#btnconsultas, nav.mobile #btnconsultas').css({ 'text-decoration': 'underline' });
 }
 
 function cargarVistaAgregarServicio() {
+
+    history.pushState(null, 'Agregar Servicio', '/administrador/servicios/agregar');
 
     loadSidebar('');
 
@@ -540,9 +573,18 @@ function cargarVistaAgregarServicio() {
             }
         });
     });
+
+    $('#titactionbar').html('Agregar Servicio');
+    $('#agregar').off().on('click', () => changeView(cargarVistaAgregarServicio));
+
+    $('#seccionescss').attr('href', 'css/administrador/servicios.css');
+    $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
+    $('#btnservicios, nav.mobile #btnservicios').css({ 'text-decoration': 'underline' });
 }
 
 function cargarVistaPacientes() {
+
+    history.pushState(null, 'Pacientes', '/administrador/pacientes');
 
     $.get("vistas/vistasadmin/sidebarpacientes.php", data => {
 
@@ -641,7 +683,7 @@ function cargarVistaPacienteDetalle(idp) {
 
                 contenedor.attr('data-editar', 'edit');
                 guardar.prop('disabled', false);
-                editar.html('Cancelar').css({ 'padding': '.7rem 4rem' });
+                // editar.html('Cancelar').css({ 'padding': '.7rem 4rem' });
 
                 $('#pcontainer input.valor').prop('disabled', false);
                 $('.enfermedad .eliminarenfermedad, .medicamento .eliminarmedicamento, #agregarenfermedad, #agregarmedicacion').removeClass('invisible').addClass('visible');
@@ -768,7 +810,7 @@ function cargarVistaPacienteDetalle(idp) {
 
                 contenedor.attr('data-editar', 'noedit');
                 guardar.prop('disabled', true);
-                editar.html('Editar').css({ 'padding': '.7rem 5rem' });
+                // editar.html('Editar').css({ 'padding': '.7rem 5rem' });
 
                 contenedor.find('input.valor').prop('disabled', true);
                 contenedor.find('.enfermedad .eliminarenfermedad, .medicamento .eliminarmedicamento, #agregarenfermedad, #agregarmedicacion').removeClass('visible').addClass('invisible');
@@ -844,9 +886,15 @@ function cargarVistaPacienteDetalle(idp) {
             }
         });
     });
+
+    $('#seccionescss').attr('href', 'css/administrador/pacientes.css');
+    $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
+    $('#btnpacientes, nav.mobile #btnpacientes').css({ 'text-decoration': 'underline' });
 }
 
 function cargarVistaServicios() {
+
+    history.pushState(null, 'Servicios', '/administrador/servicios');
 
     $.get("vistas/vistasadmin/vistaservicios.php", data => {
 
@@ -1097,6 +1145,8 @@ function enviarIMGServicio($data, $tipo) {
 }
 
 function resetAdmin() {
+
+    history.pushState(null, 'Administrador', '/administrador');
 
     changeView(() => {
 

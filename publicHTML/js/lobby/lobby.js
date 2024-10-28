@@ -1,6 +1,19 @@
 $(() => {
 
+    history.pushState(null, 'Lobby', '/lobby');
+
     addListeners();
+
+    switch($('main').data('vista')) {
+
+        case 'nosotros': changeView(cargarVistaNosotros); break;
+
+        case 'servicios': changeView(cargarVistaServicios); break;
+
+        case 'contacto': changeView(cargarVistaContacto); break;
+
+        case 'inicio': changeView(cargarVistaInicio); break;
+    }
 
     $.get('backend/lobby/getnotificaciones.php', respuesta => notificacionesManager(respuesta));
 });
@@ -114,6 +127,8 @@ function addListeners() {
 
 function cargarVistaInicio() {
 
+    history.pushState(null, 'Lobby', '/lobby');
+
     window.scrollTo({top: 0, behavior: 'smooth'});
 
     $.get("vistas/vistaslobby/vistainicio.php", data => {
@@ -134,6 +149,8 @@ function cargarVistaInicio() {
 
 function cargarVistaNosotros() {
 
+    history.pushState(null, 'Sobre Nosotros', '/lobby/nosotros');
+
     window.scrollTo({top: 0, behavior: 'smooth'});
 
     $.get("vistas/vistaslobby/vistanosotros.php", data => {
@@ -153,19 +170,23 @@ function cargarVistaNosotros() {
 }
 
 function cargarVistaServicios() {
-    console.log("cargarVistaServicios llamada");
+
+    history.pushState(null, 'Servicios', '/lobby/servicios');
+
+    console.log("Cargando vista de 'Servicios'");
 
     window.scrollTo({top: 0, behavior: 'smooth'});
 
     $.get("vistas/vistaslobby/vistaservicios.php", data => {
+
         loadView(data);
         console.log("Cargando vista de 'Servicios'");
-        // history.pushState({}, '', 'servicios');
-    });
 
-    $.get('backend/lobby/apiservicios.php', data => {
-        console.log("Llamada a iniciarServicios");
-        iniciarServicios(data);
+        $.get('backend/lobby/apiservicios.php', data => {
+
+            console.log("Llamada a iniciarServicios");
+            iniciarServicios(data);
+        });
     });
 
     $('#servicios, #serviciosm').css({ 'text-decoration': 'underline' });
@@ -178,6 +199,8 @@ function cargarVistaServicios() {
 
 
 function cargarVistaContacto() {
+
+    history.pushState(null, 'Servicios', '/lobby/contacto');
 
     window.scrollTo({top: 0, behavior: 'smooth'});
 
