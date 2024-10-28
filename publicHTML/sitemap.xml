@@ -1,17 +1,27 @@
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
     <url>
-    <loc>https://clinica-local.ddns.net/Proyecto-3-BF/publicHTML/index.php</loc>
-    <priority>1</priority>
-    <changefreq>weekly</changefreq>
-    <lastmod>2024-10-25</lastmod>
+        <loc>https://clinica-local.ddns.net/Proyecto-3-BF/publicHTML/</loc>
+        <lastmod>2024-10-26T07:09:56+00:00</lastmod>
+        <priority>1.00</priority>
     </url>
-
     <url>
-    <loc>https://clinica-local.ddns.net/aboutUs/aboutus.php</loc>
-    <priority>0.2</priority>
-    <changefreq>weekly</changefreq>
-    <lastmod>2024-10-25</lastmod>
+        <loc>https://clinica-local.ddns.net/Proyecto-3-BF/publicHTML/reservarconsulta.php</loc>
+        <lastmod>2024-10-26T07:09:56+00:00</lastmod>
+        <priority>0.80</priority>
     </url>
-
+    <url>
+        <loc>https://clinica-local.ddns.net/Proyecto-3-BF/publicHTML/aboutUs/aboutus.php</loc>
+        <lastmod>2024-10-26T07:09:56+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://clinica-local.ddns.net/Proyecto-3-BF/publicHTML/?cmpscreen</loc>
+        <lastmod>2024-10-26T07:09:56+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
 </urlset>
