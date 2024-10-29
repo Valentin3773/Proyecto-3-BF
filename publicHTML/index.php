@@ -17,27 +17,28 @@ $urlbase = getUrlDominio();
 <html lang="es">
 
 <head>
-
     <base href="<?= $urlbase ?>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="WZQCoGwsuUGYiYGQOZBqDICW3ZsbFxuc-ML5QG8_OW0" />
-    <meta description="Ofrecemos atención odontológica de alta calidad">
+    <meta name="description" content="Ofrecemos atención odontológica de alta calidad">
     <meta name="Inicio">
-
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-408EQQ11WH"></script>
-        <script>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-408EQQ11WH"></script>
+    <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
-
         gtag('config', 'G-408EQQ11WH');
-        </script>
-
-        <script async type="text/javascript" data-cmp-ab="1" src="https://cdn.consentmanager.net/delivery/autoblocking/945e0f3de1d2a.js" data-cmp-host="d.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="16"></script>
-
-    <!-- Librerias -->
+    </script>
+    
+    <!-- Consent Manager -->
+    <script async type="text/javascript" data-cmp-ab="1" src="https://cdn.consentmanager.net/delivery/autoblocking/945e0f3de1d2a.js" data-cmp-host="d.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="16"></script>
+    
+    <!-- Librerías -->
     <script src="lib/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="lib/bootstrap-5.2.3-dist/css/bootstrap.min.css">
     <script defer src="lib/bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
@@ -45,33 +46,23 @@ $urlbase = getUrlDominio();
     <script defer src="lib/slick/slick.min.js"></script>
     <link rel="stylesheet" href="lib/fontawesome-free-5.15.4-web/css/all.min.css">
     <script defer src="lib/fontawesome-free-5.15.4-web/js/all.min.js"></script>
-
+    
     <!-- Favicon -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-
+    
     <!-- CSS -->
     <link rel="stylesheet" href="css/lobby/headerstyle.css">
     <link id="seccionescss" rel="stylesheet" href="css/lobby/inicio.css">
-
+    
     <!-- Scripts -->
     <script src="js/preloader.js"></script>
     <script src="js/utilidades.js"></script>
     <script defer src="js/lobby/headerscript.js"></script>
     <script defer src="js/lobby/servicios.js"></script>
     <script defer src="js/lobby/lobby.js"></script>
-
-    <!-- Google Tag Manager -->
-    <script> async (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-W3NSM9G6');</script>
-    <!-- End Google Tag Manager -->
     
     <link rel="canonical" href="https://clinica-local.ddns.net/Proyecto-3-BF/publicHTML/index.php" />
-
     <title>Clínica Salud Bucal</title>
-
 </head>
 
 <body>
