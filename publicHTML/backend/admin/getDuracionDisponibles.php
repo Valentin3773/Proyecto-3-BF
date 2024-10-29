@@ -1,9 +1,11 @@
 <?php
 
 include_once("../extractor.php");
-session_start();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') duraciones();
+session_start();
+reloadSession();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['odontologo'])) duraciones();
 
 else  exit();
 
@@ -13,8 +15,8 @@ function duraciones() {
 
     if (isset($data['fecha']) && isset($data['hora'])) {
 
-        $fecha = DateTime::createFromFormat('Y-m-d', $data['fecha']);
-        $hora = $data['hora'];
+        $fecha = DateTime::createFromFormat('Y-m-d', sanitizar($data['fecha']));
+        $hora = sanitizar($data['hora']);
         $ido = $_SESSION['odontologo']['idodontologo'];
 
         if ($fecha) {

@@ -2,16 +2,16 @@ var uniqueServicios = [];
 var visto = new Set();
 
 function iniciarServicios(servicios) {
-    
+
     for (let i = 0; i < servicios.length; i++) {
         if (!visto.has(servicios[i].numero)) {
             visto.add(servicios[i].numero);
             uniqueServicios.push(servicios[i]);
         }
     }
-   
+
     uniqueServicios.forEach(elemento => {
-        
+
         let slideservicio = $(`<div id="${elemento.numero}" class="card btn${elemento.nombre}"></div>`);
 
         if (elemento.icono != null) {
@@ -19,11 +19,11 @@ function iniciarServicios(servicios) {
         } else {
             slideservicio.append(`<img src="img/logaso.png" alt="${elemento.nombre}" class="card-img-top img-thumbnail">`);
         }
-        
+
         slideservicio.append(`<div class="card-body"><h3 class="card-title text-center m-0">${elemento.nombre}</h3></div>`);
 
         $('.navslider').append(slideservicio);
-        
+
         let secservicio = $(`<section id="${elemento.numero}" class="mt-5 gx-0"><div class="sectitcontainer text-center"><h2 class="sectitulo">${elemento.nombre}</h2></div><div class="seccontainer row mt-5 gx-0"><div class="col-xl-1 col-lg-1"></div><article class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 d-flex align-items-center p-3"><p>${elemento.descripcion}</p></article><aside class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 d-flex justify-content-center align-items-center"></aside><div class="col-xl-1 col-lg-1"></div></div></section>`);
 
         if (elemento.imagen != null) {
@@ -35,71 +35,79 @@ function iniciarServicios(servicios) {
         $('main #sectionservicecontainer').append(secservicio);
     });
 
-    setTimeout(() => $('.navslider').slick({
+    setTimeout(() => {
 
-        dots: false,
-        infinite: true,
-        autoplay: true,
-        appendArrows: $('.navslider'),
-        autoplaySpeed: 2000,
-        speed: 500,
-        slidesToShow: 7,
-        slidesToScroll: 1,
-        responsive: [
+        $('.navslider').slick({
 
-            {
-                breakpoint: 2400,
-                settings: {
+            dots: false,
+            infinite: true,
+            autoplay: true,
+            appendArrows: $('.navslider'),
+            autoplaySpeed: 2000,
+            speed: 500,
+            slidesToShow: 7,
+            slidesToScroll: 1,
+            responsive: [
 
-                    slidesToShow: 6
+                {
+                    breakpoint: 2400,
+                    settings: {
+
+                        slidesToShow: 6
+                    }
+                },
+                {
+                    breakpoint: 2000,
+                    settings: {
+
+                        slidesToShow: 5
+                    }
+                },
+                {
+                    breakpoint: 1600,
+                    settings: {
+
+                        slidesToShow: 4
+                    }
+                },
+                {
+                    breakpoint: 1300,
+                    settings: {
+
+                        slidesToShow: 3,
+                        arrows: false
+                    }
+                },
+                {
+                    breakpoint: 800,
+                    settings: {
+
+                        slidesToShow: 2,
+                        arrows: false
+                    }
+                },
+                {
+                    breakpoint: 400,
+                    settings: {
+
+                        slidesToShow: 1,
+                        arrows: false
+                    }
                 }
-            },
-            {
-                breakpoint: 2000,
-                settings: {
+            ]
+        });
 
-                    slidesToShow: 5
-                }
-            },
-            {
-                breakpoint: 1600,
-                settings: {
-
-                    slidesToShow: 4
-                }
-            },
-            {
-                breakpoint: 1300,
-                settings: {
-
-                    slidesToShow: 3,
-                    arrows: false
-                }
-            },
-            {
-                breakpoint: 800,
-                settings: {
-
-                    slidesToShow: 2,
-                    arrows: false
-                }
-            },
-            {
-                breakpoint: 400,
-                settings: {
-
-                    slidesToShow: 1,
-                    arrows: false
-                }
-            }
-        ]
         
-    }), 10);
+
+    }, 10);
 
     $('.slick-prev').empty();
     $('.slick-next').empty();
+
     addServListeners(uniqueServicios);
-    $('.navslider').on('afterChange', function(event, slick, currentSlide){
+
+    $('.navslider').on('afterChange', function (event, slick, currentSlide) {
+
         addServListeners(uniqueServicios);
     });
 }
@@ -114,7 +122,7 @@ function addServListeners(servicios) {
         behavior: 'smooth'
 
     })));
-    
+
     let blocked = false;
     let blockTimeout = null;
     let prevDeltaY = 0;

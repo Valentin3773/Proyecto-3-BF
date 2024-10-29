@@ -130,9 +130,19 @@ $urlbase = getUrlDominio();
 
             </div>
 
-            <div id="odontologocontainer">
+            <div id="opcionescontainer" class="p-2">
 
-                <h2 class="m-0"> <?= "{$_SESSION['odontologo']['nombre']} {$_SESSION['odontologo']['apellido']}" ?> </h2>
+                <button id="btnopciones" type="button" class="invisible">
+
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+
+                        <path stroke="black" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"></path>
+
+                    </svg>
+
+                </button>
+
+                <div id="sidebarmobile" class="invisible py-4"></div>
 
             </div>
 

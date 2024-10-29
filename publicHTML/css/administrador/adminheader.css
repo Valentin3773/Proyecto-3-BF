@@ -244,7 +244,7 @@ nav li:hover a {
     row-gap: .5rem;
 }
 
-.sidebar {
+.sidebar, #sidebarmobile {
 
     border-radius: 0 10px 10px 0;
     overflow-y: scroll;
@@ -274,7 +274,7 @@ nav li:hover a {
     margin-top: .5rem;
 }
 
-.sidebar::-webkit-scrollbar {
+.sidebar::-webkit-scrollbar, #sidebarmobile::-webkit-scrollbar {
 
     display: none;
 }
@@ -430,7 +430,7 @@ button#agregarmobile {
     right: 5%;
     background-color: #0AF0AB;
     color: white;
-    padding: 1rem;
+    padding: .5rem;
     border: none;
     border-radius: 10px 10px 0 0;
     width: 30%;
@@ -460,11 +460,59 @@ button#agregarmobile:active {
     filter: brightness(1.2);
 }
 
+#sidebarmobile {
+
+    display: none !important;
+}
+
 @media screen and (width <= 991px) {
 
     #headerpc, .actionbar, .sidebar {
 
         display: none;
+    }
+
+    header.mobile #opcionescontainer {
+
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    header.mobile #btnopciones {
+
+        width: 60px;
+        height: 60px;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 1px 1px 0 #9B9B9B;
+        background-color: white;
+        transition-duration: .3s;
+        border: 2px solid rgba(0, 0, 0, .4);
+    }
+
+    #sidebarmobile {
+
+        position: absolute;
+        top: 100%;
+        right: -1rem;
+        width: 100dvw !important;
+        display: flex !important;
+        flex-direction: column;
+        z-index: 100;
+        border-radius: 0 !important;
+        font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        transition-duration: .3s;
+        height: 80dvh !important;
+        background-color: white;
+        z-index: 250;
+    }
+
+    header.mobile #btnopciones:active {
+
+        scale: .97;
+        filter: brightness(1.2);
     }
 
     nav.mobile {

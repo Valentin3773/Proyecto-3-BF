@@ -60,6 +60,8 @@ function addAdminListeners() {
 
         if (!cargando) changePage('index.php');
     });
+
+    $('header.mobile #btnopciones').on('click', desplegarSidebarMobile);
 }
 
 function cargarVistaConsultaCalendario() {
@@ -71,7 +73,7 @@ function cargarVistaConsultaCalendario() {
 
     $.get("vistas/vistasadmin/sidebarconsultas.php", data => {
 
-        loadSidebar(data)
+        loadSidebar(data);
 
         $('.pacientec').on('click', function () {
 
@@ -1187,7 +1189,7 @@ function resetAdmin() {
 
     changeView(() => {
 
-        loadSidebar();
+        loadSidebar('');
         loadView('<div class="w-100 h-100 d-flex justify-content-center align-items-center"><h1 class="titinformativo">Bienvenido al administrador</h1></div>');
     });
 
@@ -1214,7 +1216,20 @@ let fechasPermitidas = [];
 
 function loadSidebar(contenido) {
 
-    $('.sidebar').empty().html(contenido).css({ 'opacity': 1 })[0].scrollTo({ top: 0, behavior: 'smooth' });
+    console.log('Cargando Sidebar');
+
+    const sidebar = $('.sidebar');
+    const sidebarmobile = $('header.mobile #sidebarmobile');
+    const btnopciones = $('header.mobile #btnopciones');
+
+    sidebar.empty().html(contenido).css({ 'opacity': 1 })[0].scrollTo({ top: 0, behavior: 'smooth' });
+    sidebarmobile.empty().html(contenido).css({ 'opacity': 1 })[0].scrollTo({ top: 0, behavior: 'smooth' });
+
+    if(contenido === '') btnopciones.removeClass('visible').addClass('invisible');
+
+    else btnopciones.removeClass('invisible').addClass('visible');
+
+    if(sidebarmobile.hasClass('visible')) desplegarSidebarMobile();
 }
 
 function changeView(vista) {
@@ -1237,4 +1252,22 @@ function manageMobileAddButton(active, texto, onclick = () => {}) {
     else mobileButton.removeClass('activo').addClass('inactivo');
 
     mobileButton.html(texto).off().on('click', onclick);
+}
+
+function desplegarSidebarMobile() {
+
+    const sidebarmobile = $('header.mobile #sidebarmobile');
+    const mobilepacientescontainer = $('header.mobile #sidebarmobile > .pacientescontainer');
+
+    if(sidebarmobile.hasClass('invisible') && !sidebarmobile.is(':empty')) {
+        
+        sidebarmobile.removeClass('invisible').addClass('visible');
+        mobilepacientescontainer.removeClass('invisible').addClass('visible');
+    }
+
+    else {
+        
+        sidebarmobile.removeClass('visible').addClass('invisible');
+        mobilepacientescontainer.removeClass('visible').addClass('invisible');
+    }
 }

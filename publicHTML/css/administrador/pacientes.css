@@ -431,4 +431,14 @@
         
         padding: .7rem;
     }
+
+    .eliminarenfermedad, .eliminarmedicamento {
+
+        padding: 1rem;
+    }
+
+    .enfermedad, .medicamento {
+
+        line-height: 45px;
+    }
 }

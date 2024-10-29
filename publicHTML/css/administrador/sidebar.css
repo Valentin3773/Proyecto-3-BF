@@ -1,4 +1,4 @@
-.sidebar > h2 {
+.sidebar > h2, #sidebarmobile > h2 {
 
     color: #00B2FF;
     text-align: center;
@@ -8,7 +8,7 @@
 }
 
 .sidebar .pacientec,
-.consultaside {
+.consultaside, #sidebarmobile .pacientec {
 
     background-color: #00B2FF;
     color: white;
@@ -25,7 +25,7 @@
 }
 
 
-.sidebar > h2 {
+.sidebar > h2, #sidebarmobile > h2 {
 
     color: #00B2FF;
     text-align: center;
@@ -35,7 +35,7 @@
 }
 
 .sidebar .paciente,
-.consultaside {
+.consultaside, #sidebarmobile .paciente {
 
     background-color: #00B2FF;
     color: white;
@@ -51,36 +51,36 @@
     transition-duration: .3s;
 }
 
-.sidebar .pacientec:hover {
+.sidebar .pacientec:hover, #sidebarmobile .pacientec:hover {
 
     scale: 1.03;
     filter: brightness(1.1);
 }
 
-.sidebar .pacientec:active {
+.sidebar .pacientec:active, #sidebarmobile .pacientec:active {
 
     scale: .97;
     filter: brightness(1.2);
 }
 
-.sidebar .consultaside:hover {
+.sidebar .consultaside:hover, #sidebarmobile .consultaside:hover {
 
     scale: 1.03;
 }
 
-.sidebar .paciente:hover {
+.sidebar .paciente:hover, #sidebarmobile .paciente:hover {
 
     scale: 1.03;
     filter: brightness(1.1);
 }
 
-.sidebar .paciente:active {
+.sidebar .paciente:active, #sidebarmobile .paciente:active {
 
     scale: .97;
     filter: brightness(1.2);
 }
 
-.sidebar .consultaside:hover {
+.sidebar .consultaside:hover, #sidebarmobile .consultaside:hover {
 
     scale: 1.03;
 }

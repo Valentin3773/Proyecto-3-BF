@@ -529,4 +529,9 @@ section#calendariocontainer {
         padding: .6rem;
         margin-top: .4rem;
     }
+
+    #tituloconsultas {
+
+        font-size: 200%;
+    }
 }
