@@ -1,6 +1,7 @@
 <?php
 
 include("../conexion.php");
+include("../extractor.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
