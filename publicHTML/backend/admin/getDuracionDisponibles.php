@@ -1,13 +1,11 @@
 <?php
 
 include_once("../extractor.php");
-
 session_start();
-reloadSession();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') duraciones();
 
-else exit();
+else  exit();
 
 function duraciones() {
 

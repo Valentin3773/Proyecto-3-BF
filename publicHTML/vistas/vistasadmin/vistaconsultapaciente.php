@@ -42,13 +42,10 @@ $fechaF = sumarFecha($fechaA, "mes", 3);
 $conjFechas = [];
 
 foreach (getDatesFromRange($fechaA, $fechaF) as $dateFromRange) if (fechaDisponible($dateFromRange, $ido)) $conjFechas[] = $dateFromRange;
-
 $conjHoras = horasDisponibles($fecha, $ido);
 $conjDuracion = duracionesDisponibles($formato,$Tiempoensql,$ido);
 
-$Tiempoensql = formatDateTime($Tiempoensql, 'H:i:s', 'H:i');
-
-foreach($conjFechas as &$fechita) $fechita = formatDateTime($fechita, 'Y-m-d', 'd/m/Y');
+$Tiempoensql = formatDateTime($Tiempoensql,'H:i:s', 'H:i');
 
 ?>
 
@@ -107,7 +104,7 @@ foreach($conjFechas as &$fechita) $fechita = formatDateTime($fechita, 'Y-m-d', '
                                     for($i = 0; $i < count($conjDuracion); $i++) {
                                         if(!($tupla['duracion'] == $conjDuracion[$i])){}
 
-                                        echo "<option value= '{$conjDuracion[$i]}'>{$conjDuracion[$i]}m</option>";
+                                        echo "<option value= '$conjDuracion[$i]'>$conjDuracion[$i]</option>";
                                     }
                                 } 
                                 else {

@@ -15,7 +15,7 @@ function addBTNListeners() {
     $('#btnCancelar').on('click', funcionCancelar);
     $('#btnGuardar').on('click', funcionGuardar);
     $('#btnEliminar').on('click', functionEliminar);
-    $('#fecha-CP').on('change', cambiarHorario);
+    $('#fecha-CP').on('change',cambiarHorario);
 
     $('#btnCancelar').css("opacity", 0.5);
     $('#btnGuardar').css("opacity", 0.5);
@@ -34,21 +34,15 @@ function cambiarHorario() {
         data: JSON.stringify({ fecha: fecha }),
         contentType: 'application/json',
         success: function(response) {
-
             console.log(response);
-
             let horarios = JSON.parse(response);
-
             $('#hora-CP').empty();
-
             for (let i = 0; i < horarios.length; i++) {
-
                 $('#hora-CP').append("<option value='" + horarios[i] + "'>" + horarios[i] + "</option>");
             }
             $('#hora-CP').append("<option id='horaV' value='" + horaV + "'>" + horaV + "</option>");
         },
         error: function(error) {
-
             console.log('Error al enviar los datos:', error);
         }
     });
@@ -70,16 +64,12 @@ function ajustarDuracion(){
         success: function(response) {
             console.log(response+"opa");
             let duraciones = JSON.parse(response);
-
             $('#duracion-CP').empty();
-
             for (let i = 0; i < duraciones.length; i++) {
-
                 $('#duracion-CP').append("<option value='" + duraciones[i] + "'>" + duraciones[i] + "</option>");
             }
         },
         error: function(error) {
-            
             console.log('Error al enviar los datos:', error);
         }
     });
@@ -195,8 +185,6 @@ function funcionGuardar() {
                 console.error("Error al procesar la solicitud: " + outputError + jqXHR + estado);
             }
         });
-
-        changeView(() => cargarVistaConsultaDetalle(data.fecha, data.hora));
     }
 }
 

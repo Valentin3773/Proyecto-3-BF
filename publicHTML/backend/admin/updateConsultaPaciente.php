@@ -29,29 +29,34 @@ function updateConsulta()
     $fechaV = isset($data['fechaV']) ? sanitizar($data['fechaV']) : null;
     $horaV = isset($data['horaV']) ? sanitizar($data['horaV']) : null;
 
-    $hora = formatDateTime($hora, 'H:i', 'H:i:s');
-    $fecha = formatDateTime($fecha, 'd/m/Y', 'Y-m-d');
+    $hora = formatDateTime($hora,'H:i', 'H:i:s');
+
     
     if (empty($asunto) || $asunto == null) {
 
-        echo "El campo 'Asunto' esta vacio. Por favor, ingrese un valor";
+        echo "El campo 'Asunto' esta vacio. Por favor, ingresa un valor.";
         exit();
     } 
-    else if (empty($hora) || strcasecmp($hora, "No hay horarios disponibles") === 0 || $hora == null) {
+    elseif (empty($hora) || strcasecmp($hora, "No hay horarios disponibles") === 0 || $hora == null) {
 
-        echo "Debes seleccionar una hora";
+        echo "Debes seleccionar una hora.";
         exit();
     } 
-    else if (empty($duracion) || $duracion == 0 || $duracion == null) {
+    elseif (empty($duracion) || $duracion == 0 || $duracion == null) {
 
-        echo "El campo 'Duracion' no puede estar vacio. Por favor, ingrese un valor";
+        echo "El campo 'Duracion' no puede ser 0 o vacio    . Por favor, ingresa un valor.";
         exit();
     } 
-    else if (empty($fecha) || strcasecmp($fecha, "No hay fecha disponibles") === 0 || $fecha == null) {
+    elseif (empty($fecha) || strcasecmp($fecha, "No hay fecha disponibles") === 0 || $fecha == null) {
 
-        echo "Debes seleccionar una fecha";
+        echo "Debes seleccionar una fecha.";
         exit();
-    }
+    } 
+    elseif (empty($resumen) || $resumen == null) {
+
+        echo "El campo 'Resumen' está vacío. Por favor, ingrese algun contenido.";
+        exit();
+    } 
     else {
 
         if ($fecha == "Elija una fecha") $fecha = $fechaV;
@@ -59,19 +64,25 @@ function updateConsulta()
 
         $fechadatetime = DateTime::createFromFormat('Y-m-d', $fecha);
 
-        if (fechaDisponible($fecha, $ido)) {
+        if (fechaDisponible($fecha, $ido) && in_array(formatDateTime($hora, 'H:i:s', 'H:i'), horasDisponibles($fecha, $ido))) {
+
             if (duracionesDisponibles($fechadatetime, $hora, $ido)) {
+
                 $disponibles = duracionesDisponibles($fechadatetime, $hora, $ido);
                 $estado = false;
                 
                 foreach ($disponibles as $duracionD) {
+
                     if ($duracion == $duracionD) {
+
                         $estado = true;
                     }
                 }
                 
                 if ($estado) {
+
                     try {
+
                         $consulta = 'UPDATE consulta SET fecha = :fecha, hora = :hora, asunto = :asunto, resumen = :resumen, duracion = :duracion WHERE idodontologo = :idodontologo AND hora = :horaV AND fecha = :fechaV';
                         $stmt = $pdo->prepare($consulta);
                         $stmt->bindParam(':fecha', $fecha);
@@ -103,5 +114,4 @@ function updateConsulta()
 
     }
     exit();
-
 }
