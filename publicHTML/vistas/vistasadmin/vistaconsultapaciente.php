@@ -23,7 +23,7 @@ $Fechaensql = $formato->format('Y-m-d');
 $Tiempoensql = $formato->format('H:i:s');
 $tupla = array();
 
-$sql = 'SELECT * FROM consulta JOIN paciente ON consulta.idpaciente = paciente.idpaciente WHERE idodontologo = :ido AND fecha = :fecha AND hora =:hora';
+$sql = 'SELECT * FROM consulta JOIN paciente ON consulta.idpaciente = paciente.idpaciente WHERE idodontologo = :ido AND fecha = :fecha AND hora =:hora AND vigente = "vigente"';
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':ido', $ido);
 $stmt->bindParam(':fecha', $Fechaensql);

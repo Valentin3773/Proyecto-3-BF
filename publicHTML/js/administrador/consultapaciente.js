@@ -16,6 +16,7 @@ function addBTNListeners() {
     $('#btnGuardar').on('click', funcionGuardar);
     $('#btnEliminar').on('click', functionEliminar);
     $('#fecha-CP').on('change',cambiarHorario);
+    $('#hora-CP').on('change',ajustarDuracion);
 
     $('#btnCancelar').css("opacity", 0.5);
     $('#btnGuardar').css("opacity", 0.5);
@@ -27,6 +28,7 @@ function cambiarHorario() {
     let horaV = $('.contentHora #horaV').val();
     const url = 'backend/admin/getHorarioDisponibles.php';
 
+
     $.ajax({
 
         type: 'POST',
@@ -34,7 +36,6 @@ function cambiarHorario() {
         data: JSON.stringify({ fecha: fecha }),
         contentType: 'application/json',
         success: function(response) {
-            console.log(response);
             let horarios = JSON.parse(response);
             $('#hora-CP').empty();
             for (let i = 0; i < horarios.length; i++) {
@@ -46,7 +47,6 @@ function cambiarHorario() {
             console.log('Error al enviar los datos:', error);
         }
     });
-
     ajustarDuracion();
 }
 
@@ -54,7 +54,7 @@ function ajustarDuracion(){
     let fecha = $('#fecha-CP option:selected').val();
     let hora = $('#hora-CP option:selected').val();
     const url = 'backend/admin/getDuracionDisponibles.php';
-
+    console.log('Opa');
     $.ajax({
 
         type: 'POST',
@@ -62,7 +62,7 @@ function ajustarDuracion(){
         data: JSON.stringify({ fecha: fecha, hora: hora}),
         contentType: 'application/json',
         success: function(response) {
-            console.log(response+"opa");
+            console.log(response);
             let duraciones = JSON.parse(response);
             $('#duracion-CP').empty();
             for (let i = 0; i < duraciones.length; i++) {
@@ -159,7 +159,6 @@ function funcionGuardar() {
             fechaV: $('.contentFecha #fechaV').val(),
             horaV: $('.contentHora #horaV').val()
         };
-        console.log(data);
 
         $.ajax({
 
@@ -170,7 +169,7 @@ function funcionGuardar() {
             success: response => {
 
                 if (response.error === undefined) {
-                    createHeaderPopup('Nuevo Aviso',response,'administrador.php');
+                    createHeaderPopup('Nuevo Aviso',response,() => changeView(cargarVistaConsultaCalendario));
                     iniData.asunto = $('#asunto-CP').val();
                     iniData.duracion = Number($('#duracion-CP option:selected').val());
                     iniData.fechaV = $('#fecha-CP option:selected').html();
