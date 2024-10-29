@@ -5,8 +5,8 @@ var iniData = {
     asunto: ($('#asunto-CP').val()),
     duracion: Number($('#duracion-CP').val()),
     resumen: ($('#resumen-CP').val()),
-    fechaV: $('.contentFecha #fechaV').html(),
-    horaV: $('.contentHora #horaV').html()
+    fechaV: $('.contentFecha #fechaV').val(),
+    horaV: $('.contentHora #horaV').val()
 }
 
 function addBTNListeners() {
@@ -23,9 +23,8 @@ function addBTNListeners() {
 }
 
 function cambiarHorario() {
-
-    let fecha = $('#fecha-CP option:selected').html();
-    let horaV = $('.contentHora #horaV').html();
+    let fecha = $('#fecha-CP option:selected').val();
+    let horaV = $('.contentHora #horaV').val();
     const url = 'backend/admin/getHorarioDisponibles.php';
 
     $.ajax({
@@ -57,10 +56,9 @@ function cambiarHorario() {
     ajustarDuracion();
 }
 
-function ajustarDuracion() {
-
-    let fecha = $('#fecha-CP option:selected').html();
-    let hora = $('#hora-CP option:selected').html();
+function ajustarDuracion(){
+    let fecha = $('#fecha-CP option:selected').val();
+    let hora = $('#hora-CP option:selected').val();
     const url = 'backend/admin/getDuracionDisponibles.php';
 
     $.ajax({
@@ -70,9 +68,7 @@ function ajustarDuracion() {
         data: JSON.stringify({ fecha: fecha, hora: hora}),
         contentType: 'application/json',
         success: function(response) {
-
-            console.log(response);
-
+            console.log(response+"opa");
             let duraciones = JSON.parse(response);
 
             $('#duracion-CP').empty();
@@ -168,11 +164,12 @@ function funcionGuardar() {
             asunto: ($('#asunto-CP').val()),
             hora: ($('#hora-CP option:selected').html()),
             duracion: Number($('#duracion-CP').val()),
-            fecha: ($('#fecha-CP option:selected').html()),
+            fecha: ($('#fecha-CP option:selected').val()),
             resumen: ($('#resumen-CP').val()),
-            fechaV: $('.contentFecha #fechaV').html(),
-            horaV: $('.contentHora #horaV').html()
+            fechaV: $('.contentFecha #fechaV').val(),
+            horaV: $('.contentHora #horaV').val()
         };
+        console.log(data);
 
         $.ajax({
 
@@ -183,7 +180,7 @@ function funcionGuardar() {
             success: response => {
 
                 if (response.error === undefined) {
-                    createPopup('Nuevo Aviso',response);
+                    createHeaderPopup('Nuevo Aviso',response,'administrador.php');
                     iniData.asunto = $('#asunto-CP').val();
                     iniData.duracion = Number($('#duracion-CP option:selected').val());
                     iniData.fechaV = $('#fecha-CP option:selected').html();

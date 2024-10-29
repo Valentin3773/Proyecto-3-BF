@@ -55,53 +55,52 @@ function updateConsulta()
     else {
 
         if ($fecha == "Elija una fecha") $fecha = $fechaV;
-        
         if ($hora == "Elija una hora") $hora = $horaV;
 
-        $fechadatetime = Datetime::createFromFormat('Y-m-d', $fecha);
+        $fechadatetime = DateTime::createFromFormat('Y-m-d', $fecha);
 
-        error_log(fechaDisponible($fecha, $ido));
-        error_log(in_array(formatDateTime($hora, 'H:i:s', 'H:i'), horasDisponibles($fecha, $ido)));
-        error_log(in_array($duracion, duracionesDisponibles($fechadatetime, $hora, $ido)));
-
-        if(!(fechaDisponible($fecha, $ido) && in_array(formatDateTime($hora, 'H:i:s', 'H:i'), horasDisponibles($fecha, $ido)) && in_array($duracion, duracionesDisponibles($fechadatetime, $hora, $ido)))) {
-
-            echo "Lo sentimos, la fecha, la hora o la duración no están disponibles";
-            exit();
+        if (fechaDisponible($fecha, $ido)) {
+            if (duracionesDisponibles($fechadatetime, $hora, $ido)) {
+                $disponibles = duracionesDisponibles($fechadatetime, $hora, $ido);
+                $estado = false;
+                
+                foreach ($disponibles as $duracionD) {
+                    if ($duracion == $duracionD) {
+                        $estado = true;
+                    }
+                }
+                
+                if ($estado) {
+                    try {
+                        $consulta = 'UPDATE consulta SET fecha = :fecha, hora = :hora, asunto = :asunto, resumen = :resumen, duracion = :duracion WHERE idodontologo = :idodontologo AND hora = :horaV AND fecha = :fechaV';
+                        $stmt = $pdo->prepare($consulta);
+                        $stmt->bindParam(':fecha', $fecha);
+                        $stmt->bindParam(':hora', $hora);
+                        $stmt->bindParam(':asunto', $asunto);
+                        $stmt->bindParam(':resumen', $resumen);
+                        $stmt->bindParam(':duracion', $duracion);
+                        $stmt->bindParam(':idodontologo', $ido);
+                        $stmt->bindParam(':fechaV', $fechaV);
+                        $stmt->bindParam(':horaV', $horaV);
+                        
+                        if ($stmt->execute()) {
+                            echo "Se ha modificado la consulta";
+                        } else {
+                            echo "Ha ocurrido un error al modificar la consulta";
+                        }
+                    } catch (Throwable $th) {
+                        echo $th->getMessage();
+                    }
+                } else {
+                    echo "Uno de los datos no son disponibles";
+                }
+            } else {
+                echo "No disponible";
+            }
+        } else {
+            echo "Fecha no disponible";
         }
 
-        try {
-
-            $consulta = 'UPDATE consulta SET fecha = :fecha, hora = :hora, asunto = :asunto, resumen = :resumen, duracion = :duracion WHERE idodontologo = :idodontologo AND hora = :horaV AND fecha = :fechaV';
-
-            $fechaV = formatDateTime($fechaV, 'd/m/Y', 'Y-m-d');
-            $horaV = formatDateTime($horaV, 'H:i', 'H:i:s');
-
-            $stmt = $pdo->prepare($consulta);
-            $stmt->bindParam(':fecha', $fecha);
-            $stmt->bindParam(':hora', $hora);
-            $stmt->bindParam(':asunto', $asunto);
-            $stmt->bindParam(':resumen', $resumen);
-            $stmt->bindParam(':duracion', $duracion);
-            $stmt->bindParam(':idodontologo', $ido);
-            $stmt->bindParam(':fechaV', $fechaV);
-            $stmt->bindParam(':horaV', $horaV);
-
-            error_log($fecha);
-            error_log($hora);
-            error_log($fechaV);
-            error_log($horaV);
-            error_log($ido);
-
-            if ($stmt->execute()) echo "Se ha modificado la consulta";
-            
-            else echo "Ha ocurrido un error al modificar la consulta";
-        } 
-        catch (Throwable $th) {
-
-            echo  "$th->getMessage()";
-        }
-        
     }
     exit();
 

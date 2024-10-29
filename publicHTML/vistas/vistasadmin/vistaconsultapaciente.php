@@ -80,8 +80,9 @@ foreach($conjFechas as &$fechita) $fechita = formatDateTime($fechita, 'Y-m-d', '
 
                                 echo "<option id='horaV'>" . $Tiempoensql . "</option>";
                                 for($i = 0; $i < count($conjHoras); $i++) {
-
-                                    echo "<option value= '$conjHoras[$i]'>$conjHoras[$i]</option>";
+                                    if(!($Tiempoensql == $conjHoras[$i])){
+                                        echo "<option value= '$conjHoras[$i]'>$conjHoras[$i]</option>";
+                                    }
                                 } 
                             } 
                             else {
@@ -104,6 +105,7 @@ foreach($conjFechas as &$fechita) $fechita = formatDateTime($fechita, 'Y-m-d', '
                                 if(!empty($conjDuracion)) {
 
                                     for($i = 0; $i < count($conjDuracion); $i++) {
+                                        if(!($tupla['duracion'] == $conjDuracion[$i])){}
 
                                         echo "<option value= '{$conjDuracion[$i]}'>{$conjDuracion[$i]}m</option>";
                                     }
@@ -127,11 +129,13 @@ foreach($conjFechas as &$fechita) $fechita = formatDateTime($fechita, 'Y-m-d', '
                     <select name="" id="fecha-CP" disabled>
                     <?php 
                             if(!empty($conjFechas)) {
-
-                                echo "<option id='fechaV'>" . formatDateTime($Fechaensql, 'Y-m-d', 'd/m/Y') . "</option>";
-                                foreach($conjFechas as &$fechona) {
-
-                                    echo "<option value= '$fechona'>$fechona</option>";
+                                $fechaActual = DateTime::createFromFormat('Y-m-d', $Fechaensql)->format('d/m/Y');
+                                echo "<option id='fechaV' value='$Fechaensql'>" . $fechaActual . "</option>";
+                                for($i = 0; $i < count($conjFechas); $i++) {
+                                    if(!($Fechaensql == $conjFechas[$i])){
+                                        $fechaFormateada = DateTime::createFromFormat('Y-m-d', $conjFechas[$i])->format('d/m/Y');
+                                        echo "<option value= '$conjFechas[$i]'>$fechaFormateada</option>";
+                                    }
                                 } 
                             } 
                             else {

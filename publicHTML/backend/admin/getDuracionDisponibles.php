@@ -12,16 +12,20 @@ else exit();
 function duraciones() {
 
     $data = json_decode(file_get_contents('php://input'), true);
-    $fecha = sanitizar($data['fecha']);
-    $hora = sanitizar($data['hora']);
-    $ido = $_SESSION['odontologo']['idodontologo'];
 
-    error_log($fecha . ' ' . $hora);    
+    if (isset($data['fecha']) && isset($data['hora'])) {
 
-    $fechatiempoString = $fecha . ' ' . $hora;
-    $fecha = DateTime::createFromFormat('d/m/Y H:i', $fechatiempoString);
+        $fecha = DateTime::createFromFormat('Y-m-d', $data['fecha']);
+        $hora = $data['hora'];
+        $ido = $_SESSION['odontologo']['idodontologo'];
 
-    $conjDuraciones = duracionesDisponibles($fecha,$hora,$ido);
-    echo json_encode($conjDuraciones);
+        if ($fecha) {
+
+            $conjDuraciones = duracionesDisponibles($fecha, $hora, $ido);
+            
+            echo json_encode($conjDuraciones);
+        } 
+    }
 }
+
 ?>
