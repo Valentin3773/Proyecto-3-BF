@@ -21,11 +21,11 @@ body {
 }
 
 #aboutus {
-
     color: #fff;
     font-family: Inika-Bold;
     font-size: 3rem;
     text-align: center;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+    text-shadow: 1px 1px 1px rgba(1, 1, 1, 1);
     letter-spacing: 4px;
 }
+

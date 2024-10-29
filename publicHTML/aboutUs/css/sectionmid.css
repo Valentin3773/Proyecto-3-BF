@@ -28,6 +28,7 @@ body {
     text-align: center;
     height: auto;
     display: flex;
+    justify-content: center;
 }
 
 #logopa img {

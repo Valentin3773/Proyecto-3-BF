@@ -16,18 +16,28 @@ footer {
 
     font-family: Inika-Bold;
     color: #fff;
-    font-size: 18px;
+    font-size: 23px;
+    text-shadow: 1px 1px 1px black;
 }
 
 #contenedorflogo {
-
+    height: 14px;
+    width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px 0;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px black;
+    transition-duration: 300ms;
 }
 
 #contenedorflogo img {
+    width: 34px;
 
-    width: 17px;
+}
+
+#contenedorflogo:hover {
+    transform: rotate(360deg);
 }
