@@ -30,7 +30,7 @@ function updateConsulta()
     $horaV = isset($data['horaV']) ? sanitizar($data['horaV']) : null;
 
     $hora = formatDateTime($hora, 'H:i', 'H:i:s');
-    $fecha = formatDateTime($hora, 'Y-m-d', 'd/m/Y');
+    $fecha = formatDateTime($fecha, 'd/m/Y', 'Y-m-d');
     
     if (empty($asunto) || $asunto == null) {
 
@@ -60,7 +60,11 @@ function updateConsulta()
 
         $fechadatetime = Datetime::createFromFormat('Y-m-d', $fecha);
 
-        if(!(fechaDisponible($fecha, $ido) && in_array($hora, horasDisponibles($fecha, $ido)) && in_array($duracion, duracionesDisponibles($fechadatetime, $hora, $ido)))) {
+        error_log(fechaDisponible($fecha, $ido));
+        error_log(in_array(formatDateTime($hora, 'H:i:s', 'H:i'), horasDisponibles($fecha, $ido)));
+        error_log(in_array($duracion, duracionesDisponibles($fechadatetime, $hora, $ido)));
+
+        if(!(fechaDisponible($fecha, $ido) && in_array(formatDateTime($hora, 'H:i:s', 'H:i'), horasDisponibles($fecha, $ido)) && in_array($duracion, duracionesDisponibles($fechadatetime, $hora, $ido)))) {
 
             echo "Lo sentimos, la fecha, la hora o la duración no están disponibles";
             exit();
@@ -69,6 +73,9 @@ function updateConsulta()
         try {
 
             $consulta = 'UPDATE consulta SET fecha = :fecha, hora = :hora, asunto = :asunto, resumen = :resumen, duracion = :duracion WHERE idodontologo = :idodontologo AND hora = :horaV AND fecha = :fechaV';
+
+            $fechaV = formatDateTime($fechaV, 'd/m/Y', 'Y-m-d');
+            $horaV = formatDateTime($horaV, 'H:i', 'H:i:s');
 
             $stmt = $pdo->prepare($consulta);
             $stmt->bindParam(':fecha', $fecha);
@@ -79,6 +86,12 @@ function updateConsulta()
             $stmt->bindParam(':idodontologo', $ido);
             $stmt->bindParam(':fechaV', $fechaV);
             $stmt->bindParam(':horaV', $horaV);
+
+            error_log($fecha);
+            error_log($hora);
+            error_log($fechaV);
+            error_log($horaV);
+            error_log($ido);
 
             if ($stmt->execute()) echo "Se ha modificado la consulta";
             

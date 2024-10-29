@@ -50,8 +50,6 @@ $Tiempoensql = formatDateTime($Tiempoensql, 'H:i:s', 'H:i');
 
 foreach($conjFechas as &$fechita) $fechita = formatDateTime($fechita, 'Y-m-d', 'd/m/Y');
 
-foreach($conjFechas as $fechona) error_log($fechona);
-
 ?>
 
 <script src="js/administrador/consultapaciente.js"></script>

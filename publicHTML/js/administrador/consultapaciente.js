@@ -174,7 +174,6 @@ function funcionGuardar() {
             horaV: $('.contentHora #horaV').html()
         };
 
-
         $.ajax({
 
             type: 'POST',
@@ -199,6 +198,8 @@ function funcionGuardar() {
                 console.error("Error al procesar la solicitud: " + outputError + jqXHR + estado);
             }
         });
+
+        changeView(() => cargarVistaConsultaDetalle(data.fecha, data.hora));
     }
 }
 
