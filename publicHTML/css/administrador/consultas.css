@@ -522,4 +522,11 @@ section#calendariocontainer {
 
         width: 100% !important;
     }
+
+    #contagregarconsulta {
+
+        width: 100% !important;
+        padding: .6rem;
+        margin-top: .4rem;
+    }
 }

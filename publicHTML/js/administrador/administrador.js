@@ -134,6 +134,8 @@ function cargarVistaConsultaCalendario() {
     $('#seccionescss').attr('href', 'css/administrador/consultas.css');
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnconsultas, nav.mobile #btnconsultas').css({ 'text-decoration': 'underline' });
+
+    manageMobileAddButton(true, 'Agendar Consulta', () => changeView(cargarVistaAgregarConsulta));
 }
 
 function cargarVistaConsultasPaciente(idp) {
@@ -167,6 +169,8 @@ function cargarVistaConsultasPaciente(idp) {
             changeView(() => cargarVistaConsultaDetalle(fecha, hora));
         });
     });
+
+    manageMobileAddButton(true, 'Agendar Consulta', () => changeView(cargarVistaAgregarConsulta));
 }
 
 function cargarVistaConsultaDetalle(fecha, hora) {
@@ -187,6 +191,8 @@ function cargarVistaConsultaDetalle(fecha, hora) {
     $('#seccionescss').attr('href', 'css/administrador/consultas.css');
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnconsultas, nav.mobile #btnconsultas').css({ 'text-decoration': 'underline' });
+
+    manageMobileAddButton(false, 'Agendar Consulta');
 }
 
 function addCalendarioListeners() {
@@ -438,6 +444,8 @@ function cargarVistaAgregarConsulta() {
     $('#seccionescss').attr('href', 'css/administrador/consultas.css');
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnconsultas, nav.mobile #btnconsultas').css({ 'text-decoration': 'underline' });
+
+    manageMobileAddButton(false, 'Agendar Consulta');
 }
 
 function cargarVistaAgregarServicio() {
@@ -578,6 +586,8 @@ function cargarVistaAgregarServicio() {
     $('#seccionescss').attr('href', 'css/administrador/servicios.css');
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnservicios, nav.mobile #btnservicios').css({ 'text-decoration': 'underline' });
+
+    manageMobileAddButton(false, 'Agregar Servicio');
 }
 
 function cargarVistaPacientes() {
@@ -612,6 +622,8 @@ function cargarVistaPacientes() {
     $('#seccionescss').attr('href', 'css/administrador/pacientes.css');
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnpacientes, nav.mobile #btnpacientes').css({ 'text-decoration': 'underline' });
+
+    manageMobileAddButton(false, '');
 }
 
 function cargarVistaPacienteDetalle(idp) {
@@ -888,6 +900,8 @@ function cargarVistaPacienteDetalle(idp) {
     $('#seccionescss').attr('href', 'css/administrador/pacientes.css');
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnpacientes, nav.mobile #btnpacientes').css({ 'text-decoration': 'underline' });
+
+    manageMobileAddButton(false, '');
 }
 
 function cargarVistaServicios() {
@@ -917,6 +931,8 @@ function cargarVistaServicios() {
     $('#seccionescss').attr('href', 'css/administrador/servicios.css');
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnservicios, nav.mobile #btnservicios').css({ 'text-decoration': 'underline' });
+
+    manageMobileAddButton(true, 'Agregar Servicio', () => changeView(cargarVistaAgregarServicio));
 }
 
 function cargarVistaServicioDetalle(numservicio) {
@@ -1105,6 +1121,8 @@ function cargarVistaServicioDetalle(numservicio) {
     $('#seccionescss').attr('href', 'css/administrador/servicios.css');
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnservicios, nav.mobile #btnservicios').css({ 'text-decoration': 'underline' });
+
+    manageMobileAddButton(true, 'Agregar Servicio', () => changeView(cargarVistaAgregarServicio));
 }
 
 function enviarIMGServicio($data, $tipo) {
@@ -1208,4 +1226,15 @@ function changeView(vista) {
 function loadView(contenido) {
 
     $('main').empty().html(contenido).fadeIn(200)[0].scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function manageMobileAddButton(active, texto, onclick = () => {}) {
+
+    let mobileButton =  $('#agregarmobile');
+
+    if(active) mobileButton.removeClass('inactivo').addClass('activo');
+
+    else mobileButton.removeClass('activo').addClass('inactivo');
+
+    mobileButton.html(texto).off().on('click', onclick);
 }

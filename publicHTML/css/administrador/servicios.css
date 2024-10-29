@@ -304,4 +304,17 @@
 
         font-size: 1.5rem;
     }
+
+    #contagregarservicio {
+
+        width: 100% !important;
+        padding: .6rem;
+        margin-top: .4rem;
+    }
+
+    #contimg {
+
+        flex-direction: column;
+        row-gap: 1rem;
+    }
 }

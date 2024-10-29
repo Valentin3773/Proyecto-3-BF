@@ -2,6 +2,6 @@
 
 include('extractor.php');
 
-echo getUrlDominio();
+var_dump(horasDisponibles('2024-11-01', 1))
 
 ?>

@@ -307,6 +307,7 @@ main {
     max-height: 84.4dvh !important;
     box-shadow: -2px -4px 4px rgba(0, 0, 0, .25);
     /* transition-duration: .3s; */
+    padding-bottom: 1.3rem !important;
 }
 
 .row > div {
@@ -422,6 +423,43 @@ main {
     text-align: center;
 }
 
+button#agregarmobile {
+
+    position: fixed;
+    bottom: 10dvh;
+    right: 5%;
+    background-color: #0AF0AB;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px 10px 0 0;
+    width: 30%;
+    font-family: RobotoSerif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.3rem;
+    font-weight: 600;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .35);
+    text-shadow: 0 0 3px rgba(0, 0, 0, .4);
+    transition: all .3s ease;
+    display: none;
+    border-top: 2px solid rgba(0, 0, 0, .2);
+    border-left: 2px solid rgba(0, 0, 0, .2);
+    border-right: 2px solid rgba(0, 0, 0, .2);
+    transition-duration: .3s;
+}
+
+button#agregarmobile:hover {
+
+    scale: 1.03;
+    filter: brightness(1.1);
+}
+
+button#agregarmobile:active {
+
+    scale: .97;
+    filter: brightness(1.2);
+}
+
 @media screen and (width <= 991px) {
 
     #headerpc, .actionbar, .sidebar {
@@ -439,6 +477,7 @@ main {
         height: 10dvh;
         background-color: white;
         box-shadow: 0 -4px 4px #78b3ff7c;
+        z-index: 300;
     }
 
     nav.mobile ul {
@@ -520,6 +559,24 @@ main {
     h1.titinformativo {
 
         font-size: 2rem;
+    }
+
+    button#agregarmobile.activo {
+
+        display: block;
+        bottom: 10dvh;
+        z-index: 200;
+    }
+
+    button#agregarmobile.inactivo {
+
+        display: block;
+        bottom: -5dvh;
+    }
+
+    .subtitulo {
+
+        font-size: 250% !important;
     }
 }
 

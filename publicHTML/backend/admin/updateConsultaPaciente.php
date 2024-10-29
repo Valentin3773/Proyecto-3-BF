@@ -29,39 +29,42 @@ function updateConsulta()
     $fechaV = isset($data['fechaV']) ? sanitizar($data['fechaV']) : null;
     $horaV = isset($data['horaV']) ? sanitizar($data['horaV']) : null;
 
-    $hora = formatDateTime($hora,'H:i', 'H:i:s');
-
+    $hora = formatDateTime($hora, 'H:i', 'H:i:s');
+    $fecha = formatDateTime($hora, 'Y-m-d', 'd/m/Y');
     
     if (empty($asunto) || $asunto == null) {
 
-        echo "El campo 'Asunto' esta vacio. Por favor, ingresa un valor.";
+        echo "El campo 'Asunto' esta vacio. Por favor, ingrese un valor";
         exit();
     } 
-    elseif (empty($hora) || strcasecmp($hora, "No hay horarios disponibles") === 0 || $hora == null) {
+    else if (empty($hora) || strcasecmp($hora, "No hay horarios disponibles") === 0 || $hora == null) {
 
-        echo "Debes seleccionar una hora.";
+        echo "Debes seleccionar una hora";
         exit();
     } 
-    elseif (empty($duracion) || $duracion == 0 || $duracion == null) {
+    else if (empty($duracion) || $duracion == 0 || $duracion == null) {
 
-        echo "El campo 'Duracion' no puede ser 0 o vacio    . Por favor, ingresa un valor.";
+        echo "El campo 'Duracion' no puede estar vacio. Por favor, ingrese un valor";
         exit();
     } 
-    elseif (empty($fecha) || strcasecmp($fecha, "No hay fecha disponibles") === 0 || $fecha == null) {
+    else if (empty($fecha) || strcasecmp($fecha, "No hay fecha disponibles") === 0 || $fecha == null) {
 
-        echo "Debes seleccionar una fecha.";
+        echo "Debes seleccionar una fecha";
         exit();
-    } 
-    elseif (empty($resumen) || $resumen == null) {
-
-        echo "El campo 'Resumen' está vacío. Por favor, ingrese algun contenido.";
-        exit();
-    } 
+    }
     else {
 
         if ($fecha == "Elija una fecha") $fecha = $fechaV;
         
         if ($hora == "Elija una hora") $hora = $horaV;
+
+        $fechadatetime = Datetime::createFromFormat('Y-m-d', $fecha);
+
+        if(!(fechaDisponible($fecha, $ido) && in_array($hora, horasDisponibles($fecha, $ido)) && in_array($duracion, duracionesDisponibles($fechadatetime, $hora, $ido)))) {
+
+            echo "Lo sentimos, la fecha, la hora o la duración no están disponibles";
+            exit();
+        }
 
         try {
 

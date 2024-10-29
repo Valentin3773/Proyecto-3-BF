@@ -42,10 +42,15 @@ $fechaF = sumarFecha($fechaA, "mes", 3);
 $conjFechas = [];
 
 foreach (getDatesFromRange($fechaA, $fechaF) as $dateFromRange) if (fechaDisponible($dateFromRange, $ido)) $conjFechas[] = $dateFromRange;
+
 $conjHoras = horasDisponibles($fecha, $ido);
 $conjDuracion = duracionesDisponibles($formato,$Tiempoensql,$ido);
 
-$Tiempoensql = formatDateTime($Tiempoensql,'H:i:s', 'H:i');
+$Tiempoensql = formatDateTime($Tiempoensql, 'H:i:s', 'H:i');
+
+foreach($conjFechas as &$fechita) $fechita = formatDateTime($fechita, 'Y-m-d', 'd/m/Y');
+
+foreach($conjFechas as $fechona) error_log($fechona);
 
 ?>
 
@@ -102,7 +107,7 @@ $Tiempoensql = formatDateTime($Tiempoensql,'H:i:s', 'H:i');
 
                                     for($i = 0; $i < count($conjDuracion); $i++) {
 
-                                        echo "<option value= '$conjDuracion[$i]'>$conjDuracion[$i]</option>";
+                                        echo "<option value= '{$conjDuracion[$i]}'>{$conjDuracion[$i]}m</option>";
                                     }
                                 } 
                                 else {
@@ -125,9 +130,10 @@ $Tiempoensql = formatDateTime($Tiempoensql,'H:i:s', 'H:i');
                     <?php 
                             if(!empty($conjFechas)) {
 
-                                echo "<option id='fechaV'>" . $Fechaensql . "</option>";
-                                for($i = 0; $i < count($conjFechas); $i++) {
-                                    echo "<option value= '$conjFechas[$i]'>$conjFechas[$i]</option>";
+                                echo "<option id='fechaV'>" . formatDateTime($Fechaensql, 'Y-m-d', 'd/m/Y') . "</option>";
+                                foreach($conjFechas as &$fechona) {
+
+                                    echo "<option value= '$fechona'>$fechona</option>";
                                 } 
                             } 
                             else {

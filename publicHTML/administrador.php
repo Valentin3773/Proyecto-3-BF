@@ -171,6 +171,8 @@ $urlbase = getUrlDominio();
 
         </nav>
 
+        <button id="agregarmobile">Agendar Consulta</button>
+
     </div>
 
 </body>
