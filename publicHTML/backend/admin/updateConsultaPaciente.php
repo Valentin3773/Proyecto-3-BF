@@ -60,32 +60,52 @@ function updateConsulta()
     else {
 
         if ($fecha == "Elija una fecha") $fecha = $fechaV;
-        
         if ($hora == "Elija una hora") $hora = $horaV;
 
-        try {
+        $fechadatetime = DateTime::createFromFormat('Y-m-d', $fecha);
 
-            $consulta = 'UPDATE consulta SET fecha = :fecha, hora = :hora, asunto = :asunto, resumen = :resumen, duracion = :duracion WHERE idodontologo = :idodontologo AND hora = :horaV AND fecha = :fechaV';
-
-            $stmt = $pdo->prepare($consulta);
-            $stmt->bindParam(':fecha', $fecha);
-            $stmt->bindParam(':hora', $hora);
-            $stmt->bindParam(':asunto', $asunto);
-            $stmt->bindParam(':resumen', $resumen);
-            $stmt->bindParam(':duracion', $duracion);
-            $stmt->bindParam(':idodontologo', $ido);
-            $stmt->bindParam(':fechaV', $fechaV);
-            $stmt->bindParam(':horaV', $horaV);
-
-            if ($stmt->execute()) echo "Se ha modificado la consulta";
-            
-            else echo "Ha ocurrido un error al modificar la consulta";
-        } 
-        catch (Throwable $th) {
-
-            echo  "$th->getMessage()";
+        if (fechaDisponible($fecha, $ido)) {
+            if (duracionesDisponibles($fechadatetime, $hora, $ido)) {
+                $disponibles = duracionesDisponibles($fechadatetime, $hora, $ido);
+                $estado = false;
+                
+                foreach ($disponibles as $duracionD) {
+                    if ($duracion == $duracionD) {
+                        $estado = true;
+                    }
+                }
+                
+                if ($estado) {
+                    try {
+                        $consulta = 'UPDATE consulta SET fecha = :fecha, hora = :hora, asunto = :asunto, resumen = :resumen, duracion = :duracion WHERE idodontologo = :idodontologo AND hora = :horaV AND fecha = :fechaV';
+                        $stmt = $pdo->prepare($consulta);
+                        $stmt->bindParam(':fecha', $fecha);
+                        $stmt->bindParam(':hora', $hora);
+                        $stmt->bindParam(':asunto', $asunto);
+                        $stmt->bindParam(':resumen', $resumen);
+                        $stmt->bindParam(':duracion', $duracion);
+                        $stmt->bindParam(':idodontologo', $ido);
+                        $stmt->bindParam(':fechaV', $fechaV);
+                        $stmt->bindParam(':horaV', $horaV);
+                        
+                        if ($stmt->execute()) {
+                            echo "Se ha modificado la consulta";
+                        } else {
+                            echo "Ha ocurrido un error al modificar la consulta";
+                        }
+                    } catch (Throwable $th) {
+                        echo $th->getMessage();
+                    }
+                } else {
+                    echo "Uno de los datos no son disponibles";
+                }
+            } else {
+                echo "No disponible";
+            }
+        } else {
+            echo "Fecha no disponible";
         }
-        
+
     }
     exit();
 

@@ -1,31 +1,9 @@
-User-agent: Googlebot
-Allow: /Proyecto-3-BF/publicHTML/sitemap.xml
-
-User-agent: Googlebot-Image
-Allow: /Proyecto-3-BF/publicHTML/sitemap.xml
-
-User-agent: Googlebot-Video
-Allow: /Proyecto-3-BF/publicHTML/sitemap.xml
-
-User-agent: AdsBot-Google
-Allow: /Proyecto-3-BF/publicHTML/sitemap.xml
-
-User-agent: Googlebot-News
-Allow: /Proyecto-3-BF/publicHTML/sitemap.xml
-
-Sitemap: https://clinica-local.ddns.net/Proyecto-3-BF/publicHTML/sitemap.xml
-
 User-agent: *
 Disallow: /administrador.php
 Disallow: /perfil.php
 Disallow: /reservarconsulta.php
-Allow: /Proyecto-3-BF/publicHTML/vistas/
-Allow: /Proyecto-3-BF/publicHTML/backend/
-Allow: /Proyecto-3-BF/publicHTML/img/
-Allow: /Proyecto-3-BF/publicHTML/js/
-Allow: /Proyecto-3-BF/publicHTML/lib/
-Allow: /Proyecto-3-BF/publicHTML/font/
-Allow: /Proyecto-3-BF/publicHTML/css/
+
+Allow: /Proyecto-3-BF/publicHTML/
 Allow: /index.php
 Allow: /aboutUs/aboutus.php
 
