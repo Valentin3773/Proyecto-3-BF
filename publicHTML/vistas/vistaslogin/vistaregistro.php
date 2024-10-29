@@ -13,7 +13,7 @@
         <div id="contenedor_formulario_registro" class="mb-3 col-xl-6 col-lg-6 col-12">
 
             <div id="titulo_input">
-                <label for="innombre" class="text-end row">Nombre</label>
+                <label for="innombre" class="text-end row">Nombre<span class="astobligatorio" title="Este campo es obligatorio">*</span></label>
             </div>
             <div id="div_input">
                 <input type="text" name="nombre" id="innombre" title="Ingrese su nombre" placeholder="Ingrese su nombre" required autofocus>
@@ -23,7 +23,7 @@
         <div id="contenedor_formulario_registro" class="mb-4 col-xl-6 col-lg-6 col-12">
 
             <div id="titulo_input">
-                <label for="inapellido" class="text-end row">Apellido</label>
+                <label for="inapellido" class="text-end row">Apellido<span class="astobligatorio" title="Este campo es obligatorio">*</span></label>
             </div>
             <div id="div_input">
                 <input type="text" name="apellido" id="inapellido" title="Ingrese su apellido" placeholder="Ingrese su apellido" required>
@@ -33,7 +33,7 @@
         <div id="contenedor_formulario_registro" class="mb-4 col-xl-6 col-lg-6 col-12">
 
             <div id="titulo_input">
-                <label for="indocumento" class="text-end row">Documento</label>
+                <label for="indocumento" class="text-end row">Documento<span class="astobligatorio" title="Este campo es obligatorio">*</span></label>
             </div>
             <div id="div_input">
                 <input type="text" name="documento" id="indocumento" title="Ingrese su documento" placeholder="Ingrese su documento" required>
@@ -63,7 +63,7 @@
         <div id="contenedor_formulario_registro" class="mb-4 col-12">
 
             <div id="titulo_input">
-                <label for="inemail" class="text-end row">Email</label>
+                <label for="inemail" class="text-end row">Email<span class="astobligatorio" title="Este campo es obligatorio">*</span></label>
             </div>
             <div id="div_input">
                 <input type="text" name="email" id="inemail" title="Ingrese su correo electrónico" placeholder="Ingrese su correo electrónico" required>
@@ -73,7 +73,7 @@
         <div id="contenedor_formulario_registro" class="mb-4 col-12">
 
             <div id="titulo_input">
-                <label for="incontrasenia" class="text-end row">Contraseña</label>
+                <label for="incontrasenia" class="text-end row">Contraseña<span class="astobligatorio" title="Este campo es obligatorio">*</span></label>
             </div>
             <div id="div_input">
                 <input type="password" name="contrasenia" id="incontrasenia" title="Ingrese su contraseña" placeholder="Ingrese su contraseña" required>
@@ -83,7 +83,7 @@
         <div id="contenedor_formulario_registro" class="mb-4 col-12 contconcontrasenia">
 
             <div id="titulo_input">
-                <label for="inconcontrasenia" class="text-end row">Confirmar Contraseña</label>
+                <label for="inconcontrasenia" class="text-end row">Confirmar Contraseña<span class="astobligatorio" title="Este campo es obligatorio">*</span></label>
             </div>
             <div id="div_input">
                 <input type="password" name="concontrasenia" id="inconcontrasenia" title="Ingrese nuevamente su contraseña" placeholder="Ingrese nuevamente su contraseña" required>

@@ -4,7 +4,9 @@ var visto = new Set();
 function iniciarServicios(servicios) {
 
     for (let i = 0; i < servicios.length; i++) {
+
         if (!visto.has(servicios[i].numero)) {
+
             visto.add(servicios[i].numero);
             uniqueServicios.push(servicios[i]);
         }
@@ -82,14 +84,6 @@ function iniciarServicios(servicios) {
                     breakpoint: 800,
                     settings: {
 
-                        slidesToShow: 2,
-                        arrows: false
-                    }
-                },
-                {
-                    breakpoint: 400,
-                    settings: {
-
                         slidesToShow: 1,
                         arrows: false
                     }
@@ -97,9 +91,7 @@ function iniciarServicios(servicios) {
             ]
         });
 
-        
-
-    }, 10);
+    }, 1000);
 
     $('.slick-prev').empty();
     $('.slick-next').empty();
@@ -109,10 +101,9 @@ function iniciarServicios(servicios) {
     $('.navslider').on('afterChange', function (event, slick, currentSlide) {
 
         addServListeners(uniqueServicios);
+        console.log('pablo');
     });
 }
-
-
 
 function addServListeners(servicios) {
 
@@ -128,6 +119,7 @@ function addServListeners(servicios) {
     let prevDeltaY = 0;
 
     $(".navslider").off().on('mousewheel DOMMouseScroll wheel', function (evt) {
+
         addServListeners(servicios);
         let deltaY = evt.originalEvent.deltaY;
         evt.preventDefault();
@@ -141,14 +133,9 @@ function addServListeners(servicios) {
             blocked = true;
             prevDeltaY = deltaY;
 
-            if (deltaY > 0) {
-
-                $(this).slick('slickNext');
-            }
-            else {
-
-                $(this).slick('slickPrev');
-            }
+            if (deltaY > 0) $(this).slick('slickNext');
+            
+            else $(this).slick('slickPrev');
         }
     });
 }
