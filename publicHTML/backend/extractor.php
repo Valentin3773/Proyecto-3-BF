@@ -447,6 +447,8 @@ function enviarEmailVerificador(string $destino, int $idp, string $verificador):
 
     global $defaults;
 
+    $dns = getUrlDominio();
+
     $mail = new PHPMailer(true);
 
     $mail->isSMTP();
@@ -533,7 +535,7 @@ function enviarEmailVerificador(string $destino, int $idp, string $verificador):
                 <div class='container'>
                     <h1>Verifica tu cuenta de la clínica</h1>
                     <div id='linkcontainer'>
-                        <a href='localhost/Proyecto-3-BF/publicHTML/backend/login/verificaremail.php?idp={$idp}&verificador={$verificador}'>Verificar cuenta</a>
+                        <a href='{$dns}backend/login/verificaremail.php?idp={$idp}&verificador={$verificador}'>Verificar cuenta</a>
                     </div>
                     <p class='footer'>Este es un mensaje automático, por favor no responda directamente a este correo.</p>
                 </div>
@@ -759,7 +761,8 @@ function getHorasFinalizacionInactividad(string $fechainicio, string $horainicio
             }
         }
         return $horasDisponibles;
-    } else return getDefaultHours();
+    } 
+    else return getDefaultHours();
 }
 
 function enviarEmailCancelador($emailp, $asunto, $fecha, $hora): bool
