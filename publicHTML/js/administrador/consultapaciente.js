@@ -228,7 +228,7 @@ async function functionEliminar() {
             contentType: 'application/json',
             success: function (response) {
 
-                if (response.error === undefined) console.log(response); //createHeaderPopup("Nuevo aviso", "Se elimino la consulta con exito", () => changeView(cargarVistaConsultaCalendario));
+                if (response.error === undefined) createHeaderPopup("Nuevo aviso", response.enviar, () => changeView(cargarVistaConsultaCalendario));
                 
                 else createPopup("Nuevo aviso", response.error);
             },
