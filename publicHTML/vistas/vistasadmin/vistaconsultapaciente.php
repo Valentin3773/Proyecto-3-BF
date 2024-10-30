@@ -15,6 +15,7 @@ if(!isset($_SESSION['odontologo'])) {
 $ido = $_SESSION['odontologo']['idodontologo'];
 $hora = $_GET['hora'];
 $fecha = $_GET['fecha'];
+$conjHoras = horasDisponibles($fecha, $ido);
 
 // Formateo de string a interpretación de SQL
 $fechatiempoString = $fecha . ' ' . $hora;
@@ -42,7 +43,6 @@ $fechaF = sumarFecha($fechaA, "mes", 3);
 $conjFechas = [];
 
 foreach (getDatesFromRange($fechaA, $fechaF) as $dateFromRange) if (fechaDisponible($dateFromRange, $ido)) $conjFechas[] = $dateFromRange;
-$conjHoras = horasDisponibles($fecha, $ido);
 $conjDuracion = duracionesDisponibles($formato,$Tiempoensql,$ido);
 
 $Tiempoensql = formatDateTime($Tiempoensql,'H:i:s', 'H:i');

@@ -41,7 +41,7 @@ function cambiarHorario() {
             for (let i = 0; i < horarios.length; i++) {
                 $('#hora-CP').append("<option value='" + horarios[i] + "'>" + horarios[i] + "</option>");
             }
-            $('#hora-CP').append("<option id='horaV' value='" + horaV + "'>" + horaV + "</option>");
+            $('#hora-CP').append("<option id='horaV' value='" + horaV + "'style='Display:none'>" + horaV + "</option>");
         },
         error: function(error) {
             console.log('Error al enviar los datos:', error);
@@ -195,10 +195,12 @@ async function functionEliminar() {
     const data = {
 
         fechaV: $('.contentFecha #fechaV').html(),
-        horaV: $('.contentHora #horaV').html()
+        horaV: $('.contentHora #horaV').html(),
+        asunto: $('#asunto-CP').val()
+
     };
 
-    console.log("Cancelado");
+    console.log(data.asunto);
 
     $('#btnCancelar').css("opacity", 0.5);
     $('#btnGuardar').css("opacity", 0.5);
@@ -226,9 +228,9 @@ async function functionEliminar() {
             contentType: 'application/json',
             success: function (response) {
 
-                if (response.error === undefined) createHeaderPopup("Nuevo aviso", "Se elimino la consulta con exito", () => changeView(cargarVistaConsultaCalendario));
+                if (response.error === undefined) console.log(response); //createHeaderPopup("Nuevo aviso", "Se elimino la consulta con exito", () => changeView(cargarVistaConsultaCalendario));
                 
-                else createPopup("Nuevo aviso", response);
+                else createPopup("Nuevo aviso", response.error);
             },
             error: function (jqXHR, estado, outputError) {
 

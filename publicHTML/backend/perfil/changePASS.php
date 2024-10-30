@@ -23,97 +23,102 @@ function changePassword() {
     $data['newA'] = sanitizar($data['newA']);
     $data['old'] = sanitizar($data['old']);
 
-    if($data['new'] == $data['newA']) {
+   if (!empty($data['new']) || !empty($data['newA'])) {
 
-        if (isset($_SESSION['odontologo'])) {
+        if($data['new'] == $data['newA']) {
 
-            $ido = $_SESSION['odontologo']['idodontologo'];
+            if (isset($_SESSION['odontologo'])) {
 
-            try {
+                $ido = $_SESSION['odontologo']['idodontologo'];
 
-                $contraseniaOld = $data['old'];
+                try {
 
-                $consulta = "SELECT contrasenia FROM odontologo WHERE idodontologo = :ido";
-                $stmt = $pdo->prepare($consulta);
-                $stmt->bindParam(':ido', $ido);
-                $stmt->execute();
-                $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $contraseniaOld = $data['old'];
 
-                $hashedPassword = $tupla['contrasenia'];
+                    $consulta = "SELECT contrasenia FROM odontologo WHERE idodontologo = :ido";
+                    $stmt = $pdo->prepare($consulta);
+                    $stmt->bindParam(':ido', $ido);
+                    $stmt->execute();
+                    $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                if(password_verify($contraseniaOld, $hashedPassword)) {
+                    $hashedPassword = $tupla['contrasenia'];
 
-                    try {
+                    if(password_verify($contraseniaOld, $hashedPassword)) {
 
-                        $pass = $data['new'];
-                        $pass = password_hash($pass, PASSWORD_BCRYPT);
-                        $consulta = "UPDATE odontologo SET contrasenia = :pass WHERE idodontologo = :ido";
-                        $stmt = $pdo->prepare($consulta);
-                        $stmt->bindParam(':pass', $pass);
-                        $stmt->bindParam(':ido', $ido);
-                        $stmt->execute();
-                        $respuesta['enviar'] = "Contraseña Actualizada";
-                        reloadSession();
-                    }
-                    catch(PDOException $e) {
+                        try {
 
-                        $respuesta['enviar'] = $e;
-                    }
+                            $pass = $data['new'];
+                            $pass = password_hash($pass, PASSWORD_BCRYPT);
+                            $consulta = "UPDATE odontologo SET contrasenia = :pass WHERE idodontologo = :ido";
+                            $stmt = $pdo->prepare($consulta);
+                            $stmt->bindParam(':pass', $pass);
+                            $stmt->bindParam(':ido', $ido);
+                            $stmt->execute();
+                            $respuesta['enviar'] = "Contraseña Actualizada";
+                            reloadSession();
+                        }
+                        catch(PDOException $e) {
+
+                            $respuesta['enviar'] = $e;
+                        }
+                    } 
+                    else $respuesta['error'] = "La contraseña actual no coincide con el usuario";
                 } 
-                else $respuesta['error'] = "La contraseña actual no coincide con el usuario";
+                catch (PDOException $e) {
+
+                    $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
+                }
             } 
-            catch (PDOException $e) {
+            else if (isset($_SESSION['paciente'])) {
 
-                $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
-            }
-        } 
-        else if (isset($_SESSION['paciente'])) {
+                $idp = $_SESSION['paciente']['idpaciente'];
 
-            $idp = $_SESSION['paciente']['idpaciente'];
+                try {
 
-            try {
+                    $contraseniaOld = $data['old'];
 
-                $contraseniaOld = $data['old'];
+                    $consulta = "SELECT contrasenia FROM paciente WHERE idpaciente = :idp";
+                    $stmt = $pdo->prepare($consulta);
+                    $stmt->bindParam(':idp', $idp);
+                    $stmt->execute();
+                    $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                $consulta = "SELECT contrasenia FROM paciente WHERE idpaciente = :idp";
-                $stmt = $pdo->prepare($consulta);
-                $stmt->bindParam(':idp', $idp);
-                $stmt->execute();
-                $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $hashedPassword = $tupla['contrasenia'];
 
-                $hashedPassword = $tupla['contrasenia'];
+                    if(password_verify($contraseniaOld, $hashedPassword)) {
 
-                if(password_verify($contraseniaOld, $hashedPassword)) {
+                        try {
 
-                    try {
+                            $pass = $data['new'];
+                            $pass = password_hash($pass, PASSWORD_BCRYPT);
+                            $consulta = "UPDATE paciente SET contrasenia = :pass WHERE idpaciente = :idp";
+                            $stmt = $pdo->prepare($consulta);
+                            $stmt->bindParam(':pass', $pass);
+                            $stmt->bindParam(':idp', $idp);
+                            $stmt->execute();
+                            $respuesta['enviar'] = "Contraseña Actualizada";
+                            reloadSession();
+                        }
+                        catch(PDOException $e) {
 
-                        $pass = $data['new'];
-                        $pass = password_hash($pass, PASSWORD_BCRYPT);
-                        $consulta = "UPDATE paciente SET contrasenia = :pass WHERE idpaciente = :idp";
-                        $stmt = $pdo->prepare($consulta);
-                        $stmt->bindParam(':pass', $pass);
-                        $stmt->bindParam(':idp', $idp);
-                        $stmt->execute();
-                        $respuesta['enviar'] = "Contraseña Actualizada";
-                        reloadSession();
-                    }
-                    catch(PDOException $e) {
-
-                        $respuesta['enviar'] = $e;
-                    }
+                            $respuesta['enviar'] = $e;
+                        }
+                    } 
+                    else $respuesta['error'] = "La contraseña actual no coincide con el usuario";
                 } 
-                else $respuesta['error'] = "La contraseña actual no coincide con el usuario";
+                catch (PDOException $e) {
+
+                    $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
+                }
             } 
-            catch (PDOException $e) {
+            else $respuesta['error'] = "Ha ocurrido un error";
 
-                $respuesta['error'] = "Ha ocurrido un error: " . $e->getMessage();
-            }
         } 
-        else $respuesta['error'] = "Ha ocurrido un error";
-
-    } 
-    else $respuesta['error'] = "Las contraseñas repetidas no son iguales";
-    
+        else $respuesta['error'] = "Las contraseñas repetidas no son iguales";
+    } else {
+        
+        $respuesta['enviar'] = "Una de las contraseñas esta vacia";
+    }
     header('Content-Type: application/json');
     echo json_encode($respuesta);
     exit();
