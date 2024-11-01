@@ -18,16 +18,14 @@ function addBTNListeners() {
     $('#fecha-CP').on('change',cambiarHorario);
     $('#hora-CP').on('change',ajustarDuracion);
 
-    $('#btnCancelar').css("opacity", 0.5);
-    $('#btnGuardar').css("opacity", 0.5);
-    $('#btnEliminar').css("opacity", 0.5);
+    desactivarInputs();
 }
 
 function cambiarHorario() {
+
     let fecha = $('#fecha-CP option:selected').val();
     let horaV = $('.contentHora #horaV').val();
     const url = 'backend/admin/getHorarioDisponibles.php';
-
 
     $.ajax({
 
@@ -36,25 +34,29 @@ function cambiarHorario() {
         data: JSON.stringify({ fecha: fecha }),
         contentType: 'application/json',
         success: function(response) {
+
             let horarios = JSON.parse(response);
             $('#hora-CP').empty();
             for (let i = 0; i < horarios.length; i++) {
+
                 $('#hora-CP').append("<option value='" + horarios[i] + "'>" + horarios[i] + "</option>");
             }
             $('#hora-CP').append("<option id='horaV' value='" + horaV + "'style='Display:none'>" + horaV + "</option>");
         },
         error: function(error) {
+            
             console.log('Error al enviar los datos:', error);
         }
     });
     ajustarDuracion();
 }
 
-function ajustarDuracion(){
+function ajustarDuracion() {
+
     let fecha = $('#fecha-CP option:selected').val();
     let hora = $('#hora-CP option:selected').val();
     const url = 'backend/admin/getDuracionDisponibles.php';
-    console.log('Opa');
+
     $.ajax({
 
         type: 'POST',
@@ -62,58 +64,35 @@ function ajustarDuracion(){
         data: JSON.stringify({ fecha: fecha, hora: hora}),
         contentType: 'application/json',
         success: function(response) {
-            console.log(response);
+
             let duraciones = JSON.parse(response);
+
             $('#duracion-CP').empty();
+
             for (let i = 0; i < duraciones.length; i++) {
+
                 $('#duracion-CP').append("<option value='" + duraciones[i] + "'>" + duraciones[i] + "</option>");
             }
         },
         error: function(error) {
+
             console.log('Error al enviar los datos:', error);
         }
     });
-
 }
 
 function funcionModificar() {
 
     console.log("Modificar");
-    $('#btnCancelar').css("opacity", 1);
-    $('#btnGuardar').css("opacity", 1);
-    $('#btnEliminar').css("opacity", 1);
-
-    $('#btnModificar').css("opacity", 0.5);
-    $('#btnModificar').prop('disabled', true);
-
-    $('#btnCancelar').removeAttr('disabled');
-    $('#btnGuardar').removeAttr('disabled');
-    $('#btnEliminar').removeAttr('disabled');
-    $('#asunto-CP').removeAttr('disabled');
-    $('#hora-CP').removeAttr('disabled');
-    $('#duracion-CP').removeAttr('disabled');
-    $('#fecha-CP').removeAttr('disabled');
-    $('#resumen-CP').removeAttr('disabled');
+    desactivarInputs(false);
 }
 
 function funcionCancelar() {
 
     console.log("Cancelar");
-    $('#btnCancelar').css("opacity", 0.5);
-    $('#btnGuardar').css("opacity", 0.5);
-    $('#btnEliminar').css("opacity", 0.5);
 
-    $('#btnModificar').css("opacity", 1);
-    $('#btnModificar').removeAttr('disabled');
-
-    $('#btnCancelar').prop('disabled', true);
-    $('#btnGuardar').prop('disabled', true);
-    $('#btnEliminar').prop('disabled', true);
-    $('#asunto-CP').prop('disabled', true);
-    $('#hora-CP').prop('disabled', true);
-    $('#duracion-CP').prop('disabled', true);
-    $('#fecha-CP').prop('disabled', true);
-    $('#resumen-CP').prop('disabled', true);
+    desactivarInputs();
+    
     $("#hora-CP").val($("#hora-CP option:first").val());
     $("#fecha-CP").val($("#fecha-CP option:first").val());
 
@@ -122,25 +101,11 @@ function funcionCancelar() {
     $('#resumen-CP').val(iniData['resumen']);
 }
 
-function funcionGuardar() {
+async function funcionGuardar() {
 
     console.log("Guardar");
-    $('#btnCancelar').css("opacity", 0.5);
-    $('#btnGuardar').css("opacity", 0.5);
-    $('#btnEliminar').css("opacity", 0.5);
-
-
-    $('#btnModificar').css("opacity", 1);
-    $('#btnModificar').removeAttr('disabled');
-
-    $('#btnEliminar').prop('disabled', true);
-    $('#btnCancelar').prop('disabled', true);
-    $('#btnGuardar').prop('disabled', true);
-    $('#asunto-CP').prop('disabled', true);
-    $('#hora-CP').prop('disabled', true);
-    $('#duracion-CP').prop('disabled', true);
-    $('#fecha-CP').prop('disabled', true);
-    $('#resumen-CP').prop('disabled', true);
+    
+    desactivarInputs();
 
     if (iniData['asunto'] == $('#asunto-CP').val() && iniData['horaV'] == $('#hora-CP option:selected').html() && iniData['duracion'] == $('#duracion-CP').val() && iniData['fechaV'] == $('#fecha-CP option:selected').html() && iniData['resumen'] == $('#resumen-CP').val()) {
 
@@ -148,48 +113,53 @@ function funcionGuardar() {
     }
     else {
 
-        const url = 'backend/admin/updateConsultaPaciente.php';
-        const data = {
+        if(await createConfirmPopup('Atención', '¿Realmente desea modificar esta consulta?')) {
 
-            asunto: ($('#asunto-CP').val()),
-            hora: ($('#hora-CP option:selected').html()),
-            duracion: Number($('#duracion-CP').val()),
-            fecha: ($('#fecha-CP option:selected').val()),
-            resumen: ($('#resumen-CP').val()),
-            fechaV: $('.contentFecha #fechaV').val(),
-            horaV: $('.contentHora #horaV').val()
-        };
+            $('#btnGuardar').html('<i class="fas fa-spinner fa-pulse"></i>');
 
-        $.ajax({
+            const url = 'backend/admin/updateConsultaPaciente.php';
+            const data = {
 
-            type: 'POST',
-            url: url,
-            data: JSON.stringify(data),
-            contentType: 'application/json',
-            success: response => {
+                asunto: ($('#asunto-CP').val()),
+                hora: ($('#hora-CP option:selected').html()),
+                duracion: Number($('#duracion-CP').val()),
+                fecha: ($('#fecha-CP option:selected').val()),
+                resumen: ($('#resumen-CP').val()),
+                fechaV: $('.contentFecha #fechaV').val(),
+                horaV: $('.contentHora #horaV').val()
+            };
 
-                if (response.error === undefined) {
-                    createHeaderPopup('Nuevo Aviso',response,() => changeView(cargarVistaConsultaCalendario));
-                    iniData.asunto = $('#asunto-CP').val();
-                    iniData.duracion = Number($('#duracion-CP option:selected').val());
-                    iniData.fechaV = $('#fecha-CP option:selected').html();
-                    iniData.horaV = $('#hora-CP option:selected').html();
-                    iniData.resumen = $('#resumen-CP').val();
+            $.ajax({
+
+                type: 'POST',
+                url: url,
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: response => {
+
+                    if (response.error === undefined) {
+
+                        createHeaderPopup('Nuevo Aviso', response, () => changeView(cargarVistaConsultaCalendario));
+                        iniData.asunto = $('#asunto-CP').val();
+                        iniData.duracion = Number($('#duracion-CP option:selected').val());
+                        iniData.fechaV = $('#fecha-CP option:selected').html();
+                        iniData.horaV = $('#hora-CP option:selected').html();
+                        iniData.resumen = $('#resumen-CP').val();
+                    }
+                    else createPopup("Nuevo aviso", response);
+
+                    $('#btnGuardar').html('Guardar');
+                },
+                error: (jqXHR, estado, outputError) => {
+
+                    console.error("Error al procesar la solicitud: " + outputError + jqXHR + estado);
                 }
-
-                else createPopup("Nuevo aviso", response);
-            },
-            error: (jqXHR, estado, outputError) => {
-
-                console.error("Error al procesar la solicitud: " + outputError + jqXHR + estado);
-            }
-        });
+            });
+        }
     }
 }
 
 async function functionEliminar() {
-
-    console.log("Eliminar");
 
     const url = 'backend/admin/deleteConsultaPaciente.php';
     const data = {
@@ -197,28 +167,13 @@ async function functionEliminar() {
         fechaV: $('.contentFecha #fechaV').html(),
         horaV: $('.contentHora #horaV').html(),
         asunto: $('#asunto-CP').val()
-
     };
 
-    console.log(data.asunto);
-
-    $('#btnCancelar').css("opacity", 0.5);
-    $('#btnGuardar').css("opacity", 0.5);
-    $('#btnEliminar').css("opacity", 0.5);
-
-    $('#btnModificar').css("opacity", 1);
-    $('#btnModificar').removeAttr('disabled');
-
-    $('#btnCancelar').prop('disabled', true);
-    $('#btnGuardar').prop('disabled', true);
-    $('#btnEliminar').prop("disabled", true);
-    $('#asunto-CP').prop('disabled', true);
-    $('#hora-CP').prop('disabled', true);
-    $('#duracion-CP').prop('disabled', true);
-    $('#fecha-CP').prop('disabled', true);
-    $('#resumen-CP').prop('disabled', true);
-
     if (await createConfirmPopup("Atención", "¿Realmente desea eliminar esta consulta?")) {
+
+        desactivarInputs();
+
+        $('#btnEliminar').html('<i class="fas fa-spinner fa-pulse"></i>');
 
         $.ajax({
 
@@ -231,11 +186,53 @@ async function functionEliminar() {
                 if (response.error === undefined) createHeaderPopup("Nuevo aviso", response.enviar, () => changeView(cargarVistaConsultaCalendario));
                 
                 else createPopup("Nuevo aviso", response.error);
+
+                $('#btnEliminar').html('Eliminar');          
             },
             error: function (jqXHR, estado, outputError) {
 
                 console.error("Error al procesar la solicitud: " + outputError + jqXHR + estado);
             }
         });
+    }
+}
+
+function desactivarInputs(desactivado = true) {
+
+    if(desactivado) {
+
+        $('#btnCancelar').css("opacity", 0.5);
+        $('#btnGuardar').css("opacity", 0.5);
+        $('#btnEliminar').css("opacity", 0.5);
+
+        $('#btnModificar').css("opacity", 1);
+        $('#btnModificar').removeAttr('disabled');
+
+        $('#btnCancelar').prop('disabled', true);
+        $('#btnGuardar').prop('disabled', true);
+        $('#btnEliminar').prop("disabled", true);
+        $('#asunto-CP').prop('disabled', true);
+        $('#hora-CP').prop('disabled', true);
+        $('#duracion-CP').prop('disabled', true);
+        $('#fecha-CP').prop('disabled', true);
+        $('#resumen-CP').prop('disabled', true);
+    }
+    else {
+
+        $('#btnCancelar').css("opacity", 1);
+        $('#btnGuardar').css("opacity", 1);
+        $('#btnEliminar').css("opacity", 1);
+
+        $('#btnModificar').css("opacity", 0.5);
+        $('#btnModificar').prop('disabled', true);
+
+        $('#btnCancelar').prop('disabled', false);
+        $('#btnGuardar').prop('disabled', false);
+        $('#btnEliminar').prop("disabled", false);
+        $('#asunto-CP').prop('disabled', false);
+        $('#hora-CP').prop('disabled', false);
+        $('#duracion-CP').prop('disabled', false);
+        $('#fecha-CP').prop('disabled', false);
+        $('#resumen-CP').prop('disabled', false);
     }
 }

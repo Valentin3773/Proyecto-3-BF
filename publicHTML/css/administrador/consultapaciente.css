@@ -203,16 +203,21 @@ h1 {
     font-size: 2rem;
     width: 20%;
     height: 100%;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, .35);
 }
 
-.btnInteractivo:hover {
-
-    scale: 1.05;
-}
-
-.btnInteractivo:hover {
+.btnInteractivo:not([disabled]):hover {
 
     color: white;
+    scale: 1.03;
+    filter: brightness(1.1);
+}
+
+.btnInteractivo:not([disabled]):active {
+
+    color: white;
+    scale: .97;
+    filter: brightness(1.2);
 }
 
 select {

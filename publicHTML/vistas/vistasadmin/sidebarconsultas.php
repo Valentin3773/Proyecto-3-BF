@@ -28,6 +28,8 @@ if ($stmt->execute() && $stmt->rowCount() > 0) {
 
 ?>
 
+<?php if(!empty($pacientes)): ?>
+
 <h2 class="w-100">Pacientes</h2>
 
 <div class="pacientescontainer">
@@ -46,3 +48,5 @@ if ($stmt->execute() && $stmt->rowCount() > 0) {
     ?>
 
 </div>  
+
+<?php endif; ?>

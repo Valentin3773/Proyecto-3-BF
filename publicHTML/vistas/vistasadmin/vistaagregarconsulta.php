@@ -12,7 +12,7 @@ if(!isset($_SESSION['odontologo'])) {
     exit();
 }
 
-$sql = "SELECT idpaciente, nombre, apellido FROM paciente ORDER BY nombre ASC, apellido ASC";
+$sql = "SELECT idpaciente, nombre, apellido, documento FROM paciente ORDER BY nombre ASC, apellido ASC";
 
 $stmt = $pdo->prepare($sql);
 
@@ -33,7 +33,7 @@ if($stmt->execute()) $pacientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <option selected value="">Seleccione un paciente</option>
 
-                <?php foreach($pacientes as $paciente) echo "<option value='{$paciente["idpaciente"]}'>{$paciente["nombre"]} {$paciente["apellido"]}</option>"; ?>
+                <?php foreach($pacientes as $paciente) echo "<option value='{$paciente["idpaciente"]}'>{$paciente["nombre"]} {$paciente["apellido"]} - {$paciente["documento"]}</option>"; ?>
 
             </select>
 

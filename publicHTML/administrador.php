@@ -157,7 +157,7 @@ $urlbase = getUrlDominio();
                     <div class="sidebar w-100"></div>
 
                     <div class="actionbar w-100 d-flex justify-content-center align-items-center">
-                        <h3 id="titactionbar">Agregar Consulta</h3>
+                        <h3 id="titactionbar" class="mb-2">Agregar<br>Consulta</h3>
                         <div id="agregar" class="invisible"><div class="mas"></div></div>
                     </div>
 

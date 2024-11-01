@@ -137,7 +137,7 @@ function cargarVistaConsultaCalendario() {
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnconsultas, nav.mobile #btnconsultas').css({ 'text-decoration': 'underline' });
 
-    manageMobileAddButton(true, 'Agendar Consulta', () => changeView(cargarVistaAgregarConsulta));
+    manageMobileAddButton(true, 'Agendar<br>Consulta', () => changeView(cargarVistaAgregarConsulta));
 }
 
 function cargarVistaConsultasPaciente(idp) {
@@ -172,7 +172,7 @@ function cargarVistaConsultasPaciente(idp) {
         });
     });
 
-    manageMobileAddButton(true, 'Agendar Consulta', () => changeView(cargarVistaAgregarConsulta));
+    manageMobileAddButton(true, 'Agendar<br>Consulta', () => changeView(cargarVistaAgregarConsulta));
 }
 
 function cargarVistaConsultaDetalle(fecha, hora) {
@@ -194,7 +194,7 @@ function cargarVistaConsultaDetalle(fecha, hora) {
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnconsultas, nav.mobile #btnconsultas').css({ 'text-decoration': 'underline' });
 
-    manageMobileAddButton(false, 'Agendar Consulta');
+    manageMobileAddButton(false, 'Agendar<br>Consulta');
 }
 
 function addCalendarioListeners() {
@@ -447,7 +447,7 @@ function cargarVistaAgregarConsulta() {
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnconsultas, nav.mobile #btnconsultas').css({ 'text-decoration': 'underline' });
 
-    manageMobileAddButton(false, 'Agendar Consulta');
+    manageMobileAddButton(false, 'Agendar<br>Consulta');
 }
 
 function cargarVistaAgregarServicio() {
@@ -589,7 +589,7 @@ function cargarVistaAgregarServicio() {
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnservicios, nav.mobile #btnservicios').css({ 'text-decoration': 'underline' });
 
-    manageMobileAddButton(false, 'Agregar Servicio');
+    manageMobileAddButton(false, 'Agregar<br>Servicio');
 }
 
 function cargarVistaPacientes() {
@@ -934,7 +934,7 @@ function cargarVistaServicios() {
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnservicios, nav.mobile #btnservicios').css({ 'text-decoration': 'underline' });
 
-    manageMobileAddButton(true, 'Agregar Servicio', () => changeView(cargarVistaAgregarServicio));
+    manageMobileAddButton(true, 'Agregar<br>Servicio', () => changeView(cargarVistaAgregarServicio));
 }
 
 function cargarVistaServicioDetalle(numservicio) {
@@ -1124,7 +1124,7 @@ function cargarVistaServicioDetalle(numservicio) {
     $('nav a, nav.mobile a').css({ 'text-decoration': 'none' });
     $('#btnservicios, nav.mobile #btnservicios').css({ 'text-decoration': 'underline' });
 
-    manageMobileAddButton(true, 'Agregar Servicio', () => changeView(cargarVistaAgregarServicio));
+    manageMobileAddButton(true, 'Agregar<br>Servicio', () => changeView(cargarVistaAgregarServicio));
 }
 
 function enviarIMGServicio($data, $tipo) {

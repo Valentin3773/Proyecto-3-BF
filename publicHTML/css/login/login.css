@@ -19,7 +19,7 @@
 body,
 html {
 
-    height: 100%;
+    height: 100dvh;
     margin: 0;
     padding: 0;
 }
@@ -31,7 +31,7 @@ body {
 
 main {
 
-    height: 100%;
+    height: 100dvh;
     filter: brightness(0.85);
 }
 
@@ -377,7 +377,7 @@ h1 {
 
 body {
 
-    height: 100% !important;
+    height: 100dvh !important;
     background-image: url(../../img/fondos/fondologin.png);
     background-size: cover;
     background-repeat: no-repeat;
@@ -405,8 +405,9 @@ body {
 
     html,
     body {
+
         width: 100%;
-        height: 100%;
+        height: 100dvh;
         margin: 0;
         padding: 0;
         overflow-x: hidden;
@@ -498,7 +499,7 @@ body {
     html,
     body {
         width: 100%;
-        height: 100% !important;
+        height: 100dvh !important;
         margin: 0;
         padding: 0;
         overflow-x: hidden;
@@ -596,7 +597,7 @@ body {
     html,
     body {
         width: 100%;
-        height: 100% !important;
+        height: 100dvh !important;
         margin: 0;
         padding: 0;
         overflow-x: hidden;
