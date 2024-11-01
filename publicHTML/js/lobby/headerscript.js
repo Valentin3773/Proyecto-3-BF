@@ -29,6 +29,8 @@ $(() => {
 
     $('#btnperfil ul #registrarse, #opcionescontainer .menuperfilm #registrarse').on('click', () => changePage('login.php?estado=2'));
     
+    $('#btnperfil ul #iniciargoogle, #opcionescontainer .menuperfilm #iniciargoogle').on('click', () => changePage('loginGoogle/index.php'));
+    
     $('#btnperfil ul #cerrarsesion, #opcionescontainer .menuperfilm #cerrarsesion').on('click', async () => {
         
         if(await createConfirmPopup('Confirmación', '¿Estás seguro de cerrar sesión?')) changePage('login.php?estado=3');

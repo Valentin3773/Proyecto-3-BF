@@ -62,6 +62,7 @@ function cargarVistaLogin() {
         $('#btnregistrarsel').on('click', () => changeView(cargarVistaRegistro));
         $('#iniadmin').on('click', () => changeView(cargarVistaLoginAdmin));
         $('#olvidarpass').on('click', () => changeView(cargarVistaRecuperarPass));
+        $('#googlebutton').on('click', () => changePage('loginGoogle/index.php'));
         $('#ingresar').on('click', function (event) {
 
             event.preventDefault();
