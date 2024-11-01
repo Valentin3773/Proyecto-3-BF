@@ -955,7 +955,7 @@ function archivarConsulta(string $fecha, string $hora, int $ido): bool
 
             if ($stmt->rowCount() == 0) {
 
-                $sql = "UPDATE consulta SET vigente = :codigo WHERE fecha = :fecha AND hora = :hora AND idodontologo = :ido";
+                $sql = "UPDATE consulta SET vigente = :codigo WHERE fecha = :fecha AND hora = :hora AND idodontologo = :ido AND vigente = 'vigente'";
 
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':fecha', $fecha);

@@ -12,6 +12,7 @@ else exit();
 
 function eliminarConsulta() {
 
+    global $pdo;
     $response = array();
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
@@ -27,24 +28,29 @@ function eliminarConsulta() {
     $Tiempoensql = $formato->format('H:i:s');
 
     try {
+        
+        $consulta = "SELECT p.email FROM paciente p JOIN consulta c ON p.idpaciente = c.idpaciente WHERE c.idodontologo = :ido AND c.vigente = 'vigente' AND c.fecha = :fecha AND c.hora = :hora";
+        $stmt = $pdo->prepare($consulta);
+        $stmt->bindParam(':ido', $ido);
+        $stmt->bindParam(':fecha', $Fechaensql); 
+        $stmt->bindParam(':hora', $Tiempoensql);             
+        $tupla=null;
+
+        if($stmt->execute() && $stmt->rowCount() > 0) $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if(!archivarConsulta($Fechaensql, $Tiempoensql, $ido)) $response['error'] = "Ha ocurrido un error al eliminar la consulta";
         
         else {
-            global $pdo;
-            $consulta = "SELECT p.email FROM paciente p JOIN consulta c ON p.idpaciente = c.idpaciente WHERE c.idodontologo = :ido AND c.vigente = 'vigente'";
-            $stmt = $pdo->prepare($consulta);
-            $stmt->bindParam(':ido', $ido);            
-            $tupla=null;
 
-            if($stmt->execute() && $stmt->rowCount() > 0) $tupla = $stmt->fetch(PDO::FETCH_ASSOC);
-            $response['enviar'] = "Se borro la consulta".$tupla['email'];
-            enviarEmailCancelador($tupla['email'], $asunto, $Fechaensql, $Tiempoensql);
+            $response['enviar'] = "Se borro la consulta";
+            enviarEmailCancelador($tupla['email'], $asunto, $fecha, $hora);
+
         }
     } 
     catch (Throwable $th) {
 
         $response['error'] = "Ha ocurrido un error al eliminar la consulta";
+
     }
     header('Content-Type: application/json');
     echo json_encode($response);
