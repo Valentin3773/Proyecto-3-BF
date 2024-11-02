@@ -14,7 +14,7 @@ if($data) {
 
     $respuesta = [];
 
-    $numservicio = intval(sanitizar($data['numservicio']));
+    $numservicio = intval(sanitizar($data['numero']));
     
     $sql = "DELETE FROM servicio WHERE numero = :num";
     $stmt = $pdo->prepare($sql);

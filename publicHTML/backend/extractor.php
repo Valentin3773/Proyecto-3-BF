@@ -765,7 +765,7 @@ function getHorasFinalizacionInactividad(string $fechainicio, string $horainicio
     else return getDefaultHours();
 }
 
-function enviarEmailCancelador($emailp, $asunto, $fecha, $hora): bool
+function enviarEmailCancelador(string $emailp, string $asunto, string $fecha, string $hora): bool
 {
 
     global $defaults;

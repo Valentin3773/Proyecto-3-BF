@@ -293,6 +293,39 @@
     filter: brightness(1.2);
 }
 
+#eliminarservicio {
+
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    border-radius: 10px;
+    padding: 1.3rem;
+    transition-duration: .3s;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px .5px rgba(0, 0, 0, .4);
+    border: 1px solid rgba(0, 0, 0, .1);
+}
+
+#eliminarservicio > svg {
+
+    scale: 1.6;
+}
+
+#eliminarservicio:hover {
+
+    scale: 1.05;
+    filter: brightness(1.1);
+}
+
+#eliminarservicio:active {
+
+    scale: .97;
+    filter: brightness(1.2);
+}
+
 @media screen and (width <= 991px) {
     
     h1#tituloservicios {

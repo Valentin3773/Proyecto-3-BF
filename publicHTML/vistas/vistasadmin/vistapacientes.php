@@ -1,6 +1,7 @@
 <?php
 
 include("../../backend/conexion.php");
+include("../../backend/extractor.php");
 
 session_start();
 
@@ -78,9 +79,10 @@ if (!isset($_GET['idpaciente'])) {
 
 <?php
 
-} else {
+} 
+else {
 
-    $idp = isset($_GET['idpaciente']) ? $_GET['idpaciente'] : null;
+    $idp = isset($_GET['idpaciente']) ? intval(sanitizar($_GET['idpaciente'])) : null;
 
     $consulta = "SELECT * FROM paciente WHERE idpaciente = :idp ORDER BY nombre ASC";
     $stmt = $pdo->prepare($consulta);
@@ -106,7 +108,7 @@ if (!isset($_GET['idpaciente'])) {
 
     <div id="pcontainer">
 
-        <h3 class="idpaciente"> <?= "ID: " . $idp ?> </h3>
+        <h3 class="idpaciente"><?= "ID: {$idp}" ?></h3>
 
         <div id="fotonom">
 

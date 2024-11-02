@@ -956,6 +956,40 @@ function cargarVistaServicioDetalle(numservicio) {
             desc: ""
         };
 
+        $('#eliminarservicio').on('click', async function() {
+
+            if(await createConfirmPopup('Confirmación', '¿Realmente desea eliminar este servicio?')) {
+
+                $(this).html('<i class="fas fa-spinner fa-pulse" style="color: #ffffff;"></i>').prop('disabled', true).css({ 'opacity': '.5' });
+
+                cargando = true;
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "backend/admin/eliminarservicio.php",
+                    data: JSON.stringify({numero: numservicio}),
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+
+                        cargando = false;
+
+                        if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, () => changeView(cargarVistaServicios));
+
+                        else createPopup('Nuevo Aviso', response.error);
+
+                        $(this).html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').prop('disabled', false).css({ 'opacity': '1' });
+                    },
+                    error: (jqXHR, estado, outputError) => {
+
+                        console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                        cargando = false;
+                    }
+                });
+            }
+        });
+
         $('[id="mdC"]').eq(0).on('click', function () {
 
             if ($('.contTitulon').attr('disabled')) {

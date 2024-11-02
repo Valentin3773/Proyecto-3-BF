@@ -4,6 +4,7 @@ include('../conexion.php');
 include('../extractor.php');
 
 session_start();
+reloadSession();
 
 if($_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_SESSION['odontologo'])) exit();
 
@@ -20,6 +21,8 @@ if($data) {
     $ido = $_SESSION['odontologo']['idodontologo'];
 
     $respuesta['horasInicio'] = getHorasInicioHorario($dia, $ido);
+
+    $respuesta['horasInicioComun'] = formatDateTimeArray(getHorasInicioHorario($dia, $ido), 'H:i:s', 'H:i');
 }
 
 header('Content-Type: application/json');

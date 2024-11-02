@@ -53,24 +53,35 @@ in_array($horafinalizacion, getHorasFinalizacionInactividad($fechainicio, $horai
     $stmt2->bindParam(':tiempofinalizacion3', $tiempofinalizacion);
     $stmt2->bindParam(':ido', $ido);
 
-    if($stmt->execute() && $stmt2->execute() && $stmt2->rowCount() > 0) {
+    if($stmt->execute() && $stmt2->execute()) {
 
-        $respuesta['exito'] = "Se ha agregado la inactividad";
+        if($stmt2->rowCount() > 0) {
 
-        $emailsaenviar = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+            $consultascanceladas = true;
+            $emailsenviados = true;
 
-        foreach($emailsaenviar as $emailaenviar) archivarConsulta($emailaenviar['fecha'], $emailaenviar['hora'], $ido);
+            $respuesta['exito'] = "Se ha agregado la inactividad";
 
-        foreach($emailsaenviar as $emailaenviar) {
-            
-            $fechaenviar = DateTime::createFromFormat('Y-m-d', $emailaenviar['fecha']);
-            $fechaenviar = $fechaenviar->format('d/m/Y');
+            $emailsaenviar = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
-            $horaenviar = DateTime::createFromFormat('H:i:s', $emailaenviar['hora']);
-            $horaenviar = $horaenviar->format('H:i');
+            foreach($emailsaenviar as $emailaenviar) if(!archivarConsulta($emailaenviar['fecha'], $emailaenviar['hora'], $ido)) $consultascanceladas = false;
 
-            enviarEmailCancelador($emailaenviar['email'], $emailaenviar['asunto'], $fechaenviar, $horaenviar);
+            foreach($emailsaenviar as $emailaenviar) {
+                
+                $fechaenviar = DateTime::createFromFormat('Y-m-d', $emailaenviar['fecha']);
+                $fechaenviar = $fechaenviar->format('d/m/Y');
+
+                $horaenviar = DateTime::createFromFormat('H:i:s', $emailaenviar['hora']);
+                $horaenviar = $horaenviar->format('H:i');
+
+                if(!enviarEmailCancelador($emailaenviar['email'], $emailaenviar['asunto'], $fechaenviar, $horaenviar)) $emailsenviados = false;
+            }
+
+            if($consultascanceladas) $respuesta['exito'] = $emailsenviados ? "Se ha agregado la inactividad, se han cancelado las consultas dentro de esta y se ha notificado a los pacientes" : "Se ha agregado la inactividad, se han cancelado las consultas dentro de esta, pero ha ocurrido un error al notificar a los pacientes";
+
+            else $respuesta['error'] = "Ha ocurrido un error crítico, se ha agregado la inactividad pero no se han cancelado las consultas dentro de esta";
         }
+        else $respuesta['exito'] = "Se ha agregado la inactividad";
     }
     else $respuesta['error'] = "Ha ocurrido un error al agregar la inactividad";
 }

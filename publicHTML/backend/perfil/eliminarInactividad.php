@@ -1,8 +1,10 @@
 <?php
 
 include('../conexion.php');
+include('../extractor.php');
 
 session_start();
+reloadSession();
 
 if($_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_SESSION['odontologo'])) exit();
 

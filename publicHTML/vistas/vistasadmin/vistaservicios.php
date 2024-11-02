@@ -1,6 +1,7 @@
 <?php
 
 include("../../backend/conexion.php");
+include("../../backend/extractor.php");
 
 session_start();
 
@@ -34,7 +35,7 @@ if (!isset($_GET['numservicio'])) {
 
 } else if (is_numeric($_GET['numservicio']) && $_GET['numservicio'] > 0) {
 
-    $numservicio = $_GET['numservicio'];
+    $numservicio = intval(sanitizar($_GET['numservicio']));
 
     $sql = "SELECT * FROM servicio WHERE numero = :numservicio ORDER BY nombre ASC";
 
@@ -43,11 +44,14 @@ if (!isset($_GET['numservicio'])) {
 
     if ($stmt->execute() && $stmt->rowCount() == 1) $servicio = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    else exit();
+
 ?>
 
     <div id="cuerpo">
 
         <div id="titulon">
+            <div id="eliminarservicio" title="Eliminar Servicio" data-servicio="<?= $numservicio ?>"><i class='fas fa-trash-alt' style='color: #ffffff;'></i></div>
             <input class="contTitulon" type="text" value = "<?= $servicio['nombre'] ?>" disabled>
             <div id="mdC" class="lapizeditar lapizeditarc"><img src="img/iconosvg/lapiz.svg" alt="Modificar" title="Modificar"></div>
         </div>

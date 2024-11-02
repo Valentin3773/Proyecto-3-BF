@@ -20,6 +20,8 @@ if($data) {
     $horainicio = sanitizar($data['horainicio']);
     
     $respuesta['horasFinalizacion'] = getHorasFinalizacionHorario($dia, $horainicio, $ido);
+
+    $respuesta['horasFinalizacionComun'] = formatDateTimeArray(getHorasFinalizacionHorario($dia, $horainicio, $ido), 'H:i:s', 'H:i');
 }
 
 header('Content-Type: application/json');

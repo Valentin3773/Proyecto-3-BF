@@ -35,6 +35,11 @@ main {
     filter: brightness(0.85);
 }
 
+* {
+
+    transition: height 0s, scale .3s, transform .3s, filter .3s, color .3s, box-shadow .3s !important;
+}
+
 .lds-spinner,
 .lds-spinner div,
 .lds-spinner div:after {

@@ -55,13 +55,14 @@ if ($data) {
 
     if ($stmt1->execute() && $stmt2->execute()) {
 
-        $respuesta["exito"] = "{$ido} {$dia} {$horario['horainicio']} {$horario['horafinalizacion']}";
+        $consultascanceladas = true;
+        $emailsenviados = true;
 
         if($stmt2->rowCount() > 0) {
 
             $consultasaarchivar = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
-            foreach ($consultasaarchivar as $consulta) archivarConsulta($consulta['fecha'], $consulta['hora'], $ido);
+            foreach ($consultasaarchivar as $consulta) if(!archivarConsulta($consulta['fecha'], $consulta['hora'], $ido)) $consultascanceladas = false;
 
             foreach ($consultasaarchivar as $consulta) {
 
@@ -71,9 +72,14 @@ if ($data) {
                 $horaenviar = DateTime::createFromFormat('H:i:s', $consulta['hora']);
                 $horaenviar = $horaenviar->format('H:i');
 
-                enviarEmailCancelador($consulta['email'], $consulta['asunto'], $fechaenviar, $horaenviar);
+                if(!enviarEmailCancelador($consulta['email'], $consulta['asunto'], $fechaenviar, $horaenviar)) $emailsenviados = false;
             }
         }
+        else $consultascanceladas = false;
+
+        if($consultascanceladas) $respuesta["exito"] = $emailsenviados ? "Se ha eliminado el horario, se han cancelado las consultas dentro de este y se ha notificado a los pacientes" : "Se ha eliminado el horario, se han cancelado las consultas dentro de este, pero ha ocurrido un error al notificar a los pacientes";
+
+        else $respuesta["exito"] = "Se ha eliminado el horario";
     }
     else $respuesta["error"] = "Ha ocurrido un error al eliminar el horario";
 }

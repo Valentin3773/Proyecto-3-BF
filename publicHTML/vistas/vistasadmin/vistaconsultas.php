@@ -20,7 +20,7 @@ if (isset($_GET['idpaciente'])) {
     $nompaciente = "";
 
     $ido = $_SESSION['odontologo']['idodontologo'];
-    $idp = isset($_GET['idpaciente']) ? $_GET['idpaciente'] : null;
+    $idp = isset($_GET['idpaciente']) ? intval(sanitizar($_GET['idpaciente'])) : null;
     $consulta = "SELECT fecha, hora, asunto FROM consulta WHERE idpaciente = :idp AND idodontologo = :ido AND vigente = 'vigente' AND ((fecha > CURDATE()) OR (fecha = CURDATE() AND CURTIME() < hora)) ORDER BY fecha ASC, hora ASC";
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':idp', $idp);
@@ -70,9 +70,14 @@ if (isset($_GET['idpaciente'])) {
 
         $nompaciente = $tupla['nombre'] . " " . $tupla['apellido'];
     }
-} else if (isset($_GET['anio']) && isset($_GET['mes']) && isset($_GET['dia'])) {
+} 
+else if (isset($_GET['anio']) && isset($_GET['mes']) && isset($_GET['dia'])) {
 
-    $fecha = DateTime::createFromFormat('Y-m-d', "{$_GET['anio']}-{$_GET['mes']}-{$_GET['dia']}");
+    $anio = sanitizar($_GET['anio']);
+    $mes = sanitizar($_GET['mes']);
+    $dia = sanitizar($_GET['dia']);
+
+    $fecha = DateTime::createFromFormat('Y-m-d', "{$anio}-{$mes}-{$dia}");
     $fechastring = $fecha->format('Y-m-d');
     $ido = $_SESSION['odontologo']['idodontologo'];
 
@@ -98,10 +103,11 @@ if (isset($_GET['idpaciente'])) {
     $stmt->bindParam(':ido', $ido);
 
     if ($stmt->execute() && $stmt->rowCount() > 0) while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) $consultasActuales[] = $tupla;
-} else if (isset($_GET['fecha1']) && isset($_GET['fecha2'])) {
+} 
+else if (isset($_GET['fecha1']) && isset($_GET['fecha2'])) {
 
-    $fecha1 = new DateTime($_GET['fecha1']);
-    $fecha2 = new DateTime($_GET['fecha2']);
+    $fecha1 = new DateTime(sanitizar($_GET['fecha1']));
+    $fecha2 = new DateTime(sanitizar($_GET['fecha2']));
 
     $fecha1 = $fecha1->format('Y-m-d');
     $fecha2 = $fecha2->format('Y-m-d');

@@ -131,6 +131,11 @@ html, body, #container {
     height: 100dvh;
 }
 
+* {
+
+    transition: height 0s, scale .3s, transform .3s, filter .3s, color .3s, box-shadow .3s !important;
+}
+
 header {
 
     height: 15dvh !important;

@@ -236,7 +236,7 @@ function cargarVistaHorarios() {
 
             if (await createConfirmPopup('Confirmación', '¿Estas seguro de que deseas eliminar el horario?', ['No', 'Sí'])) {
 
-                $('#eliminarhorario').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true).attr('data-eliminar', 'no');
+                $('#eliminarhorario').html('<i class="fas fa-spinner fa-pulse" style="color: #ffffff;"></i>').prop('disabled', true).attr('data-eliminar', 'no');
                 $('.horario .tachito').addClass('invisible').removeClass('visible');
 
                 $.ajax({
@@ -250,7 +250,7 @@ function cargarVistaHorarios() {
 
                         $('#eliminarhorario').html('<i class="fas fa-trash-alt" style="color: #ffffff;"></i>').prop('disabled', false);
 
-                        if (response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaHorarios);
+                        if (response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaHorarios, 10);
 
                         else createPopup('Nuevo Aviso', response.error);
                     },
@@ -303,7 +303,7 @@ function cargarVistaInactividades() {
 
             if (await createConfirmPopup('Confirmación', '¿Estas seguro de que deseas eliminar la inactividad?', ['No', 'Sí'])) {
 
-                $('#eliminarinactividad').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true).attr('data-eliminar', 'no');
+                $('#eliminarinactividad').html('<i class="fas fa-spinner fa-pulse" style="color: #ffffff;"></i>').prop('disabled', true).attr('data-eliminar', 'no');
                 $('.inactividad .tachito').addClass('invisible').removeClass('visible');
 
                 $.ajax({
@@ -447,6 +447,7 @@ function cargarVistaAgregarHorario() {
                     success: function (response) {
 
                         let horasinicio = Object.values(response.horasInicio);
+                        let horasiniciocomun = Object.values(response.horasInicioComun);
 
                         $('#confirmarhorario').addClass('inactivo').removeClass('activo').prop('disabled', true);
 
@@ -454,7 +455,9 @@ function cargarVistaAgregarHorario() {
 
                             $('#contagregarhorario select#horainicio').prop('disabled', false).html('<option selected value="">Seleccione la hora de inicio</option>');
                             $('#contagregarhorario select#horafinalizacion').html('<option selected value="">Seleccione la hora de finalización</option>').prop('disabled', true);
-                            horasinicio.forEach(elemento => $('#contagregarhorario select#horainicio').append(`<option value='${elemento}'>${elemento}</option>`));
+                            
+                            for(let i = 0; i < horasinicio.length; i++) $('#contagregarhorario select#horainicio').append(`<option value='${horasinicio[i]}'>${horasiniciocomun[i]}</option>`);
+            
                             horario.dia = Number($('select#dia').val());
                         }
                     },
@@ -483,13 +486,16 @@ function cargarVistaAgregarHorario() {
                     success: function (response) {
 
                         let horasfinalizacion = Object.values(response.horasFinalizacion);
+                        let horasfinalizacioncomun = Object.values(response.horasFinalizacionComun);
 
                         $('#confirmarhorario').addClass('inactivo').removeClass('activo').prop('disabled', true);
 
                         if (horasfinalizacion.length > 0) {
 
                             $('#contagregarhorario select#horafinalizacion').prop('disabled', false).empty().append('<option selected value="">Seleccione la hora de finalización</option>');
-                            horasfinalizacion.forEach(elemento => $('#contagregarhorario select#horafinalizacion').append(`<option value='${elemento}'>${elemento}</option>`));
+                            
+                            for(let i = 0; i < horasfinalizacion.length; i++) $('#contagregarhorario select#horafinalizacion').append(`<option value='${horasfinalizacion[i]}'>${horasfinalizacioncomun[i]}</option>`);
+                            
                             horario.horainicio = $('select#horainicio').val();
                         }
                     },
@@ -516,7 +522,7 @@ function cargarVistaAgregarHorario() {
 
             if (await createConfirmPopup('Confirmación', '¿Estás seguro de agregar el horario?')) {
 
-                $('#confirmarhorario').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true).css({ 'background-color': 'rgb(66, 148, 255, .4)' });
+                $('#confirmarhorario').html('<i class="fas fa-spinner fa-pulse" style="color: #ffffff;"></i>').prop('disabled', true).css({ 'background-color': 'rgb(66, 148, 255, .4)' });
 
                 if (horario.dia != null && horario.horainicio != null && horario.horafinalizacion != null) $.ajax({
 
@@ -690,7 +696,7 @@ function cargarVistaAgregarInactividad() {
 
             if (await createConfirmPopup('Confirmación', '¿Estás seguro de agregar la inactividad?')) {
 
-                $('#confirmarinactividad').html('<i class="fas fa-spinner fa-pulse"></i>').prop('disabled', true).removeClass('activo').addClass('inactivo');
+                $('#confirmarinactividad').html('<i class="fas fa-spinner fa-pulse" style="color: #ffffff;"></i>').prop('disabled', true).removeClass('activo').addClass('inactivo');
 
                 $datos = new FormData($('#contagregarinactividad')[0]);
 
@@ -705,7 +711,7 @@ function cargarVistaAgregarInactividad() {
 
                         $('#confirmarinactividad').html('Agregar').prop('disabled', false).removeClass('inactivo').addClass('activo');
 
-                        if (response.exito !== '') createHeaderPopup('Nuevo Aviso', response.exito, () => changeView(cargarVistaInactividades));
+                        if (response.exito.length > 0) createHeaderPopup('Nuevo Aviso', response.exito, () => changeView(cargarVistaInactividades), 10);
 
                         else createPopup('Nuevo Aviso', response.error);
                     },
