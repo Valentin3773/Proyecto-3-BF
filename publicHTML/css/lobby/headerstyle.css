@@ -171,7 +171,7 @@ header {
 
 * {
 
-    transition: height 0s, scale .3s, transform .3s, filter .3s, color .3s, box-shadow .3s !important;
+    transition: height 0s, scale .3s, transform .3s, filter .3s, color .3s, box-shadow .3s, opacity .3s !important;
 }
 
 header.comprimido {
@@ -194,10 +194,11 @@ header.comprimido {
 
 #btnperfil ul.invisible, #opcionescontainer > ul.invisible {
 
-    display: none;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
-#btnperfil ul.visible, #opcionescontainer > ul.visible {
+#btnperfil ul, #opcionescontainer > ul {
 
     position: absolute;
     width: 500px;
@@ -215,6 +216,12 @@ header.comprimido {
     font-family: RobotoSerif, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: #4294FF;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, .5);
+}
+
+#btnperfil ul.visible, #opcionescontainer > ul.visible {
+
+    opacity: 1 !important;
+    pointer-events: auto !important;
 }
 
 #opcionescontainer > ul.visible {
@@ -294,6 +301,11 @@ header.comprimido {
 .left {
 
     width: 70%;
+}
+
+#opcionescontainer {
+
+    display: none !important;
 }
 
 header #titulogo h2 {
@@ -431,13 +443,14 @@ header #btnperfil img {
 #navmobile.marboliviano {
 
     transition-duration: 300ms;
-    display: none !important;
+    opacity: 0;
+    pointer-events: none;
 }
 
 #navmobile {
 
     transition-duration: 300ms;
-    display: none;
+    display: block !important;
     z-index: 10;
     width: 100% !important;
 }
@@ -763,6 +776,7 @@ header #btnperfil img {
     header #opcionescontainer {
 
         width: 120px;
+        display: block !important;
     }
 
     header #btnopciones {
@@ -859,6 +873,7 @@ header #btnperfil img {
     header #opcionescontainer {
 
         width: 120px;
+        display: block !important;
     }
 
     header #btnopciones {
@@ -995,7 +1010,8 @@ header #btnperfil img {
 
     .desplegado {
 
-        display: block !important;
+        opacity: 1;
+        pointer-events: auto;
         position: absolute;
         z-index: 3;
         top: 110%;
@@ -1084,7 +1100,7 @@ header #btnperfil img {
     header #opcionescontainer {
 
         width: fit-content;
-        
+        display: block !important;
     }
 
     header #btnopciones {
@@ -1202,7 +1218,8 @@ header #btnperfil img {
 
     #navmobile.desplegado {
 
-        display: block !important;
+        opacity: 1;
+        pointer-events: auto;
         position: absolute;
         z-index: 3;
         top: 110%;
@@ -1294,7 +1311,7 @@ header #btnperfil img {
     header #opcionescontainer {
 
         width: fit-content;
-        
+        display: block !important;
     }
 
     header #btnopciones {
