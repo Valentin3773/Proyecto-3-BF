@@ -169,9 +169,9 @@ header {
     z-index: 5;
 }
 
-* {
+*:not(#carrusel):not(.carousel-inner *):not(.navslider):not(.navslider *) {
 
-    transition: height 0s, scale .3s, transform .3s, filter .3s, color .3s, box-shadow .3s, opacity .3s !important;
+    transition: height 0s, scale .3s, rotate .5s, transform .3s, filter .3s, color .3s, box-shadow .3s, opacity .3s !important;
 }
 
 header.comprimido {
@@ -543,7 +543,13 @@ header #btnperfil img {
 }
 
 /*/ PC /*/
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 899px) {
+    
+    #bienvenida #btnreservar {
+
+        font-size: 300%;
+        padding: 15px 20px;
+    }
 
     nav ul li, #btnreservar {
         
@@ -1439,7 +1445,7 @@ header #btnperfil img {
     filter: brightness(1.2);
 }
 
-.desplegado ul li a:hover {
+#navmobile.desplegado ul li a:hover {
 
     color: #0AF0AB;
 }

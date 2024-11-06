@@ -47,7 +47,7 @@ main {
 
 #bienvenida article h1 {
 
-    font-size: 6rem;
+    font-size: 5rem;
     color: white;
     z-index: 3;
     text-shadow: 0px 0px 10px rgba(0,0,0,0.3);
@@ -100,12 +100,6 @@ main {
     left: 0;
 }
 
-#bienvenida #btnreservar {
-
-    font-size: 300%;
-    padding: 15px 20px;
-}
-
 #bienvenida .contReservar {
 
     max-width: none !important;
@@ -133,7 +127,7 @@ main {
     font-size: 250%;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 899px) {
     
     #bienvenida article h1 {
 
@@ -174,5 +168,13 @@ main {
     #bienvenida .contReservar {
 
         border-radius: 10px;
+    }
+}
+
+@media screen and (width <= 550px) {
+    
+    #bienvenida .imgcontainer {
+
+        clip-path: polygon(0 4%, 100% 4%, 100% 96%, 0 96%) !important;
     }
 }

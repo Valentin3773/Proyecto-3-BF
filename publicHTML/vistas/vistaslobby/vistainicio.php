@@ -14,7 +14,7 @@
 
     <div class="imgcontainer">
 
-        <img src="img/imagenesEmpresa/Ejemplo3.jpg" alt="" id="Ejemplo1" class="h-100 w-100" loading="lazy">
+        <img src="img/imagenesEmpresa/entrada3.webp" alt="Entrada 3" id="Ejemplo1" class="h-100 w-100" loading="lazy">
         <div class="negron"></div>
 
     </div>
@@ -35,14 +35,14 @@
             <p>
                 Bienvenido a la <span>Clínica Salud Bucal</span>,
                 donde tu salud bucal es nuestra prioridad. Nuestro equipo de odontólogos expertos y amable personal se dedican a
-                proporcionar atención dental de la más alta calidad en un ambiente cálido y acogedor.
+                proporcionar atención dental de calidad en un ambiente cálido y acogedor.
             </p>
 
         </article>
 
         <aside class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 d-flex justify-items-center align-items-center">
 
-            <img src="img/imagenesEmpresa/Ejemplo.png" alt="" id="Ejemplo1" class="w-100 img-thumbnail" loading="lazy">
+            <img src="img/imagenesEmpresa/entrada1.webp" alt="Entrada 1" id="Ejemplo1" class="w-100 img-thumbnail" loading="lazy">
 
         </aside>
 
@@ -68,16 +68,16 @@
         <article class="carousel-inner">
 
             <div class="carousel-item active">
-                <img src="img/imagenesEmpresa/consultorio2.jpg" class="d-block w-100 img-thumbnail" alt="..." loading="lazy">
+                <img src="img/imagenesEmpresa/sala1.webp" class="d-block w-100 img-thumbnail" alt="Sala 1" loading="lazy">
             </div>
             <div class="carousel-item">
-                <img src="img/imagenesEmpresa/sala2.jpg" class="d-block w-100 img-thumbnail" alt="..." loading="lazy">
+                <img src="img/imagenesEmpresa/sala2.webp" class="d-block w-100 img-thumbnail" alt="Sala 2" loading="lazy">
             </div>
             <div class="carousel-item">
-                <img src="img/imagenesEmpresa/sala3.jpg" class="d-block w-100 img-thumbnail" alt="..." loading="lazy">
+                <img src="img/imagenesEmpresa/consultorio1.webp" class="d-block w-100 img-thumbnail" alt="Consultorio 1" loading="lazy">
             </div>
             <div class="carousel-item">
-                <img src="img/imagenesEmpresa/consultorio3.jpg" class="d-block w-100 img-thumbnail" alt="..." loading="lazy">
+                <img src="img/imagenesEmpresa/consultorio2.webp" class="d-block w-100 img-thumbnail" alt="Consultorio 2" loading="lazy">
             </div>
 
         </article>

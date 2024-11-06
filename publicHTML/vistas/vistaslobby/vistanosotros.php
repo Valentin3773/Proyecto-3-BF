@@ -25,7 +25,7 @@
 
         <aside class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 d-flex justify-items-center align-items-center">
 
-            <img src="img/imagenesEmpresa/Ejemplo.png" alt="" id="Ejemplo1" class="w-100 img-thumbnail" loading="lazy">
+            <img src="img/imagenesEmpresa/entrada4.webp" alt="Entrada 4" id="Ejemplo1" class="w-100 img-thumbnail" loading="lazy">
 
         </aside>
 
