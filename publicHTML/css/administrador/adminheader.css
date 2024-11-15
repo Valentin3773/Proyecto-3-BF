@@ -465,6 +465,14 @@ button#agregarmobile:active {
     display: none !important;
 }
 
+@media screen and (width <= 1100px) {
+    
+    #odontologocontainer {
+
+        display: none !important;
+    }
+}
+
 @media screen and (width <= 991px) {
 
     #headerpc, .actionbar, .sidebar {
@@ -649,5 +657,24 @@ button#agregarmobile:active {
 
         font-size: .65rem;
         padding: 1rem;
+    }
+}
+
+@media screen and (height <= 850px) {
+    
+    .actionbar #titactionbar {
+
+        margin: 0 !important;
+    }
+
+    .actionbar #agregar {
+
+        padding: 1.4rem;
+    }
+
+    .actionbar #agregar .mas {
+
+        width: 40px;
+        height: 40px;
     }
 }

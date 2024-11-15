@@ -34,9 +34,17 @@ function updateConsulta()
     
     if (empty($asunto) || $asunto == null) {
 
-        echo "El campo 'Asunto' esta vacio. Por favor, ingresa un valor.";
+        echo "El campo 'Asunto' esta vacio. Por favor, ingresa un valor";
         exit();
-    } 
+    }
+    else if(!preg_match("/^[a-zA-ZÀ-ÿ\s'’`´,.-]+$/u", $asunto)) echo "El formato del asunto no es válido";
+    else if(strlen($asunto) > 55) echo "El asunto es demasiado largo";
+    else if(strlen($asunto) <= 4) echo "El asunto es demasiado corto, debe tener al menos 5 caracteres";
+
+    else if($resumen != null && $resumen != '' && !preg_match("/^[a-zA-ZÀ-ÿ\s'’`´,.¿?¡!-]+$/u", $resumen)) echo "El formato del resumen no es válido";
+    else if($resumen != null && $resumen != '' && strlen($resumen) > 2500) echo "El resumen es demasiado largo";
+    else if($resumen != null && $resumen != '' && strlen($resumen) <= 9) echo "El resumen es demasiado corto, debe tener al menos 10 caracteres";
+    
     elseif (empty($hora) || strcasecmp($hora, "No hay horarios disponibles") === 0 || $hora == null) {
 
         echo "Debes seleccionar una hora.";
@@ -44,14 +52,15 @@ function updateConsulta()
     } 
     elseif (empty($duracion) || $duracion == 0 || $duracion == null) {
 
-        echo "El campo 'Duracion' no puede ser 0 o vacio    . Por favor, ingresa un valor.";
+        echo "El campo 'Duración' no puede ser 0 o vacío. Por favor, ingresa un valor";
         exit();
     } 
     elseif (empty($fecha) || strcasecmp($fecha, "No hay fecha disponibles") === 0 || $fecha == null) {
 
         echo "Debes seleccionar una fecha.";
         exit();
-    } else {
+    } 
+    else {
 
         if ($fecha == "Elija una fecha") $fecha = $fechaV;
         if ($hora == "Elija una hora") $hora = $horaV;
@@ -89,26 +98,22 @@ function updateConsulta()
                             $stmt->bindParam(':fechaV', $fechaV);
                             $stmt->bindParam(':horaV', $horaV);
                             
-                            if ($stmt->execute()) {
-                                echo "Se ha modificado la consulta";
-                            } else {
-                                echo "Ha ocurrido un error al modificar la consulta";
-                            }
-                        } catch (Throwable $th) {
+                            if ($stmt->execute()) echo "Se ha modificado la consulta";
+                            
+                            else echo "Ha ocurrido un error al modificar la consulta";
+                        } 
+                        catch (Throwable $th) {
+
                             echo $th->getMessage();
                         }
-                    } else {
-                        echo "Uno de los datos no son disponibles";
-                    }
-                } else {
-                    echo "No disponible";
-                }
-            } else {
-                echo "Fecha no disponible o Hora no disponible";
-            }
-        } else {
-            echo "Horario no Disponible";
-        }
+                    } 
+                    else  echo "Uno de los datos no está disponible";
+                } 
+                else echo "No disponible";
+            } 
+            else echo "Fecha y/u hora no disponible";
+        } 
+        else echo "Horario no disponible";
     }
     exit();
 }

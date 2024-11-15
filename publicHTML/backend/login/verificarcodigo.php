@@ -24,8 +24,11 @@ function comprobarcodigo() {
     if($con === $recon) {
 
         if((hash_equals($scupass, hash_hmac('sha256', $codigo, 'Pepe')))) {
+            
+            if(strlen($con) > 24) $respuesta['error'] = "La contraseña es demasiado larga, debe tener entre 4 y 24 caracteres";
+            if(strlen($con) <= 3) $respuesta['error'] = "La contraseña es demasiado corta, debe tener entre 4 y 24 caracteres";
 
-            if($con === $recon) {
+            else if($con === $recon) {
 
                 try {
 

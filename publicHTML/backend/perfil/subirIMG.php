@@ -63,9 +63,17 @@ function subirPacienteIMG() {
     $respuesta = array();
 
     // Obtengo la imagen del ajax
-    $file = $_FILES['file'];
+    $file = $_FILES['file'] ?? null;
     $ruta_carpeta = $_SERVER['DOCUMENT_ROOT'] . "/Proyecto-3-BF/publicHTML/backend/almacenamiento/fotosdeperfil/";
     
+    if(!isset($file)) return;
+
+    if($file['size'] > 700 * 1024) {
+
+        $respuesta['error'] = "La foto es demasiado grande, debe tener un tamaño menor a 700KB";
+        return;
+    }
+
     // Genera un nombre único para que la imagen no se encuentre repetida
     $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
     $nuevo_nombre_archivo = uniqid('img_', true) . '.' . $extension;
@@ -119,9 +127,17 @@ function subirOdontologoIMG() {
     $respuesta = array();
 
     // Obtengo la imagen del ajax
-    $file = $_FILES['file'];
+    $file = $_FILES['file'] ?? null;
     $ruta_carpeta = $_SERVER['DOCUMENT_ROOT'] . "/Proyecto-3-BF/publicHTML/backend/almacenamiento/fotosdeperfil/";
     
+    if(!isset($file)) return;
+
+    if($file['size'] > 700 * 1024) {
+
+        $respuesta['error'] = "La foto es demasiado grande, debe tener un tamaño menor a 700KB";
+        return;
+    }
+
     // Genera un nombre único para que la imagen no se encuentre repetida
     $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
     $nuevo_nombre_archivo = uniqid('img_', true) . '.' . $extension;

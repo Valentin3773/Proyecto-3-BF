@@ -15,11 +15,86 @@ function crearServicio() {
     global $pdo;
     global $respuesta;
 
-    $nombre = $_POST["nombre"];
-    $descripcion = $_POST["descripcion"];
+    $nombre = isset($_POST["nombre"]) ? sanitizar($_POST["nombre"]) : null;
+    $descripcion = isset($_POST["descripcion"]) ? sanitizar($_POST["descripcion"]) : null;
+
+    if($nombre == null || $descripcion == null) {
+
+        $respuesta["error"] = "Debes ingresar un nombre y una descripción para el servicio";
+
+        header('Content-Type: application/json');
+        echo json_encode($respuesta);
+        exit();
+    }
+    else if(!preg_match("/^[a-zA-ZÀ-ÿ\s'’`´,-]+$/u", $nombre)) {
+        
+        $respuesta["error"] = "El formato del nombre del servicio no es válido";
+        
+        header('Content-Type: application/json');
+        echo json_encode($respuesta);
+        exit();
+    }
+    else if(strlen($nombre) > 60) {
+
+        $respuesta["error"] = "El nombre del servicio es demasiado largo";
+
+        header('Content-Type: application/json');
+        echo json_encode($respuesta);
+        exit();
+    }
+    else if(strlen($nombre) <= 3) {
+
+        $respuesta["error"] = "El nombre del servicio es demasiado corto";
+
+        header('Content-Type: application/json');
+        echo json_encode($respuesta);
+        exit();
+    }
+    else if(!preg_match("/^[a-zA-ZÀ-ÿ\s'’`´,.¿?¡!-]+$/u", $descripcion)) {
+        
+        $respuesta["error"] = "El formato de la descripción del servicio no es válido";
+        
+        header('Content-Type: application/json');
+        echo json_encode($respuesta);
+        exit();
+    }
+    else if(strlen($descripcion) > 2500) {
+
+        $respuesta["error"] = "La descripción del servicio es demasiado larga";
+
+        header('Content-Type: application/json');
+        echo json_encode($respuesta);
+        exit();
+    }
+    else if(strlen($descripcion) < 20) {
+
+        $respuesta["error"] = "La descripción del servicio es demasiado corta, debe tener al menos 20 caracteres";
+
+        header('Content-Type: application/json');
+        echo json_encode($respuesta);
+        exit();
+    }
 
     $icono = isset($_FILES['file1']) ? $_FILES['file1'] : null;
-    $imagen = isset($_FILES['file2']) ? $_FILES['file2'] : null;    
+    $imagen = isset($_FILES['file2']) ? $_FILES['file2'] : null;
+
+    if($icono != null && $icono['size'] > 1024 * 1024) {
+
+        $respuesta["error"] = "El icono es demasiado grande, debe tener un tamaño menor a 1MB";
+
+        header('Content-Type: application/json');
+        echo json_encode($respuesta);
+        exit();
+    }
+    else if($imagen != null && $imagen['size'] > 6 * 1024 * 1024) {
+
+        $respuesta["error"] = "La imagen es demasiado grande, debe tener un tamaño menor a 6MB";
+
+        header('Content-Type: application/json');
+        echo json_encode($respuesta);
+        exit();
+    }
+
     $iconoName = icono($icono);
     $imagenName = imagen($imagen);
 
@@ -68,7 +143,7 @@ function icono($icon) {
 
             if (move_uploaded_file($icon['tmp_name'], $ruta_guardar_archivo)) return $nuevo_nombre_archivo;
             
-            else return false;  
+            else return false; 
         } 
         catch (Exception $e) {
 

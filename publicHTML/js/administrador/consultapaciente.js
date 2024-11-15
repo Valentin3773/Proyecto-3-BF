@@ -19,6 +19,8 @@ function addBTNListeners() {
     $('#hora-CP').on('change',ajustarDuracion);
 
     desactivarInputs();
+
+    cambiarHorario();
 }
 
 function cambiarHorario() {

@@ -52,7 +52,7 @@
                 </div>
 
                 <div id="contenedor_fondo">
-                    <p class="m-0">pirepepetafeli@gmail.com</p>
+                    <p class="m-0">macarcabelos@hotmail.com</p>
                 </div>
             </div>
 

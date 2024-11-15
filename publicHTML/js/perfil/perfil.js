@@ -94,7 +94,7 @@ function integrarBoton($datos, $id) {
 
         quitarEventos();
 
-        $($id).on('click', function () {
+        $($id).off().on('click', function () {
 
             if ($($datos['inputID']).val() != $datos['old']) {
 

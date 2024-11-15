@@ -29,7 +29,7 @@ if(!isset($_SESSION['odontologo'])) {
         <div id="contdescripcion">
 
             <label for="descripcion">Descripción</label>
-            <textarea type="text" class="form-control" id="descripcion" title="Ingrese la descripción" placeholder="Ingrese la descripción" disabled required></textarea>
+            <textarea type="text" class="form-control" id="descripcion" minlength="20" title="Ingrese la descripción" placeholder="Ingrese la descripción" required></textarea>
 
         </div>
 
@@ -70,7 +70,7 @@ if(!isset($_SESSION['odontologo'])) {
 
         <div id="contbtnagregar" class="d-flex justify-content-center align-items-center">
 
-            <button type="button" id="agregarservicio" class="inactivo" disabled>Agregar</button>
+            <button type="button" id="agregarservicio" class="activo">Agregar</button>
 
         </div>
 

@@ -20,6 +20,8 @@ if (!isset($_GET['numservicio'])) {
     if ($stmt->execute()) $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
+
+    <?php if(!empty($servicios)) { ?>
     <div id="tituservicioscontainer" class="d-flex justify-content-center gx-0 mt-3">
 
         <h1 id="tituloservicios" class="text-center">Servicios</h1>
@@ -30,6 +32,12 @@ if (!isset($_GET['numservicio'])) {
         <?php foreach ($servicios as $servicio) echo "<div id='{$servicio["numero"]}' class='servicio'><h3>{$servicio["nombre"]}<h3></div>"; ?>
 
     </div>
+    <?php
+    
+    }
+    else echo "<div class='w-100 h-100 d-flex justify-content-center align-items-center'><h1 class='titinformativo'>No hay servicios, prueba agregando uno</h1></div>"; 
+    
+    ?>
 
 <?php
 

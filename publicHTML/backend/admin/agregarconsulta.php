@@ -33,7 +33,11 @@ $asunto = sanitizar($_POST["asunto"]);
 
 if(fechaDisponible($fecha->format('Y-m-d'), $ido) && in_array($hora, horasDisponibles($fecha->format('Y-m-d'), $ido)) && in_array($duracion, duracionesDisponibles($fecha, $hora, $ido))) {
 
-    if(strlen($asunto) >= 6 && strlen($asunto) <= 50) {
+    if(!preg_match("/^[a-zA-ZÀ-ÿ\s'’`´,.-]+$/u", $asunto)) $respuesta["error"] = "El formato del asunto no es válido";
+    else if(strlen($asunto) > 55) $respuesta["error"] = "El asunto es demasiado largo";
+    else if(strlen($asunto) <= 4) $respuesta["error"] = "El asunto es demasiado corto, debe tener al menos 5 caracteres";
+
+    else {
 
         $fecha = $fecha->format('Y-m-d');
         $hora = $hora . ':00';
@@ -56,7 +60,6 @@ if(fechaDisponible($fecha->format('Y-m-d'), $ido) && in_array($hora, horasDispon
         }
         else $respuesta["error"] = "Ha ocurrido un error al agendar la consulta";
     }
-    else $respuesta["error"] = "Asunto no válido";
 }
 else $respuesta["error"] = "La fecha, hora y/o duración no son válidas";
 

@@ -36,7 +36,7 @@
                 <label for="indocumento" class="text-end row">Documento<span class="astobligatorio" title="Este campo es obligatorio">*</span></label>
             </div>
             <div id="div_input">
-                <input type="text" name="documento" id="indocumento" title="Ingrese su documento" placeholder="Ingrese su documento" required>
+                <input type="number" minlength="2" maxlength="10" name="documento" id="indocumento" title="Ingrese su documento" placeholder="Ingrese su documento" required>
             </div>
 
         </div>

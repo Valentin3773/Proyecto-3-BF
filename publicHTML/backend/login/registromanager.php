@@ -10,7 +10,7 @@ function processRegisterForm() : void {
     global $pdo;
 
     $nombre = isset($_POST['nombre']) ? sanitizar($_POST['nombre']) : null;
-    $apellidos = isset($_POST['apellido']) ? sanitizar($_POST['apellido']) : null;
+    $apellido = isset($_POST['apellido']) ? sanitizar($_POST['apellido']) : null;
     $documento = isset($_POST['documento']) ? sanitizar($_POST['documento']) : null;
     $telefono = isset($_POST['telefono']) ? sanitizar($_POST['telefono']) : null;
     $direccion = isset($_POST['direccion']) ? sanitizar($_POST['direccion']) : null;
@@ -20,46 +20,41 @@ function processRegisterForm() : void {
 
     $datos = array();
 
-    if ($nombre === null || $nombre === '') {
+    if ($nombre === null || $nombre === '') $datos['error'] = "Nombre no proporcionado";
+    else if(!preg_match("/^[a-zA-ZÀ-ÿ\s'’`´-]+$/u", $nombre)) $datos['error'] = "El nombre no tiene el formato adecuado";
+    else if(strlen($nombre) > 50) $datos['error'] = "El nombre es demasiado largo";
+    else if(strlen($nombre) <= 2) $datos['error'] = "El nombre es demasiado corto";
+    
+    else if ($apellido === null || $apellido === '') $datos['error'] = "Apellido no proporcionado";
+    else if(!preg_match("/^[a-zA-ZÀ-ÿ\s'’`´-]+$/u", $apellido)) $datos['error'] = "El apellido no tiene el formato adecuado";
+    else if(strlen($apellido) > 50) $datos['error'] = "El apellido es demasiado largo";
+    else if(strlen($apellido) <= 2) $datos['error'] = "El apellido es demasiado corto";
 
-        $datos['error'] = "Nombre no proporcionado.";
-    } 
-    else if ($apellidos === null || $apellidos === '') {
+    else if ($telefono != null && $telefono != '' && !preg_match("/^\+?\d{0,3}[-. (]*\d{1,4}[-. )]*\d{1,4}[-. ]*\d{1,4}[-. ]*\d{0,9}$/", $telefono)) $datos['error'] = "El formato del número de teléfono no es válido";
+    else if ($telefono != null && $telefono != '' && strlen($telefono) > 30) $datos['error'] = "El número de teléfono es demasiado largo";
+    else if ($telefono != null && $telefono != '' && strlen($telefono) <= 4) $datos['error'] = "El número de teléfono es demasiado corto, debe tener al menos 5 digitos";
 
-        $datos['error'] = "Apellidos no proporcionados.";
-    } 
-    else if ($documento === null || $documento === '') {
+    else if ($direccion != null && $direccion != '' && !preg_match("/^[a-zA-Z0-9À-ÿ\s,.-]+$/u", $direccion)) $datos['error'] = "El formato de la dirección no es válido";
+    else if ($direccion != null && $direccion != '' && strlen($direccion) > 200) $datos['error'] = "La dirección es demasiado larga";
+    else if ($direccion != null && $direccion != '' && strlen($direccion) <= 5) $datos['error'] = "La dirección es demasiado corta, debe tener al menos 6 caracteres";
 
-        $datos['error'] = "Documento no proporcionado.";
-    } 
-    else if (!ctype_digit($documento)) {
-
-        $datos['error'] = "El documento debe ser ingresado solo con números y sin guiones.";
-    } 
-    else if (strlen($documento) != 8) {
-
-        $datos['error'] = "El documento debe tener exactamente 8 dígitos.";
-    } 
-    else if ($email === null || $email === '') {
-
-        $datos['error'] = "Email no proporcionado.";
-    } 
-    else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
-        $datos['error'] = "Correo en formato no reconocible";
-    } 
-    else if ($contrasenia === null || $contrasenia === '') {
-
-        $datos['error'] = "Contraseña no proporcionada.";
-    } 
-    else if ($concontrasenia === null || $concontrasenia === '') {
-
-        $datos['error'] = "Confirmación de contraseña no proporcionada.";
-    } 
-    else if ($contrasenia !== $concontrasenia) {
-
-        $datos['error'] = "Las contraseñas no coinciden.";
-    } 
+    else if ($documento === null || $documento === '') $datos['error'] = "Documento no proporcionado";
+    else if (!ctype_digit($documento)) $datos['error'] = "El documento debe ser ingresado solo con números y sin puntos ni guiones";
+    else if (strlen($documento) > 20) $datos['error'] = "El documento es demasiado largo";
+    else if (strlen($documento) <= 3) $datos['error'] = "El documento es demasiado corto";
+    
+    else if ($email === null || $email === '') $datos['error'] = "Email no proporcionado";
+    else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $datos['error'] = "Correo electrónico en formato no reconocible";
+    else if (strlen($email) > 250) $datos['error'] = "El correo electrónico es demasiado largo";
+    else if (strlen($email) <= 5) $datos['error'] = "El correo electrónico es demasiado corto";
+    
+    else if ($contrasenia === null || $contrasenia === '') $datos['error'] = "Contraseña no proporcionada";
+    else if (strlen($contrasenia) > 24) $datos['error'] = "La contraseña es demasiado larga (debe tener entre 3 y 24 caracteres)";
+    else if (strlen($contrasenia) <= 3) $datos['error'] = "La contraseña es demasiado corta (debe tener al menos 3 caracteres)";
+    
+    else if ($concontrasenia === null || $concontrasenia === '') $datos['error'] = "Confirmación de contraseña no proporcionada";
+    else if ($contrasenia !== $concontrasenia) $datos['error'] = "Las contraseñas no coinciden";
+    
     else {
 
         $chekeo = "SELECT documento FROM paciente WHERE documento = :documento OR email = :email";
@@ -69,11 +64,8 @@ function processRegisterForm() : void {
 
         if ($stmt->execute()) {
 
-            if ($stmt->rowCount() > 0) {
-
-                $user = $stmt->fetch(PDO::FETCH_ASSOC);
-                $datos['error'] = "Usuario existente: $email";
-            } 
+            if ($stmt->rowCount() > 0) $datos['error'] = "El email o el documento ya se encuentran registrados";
+            
             else {
 
                 $hashedPassword = password_hash($contrasenia, PASSWORD_BCRYPT);
@@ -81,7 +73,7 @@ function processRegisterForm() : void {
                 $sql = "INSERT INTO paciente (documento, nombre, apellido, email, contrasenia, direccion, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $pdo->prepare($sql);
 
-                if ($stmt->execute([$documento, $nombre, $apellidos, $email, $hashedPassword, $direccion, $telefono])) {
+                if ($stmt->execute([$documento, $nombre, $apellido, $email, $hashedPassword, $direccion, $telefono])) {
 
                     $datos['registrado'] = "Usuario Registrado";
                 } 

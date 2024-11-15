@@ -17,19 +17,15 @@ if (!isset($_GET['idpaciente'])) {
 
     $pacientes = array();
 
-    $consulta = "SELECT DISTINCT p.idpaciente, p.nombre, p.apellido, p.documento, p.telefono, p.foto FROM odontologo o JOIN consulta c ON o.idodontologo = c.idodontologo JOIN paciente p ON c.idpaciente = p.idpaciente WHERE o.idodontologo = :ido ORDER BY nombre ASC";
+    $consulta = "SELECT DISTINCT p.idpaciente, p.nombre, p.apellido, p.documento, p.telefono, p.foto FROM odontologo o JOIN consulta c ON o.idodontologo = c.idodontologo JOIN paciente p ON c.idpaciente = p.idpaciente WHERE o.idodontologo = :ido AND c.vigente = 'vigente' ORDER BY nombre ASC";
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(':ido', $ido);
 
-    if ($stmt->execute() && $stmt->rowCount() > 0) {
-
-        while ($tupla = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-            $pacientes[] = $tupla;
-        }
-    }
+    if ($stmt->execute() && $stmt->rowCount() > 0) $pacientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
+
+    <?php if(!empty($pacientes)) { ?>
 
     <div class="conpacientes">
 
@@ -76,6 +72,13 @@ if (!isset($_GET['idpaciente'])) {
         ?>
 
     </div>
+
+    <?php 
+    
+    }
+    else echo "<div class='w-100 h-100 d-flex justify-content-center align-items-center'><h1 class='titinformativo'>Todavía no tienes ningún paciente, prueba agendando una consulta para uno</h1></div>"; 
+
+    ?>
 
 <?php
 

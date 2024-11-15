@@ -25,7 +25,7 @@ $(() => {
 
     resetAdmin();
 
-    switch($('body').data('vista')) {
+    switch ($('body').data('vista')) {
 
         case 'consultas': changeView(cargarVistaConsultaCalendario); break;
 
@@ -219,9 +219,9 @@ function addCalendarioListeners() {
                 $.get("vistas/vistasadmin/sidebarconsultas.php", data => {
 
                     loadSidebar(data)
-            
+
                     $('.pacientec').on('click', function () {
-            
+
                         if (!cargando) changeView(() => cargarVistaConsultasPaciente($(this).attr('id')));
                     });
                 });
@@ -263,9 +263,9 @@ function addCalendarioListeners() {
                 $.get("vistas/vistasadmin/sidebarconsultas.php", data => {
 
                     loadSidebar(data)
-            
+
                     $('.pacientec').on('click', function () {
-            
+
                         if (!cargando) changeView(() => cargarVistaConsultasPaciente($(this).attr('id')));
                     });
                 });
@@ -285,7 +285,7 @@ function addCalendarioListeners() {
 }
 
 function cargarVistaAgregarConsulta() {
-    
+
     history.pushState(null, 'Agendar Consulta', '/administrador/consultas/agendar');
 
     loadSidebar('');
@@ -524,25 +524,7 @@ function cargarVistaAgregarServicio() {
             });
         });
 
-        $('#nombre').on('input', () => {
-
-            if ($('#nombre').val().length >= 4) $('#descripcion').prop('disabled', false);
-
-            else {
-
-                $('#descripcion').empty().prop('disabled', true);
-                $('#agregarservicio').prop('disabled', true).removeClass('activo').addClass('inactivo');
-            }
-        });
-
-        $('#descripcion').on('input', () => {
-
-            if ($('#descripcion').val().length >= 20) $('#agregarservicio').prop('disabled', false).removeClass('inactivo').addClass('activo');
-
-            else $('#agregarservicio').prop('disabled', true).removeClass('activo').addClass('inactivo');
-        })
-
-        $('#agregarservicio').on('click', async () => {
+        $('#agregarservicio').on('click', async evt => {
 
             if (await createConfirmPopup('Confirmación', '¿Estás seguro de agregar el servicio?')) {
 
@@ -550,34 +532,31 @@ function cargarVistaAgregarServicio() {
 
                 formData.append('nombre', $('#nombre').val()); formData.append('descripcion', $('#descripcion').val());
 
-                if ($('#nombre').val().length >= 4 && $('#descripcion').val().length >= 20) {
+                cargando = true;
 
-                    cargando = true;
+                $.ajax({
 
-                    $.ajax({
+                    type: "POST",
+                    url: "backend/admin/agregarservicio.php",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
 
-                        type: "POST",
-                        url: "backend/admin/agregarservicio.php",
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function (response) {
+                        cargando = false;
 
-                            cargando = false;
+                        $('#agregarservicio').html('Agregar').prop('disabled', false).removeClass('inactivo').addClass('activo');
 
-                            $('#agregarservicio').html('Agregar').prop('disabled', false).removeClass('inactivo').addClass('activo');
+                        if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaServicios);
 
-                            if (response.error == undefined) createHeaderPopup('Nuevo Aviso', response.exito, cargarVistaServicios);
+                        else createPopup('Nuevo Aviso', response.error);
+                    },
+                    error: (jqXHR, estado, outputError) => {
 
-                            else createPopup('Nuevo Aviso', response.error);
-                        },
-                        error: (jqXHR, estado, outputError) => {
-
-                            console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
-                            cargando = false;
-                        }
-                    });
-                }
+                        console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR);
+                        cargando = false;
+                    }
+                });
             }
         });
     });
@@ -865,9 +844,9 @@ function cargarVistaPacienteDetalle(idp) {
 
                                         cargando = false;
 
-                                        if (response[0]) createHeaderPopup('Nuevo Aviso', responso.exito, () => changeView(() => cargarVistaPacienteDetalle(idp)));
+                                        if (response[0]) createHeaderPopup('Nuevo Aviso', responso.exito, () => changeView(() => cargarVistaPacienteDetalle(idp)), 10);
 
-                                        else createPopup('Nuevo Aviso', responso.error);
+                                        else createPopup('Nuevo Aviso', responso.error, 10);
                                     },
                                     error: (jqXHR, estado, outputError) => {
 
@@ -956,9 +935,9 @@ function cargarVistaServicioDetalle(numservicio) {
             desc: ""
         };
 
-        $('#eliminarservicio').on('click', async function() {
+        $('#eliminarservicio').on('click', async function () {
 
-            if(await createConfirmPopup('Confirmación', '¿Realmente desea eliminar este servicio?')) {
+            if (await createConfirmPopup('Confirmación', '¿Realmente desea eliminar este servicio?')) {
 
                 $(this).html('<i class="fas fa-spinner fa-pulse" style="color: #ffffff;"></i>').prop('disabled', true).css({ 'opacity': '.5' });
 
@@ -968,7 +947,7 @@ function cargarVistaServicioDetalle(numservicio) {
 
                     type: "POST",
                     url: "backend/admin/eliminarservicio.php",
-                    data: JSON.stringify({numero: numservicio}),
+                    data: JSON.stringify({ numero: numservicio }),
                     processData: false,
                     contentType: false,
                     success: function (response) {
@@ -1024,9 +1003,13 @@ function cargarVistaServicioDetalle(numservicio) {
 
                             cargando = false;
 
-                            if (response.error == undefined) { createPopup('Nuevo Aviso', response); $('.contTitulon').attr('disabled', true); }
+                            if (response.error == undefined) { createPopup('Nuevo Aviso', response.exito); $('.contTitulon').attr('disabled', true); }
 
-                            else createPopup('Nuevo Aviso', response);
+                            else {
+
+                                createPopup('Nuevo Aviso', response.error);
+                                cargarVistaServicioDetalle(numservicio);
+                            }
                         },
                         error: (jqXHR, estado, outputError) => {
 
@@ -1072,9 +1055,13 @@ function cargarVistaServicioDetalle(numservicio) {
 
                             cargando = false;
 
-                            if (response.error == undefined) { createPopup('Nuevo Aviso', response); $('#descripcion').attr('readonly', true); }
+                            if (response.error == undefined) { createPopup('Nuevo Aviso', response.exito); $('#descripcion').attr('readonly', true); }
 
-                            else createPopup('Nuevo Aviso', response.error);
+                            else {
+
+                                cargarVistaServicioDetalle(numservicio);
+                                createPopup('Nuevo Aviso', response.error);
+                            }
                         },
                         error: (jqXHR, estado, outputError) => {
 
@@ -1259,11 +1246,11 @@ function loadSidebar(contenido) {
     sidebar.empty().html(contenido).css({ 'opacity': 1 })[0].scrollTo({ top: 0, behavior: 'smooth' });
     sidebarmobile.empty().html(contenido).css({ 'opacity': 1 })[0].scrollTo({ top: 0, behavior: 'smooth' });
 
-    if(contenido === '') btnopciones.removeClass('visible').addClass('invisible');
+    if (contenido === '') btnopciones.removeClass('visible').addClass('invisible');
 
     else btnopciones.removeClass('invisible').addClass('visible');
 
-    if(sidebarmobile.hasClass('visible')) desplegarSidebarMobile();
+    if (sidebarmobile.hasClass('visible')) desplegarSidebarMobile();
 }
 
 function changeView(vista) {
@@ -1277,11 +1264,11 @@ function loadView(contenido) {
     $('main').empty().html(contenido).fadeIn(200)[0].scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function manageMobileAddButton(active, texto, onclick = () => {}) {
+function manageMobileAddButton(active, texto, onclick = () => { }) {
 
-    let mobileButton =  $('#agregarmobile');
+    let mobileButton = $('#agregarmobile');
 
-    if(active) mobileButton.removeClass('inactivo').addClass('activo');
+    if (active) mobileButton.removeClass('inactivo').addClass('activo');
 
     else mobileButton.removeClass('activo').addClass('inactivo');
 
@@ -1293,14 +1280,14 @@ function desplegarSidebarMobile() {
     const sidebarmobile = $('header.mobile #sidebarmobile');
     const mobilepacientescontainer = $('header.mobile #sidebarmobile > .pacientescontainer');
 
-    if(sidebarmobile.hasClass('invisible') && !sidebarmobile.is(':empty')) {
-        
+    if (sidebarmobile.hasClass('invisible') && !sidebarmobile.is(':empty')) {
+
         sidebarmobile.removeClass('invisible').addClass('visible');
         mobilepacientescontainer.removeClass('invisible').addClass('visible');
     }
 
     else {
-        
+
         sidebarmobile.removeClass('visible').addClass('invisible');
         mobilepacientescontainer.removeClass('visible').addClass('invisible');
     }

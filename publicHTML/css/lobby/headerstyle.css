@@ -169,7 +169,7 @@ header {
     z-index: 5;
 }
 
-*:not(#carrusel):not(.carousel-inner *):not(.navslider):not(.navslider *) {
+*:not(#carrusel):not(.carousel-inner *):not(.navslider):not(.navslider *):not(#div-mensaje-popup):not(#div-mensaje-popup *) {
 
     transition: height 0s, scale .3s, rotate .5s, transform .3s, filter .3s, color .3s, box-shadow .3s, opacity .3s !important;
 }

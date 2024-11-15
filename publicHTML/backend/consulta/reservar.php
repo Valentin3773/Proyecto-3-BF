@@ -22,32 +22,39 @@ $respuesta = array();
 
 if($data && isset($_SESSION['paciente'])) {
 
-    $ido = $data['odontologo'];
+    $ido = intval(sanitizar($data['odontologo']));
     $idp = $_SESSION['paciente']['idpaciente'];
 
-    $fecha = new DateTime($data['fecha']);
+    $fecha = new DateTime(sanitizar($data['fecha']));
     $fecha = $fecha->format('Y-m-d');
 
     $hora = new DateTime();
-    $hora->setTime($data['hora']['hora'], $data['hora']['minuto']);
+    $hora->setTime(sanitizar($data['hora']['hora']), sanitizar($data['hora']['minuto']));
 
-    $asunto = $data['asunto'];
+    $asunto = sanitizar($data['asunto']);
 
     if(odontologoHabilitado($idp, $ido) && fechaDisponible($fecha, $ido) && in_array($hora->format('H:i'), horasDisponibles($fecha, $ido))) {
 
-        $hora = $hora->format('H:i:s');
+        if(!preg_match("/^[a-zA-ZÀ-ÿ\s'’`´,.-]+$/u", $asunto)) $respuesta["error"] = "El formato del asunto no es válido";
+        else if(strlen($asunto) > 55) $respuesta["error"] = "El asunto es demasiado largo";
+        else if(strlen($asunto) <= 4) $respuesta["error"] = "El asunto es demasiado corto, debe tener al menos 5 caracteres";
 
-        $sql = 'INSERT INTO consulta (fecha, hora, idodontologo, idpaciente, asunto) VALUES (:fecha, :hora, :ido, :idp, :asunto)';
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':fecha', $fecha);
-        $stmt->bindParam(':hora', $hora);
-        $stmt->bindParam(':ido', $ido);
-        $stmt->bindParam(':idp', $idp); 
-        $stmt->bindParam(':asunto', $asunto);
+        else {
 
-        if($stmt->execute()) $respuesta['exito'] = !enviarEmailReservador($fecha, $hora, $ido) ? 'Su consulta se ha reservado correctamente' : 'Su consulta se ha reservado correctamente, se le ha enviado un email con los detalles';
-        
-        else $respuesta['error'] = "Ha ocurrido un error al reservar la consulta";
+            $hora = $hora->format('H:i:s');
+
+            $sql = 'INSERT INTO consulta (fecha, hora, idodontologo, idpaciente, asunto) VALUES (:fecha, :hora, :ido, :idp, :asunto)';
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':fecha', $fecha);
+            $stmt->bindParam(':hora', $hora);
+            $stmt->bindParam(':ido', $ido);
+            $stmt->bindParam(':idp', $idp); 
+            $stmt->bindParam(':asunto', $asunto);
+
+            if($stmt->execute()) $respuesta['exito'] = !enviarEmailReservador($fecha, $hora, $ido) ? 'Su consulta se ha reservado correctamente' : 'Su consulta se ha reservado correctamente, se le ha enviado un email con los detalles';
+            
+            else $respuesta['error'] = "Ha ocurrido un error al reservar la consulta";
+        }
     }
     else $respuesta['error'] = "Ha ocurrido un error, la fecha y hora no están disponibles";
 }

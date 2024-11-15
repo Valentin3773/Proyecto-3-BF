@@ -38,18 +38,24 @@ $respuesta = true;
 
 try {
 
-    $file = $_FILES['file'];
+    $file = $_FILES['file'] ?? null;
+    $idp = isset($_POST['idpaciente']) ? intval(sanitizar($_POST['idpaciente'])) : null;
 
-    if (!isset($file)) {
+    if (!isset($file) || !isset($idp)) {
 
         header('Content-Type: application/json');
         echo json_encode($respuesta);
         exit();
     }
 
-    $idp = $_POST['idpaciente'];
-
     $ruta_carpeta = $_SERVER['DOCUMENT_ROOT'] . "/Proyecto-3-BF/publicHTML/backend/almacenamiento/fotosdeperfil/";
+
+    if($file['size'] > 700 * 1024) {
+
+        header('Content-Type: application/json');
+        echo json_encode($respuesta);
+        exit();
+    }
 
     $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
     $nuevo_nombre_archivo = uniqid('img_', true) . '.' . $extension;

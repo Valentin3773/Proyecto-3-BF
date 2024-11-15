@@ -4,6 +4,7 @@ function funcionguardarCambios($data) {
 
         let url = "backend/perfil/updateODP.php";
         let svdata = {
+
             name: $data['namedata'], 
             value: $data['dato'], 
             oldvalue: $data['old']
@@ -19,9 +20,13 @@ function funcionguardarCambios($data) {
     
                 if (response.error === undefined) createPopup('Nuevo Aviso', response.enviar);
     
-                else createPopup('Nuevo Aviso', response.error);
+                else {
+                    
+                    createPopup('Nuevo Aviso', response.error);
+                    cargarVistaPerfil();
+                }
             },
-            error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: 3" + outputError + estado + jqXHR)
+            error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
         });
     } 
     else if ($data['tipo'] === "$") {
@@ -44,7 +49,11 @@ function funcionguardarCambios($data) {
     
                 if (response.error === undefined) createPopup('Nuevo Aviso', response.enviar);
     
-                else createPopup('Nuevo Aviso', response.error);
+                else {
+                    
+                    createPopup('Nuevo Aviso', response.error);
+                    cargarVistaPerfil();
+                }
             },
             error: (jqXHR, estado, outputError) => console.error("Error al procesar la solicitud: " + outputError + estado + jqXHR)
         });

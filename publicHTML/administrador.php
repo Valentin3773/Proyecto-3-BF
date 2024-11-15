@@ -88,7 +88,7 @@ $urlbase = getUrlDominio();
 
         <header id="headerpc" class="row gx-3 p-0">
 
-            <div class="col-xl-2 col-lg-2 col-md-2">
+            <div class="col-xl-2 col-lg-3 col-md-2">
 
                 <div class="w-100 h-100 logocontainer d-flex justify-content-center align-items-center">
 
@@ -98,7 +98,7 @@ $urlbase = getUrlDominio();
 
             </div>
 
-            <div class="col-xl-10 col-lg-10 col-md-10 navcontainer p-3 pl-3">
+            <div class="col-xl-10 col-lg-9 col-md-10 navcontainer p-3 pl-3">
 
                 <nav>
 
@@ -150,7 +150,7 @@ $urlbase = getUrlDominio();
 
         <div class="row segfila gx-3 p-0">
 
-            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-0 col-0 firstdivsegfila">
+            <div class="col-xl-2 col-lg-3 col-md-0 col-sm-0 col-0 firstdivsegfila">
 
                 <div class="sidebarcontainer w-100 h-100 d-flex flex-column">
 
@@ -165,7 +165,7 @@ $urlbase = getUrlDominio();
 
             </div>
 
-            <main class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12"></main>
+            <main class="col-xl-10 col-lg-9 col-md-12 col-sm-12 col-12"></main>
 
         </div>
 

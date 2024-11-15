@@ -1,7 +1,12 @@
 var uniqueServicios = [];
 var visto = new Set();
+var serviciosiniciados = false;
 
 function iniciarServicios(servicios) {
+
+    if(serviciosiniciados) return;
+    
+    else serviciosiniciados = true;
 
     for (let i = 0; i < servicios.length; i++) {
 
@@ -97,22 +102,19 @@ function iniciarServicios(servicios) {
     $('.slick-next').empty();
 
     addServListeners(uniqueServicios);
-
-    $('.navslider').on('afterChange', function (event, slick, currentSlide) {
-
-        addServListeners(uniqueServicios);
-        console.log('pablo');
-    });
 }
 
 function addServListeners(servicios) {
 
-    servicios.forEach(elemento => $(`.navslider #${elemento.numero}`).off().on('click', evt => window.scrollTo({
+    servicios.forEach(elemento => {
 
-        top: $(`#sectionservicecontainer #${elemento.numero}`)[0].offsetTop - 160,
-        behavior: 'smooth'
+        $(`.navslider #${elemento.numero}`).off().on('click', evt => window.scrollTo({
 
-    })));
+            top: $(`#sectionservicecontainer #${elemento.numero}`)[0].offsetTop - 160,
+            behavior: 'smooth'
+
+        }));
+    });
 
     let blocked = false;
     let blockTimeout = null;
@@ -120,7 +122,6 @@ function addServListeners(servicios) {
 
     $(".navslider").off().on('mousewheel DOMMouseScroll wheel', function (evt) {
 
-        addServListeners(servicios);
         let deltaY = evt.originalEvent.deltaY;
         evt.preventDefault();
         evt.stopPropagation();
@@ -139,4 +140,3 @@ function addServListeners(servicios) {
         }
     });
 }
-
