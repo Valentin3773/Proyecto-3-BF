@@ -43,26 +43,33 @@ function changePassword() {
 
                     $hashedPassword = $tupla['contrasenia'];
 
-                    if(password_verify($contraseniaOld, $hashedPassword)) {
+                    if(strlen($data['new']) > 24) $respuesta['error'] = "La nueva contraseña es demasiado larga, debe tener entre 3 y 24 caracteres";
 
-                        try {
+                    else if(strlen($data['new']) <= 3) $respuesta['error'] = "La nueva contraseña es demasiado corta, debe tener entre 3 y 24 caracteres";
 
-                            $pass = $data['new'];
-                            $pass = password_hash($pass, PASSWORD_BCRYPT);
-                            $consulta = "UPDATE odontologo SET contrasenia = :pass WHERE idodontologo = :ido";
-                            $stmt = $pdo->prepare($consulta);
-                            $stmt->bindParam(':pass', $pass);
-                            $stmt->bindParam(':ido', $ido);
-                            $stmt->execute();
-                            $respuesta['enviar'] = "Contraseña Actualizada";
-                            reloadSession();
-                        }
-                        catch(PDOException $e) {
+                    else {
 
-                            $respuesta['enviar'] = $e;
-                        }
-                    } 
-                    else $respuesta['error'] = "La contraseña actual no coincide con el usuario";
+                        if(password_verify($contraseniaOld, $hashedPassword)) {
+
+                            try {
+
+                                $pass = $data['new'];
+                                $pass = password_hash($pass, PASSWORD_BCRYPT);
+                                $consulta = "UPDATE odontologo SET contrasenia = :pass WHERE idodontologo = :ido";
+                                $stmt = $pdo->prepare($consulta);
+                                $stmt->bindParam(':pass', $pass);
+                                $stmt->bindParam(':ido', $ido);
+                                $stmt->execute();
+                                $respuesta['enviar'] = "Contraseña Actualizada";
+                                reloadSession();
+                            }
+                            catch(PDOException $e) {
+
+                                $respuesta['enviar'] = $e;
+                            }
+                        } 
+                        else $respuesta['error'] = "La contraseña actual no coincide con el usuario";
+                    }
                 } 
                 catch (PDOException $e) {
 
@@ -85,26 +92,33 @@ function changePassword() {
 
                     $hashedPassword = $tupla['contrasenia'];
 
-                    if(password_verify($contraseniaOld, $hashedPassword)) {
+                    if(strlen($data['new']) > 24) $respuesta['error'] = "La nueva contraseña es demasiado larga, debe tener entre 3 y 24 caracteres";
 
-                        try {
+                    else if(strlen($data['new']) <= 3) $respuesta['error'] = "La nueva contraseña es demasiado corta, debe tener entre 3 y 24 caracteres";
 
-                            $pass = $data['new'];
-                            $pass = password_hash($pass, PASSWORD_BCRYPT);
-                            $consulta = "UPDATE paciente SET contrasenia = :pass WHERE idpaciente = :idp";
-                            $stmt = $pdo->prepare($consulta);
-                            $stmt->bindParam(':pass', $pass);
-                            $stmt->bindParam(':idp', $idp);
-                            $stmt->execute();
-                            $respuesta['enviar'] = "Contraseña Actualizada";
-                            reloadSession();
-                        }
-                        catch(PDOException $e) {
+                    else {
 
-                            $respuesta['enviar'] = $e;
-                        }
-                    } 
-                    else $respuesta['error'] = "La contraseña actual no coincide con el usuario";
+                        if(password_verify($contraseniaOld, $hashedPassword)) {
+
+                            try {
+
+                                $pass = $data['new'];
+                                $pass = password_hash($pass, PASSWORD_BCRYPT);
+                                $consulta = "UPDATE paciente SET contrasenia = :pass WHERE idpaciente = :idp";
+                                $stmt = $pdo->prepare($consulta);
+                                $stmt->bindParam(':pass', $pass);
+                                $stmt->bindParam(':idp', $idp);
+                                $stmt->execute();
+                                $respuesta['enviar'] = "Contraseña Actualizada";
+                                reloadSession();
+                            }
+                            catch(PDOException $e) {
+
+                                $respuesta['enviar'] = $e;
+                            }
+                        } 
+                        else $respuesta['error'] = "La contraseña actual no coincide con el usuario";
+                    }
                 } 
                 catch (PDOException $e) {
 
