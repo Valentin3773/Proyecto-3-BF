@@ -18,7 +18,11 @@ function funcionguardarCambios($data) {
             contentType: 'application/json',
             success: response => {
     
-                if (response.error === undefined) createPopup('Nuevo Aviso', response.enviar);
+                if (response.error === undefined) {
+                    
+                    createPopup('Nuevo Aviso', response.enviar);
+                    cargarVistaPerfil();
+                }
     
                 else {
                     
@@ -46,8 +50,12 @@ function funcionguardarCambios($data) {
             data: JSON.stringify(svdata),
             contentType: 'application/json',
             success: response => {
-    
-                if (response.error === undefined) createPopup('Nuevo Aviso', response.enviar);
+
+                if (response.error === undefined) {
+                    
+                    createPopup('Nuevo Aviso', response.enviar); 
+                    cargarVistaPerfil();
+                }
     
                 else {
                     

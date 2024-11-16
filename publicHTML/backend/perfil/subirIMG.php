@@ -71,7 +71,9 @@ function subirPacienteIMG() {
     if($file['size'] > 700 * 1024) {
 
         $respuesta['error'] = "La foto es demasiado grande, debe tener un tamaño menor a 700KB";
-        return;
+        header('Content-Type: application/json');
+        echo json_encode($respuesta);
+        exit();
     }
 
     // Genera un nombre único para que la imagen no se encuentre repetida
@@ -135,7 +137,9 @@ function subirOdontologoIMG() {
     if($file['size'] > 700 * 1024) {
 
         $respuesta['error'] = "La foto es demasiado grande, debe tener un tamaño menor a 700KB";
-        return;
+        header('Content-Type: application/json');
+        echo json_encode($respuesta);
+        exit();
     }
 
     // Genera un nombre único para que la imagen no se encuentre repetida
