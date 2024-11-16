@@ -24,10 +24,10 @@ function addBTNListeners() {
 }
 
 function cambiarHorario() {
-
     let fecha = $('#fecha-CP option:selected').val();
     let horaV = $('.contentHora #horaV').val();
     const url = 'backend/admin/getHorarioDisponibles.php';
+    console.log('ajustando horarios');
 
     $.ajax({
 
@@ -39,22 +39,28 @@ function cambiarHorario() {
 
             let horarios = JSON.parse(response);
             $('#hora-CP').empty();
-            for (let i = 0; i < horarios.length; i++) {
-
-                $('#hora-CP').append("<option value='" + horarios[i] + "'>" + horarios[i] + "</option>");
-            }
             $('#hora-CP').append("<option id='horaV' value='" + horaV + "'style='Display:none'>" + horaV + "</option>");
+            if(horarios.length != 0) {
+                for (let i = 0; i < horarios.length; i++) {
+                    if(horarios[i] != horaV) {
+                        $('#hora-CP').append("<option value='" + horarios[i] + "'>" + horarios[i] + "</option>");
+                    }
+                }
+                ajustarDuracion();
+            } else {
+                $('#hora-CP').append("<option value=' null '>No hay horarios disponibles</option>");
+            }   
         },
         error: function(error) {
             
             console.log('Error al enviar los datos:', error);
         }
     });
-    ajustarDuracion();
+    
 }
 
 function ajustarDuracion() {
-
+    console.log('ajustando duraciones');
     let fecha = $('#fecha-CP option:selected').val();
     let hora = $('#hora-CP option:selected').val();
     const url = 'backend/admin/getDuracionDisponibles.php';
@@ -70,7 +76,6 @@ function ajustarDuracion() {
             let duraciones = JSON.parse(response);
 
             $('#duracion-CP').empty();
-
             for (let i = 0; i < duraciones.length; i++) {
 
                 $('#duracion-CP').append("<option value='" + duraciones[i] + "'>" + duraciones[i] + "</option>");

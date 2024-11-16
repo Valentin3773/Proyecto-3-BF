@@ -99,17 +99,16 @@ $Tiempoensql = formatDateTime($Tiempoensql,'H:i:s', 'H:i');
                     <select type="number" name="" id="duracion-CP" value="" disabled>
                     <option><?= $tupla['duracion'] ?></option>
                         <?php
+                        error_log('PEPE');
                                 if(!empty($conjDuracion)) {
-
+                                    error_log('PEPE2');
                                     for($i = 0; $i < count($conjDuracion); $i++) {
                                         if(!($tupla['duracion'] == $conjDuracion[$i])){}
-
                                         echo "<option value= '$conjDuracion[$i]'>$conjDuracion[$i]</option>";
                                     }
                                 } 
                                 else {
-
-                                    echo "<option'>" .$tupla['duracion']. "</option>";
+                                    error_log('PEPE3');
                                     echo "<option>No hay duraciones disponibles</option>";
                                 }
                         ?>

@@ -15,6 +15,7 @@ function horarios() {
     $fecha = sanitizar($data['fecha']);
     $ido = $_SESSION['odontologo']['idodontologo'];
     $conjHoras = horasDisponibles($fecha, $ido);
+    error_log(json_encode($conjHoras));
     echo json_encode($conjHoras);
 }
 
