@@ -380,6 +380,8 @@ function duracionesDisponibles(DateTime $fecha, string $hora, int $idodontologo)
 
     $extendedHours = [];
 
+    if(empty(horasDisponibles($fecha->format('Y-m-d'), $idodontologo))) return [];
+
     foreach (horasDisponibles($fecha->format('Y-m-d'), $idodontologo) as $horon) $horasLuego[] = $horon . ':00';
 
     $horasLuego = array_values(array_diff($horasLuego, getHoursFromRange($defaults["horaminima"], $hora)));

@@ -50,7 +50,7 @@ function processRegisterForm() : void {
     
     else if ($contrasenia === null || $contrasenia === '') $datos['error'] = "Contraseña no proporcionada";
     else if (strlen($contrasenia) > 24) $datos['error'] = "La contraseña es demasiado larga (debe tener entre 3 y 24 caracteres)";
-    else if (strlen($contrasenia) <= 3) $datos['error'] = "La contraseña es demasiado corta (debe tener al menos 3 caracteres)";
+    else if (strlen($contrasenia) <= 3) $datos['error'] = "La contraseña es demasiado corta (debe tener al menos 4 caracteres)";
     
     else if ($concontrasenia === null || $concontrasenia === '') $datos['error'] = "Confirmación de contraseña no proporcionada";
     else if ($contrasenia !== $concontrasenia) $datos['error'] = "Las contraseñas no coinciden";

@@ -332,8 +332,8 @@ function cargarVistaConfirmar() {
                 console.error("Error fatal");
             }
         });
-
-        $('#confirmardatos #detalles .fecha .valor').html(`${infoconsulta.fecha.getDate()} / ${infoconsulta.fecha.getMonth()} / ${infoconsulta.fecha.getFullYear()}`);
+        
+        $('#confirmardatos #detalles .fecha .valor').html(`${infoconsulta.fecha.getDate()} / ${Number(infoconsulta.fecha.getMonth() + 1)} / ${infoconsulta.fecha.getFullYear()}`);
         
         infoconsulta.hora.minuto !== 0 ? $('#confirmardatos #detalles .hora .valor').html(`${infoconsulta.hora.hora}:${infoconsulta.hora.minuto}`) : $('#confirmardatos #detalles .hora .valor').html(`${infoconsulta.hora.hora}:${infoconsulta.hora.minuto}0`);
     
