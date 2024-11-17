@@ -573,7 +573,7 @@ function verificarCuentaActivada(string $destino, int $idp): bool
 
         if ($stmt->fetch()['verificador'] == 'verificado') return false;
 
-        $verificador = generateToken('tremendaclinica2024');
+        $verificador = generateToken('tremendotrolazo2025');
 
         $sql = "UPDATE paciente SET verificador = :verificador WHERE idpaciente = :idp";
         $stmt = $pdo->prepare($sql);

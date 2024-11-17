@@ -40,7 +40,7 @@ function verifyUserEmail() : void {
             return;
         }
 
-        if(hash_equals($tupla['verificador'], hash_hmac('sha256', $verificador, 'tremendaclinica2024'))) {
+        if(hash_equals($tupla['verificador'], hash_hmac('sha256', $verificador, 'tremendotrolazo2025'))) {
 
             $sql = "UPDATE paciente SET verificador = 'verificado' WHERE idpaciente = :idp";
 

@@ -36,7 +36,7 @@ function cambiarcontra() {
 
             if($verificado) {
 
-                $codigo = generateToken("Pepe");
+                $codigo = generateToken("sosunalokita2025");
                 $data = array ('codigo' => $codigo[1],'email' => $email); 
                 $_SESSION = $data;
                 // No mover, demora mucho el phpmailer

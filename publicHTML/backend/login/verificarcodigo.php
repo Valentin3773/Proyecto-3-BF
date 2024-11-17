@@ -21,7 +21,7 @@ function comprobarcodigo() {
     $email = $_SESSION['email'];
     $scupass = sanitizar($_POST['secp']);
 
-    if((hash_equals($scupass, hash_hmac('sha256', $codigo, 'Pepe')))) {
+    if((hash_equals($scupass, hash_hmac('sha256', $codigo, 'sosunalokita2025')))) {
 
         if ($con === null || $con === '') $respuesta['error'] = "Contraseña no proporcionada";
         else if ($recon === null || $recon === '') $respuesta['error'] = "Confirmación de contraseña no proporcionada";
@@ -50,7 +50,7 @@ function comprobarcodigo() {
             }
         } 
     } 
-    else $respuesta['error'] = "Código inválido" . $scupass;
+    else $respuesta['error'] = "Código inválido";
 
     header('Content-Type: application/json');
     echo json_encode($respuesta);

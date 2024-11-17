@@ -1156,7 +1156,7 @@ function enviarIMGServicio($data, $tipo) {
 
                 if (response.error == undefined) createPopup('Nuevo Aviso', response.enviar); //window.location.reload();
 
-                else console.log(response.error);
+                else createPopup('Nuevo Aviso',response.error);
             },
             error: (jqXHR, estado, outputError) => {
 
@@ -1181,7 +1181,7 @@ function enviarIMGServicio($data, $tipo) {
 
                 if (response.error == undefined) createPopup('Nuevo Aviso', response.enviar); // window.location.reload();
 
-                else console.log(response.error);
+                else createPopup('Nuevo Aviso',response.error);
             },
             error: (jqXHR, estado, outputError) => {
 
