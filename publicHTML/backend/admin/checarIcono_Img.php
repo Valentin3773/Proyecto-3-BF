@@ -21,7 +21,8 @@ function checarIMGServicio($tipo, $id) {
             if ($stmt->execute() && $stmt->rowCount() > 0) {
 
                 $estado['nombre'] = $stmt->fetch(PDO::FETCH_ASSOC)['icono'];
-                $estado['ok'] = true;
+                if(isset($estado['nombre'])) $estado['ok'] = true;
+                else $estado['ok'] = false;
             }
 
         } 
@@ -34,7 +35,8 @@ function checarIMGServicio($tipo, $id) {
             if ($stmt->execute() && $stmt->rowCount() > 0) {
 
                 $estado['nombre'] = $stmt->fetch(PDO::FETCH_ASSOC)['imagen'];
-                $estado['ok'] = true;
+                if(isset($estado['nombre'])) $estado['ok'] = true;
+                else $estado['ok'] = false;
             }
         }
     } 

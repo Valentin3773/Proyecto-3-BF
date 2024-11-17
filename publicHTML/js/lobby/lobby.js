@@ -167,25 +167,22 @@ function cargarVistaNosotros() {
     $('#seccionescss').attr('href', 'css/lobby/nosotros.css');
 }
 
-function cargarVistaServicios() {
-
+async function cargarVistaServicios() {
     history.pushState(null, 'Servicios', '/lobby/servicios');
-
     console.log("Cargando vista de 'Servicios'");
-
     window.scrollTo({top: 0, behavior: 'smooth'});
 
-    $.get("vistas/vistaslobby/vistaservicios.php", data => {
+    try {
+        const vistaData = await $.get("vistas/vistaslobby/vistaservicios.php");
+        loadView(vistaData);
+        console.log("Vista de 'Servicios' cargada");
 
-        loadView(data);
-        console.log("Cargando vista de 'Servicios'");
-
-        $.get('backend/lobby/apiservicios.php', data => {
-
-            console.log("Llamada a iniciarServicios");
-            iniciarServicios(data);
-        });
-    });
+        const serviciosData = await $.get('backend/lobby/apiservicios.php');
+        console.log("Llamada a iniciarServicios");
+        iniciarServicios(serviciosData);
+    } catch (error) {
+        console.error("Error al cargar la vista de 'Servicios' o los datos de servicios:", error);
+    }
 
     $('#servicios, #serviciosm').css({ 'text-decoration': 'underline' });
     $('#inicio, #iniciom').css({ 'text-decoration': 'none' });
