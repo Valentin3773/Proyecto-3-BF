@@ -49,11 +49,14 @@ function processRegisterForm() : void {
     else if (strlen($email) <= 5) $datos['error'] = "El correo electrónico es demasiado corto";
     
     else if ($contrasenia === null || $contrasenia === '') $datos['error'] = "Contraseña no proporcionada";
-    else if (strlen($contrasenia) > 24) $datos['error'] = "La contraseña es demasiado larga (debe tener entre 3 y 24 caracteres)";
-    else if (strlen($contrasenia) <= 3) $datos['error'] = "La contraseña es demasiado corta (debe tener al menos 4 caracteres)";
-    
     else if ($concontrasenia === null || $concontrasenia === '') $datos['error'] = "Confirmación de contraseña no proporcionada";
     else if ($contrasenia !== $concontrasenia) $datos['error'] = "Las contraseñas no coinciden";
+    else if (strlen($contrasenia) > 24) $datos['error'] = "La contraseña es demasiado larga (debe tener entre 8 y 24 caracteres)";
+    else if (strlen($contrasenia) <= 7) $datos['error'] = "La contraseña es demasiado corta (debe tener al menos 8 caracteres)";
+    else if (!preg_match('/[A-Z]/', $contrasenia)) $datos['error'] = "La contraseña debe incluir al menos una letra mayúscula (A-Z)";
+    else if (!preg_match('/[a-z]/', $contrasenia)) $datos['error'] = "La contraseña debe incluir al menos una letra minúscula (a-z)";
+    else if (!preg_match('/[0-9]/', $contrasenia)) $datos['error'] = "La contraseña debe incluir al menos un número (0-9)";
+    else if (!preg_match('/[!@#$%^&*(),.?":{}|<>]/', $contrasenia)) $datos['error'] = "La contraseña debe incluir al menos un carácter especial";   
     
     else {
 
