@@ -1,6 +1,6 @@
 <?php
 
-// Extractor es un modulo que incluye funciones que mejoran la calidad de vida de los programadores.
+// Extractor es un módulo que incluye funciones que mejoran la calidad de vida de los programadores.
 
 $dir = "{$_SERVER['DOCUMENT_ROOT']}/Proyecto-3-BF/publicHTML/";
 
@@ -550,7 +550,7 @@ function enviarEmailVerificador(string $destino, int $idp, string $verificador):
     $headers .= "Content-type: text/html; charset=utf-8\r\n";
 
     // Enviar correo con PHPMailer
-    $mail->setFrom('clinicasaludbucal@gmail.com', 'Clinica Salud Bucal', $headers);
+    $mail->setFrom('clinicasaludbucal@gmail.com', 'Clínica Salud Bucal', $headers);
     $mail->addAddress($destino);
     $mail->Subject = 'Verifica tu cuenta';
     $mail->Body    = $mensaje;

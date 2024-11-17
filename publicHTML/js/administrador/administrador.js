@@ -1085,7 +1085,7 @@ function cargarVistaServicioDetalle(numservicio) {
                         let formData = new FormData();
                         formData.append('id', id);
                         formData.append('file', file);
-                        enviarIMGServicio(formData, 0);;
+                        enviarIMGServicio(formData, 0, numservicio);;
                     }
                 }
                 catch (error) {
@@ -1116,7 +1116,7 @@ function cargarVistaServicioDetalle(numservicio) {
                         let formData = new FormData();
                         formData.append('id', id);
                         formData.append('file', file);
-                        enviarIMGServicio(formData, 1);
+                        enviarIMGServicio(formData, 1, numservicio);
                     }
                 }
                 catch (error) {
@@ -1137,7 +1137,7 @@ function cargarVistaServicioDetalle(numservicio) {
     manageMobileAddButton(true, 'Agregar<br>Servicio', () => changeView(cargarVistaAgregarServicio));
 }
 
-function enviarIMGServicio($data, $tipo) {
+function enviarIMGServicio($data, $tipo, numservicio) {
 
     if ($tipo == 0) {
 
@@ -1156,7 +1156,9 @@ function enviarIMGServicio($data, $tipo) {
 
                 if (response.error == undefined) createPopup('Nuevo Aviso', response.enviar); //window.location.reload();
 
-                else createPopup('Nuevo Aviso',response.error);
+                else createPopup('Nuevo Aviso', response.error);
+
+                cargarVistaServicioDetalle(numservicio);
             },
             error: (jqXHR, estado, outputError) => {
 
