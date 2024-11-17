@@ -655,17 +655,6 @@ function cargarVistaPacienteDetalle(idp) {
         datospaciente.enfermedades = contenedor.find('.enfermedad').map(function () { return $(this).attr('data-enfermedad'); }).get();
         datospaciente.medicacion = contenedor.find('.medicamento').map(function () { return $(this).attr('data-medicamento'); }).get();
 
-        /*
-        $('#odontologocontainer').on('click', () => {
-            
-            datospaciente.medicacion.filter(String);
-            datospaciente.enfermedades.filter(String);
-            console.log(datospaciente);
-            console.log(fotopaciente);
-            console.log($('#mdF'));
-        });
-        */
-
         editar.on('click', () => {
 
             if (contenedor.attr('data-editar') == 'edit') changeView(() => cargarVistaPacienteDetalle(idp));
@@ -844,7 +833,7 @@ function cargarVistaPacienteDetalle(idp) {
 
                                         cargando = false;
 
-                                        if (response[0]) createHeaderPopup('Nuevo Aviso', responso.exito, () => changeView(() => cargarVistaPacienteDetalle(idp)), 10);
+                                        if (response[0]) createHeaderPopup('Nuevo Aviso', responso.exito, () => cargarVistaPacienteDetalle(idp), 10);
 
                                         else createPopup('Nuevo Aviso', responso.error, 10);
                                     },
@@ -858,7 +847,7 @@ function cargarVistaPacienteDetalle(idp) {
                             else {
 
                                 cargando = false;
-                                createHeaderPopup('Nuevo Aviso', responso.exito, () => changeView(() => cargarVistaPacienteDetalle(idp)));
+                                createHeaderPopup('Nuevo Aviso', responso.exito, () => cargarVistaPacienteDetalle(idp));
                             }
                         }
                         else {
