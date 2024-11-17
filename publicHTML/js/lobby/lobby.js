@@ -172,6 +172,26 @@ async function cargarVistaServicios() {
     console.log("Cargando vista de 'Servicios'");
     window.scrollTo({top: 0, behavior: 'smooth'});
 
+    function recargarScript(scriptUrl) {
+        // Eliminar el script existente
+        const viejoScript = document.querySelector(`script[src="${scriptUrl}"]`);
+        if (viejoScript) {
+            viejoScript.remove();
+        }
+    
+        // Crear un nuevo script
+        const newScript = document.createElement('script');
+        newScript.src = scriptUrl;
+        newScript.async = true;
+        newScript.defer = true;
+    
+        // Agregar el nuevo script al documento
+        document.body.appendChild(newScript);
+    }
+    
+    // Llamar a la función para recargar el script
+    recargarScript('js/lobby/servicios.js');    
+
     try {
         const vistaData = await $.get("vistas/vistaslobby/vistaservicios.php");
         loadView(vistaData);
