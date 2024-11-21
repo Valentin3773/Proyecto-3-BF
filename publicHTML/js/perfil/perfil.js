@@ -342,7 +342,19 @@ function cargarVistaSeguridad() {
 
     $.get('vistas/vistasperfil/vistaseguridad.php', contenido => {
 
-        $('main').empty().html(contenido).fadeIn(200);
+        loadView(contenido);
+
+        $('.mostrarpass').off().on('click', function () {
+            
+            switch($(this).attr('id')) {
+
+                case '1': togglePassIcon([$('#oldpass')], $(this).attr('id')); break;
+
+                case '2': togglePassIcon([$('#newpass')], $(this).attr('id')); break;
+
+                case '3': togglePassIcon([$('#newpassagain')], $(this).attr('id')); break;
+            }
+        });
         $('#cambiarpass').on('click', async function (e) {
 
             e.preventDefault();
@@ -758,6 +770,27 @@ function cambiarContrasenia($1, $2, $3) {
         },
         error: (jqXHR, estado, outputError) => console.log("Error al procesar la solicitud: 3" + outputError + estado + jqXHR)
     });
+}
+
+function togglePassIcon(campos, id) {
+
+    let btnmostrar = $(`.mostrarpass#${id}`);
+    let mostrando = btnmostrar.attr('src') === 'img/iconosvg/view.svg';
+
+    if(mostrando) {
+
+        btnmostrar.attr('src', 'img/iconosvg/hide.svg');
+        btnmostrar.attr('title', 'Esconder contraseña');
+
+        campos.forEach(elemento => elemento.attr('type', 'text'));
+    }
+    else {
+
+        btnmostrar.attr('src', 'img/iconosvg/view.svg');
+        btnmostrar.attr('title', 'Mostrar contraseña');
+
+        campos.forEach(elemento => elemento.attr('type', 'password'));
+    }
 }
 
 function desplegarSidebarMobile() {

@@ -56,9 +56,10 @@ else $verificado = true;
     <div id="contenedor_formulario" class="mb-3">
 
         <div id="titulo_input"><label for="oldpass" class="text-center">Contraseña actual</label></div>
-        <div>
+        <div class="position-relative d-flex justify-content-center align-items-center">
 
             <input type="password" id="oldpass" name="oldpass" title="Ingrese su contraseña actual" placeholder="Ingrese su contraseña actual" required>
+            <img src="img/iconosvg/view.svg" alt="Cambiar visibilidad" title="Mostrar contraseña" class="mostrarpass position-absolute" id="1">
 
         </div>
 
@@ -66,9 +67,10 @@ else $verificado = true;
     <div id="contenedor_formulario" class="mb-3">
 
         <div id="titulo_input"><label for="newpass" class="text-center">Nueva contraseña</label></div>
-        <div>
+        <div class="position-relative d-flex justify-content-center align-items-center">
 
-            <input type="password" id="newpass" name="newpass" title="Ingrese su nueva contraseña" placeholder="Ingrese su nueva contraseña" required>
+            <input type="password" id="newpass" name="newpass" title="Ingrese su nueva contraseña" placeholder="Ingrese su nueva contraseña" autocomplete="new-password" required>
+            <img src="img/iconosvg/view.svg" alt="Cambiar visibilidad" title="Mostrar contraseña" class="mostrarpass position-absolute" id="2">
 
         </div>
 
@@ -76,9 +78,10 @@ else $verificado = true;
     <div id="contenedor_formulario" class="mb-3">
 
         <div id="titulo_input"><label for="oldpass" class="text-center">Repetir nueva contraseña</label></div>
-        <div>
+        <div class="position-relative d-flex justify-content-center align-items-center">
 
             <input type="password" id="newpassagain" name="newpassagain" title="Repita su nueva contraseña" placeholder="Repita su nueva contraseña" required>
+            <img src="img/iconosvg/view.svg" alt="Cambiar visibilidad" title="Mostrar contraseña" class="mostrarpass position-absolute" id="3">
 
         </div>
 

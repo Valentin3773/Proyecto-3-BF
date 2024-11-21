@@ -59,6 +59,10 @@ function cargarVistaLogin() {
         console.log("Cargando vista de 'Login'");
 
         $('#btnvolver').off().on('click', () => changeView(volverInicio));
+        $('.mostrarpass').off().on('click', function () {
+            
+            togglePassIcon([$('#incontrasenia')], $(this).attr('id'));
+        });
         $('#btnregistrarsel').on('click', () => changeView(cargarVistaRegistro));
         $('#iniadmin').on('click', () => changeView(cargarVistaLoginAdmin));
         $('#olvidarpass').on('click', () => changeView(cargarVistaRecuperarPass));
@@ -91,6 +95,12 @@ function cargarVistaRegistro() {
         console.log("Cargando vista de 'Registro'");
 
         $('#btnvolver').off().on('click', volverLogin);
+        $('.mostrarpass').off().on('click', function () {
+            
+            if($(this).attr('id') === '1') togglePassIcon([$('#incontrasenia')], $(this).attr('id'));
+
+            else togglePassIcon([$('#inconcontrasenia')], $(this).attr('id'));
+        });
         $('#btnregistrarsel').on('click', function (event) {
 
             event.preventDefault();
@@ -120,6 +130,10 @@ function cargarVistaLoginAdmin() {
         loadView(data);
         console.log("Cargando vista de 'Login'");
         $('#btnvolver').off().on('click', volverLogin);
+        $('.mostrarpass').off().on('click', function () {
+            
+            togglePassIcon([$('#incontrasenia')], $(this).attr('id'));
+        });
         $('#ingresarad').on('click', function (event) {
 
             event.preventDefault();
@@ -291,11 +305,18 @@ function cargarCodigoEmail($codigo) {
 
         $('#btnvolver').off().on('click', () => changeView(cargarVistaRecuperarPass));
 
+        $('.mostrarpass').off().on('click', function () {
+            
+            if($(this).attr('id') === '1') togglePassIcon([$('#inContra')], $(this).attr('id'));
+
+            else togglePassIcon([$('#inConcontra')], $(this).attr('id'));
+        });
+
         $('.btnRecu').on('click', function (e) {
 
             e.preventDefault();
 
-            if ($('#inContra').val() === $('#inConcontra').val()) verificarCodigo($('#inCodigo').val(), $('#inContra').val(), $('#inConcontra').val(), $codigo);
+            if($('#inContra').val() === $('#inConcontra').val()) verificarCodigo($('#inCodigo').val(), $('#inContra').val(), $('#inConcontra').val(), $codigo);
             
             else createPopup("Nuevo Aviso", "Las contraseñas ingresadas no coinciden");
         });
@@ -425,6 +446,27 @@ function cerrarSesion() {
         },
         error: (jqXHR, estado, outputError) => console.log(jqXHR, estado, outputError)
     });
+}
+
+function togglePassIcon(campos, id) {
+
+    let btnmostrar = $(`.mostrarpass#${id}`);
+    let mostrando = btnmostrar.attr('src') === 'img/iconosvg/view.svg';
+
+    if(mostrando) {
+
+        btnmostrar.attr('src', 'img/iconosvg/hide.svg');
+        btnmostrar.attr('title', 'Esconder contraseña');
+
+        campos.forEach(elemento => elemento.attr('type', 'text'));
+    }
+    else {
+
+        btnmostrar.attr('src', 'img/iconosvg/view.svg');
+        btnmostrar.attr('title', 'Mostrar contraseña');
+
+        campos.forEach(elemento => elemento.attr('type', 'password'));
+    }
 }
 
 function changeView(vista) {

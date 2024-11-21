@@ -37,8 +37,9 @@
                 <div id="titulo_input">
                     <label for="inContra" class="text-end row">Nueva contraseña</label>
                 </div>
-                <div>
-                    <input id="inContra" type="password" name="" title="Ingrese su nueva contraseña" placeholder="Ingrese su nueva contraseña">
+                <div id="div_input" class="position-relative d-flex justify-content-center align-items-center">
+                    <input id="inContra" type="password" name="" title="Ingrese su nueva contraseña" placeholder="Ingrese su nueva contraseña" autocomplete="new-password">
+                    <img src="img/iconosvg/view.svg" alt="Cambiar visibilidad" title="Mostrar contraseña" class="mostrarpass position-absolute" id="1">
                 </div>
 
             </div>
@@ -48,8 +49,9 @@
                 <div id="titulo_input">
                     <label for="inConcontra" class="text-end row">Repetir nueva contraseña</label>
                 </div>
-                <div>
+                <div id="div_input" class="position-relative d-flex justify-content-center align-items-center">
                     <input id="inConcontra" type="password" name="" title="Repita la nueva contraseña" placeholder="Repita la nueva contraseña">
+                    <img src="img/iconosvg/view.svg" alt="Cambiar visibilidad" title="Mostrar contraseña" class="mostrarpass position-absolute" id="2">
                 </div>
 
             </div>

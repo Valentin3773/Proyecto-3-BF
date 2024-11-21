@@ -6,7 +6,6 @@ include("../conexion.php");
 include("../extractor.php");
 include("checarIcono_Img.php");
 
-
 if  ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SESSION['odontologo']){
     
     actualizarIcono();

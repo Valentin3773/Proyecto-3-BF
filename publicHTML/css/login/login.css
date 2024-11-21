@@ -40,6 +40,35 @@ main {
     transition: height 0s, scale .3s, transform .3s, filter .3s, color .3s, box-shadow .3s !important;
 }
 
+input[type="password"]::-ms-reveal, 
+input[type="password"]::-ms-clear, 
+input[type="password"]::-webkit-inner-spin-button, 
+input[type="password"]::-webkit-clear-button {
+
+    display: none !important;
+}
+
+.mostrarpass {
+
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 35px;
+}
+
+.mostrarpass:hover {
+
+    scale: 1.05;
+    filter: brightness(1.1);
+}
+
+.mostrarpass:active {
+
+    scale: .95;
+    filter: brightness(1.2);
+}
+
 .lds-spinner,
 .lds-spinner div,
 .lds-spinner div:after {

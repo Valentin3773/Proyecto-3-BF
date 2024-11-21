@@ -4,7 +4,7 @@ $host = "localhost";
 $db = "clinica";
 $charset = 'utf8mb4';
 $user = "root";
-$pass = "";
+$pass = "£9Z151XE.FrDl_$[V_e+3[?S>";
 
 $options = [
 

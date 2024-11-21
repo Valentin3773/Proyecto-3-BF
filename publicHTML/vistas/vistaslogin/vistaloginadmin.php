@@ -43,8 +43,9 @@
                     <div id="titulo_input">
                         <label for="incontrasenia" class="text-end row">Contraseña</label>
                     </div>
-                    <div>
+                    <div class="position-relative d-flex justify-content-center align-items-center">
                         <input type="password" name="contrasenia" id="incontrasenia" title="Ingrese su contraseña" placeholder="Ingrese su contraseña" required>
+                        <img src="img/iconosvg/view.svg" alt="Cambiar visibilidad" title="Mostrar contraseña" class="mostrarpass position-absolute" id="1">
                     </div>
 
                 </div>

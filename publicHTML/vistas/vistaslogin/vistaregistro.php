@@ -75,8 +75,9 @@
             <div id="titulo_input">
                 <label for="incontrasenia" class="text-end row">Contraseña<span class="astobligatorio" title="Este campo es obligatorio">*</span></label>
             </div>
-            <div id="div_input">
-                <input type="password" name="contrasenia" id="incontrasenia" title="Ingrese su contraseña" placeholder="Ingrese su contraseña" required>
+            <div id="div_input" class="position-relative d-flex justify-content-center align-items-center">
+                <input type="password" name="contrasenia" id="incontrasenia" title="Ingrese su contraseña" placeholder="Ingrese su contraseña" autocomplete="new-password" required>
+                <img src="img/iconosvg/view.svg" alt="Cambiar visibilidad" title="Mostrar contraseña" class="mostrarpass position-absolute" id="1">
             </div>
 
         </div>
@@ -85,8 +86,9 @@
             <div id="titulo_input">
                 <label for="inconcontrasenia" class="text-end row">Confirmar Contraseña<span class="astobligatorio" title="Este campo es obligatorio">*</span></label>
             </div>
-            <div id="div_input">
+            <div id="div_input" class="position-relative d-flex justify-content-center align-items-center">
                 <input type="password" name="concontrasenia" id="inconcontrasenia" title="Ingrese nuevamente su contraseña" placeholder="Ingrese nuevamente su contraseña" required>
+                <img src="img/iconosvg/view.svg" alt="Cambiar visibilidad" title="Mostrar contraseña" class="mostrarpass position-absolute" id="2">
             </div>
 
         </div>
